@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
                 body: LandinPage()
               ),
           '/productdetails': (context) => AppBarMain(
-                body: ProductDetails(),
+                body: ProductDetailsofLugs(),
               ),
           '/cart': (context) => AppBarMain(
                 body: CartPage(),
@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-void navigateToProductDetails(BuildContext context, int selectedProductIndex) {
+void navigateToProductDetailsofLugs(BuildContext context, int selectedProductIndex) {
   Navigator.of(context)
       .pushNamed('/productdetails', arguments: selectedProductIndex);
 }

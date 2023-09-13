@@ -1,33 +1,37 @@
-import 'package:firebase_hex/provider/cart_provider.dart';
-import 'package:firebase_hex/provider/data_provider.dart';
-import 'package:firebase_hex/provider/thumbnail.dart';
-import 'package:firebase_hex/provider/user_input_provider.dart';
-import 'package:firebase_hex/responsive/product_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import 'nonpdf_product.dart';
+import '../provider/cart_provider.dart';
+import '../provider/data_provider.dart';
+import '../provider/thumbnail.dart';
 
-class ProductDetailsOfAccessories extends StatelessWidget {
+import '../provider/user_input_provider.dart';
+import '../responsive/product_page.dart';
+import 'accessories_product.dart';
+
+class Nopdf extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
-  // ProductDetails({required this.productData, required this.selectedIndex});
+  String? typeOfProduct;
+Nopdf({this.typeOfProduct});
+  // Nopdf({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
+    print("gfhjkl");
+    print(typeOfProduct);
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
 TextEditingController quantityController = TextEditingController();
 
     final int selectedProductIndex =
         ModalRoute.of(context)!.settings.arguments as int;
-    final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
       mobileProductPage: MobileProduct(),
       desktopProductPage: FutureBuilder(
-        future: context.read<DataProvider>().newaccessories,
+        future: context.read<DataProvider>().setTypeOfProducts( typeOfProduct),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
 
@@ -48,7 +52,7 @@ TextEditingController quantityController = TextEditingController();
             //  String selectedPrice = '';
 
             return 
-            pdf!=null?
+            // pdf!=null?
             DefaultTabController(
               length: 2,
               child: Container(
@@ -56,7 +60,7 @@ TextEditingController quantityController = TextEditingController();
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                   Expanded(
+                    Expanded(
                             flex: 1,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
@@ -176,62 +180,62 @@ TextEditingController quantityController = TextEditingController();
                                           ),
                                         ],
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Codes and Prices:',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          Wrap(
-                                            spacing:
-                                                8.0, // Adjust the spacing between buttons as needed
-                                            runSpacing:
-                                                8.0, // Adjust the spacing between rows as needed
-                                            children: List<Widget>.generate(
-                                                price.length, (index) {
-                                              final codeAndPrice = price[index];
-                                              return InkWell(
-                                                onTap: () {
-                                                  // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                                  selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.all(
-                                                      8.0), // Adjust the padding as needed
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: codeAndPrice
-                                                                  .productCode ==
-                                                              selectedCodeProvider
-                                                                  .selectedProductCode
-                                                          // codeAndPrice.productCode
-                                                          ? Colors
-                                                              .blue // Set border color to blue for selected container
-                                                          : Colors
-                                                              .black, // Set border color to black for non-selected containers
-                                                      width:
-                                                          1.0, // Set your desired border width
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    '${codeAndPrice.productCode}',
-                                                    style: TextStyle(
-                                                      color: Colors
-                                                          .black, // Set your desired text color
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }),
-                                          ),
-                                        ],
-                                      )
+                                      // Column(
+                                      //   crossAxisAlignment:
+                                      //       CrossAxisAlignment.start,
+                                      //   children: [
+                                      //     Text(
+                                      //       'Codes and Prices:',
+                                      //       style: TextStyle(
+                                      //         fontWeight: FontWeight.bold,
+                                      //         fontSize: 18,
+                                      //       ),
+                                      //     ),
+                                      //     Wrap(
+                                      //       spacing:
+                                      //           8.0, // Adjust the spacing between buttons as needed
+                                      //       runSpacing:
+                                      //           8.0, // Adjust the spacing between rows as needed
+                                      //       children: List<Widget>.generate(
+                                      //           price.length, (index) {
+                                      //         final codeAndPrice = price[index];
+                                      //         return InkWell(
+                                      //           onTap: () {
+                                      //             // When a container is tapped, update the selectedPrice using ValueNotifier.
+                                      //             selectedPriceNotifier.value =
+                                      //                 '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                      //           },
+                                                // child: Container(
+                                                //   padding: EdgeInsets.all(
+                                                //       8.0), // Adjust the padding as needed
+                                                //   decoration: BoxDecoration(
+                                                //     border: Border.all(
+                                                //       color: codeAndPrice
+                                                //                   .productCode ==
+                                                //               selectedCodeProvider
+                                                //                   .selectedProductCode
+                                                //           // codeAndPrice.productCode
+                                                //           ? Colors
+                                                //               .blue // Set border color to blue for selected container
+                                                //           : Colors
+                                                //               .black, // Set border color to black for non-selected containers
+                                                //       width:
+                                                //           1.0, // Set your desired border width
+                                                //     ),
+                                                //   ),
+                                                //   child: Text(
+                                                //     '${codeAndPrice.productCode}',
+                                                //     style: TextStyle(
+                                                //       color: Colors
+                                                //           .black, // Set your desired text color
+                                                //     ),
+                                                //   ),
+                                                // ),
+                                      //         );
+                                      //       }),
+                                      //     ),
+                                      //   ],
+                                      // )
                                     ],
                                   ),
                                 ),
@@ -242,27 +246,7 @@ TextEditingController quantityController = TextEditingController();
                       flex: 2,
                       child: Column(
                         children: [
-                          TabBar(
-                            unselectedLabelColor: Color.fromARGB(255, 5, 5, 5),
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            indicator: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Color.fromARGB(255, 0, 0, 0),
-                                  Color.fromARGB(255, 255, 255, 255)
-                                ]),
-                                borderRadius: BorderRadius.circular(0),
-                                color:
-                                    const Color.fromARGB(255, 255, 255, 255)),
-                            tabs: [
-                              Tab(
-                                text: 'Description',
-                              ),
-                              Tab(
-                                text: 'Technical Details',
-                              ),
-                            ],
-                            labelColor: Colors.white,
-                          ),
+                          
                           Expanded(
                             flex: 2,
                             child: TabBarView(
@@ -410,28 +394,36 @@ TextEditingController quantityController = TextEditingController();
                                       SizedBox(
                                         height: 20,
                                       ),
-                                     
+                                      // Column(
+                                      //   crossAxisAlignment:
+                                      //       CrossAxisAlignment.start,
+                                      //   children: [
+                                      //     Text(
+                                      //       'Codes and Prices:',
+                                      //       style: TextStyle(
+                                      //         fontWeight: FontWeight.bold,
+                                      //         fontSize: 18,
+                                      //       ),
+                                      //     ),
+                                         
+                                      //     for (var codeAndPrice in price)
+                                      //       ElevatedButton(
+                                      //         onPressed: () {   
+                                      //           // When a button is clicked, update the selectedPrice using ValueNotifier.
+                                      //           selectedPriceNotifier.value =
+                                      //               '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                      //         },
+                                      //         child: Text(
+                                      //           '${codeAndPrice.productCode}',
+                                      //         ),
+                                      //       ),
+                                      //   ],
+                                      // ),
                                     ],
                                   ),
                                 ),
                                 // Tab 2 content goes here
-                                SingleChildScrollView(
-                                  child: Container(
-                                    height: 1500,
-                                    color:const Color.fromARGB(255, 230, 233, 235),
-                                    child: pdf!=null?
-                                         SfPdfViewer.network(
-                                pdf):
-                                Nopdf(typeOfProduct: 'accessories')
-                                        // PDFView(
-                                        //   filePath:
-                                        //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                        //   // height: 300,   // Set the desired height for the PDF viewer
-                                        //   // width: 300,    // Set the desired width for the PDF viewer
-                                        // ),
-                                  
-                                  ),
-                                ),
+                                
                               ],
                             ),
                           ),
@@ -441,18 +433,10 @@ TextEditingController quantityController = TextEditingController();
                   ],
                 ),
               ),
-            ):Nopdf(typeOfProduct: 'accessories');
+            );
           }
         },
       ),
     );
-  }
-}
-class MobileProduct extends StatelessWidget {
-  const MobileProduct({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }

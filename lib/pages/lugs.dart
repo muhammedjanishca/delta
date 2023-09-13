@@ -42,7 +42,7 @@ class LugsPage extends StatelessWidget {
                 productData.thumbnail??"",
               );
 
-               navigateToProductDetails(context, index);
+               navigateToProductDetailsofLugs(context, index);
             },
                     child: Container(
                       
