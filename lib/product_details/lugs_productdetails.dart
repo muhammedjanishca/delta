@@ -441,11 +441,10 @@ TextEditingController quantityController = TextEditingController();
                                 SingleChildScrollView(
                                   child: Container(
                                     height: 1500,
-                                    color:const Color.fromARGB(255, 230, 233, 235),
-                                    child: pdf!=null?
+                                    // color:const Color.fromARGB(255, 230, 233, 235),
+                                    child: 
                                          SfPdfViewer.network(
-                                pdf):
-                                Nopdf(typeOfProduct: 'accessories')
+                                pdf)
                                         // PDFView(
                                         //   filePath:
                                         //       pdf, // Replace 'pdf' with the actual PDF file path or URL
@@ -464,7 +463,7 @@ TextEditingController quantityController = TextEditingController();
                   ],
                 ),
               ),
-            ):Nopdf(typeOfProduct: 'accessories');
+            ):Nopdf(typeOfProduct: 'lugs');
           }
         },
       ),

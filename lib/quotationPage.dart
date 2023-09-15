@@ -17,35 +17,59 @@ class QuotationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(64, 4, 149, 1),
-        title: Text('Quotation'),
-      
-      ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Center(
-              child: Container(
-                
-                width: MediaQuery.of(context).size.width * 0.8,
-                padding: EdgeInsets.only(top: 20.0),
-                child: _buildQuotationTable(),
+  return Scaffold(
+    body: Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  // Add your navigation logic here to go back
+                  Navigator.pop(context);
+                },
               ),
-            ),
+              Text(
+                'Your Page Title', // Replace with your page title
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-        floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          PdfService().generateInvoice(cartItems);
-        },
-        child: const Icon(Icons.print),
-      ),
-    );
-  }
+        ),
+        Expanded(
+          child: ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: _buildQuotationTable(),
+                  ),
+                ),
+              ),
+              // Add more widgets to your ListView here
+            ],
+          ),
+        ),
+      ],
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        // Add your FloatingActionButton logic here
+        PdfService().generateInvoice(cartItems);
+      },
+      child: const Icon(Icons.print),
+    ),
+  );
+}
+
 
      Widget _buildQuotationTable() {
     return SingleChildScrollView(

@@ -11,9 +11,7 @@ import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
-
 import 'cart.dart';
 
 class AppBarMain extends StatelessWidget {
@@ -66,33 +64,35 @@ class DesktopAppBar extends StatelessWidget {
                   children: [
                     // _searchBox(searchTextController), // Add the search box here
                     Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child:Image.asset("assets/image/deltalogo.jpg.jpg")
-                      //  Text(
-                      //   'Delta',
-                      //   style: GoogleFonts.pacifico(
-                      //     textStyle: TextStyle(
-                      //       color: Color.fromARGB(255, 122, 102, 54),
-                      //       fontSize: 35,
-                      //     ),
-                      //   ),
-                      // ),
-                      
-                    ),
+                        padding: const EdgeInsets.only(left: 25),
+                        child: Image.asset("assets/image/deltalogo.jpg.jpg")
+                        //  Text(
+                        //   'Delta',
+                        //   style: GoogleFonts.pacifico(
+                        //     textStyle: TextStyle(
+                        //       color: Color.fromARGB(255, 122, 102, 54),
+                        //       fontSize: 35,
+                        //     ),
+                        //   ),
+                        // ),
+
+                        ),
                     Spacer(),
                     Expanded(child: _searchBox(searchTextController)),
                     TextButton(
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SignUpPage()),
-    );
-  },
-  style: ButtonStyle(
-    foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 99, 98, 98)), // Change the color to your desired color
-  ),
-  child: Text('SignUp/SignIn'),
-),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                        );
+                      },
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 99, 98,
+                                98)), // Change the color to your desired color
+                      ),
+                      child: Text('SignUp/SignIn'),
+                    ),
 
                     user != null
                         ? TextButton(
@@ -106,12 +106,12 @@ class DesktopAppBar extends StatelessWidget {
                       child: GestureDetector(
                           onTap: () {
                             user != null
-                           ? Navigator.pushNamed(context, '/cart')
-                            : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpPage(),
-                                ));
+                                ? Navigator.pushNamed(context, '/cart')
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignUpPage(),
+                                    ));
                           },
                           child: Icon(Icons.shopping_cart)),
                     )

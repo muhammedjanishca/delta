@@ -198,9 +198,10 @@ class _CartPageState extends State<CartPage> {
                     height: 10,
                   ),
                   ListTile(
-                    title: Text('Total\n'),
+                    title: Text('Total Price',                      style: TextStyle(fontWeight: FontWeight.bold),
+),
                     trailing: Text(
-                      'Total Price: \$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                      '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
