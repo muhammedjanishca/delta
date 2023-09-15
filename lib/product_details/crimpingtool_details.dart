@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
@@ -285,36 +287,36 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                             ),
                                             SizedBox(height: 8.0),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: description!
-                                                  .toUpperCase()
-                                                  .split('\n')
-                                                  .map((line) {
-                                                return Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.star,
-                                                      size:
-                                                          10, // Adjust the size as needed
-                                                      color: Color.fromARGB(
-                                                          255,
-                                                          220,
-                                                          227,
-                                                          26), // Adjust the color as needed
-                                                    ),
-                                                    SizedBox(
-                                                        width:
-                                                            8), // Add some space between the circle icon and text
-                                                    Text(
-                                                      line,
-                                                      style: TextStyle(
-                                                          fontSize: 16),
-                                                    ),
-                                                  ],
-                                                );
-                                              }).toList(),
-                                            ),
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: description!
+      .toUpperCase()
+      .split('\n')
+      .map((line) {
+        return Row(
+          children: [
+            Icon(
+              Icons.star,
+              size: 10, // Adjust the size as needed
+              color: Color.fromARGB(255, 220, 227, 26), // Adjust the color as needed
+            ),
+            SizedBox(
+              width: 8, // Add some space between the circle icon and text
+            ),
+            Flexible(
+              child: Text(
+                line,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                overflow: TextOverflow.ellipsis, // Handle text overflow
+              ),
+            ),
+          ],
+        );
+      })
+      .toList(),
+),
+
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 8.0),
@@ -356,39 +358,52 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                                 SizedBox(
                                                   width: 30,
                                                 ),
-                                                ElevatedButton(
+                                               ElevatedButton(
                                                   onPressed: () {
-                                                    final selectedPrice =
-                                                        selectedPriceNotifier
-                                                            .value;
-                                                    final productCode =
-                                                        selectedPrice
-                                                            .split(': ')[0];
-                                                    final price = double.parse(
-                                                        selectedPrice
-                                                            .split(': ')[1]);
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      // signed in
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                              .value;
+                                                      final productCode =
+                                                          selectedPrice
+                                                              .split(': ')[0];
+                                                      final price = double
+                                                          .parse(selectedPrice
+                                                              .split(': ')[1]);
 
-                                                    final quantity = int.tryParse(
-                                                            quantityController
-                                                                .text) ??
-                                                        0;
-                                                    final imageUrl =
-                                                        selectedThumbnailProvider
-                                                                .selectedThumbnail ??
-                                                            thumbnail;
-                                                    final productName =
-                                                        textpass;
-                                                    final cartProvider =
-                                                        Provider.of<
-                                                                CartProvider>(
-                                                            context,
-                                                            listen: false);
-                                                    cartProvider.addToCart(
-                                                        productCode,
-                                                        price,
-                                                        quantity,
-                                                        imageUrl ?? "",
-                                                        productName ?? "");
+                                                      final quantity = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      final imageUrl =
+                                                          selectedThumbnailProvider
+                                                                  .selectedThumbnail ??
+                                                              thumbnail;
+                                                      final productName =
+                                                          textpass;
+                                                      final cartProvider =
+                                                          Provider.of<
+                                                                  CartProvider>(
+                                                              context,
+                                                              listen: false);
+                                                      cartProvider.addToCart(
+                                                          productCode,
+                                                          price,
+                                                          quantity,
+                                                          imageUrl ?? "",
+                                                          productName ?? "");
+                                                    } else {
+                                                      // signed out
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SignUpPage(),
+                                                          ));
+                                                    }
                                                   },
                                                   child:
                                                       const Text('ADD TO CART'),

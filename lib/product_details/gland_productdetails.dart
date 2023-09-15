@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
@@ -56,7 +58,7 @@ TextEditingController quantityController = TextEditingController();
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Container(
@@ -238,7 +240,7 @@ TextEditingController quantityController = TextEditingController();
                             ),
                           ),
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Column(
                         children: [
                           TabBar(
@@ -281,34 +283,36 @@ TextEditingController quantityController = TextEditingController();
                                             fontSize: 30),
                                       ),
                                       SizedBox(height: 8.0),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children:
-                                            description!.toUpperCase().split('\n').map((line) {
-                                          return Row(
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                size:
-                                                    10, // Adjust the size as needed
-                                                color: Color.fromARGB(
-                                                    255,
-                                                    220,
-                                                    227,
-                                                    26), // Adjust the color as needed
-                                              ),
-                                              SizedBox(
-                                                  width:
-                                                      8), // Add some space between the circle icon and text
-                                              Text(
-                                                line,
-                                                style: TextStyle(fontSize: 16),
-                                              ),
-                                            ],
-                                          );
-                                        }).toList(),
-                                      ),
+                                     Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: description!
+      .toUpperCase()
+      .split('\n')
+      .map((line) {
+        return Row(
+          children: [
+            Icon(
+              Icons.star,
+              size: 10, // Adjust the size as needed
+              color: Colors.black // Adjust the color as needed
+            ),
+            SizedBox(
+              width: 8, // Add some space between the circle icon and text
+            ),
+            Flexible(
+              child: Text(
+                line,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                overflow: TextOverflow.visible, // Handle text overflow
+              ),
+            ),
+          ],
+        );
+      })
+      .toList(),
+),
 
                                       // SizedBox(height: 8.0),
                                       SizedBox(height: 8.0),
@@ -346,42 +350,64 @@ TextEditingController quantityController = TextEditingController();
                                           SizedBox(
                                             width: 30,
                                           ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              final selectedPrice =
-                                                  selectedPriceNotifier.value;
-                                              final productCode =
-                                                  selectedPrice.split(': ')[0];
-                                              final price = double.parse(
-                                                  selectedPrice.split(': ')[1]);
+                                         ElevatedButton(
+                                                  onPressed: () {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      // signed in
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                              .value;
+                                                      final productCode =
+                                                          selectedPrice
+                                                              .split(': ')[0];
+                                                      final price = double
+                                                          .parse(selectedPrice
+                                                              .split(': ')[1]);
 
-            final quantity = int.tryParse(quantityController.text) ?? 0;
-                                              final imageUrl =
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      thumbnail;
-                                              final productName = textpass;
-                                              final cartProvider =
-                                                  Provider.of<CartProvider>(
-                                                      context,
-                                                      listen: false);
-                                              cartProvider.addToCart(
-                                                  productCode,
-                                                  price,
-                                                  quantity,
-                                                  imageUrl??"",
-                                                  productName??"");
-                                            },
-                                            child: const Text('ADD TO CART'),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.black),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(150, 50)),
-                                            ),
-                                          ),
+                                                      final quantity = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      final imageUrl =
+                                                          selectedThumbnailProvider
+                                                                  .selectedThumbnail ??
+                                                              thumbnail;
+                                                      final productName =
+                                                          textpass;
+                                                      final cartProvider =
+                                                          Provider.of<
+                                                                  CartProvider>(
+                                                              context,
+                                                              listen: false);
+                                                      cartProvider.addToCart(
+                                                          productCode,
+                                                          price,
+                                                          quantity,
+                                                          imageUrl ?? "",
+                                                          productName ?? "");
+                                                    } else {
+                                                      // signed out
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SignUpPage(),
+                                                          ));
+                                                    }
+                                                  },
+                                                  child:
+                                                      const Text('ADD TO CART'),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.black),
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(Size(150, 50)),
+                                                  ),
+                                                ),
                                           SizedBox(
                                             width: 20,
                                           ),

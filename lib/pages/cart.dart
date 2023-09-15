@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/signup_page.dart';
+import 'package:firebase_hex/login_and_signing/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart_provider.dart';
 import '../provider/user_input_provider.dart';
+import '../quotationPage.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -21,6 +24,7 @@ class _CartPageState extends State<CartPage> {
     final cartProvider = Provider.of<CartProvider>(context);
     cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
+ 
 
     return Scaffold(
       body: Row(
@@ -136,7 +140,7 @@ class _CartPageState extends State<CartPage> {
                               IconButton(
                                 icon: Icon(Icons.delete_outline_rounded),
                                 onPressed: () async {
-                                
+                                  print(cartItems['cartItems'][index]);
                                   cartProvider.removeFromCart(
                                       index, cartItems['cartItems']);
                                   // cartProvider.removeFromCart(item);
@@ -213,24 +217,23 @@ class _CartPageState extends State<CartPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(
-                      //             builder: (context) => QuotationPage(    totalPrice: cartProvider.getTotalPrice(), cartItems:cartProvider.cartItems,
-                      //               )));
-                      //   },
-                      //   child:  Text(
-                      //     'GANERATE QUATATION',
-                      //     style: TextStyle(color: Colors.white),
-                      //   ),
-                      //   style: ButtonStyle(
-                      //     backgroundColor:
-                      //         MaterialStateProperty.all(Colors.black),
-                      //     minimumSize: MaterialStateProperty.all(Size(150, 50)),
-                      //   ),
-                      // ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QuotationPage(    totalPrice: cartProvider.getTotalPrice(), cartItem:cartProvider.cartItems                                    )));
+                        },
+                        child:  Text(
+                          'GANERATE QUATATION',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black),
+                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                        ),
+                      ),
                       SizedBox(
                         width: 40,
                       ),

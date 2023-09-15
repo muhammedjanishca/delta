@@ -53,18 +53,7 @@ class CartProvider with ChangeNotifier {
         .update({'cartItems': cartItems});
     notifyListeners();
   }
-  // void removeFromCart(String productCode) {
-  //   _cartItems.removeWhere((item) => item.productCode == productCode);
-  //   notifyListeners();
-  // }
-
-  // double getTotalPrice() {
-  //   double totalPrice = 0.0;
-  //   for (var item in _cartItems) {
-  //     totalPrice += item.price * item.quantity;
-  //   }
-  //   return totalPrice;
-  // }
+ 
   double getTotalPrice() {
     double totalPrice = 0.0;
     for (var item in fetchedItems["cartItems"]) {
@@ -73,9 +62,14 @@ class CartProvider with ChangeNotifier {
     return totalPrice;
   }
 
+  // void updateQuantity(String productCode, int newQuantity) {
+  //   final cartItem = _cartItems.firstWhere((item) => item.productCode == productCode);
+  //   cartItem.updateQuantity(newQuantity);
+  //   notifyListeners();
+  // }
+  
   void updateQuantity(String productCode, int newQuantity) {
-    final cartItem =
-        _cartItems.firstWhere((item) => item.productCode == productCode);
+    final cartItem = _cartItems.firstWhere((item) => item.productCode == productCode);
     cartItem.updateQuantity(newQuantity);
     notifyListeners();
   }
@@ -95,3 +89,18 @@ class CartItem {
     quantity = newQuantity;
   }
 }
+
+
+
+ // void removeFromCart(String productCode) {
+  //   _cartItems.removeWhere((item) => item.productCode == productCode);
+  //   notifyListeners();
+  // }
+
+  // double getTotalPrice() {
+  //   double totalPrice = 0.0;
+  //   for (var item in _cartItems) {
+  //     totalPrice += item.price * item.quantity;
+  //   }
+  //   return totalPrice;
+  // }

@@ -1,3 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_hex/login_and_signing/signup_page.dart';
+import 'package:firebase_hex/login_and_signing/welcome_page.dart';
 import 'package:firebase_hex/pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/connecters.dart';
 import 'package:firebase_hex/pages/crimping.dart';
@@ -11,7 +15,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'cart.dart';
-
 
 class AppBarMain extends StatelessWidget {
   final Widget body;
@@ -45,7 +48,7 @@ class DesktopAppBar extends StatelessWidget {
 
   DesktopAppBar(this.context);
   final TextEditingController searchTextController = TextEditingController();
-
+  var user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -76,15 +79,35 @@ class DesktopAppBar extends StatelessWidget {
                     ),
                     Spacer(),
                     Expanded(child: _searchBox(searchTextController)),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()),
+                          );
+                        },
+                        child: Text('SignUp/SignIn')),
+                    user != null
+                        ? TextButton(
+                            onPressed: () {
+                              FirebaseAuth.instance.signOut();
+                            },
+                            child: Text('logout'))
+                        : SizedBox(),
                     Padding(
                       padding: const EdgeInsets.only(left: 25, right: 25),
                       child: GestureDetector(
-                        onTap: () {
-                                                    Navigator.pushNamed(
-                                                        context, '/cart');
-                                                  },
-                        child: Icon(Icons.shopping_cart))
-                      ,
+                          onTap: () {
+                            user != null
+                           ? Navigator.pushNamed(context, '/cart')
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpPage(),
+                                ));
+                          },
+                          child: Icon(Icons.shopping_cart)),
                     )
                   ],
                 ),
@@ -120,22 +143,18 @@ class DesktopAppBar extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AppBarMain(
-                                  body: LugsPage()
-                                ),
-                              )
-                              );
+                                builder: (context) =>
+                                    AppBarMain(body: LugsPage()),
+                              ));
                         } else if (selectedDataType == 'Connectors') {
                           final connectorsData =
                               await dataProvider.fetchConnectorsData();
-                         Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AppBarMain(
-                                  body: ConnectersPage()
-                                ),
-                              )
-                              );
+                                builder: (context) =>
+                                    AppBarMain(body: ConnectersPage()),
+                              ));
                         }
                         // Add similar conditions for other data types
                       },
@@ -152,25 +171,21 @@ class DesktopAppBar extends StatelessWidget {
                           //     await dataProvider.fetchConnectorsData();
                           final glandsdata =
                               await dataProvider.fetchGlandsData();
-                        Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AppBarMain(
-                                  body: GlandPage()
-                                ),
-                              )
-                              );
+                                builder: (context) =>
+                                    AppBarMain(body: GlandPage()),
+                              ));
                         } else if (selectedDataType == 'Accessories') {
                           final AccessoriesData =
                               await dataProvider.fetchAccssoriesData();
-                         Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AppBarMain(
-                                  body: AccessoriesPage()
-                                ),
-                              )
-                              );
+                                builder: (context) =>
+                                    AppBarMain(body: AccessoriesPage()),
+                              ));
                         }
                         // Add similar conditions for other data types
                       },
@@ -183,19 +198,17 @@ class DesktopAppBar extends StatelessWidget {
                         final dataProvider =
                             Provider.of<DataProvider>(context, listen: false);
                         if (selectedDataType == 'Crimping Tool') {
-                          final Crimpingtooldata = await dataProvider.fetchCrimpingtoolData();
+                          final Crimpingtooldata =
+                              await dataProvider.fetchCrimpingtoolData();
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AppBarMain(
-                                  body: CrimpingToolPage()
-                                ),
-                              )
-                              );
+                                builder: (context) =>
+                                    AppBarMain(body: CrimpingToolPage()),
+                              ));
                         }
                       },
                     ),
-                    
                     SizedBox(width: 50),
                   ],
                 ),
@@ -220,7 +233,7 @@ class DesktopAppBar extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-         color: Colors.white,
+          color: Colors.white,
         ),
       ),
       itemBuilder: (context) {
@@ -352,7 +365,7 @@ class DesktopAppBar extends StatelessWidget {
 //               children: [
 //                 ListTile(
 //                   title: Text('Others'),
-                  
+
 //                   onTap: () async {
 //                      final dataProvider =
 //                             Provider.of<DataProvider>(context, listen: false);
@@ -409,16 +422,17 @@ class MobileAppBar extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-              IconButton(
-  icon: Icon(Icons.shopping_cart), // The icon you want to display
-  onPressed: () {Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CartPage()));
-    // Define the action to be performed when the button is pressed
-    // For example, you can navigate to a shopping cart page here
-    // or perform any other desired action.
-  },
-)
+                IconButton(
+                  icon:
+                      Icon(Icons.shopping_cart), // The icon you want to display
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => CartPage()));
+                    // Define the action to be performed when the button is pressed
+                    // For example, you can navigate to a shopping cart page here
+                    // or perform any other desired action.
+                  },
+                )
               ],
             ),
             backgroundColor: Color.fromARGB(255, 0, 0, 0),

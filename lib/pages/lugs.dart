@@ -4,6 +4,8 @@ import '../main.dart';
 import '../model.dart';
 import '../provider/data_provider.dart';
 import '../provider/thumbnail.dart';
+
+
 class LugsPage extends StatelessWidget {
   LugsPage({super.key});
 

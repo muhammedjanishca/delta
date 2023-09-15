@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -5,11 +7,10 @@ import '../provider/cart_provider.dart';
 import '../provider/data_provider.dart';
 import '../provider/thumbnail.dart';
 import '../provider/user_input_provider.dart';
-
 import '../responsive/product_page.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsofLugs extends StatelessWidget {
+class ProductDetailsoflugs extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
   // ProductDetails({required this.productData, required this.selectedIndex});
   @override
@@ -17,10 +18,10 @@ class ProductDetailsofLugs extends StatelessWidget {
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
 TextEditingController quantityController = TextEditingController();
-    final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
     final int selectedProductIndex =
         ModalRoute.of(context)!.settings.arguments as int;
+    final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
@@ -348,41 +349,63 @@ TextEditingController quantityController = TextEditingController();
                                             width: 30,
                                           ),
                                           ElevatedButton(
-                                            onPressed: () {
-                                              final selectedPrice =
-                                                  selectedPriceNotifier.value;
-                                              final productCode =
-                                                  selectedPrice.split(': ')[0];
-                                              final price = double.parse(
-                                                  selectedPrice.split(': ')[1]);
+                                                  onPressed: () {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      // signed in
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                              .value;
+                                                      final productCode =
+                                                          selectedPrice
+                                                              .split(': ')[0];
+                                                      final price = double
+                                                          .parse(selectedPrice
+                                                              .split(': ')[1]);
 
-            final quantity = int.tryParse(quantityController.text) ?? 0;
-                                              final imageUrl =
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      thumbnail;
-                                              final productName = textpass;
-                                              final cartProvider =
-                                                  Provider.of<CartProvider>(
-                                                      context,
-                                                      listen: false);
-                                              cartProvider.addToCart(
-                                                  productCode,
-                                                  price,
-                                                  quantity,
-                                                  imageUrl??"",
-                                                  productName??"");
-                                            },
-                                            child: const Text('ADD TO CART'),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.black),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(150, 50)),
-                                            ),
-                                          ),
+                                                      final quantity = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      final imageUrl =
+                                                          selectedThumbnailProvider
+                                                                  .selectedThumbnail ??
+                                                              thumbnail;
+                                                      final productName =
+                                                          textpass;
+                                                      final cartProvider =
+                                                          Provider.of<
+                                                                  CartProvider>(
+                                                              context,
+                                                              listen: false);
+                                                      cartProvider.addToCart(
+                                                          productCode,
+                                                          price,
+                                                          quantity,
+                                                          imageUrl ?? "",
+                                                          productName ?? "");
+                                                    } else {
+                                                      // signed out
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SignUpPage(),
+                                                          ));
+                                                    }
+                                                  },
+                                                  child:
+                                                      const Text('ADD TO CART'),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.black),
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(Size(150, 50)),
+                                                  ),
+                                                ),
                                           SizedBox(
                                             width: 20,
                                           ),
@@ -421,7 +444,8 @@ TextEditingController quantityController = TextEditingController();
                                     color:const Color.fromARGB(255, 230, 233, 235),
                                     child: pdf!=null?
                                          SfPdfViewer.network(
-                                pdf):Nopdf()
+                                pdf):
+                                Nopdf(typeOfProduct: 'accessories')
                                         // PDFView(
                                         //   filePath:
                                         //       pdf, // Replace 'pdf' with the actual PDF file path or URL
@@ -440,8 +464,7 @@ TextEditingController quantityController = TextEditingController();
                   ],
                 ),
               ),
-            ):
-            Nopdf(typeOfProduct: 'lugs',);
+            ):Nopdf(typeOfProduct: 'accessories');
           }
         },
       ),

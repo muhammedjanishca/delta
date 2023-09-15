@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../login_and_signing/signup_page.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsOfConnectors extends StatelessWidget {
@@ -347,42 +349,64 @@ TextEditingController quantityController = TextEditingController();
                                           SizedBox(
                                             width: 30,
                                           ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              final selectedPrice =
-                                                  selectedPriceNotifier.value;
-                                              final productCode =
-                                                  selectedPrice.split(': ')[0];
-                                              final price = double.parse(
-                                                  selectedPrice.split(': ')[1]);
+                                         ElevatedButton(
+                                                  onPressed: () {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      // signed in
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                              .value;
+                                                      final productCode =
+                                                          selectedPrice
+                                                              .split(': ')[0];
+                                                      final price = double
+                                                          .parse(selectedPrice
+                                                              .split(': ')[1]);
 
-            final quantity = int.tryParse(quantityController.text) ?? 0;
-                                              final imageUrl =
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      thumbnail;
-                                              final productName = textpass;
-                                              final cartProvider =
-                                                  Provider.of<CartProvider>(
-                                                      context,
-                                                      listen: false);
-                                              cartProvider.addToCart(
-                                                  productCode,
-                                                  price,
-                                                  quantity,
-                                                  imageUrl??"",
-                                                  productName??"");
-                                            },
-                                            child: const Text('ADD TO CART'),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.black),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(150, 50)),
-                                            ),
-                                          ),
+                                                      final quantity = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      final imageUrl =
+                                                          selectedThumbnailProvider
+                                                                  .selectedThumbnail ??
+                                                              thumbnail;
+                                                      final productName =
+                                                          textpass;
+                                                      final cartProvider =
+                                                          Provider.of<
+                                                                  CartProvider>(
+                                                              context,
+                                                              listen: false);
+                                                      cartProvider.addToCart(
+                                                          productCode,
+                                                          price,
+                                                          quantity,
+                                                          imageUrl ?? "",
+                                                          productName ?? "");
+                                                    } else {
+                                                      // signed out
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SignUpPage(),
+                                                          ));
+                                                    }
+                                                  },
+                                                  child:
+                                                      const Text('ADD TO CART'),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.black),
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(Size(150, 50)),
+                                                  ),
+                                                ),
                                           SizedBox(
                                             width: 20,
                                           ),

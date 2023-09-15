@@ -1,7 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../login_and_signing/signup_page.dart';
 import '../provider/cart_provider.dart';
 import '../provider/data_provider.dart';
 import '../provider/thumbnail.dart';
@@ -61,12 +63,13 @@ TextEditingController quantityController = TextEditingController();
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Container(
                                 // height: do
                                 width: MediaQuery.of(context).size.width / 1,
+                              
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 0, right: 0, top: 25),
@@ -74,6 +77,7 @@ TextEditingController quantityController = TextEditingController();
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
+                                      
                                       Container(
                                         color: Colors.white,
                                         height:
@@ -180,62 +184,7 @@ TextEditingController quantityController = TextEditingController();
                                           ),
                                         ],
                                       ),
-                                      // Column(
-                                      //   crossAxisAlignment:
-                                      //       CrossAxisAlignment.start,
-                                      //   children: [
-                                      //     Text(
-                                      //       'Codes and Prices:',
-                                      //       style: TextStyle(
-                                      //         fontWeight: FontWeight.bold,
-                                      //         fontSize: 18,
-                                      //       ),
-                                      //     ),
-                                      //     Wrap(
-                                      //       spacing:
-                                      //           8.0, // Adjust the spacing between buttons as needed
-                                      //       runSpacing:
-                                      //           8.0, // Adjust the spacing between rows as needed
-                                      //       children: List<Widget>.generate(
-                                      //           price.length, (index) {
-                                      //         final codeAndPrice = price[index];
-                                      //         return InkWell(
-                                      //           onTap: () {
-                                      //             // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                      //             selectedPriceNotifier.value =
-                                      //                 '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-                                      //           },
-                                                // child: Container(
-                                                //   padding: EdgeInsets.all(
-                                                //       8.0), // Adjust the padding as needed
-                                                //   decoration: BoxDecoration(
-                                                //     border: Border.all(
-                                                //       color: codeAndPrice
-                                                //                   .productCode ==
-                                                //               selectedCodeProvider
-                                                //                   .selectedProductCode
-                                                //           // codeAndPrice.productCode
-                                                //           ? Colors
-                                                //               .blue // Set border color to blue for selected container
-                                                //           : Colors
-                                                //               .black, // Set border color to black for non-selected containers
-                                                //       width:
-                                                //           1.0, // Set your desired border width
-                                                //     ),
-                                                //   ),
-                                                //   child: Text(
-                                                //     '${codeAndPrice.productCode}',
-                                                //     style: TextStyle(
-                                                //       color: Colors
-                                                //           .black, // Set your desired text color
-                                                //     ),
-                                                //   ),
-                                                // ),
-                                      //         );
-                                      //       }),
-                                      //     ),
-                                      //   ],
-                                      // )
+                                     
                                     ],
                                   ),
                                 ),
@@ -243,7 +192,7 @@ TextEditingController quantityController = TextEditingController();
                             ),
                           ),
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Column(
                         children: [
                           
@@ -331,42 +280,64 @@ TextEditingController quantityController = TextEditingController();
                                           SizedBox(
                                             width: 30,
                                           ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              final selectedPrice =
-                                                  selectedPriceNotifier.value;
-                                              final productCode =
-                                                  selectedPrice.split(': ')[0];
-                                              final price = double.parse(
-                                                  selectedPrice.split(': ')[1]);
+                                         ElevatedButton(
+                                                  onPressed: () {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      // signed in
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                              .value;
+                                                      final productCode =
+                                                          selectedPrice
+                                                              .split(': ')[0];
+                                                      final price = double
+                                                          .parse(selectedPrice
+                                                              .split(': ')[1]);
 
-            final quantity = int.tryParse(quantityController.text) ?? 0;
-                                              final imageUrl =
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      thumbnail;
-                                              final productName = textpass;
-                                              final cartProvider =
-                                                  Provider.of<CartProvider>(
-                                                      context,
-                                                      listen: false);
-                                              cartProvider.addToCart(
-                                                  productCode,
-                                                  price,
-                                                  quantity,
-                                                  imageUrl??"",
-                                                  productName??"");
-                                            },
-                                            child: const Text('ADD TO CART'),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.black),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(150, 50)),
-                                            ),
-                                          ),
+                                                      final quantity = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      final imageUrl =
+                                                          selectedThumbnailProvider
+                                                                  .selectedThumbnail ??
+                                                              thumbnail;
+                                                      final productName =
+                                                          textpass;
+                                                      final cartProvider =
+                                                          Provider.of<
+                                                                  CartProvider>(
+                                                              context,
+                                                              listen: false);
+                                                      cartProvider.addToCart(
+                                                          productCode,
+                                                          price,
+                                                          quantity,
+                                                          imageUrl ?? "",
+                                                          productName ?? "");
+                                                    } else {
+                                                      // signed out
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SignUpPage(),
+                                                          ));
+                                                    }
+                                                  },
+                                                  child:
+                                                      const Text('ADD TO CART'),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.black),
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(Size(150, 50)),
+                                                  ),
+                                                ),
                                           SizedBox(
                                             width: 20,
                                           ),
@@ -394,31 +365,7 @@ TextEditingController quantityController = TextEditingController();
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      // Column(
-                                      //   crossAxisAlignment:
-                                      //       CrossAxisAlignment.start,
-                                      //   children: [
-                                      //     Text(
-                                      //       'Codes and Prices:',
-                                      //       style: TextStyle(
-                                      //         fontWeight: FontWeight.bold,
-                                      //         fontSize: 18,
-                                      //       ),
-                                      //     ),
-                                         
-                                      //     for (var codeAndPrice in price)
-                                      //       ElevatedButton(
-                                      //         onPressed: () {   
-                                      //           // When a button is clicked, update the selectedPrice using ValueNotifier.
-                                      //           selectedPriceNotifier.value =
-                                      //               '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-                                      //         },
-                                      //         child: Text(
-                                      //           '${codeAndPrice.productCode}',
-                                      //         ),
-                                      //       ),
-                                      //   ],
-                                      // ),
+                                      
                                     ],
                                   ),
                                 ),
