@@ -222,7 +222,7 @@ class _CartPageState extends State<CartPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QuotationPage(    totalPrice: cartProvider.getTotalPrice(), cartItem:cartProvider.cartItems                                    )));
+                                  builder: (context) => QuotationPage(    totalPrice: cartProvider.getTotalPrice(), cartItems:cartItems["cartItems"]                             )));
                         },
                         child:  Text(
                           'GANERATE QUATATION',

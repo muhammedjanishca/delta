@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_hex/pdfservies.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,9 @@ import 'package:intl/intl.dart';
 class QuotationPage extends StatelessWidget {
   // final List<User> cartItems;
   final double totalPrice;
- final List<CartItem> cartItem; // Update the type if needed
+ final cartItems; // Update the type if needed
 
-  QuotationPage({required this.cartItem, required this.totalPrice});
+  QuotationPage({required this.cartItems, required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class QuotationPage extends StatelessWidget {
       ),
         floatingActionButton: FloatingActionButton(
         onPressed: (){
-          PdfService().generateInvoice(cartItem);
+          PdfService().generateInvoice(cartItems);
         },
         child: const Icon(Icons.print),
       ),
@@ -108,23 +110,24 @@ class QuotationPage extends StatelessWidget {
                 ),
               ],
               rows: [
-                for (var i = 0; i < cartItem.length; i++)
+                for (var i = 0; i < cartItems.length; i++)
+               
                   DataRow(
                     color: MaterialStateColor.resolveWith((states) =>
                         i % 2 == 0 ? Colors.white : Colors.transparent),
                     cells: [
                       // DataCell(_buildTableCell('${i + 1}')),
-                      DataCell(_buildTableCell(cartItem[i].productName)),
-                                        DataCell(_buildTableCell(cartItem[i].productCode)),
+                      DataCell(_buildTableCell(jsonDecode(cartItems[i])['productName'])),
+                                        DataCell(_buildTableCell(jsonDecode(cartItems[i])['productCode'])),
 
-                      DataCell(_buildTableCell('${cartItem[i].quantity}')),
+                      DataCell(_buildTableCell('${jsonDecode(cartItems[i])['quantity']}')),
                       DataCell(_buildTableCell('unit')),
                       DataCell(
-                        _buildTableCell('\$${cartItem[i].price}',
+                        _buildTableCell('\$${jsonDecode(cartItems[i])['price']}',
                             fontWeight: FontWeight.bold),
                       ),
                       DataCell(_buildTableCell(
-                          '\$${(cartItem[i].price * cartItem[i].quantity).toStringAsFixed(2)}')),
+                          '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
                     ],
                   ),
                 // Total Amount Row

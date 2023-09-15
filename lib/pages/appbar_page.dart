@@ -67,27 +67,33 @@ class DesktopAppBar extends StatelessWidget {
                     // _searchBox(searchTextController), // Add the search box here
                     Padding(
                       padding: const EdgeInsets.only(left: 25),
-                      child: Text(
-                        'Delta',
-                        style: GoogleFonts.pacifico(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 122, 102, 54),
-                            fontSize: 35,
-                          ),
-                        ),
-                      ),
+                      child:Image.asset("assets/image/deltalogo.jpg.jpg")
+                      //  Text(
+                      //   'Delta',
+                      //   style: GoogleFonts.pacifico(
+                      //     textStyle: TextStyle(
+                      //       color: Color.fromARGB(255, 122, 102, 54),
+                      //       fontSize: 35,
+                      //     ),
+                      //   ),
+                      // ),
+                      
                     ),
                     Spacer(),
                     Expanded(child: _searchBox(searchTextController)),
                     TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignUpPage()),
-                          );
-                        },
-                        child: Text('SignUp/SignIn')),
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SignUpPage()),
+    );
+  },
+  style: ButtonStyle(
+    foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 99, 98, 98)), // Change the color to your desired color
+  ),
+  child: Text('SignUp/SignIn'),
+),
+
                     user != null
                         ? TextButton(
                             onPressed: () {
@@ -459,7 +465,7 @@ Widget _searchBox(TextEditingController searchTextController) {
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: Colors.white, // Background color is white
+      color: Color.fromARGB(255, 222, 220, 220), // Background color is white
     ),
     child: Row(
       children: [
@@ -480,7 +486,7 @@ Widget _searchBox(TextEditingController searchTextController) {
         ),
         Container(
           height: 50,
-          color: Colors.black,
+          color: Color.fromARGB(255, 40, 38, 38),
           child: TextButton(
               child: Text(
                 'clear',
