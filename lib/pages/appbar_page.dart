@@ -52,34 +52,33 @@ class DesktopAppBar extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => DataProvider(),
       child: PreferredSize(
-        preferredSize: const Size.fromHeight(105),
+        preferredSize:  Size.fromHeight(105),
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
               Container(
-                // color: Colors.amber,
-                height: 60,
+                color: Colors.black,
+                height: 64,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
                     // _searchBox(searchTextController), // Add the search box here
-                    
-                        // child: Image.asset("assets/image/deltalogo.jpg.jpg")
-                         Text(
-                          'Delta',
-                          style: GoogleFonts.pacifico(
-                            textStyle: TextStyle(
-                              color: Color.fromARGB(255, 122, 102, 54),
-                              fontSize: 35,
-                            ),
-                          ),
-                      
-
+                    // child: Image.asset("assets/image/deltalogo.jpg.jpg")
+                    Text(
+                      'Delta',
+                      style: GoogleFonts.pacifico(
+                        textStyle: TextStyle(
+                          color: Color.fromARGB(255, 122, 102, 54),
+                          fontSize: 35,
                         ),
+                      ),
+                    ),
                     Spacer(),
-                    Expanded(child: _searchBox(searchTextController)),
+                    Expanded(child: _searchBox(searchTextController, context)),
+                     SizedBox(width: MediaQuery.of(context).size.width / 70),
+
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -89,48 +88,57 @@ class DesktopAppBar extends StatelessWidget {
                       },
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all<Color>(
-                            Color.fromARGB(255, 99, 98,
-                                98)), // Change the color to your desired color
+                            const Color.fromARGB(255, 194, 192,
+                                192)), // Change the color to your desired color
                       ),
                       child: Text('SignUp/SignIn'),
                     ),
 
-                    user != null
-                        ? TextButton(
-                            onPressed: () {
-                              FirebaseAuth.instance.signOut();
-                            },
-                            child: Text('logout'))
-                        : SizedBox(),
-                  
-                       GestureDetector(
-                          onTap: () {
-                            user != null
-                                ? Navigator.pushNamed(context, '/cart')
-                                : Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SignUpPage(),
-                                    ));
-                          },
-                          child: Icon(Icons.shopping_cart)),
-                                        SizedBox(width: MediaQuery.of(context).size.width / 8),
+                    // user != null
+                    //     ? TextButton(
+                    //         onPressed: () {
+                    //           FirebaseAuth.instance.signOut();
+                    //         },
+                    //         child: Text('logout'))
+                    //     : SizedBox(),
+                                        SizedBox(width: MediaQuery.of(context).size.width /70),
 
+                                            Icon(Icons.person,color: Colors.white,),
+
+                    SizedBox(width: MediaQuery.of(context).size.width / 70),
+
+                    GestureDetector(
+                        onTap: () {
+                          user != null
+                              ? Navigator.pushNamed(context, '/cart')
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignUpPage(),
+                                  ));
+                        },
+                        child: Icon(
+                          Icons.shopping_cart,
+                          color: Colors.white,
+                        )),
+                    SizedBox(width: MediaQuery.of(context).size.width / 8),
                   ],
                 ),
               ),
               Container(
-                height: 45,
+                height: 41,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromARGB(223, 13, 13, 13), // First color
-                      Color.fromARGB(223, 0, 0, 0), // Second color
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
+                  color: Color.fromARGB(255, 76, 138, 131),
+                  // gradient: LinearGradient(
+                  //   colors: ,
+                  //   // colors: [
+                  //   //   Color.fromARGB(223, 13, 13, 13), // First color
+                  //   //   Color.fromARGB(223, 0, 0, 0), // Second color
+                  //   // ],
+                  //   begin: Alignment.topCenter,
+                  //   end: Alignment.bottomCenter,
+                  // ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -453,7 +461,7 @@ class MobileAppBar extends StatelessWidget {
               height: 48, // Set the height of the container
               width: MediaQuery.of(context).size.width * 0.7,
               // color: Colors.amber, // Set the width of the container
-              child: _searchBox(searchTextController),
+              child: _searchBox(searchTextController, context),
             ),
           ),
         ],
@@ -462,11 +470,13 @@ class MobileAppBar extends StatelessWidget {
 
 //###### search Box #######
 
-Widget _searchBox(TextEditingController searchTextController) {
+Widget _searchBox(TextEditingController searchTextController, context) {
   return Container(
+    height: MediaQuery.of(context).size.height / 18,
+    // width: MediaQuery.of(context).size.width/0.10,
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      color: Color.fromARGB(255, 222, 220, 220), // Background color is white
+      borderRadius: BorderRadius.circular(4),
+      color: Colors.white, // Background color is white
     ),
     child: Row(
       children: [
@@ -476,30 +486,40 @@ Widget _searchBox(TextEditingController searchTextController) {
             style: TextStyle(color: Colors.black), // Text color is black
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: 'Search...',
+              hintText: 'What are you looking for?',
               hintStyle: TextStyle(
-                color: Colors.black.withOpacity(0.5),
-              ), // Hint text color is black with some opacity
+                  color: Colors.black.withOpacity(0.5),
+                  fontSize: 16), // Hint text color is black with some opacity
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              // prefixIcon: Icon(Icons.search, color: Colors.black), // Search lens icon
+              suffixIcon:
+                  Icon(Icons.search, color: Color.fromARGB(255, 155, 154, 154)),
+              //  IconButton(
+              //   icon: Icon(Icons.clear, color: Colors.black),
+              //   onPressed: () {
+              //     // Clear text field
+              //     searchTextController.clear();
+              //   },
+              // ),
             ),
           ),
-        ),
-        Container(
-          height: 50,
-          color: Color.fromARGB(255, 40, 38, 38),
-          child: TextButton(
-              child: Text(
-                'clear',
-                style: GoogleFonts.ubuntu(
-                    textStyle:
-                        TextStyle(color: Color.fromARGB(255, 131, 131, 128))),
-              ),
-              onPressed: () {
-                searchTextController.clear();
-              }),
         ),
       ],
     ),
   );
 }
+  // Container(
+        //   height: 50,
+        //   color: Color.fromARGB(255, 40, 38, 38),
+        //   child: TextButton(
+        //       child: Text(
+        //         'clear',
+        //         style: GoogleFonts.ubuntu(
+        //             textStyle:
+        //                 TextStyle(color: Color.fromARGB(255, 131, 131, 128))),
+        //       ),
+        //       onPressed: () {
+        //         searchTextController.clear();
+        //       }),
+        // ),

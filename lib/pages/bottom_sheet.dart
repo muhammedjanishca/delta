@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/customtextfield.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +10,9 @@ class BottomSheett extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      TextEditingController textarea = TextEditingController();
+  var user = FirebaseAuth.instance.currentUser;
+
+  TextEditingController textarea = TextEditingController();
   TextEditingController companyName = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -36,6 +39,8 @@ class BottomSheett extends StatelessWidget {
                   ),
                 ),
               ),
+                               SizedBox(  height: MediaQuery.of(context).size.height / 30,),
+
               TextButton(
                   onPressed: () {},
                   child: Text(
@@ -48,12 +53,15 @@ class BottomSheett extends StatelessWidget {
                     "Contact Us\n",
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
                   )),
-              TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Logout\n",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
-                  )),
+              
+                   user != null
+                        ? TextButton(
+                            onPressed: () {
+                              FirebaseAuth.instance.signOut();
+                            },
+                            child: Text('Logout',
+                             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),))
+                        : SizedBox(),
                       ],
                       // ),
                     ),

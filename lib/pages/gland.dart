@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/pages/bottom_sheet.dart';
+import 'package:firebase_hex/pages/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,12 +38,13 @@ class GlandPage extends StatelessWidget {
                   // Customize the properties of your Container as needed
                   // color: Colors.blue,
                   height: MediaQuery.of(context).size.height / 2.5,
-                  child: Image.network(
-                    'https://thumbs.dreamstime.com/b/electrical-tools-components-website-banner-format-shot-assortment-electrical-contractors-tools-house-plans-85133897.jpg',
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
+                  child: custCarosal(context, sliderGlands, Index)
+                  // child: Image.network(
+                  //   'https://thumbs.dreamstime.com/b/electrical-tools-components-website-banner-format-shot-assortment-electrical-contractors-tools-house-plans-85133897.jpg',
+                  //   width: 200,
+                  //   height: 200,
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
                 Padding(
                   padding:
