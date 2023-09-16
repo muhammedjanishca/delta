@@ -95,37 +95,11 @@ class DataProvider extends ChangeNotifier {
 
   updateCurrentUser(context, id) {
     currentUser = id;
-    // ignore: curly_braces_in_flow_control_structures
-    //for (int i = 0; i < currentUser; i++)
     notifyListeners();
   }
-
-  // ... Define fetch methods for other data types
+ // ... Define fetch methods for other data types
 }
-// import 'package:http/http.dart' as http;
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:ytalk/Model/FeedModal/Image_Model.dart';
 
-// Future<ImageModel?> getImage() async {
-//   // log("bsnvgfds");
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   final retrieve = prefs.getString('access_token');
-//   Uri url = Uri.parse('https://thewhytalks.com/api/feed/images');
-//   final response = await http.get(url, headers: {
-//     'Authorization': 'Bearer $retrieve',
-//   });
-//   print(response.statusCode);
-//   print('llllllll');
-//   if (response.statusCode == 200) {
-//     print(response);
-//     ImageModel? imageapi = imageModelFromJson(response.body);
-//     print(imageapi);
-
-//     return imageapi;
-//   } else {
-//     throw Exception();
-//   }
-// }
 
 Future<ProduceNewModal> _fetchLugsData() async {
   final response = await http

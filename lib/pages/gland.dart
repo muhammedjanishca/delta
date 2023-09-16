@@ -1,5 +1,6 @@
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 import '../model.dart';
@@ -95,11 +96,10 @@ class GlandPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  // Customize the properties of your Container as needed
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  child: _BlackContainer()
-                ),
+                    // Customize the properties of your Container as needed
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    child: _BlackContainer(context)),
               ],
             );
           }
@@ -109,158 +109,219 @@ class GlandPage extends StatelessWidget {
   }
 }
 
-Widget _BlackContainer() {
+Widget _BlackContainer(context) {
+  TextEditingController textarea = TextEditingController();
+  TextEditingController companyName = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
+
   return Row(
     children: [
-      Expanded(
-        flex: 1,
-        child:ListView(
-          children: [
-            Text("xcvb"),
-            Text("dfgh"),
-             Text("dfgh"),
-            
-          ],)
-        ),
-        Expanded(
-          flex: 2,
-          child: ListView(children: [
-          Text("xcvb"),
-            Text("dfgh"),
-             Text("dfgh"),
-        ],)),
-        Expanded(
-          flex: 3,
-          child:Container(
-            color: Colors.black,
+      Container(
+        width: MediaQuery.of(context).size.width / 6,
+        color: Colors.black,
+        child: Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+              Text(
+                'Delta',
+                style: GoogleFonts.pacifico(
+                  textStyle: TextStyle(
+                    color: Color.fromARGB(255, 122, 102, 54),
+                    fontSize: 35,
+                  ),
+                ),
+              ),
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "About Us\n",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
+                  )),
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Contact Us\n",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
+                  )),
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Logout\n",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
+                  )),
+                      ],
+                      // ),
+                    ),
+            )),
+      ),
+      Container(
+        width: MediaQuery.of(context).size.width / 4,
+        color: Colors.black,
+        child: Expanded(
+          // flex: 2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('jkfn sjfhjfff',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-Row(
-  children: [
-    Container(
-      width: 200,
-      height: 40,
-      child: TextFormField(
-        keyboardType: TextInputType.phone,
-        decoration: InputDecoration(
-          hintText: 'Name',
-          hintStyle: TextStyle(color: Colors.white), // Set hint text color to white
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white, // Set border color to white
-              width: 2.0,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white, // Set enabled border color to white
-              width: 2.0,
-            ),
-          ),
-        ),
-      ),
-    ),
-    SizedBox(width: 10),
-   Container(
-      width: 200,
-      height: 40,
-      child: TextFormField(
-        keyboardType: TextInputType.phone,
-        decoration: InputDecoration(
-          hintText: 'Company Name',
-          hintStyle: TextStyle(color: Colors.white), // Set hint text color to white
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white, // Set border color to white
-              width: 2.0,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white, // Set enabled border color to white
-              width: 2.0,
-            ),
-          ),
-        ),
-      ),
-    ),
-  ],
-)
-
+                Text(
+                  'Address\n',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                Text(
+                  'DELTA NATIONALS Baladiya St,\nAlanwar Center P.O.Box: 101447, jiddah 21311\nTel: 0126652671, jiddah -Soudi Arabia\nE-mail : sales@deltanationals.com',
+                  style: TextStyle(fontSize: 15,color: Colors.white),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height/20,),
+                 Text(
+                  'Contact Us\n',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                Text('+91 6238636935',style:TextStyle(color: Colors.white,fontSize: 15),)
               ],
             ),
-          )
-          //  TextFormField(
-          //     keyboardType: TextInputType.number,
-          //     decoration: InputDecoration(
-          //         prefixIcon: Padding(
-          //           padding: EdgeInsets.all(0.0),
-          //           child: Icon(Icons.person,
-          //               size: 40.0, color: Colors.white),
-          //         ),
-          //         hintText: "Input your opinion",
-          //         hintStyle: TextStyle(color: Colors.white30),
-          //         border: OutlineInputBorder(
-          //             borderRadius:
-          //             BorderRadius.all(new Radius.circular(25.0))),
-          //         labelStyle: TextStyle(color: Colors.white)),
-          //     textAlign: TextAlign.center,
-          //     style: TextStyle(
-          //       color: Colors.white,
-          //       fontSize: 25.0,
-          //     ),
-          //     controller: host,
-          //     validator: (value) {
-          //       if (value.isEmpty) {
-          //         return "Empty value";
-          //       }
-          //     },
-          //   )
-//            Container(
-//   padding: EdgeInsets.all(12),
-//   child: Column(
-//     children: <Widget>[
-      
-//       Text("ghjty gh"),
-//       TextField(
-//         decoration: InputDecoration(
-//           border: OutlineInputBorder(),
-//           labelText: 'Default TextField',
-//         ),
-//       ),
-//       SizedBox(height: 16,),
-//       TextField(
-//         decoration: InputDecoration(
-//           border: OutlineInputBorder(),
-//           labelText: 'Densed TextField',
-//           isDense: true,                      // Added this
-//         ),
-//       ),
-//       SizedBox(height: 16,),
-//       TextField(
-//         decoration: InputDecoration(
-//           border: OutlineInputBorder(),
-//           labelText: 'Even Densed TextFiled',
-//           isDense: true,                      // Added this
-//           contentPadding: EdgeInsets.all(8),  // Added this
-//         ),
-//       ),
-//       SizedBox(
-//   width: 240, // <-- TextField width
-//   height: 120, // <-- TextField height
-//   child: TextField(
-//     maxLines: null,
-//     expands: true,
-//     keyboardType: TextInputType.multiline,
-//     decoration: InputDecoration(filled: true, hintText: 'Enter a message'),
-//   ),
-// )
-//     ],
-//   ),
-// )
-          )
+          ),
+        ),
+      ),
+      Expanded(
+          flex: 3,
+          child: Container(
+            color: Colors.black,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 20,
+                  ),
+                  Text(
+                    'Write To Us',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 20,
+                  ),
+                  Row(
+                    children: [
+                      _TextField("Name", name, context),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 35,
+                      ),
+                      _TextField("Company Name", companyName, context)
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 25,
+                  ),
+                  Row(
+                    
+                    children: [
+                      _TextField("Email", email, context),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 35,
+                      ),
+                      _TextField('Phone Number', phoneNumber, context)
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 25,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: textarea,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                              hintText: "Message",
+                              hintStyle: TextStyle(color: Colors.white),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      Colors.white, // Set border color to white
+                                  width: 2.0,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.white, width: 2))),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 25,
+                        ),
+                         ElevatedButton(
+                        onPressed: () {
+                         print(textarea.text);
+
+                        },
+                        child: Text(
+                          'SUBMIT',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                        ),
+                      ),
+                      
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ))
     ],
+  );
+}
+
+Widget _TextField(String hintText, TextEditingController controller, context) {
+  return Container(
+    width: MediaQuery.of(context).size.width / 5,
+    height: 40,
+    child: TextFormField(
+      controller: controller, // Pass the controller
+      keyboardType: TextInputType.phone,
+      decoration: InputDecoration(
+        hintText: hintText, // Pass the hint text
+        hintStyle: TextStyle(
+          color: Colors.white,fontSize: 15
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 2.0,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 2.0,
+          ),
+        ),
+      ),
+    ),
   );
 }

@@ -58,23 +58,24 @@ class DesktopAppBar extends StatelessWidget {
           child: Column(
             children: [
               Container(
+                // color: Colors.amber,
                 height: 60,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
+                    SizedBox(width: MediaQuery.of(context).size.width / 8),
                     // _searchBox(searchTextController), // Add the search box here
-                    Padding(
-                        padding: const EdgeInsets.only(left: 25),
-                        child: Image.asset("assets/image/deltalogo.jpg.jpg")
-                        //  Text(
-                        //   'Delta',
-                        //   style: GoogleFonts.pacifico(
-                        //     textStyle: TextStyle(
-                        //       color: Color.fromARGB(255, 122, 102, 54),
-                        //       fontSize: 35,
-                        //     ),
-                        //   ),
-                        // ),
+                    
+                        // child: Image.asset("assets/image/deltalogo.jpg.jpg")
+                         Text(
+                          'Delta',
+                          style: GoogleFonts.pacifico(
+                            textStyle: TextStyle(
+                              color: Color.fromARGB(255, 122, 102, 54),
+                              fontSize: 35,
+                            ),
+                          ),
+                      
 
                         ),
                     Spacer(),
@@ -101,9 +102,8 @@ class DesktopAppBar extends StatelessWidget {
                             },
                             child: Text('logout'))
                         : SizedBox(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25, right: 25),
-                      child: GestureDetector(
+                  
+                       GestureDetector(
                           onTap: () {
                             user != null
                                 ? Navigator.pushNamed(context, '/cart')
@@ -114,7 +114,8 @@ class DesktopAppBar extends StatelessWidget {
                                     ));
                           },
                           child: Icon(Icons.shopping_cart)),
-                    )
+                                        SizedBox(width: MediaQuery.of(context).size.width / 8),
+
                   ],
                 ),
               ),

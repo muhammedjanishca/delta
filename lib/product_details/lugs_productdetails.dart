@@ -164,6 +164,7 @@ TextEditingController quantityController = TextEditingController();
                                             builder: (context, selectedPrice,
                                                 child) {
                                               return Container(
+                                                
                                                 padding: EdgeInsets.all(8.0),
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
@@ -203,6 +204,7 @@ TextEditingController quantityController = TextEditingController();
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
                                                 },
                                                 child: Container(
+                                                  width: 100,
                                                   padding: EdgeInsets.all(
                                                       8.0), // Adjust the padding as needed
                                                   decoration: BoxDecoration(
