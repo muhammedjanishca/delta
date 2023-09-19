@@ -62,12 +62,6 @@ class CartProvider with ChangeNotifier {
     return totalPrice;
   }
 
-  // void updateQuantity(String productCode, int newQuantity) {
-  //   final cartItem = _cartItems.firstWhere((item) => item.productCode == productCode);
-  //   cartItem.updateQuantity(newQuantity);
-  //   notifyListeners();
-  // }
-  
   void updateQuantity(String productCode, int newQuantity) {
     final cartItem = _cartItems.firstWhere((item) => item.productCode == productCode);
     cartItem.updateQuantity(newQuantity);

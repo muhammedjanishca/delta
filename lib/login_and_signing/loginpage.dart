@@ -39,6 +39,7 @@ class LoginPage extends StatelessWidget {
         child: Container(
         child: Row(
           children: [
+            
             Expanded(
             flex: 3,
             child: Container(
@@ -179,8 +180,8 @@ class LoginPage extends StatelessWidget {
                           },
                           child: value.isLoading
                               ? SizedBox(
-                                  width: 25,
-                                  height: 25,
+                                  width: 40,
+                                  height: 40,
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                     strokeWidth: 2,
@@ -219,6 +220,9 @@ class LoginPage extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
+                        ),
+                         SizedBox(
+                          height: MediaQuery.of(context).size.height / 45,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

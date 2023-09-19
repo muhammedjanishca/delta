@@ -32,7 +32,7 @@ class QuotationPage extends StatelessWidget {
                 },
               ),
               Text(
-                'Your Page Title', // Replace with your page title
+                'Go Back', // Replace with your page title
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class QuotationPage extends StatelessWidget {
               columnSpacing: 10.0,
               dividerThickness: 2,
               headingRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(159, 12, 57, 207)),
+                  (states) => Color.fromARGB(255, 54, 98, 98)),
               dataRowMaxHeight: 50,
               headingRowHeight: 60,
               horizontalMargin: 10,
@@ -109,7 +109,7 @@ class QuotationPage extends StatelessWidget {
                 //   tooltip: 'Serial Number',
                 // ),
                 DataColumn(
-                  label: _buildTableCell('Description'),
+                  label: _buildTableCell('Description',),
                   tooltip: 'Product Description',
                 ),
                  DataColumn(

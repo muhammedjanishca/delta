@@ -59,7 +59,7 @@ TextEditingController quantityController = TextEditingController();
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                    Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Container(
@@ -165,6 +165,7 @@ TextEditingController quantityController = TextEditingController();
                                             builder: (context, selectedPrice,
                                                 child) {
                                               return Container(
+                                                width: 110,
                                                 padding: EdgeInsets.all(8.0),
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
@@ -241,115 +242,120 @@ TextEditingController quantityController = TextEditingController();
                             ),
                           ),
                     Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          TabBar(
+                            flex: 3,
+                            child: Column(
+                              children: [
+                               TabBar(
                             unselectedLabelColor: Color.fromARGB(255, 5, 5, 5),
                             indicatorSize: TabBarIndicatorSize.tab,
                             indicator: BoxDecoration(
                                 gradient: LinearGradient(colors: [
                                   Color.fromARGB(255, 0, 0, 0),
-                                  Color.fromARGB(255, 255, 255, 255)
+                                  Color.fromARGB(255, 0, 0, 0)
                                 ]),
                                 borderRadius: BorderRadius.circular(0),
                                 color:
                                     const Color.fromARGB(255, 255, 255, 255)),
-                            tabs: [
-                              Tab(
-                                text: 'Description',
-                              ),
-                              Tab(
-                                text: 'Technical Details',
-                              ),
-                            ],
-                            labelColor: Colors.white,
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: TabBarView(
-                              children: [
-                                // Tab 1 content goes here
-                                Container(
-                                  // height: 1000,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  tabs: [
+                                    Tab(
+                                      text: 'Description',
+                                    ),
+                                    Tab(
+                                      text: 'Technical Details',
+                                    ),
+                                  ],
+                                  labelColor: Colors.white,
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: TabBarView(
                                     children: [
-                                      SizedBox(height: 16.0),
-                                      Text(
-                                        textpass??"",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 30),
-                                      ),
-                                      SizedBox(height: 8.0),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children:
-                                            description!.toUpperCase().split('\n').map((line) {
-                                          return Row(
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                size:
-                                                    10, // Adjust the size as needed
-                                                color: Color.fromARGB(
-                                                    255,
-                                                    220,
-                                                    227,
-                                                    26), // Adjust the color as needed
-                                              ),
-                                              SizedBox(
-                                                  width:
-                                                      8), // Add some space between the circle icon and text
-                                              Text(
-                                                line,
-                                                style: TextStyle(fontSize: 16),
-                                              ),
-                                            ],
-                                          );
-                                        }).toList(),
-                                      ),
-
-                                      // SizedBox(height: 8.0),
-                                      SizedBox(height: 8.0),
+                                      // Tab 1 content goes here
                                       Container(
-                                          height: 40, // Set the desired height
-                                          width: 120,
-                                          color: Colors
-                                              .white, // Set the desired width
-                                          child: TextFormField(
-                                             controller: quantityController, // Link the controller to the TextFormField
-                                            keyboardType: TextInputType.number,
-                                            textAlign: TextAlign.center,
-                                            // Align the text in the center
-                                            decoration: InputDecoration(
-                                              hintText: 'Enter quantity',
-                                              // Add your desired text here
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                vertical: 8.0,
-                                                horizontal: 8.0,
-                                              ), // Adjust the padding as needed
-                                              isDense: true,
-                                              // Reduces the height of the TextFormField
-                                              border: OutlineInputBorder(
-                                                borderSide: BorderSide.none,
-                                              ),
-                                              // Removes the border
+                                        // height: 1000,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: 16.0),
+                                            Text(
+                                              textpass ?? "",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 30),
                                             ),
-                                          )),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-                                          ElevatedButton(
+                                            SizedBox(height: 8.0),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: description!
+                                                  .toUpperCase()
+                                                  .split('\n')
+                                                  .map((line) {
+                                                return Row(
+                                                  children: [
+                                                    Icon(Icons.star,
+                                                        size:
+                                                            10, // Adjust the size as needed
+                                                        color: Colors
+                                                            .black // Adjust the color as needed
+                                                        ),
+                                                    SizedBox(
+                                                      width:
+                                                          8, // Add some space between the circle icon and text
+                                                    ),
+                                                    Flexible(
+                                                      child: Text(
+                                                        line,
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .visible, // Handle text overflow
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              }).toList(),
+                                            ),
+
+                                            // SizedBox(height: 8.0),
+                                            SizedBox(height: 20.0),
+                                                                                 Container(
+  height: 40,
+  width: 140,
+  decoration: BoxDecoration(
+    color: Colors.white,
+    border: Border.all(
+      color: Colors.black, // Set the border color
+      width: 1.0, // Set the border width
+    ),
+    borderRadius: BorderRadius.all(Radius.circular(4.0)), // Add border radius
+  ),
+  child: TextFormField(
+    controller: quantityController,
+    keyboardType: TextInputType.number,
+    textAlign: TextAlign.center,
+    decoration: InputDecoration(
+      hintText: 'Enter quantity',
+      contentPadding: EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 8.0,
+      ),
+      isDense: true,
+      border: InputBorder.none, // Remove the default input border
+    ),
+  ),
+),
+                                            SizedBox(
+                                              height: 30,
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 30,
+                                                ),
+                                                ElevatedButton(
                                                   onPressed: () {
                                                     if (FirebaseAuth.instance
                                                             .currentUser !=
@@ -386,6 +392,11 @@ TextEditingController quantityController = TextEditingController();
                                                           quantity,
                                                           imageUrl ?? "",
                                                           productName ?? "");
+                                                           ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(SnackBar(
+                                                              content: Text(
+                                                                  "Added to cart")));
                                                     } else {
                                                       // signed out
                                                       Navigator.push(
@@ -407,61 +418,60 @@ TextEditingController quantityController = TextEditingController();
                                                             .all(Size(150, 50)),
                                                   ),
                                                 ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pushNamed(
-                                                  context, '/cart');
-                                            },
-                                            child: const Text(
-                                              'GO TO CART',
-                                              style: TextStyle(
-                                                  color: Colors.black),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.pushNamed(
+                                                        context, '/cart');
+                                                  },
+                                                  child: const Text(
+                                                    'GO TO CART',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  ),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.white),
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(Size(150, 50)),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.white),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(150, 50)),
+                                            SizedBox(
+                                              height: 20,
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(
-                                        height: 20,
+                                      // Tab 2 content goes here
+                                      SingleChildScrollView(
+                                        child: Container(
+                                            height: 1500,
+                                            color: const Color.fromARGB(
+                                                255, 230, 233, 235),
+                                            child: pdf != null
+                                                ? SfPdfViewer.network(pdf)
+                                                : Nopdf()
+                                            // PDFView(
+                                            //   filePath:
+                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
+                                            //   // height: 300,   // Set the desired height for the PDF viewer
+                                            //   // width: 300,    // Set the desired width for the PDF viewer
+                                            // ),
+
+                                            ),
                                       ),
-                                     
                                     ],
-                                  ),
-                                ),
-                                // Tab 2 content goes here
-                                SingleChildScrollView(
-                                  child: Container(
-                                    height: 1500,
-                                    color:const Color.fromARGB(255, 230, 233, 235),
-                                    child: pdf!=null?
-                                         SfPdfViewer.network(
-                                pdf):
-                                Nopdf(typeOfProduct: 'accessories')
-                                        // PDFView(
-                                        //   filePath:
-                                        //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                        //   // height: 300,   // Set the desired height for the PDF viewer
-                                        //   // width: 300,    // Set the desired width for the PDF viewer
-                                        // ),
-                                  
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
                     
                   ],
                 ),

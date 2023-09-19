@@ -44,6 +44,7 @@ class _CartPageState extends State<CartPage> {
                           Divider(height: 88, color: Colors.grey),
                       itemBuilder: (context, index) {
                         final item = jsonDecode(cartItems["cartItems"][index]);
+                     
 
                         // final item = cartProvider.cartItems[index];
                         return ListTile(
@@ -51,6 +52,8 @@ class _CartPageState extends State<CartPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.network(
+                                //  '\$${item.}',
+
                                 item['imageUrl'],
                                 width: 100,
                                 height: 100,
@@ -62,12 +65,12 @@ class _CartPageState extends State<CartPage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      '\$${item["productName"]}',
+                                      '${item["productName"]}',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text(
-                                      '\$${item['productCode']}',
+                                  item["productName"]==item['productCode']? SizedBox(): Text(
+                                      '${item['productCode']}',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),

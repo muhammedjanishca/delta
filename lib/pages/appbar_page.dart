@@ -14,6 +14,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'cart.dart';
 
+
+void _handlePopupSelection(String choice) {
+  // Handle the selected menu item here
+  switch (choice) {
+    case 'Account':
+      // Handle Account action
+      break;
+    case 'Login':
+      // Handle Login action
+      break;
+    case 'Logout':
+      // Handle Logout action
+      break;
+  }
+}
+
 class AppBarMain extends StatelessWidget {
   final Widget body;
 
@@ -67,11 +83,12 @@ class DesktopAppBar extends StatelessWidget {
                     // _searchBox(searchTextController), // Add the search box here
                     // child: Image.asset("assets/image/deltalogo.jpg.jpg")
                     Text(
-                      'Delta',
-                      style: GoogleFonts.pacifico(
+                      'DELTA',
+                      style: GoogleFonts.oswald( 
                         textStyle: TextStyle(
-                          color: Color.fromARGB(255, 122, 102, 54),
-                          fontSize: 35,
+                          color: Color.fromARGB(255, 251, 236, 221),
+                          fontSize: 45,
+                          fontWeight: FontWeight.w700
                         ),
                       ),
                     ),
@@ -103,7 +120,38 @@ class DesktopAppBar extends StatelessWidget {
                     //     : SizedBox(),
                                         SizedBox(width: MediaQuery.of(context).size.width /70),
 
-                                            Icon(Icons.person,color: Colors.white,),
+InkWell(
+  onTap: () {
+    // Show the PopupMenu when the icon is clicked
+    showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(0, 100, 0, 0), // Adjust the position as needed
+      items: [
+        PopupMenuItem<String>(
+          value: 'Account',
+          child: Text('Account'),
+        ),
+        PopupMenuItem<String>(
+          value: 'Login',
+          child: Text('Login'),
+        ),
+        PopupMenuItem<String>(
+          value: 'Logout',
+          child: Text('Logout'),
+        ),
+      ],
+    ).then((value) {
+      // Handle the selected menu item when the menu is dismissed
+      if (value != null) {
+        _handlePopupSelection(value);
+      }
+    });
+  },
+  child: Icon(
+    Icons.person,
+    color: Colors.white,
+  ),
+),
 
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
@@ -245,11 +293,16 @@ class DesktopAppBar extends StatelessWidget {
   ) {
     return PopupMenuButton<String>(
       offset: const Offset(0, 30),
-      child: Text(
-        title,
-        style: TextStyle(
-          color: Colors.white,
-        ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          Icon(Icons.arrow_drop_down,color: Colors.white,)
+        ],
       ),
       itemBuilder: (context) {
         return items.map((item) {

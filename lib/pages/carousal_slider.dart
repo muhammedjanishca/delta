@@ -6,9 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 final List<String> sliderGlands = [
-    'https://www.ele-mix.com/uploads/202218812/ImgScroll/ba202209161636479482609.jpg',
-    'https://www.electriceel.com/wp-content/uploads/2017/06/EEL_Model-Z5_Action-1500x800.jpg',
-    '',
+    'https://images.ctfassets.net/uwf0n1j71a7j/5LwYMgxLPveA0Q2l4RADnb/9e87fcfb4974fe0ecbfdf99a520948f3/personal-belonging-electronic-equipment-bike-insurance-add-on.webp',
+    'https://media.baumpub.com/files/slides/locale_image/full/0225/56065_en_59ed0_58276_bobcat-e10e-electric-excavator1.jpg',
+'https://www.hitachi.com/rev/archive/2020/r2020_02/02a06/image/fig_01.jpg',    
   ];
 final List<String> sliderlugs = [
   'https://images.ctfassets.net/uwf0n1j71a7j/5LwYMgxLPveA0Q2l4RADnb/9e87fcfb4974fe0ecbfdf99a520948f3/personal-belonging-electronic-equipment-bike-insurance-add-on.webp',
@@ -81,7 +81,9 @@ width: double.infinity,
             ],
           );
         },
-        slideTransform: DefaultTransform(),
+        // DefaultTransform(),
+        // BackgroundToForegroundTransform(),
+        slideTransform:DefaultTransform(),
         slideIndicator: CircularSlideIndicator(
           indicatorRadius: 0,
           currentIndicatorColor:Colors.transparent,

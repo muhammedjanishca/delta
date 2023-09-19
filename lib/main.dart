@@ -15,6 +15,7 @@ import 'package:firebase_hex/product_details/connecters_productd.dart';
 import 'package:firebase_hex/product_details/crimpingtool_details.dart';
 import 'package:firebase_hex/product_details/gland_productdetails.dart';
 import 'package:firebase_hex/product_details/lugs_productdetails.dart';
+import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print("++++++++++++++++++++++++++++++");
+    // print("++++++++++++++++++++++++++++++");
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
@@ -57,7 +58,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
-        ChangeNotifierProvider(create: (context) => UserInputProvider(),)
+        ChangeNotifierProvider(create: (context) => UserInputProvider(),),
+        ChangeNotifierProvider(create: (context)=>TextProvider())
       ],
       child: MaterialApp(
         //this use using for handle null data
