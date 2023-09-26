@@ -37,7 +37,7 @@ import 'package:flutter/material.dart';
 
 Container CustTextField(String hintText, TextEditingController controller, context) {
   return Container(
-    width: MediaQuery.of(context).size.width / 5,
+    width: MediaQuery.of(context).size.width / 4,
     height: 40,
     child: TextFormField(
       controller: controller, // Pass the controller

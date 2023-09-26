@@ -99,10 +99,12 @@ class LugsPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    // Customize the properties of your Container as needed
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    child: BottomSheett())
+  color: const Color.fromARGB(255, 255, 255, 255),
+  height: MediaQuery.of(context).size.height / 1.5,
+  child: MediaQuery.of(context).size.width >= 700
+      ? deskBottomSheett()
+      : mobiledeskBottomSheett()
+)
               ],
             );          }
         },

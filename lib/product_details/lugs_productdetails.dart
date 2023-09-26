@@ -462,12 +462,7 @@ TextEditingController quantityController = TextEditingController();
                                             child: pdf != null
                                                 ? SfPdfViewer.network(pdf)
                                                 : Nopdf()
-                                            // PDFView(
-                                            //   filePath:
-                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                            //   // height: 300,   // Set the desired height for the PDF viewer
-                                            //   // width: 300,    // Set the desired width for the PDF viewer
-                                            // ),
+                                            
 
                                             ),
                                       ),

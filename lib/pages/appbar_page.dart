@@ -7,13 +7,15 @@ import 'package:firebase_hex/pages/connecters.dart';
 import 'package:firebase_hex/pages/crimping.dart';
 import 'package:firebase_hex/pages/gland.dart';
 import 'package:firebase_hex/pages/lugs.dart';
+import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../login_and_signing/loginpage.dart';
 import 'cart.dart';
-
+import 'package:badges/badges.dart' as badges;
 
 void _handlePopupSelection(String choice) {
   // Handle the selected menu item here
@@ -65,10 +67,11 @@ class DesktopAppBar extends StatelessWidget {
   var user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
+    user != null ? Provider.of<CartProvider>(context).getCartData() : null;
     return ChangeNotifierProvider(
       create: (context) => DataProvider(),
       child: PreferredSize(
-        preferredSize:  Size.fromHeight(105),
+        preferredSize: Size.fromHeight(105),
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -84,25 +87,26 @@ class DesktopAppBar extends StatelessWidget {
                     // child: Image.asset("assets/image/deltalogo.jpg.jpg")
                     Text(
                       'DELTA',
-                      style: GoogleFonts.oswald( 
+                      style: GoogleFonts.oswald(
                         textStyle: TextStyle(
-                          color: Color.fromARGB(255, 251, 236, 221),
-                          fontSize: 45,
-                          fontWeight: FontWeight.w700
-                        ),
+                            color: Color.fromARGB(255, 251, 236, 221),
+                            fontSize: 45,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
                     Spacer(),
                     Expanded(child: _searchBox(searchTextController, context)),
-                     SizedBox(width: MediaQuery.of(context).size.width / 70),
+                    SizedBox(width: MediaQuery.of(context).size.width / 70),
 
                     TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
-                        );
-                      },
+                     onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return LoginPage(); // Your custom dialog widget
+                                        },
+                                      );
+                                    },
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromARGB(255, 194, 192,
@@ -118,57 +122,67 @@ class DesktopAppBar extends StatelessWidget {
                     //         },
                     //         child: Text('logout'))
                     //     : SizedBox(),
-                                        SizedBox(width: MediaQuery.of(context).size.width /70),
+                    SizedBox(width: MediaQuery.of(context).size.width / 70),
 
-InkWell(
-  onTap: () {
-    // Show the PopupMenu when the icon is clicked
-    showMenu(
-      context: context,
-      position: RelativeRect.fromLTRB(0, 100, 0, 0), // Adjust the position as needed
-      items: [
-        PopupMenuItem<String>(
-          value: 'Account',
-          child: Text('Account'),
-        ),
-        PopupMenuItem<String>(
-          value: 'Login',
-          child: Text('Login'),
-        ),
-        PopupMenuItem<String>(
-          value: 'Logout',
-          child: Text('Logout'),
-        ),
-      ],
-    ).then((value) {
-      // Handle the selected menu item when the menu is dismissed
-      if (value != null) {
-        _handlePopupSelection(value);
-      }
-    });
-  },
-  child: Icon(
-    Icons.person,
-    color: Colors.white,
-  ),
-),
+                    InkWell(
+                      onTap: () {
+                        // Show the PopupMenu when the icon is clicked
+                        showMenu(
+                          context: context,
+                          position: RelativeRect.fromLTRB(
+                              0, 100, 0, 0), // Adjust the position as needed
+                          items: [
+                            PopupMenuItem<String>(
+                              value: 'Account',
+                              child: Text('Account'),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'Login',
+                              child: Text('Login'),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'Logout',
+                              child: Text('Logout'),
+                            ),
+                          ],
+                        ).then((value) {
+                          // Handle the selected menu item when the menu is dismissed
+                          if (value != null) {
+                            _handlePopupSelection(value);
+                          }
+                        });
+                      },
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
+                    ),
 
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
                     GestureDetector(
-                        onTap: () {
-                          user != null
-                              ? Navigator.pushNamed(context, '/cart')
-                              : Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignUpPage(),
-                                  ));
-                        },
-                        child: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
-                        )),
+                      onTap: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpPage(),
+                                ));
+                      },
+                      child: badges.Badge(
+                          badgeContent: Text(
+                            user != null ?  Provider.of<CartProvider>(context)
+                                .fetchedItems['cartItems']
+                                .length
+                                .toString():'0',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          child: Icon(
+                            Icons.shopping_cart,
+                            color: Colors.white,
+                          )),
+                    ),
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
                   ],
                 ),
@@ -301,7 +315,10 @@ InkWell(
               color: Colors.white,
             ),
           ),
-          Icon(Icons.arrow_drop_down,color: Colors.white,)
+          Icon(
+            Icons.arrow_drop_down,
+            color: Colors.white,
+          )
         ],
       ),
       itemBuilder: (context) {
@@ -321,151 +338,137 @@ InkWell(
 
 //-----mobile view of the AppBar-------
 
-// Widget mobileDrawer(BuildContext context) {
-//   return ChangeNotifierProvider(
-//     create: (context) => DataProvider(),
-//     child: Theme(
-//       data: ThemeData(
-//         canvasColor:
-//             Colors.white, // Set the background color of the Drawer to black
-//       ),
-//       child: Drawer(
-//         child: ListView(
-//           children: [
-//             SizedBox(
-//               height: 50,
-//             ),
-//             ExpansionTile(
-//               title: Text(
-//                 'Crimping Tool',
-//                 style: TextStyle(
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.white), // Set the text color to white
-//               ),
-//               children: [
-//                 ListTile(
-//                   title: Text('Lugs'),
-//                   onTap: () async {
-//                      final dataProvider =
-//                             Provider.of<DataProvider>(context, listen: false);
-//                           final Lugsdata = await dataProvider.fetchLugsData();
-//                    Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                   builder: (context) => AppBarMain(
-//                                     body: LugsPage(
-//                                       data: Lugsdata,
-//                                     ),
-//                                   ),
-//                                 ));
-//                   },
-//                 ),
-//                 ListTile(
-//                   title: Text('Connectors'),
-//                    onTap: () async {
-//                      final dataProvider =
-//                             Provider.of<DataProvider>(context, listen: false);
-//                           final Connectersdata = await dataProvider.fetchConnectorsData();
-//                    Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                   builder: (context) => AppBarMain(
-//                                     body: LugsPage(
-//                                       data: Connectersdata,
-//                                     ),
-//                                   ),
-//                                 ));
-//                   },
-//                 ),
-//               ],
-//             ),
-//             ExpansionTile(
-//               title: Text(
-//                 'Brass Cable Gland Kits & Accessories',
-//                 style: TextStyle(
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.white), // Set the text color to white
-//               ),
-//               children: [
-//                 ListTile(
-//                   title: Text('Glands'),
-//                   onTap: () async {
-//                      final dataProvider =
-//                             Provider.of<DataProvider>(context, listen: false);
-//                           final Glandsdata = await dataProvider.fetchGlandsData();
-//                    Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                   builder: (context) => AppBarMain(
-//                                     body: LugsPage(
-//                                       data: Glandsdata,
-//                                     ),
-//                                   ),
-//                                 ));
-//                   },
-//                 ),
-//                 ListTile(
-//                   title: Text('Accessories'),
-//                   onTap: () async {
-//                      final dataProvider =
-//                             Provider.of<DataProvider>(context, listen: false);
-//                           final Accessoriesdata = await dataProvider.fetchAccssoriesData();
-//                    Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                   builder: (context) => AppBarMain(
-//                                     body: LugsPage(
-//                                       data: Accessoriesdata,
-//                                     ),
-//                                   ),
-//                                 ));
-//                   },
-//                 ),
-//               ],
-//             ),
-//             ExpansionTile(
-//               title: Text(
-//                 'Cable Terminal Ends',
-//                 style: TextStyle(
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.white), // Set the text color to white
-//               ),
-//               children: [
-//                 ListTile(
-//                   title: Text('Others'),
+Widget custmobileDrawer(BuildContext context) {
+  return ChangeNotifierProvider(
+    create: (context) => DataProvider(),
+    child: Theme(
+      data: ThemeData(
+        canvasColor:
+            Colors.white, // Set the background color of the Drawer to black
+      ),
+      child: Drawer(
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 50,
+            ),
+            ExpansionTile(
+              title: Text(
+                'Crimping Tool',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  title: Text('Lugs'),
+                  onTap: () async {
+                    final dataProvider =
+                        Provider.of<DataProvider>(context, listen: false);
+                    final Lugsdata = await dataProvider.fetchLugsData();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(body: LugsPage()),
+                        ));
+                  },
+                ),
+                ListTile(
+                  title: Text('Connectors'),
+                  onTap: () async {
+                    final dataProvider =
+                        Provider.of<DataProvider>(context, listen: false);
+                    final Connectersdata =
+                        await dataProvider.fetchConnectorsData();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AppBarMain(body: ConnectersPage()),
+                        ));
+                  },
+                ),
+              ],
+            ),
+            ExpansionTile(
+              title: Text(
+                'Brass Cable Gland Kits & Accessories',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  title: Text('Glands'),
+                  onTap: () async {
+                    final dataProvider =
+                        Provider.of<DataProvider>(context, listen: false);
+                    final Glandsdata = await dataProvider.fetchGlandsData();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(body: GlandPage()),
+                        ));
+                  },
+                ),
+                ListTile(
+                  title: Text('Accessories'),
+                  onTap: () async {
+                    final dataProvider =
+                        Provider.of<DataProvider>(context, listen: false);
+                    final Accessoriesdata =
+                        await dataProvider.fetchAccssoriesData();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AppBarMain(body: AccessoriesPage()),
+                        ));
+                  },
+                ),
+              ],
+            ),
+            ExpansionTile(
+              title: Text(
+                'Cable Terminal Ends',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  title: Text('Others'),
 
-//                   onTap: () async {
-//                      final dataProvider =
-//                             Provider.of<DataProvider>(context, listen: false);
-//                           final Crimpingtooldata = await dataProvider.fetchCrimpingtoolData();
-//                    Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                   builder: (context) => AppBarMain(
-//                                     body: LugsPage(
-//                                       data: Crimpingtooldata,
-//                                     ),
-//                                   ),
-//                                 ));
-//                   },
-//                   // Navigator.push(
-//                   //               context,
-//                   //               MaterialPageRoute(
-//                   //                 builder: (context) => AppBarMain(
-//                   //                   body: LugsPage(
-//                   //                     data: Crimpingtooldata,
-//                   //                   ),
-//                   //                 ),
-//                   //               ));
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     ),
-//   );
-// }
+                  onTap: () async {
+                    final dataProvider =
+                        Provider.of<DataProvider>(context, listen: false);
+                    final Crimpingtooldata =
+                        await dataProvider.fetchCrimpingtoolData();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AppBarMain(body: CrimpingToolPage()),
+                        ));
+                  },
+                  // Navigator.push(
+                  //               context,
+                  //               MaterialPageRoute(
+                  //                 builder: (context) => AppBarMain(
+                  //                   body: LugsPage(
+                  //                     data: Crimpingtooldata,
+                  //                   ),
+                  //                 ),
+                  //               ));
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
 
 class MobileAppBar extends StatelessWidget {
   final BuildContext context;
@@ -475,49 +478,49 @@ class MobileAppBar extends StatelessWidget {
   final TextEditingController searchTextController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          AppBar(
-            title: Row(
-              children: [
-                Text(
-                  'Delta',
-                  style: GoogleFonts.pacifico(
-                    textStyle: TextStyle(
-                      color: Color.fromARGB(255, 122, 102, 54),
-                      fontSize: 35,
-                    ),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                print('drower');
+              },
+              icon: const Icon(Icons.menu)),
+          title: Row(
+            children: [
+              Text(
+                'Delta',
+                style: GoogleFonts.pacifico(
+                  textStyle: TextStyle(
+                    color: Color.fromARGB(255, 122, 102, 54),
+                    fontSize: 35,
                   ),
                 ),
-                Spacer(),
-                IconButton(
-                  icon:
-                      Icon(Icons.shopping_cart), // The icon you want to display
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => CartPage()));
-                    // Define the action to be performed when the button is pressed
-                    // For example, you can navigate to a shopping cart page here
-                    // or perform any other desired action.
-                  },
-                )
-              ],
-            ),
-            backgroundColor: Color.fromARGB(255, 0, 0, 0),
+              ),
+              Spacer(),
+              IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CartPage()));
+                },
+              )
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 90),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: 5,
-                  horizontal: 10), // Add padding around the search box
-              height: 48, // Set the height of the container
-              width: MediaQuery.of(context).size.width * 0.7,
-              // color: Colors.amber, // Set the width of the container
-              child: _searchBox(searchTextController, context),
-            ),
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        ),
+        // drawer:custmobileDrawer(context),
+        body: Padding(
+          padding: const EdgeInsets.only(left: 90),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+                vertical: 5,
+                horizontal: 10), // Add padding around the search box
+            height: 48, // Set the height of the container
+            width: MediaQuery.of(context).size.width * 0.7,
+            // color: Colors.amber, // Set the width of the container
+            child: _searchBox(searchTextController, context),
           ),
-        ],
+        ),
       );
 }
 

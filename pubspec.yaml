@@ -53,6 +53,7 @@ dependencies:
   url_launcher: ^6.1.14
   appinio_swiper: ^2.0.3
   flutter_swiper_view: ^1.1.8
+  badges: ^3.1.2
   
 
 dev_dependencies:

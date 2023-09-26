@@ -19,6 +19,7 @@ class CartProvider with ChangeNotifier {
 
     notifyListeners();
   }
+  
 
   void addToCart(String productCode, double price, int quantity,
       String imageUrl, String productName) async {
@@ -44,16 +45,15 @@ class CartProvider with ChangeNotifier {
   }
 
   void removeFromCart(int index, var cartItems) async {
-
     cartItems.removeAt(index);
-    
+
     await FirebaseFirestore.instance
         .collection('users')
         .doc(auth.currentUser!.uid)
         .update({'cartItems': cartItems});
     notifyListeners();
   }
- 
+
   double getTotalPrice() {
     double totalPrice = 0.0;
     for (var item in fetchedItems["cartItems"]) {
@@ -62,11 +62,27 @@ class CartProvider with ChangeNotifier {
     return totalPrice;
   }
 
-  void updateQuantity(String productCode, int newQuantity) {
-    final cartItem = _cartItems.firstWhere((item) => item.productCode == productCode);
-    cartItem.updateQuantity(newQuantity);
+  void updateQuantity(int productIndex, int newQuantity) async {
+    await getCartData();
+    print(jsonDecode(fetchedItems['cartItems'][productIndex])['quantity']);
+    var updatedData = jsonDecode(fetchedItems['cartItems'][productIndex]);
+    updatedData['quantity'] = newQuantity;
+    var updatedList = fetchedItems['cartItems'];
+    updatedList.removeAt(productIndex);
+    updatedList.insert(productIndex, jsonEncode(updatedData));
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .update({'cartItems': updatedList});
+
+
     notifyListeners();
   }
+  // void updateQuantity(String productCode, int newQuantity) {
+  //   final cartItem = _cartItems.firstWhere((item) => item.productCode == productCode);
+  //   cartItem.updateQuantity(newQuantity);
+  //   notifyListeners();
+  // }
 }
 
 class CartItem {

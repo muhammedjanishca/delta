@@ -37,24 +37,24 @@ class GlandPage extends StatelessWidget {
                 Container(
                   // Customize the properties of your Container as needed
                   // color: Colors.blue,
+                  width: MediaQuery.of(context).size.width/4,
+                  // height: 600,
                   height: MediaQuery.of(context).size.height / 2.5,
                   child: custCarosal(context, sliderGlands, Index)
-                  // child: Image.network(
-                  //   'https://thumbs.dreamstime.com/b/electrical-tools-components-website-banner-format-shot-assortment-electrical-contractors-tools-house-plans-85133897.jpg',
-                  //   width: 200,
-                  //   height: 200,
-                  //   fit: BoxFit.cover,
-                  // ),
+                  
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                   child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount:
-                          4, // Set the number of columns in the grid
-                    ),
+                    
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: MediaQuery.of(context).size.width <= 700
+          ? 2
+          : MediaQuery.of(context).size.width <= 600
+              ? 2
+              : 4, // Set the number of columns in the grid
+    ),
                     itemCount: snapshot.data!.data.length,
                     shrinkWrap:
                         true, // Allow the GridView to be scrollable within the ListView
@@ -71,23 +71,27 @@ class GlandPage extends StatelessWidget {
                           navigateToProductDetailsOfGlands(context, index);
                         },
                         child: Container(
-                          color: Colors.white,
+                          height: 100,
+                          // height: MediaQuery.of(context).size.height/20,
+                          width: MediaQuery.of(context).size.width/4 ,
+                          color:Colors.white,
                           padding:
-                              EdgeInsets.all(8.0), // Add spacing on all sides
+                              EdgeInsets.all(5.0), // Add spacing on all sides
                           margin:
-                              EdgeInsets.all(8.0), // Add margin on all sides
+                              EdgeInsets.all(5.0), // Add margin on all sides
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.network(
                                 productData.thumbnail ?? "",
-                                height: 200, // Adjust the height as needed
-                                width: 200, // Adjust the width as needed
+                                height: 160,
+                                // height: MediaQuery.of(context).size.height/4, // Adjust the height as needed
+                                width: MediaQuery.of(context).size.width/5, // Adjust the width as needed
                                 // fit: BoxFit.cover,
                               ),
                               SizedBox(
-                                  height:
-                                      8.0), // Add spacing between image and text
+                                  height: 8,
+                                  width: MediaQuery.of(context).size.width/4,), // Add spacing between image and text
                               Text(
                                 productData.productName ?? "",
                                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -100,11 +104,14 @@ class GlandPage extends StatelessWidget {
                     },
                   ),
                 ),
-                Container(
-                    // Customize the properties of your Container as needed
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    child: BottomSheett())
+               Container(
+  color: const Color.fromARGB(255, 255, 255, 255),
+  height: MediaQuery.of(context).size.height / 1.5,
+  child: MediaQuery.of(context).size.width >= 700
+      ? deskBottomSheett()
+      : mobiledeskBottomSheett()
+)
+
               ],
             );
           }
