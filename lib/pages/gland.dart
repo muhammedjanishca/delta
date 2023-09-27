@@ -43,6 +43,10 @@ class GlandPage extends StatelessWidget {
                   child: custCarosal(context, sliderGlands, Index)
                   
                 ),
+                SizedBox(
+                                    width: MediaQuery.of(context).size.width/4,
+height:MediaQuery.of(context).size.height / 10 ,
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 30),

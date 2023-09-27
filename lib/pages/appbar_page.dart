@@ -41,6 +41,9 @@ class AppBarMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      //--------------- WhatsApp -------------------
+
       floatingActionButton: CustomFAB(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(105),
@@ -478,6 +481,7 @@ class MobileAppBar extends StatelessWidget {
   MobileAppBar(this.context);
 
   final TextEditingController searchTextController = TextEditingController();
+  var user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -499,6 +503,22 @@ class MobileAppBar extends StatelessWidget {
                 ),
               ),
               Spacer(),
+               user==null? TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return LoginPage(); // Your custom dialog widget
+                          },
+                        );
+                      },
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 194, 192,
+                                192)), // Change the color to your desired color
+                      ),
+                      child: Text('SignUp/SignIn'),
+                    ):SizedBox(),
               IconButton(
                 icon: Icon(Icons.shopping_cart),
                 onPressed: () {
