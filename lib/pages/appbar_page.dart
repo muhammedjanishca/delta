@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/login_and_signing/welcome_page.dart';
 import 'package:firebase_hex/pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/connecters.dart';
 import 'package:firebase_hex/pages/crimping.dart';
@@ -14,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../login_and_signing/loginpage.dart';
+import '../whatsApp.dart';
 import 'cart.dart';
 import 'package:badges/badges.dart' as badges;
 
@@ -42,6 +41,7 @@ class AppBarMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: CustomFAB(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(105),
         child: ResponsiveAppBar(
@@ -65,9 +65,14 @@ class DesktopAppBar extends StatelessWidget {
   DesktopAppBar(this.context);
   final TextEditingController searchTextController = TextEditingController();
   var user = FirebaseAuth.instance.currentUser;
+  int cartCount = 0;
   @override
   Widget build(BuildContext context) {
-    user != null ? Provider.of<CartProvider>(context).getCartData() : null;
+    if (user != null) {
+      Provider.of<CartProvider>(context).getCartData();
+      cartCount =
+          Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
+    }
     return ChangeNotifierProvider(
       create: (context) => DataProvider(),
       child: PreferredSize(
@@ -98,22 +103,22 @@ class DesktopAppBar extends StatelessWidget {
                     Expanded(child: _searchBox(searchTextController, context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
-                    TextButton(
-                     onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return LoginPage(); // Your custom dialog widget
-                                        },
-                                      );
-                                    },
+                   user==null? TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return LoginPage(); // Your custom dialog widget
+                          },
+                        );
+                      },
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromARGB(255, 194, 192,
                                 192)), // Change the color to your desired color
                       ),
                       child: Text('SignUp/SignIn'),
-                    ),
+                    ):SizedBox(),
 
                     // user != null
                     //     ? TextButton(
@@ -172,10 +177,7 @@ class DesktopAppBar extends StatelessWidget {
                       },
                       child: badges.Badge(
                           badgeContent: Text(
-                            user != null ?  Provider.of<CartProvider>(context)
-                                .fetchedItems['cartItems']
-                                .length
-                                .toString():'0',
+                            cartCount.toString(),
                             style: TextStyle(color: Colors.white),
                           ),
                           child: Icon(

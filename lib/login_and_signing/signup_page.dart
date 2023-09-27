@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/responsive/signup.dart';
@@ -1306,7 +1307,16 @@ class mobilesignup extends StatelessWidget {
                                                   smsCode:
                                                       otpTextController.text,
                                                 ));
-
+                                                await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .doc(FirebaseAuth.instance
+                                                        .currentUser?.uid)
+                                                    .set({
+                                                  'mobile':
+                                                      mobileNumTextController
+                                                          .text,
+                                                  'cartItems': []
+                                                });
                                                 Navigator.pop(context);
                                                 //                                       Navigator.pushReplacement(
                                                 // context,

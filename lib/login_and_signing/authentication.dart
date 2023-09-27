@@ -142,17 +142,18 @@ Future<void> resetPassword(String email, context) async {
        GoogleAuthProvider authProvider = GoogleAuthProvider();
       // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       // final GoogleSignInAuthentication? googleAuth =
-          // await googleUser?.authentication;
-
+      // await googleUser?.authentication;
       // final credential = GoogleAuthProvider.credential(
       //   accessToken: googleAuth?.accessToken,
-      //   idToken: googleAuth?.idToken,
-      // );
-
+      //   idToken: googleAuth?.idToken);
       // await FirebaseAuth.instance.signInWithCredential(credential);
       final UserCredential userCredential =
       await _auth.signInWithPopup(authProvider);
       user = userCredential.user;
+       await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({'name': user?.displayName, 'email': user?.email,'cartItems':[]});
       Navigator.pop(context);
     } catch (e) {
       print(e);

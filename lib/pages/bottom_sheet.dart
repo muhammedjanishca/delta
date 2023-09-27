@@ -75,7 +75,29 @@ class deskBottomSheett extends StatelessWidget {
                   user != null
                       ? TextButton(
                           onPressed: () {
-                            FirebaseAuth.instance.signOut();
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Are you sure to logout?"),
+                                  // content: Text("This is my message."),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Cancel')),
+                                    TextButton(
+                                        onPressed: () {
+                                          FirebaseAuth.instance.signOut();
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Yes'))
+                                  ],
+                                );
+                              },
+                            );
+                            // FirebaseAuth.instance.signOut();
                           },
                           child: Text(
                             'Logout',
@@ -466,9 +488,7 @@ class mobiledeskBottomSheett extends StatelessWidget {
                               height: MediaQuery.of(context).size.height / 25,
                             ),
                           ],
-                          
                         ),
-                      
                       )
                     ],
                   ),
