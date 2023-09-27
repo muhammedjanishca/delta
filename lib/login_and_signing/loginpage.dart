@@ -122,14 +122,17 @@ class LoginPage extends StatelessWidget {
                  ),
                  Padding(
                    padding: const EdgeInsets.only(top: 19.0),
-                   child: InkWell(
+                   child:InkWell(
                      onTap: () {
-                       Navigator.push(
-                           context,
-                           MaterialPageRoute(
-                             builder: (context) => ForgotPasswordPage(),
-                           ));
-                     },
+                            Navigator.of(context).pop(); // Dismiss the current alert dialog
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ForgotPasswordPage(); // Your custom dialog widget
+                          },
+                        );
+                      },
                      child: Text(
                        "Forgot Password?",
                        style: GoogleFonts.inter(

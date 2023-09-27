@@ -349,7 +349,7 @@ Widget custmobileDrawer(BuildContext context) {
     child: Theme(
       data: ThemeData(
         canvasColor:
-            Colors.white, // Set the background color of the Drawer to black
+            Color.fromARGB(255, 0, 0, 0), // Set the background color of the Drawer to black
       ),
       child: Drawer(
         child: ListView(
@@ -484,26 +484,21 @@ class MobileAppBar extends StatelessWidget {
   var user = FirebaseAuth.instance.currentUser;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                print('drower');
-              },
-              icon: const Icon(Icons.menu)),
-          title: Row(
-            children: [
-              Text(
-                'Delta',
-                style: GoogleFonts.pacifico(
-                  textStyle: TextStyle(
-                    color: Color.fromARGB(255, 122, 102, 54),
-                    fontSize: 35,
-                  ),
+ Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Text(
+              'Delta',
+              style: GoogleFonts.pacifico(
+                textStyle: TextStyle(
+                  color: Color.fromARGB(255, 122, 102, 54),
+                  fontSize: 35,
                 ),
               ),
-              Spacer(),
-               user==null? TextButton(
+            ),
+            Spacer(),
+             user==null? TextButton(
                       onPressed: () {
                         showDialog(
                           context: context,
@@ -519,31 +514,33 @@ class MobileAppBar extends StatelessWidget {
                       ),
                       child: Text('SignUp/SignIn'),
                     ):SizedBox(),
-              IconButton(
-                icon: Icon(Icons.shopping_cart),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => CartPage()));
-                },
-              )
-            ],
-          ),
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CartPage()));
+              },
+            )
+          ],
         ),
-        // drawer:custmobileDrawer(context),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 90),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-                vertical: 5,
-                horizontal: 10), // Add padding around the search box
-            height: 48, // Set the height of the container
-            width: MediaQuery.of(context).size.width * 0.7,
-            // color: Colors.amber, // Set the width of the container
-            child: _searchBox(searchTextController, context),
-          ),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      ),
+      drawer:custmobileDrawer(context),
+      
+      body: Padding(
+        padding: const EdgeInsets.only(left: 90),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+              vertical: 5,
+              horizontal: 10), // Add padding around the search box
+          height: 48, // Set the height of the container
+          width: MediaQuery.of(context).size.width * 0.7,
+          // color: Colors.amber, // Set the width of the container
+          child: _searchBox(searchTextController, context),
         ),
-      );
+      ),
+    );
+
 }
 
 //###### search Box #######
@@ -587,17 +584,4 @@ Widget _searchBox(TextEditingController searchTextController, context) {
     ),
   );
 }
-  // Container(
-        //   height: 50,
-        //   color: Color.fromARGB(255, 40, 38, 38),
-        //   child: TextButton(
-        //       child: Text(
-        //         'clear',
-        //         style: GoogleFonts.ubuntu(
-        //             textStyle:
-        //                 TextStyle(color: Color.fromARGB(255, 131, 131, 128))),
-        //       ),
-        //       onPressed: () {
-        //         searchTextController.clear();
-        //       }),
-        // ),
+ 

@@ -35,30 +35,37 @@ class GlandPage extends StatelessWidget {
             return ListView(
               children: [
                 Container(
-                  // Customize the properties of your Container as needed
-                  // color: Colors.blue,
-                  width: MediaQuery.of(context).size.width/4,
-                  // height: 600,
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  child: custCarosal(context, sliderGlands, Index)
-                  
-                ),
+                    // Customize the properties of your Container as needed
+                    // color: Colors.blue,
+                    width: MediaQuery.of(context).size.width / 4,
+                    // height: 600,
+                    height: MediaQuery.of(context).size.height / 2.5,
+                    child: custCarosal(context, sliderGlands, Index)),
                 SizedBox(
-                                    width: MediaQuery.of(context).size.width/4,
-height:MediaQuery.of(context).size.height / 10 ,
+                  width: MediaQuery.of(context).size.width / 4,
+                  height: MediaQuery.of(context).size.height / 13,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 26),
+                    child: Row(
+                      children: [
+                        TextButton(onPressed: (){}, 
+                        child:Text("HOME>>",style: TextStyle(color: const Color.fromARGB(255, 54, 98, 98),fontSize: 17,fontWeight: FontWeight.w300),) ),
+                        Text("GLANDS",style: TextStyle(fontSize:20 ,fontWeight: FontWeight.w700,color: const Color.fromARGB(255, 54, 98, 98)),)
+                      ],
+                    ),
+                  )
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                   child: GridView.builder(
-                    
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: MediaQuery.of(context).size.width <= 700
-          ? 2
-          : MediaQuery.of(context).size.width <= 600
-              ? 2
-              : 4, // Set the number of columns in the grid
-    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: MediaQuery.of(context).size.width <= 800
+                          ? 2
+                          : MediaQuery.of(context).size.width <= 1200
+                              ? 3
+                              : 4, // Set the number of columns in the grid
+                    ),
                     itemCount: snapshot.data!.data.length,
                     shrinkWrap:
                         true, // Allow the GridView to be scrollable within the ListView
@@ -77,8 +84,8 @@ height:MediaQuery.of(context).size.height / 10 ,
                         child: Container(
                           height: 100,
                           // height: MediaQuery.of(context).size.height/20,
-                          width: MediaQuery.of(context).size.width/4 ,
-                          color:Colors.white,
+                          width: MediaQuery.of(context).size.width / 4,
+                          color: Colors.white,
                           padding:
                               EdgeInsets.all(5.0), // Add spacing on all sides
                           margin:
@@ -90,12 +97,14 @@ height:MediaQuery.of(context).size.height / 10 ,
                                 productData.thumbnail ?? "",
                                 height: 160,
                                 // height: MediaQuery.of(context).size.height/4, // Adjust the height as needed
-                                width: MediaQuery.of(context).size.width/5, // Adjust the width as needed
+                                width: MediaQuery.of(context).size.width /
+                                    5, // Adjust the width as needed
                                 // fit: BoxFit.cover,
                               ),
                               SizedBox(
-                                  height: 8,
-                                  width: MediaQuery.of(context).size.width/4,), // Add spacing between image and text
+                                height: 8,
+                                width: MediaQuery.of(context).size.width / 4,
+                              ), // Add spacing between image and text
                               Text(
                                 productData.productName ?? "",
                                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -108,14 +117,12 @@ height:MediaQuery.of(context).size.height / 10 ,
                     },
                   ),
                 ),
-               Container(
-  color: const Color.fromARGB(255, 255, 255, 255),
-  height: MediaQuery.of(context).size.height / 1.5,
-  child: MediaQuery.of(context).size.width >= 700
-      ? deskBottomSheett()
-      : mobiledeskBottomSheett()
-)
-
+                Container(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    child: MediaQuery.of(context).size.width >= 700
+                        ? deskBottomSheett()
+                        : mobiledeskBottomSheett())
               ],
             );
           }
