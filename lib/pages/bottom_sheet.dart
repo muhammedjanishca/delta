@@ -211,6 +211,7 @@ class deskBottomSheett extends StatelessWidget {
                             TextFormField(
                               controller: textarea,
                               keyboardType: TextInputType.multiline,
+                              style: TextStyle(color: Colors.white),
                               maxLines: 5,
                               decoration: InputDecoration(
                                   hintText: "Message",
@@ -451,10 +452,11 @@ class mobiledeskBottomSheett extends StatelessWidget {
                             TextFormField(
                               controller: textarea,
                               keyboardType: TextInputType.multiline,
+                              style: TextStyle(color: Colors.white),
                               maxLines: 5,
                               decoration: InputDecoration(
                                   hintText: "Message",
-                                  hintStyle: TextStyle(color: Colors.white),
+                                  hintStyle: TextStyle(color:Colors.white),
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors
@@ -464,7 +466,7 @@ class mobiledeskBottomSheett extends StatelessWidget {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.white, width: 2))),
+                                          color:Colors.white, width: 2))),
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height / 25,

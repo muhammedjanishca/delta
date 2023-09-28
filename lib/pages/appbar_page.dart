@@ -475,6 +475,107 @@ Widget custmobileDrawer(BuildContext context) {
   );
 }
 
+
+
+
+
+// class MobileAppBar extends StatelessWidget {
+//   final BuildContext context;
+//   MobileAppBar(this.context);
+//   final TextEditingController searchTextController = TextEditingController();
+//   var user = FirebaseAuth.instance.currentUser;
+//   int cartCount = 0;
+//   @override
+//    Widget build(BuildContext context) {
+//     if (user != null) {
+//       Provider.of<CartProvider>(context).getCartData();
+//       cartCount =
+//           Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
+//     }
+//     return ChangeNotifierProvider(
+//       create: (context) => DataProvider(),
+//       child: PreferredSize(
+//         preferredSize: Size.fromHeight(105),
+//         child: Container(
+//           width: MediaQuery.of(context).size.width,
+//           child: Column(
+//             children: [
+//               Container(
+//                 color: Colors.black,
+//                 height: 64,
+//                 width: MediaQuery.of(context).size.width,
+//                 child: Row(
+//                   children: [               
+//                     Text(
+//                       'DELTA',
+//                       style: GoogleFonts.oswald(
+//                         textStyle: TextStyle(
+//                             color: Color.fromARGB(255, 251, 236, 221),
+//                             fontSize: 45,
+//                             fontWeight: FontWeight.w700),
+//                       ),
+//                     ),
+//                     Spacer(),
+//                     SizedBox(width: MediaQuery.of(context).size.width / 70),
+//                    user==null? TextButton(
+//                       onPressed: () {
+//                         showDialog(
+//                           context: context,
+//                           builder: (BuildContext context) {
+//                             return LoginPage(); // Your custom dialog widget
+//                           },
+//                         );
+//                       },
+//                       style: ButtonStyle(
+//                         foregroundColor: MaterialStateProperty.all<Color>(
+//                             const Color.fromARGB(255, 194, 192,
+//                                 192)), // Change the color to your desired color
+//                       ),
+//                       child: Text('SignUp/SignIn'),
+//                     ):SizedBox(),
+//                     SizedBox(width: MediaQuery.of(context).size.width / 70),
+//                     GestureDetector(
+//                       onTap: () {
+//                         user != null
+//                             ? Navigator.pushNamed(context, '/cart')
+//                             : Navigator.push(
+//                                 context,
+//                                 MaterialPageRoute(
+//                                   builder: (context) => SignUpPage(),
+//                                 ));
+//                       },
+//                       child: badges.Badge(
+//                           badgeContent: Text(
+//                             cartCount.toString(),
+//                             style: TextStyle(color: Colors.white),
+//                           ),
+//                           child: Icon(
+//                             Icons.shopping_cart,
+//                             color: Colors.white,
+//                           )),
+//                     ),
+//                     SizedBox(width: MediaQuery.of(context).size.width / 15),
+//                   ],
+//                 ),
+//               ),
+//               Container(
+//                 height: 41,
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(
+//                   color: Color.fromARGB(255, 76, 138, 131),      
+//                 ),
+//                 child: _searchBox(searchTextController, context)
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
 class MobileAppBar extends StatelessWidget {
   final BuildContext context;
 
@@ -482,9 +583,11 @@ class MobileAppBar extends StatelessWidget {
 
   final TextEditingController searchTextController = TextEditingController();
   var user = FirebaseAuth.instance.currentUser;
+  int cartCount = 0;
 
   @override
  Widget build(BuildContext context) => Scaffold(
+  
       appBar: AppBar(
         title: Row(
           children: [
@@ -514,13 +617,26 @@ class MobileAppBar extends StatelessWidget {
                       ),
                       child: Text('SignUp/SignIn'),
                     ):SizedBox(),
-            IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => CartPage()));
-              },
-            )
+            GestureDetector(
+                      onTap: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpPage(),
+                                ));
+                      },
+                      child: badges.Badge(
+                          badgeContent: Text(
+                            cartCount.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          child: Icon(
+                            Icons.shopping_cart,
+                            color: Colors.white,
+                          )),
+                    ),
           ],
         ),
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -540,7 +656,6 @@ class MobileAppBar extends StatelessWidget {
         ),
       ),
     );
-
 }
 
 //###### search Box #######
