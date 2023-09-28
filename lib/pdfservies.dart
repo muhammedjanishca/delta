@@ -43,7 +43,7 @@ class PdfService {
 PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid) {
   //Draw rectangle
   page.graphics.drawRectangle(
-      brush: PdfSolidBrush(PdfColor(91, 126, 215)),
+      brush: PdfSolidBrush(PdfColor(75, 138, 131)),
       bounds: Rect.fromLTWH(0, 0, pageSize.width - 115, 90));
   //Draw string
   page.graphics.drawString(
@@ -54,7 +54,7 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid) {
 
   page.graphics.drawRectangle(
       bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 90),
-      brush: PdfSolidBrush(PdfColor(65, 104, 205)));
+      brush: PdfSolidBrush(PdfColor(75, 138, 131)));
 
   page.graphics.drawString(r'$' + getTotalAmount(grid).toString(),
       PdfStandardFont(PdfFontFamily.helvetica, 18),
@@ -146,7 +146,7 @@ void drawFooter(PdfPage page, Size pageSize) {
 }
 
 //Create PDF grid and return
-PdfGrid getGrid(List cartItems) {
+    PdfGrid getGrid(List cartItems) {
   //Create a PDF grid
   final PdfGrid grid = PdfGrid();
   //Secify the columns count to the grid.

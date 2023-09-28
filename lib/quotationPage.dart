@@ -99,7 +99,8 @@ class QuotationPage extends StatelessWidget {
               columnSpacing: 10.0,
               dividerThickness: 2,
               headingRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(255, 54, 98, 98)),
+                  (states) =>              Color.fromARGB(255, 76, 138, 131),
+),
               dataRowMaxHeight: 50,
               headingRowHeight: 60,
               horizontalMargin: 10,
