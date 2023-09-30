@@ -42,19 +42,32 @@ class GlandPage extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 2.5,
                     child: custCarosal(context, sliderGlands, Index)),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 4,
-                  height: MediaQuery.of(context).size.height / 13,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 26),
-                    child: Row(
-                      children: [
-                        TextButton(onPressed: (){}, 
-                        child:Text("HOME>>",style: TextStyle(color: const Color.fromARGB(255, 54, 98, 98),fontSize: 17,fontWeight: FontWeight.w300),) ),
-                        Text("GLANDS",style: TextStyle(fontSize:20 ,fontWeight: FontWeight.w700,color: const Color.fromARGB(255, 54, 98, 98)),)
-                      ],
-                    ),
-                  )
-                ),
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: MediaQuery.of(context).size.height / 13,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 26),
+                      child: Row(
+                        children: [
+                          TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "HOME>>",
+                                style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 54, 98, 98),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w300),
+                              )),
+                          Text(
+                            "GLANDS",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromARGB(255, 54, 98, 98)),
+                          )
+                        ],
+                      ),
+                    )),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 30),

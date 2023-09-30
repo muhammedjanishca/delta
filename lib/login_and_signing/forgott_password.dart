@@ -1,4 +1,5 @@
 import 'package:firebase_hex/login_and_signing/authentication.dart';
+import 'package:firebase_hex/login_and_signing/forgott_passoword_status.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -9,38 +10,27 @@ class ForgotPasswordPage extends StatelessWidget {
   final emailTextController = TextEditingController();
 
   @override
+  
   Widget build(BuildContext context) {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return AlertDialog(
-        title: AppBar(
-          leading: InkWell(
-              onTap: () => Navigator.pop(context),
-              child: Image.asset(
-                "assets/icons/arrow-left.png",
-                color: Colors.black,
-              )),
-          centerTitle: true,
-          title: Text(
-            "Forgot Password",
-            style: GoogleFonts.inter(fontSize: 18, color: Colors.black),
-          ),
-        ),
+        title: Text('Forget Password'),
         content: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 56),
           child: Container(
-            height: 500,
+            height: 300,
             width: 500,
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 343,
                     child: Text(
                       'Don’t worry. \nEnter your email and we’ll send you a link to reset your password.',
                       style: GoogleFonts.inter(
                         color: Color(0xFF0D0E0F),
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
@@ -50,13 +40,13 @@ class ForgotPasswordPage extends StatelessWidget {
                       controller: emailTextController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(1),
                               borderSide: BorderSide(color: Colors.black12)),
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(1),
                               borderSide: BorderSide(color: Colors.black12)),
                           disabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(1),
                               borderSide: BorderSide(color: Colors.black12)),
                           hintText: "Email"),
                     ),
@@ -78,6 +68,16 @@ class ForgotPasswordPage extends StatelessWidget {
                                 emailTextController.text, context);
 
                             value.changeIsLoading();
+                              Navigator.of(context)
+                          .pop(); // Dismiss the current alert dialog
+
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return ForgotPasswordStatusPage(
+                                    email: emailTextController.text);
+                              },
+                            );
                           }
                         },
                         child: value.isLoading
@@ -99,9 +99,9 @@ class ForgotPasswordPage extends StatelessWidget {
                         style: ButtonStyle(
                             shape: MaterialStatePropertyAll(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16))),
+                                    borderRadius: BorderRadius.circular(1))),
                             backgroundColor:
-                                MaterialStatePropertyAll(Colors.deepPurple)),
+                                MaterialStatePropertyAll(Colors.black)),
                       ),
                     ),
                   ),

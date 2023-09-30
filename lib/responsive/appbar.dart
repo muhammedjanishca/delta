@@ -11,7 +11,7 @@ class ResponsiveAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, Constraints) {
-      if (Constraints.maxWidth < 600) {
+      if (Constraints.maxWidth < 650) {
         return mobileAppBar;
       } else {
         return desktopAppBar;

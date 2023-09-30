@@ -187,7 +187,8 @@ class DeskSignUp extends StatelessWidget {
                                                 height: 25,
                                                 child:
                                                     CircularProgressIndicator(
-                                                  color: Colors.deepPurple,
+                                                  color: Color.fromARGB(
+                                                      255, 76, 138, 131),
                                                   strokeWidth: 2,
                                                 ))
                                           ]
@@ -211,7 +212,7 @@ class DeskSignUp extends StatelessWidget {
                                                   width: 0.50,
                                                   color: Colors.black26),
                                               borderRadius:
-                                                  BorderRadius.circular(16))),
+                                                  BorderRadius.circular(1))),
                                       backgroundColor: MaterialStatePropertyAll(
                                           Colors.white)),
                                 ),
@@ -235,15 +236,15 @@ class DeskSignUp extends StatelessWidget {
                                 controller: nameTextController,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     disabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     hintText: "Name"),
@@ -255,15 +256,15 @@ class DeskSignUp extends StatelessWidget {
                                 controller: emailTextController,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     disabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     hintText: "Email"),
@@ -288,15 +289,15 @@ class DeskSignUp extends StatelessWidget {
                                           size: 26,
                                         )),
                                     border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     disabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(1),
                                         borderSide:
                                             BorderSide(color: Colors.black12)),
                                     hintText: "Password"),
@@ -308,9 +309,11 @@ class DeskSignUp extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Checkbox(
-                                      focusColor: Colors.deepPurple,
+                                      focusColor:
+                                          Color.fromARGB(255, 76, 138, 131),
                                       overlayColor: MaterialStatePropertyAll(
-                                          Colors.deepPurple),
+                                        Color.fromARGB(255, 76, 138, 131),
+                                      ),
                                       value: value.isChecked,
                                       onChanged: (value1) {
                                         value.changeIsChecked();
@@ -397,9 +400,10 @@ class DeskSignUp extends StatelessWidget {
                                       shape: MaterialStatePropertyAll(
                                           RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(16))),
+                                                  BorderRadius.circular(1))),
                                       backgroundColor: MaterialStatePropertyAll(
-                                          Colors.deepPurple)),
+                                        Color.fromARGB(255, 76, 138, 131),
+                                      )),
                                 ),
                               ),
                               SizedBox(
@@ -581,21 +585,21 @@ class DeskSignUp extends StatelessWidget {
                                                               border: OutlineInputBorder(
                                                                   borderRadius:
                                                                       BorderRadius.circular(
-                                                                          16),
+                                                                          1),
                                                                   borderSide: BorderSide(
                                                                       color: Colors
                                                                           .black12)),
                                                               enabledBorder: OutlineInputBorder(
                                                                   borderRadius:
                                                                       BorderRadius.circular(
-                                                                          16),
+                                                                          1),
                                                                   borderSide: BorderSide(
                                                                       color: Colors
                                                                           .black12)),
                                                               disabledBorder: OutlineInputBorder(
                                                                   borderRadius:
                                                                       BorderRadius.circular(
-                                                                          16),
+                                                                          1),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color: Colors.black12)),
@@ -704,7 +708,7 @@ class DeskSignUp extends StatelessWidget {
                                                                 RoundedRectangleBorder(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
-                                                                            16))),
+                                                                            1))),
                                                             backgroundColor:
                                                                 MaterialStatePropertyAll(
                                                                     const Color
@@ -755,7 +759,7 @@ class DeskSignUp extends StatelessWidget {
                                                   width: 0.50,
                                                   color: Colors.black26),
                                               borderRadius:
-                                                  BorderRadius.circular(16))),
+                                                  BorderRadius.circular(1))),
                                       backgroundColor: MaterialStatePropertyAll(
                                           Colors.black)),
                                 ),
@@ -784,9 +788,10 @@ class DeskSignUp extends StatelessWidget {
                                     child: Text(
                                       "Login",
                                       style: GoogleFonts.inter(
-                                        color: Colors.deepPurple,
+                                        color:
+                                            Color.fromARGB(255, 76, 138, 131),
                                         fontSize: 16,
-                                        decoration: TextDecoration.underline,
+                                        // decoration: TextDecoration.underline,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),

@@ -45,6 +45,8 @@ class AppBarMain extends StatelessWidget {
       //--------------- WhatsApp -------------------
 
       floatingActionButton: CustomFAB(),
+            drawer: custmobileDrawer(context),
+
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(105),
         child: ResponsiveAppBar(
@@ -212,6 +214,7 @@ class DesktopAppBar extends StatelessWidget {
                   children: [
                     SizedBox(width: 50),
                     _buildPopupMenuButton(
+                      
                       context,
                       'Cable Terminal Ends',
                       ['Lugs', 'Connectors'],
@@ -352,6 +355,7 @@ Widget custmobileDrawer(BuildContext context) {
             Color.fromARGB(255, 0, 0, 0), // Set the background color of the Drawer to black
       ),
       child: Drawer(
+        
         child: ListView(
           children: [
             SizedBox(
@@ -359,14 +363,15 @@ Widget custmobileDrawer(BuildContext context) {
             ),
             ExpansionTile(
               title: Text(
-                'Crimping Tool',
+                'Cable Terminal Ends',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white), // Set the text color to white
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  title: Text('Lugs'),
+                  title: Text('Lugs',style: TextStyle(color: Colors.white),),
                   onTap: () async {
                     final dataProvider =
                         Provider.of<DataProvider>(context, listen: false);
@@ -379,7 +384,7 @@ Widget custmobileDrawer(BuildContext context) {
                   },
                 ),
                 ListTile(
-                  title: Text('Connectors'),
+                  title: Text('Connectors',style: TextStyle(color: Colors.white),),
                   onTap: () async {
                     final dataProvider =
                         Provider.of<DataProvider>(context, listen: false);
@@ -400,11 +405,12 @@ Widget custmobileDrawer(BuildContext context) {
                 'Brass Cable Gland Kits & Accessories',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white), // Set the text color to white
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  title: Text('Glands'),
+                  title: Text('Glands',style: TextStyle(color: Colors.white),),
                   onTap: () async {
                     final dataProvider =
                         Provider.of<DataProvider>(context, listen: false);
@@ -417,7 +423,7 @@ Widget custmobileDrawer(BuildContext context) {
                   },
                 ),
                 ListTile(
-                  title: Text('Accessories'),
+                  title: Text('Accessories',style: TextStyle(color: Colors.white),),
                   onTap: () async {
                     final dataProvider =
                         Provider.of<DataProvider>(context, listen: false);
@@ -435,14 +441,15 @@ Widget custmobileDrawer(BuildContext context) {
             ),
             ExpansionTile(
               title: Text(
-                'Cable Terminal Ends',
+                'Crimping Tool',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white), // Set the text color to white
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  title: Text('Others'),
+                  title: Text('Crimping Tool',style: TextStyle(color: Colors.white),),
 
                   onTap: () async {
                     final dataProvider =
@@ -456,15 +463,6 @@ Widget custmobileDrawer(BuildContext context) {
                               AppBarMain(body: CrimpingToolPage()),
                         ));
                   },
-                  // Navigator.push(
-                  //               context,
-                  //               MaterialPageRoute(
-                  //                 builder: (context) => AppBarMain(
-                  //                   body: LugsPage(
-                  //                     data: Crimpingtooldata,
-                  //                   ),
-                  //                 ),
-                  //               ));
                 ),
               ],
             ),
@@ -474,105 +472,6 @@ Widget custmobileDrawer(BuildContext context) {
     ),
   );
 }
-
-
-
-
-
-// class MobileAppBar extends StatelessWidget {
-//   final BuildContext context;
-//   MobileAppBar(this.context);
-//   final TextEditingController searchTextController = TextEditingController();
-//   var user = FirebaseAuth.instance.currentUser;
-//   int cartCount = 0;
-//   @override
-//    Widget build(BuildContext context) {
-//     if (user != null) {
-//       Provider.of<CartProvider>(context).getCartData();
-//       cartCount =
-//           Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
-//     }
-//     return ChangeNotifierProvider(
-//       create: (context) => DataProvider(),
-//       child: PreferredSize(
-//         preferredSize: Size.fromHeight(105),
-//         child: Container(
-//           width: MediaQuery.of(context).size.width,
-//           child: Column(
-//             children: [
-//               Container(
-//                 color: Colors.black,
-//                 height: 64,
-//                 width: MediaQuery.of(context).size.width,
-//                 child: Row(
-//                   children: [               
-//                     Text(
-//                       'DELTA',
-//                       style: GoogleFonts.oswald(
-//                         textStyle: TextStyle(
-//                             color: Color.fromARGB(255, 251, 236, 221),
-//                             fontSize: 45,
-//                             fontWeight: FontWeight.w700),
-//                       ),
-//                     ),
-//                     Spacer(),
-//                     SizedBox(width: MediaQuery.of(context).size.width / 70),
-//                    user==null? TextButton(
-//                       onPressed: () {
-//                         showDialog(
-//                           context: context,
-//                           builder: (BuildContext context) {
-//                             return LoginPage(); // Your custom dialog widget
-//                           },
-//                         );
-//                       },
-//                       style: ButtonStyle(
-//                         foregroundColor: MaterialStateProperty.all<Color>(
-//                             const Color.fromARGB(255, 194, 192,
-//                                 192)), // Change the color to your desired color
-//                       ),
-//                       child: Text('SignUp/SignIn'),
-//                     ):SizedBox(),
-//                     SizedBox(width: MediaQuery.of(context).size.width / 70),
-//                     GestureDetector(
-//                       onTap: () {
-//                         user != null
-//                             ? Navigator.pushNamed(context, '/cart')
-//                             : Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                   builder: (context) => SignUpPage(),
-//                                 ));
-//                       },
-//                       child: badges.Badge(
-//                           badgeContent: Text(
-//                             cartCount.toString(),
-//                             style: TextStyle(color: Colors.white),
-//                           ),
-//                           child: Icon(
-//                             Icons.shopping_cart,
-//                             color: Colors.white,
-//                           )),
-//                     ),
-//                     SizedBox(width: MediaQuery.of(context).size.width / 15),
-//                   ],
-//                 ),
-//               ),
-//               Container(
-//                 height: 41,
-//                 width: double.infinity,
-//                 decoration: BoxDecoration(
-//                   color: Color.fromARGB(255, 76, 138, 131),      
-//                 ),
-//                 child: _searchBox(searchTextController, context)
-//               )
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 
 
@@ -586,22 +485,30 @@ class MobileAppBar extends StatelessWidget {
   int cartCount = 0;
 
   @override
- Widget build(BuildContext context) => Scaffold(
-  
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Text(
-              'Delta',
-              style: GoogleFonts.pacifico(
-                textStyle: TextStyle(
-                  color: Color.fromARGB(255, 122, 102, 54),
-                  fontSize: 35,
-                ),
-              ),
-            ),
-            Spacer(),
-             user==null? TextButton(
+  Widget build(BuildContext context) {
+    if (user != null) {
+      Provider.of<CartProvider>(context).getCartData();
+      cartCount =
+          Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
+    }
+
+    return Column(
+      children: [
+        AppBar(
+          title: Row(
+            children: [
+              Text(
+                      'DELTA',
+                      style: GoogleFonts.oswald(
+                        textStyle: TextStyle(
+                            color: Color.fromARGB(255, 251, 236, 221),
+                            fontSize: 40,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+              Spacer(),
+              user == null
+                  ? TextButton(
                       onPressed: () {
                         showDialog(
                           context: context,
@@ -612,50 +519,51 @@ class MobileAppBar extends StatelessWidget {
                       },
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(255, 194, 192,
-                                192)), // Change the color to your desired color
+                            const Color.fromARGB(255, 194, 192, 192)),
                       ),
                       child: Text('SignUp/SignIn'),
-                    ):SizedBox(),
-            GestureDetector(
-                      onTap: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpPage(),
-                                ));
-                      },
-                      child: badges.Badge(
-                          badgeContent: Text(
-                            cartCount.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          child: Icon(
-                            Icons.shopping_cart,
-                            color: Colors.white,
-                          )),
-                    ),
-          ],
+                    )
+                  : SizedBox(),
+              GestureDetector(
+                onTap: () {
+                  user != null
+                      ? Navigator.pushNamed(context, '/cart')
+                      : Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpPage(),
+                          ));
+                },
+                child: badges.Badge(
+                  badgeContent: Text(
+                    cartCount.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-      ),
-      drawer:custmobileDrawer(context),
-      
-      body: Padding(
-        padding: const EdgeInsets.only(left: 90),
-        child: Container(
-          padding: EdgeInsets.symmetric(
+        Padding(
+          padding: const EdgeInsets.only(left: 90),
+          child: Container(
+            padding: EdgeInsets.symmetric(
               vertical: 5,
-              horizontal: 10), // Add padding around the search box
-          height: 48, // Set the height of the container
-          width: MediaQuery.of(context).size.width * 0.7,
-          // color: Colors.amber, // Set the width of the container
-          child: _searchBox(searchTextController, context),
+              horizontal: 10,
+            ),
+            height: 48,
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: _searchBox(searchTextController, context),
+          ),
         ),
-      ),
+      ],
     );
+  }
 }
 
 //###### search Box #######
@@ -666,7 +574,7 @@ Widget _searchBox(TextEditingController searchTextController, context) {
     // width: MediaQuery.of(context).size.width/0.10,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(4),
-      color: Colors.white, // Background color is white
+      color: Color.fromARGB(255, 229, 226, 226), // Background color is white
     ),
     child: Row(
       children: [
@@ -699,4 +607,3 @@ Widget _searchBox(TextEditingController searchTextController, context) {
     ),
   );
 }
- 
