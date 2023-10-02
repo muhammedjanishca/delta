@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/pages/bottom_sheet.dart';
 import 'package:firebase_hex/pages/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,7 @@ class GlandPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
-                                color: const Color.fromARGB(255, 54, 98, 98)),
+                                color: janishcolor),
                           )
                         ],
                       ),
@@ -95,7 +96,7 @@ class GlandPage extends StatelessWidget {
                           navigateToProductDetailsOfGlands(context, index);
                         },
                         child: Container(
-                          height: 100,
+                          // height: 100,
                           // height: MediaQuery.of(context).size.height/20,
                           width: MediaQuery.of(context).size.width / 4,
                           color: Colors.white,

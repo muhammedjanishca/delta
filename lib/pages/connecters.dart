@@ -47,9 +47,7 @@ class ConnectersPage extends StatelessWidget {
                navigateToProductDetailsOfConnectors(context, index);
             },
                     child: Container(
-                      
                       color:Colors.white,
-                     
                       padding: EdgeInsets.all(8.0), // Add spacing on all sides
                       margin: EdgeInsets.all(8.0), // Add margin on all sides
                       child: Column(

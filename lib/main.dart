@@ -26,7 +26,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
+      options: const FirebaseOptions(
     authDomain: "login-fab91.firebaseapp.com",
     apiKey: "AIzaSyAZX6f4F_fXF9gI5ckltoKmnO34OZAixXs",
     appId: "1:461889425921:web:b9d4481b84a3345161a600",
@@ -34,7 +34,7 @@ void main() async {
     projectId: "login-fab91",
   ));
 
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -55,10 +55,13 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(
+            create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
-        ChangeNotifierProvider(create: (context) => UserInputProvider(),),
+        ChangeNotifierProvider(
+          create: (context) => UserInputProvider(),
+        ),
         ChangeNotifierProvider(create: (context) => TextProvider())
       ],
       child: MaterialApp(
@@ -85,23 +88,20 @@ class _MyAppState extends State<MyApp> {
         },
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) =>
-           AppBarMain(
-                body: LandinPage()
-              ),
+          '/': (context) => AppBarMain(body: LandinPage()),
           '/productdetails': (context) => AppBarMain(
                 body: ProductDetailsoflugs(),
               ),
           '/cart': (context) => AppBarMain(
                 body: CartPage(),
               ),
-          '/lugs': (context) => AppBarMain(
+          '/Lugs': (context) => AppBarMain(
                 body: LugsPage(),
               ),
-          '/glands': (context) => AppBarMain(
+          '/Glands': (context) => AppBarMain(
                 body: GlandPage(),
               ),
-               '/signup/signin': (context) =>SignUpPage(),
+          '/signup/signin': (context) => SignUpPage(),
           '/productdetailsofconnectors': (context) => AppBarMain(
                 body: ProductDetailsOfConnectors(),
               ),
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
           '/CrimpingTools': (context) => AppBarMain(
                 body: CrimpingToolPage(),
               ),
-              // '/sighn':(context) => SignUpPage()
+          // '/sighn':(context) => SignUpPage()
         },
         initialRoute: '/',
       ),
@@ -129,22 +129,21 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-void navigateToProductDetailsofLugs(BuildContext context, int selectedProductIndex) {
+void navigateToProductDetailsofLugs(
+    BuildContext context, int selectedProductIndex) {
   Navigator.of(context)
       .pushNamed('/productdetails', arguments: selectedProductIndex);
 }
 
-
 void navigateToProductDetailsOfConnectors(
     BuildContext context, int selectedProductIndex) {
   Navigator.of(context).pushNamed('/productdetailsofconnectors',
-      arguments: selectedProductIndex);
+  arguments: selectedProductIndex);
 }
 
 void navigateToProductDetailsOfGlands(
     BuildContext context, int selectedProductIndex) {
-  Navigator.of(context)
-      .pushNamed('/productdetailsofglands', arguments: selectedProductIndex);
+  Navigator.of(context).pushNamed('/productdetailsofglands', arguments: selectedProductIndex);
 }
 
 void navigateToProductDetailsOfAccessories(
