@@ -8,13 +8,19 @@ import '../provider/thumbnail.dart';
 import 'bottom_sheet.dart';
 import 'carousal_slider.dart';
 
-
-class LugsPage extends StatelessWidget {
+class LugsPage extends StatefulWidget {
   LugsPage({super.key});
 
   @override
+  State<LugsPage> createState() => _LugsPageState();
+}
+
+class _LugsPageState extends State<LugsPage> {
+  int selectedImageIndex = -1; // Initialize with an invalid index
+
+  @override
   Widget build(BuildContext context) {
-     final selectedThumbnailProvider =
+    final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
@@ -27,23 +33,24 @@ class LugsPage extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-              final products = snapshot.data!.data;
-            final nonNullProducts = products.where((product) => product != null).toList();
+            final products = snapshot.data!.data;
+            final nonNullProducts =
+                products.where((product) => product != null).toList();
 
             return ListView(
               children: [
                 Container(
-                  // Customize the properties of your Container as needed
-                  // color: Colors.blue,
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  child: custCarosal(context, sliderlugs, Index)
-                  // child: Image.network(
-                  //   'https://thumbs.dreamstime.com/b/electrical-tools-components-website-banner-format-shot-assortment-electrical-contractors-tools-house-plans-85133897.jpg',
-                  //   width: 200,
-                  //   height: 200,
-                  //   fit: BoxFit.cover,
-                  // ),
-                ),
+                    // Customize the properties of your Container as needed
+                    // color: Colors.blue,
+                    height: MediaQuery.of(context).size.height / 2.5,
+                    child: custCarosal(context, sliderlugs, Index)
+                    // child: Image.network(
+                    //   'https://thumbs.dreamstime.com/b/electrical-tools-components-website-banner-format-shot-assortment-electrical-contractors-tools-house-plans-85133897.jpg',
+                    //   width: 200,
+                    //   height: 200,
+                    //   fit: BoxFit.cover,
+                    // ),
+                    ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
@@ -77,11 +84,40 @@ class LugsPage extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.network(
-                                productData.thumbnail ?? "",
-                                height: 200, // Adjust the height as needed
-                                width: 200, // Adjust the width as needed
-                                // fit: BoxFit.cover,
+                              MouseRegion(
+                                 onEnter: (_) {
+                                  // Handle mouse enter event, e.g., change image size or color
+                                  setState(() {
+                                    // Update the state to apply hover effect
+
+                                    selectedImageIndex =
+                                        index; // Set the selected image index
+                                  });
+                                },
+                                onExit: (_) {
+                                  // Handle mouse exit event, e.g., reset image size or color
+                                  setState(() {
+                                    // Update the state to remove hover effect
+                                    selectedImageIndex =
+                                        -1; // Reset the selected image index
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 200),
+                                   height: selectedImageIndex == index
+                                        ? 180
+                                        : 160, // Expand selected image
+                                    width: selectedImageIndex == index
+                                        ? MediaQuery.of(context).size.width / 4
+                                        : MediaQuery.of(context).size.width / 5,
+                              
+                                  child: Image.network(
+                                    productData.thumbnail ?? "",
+                                    height: 200, // Adjust the height as needed
+                                    width: 200, // Adjust the width as needed
+                                    // fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                   height:
@@ -99,14 +135,14 @@ class LugsPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-  color: const Color.fromARGB(255, 255, 255, 255),
-  height: MediaQuery.of(context).size.height / 1.5,
-  child: MediaQuery.of(context).size.width >= 700
-      ? deskBottomSheett()
-      : mobiledeskBottomSheett()
-)
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    child: MediaQuery.of(context).size.width >= 700
+                        ? deskBottomSheett()
+                        : mobiledeskBottomSheett())
               ],
-            );          }
+            );
+          }
         },
       );
     });

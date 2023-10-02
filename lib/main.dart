@@ -59,8 +59,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider(),),
-        ChangeNotifierProvider(create: (context)=>TextProvider())
-      ],
+        ChangeNotifierProvider(create: (context)=>TextProvider()),
+        ],
       child: MaterialApp(
         //this use using for handle null data
         builder: (context, widget) {
