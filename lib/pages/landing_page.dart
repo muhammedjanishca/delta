@@ -270,7 +270,7 @@ class MobilLanding extends StatelessWidget {
                       ),
                      
                       SizedBox(
-                        height: 230,
+                        height: 280,
                       ),
                     ],
                   ),

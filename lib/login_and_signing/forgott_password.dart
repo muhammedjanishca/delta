@@ -10,6 +10,7 @@ class ForgotPasswordPage extends StatelessWidget {
   final emailTextController = TextEditingController();
 
   @override
+  
   Widget build(BuildContext context) {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return AlertDialog(
@@ -57,7 +58,6 @@ class ForgotPasswordPage extends StatelessWidget {
                       height: 56,
                       child: TextButton(
                         onPressed: () async {
-                          
                           if (emailTextController.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(

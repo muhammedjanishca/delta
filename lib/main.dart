@@ -26,8 +26,8 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        authDomain: "login-fab91.firebaseapp.com",
+    options: const FirebaseOptions(
+    authDomain: "login-fab91.firebaseapp.com",
     apiKey: "AIzaSyAZX6f4F_fXF9gI5ckltoKmnO34OZAixXs",
     appId: "1:461889425921:web:b9d4481b84a3345161a600",
     messagingSenderId: "461889425921",
@@ -59,8 +59,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider(),),
-        ChangeNotifierProvider(create: (context)=>TextProvider()),
-        ],
+        ChangeNotifierProvider(create: (context) => TextProvider())
+      ],
       child: MaterialApp(
         //this use using for handle null data
         builder: (context, widget) {

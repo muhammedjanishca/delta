@@ -187,7 +187,8 @@ class DeskSignUp extends StatelessWidget {
                                                 height: 25,
                                                 child:
                                                     CircularProgressIndicator(
-                  color: Color.fromARGB(255, 76, 138, 131),
+                                                  color: Color.fromARGB(
+                                                      255, 76, 138, 131),
                                                   strokeWidth: 2,
                                                 ))
                                           ]
@@ -401,8 +402,8 @@ class DeskSignUp extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(1))),
                                       backgroundColor: MaterialStatePropertyAll(
-                                                          Color.fromARGB(255, 76, 138, 131),
-)),
+                                        Color.fromARGB(255, 76, 138, 131),
+                                      )),
                                 ),
                               ),
                               SizedBox(
@@ -711,7 +712,7 @@ class DeskSignUp extends StatelessWidget {
                                                             backgroundColor:
                                                                 MaterialStatePropertyAll(
                                                                     const Color
-                                                                        .fromARGB(
+                                                                            .fromARGB(
                                                                         255,
                                                                         171,
                                                                         183,
@@ -787,7 +788,8 @@ class DeskSignUp extends StatelessWidget {
                                     child: Text(
                                       "Login",
                                       style: GoogleFonts.inter(
-                  color: Color.fromARGB(255, 76, 138, 131),
+                                        color:
+                                            Color.fromARGB(255, 76, 138, 131),
                                         fontSize: 16,
                                         // decoration: TextDecoration.underline,
                                         fontWeight: FontWeight.w500,
