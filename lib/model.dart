@@ -91,3 +91,52 @@ class CodesAndPrice {
         "price": price,
       };
 }
+
+// To parse this JSON data, do
+//
+//     final services = servicesFromJson(jsonString);
+
+
+Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
+
+String servicesToJson(Services data) => json.encode(data.toJson());
+
+class Services {
+    List<ProductSearch>? data;
+
+    Services({
+        this.data,
+    });
+
+    factory Services.fromJson(Map<String, dynamic> json) => Services(
+        data: json["data"] == null ? [] : List<ProductSearch>.from(json["data"]!.map((x) => ProductSearch.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+    };
+}
+
+class ProductSearch {
+    int? idNum;
+    String? productName;
+    String? thumbnail;
+
+    ProductSearch({
+        this.idNum,
+        this.productName,
+        this.thumbnail,
+    });
+
+    factory ProductSearch.fromJson(Map<String, dynamic> json) => ProductSearch(
+        idNum: json["id_num"],
+        productName: json["product_name"],
+        thumbnail: json["thumbnail"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id_num": idNum,
+        "product_name": productName,
+        "thumbnail": thumbnail,
+    };
+}
