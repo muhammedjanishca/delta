@@ -83,6 +83,10 @@
     }
   </script>
   <script>
+   el = window.document.getElementById('__ff-recaptcha-container');
+if (el != null) {
+    el.style.visibility = 'hidden';
+}
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({

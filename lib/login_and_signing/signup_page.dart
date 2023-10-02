@@ -642,38 +642,7 @@ class DeskSignUp extends StatelessWidget {
                                                                 .changeShowOtperror();
                                                             value
                                                                 .changeIsLoadingotp();
-
-                                                            try {
-                                                              await FirebaseAuth
-                                                                  .instance
-                                                                  .signInWithCredential(
-                                                                      PhoneAuthProvider
-                                                                          .credential(
-                                                                verificationId:
-                                                                    verificationId
-                                                                        .toString(),
-                                                                smsCode:
-                                                                    otpTextController
-                                                                        .text,
-                                                              ));
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                              //                                       Navigator.pushReplacement(
-                                                              // context,
-                                                              // MaterialPageRoute(
-                                                              //   builder: (context) => HomePage(),
-                                                              // ));
-                                                            } catch (e) {
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text(e.toString())));
-                                                            }
-
+                                                           await value.verifyOTP(verificationId,context,otpTextController);
                                                             value
                                                                 .changeIsLoadingotp();
                                                           }

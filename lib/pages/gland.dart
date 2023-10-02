@@ -6,10 +6,12 @@ import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
 import '../main.dart';
 import '../model.dart';
 import '../provider/thumbnail.dart';
 import 'gridview.dart';
+// ... (Your imports and other code)
 
 class GlandPage extends StatefulWidget {
   GlandPage({super.key});
@@ -19,12 +21,10 @@ class GlandPage extends StatefulWidget {
 }
 
 class _GlandPageState extends State<GlandPage> {
-   int selectedImageIndex = -1; // Initialize with an invalid index
-
+  int selectedImageIndex = -1;
 
   @override
   Widget build(BuildContext context) {
-    // final BottomSheet= BottomSheett();
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
 
@@ -44,39 +44,40 @@ class _GlandPageState extends State<GlandPage> {
             return ListView(
               children: [
                 Container(
-                    // Customize the properties of your Container as needed
-                    // color: Colors.blue,
-                    width: MediaQuery.of(context).size.width / 4,
-                    // height: 600,
-                    height: MediaQuery.of(context).size.height / 2.5,
-                    child: custCarosal(context, sliderGlands, Index)),
+                  width: MediaQuery.of(context).size.width / 4,
+                  height: MediaQuery.of(context).size.height / 2.5,
+                  child: custCarosal(context, sliderGlands, Index),
+                ),
                 SizedBox(
-                    width: MediaQuery.of(context).size.width / 4,
-                    height: MediaQuery.of(context).size.height / 13,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 26),
-                      child: Row(
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "HOME>>",
-                                style: TextStyle(
-                                    color:
-                                        const Color.fromARGB(255, 54, 98, 98),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w300),
-                              )),
-                          Text(
-                            "GLANDS",
+                  width: MediaQuery.of(context).size.width / 4,
+                  height: MediaQuery.of(context).size.height / 13,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 26),
+                    child: Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "HOME>>",
                             style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: janishcolor),
-                          )
-                        ],
-                      ),
-                    )),
+                              color: const Color.fromARGB(255, 54, 98, 98),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "GLANDS",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: janishcolor,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
@@ -86,17 +87,15 @@ class _GlandPageState extends State<GlandPage> {
                           ? 2
                           : MediaQuery.of(context).size.width <= 1200
                               ? 3
-                              : 4, // Set the number of columns in the grid
+                              : 4,
                     ),
                     itemCount: snapshot.data!.data.length,
-                    shrinkWrap:
-                        true, // Allow the GridView to be scrollable within the ListView
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
                       var productData = snapshot.data!.data[index];
 
                       return GestureDetector(
                         onTap: () {
-                          // Set the selected thumbnail for this product
                           selectedThumbnailProvider.setSelectedThumbnail(
                             productData.thumbnail ?? "",
                           );
@@ -104,61 +103,65 @@ class _GlandPageState extends State<GlandPage> {
                           navigateToProductDetailsOfGlands(context, index);
                         },
                         child: Container(
-                          // height: 100,
-                          // height: MediaQuery.of(context).size.height/20,
                           width: MediaQuery.of(context).size.width / 4,
                           color: Colors.white,
-                          padding:
-                              EdgeInsets.all(5.0), // Add spacing on all sides
-                          margin:
-                              EdgeInsets.all(5.0), // Add margin on all sides
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          padding: EdgeInsets.all(5.0),
+                          margin: EdgeInsets.all(5.0),
+                          child: Stack(
+                            alignment: Alignment.topRight,
                             children: [
-                              MouseRegion(
-                                onEnter: (_) {
-            // Handle mouse enter event, e.g., change image size or color
-            setState(() {
-              // Update the state to apply hover effect
-
-                    selectedImageIndex = index; // Set the selected image index
-
-            });
-          },
-          onExit: (_) {
-            // Handle mouse exit event, e.g., reset image size or color
-            setState(() {
-              // Update the state to remove hover effect
-                    selectedImageIndex = -1; // Reset the selected image index
-
-            });
-          },
-
-                                child: AnimatedContainer(
-                                              duration: Duration(milliseconds: 200),
-                                               height: selectedImageIndex == index ? 180 : 160, // Expand selected image
-          width: selectedImageIndex == index
-              ? MediaQuery.of(context).size.width / 4
-              : MediaQuery.of(context).size.width / 5,
-                              
-                                  child: Image.network(
-                                    productData.thumbnail ?? "",
-                                    height: 160,
-                                    // height: MediaQuery.of(context).size.height/4, // Adjust the height as needed
-                                    width: MediaQuery.of(context).size.width /
-                                        5, // Adjust the width as needed
-                                    // fit: BoxFit.cover,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  MouseRegion(
+                                    onEnter: (_) {
+                                      setState(() {
+                                        selectedImageIndex = index;
+                                      });
+                                    },
+                                    onExit: (_) {
+                                      setState(() {
+                                        selectedImageIndex = -1;
+                                      });
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 200),
+                                      height: selectedImageIndex == index
+                                          ? 210
+                                          : 160,
+                                      width: selectedImageIndex == index
+                                          ? MediaQuery.of(context).size.width /
+                                              4
+                                          : MediaQuery.of(context).size.width /
+                                              5,
+                                      child: Image.network(
+                                        productData.thumbnail ?? "",
+                                        height: 160,
+                                        width: MediaQuery.of(context).size.width / 5,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: 8,
+                                    width: MediaQuery.of(context).size.width / 4,
+                                  ),
+                                  Text(
+                                    productData.productName ?? "",
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 8,
-                                width: MediaQuery.of(context).size.width / 4,
-                              ), // Add spacing between image and text
-                              Text(
-                                productData.productName ?? "",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
+                              // Asset image as foreground decoration
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: Image.asset(
+                                  'assets/image/deltalogo.jpg.jpg',
+                                  width: 25,
+                                  height: 25,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ],
                           ),
@@ -168,11 +171,12 @@ class _GlandPageState extends State<GlandPage> {
                   ),
                 ),
                 Container(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    child: MediaQuery.of(context).size.width >= 700
-                        ? deskBottomSheett()
-                        : mobiledeskBottomSheett())
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  child: MediaQuery.of(context).size.width >= 700
+                      ? deskBottomSheett()
+                      : mobiledeskBottomSheett(),
+                )
               ],
             );
           }

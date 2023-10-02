@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart';
 
-
-
 import 'forgott_passoword_status.dart';
 
 class AuthenticationHelper extends ChangeNotifier {
@@ -18,6 +16,7 @@ class AuthenticationHelper extends ChangeNotifier {
   bool isLoadingotpSend = false;
   bool showOtperror = false;
   bool showMobError = false;
+  var user;
   void changeShowPassword() {
     showPassword = !showPassword;
     notifyListeners();
@@ -72,7 +71,7 @@ class AuthenticationHelper extends ChangeNotifier {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCred.user!.uid)
-          .set({'name': name, 'email': email,'cartItems':[]});
+          .set({'name': name, 'email': email, 'cartItems': []});
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -108,7 +107,8 @@ class AuthenticationHelper extends ChangeNotifier {
     }
     notifyListeners();
   }
-Future<void> resetPassword(String email, context) async {
+
+  Future<void> resetPassword(String email, context) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
       Navigator.pushReplacement(
@@ -136,10 +136,10 @@ Future<void> resetPassword(String email, context) async {
 
   Future<void> signInWithGoogle(context) async {
     try {
-        await Firebase.initializeApp();
-    User? user;
-    // FirebaseAuth auth = FirebaseAuth.instance;
-       GoogleAuthProvider authProvider = GoogleAuthProvider();
+      await Firebase.initializeApp();
+      User? user;
+      // FirebaseAuth auth = FirebaseAuth.instance;
+      GoogleAuthProvider authProvider = GoogleAuthProvider();
       // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       // final GoogleSignInAuthentication? googleAuth =
       // await googleUser?.authentication;
@@ -148,12 +148,23 @@ Future<void> resetPassword(String email, context) async {
       //   idToken: googleAuth?.idToken);
       // await FirebaseAuth.instance.signInWithCredential(credential);
       final UserCredential userCredential =
-      await _auth.signInWithPopup(authProvider);
+          await _auth.signInWithPopup(authProvider);
       user = userCredential.user;
-       await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set({'name': user?.displayName, 'email': user?.email,'cartItems':[]});
+      var fetchedItems = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .get();
+             print(fetchedItems.exists);
+      !fetchedItems.exists
+          ? await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userCredential.user!.uid)
+              .set({
+              'name': user?.displayName,
+              'email': user?.email,
+              'cartItems': []
+            })
+          : null;
       Navigator.pop(context);
     } catch (e) {
       print(e);
@@ -161,4 +172,44 @@ Future<void> resetPassword(String email, context) async {
     notifyListeners();
   }
 
+  Future<void> verifyOTP(verificationId, context, otpTextController) async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithCredential(PhoneAuthProvider.credential(
+        verificationId: verificationId.toString(),
+        smsCode: otpTextController.text,
+      ));
+
+      var fetchedItems = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .get();
+      print(fetchedItems.exists);
+     !fetchedItems.exists
+          ? await FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser?.uid)
+              .set({
+              'mobile': FirebaseAuth.instance.currentUser?.phoneNumber,
+              'cartItems': []
+            })
+          : null;
+  
+      Navigator.pop(context);
+      //                                       Navigator.pushReplacement(
+      // context,
+      // MaterialPageRoute(
+      //   builder: (context) => HomePage(),
+      // ));
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+    notifyListeners();
+  }
+
+  getCurrentUser() {
+    user = FirebaseAuth.instance.currentUser;
+    notifyListeners();
+  }
 }

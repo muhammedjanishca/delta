@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/customtextfield.dart';
+import 'package:firebase_hex/pages/landing_page.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../login_and_signing/authentication.dart';
 
 class BottomSheet extends StatelessWidget {
   const BottomSheet({super.key});
@@ -23,11 +27,12 @@ class deskBottomSheett extends StatefulWidget {
 }
 
 class _deskBottomSheettState extends State<deskBottomSheett> {
-    bool  hover=true; 
+  bool hover = true;
 
   @override
   Widget build(BuildContext context) {
-    var user = FirebaseAuth.instance.currentUser;
+    Provider.of<AuthenticationHelper>(context).getCurrentUser();
+    var user = Provider.of<AuthenticationHelper>(context).user;
 
     TextEditingController textarea = TextEditingController();
     TextEditingController companyName = TextEditingController();
@@ -97,7 +102,9 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
                                     TextButton(
                                         onPressed: () {
                                           FirebaseAuth.instance.signOut();
-                                          Navigator.pop(context);
+                                          // Navigator.pop(context);
+
+                                          Navigator.pushNamed(context, '/');
                                         },
                                         child: Text('Yes'))
                                   ],
@@ -238,33 +245,36 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
                               height: MediaQuery.of(context).size.height / 25,
                             ),
                             MouseRegion(
-                              onEnter:(h){
-                                setState((){
-                                  hover=false;
+                              onEnter: (h) {
+                                setState(() {
+                                  hover = false;
                                 });
-                              } ,
-                              onExit: (h){
-                                 setState((){
-                                  hover=true;
+                              },
+                              onExit: (h) {
+                                setState(() {
+                                  hover = true;
                                 });
                               },
                               child: ElevatedButton(
-                               style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                   hover==true?Colors.white :Color.fromARGB(255, 76, 138, 131),
-                                  // minimumSize:
-                                  //     MaterialStateProperty.all(Size(150, 50)),
-                                ),
-                                onPressed: () {
-                                  print(textarea.text);
-                                },
-                                child:hover==true?   Text(
-                                  'SUBMIT',
-                                  style: TextStyle(color: Colors.black),
-                                ):Text( 'SUBMIT',
-                                  style: TextStyle(color: Colors.black),)
-                               
-                              ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: hover == true
+                                        ? Colors.white
+                                        : Color.fromARGB(255, 76, 138, 131),
+                                    // minimumSize:
+                                    //     MaterialStateProperty.all(Size(150, 50)),
+                                  ),
+                                  onPressed: () {
+                                    print(textarea.text);
+                                  },
+                                  child: hover == true
+                                      ? Text(
+                                          'SUBMIT',
+                                          style: TextStyle(color: Colors.black),
+                                        )
+                                      : Text(
+                                          'SUBMIT',
+                                          style: TextStyle(color: Colors.black),
+                                        )),
                             ),
                           ],
                         ),
@@ -477,7 +487,7 @@ class mobiledeskBottomSheett extends StatelessWidget {
                               maxLines: 5,
                               decoration: InputDecoration(
                                   hintText: "Message",
-                                  hintStyle: TextStyle(color:Colors.white),
+                                  hintStyle: TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors
@@ -487,7 +497,7 @@ class mobiledeskBottomSheett extends StatelessWidget {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:Colors.white, width: 2))),
+                                          color: Colors.white, width: 2))),
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height / 25,
