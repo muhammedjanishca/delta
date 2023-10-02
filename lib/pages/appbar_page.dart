@@ -8,15 +8,15 @@ import 'package:firebase_hex/pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
-import 'package:firebase_hex/style.dart';
 import 'package:firebase_hex/search_api.dart';
+import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../login_and_signing/loginpage.dart';
 import '../whatsApp.dart';
 import 'cart.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:badges/badges.dart' as badges;
 
 void _handlePopupSelection(String choice) {
@@ -95,12 +95,8 @@ class DesktopAppBar extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
-                    // Container(
-                    //   width: 200,
-                    //   height: 40,
-                    //   child: _searchBox(context),
-                    // ), // Add the search box here
-                    Image.asset("assets/image/deltalogo.jpg.jpg"),
+                    // _searchBox(searchTextController), // Add the search box here
+                    // child: Image.asset("assets/image/deltalogo.jpg.jpg")
                     Text(
                       'DELTA',
                       style: GoogleFonts.oswald(
@@ -111,25 +107,28 @@ class DesktopAppBar extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Expanded(child: _searchBox(context)),
+                    Expanded(child: _searchBox( context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
-                   user==null? TextButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return LoginPage(); // Your custom dialog widget
-                          },
-                        );
-                      },
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(255, 194, 192,
-                                192)), // Change the color to your desired color
-                      ),
-                      child: Text('SignUp/SignIn'),
-                    ):SizedBox(),
+                    user == null
+                        ? TextButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                            },
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<
+                                  Color>(const Color
+                                      .fromARGB(255, 194, 192,
+                                  192)), // Change the color to your desired color
+                            ),
+                            child: Text('SignUp/SignIn'),
+                          )
+                        : SizedBox(),
 
                     // user != null
                     //     ? TextButton(
@@ -412,11 +411,8 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
                 ListTile(
                   title: Text(
-                    
                     'Accessories',
-                    
                     style: TextStyle(color: Colors.white),
-                  
                   ),
                   onTap: () async {
                     final dataProvider =
@@ -552,7 +548,7 @@ class MobileAppBar extends StatelessWidget {
             ),
             height: 48,
             width: MediaQuery.of(context).size.width * 0.7,
-            child: _searchBox(context),
+            child: _searchBox( context),
           ),
         ),
       ],
@@ -619,21 +615,3 @@ Widget _searchBox(BuildContext context) {
     ),
   );
 }
-
-
-// Widget _productList(BuildContext context) {
-//   final productProvider = Provider.of<ProductProvider>(context, listen: false);
-
-//   return Expanded(
-//     child: ListView.builder(
-//       itemCount: productProvider.products.length,
-//       itemBuilder: (context, index) {
-//         final product = productProvider.products[index];
-//         return ListTile(
-//           title: Text(product['product_name']),
-//           leading: Image.network(product['thumbnail']),
-//         );
-//       },
-//     ),
-//   );
-// }
