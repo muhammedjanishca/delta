@@ -104,7 +104,7 @@ class DesktopAppBar extends StatelessWidget {
                     //   height: 40,
                     //   child: _searchBox(context),
                     // ), // Add the search box here
-                    Image.asset("assets/image/deltalogo.jpg.jpg"),
+                    // Image.asset("assets/image/deltalogo.jpg.jpg"),
                     Text(
                       'DELTA',
                       style: GoogleFonts.oswald(

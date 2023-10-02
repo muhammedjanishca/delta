@@ -157,7 +157,7 @@ class _GlandPageState extends State<GlandPage> {
                                 top: 0,
                                 right: 0,
                                 child: Image.asset(
-                                  'assets/image/deltalogo.jpg.jpg',
+                                  'assets/image/images.png',
                                   width: 25,
                                   height: 25,
                                   fit: BoxFit.cover,
