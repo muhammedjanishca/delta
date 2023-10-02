@@ -7,12 +7,14 @@ import 'package:firebase_hex/pages/gland.dart';
 import 'package:firebase_hex/pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../login_and_signing/authentication.dart';
 import '../login_and_signing/loginpage.dart';
 import '../whatsApp.dart';
 import 'cart.dart';
@@ -71,10 +73,12 @@ class DesktopAppBar extends StatelessWidget {
 
   DesktopAppBar(this.context);
   final TextEditingController searchTextController = TextEditingController();
-  var user = FirebaseAuth.instance.currentUser;
+
   int cartCount = 0;
   @override
   Widget build(BuildContext context) {
+    Provider.of<AuthenticationHelper>(context).getCurrentUser();
+    var user = Provider.of<AuthenticationHelper>(context).user;
     if (user != null) {
       Provider.of<CartProvider>(context).getCartData();
       cartCount =

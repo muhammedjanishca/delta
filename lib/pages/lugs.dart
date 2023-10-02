@@ -44,12 +44,7 @@ class _LugsPageState extends State<LugsPage> {
                     // color: Colors.blue,
                     height: MediaQuery.of(context).size.height / 2.5,
                     child: custCarosal(context, sliderlugs, Index)
-                    // child: Image.network(
-                    //   'https://thumbs.dreamstime.com/b/electrical-tools-components-website-banner-format-shot-assortment-electrical-contractors-tools-house-plans-85133897.jpg',
-                    //   width: 200,
-                    //   height: 200,
-                    //   fit: BoxFit.cover,
-                    // ),
+                  
                     ),
                 Padding(
                   padding:
@@ -105,7 +100,7 @@ class _LugsPageState extends State<LugsPage> {
                                 child: AnimatedContainer(
                                   duration: Duration(milliseconds: 200),
                                    height: selectedImageIndex == index
-                                        ? 180
+                                        ? 210
                                         : 160, // Expand selected image
                                     width: selectedImageIndex == index
                                         ? MediaQuery.of(context).size.width / 4
