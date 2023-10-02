@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/pages/bottom_sheet.dart';
 import 'package:firebase_hex/pages/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +11,16 @@ import '../model.dart';
 import '../provider/thumbnail.dart';
 import 'gridview.dart';
 
-class GlandPage extends StatelessWidget {
+class GlandPage extends StatefulWidget {
   GlandPage({super.key});
+
+  @override
+  State<GlandPage> createState() => _GlandPageState();
+}
+
+class _GlandPageState extends State<GlandPage> {
+   int selectedImageIndex = -1; // Initialize with an invalid index
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +72,7 @@ class GlandPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
-                                color: const Color.fromARGB(255, 54, 98, 98)),
+                                color: janishcolor),
                           )
                         ],
                       ),
@@ -95,7 +104,7 @@ class GlandPage extends StatelessWidget {
                           navigateToProductDetailsOfGlands(context, index);
                         },
                         child: Container(
-                          height: 100,
+                          // height: 100,
                           // height: MediaQuery.of(context).size.height/20,
                           width: MediaQuery.of(context).size.width / 4,
                           color: Colors.white,
@@ -106,13 +115,41 @@ class GlandPage extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.network(
-                                productData.thumbnail ?? "",
-                                height: 160,
-                                // height: MediaQuery.of(context).size.height/4, // Adjust the height as needed
-                                width: MediaQuery.of(context).size.width /
-                                    5, // Adjust the width as needed
-                                // fit: BoxFit.cover,
+                              MouseRegion(
+                                onEnter: (_) {
+            // Handle mouse enter event, e.g., change image size or color
+            setState(() {
+              // Update the state to apply hover effect
+
+                    selectedImageIndex = index; // Set the selected image index
+
+            });
+          },
+          onExit: (_) {
+            // Handle mouse exit event, e.g., reset image size or color
+            setState(() {
+              // Update the state to remove hover effect
+                    selectedImageIndex = -1; // Reset the selected image index
+
+            });
+          },
+
+                                child: AnimatedContainer(
+                                              duration: Duration(milliseconds: 200),
+                                               height: selectedImageIndex == index ? 180 : 160, // Expand selected image
+          width: selectedImageIndex == index
+              ? MediaQuery.of(context).size.width / 4
+              : MediaQuery.of(context).size.width / 5,
+                              
+                                  child: Image.network(
+                                    productData.thumbnail ?? "",
+                                    height: 160,
+                                    // height: MediaQuery.of(context).size.height/4, // Adjust the height as needed
+                                    width: MediaQuery.of(context).size.width /
+                                        5, // Adjust the width as needed
+                                    // fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 height: 8,

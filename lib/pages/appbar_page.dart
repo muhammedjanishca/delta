@@ -8,6 +8,7 @@ import 'package:firebase_hex/pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
+import 'package:firebase_hex/style.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -113,24 +114,22 @@ class DesktopAppBar extends StatelessWidget {
                     Expanded(child: _searchBox(context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
-                    user == null
-                        ? TextButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                            },
-                            style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 194, 192,
-                                      192)), // Change the color to your desired color
-                            ),
-                            child: Text('SignUp/SignIn'),
-                          )
-                        : SizedBox(),
+                   user==null? TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return LoginPage(); // Your custom dialog widget
+                          },
+                        );
+                      },
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 194, 192,
+                                192)), // Change the color to your desired color
+                      ),
+                      child: Text('SignUp/SignIn'),
+                    ):SizedBox(),
 
                     // user != null
                     //     ? TextButton(
@@ -205,7 +204,7 @@ class DesktopAppBar extends StatelessWidget {
                 height: 41,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 76, 138, 131),
+                  color: janishcolor,
                   // gradient: LinearGradient(
                   //   colors: ,
                   //   // colors: [
@@ -231,21 +230,11 @@ class DesktopAppBar extends StatelessWidget {
                           // final connectorsData =
                           //     await dataProvider.fetchConnectorsData();
                           final lugsdata = await dataProvider.fetchLugsData();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AppBarMain(body: LugsPage()),
-                              ));
+                          Navigator.pushNamed(context, '/Lugs');
                         } else if (selectedDataType == 'Connectors') {
                           final connectorsData =
                               await dataProvider.fetchConnectorsData();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AppBarMain(body: ConnectersPage()),
-                              ));
+                          Navigator.pushNamed(context, '/Connecters');
                         }
                         // Add similar conditions for other data types
                       },
@@ -262,21 +251,11 @@ class DesktopAppBar extends StatelessWidget {
                           //     await dataProvider.fetchConnectorsData();
                           final glandsdata =
                               await dataProvider.fetchGlandsData();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AppBarMain(body: GlandPage()),
-                              ));
+                          Navigator.pushNamed(context, '/Glands');
                         } else if (selectedDataType == 'Accessories') {
                           final AccessoriesData =
                               await dataProvider.fetchAccssoriesData();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AppBarMain(body: AccessoriesPage()),
-                              ));
+                          Navigator.pushNamed(context, '/Accssories');
                         }
                         // Add similar conditions for other data types
                       },
@@ -291,12 +270,7 @@ class DesktopAppBar extends StatelessWidget {
                         if (selectedDataType == 'Crimping Tool') {
                           final Crimpingtooldata =
                               await dataProvider.fetchCrimpingtoolData();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AppBarMain(body: CrimpingToolPage()),
-                              ));
+                          Navigator.pushNamed(context, '/CrimpingTools');
                         }
                       },
                     ),
@@ -438,8 +412,11 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
                 ListTile(
                   title: Text(
+                    
                     'Accessories',
+                    
                     style: TextStyle(color: Colors.white),
+                  
                   ),
                   onTap: () async {
                     final dataProvider =
@@ -643,19 +620,20 @@ Widget _searchBox(BuildContext context) {
   );
 }
 
-Widget _productList(BuildContext context) {
-  final productProvider = Provider.of<ProductProvider>(context, listen: false);
 
-  return Expanded(
-    child: ListView.builder(
-      itemCount: productProvider.products.length,
-      itemBuilder: (context, index) {
-        final product = productProvider.products[index];
-        return ListTile(
-          title: Text(product['product_name']),
-          leading: Image.network(product['thumbnail']),
-        );
-      },
-    ),
-  );
-}
+// Widget _productList(BuildContext context) {
+//   final productProvider = Provider.of<ProductProvider>(context, listen: false);
+
+//   return Expanded(
+//     child: ListView.builder(
+//       itemCount: productProvider.products.length,
+//       itemBuilder: (context, index) {
+//         final product = productProvider.products[index];
+//         return ListTile(
+//           title: Text(product['product_name']),
+//           leading: Image.network(product['thumbnail']),
+//         );
+//       },
+//     ),
+//   );
+// }

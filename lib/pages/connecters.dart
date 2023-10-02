@@ -6,8 +6,15 @@ import '../model.dart';
 import '../provider/thumbnail.dart';
 import 'gridview.dart';
 
-class ConnectersPage extends StatelessWidget {
+class ConnectersPage extends StatefulWidget {
   ConnectersPage({super.key});
+
+  @override
+  State<ConnectersPage> createState() => _ConnectersPageState();
+}
+
+class _ConnectersPageState extends State<ConnectersPage> {
+    int selectedImageIndex = -1; // Initialize with an invalid index
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +54,47 @@ class ConnectersPage extends StatelessWidget {
                navigateToProductDetailsOfConnectors(context, index);
             },
                     child: Container(
-                      
                       color:Colors.white,
-                     
                       padding: EdgeInsets.all(8.0), // Add spacing on all sides
                       margin: EdgeInsets.all(8.0), // Add margin on all sides
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.network(
-                            productData.thumbnail??"",
-                            height: 200, // Adjust the height as needed
-                            width: 200, // Adjust the width as needed
-                            // fit: BoxFit.cover,
+                          MouseRegion(
+                             onEnter: (_) {
+                                  // Handle mouse enter event, e.g., change image size or color
+                                  setState(() {
+                                    // Update the state to apply hover effect
+
+                                    selectedImageIndex =
+                                        index; // Set the selected image index
+                                  });
+                                },
+                                onExit: (_) {
+                                  // Handle mouse exit event, e.g., reset image size or color
+                                  setState(() {
+                                    // Update the state to remove hover effect
+                                    selectedImageIndex =
+                                        -1; // Reset the selected image index
+                                  });
+                                },
+                            child: AnimatedContainer(
+                                                                duration: Duration(milliseconds: 200),
+                                                                 height: selectedImageIndex == index
+                                        ? 180
+                                        : 160, // Expand selected image
+                                    width: selectedImageIndex == index
+                                        ? MediaQuery.of(context).size.width / 4
+                                        : MediaQuery.of(context).size.width / 5,
+                          
+                          
+                              child: Image.network(
+                                productData.thumbnail??"",
+                                height: 200, // Adjust the height as needed
+                                width: 200, // Adjust the width as needed
+                                // fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                           SizedBox(height: 8.0), // Add spacing between image and text
                           Text(

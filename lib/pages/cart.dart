@@ -1,14 +1,13 @@
 import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/login_and_signing/welcome_page.dart';
+// import 'package:firebase_hex/login_and_signing/signup_page.dart';
+// import 'package:firebase_hex/login_and_signing/welcome_page.dart';
 import 'package:firebase_hex/pages/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/res_cartpage.dart';
 import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
-import 'package:footer/footer.dart';
+// import 'package:footer/footer.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart_provider.dart';
 import '../provider/user_input_provider.dart';
@@ -50,13 +49,35 @@ class _DeskCartState extends State<DeskCart> {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 10,
+                  
                 ),
                 SizedBox(
                   height: 700,
                   width: MediaQuery.of(context).size.width / 2,
                   child: Column(
                     children: [
-                      SizedBox(height: 60),
+                      SizedBox(height: 60,
+                      child: Row(
+                        children: [
+                          TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "HOME>>",
+                                style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 54, 98, 98),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w300),
+                              )),
+                          Text(
+                            "CART",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: janishcolor),
+                          )
+                        ],
+                      ),),
                       Expanded(
                         child: ListView.separated(
                           itemCount: cartItems["cartItems"].length,
@@ -92,6 +113,7 @@ class _DeskCartState extends State<DeskCart> {
                                 height: MediaQuery.of(context).size.height / 5,
                                 width: MediaQuery.of(context).size.width / 3,
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
@@ -328,22 +350,22 @@ class _DeskCartState extends State<DeskCart> {
                             SizedBox(
                               width: 40,
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Navigator.pushNamed(
-                                //     context, '/cart');
-                              },
-                              child: Text(
-                                'CHECKOUT',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.white),
-                                minimumSize:
-                                    MaterialStateProperty.all(Size(150, 55)),
-                              ),
-                            ),
+                            // ElevatedButton(
+                            //   onPressed: () {
+                            //     // Navigator.pushNamed(
+                            //     //     context, '/cart');
+                            //   },
+                            //   child: Text(
+                            //     'CHECKOUT',
+                            //     style: TextStyle(color: Colors.black),
+                            //   ),
+                            //   style: ButtonStyle(
+                            //     backgroundColor:
+                            //         MaterialStateProperty.all(Colors.white),
+                            //     minimumSize:
+                            //         MaterialStateProperty.all(Size(150, 55)),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -380,6 +402,7 @@ class Mobilecart extends StatefulWidget {
 class _MobilecartState extends State<Mobilecart> {
   @override
   Widget build(BuildContext context) {
+    
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -389,275 +412,302 @@ class _MobilecartState extends State<Mobilecart> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 650,
-              padding: EdgeInsets.only(left: 16), // Add left padding here
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 60,
-                    child: Text("sdfghjk"),
-                  ),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: cartItems["cartItems"].length,
-                      separatorBuilder: (context, index) =>
-                          Divider(height: 88, color: Colors.grey),
-                      itemBuilder: (context, index) {
-                        final item = jsonDecode(cartItems["cartItems"][index]);
-
-                        // final item = cartProvider.cartItems[index];
-                        return ListTile(
-                          title: Row(
-                            children: [
-                              Container(
-                                height: MediaQuery.of(context).size.height / 5,
-                                width: MediaQuery.of(context).size.width / 5,
-                                color: Colors.white,
-                                child: Image.network(
-                                  item['imageUrl'],
-                                  fit: BoxFit.scaleDown,
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 30,
-                              ),
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height / 5,
-                                width: MediaQuery.of(context).size.width / 1.5,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${item["productName"]}',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+        child: Container(
+          child: Column(
+            children: [
+              Container(
+                height: 650,
+                padding: EdgeInsets.only(left: 16), // Add left padding here
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 50,
+ child: Row(
+                        children: [
+                          TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "HOME>>",
+                                style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 54, 98, 98),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w300),
+                              )),
+                          Text(
+                            "CART",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: janishcolor),
+                          )
+                        ],
+                      ),                    ),
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: cartItems["cartItems"].length,
+                        separatorBuilder: (context, index) =>
+                            Divider(height: 88, color: Colors.grey),
+                        itemBuilder: (context, index) {
+                          final item = jsonDecode(cartItems["cartItems"][index]);
+        
+                          // final item = cartProvider.cartItems[index];
+                          return GestureDetector(
+                            onTap: (){
+                             // if(index)
+                             //Navigator.of(context).push(mater)
+                            },
+                            child: ListTile(
+                              title: Row(
+                                children: [
+                                  Container(
+                                    height: MediaQuery.of(context).size.height / 5,
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    color: Colors.white,
+                                    child: Image.network(
+                                      item['imageUrl'],
+                                      fit: BoxFit.scaleDown,
                                     ),
-                                    item["productName"] == item['productCode']
-                                        ? SizedBox()
-                                        : Text(
-                                            '${item['productCode']}',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                    Text(
-                                        // toStringAsFixed(2)
-                                        'Price: \$${item['price'].toStringAsFixed(2)}'),
-                                    Row(
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width / 30,
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height / 5,
+                                    width: MediaQuery.of(context).size.width / 1.5,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Quantity:${item['quantity']}'),
-                                        IconButton(
-                                            icon: Icon(
-                                              Icons.edit,
-                                              color: Colors.black,
-                                            ),
-                                            onPressed: () {
-                                              int newQuantity =
-                                                  item['quantity'];
-                                              showDialog(
+                                        Text(
+                                          '${item["productName"]}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        item["productName"] == item['productCode']
+                                            ? SizedBox()
+                                            : Text(
+                                                '${item['productCode']}',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                        Text(
+                                            // toStringAsFixed(2)
+                                            'Price: \$${item['price'].toStringAsFixed(2)}'),
+                                        Row(
+                                          children: [
+                                            Text('Quantity:${item['quantity']}'),
+                                            IconButton(
+                                                icon: Icon(
+                                                  Icons.edit,
+                                                  color: Colors.black,
+                                                ),
+                                                onPressed: () {
+                                                  int newQuantity =
+                                                      item['quantity'];
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          title:
+                                                              Text('Edit Quantity'),
+                                                          content: TextField(
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            decoration:
+                                                                InputDecoration(
+                                                                    labelText:
+                                                                        'Quantity'),
+                                                            onChanged: (value) {
+                                                              newQuantity =
+                                                                  int.tryParse(
+                                                                          value) ??
+                                                                      newQuantity;
+                                                            },
+                                                          ),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text('Cancel'),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                cartProvider
+                                                                    .updateQuantity(
+                                                                        index,
+                                                                        newQuantity);
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text('Save'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      });
+                                                }),
+                                            // Divider(),
+                                            // Text("|"),
+                                  
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.delete_rounded,
+                                                color: Colors.black,
+                                              ),
+                                              onPressed: () async {
+                                                showDialog(
                                                   context: context,
-                                                  builder: (context) {
+                                                  builder: (BuildContext context) {
                                                     return AlertDialog(
                                                       title:
-                                                          Text('Edit Quantity'),
-                                                      content: TextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                                labelText:
-                                                                    'Quantity'),
-                                                        onChanged: (value) {
-                                                          newQuantity =
-                                                              int.tryParse(
-                                                                      value) ??
-                                                                  newQuantity;
-                                                        },
-                                                      ),
-                                                      actions: [
+                                                          Text('Confirm Removal'),
+                                                      content: Text(
+                                                          'Are you sure you want to remove this product?'),
+                                                      actions: <Widget>[
                                                         TextButton(
+                                                          child: Text('No'),
                                                           onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
+                                                            Navigator.of(context)
+                                                                .pop(); // Close the dialog
                                                           },
-                                                          child: Text('Cancel'),
                                                         ),
                                                         TextButton(
+                                                          child: Text('Yes'),
                                                           onPressed: () {
                                                             cartProvider
-                                                                .updateQuantity(
+                                                                .removeFromCart(
                                                                     index,
-                                                                    newQuantity);
-                                                            Navigator.pop(
-                                                                context);
+                                                                    cartItems[
+                                                                        'cartItems']);
+                                                            Navigator.of(context)
+                                                                .pop(); // Close the dialog
                                                           },
-                                                          child: Text('Save'),
                                                         ),
                                                       ],
                                                     );
-                                                  });
-                                            }),
-                                        // Divider(),
-                                        // Text("|"),
-
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.delete_rounded,
-                                            color: Colors.black,
-                                          ),
-                                          onPressed: () async {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title:
-                                                      Text('Confirm Removal'),
-                                                  content: Text(
-                                                      'Are you sure you want to remove this product?'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: Text('No'),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                    ),
-                                                    TextButton(
-                                                      child: Text('Yes'),
-                                                      onPressed: () {
-                                                        cartProvider
-                                                            .removeFromCart(
-                                                                index,
-                                                                cartItems[
-                                                                    'cartItems']);
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                    ),
-                                                  ],
+                                                  },
                                                 );
                                               },
-                                            );
-                                          },
-                                        ),
+                                            ),
+                                          ],
+                                        )
                                       ],
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-
-            // flex: 2,
-            SizedBox(
-              height: 300,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 10,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        // Divider(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 20,
-                        ),
-                        Text(
-                          'Summary\n',
-                          style: TextStyle(
-                              fontSize: 23, fontWeight: FontWeight.w500),
-                        ),
-                        // SizedBox(height: 47),
-                        ListTile(
-                          title: Text(
-                            'Subtotal',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w400),
-                          ),
-                          trailing: Text(
-                            '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                        ),
-
-                        // SizedBox(height: 45),
-                        ListTile(
-                          title: Text('VAT'),
-                          // trailing: Text('\$ ${totalPrice.toStringAsFixed(2)}'),
-                        ),
-
-                        // SizedBox(
-                        //   height: 20,
-                        // ),
-                        Divider(
-                          height:
-                              1, // Adjust the height of the divider as needed
-                          color: const Color.fromARGB(255, 147, 146,
-                              146), // Choose the color of the divider
-                          thickness:
-                              1, // Specify the thickness of the divider line
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Total Price',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                          trailing: Text(
-                            '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Divider(
-                          height:
-                              1, // Adjust the height of the divider as needed
-                          color: const Color.fromARGB(255, 147, 146,
-                              146), // Choose the color of the divider
-                          thickness:
-                              1, // Specify the thickness of the divider line
-                        ),
-
-                        SizedBox(
-                          height: 40,
-                        ),
-                      ],
+        
+              // flex: 2,
+              SizedBox(
+                height: 300,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 10,
                     ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 22,
-                  ),
-                ],
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          // Divider(),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 20,
+                          ),
+                          Text(
+                            'Summary\n',
+                            style: TextStyle(
+                                fontSize: 23, fontWeight: FontWeight.w500),
+                          ),
+                          // SizedBox(height: 47),
+                          ListTile(
+                            title: Text(
+                              'Subtotal',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w400),
+                            ),
+                            trailing: Text(
+                              '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+        
+                          // SizedBox(height: 45),
+                          ListTile(
+                            title: Text('VAT'),
+                            // trailing: Text('\$ ${totalPrice.toStringAsFixed(2)}'),
+                          ),
+        
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
+                          Divider(
+                            height:
+                                1, // Adjust the height of the divider as needed
+                            color: const Color.fromARGB(255, 147, 146,
+                                146), // Choose the color of the divider
+                            thickness:
+                                1, // Specify the thickness of the divider line
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ListTile(
+                            title: Text(
+                              'Total Price',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            ),
+                            trailing: Text(
+                              '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Divider(
+                            height:
+                                1, // Adjust the height of the divider as needed
+                            color: const Color.fromARGB(255, 147, 146,
+                                146), // Choose the color of the divider
+                            thickness:
+                                1, // Specify the thickness of the divider line
+                          ),
+        
+                          SizedBox(
+                            height: 40,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 22,
+                    ),
+                  ],
+                ),
               ),
-            ),
-
-            Container(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                height: MediaQuery.of(context).size.height / 1.5,
-                child: MediaQuery.of(context).size.width >= 700
-                    ? deskBottomSheett()
-                    : mobiledeskBottomSheett()),
-            //  Footer(child: Container(height: 50,
-            //                color: Colors.pink,)),
-          ],
+        
+              Container(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  child: MediaQuery.of(context).size.width >= 700
+                      ? deskBottomSheett()
+                      : mobiledeskBottomSheett()),
+              //  Footer(child: Container(height: 50,
+              //                color: Colors.pink,)),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(),
