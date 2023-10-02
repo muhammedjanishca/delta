@@ -10,7 +10,9 @@ import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:firebase_hex/style.dart';
+import 'package:firebase_hex/search_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../login_and_signing/authentication.dart';
@@ -97,8 +99,12 @@ class DesktopAppBar extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
-                    // _searchBox(searchTextController), // Add the search box here
-                    // child: Image.asset("assets/image/deltalogo.jpg.jpg")
+                    // Container(
+                    //   width: 200,
+                    //   height: 40,
+                    //   child: _searchBox(context),
+                    // ), // Add the search box here
+                    Image.asset("assets/image/deltalogo.jpg.jpg"),
                     Text(
                       'DELTA',
                       style: GoogleFonts.oswald(
@@ -109,28 +115,25 @@ class DesktopAppBar extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Expanded(child: _searchBox(searchTextController, context)),
+                    Expanded(child: _searchBox(context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
-                    user == null
-                        ? TextButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                            },
-                            style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<
-                                  Color>(const Color
-                                      .fromARGB(255, 194, 192,
-                                  192)), // Change the color to your desired color
-                            ),
-                            child: Text('SignUp/SignIn'),
-                          )
-                        : SizedBox(),
+                   user==null? TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return LoginPage(); // Your custom dialog widget
+                          },
+                        );
+                      },
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 194, 192,
+                                192)), // Change the color to your desired color
+                      ),
+                      child: Text('SignUp/SignIn'),
+                    ):SizedBox(),
 
                     // user != null
                     //     ? TextButton(
@@ -413,8 +416,11 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
                 ListTile(
                   title: Text(
+                    
                     'Accessories',
+                    
                     style: TextStyle(color: Colors.white),
+                  
                   ),
                   onTap: () async {
                     final dataProvider =
@@ -550,7 +556,7 @@ class MobileAppBar extends StatelessWidget {
             ),
             height: 48,
             width: MediaQuery.of(context).size.width * 0.7,
-            child: _searchBox(searchTextController, context),
+            child: _searchBox(context),
           ),
         ),
       ],
@@ -560,10 +566,12 @@ class MobileAppBar extends StatelessWidget {
 
 //###### search Box #######
 
-Widget _searchBox(TextEditingController searchTextController, context) {
+Widget _searchBox(BuildContext context) {
+  final productProvider = Provider.of<ProductProvider>(context, listen: false);
+
   return Container(
     height: MediaQuery.of(context).size.height / 18,
-    // width: MediaQuery.of(context).size.width/0.10,
+    // width: MediaQuery.of(context).size.width/2,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(4),
       color: Color.fromARGB(255, 229, 226, 226), // Background color is white
@@ -571,31 +579,65 @@ Widget _searchBox(TextEditingController searchTextController, context) {
     child: Row(
       children: [
         Expanded(
-          child: TextFormField(
-            controller: searchTextController,
-            style: TextStyle(color: Colors.black), // Text color is black
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'What are you looking for?',
-              hintStyle: TextStyle(
+          child: TypeAheadFormField<Map<String, dynamic>>(
+            textFieldConfiguration: TextFieldConfiguration(
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                hintText: 'What are you looking for?',
+                hintStyle: TextStyle(
                   color: Colors.black.withOpacity(0.5),
-                  fontSize: 16), // Hint text color is black with some opacity
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-              // prefixIcon: Icon(Icons.search, color: Colors.black), // Search lens icon
-              suffixIcon:
-                  Icon(Icons.search, color: Color.fromARGB(255, 155, 154, 154)),
-              //  IconButton(
-              //   icon: Icon(Icons.clear, color: Colors.black),
-              //   onPressed: () {
-              //     // Clear text field
-              //     searchTextController.clear();
-              //   },
-              // ),
+                  fontSize: 16,
+                ),
+                enabledBorder: OutlineInputBorder(),
+                border: InputBorder.none,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                suffixIcon: Icon(Icons.search,
+                    color: Color.fromARGB(255, 155, 154, 154)),
+              ),
             ),
+            suggestionsCallback: (query) async {
+              // Only call the fetchData() method if the search query is not empty.
+              if (query.isNotEmpty) {
+                return await productProvider.fetchData(query);
+              } else {
+                return [];
+              }
+            },
+            itemBuilder: (context, suggestion) {
+              return SizedBox(
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(suggestion['thumbnail']),
+                  ),
+                  title: Text(suggestion['product_name']),
+                ),
+              );
+            },
+            onSuggestionSelected: (suggestion) {
+              // Handle search submission here
+            },
           ),
         ),
       ],
     ),
   );
 }
+
+
+// Widget _productList(BuildContext context) {
+//   final productProvider = Provider.of<ProductProvider>(context, listen: false);
+
+//   return Expanded(
+//     child: ListView.builder(
+//       itemCount: productProvider.products.length,
+//       itemBuilder: (context, index) {
+//         final product = productProvider.products[index];
+//         return ListTile(
+//           title: Text(product['product_name']),
+//           leading: Image.network(product['thumbnail']),
+//         );
+//       },
+//     ),
+//   );
+// }

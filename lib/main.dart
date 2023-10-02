@@ -20,6 +20,7 @@ import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
+import 'package:firebase_hex/search_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -59,6 +60,11 @@ class _MyAppState extends State<MyApp> {
             create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(
+          create: (context) => UserInputProvider(),
+        ),
+        ChangeNotifierProvider(create: (context) => TextProvider()),
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(
           create: (context) => UserInputProvider(),
         ),
@@ -138,12 +144,13 @@ void navigateToProductDetailsofLugs(
 void navigateToProductDetailsOfConnectors(
     BuildContext context, int selectedProductIndex) {
   Navigator.of(context).pushNamed('/productdetailsofconnectors',
-  arguments: selectedProductIndex);
+      arguments: selectedProductIndex);
 }
 
 void navigateToProductDetailsOfGlands(
     BuildContext context, int selectedProductIndex) {
-  Navigator.of(context).pushNamed('/productdetailsofglands', arguments: selectedProductIndex);
+  Navigator.of(context)
+      .pushNamed('/productdetailsofglands', arguments: selectedProductIndex);
 }
 
 void navigateToProductDetailsOfAccessories(
