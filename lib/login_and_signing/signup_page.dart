@@ -712,7 +712,7 @@ class DeskSignUp extends StatelessWidget {
                                                             backgroundColor:
                                                                 MaterialStatePropertyAll(
                                                                     const Color
-                                                                            .fromARGB(
+                                                                        .fromARGB(
                                                                         255,
                                                                         171,
                                                                         183,
@@ -779,11 +779,15 @@ class DeskSignUp extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => LoginPage(),
-                                          ));
+                                      //           Navigator.of(context)
+                                      // .pop(); // Dismiss the current alert dialog
+
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return LoginPage(); // Your custom dialog widget
+                                        },
+                                      );
                                     },
                                     child: Text(
                                       "Login",

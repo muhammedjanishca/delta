@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/customtextfield.dart';
+import 'package:firebase_hex/pages/landing_page.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -97,7 +98,7 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
                                     TextButton(
                                         onPressed: () {
                                           FirebaseAuth.instance.signOut();
-                                          Navigator.pop(context);
+                                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandinPage(),));
                                         },
                                         child: Text('Yes'))
                                   ],
