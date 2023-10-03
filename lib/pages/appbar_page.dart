@@ -625,3 +625,21 @@ Widget _searchBox(BuildContext context) {
     ),
   );
 }
+
+
+Widget _productList(BuildContext context) {
+  final productProvider = Provider.of<ProductProvider>(context, listen: false);
+
+  return Expanded(
+    child: ListView.builder(
+      itemCount: productProvider.products.length,
+      itemBuilder: (context, index) {
+        final product = productProvider.products[index];
+        return ListTile(
+          title: Text(product['product_name']),
+          leading: Image.network(product['thumbnail']),
+        );
+      },
+    ),
+  );
+}
