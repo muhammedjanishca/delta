@@ -642,38 +642,7 @@ class DeskSignUp extends StatelessWidget {
                                                                 .changeShowOtperror();
                                                             value
                                                                 .changeIsLoadingotp();
-
-                                                            try {
-                                                              await FirebaseAuth
-                                                                  .instance
-                                                                  .signInWithCredential(
-                                                                      PhoneAuthProvider
-                                                                          .credential(
-                                                                verificationId:
-                                                                    verificationId
-                                                                        .toString(),
-                                                                smsCode:
-                                                                    otpTextController
-                                                                        .text,
-                                                              ));
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                              //                                       Navigator.pushReplacement(
-                                                              // context,
-                                                              // MaterialPageRoute(
-                                                              //   builder: (context) => HomePage(),
-                                                              // ));
-                                                            } catch (e) {
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text(e.toString())));
-                                                            }
-
+                                                           await value.verifyOTP(verificationId,context,otpTextController);
                                                             value
                                                                 .changeIsLoadingotp();
                                                           }
@@ -712,7 +681,7 @@ class DeskSignUp extends StatelessWidget {
                                                             backgroundColor:
                                                                 MaterialStatePropertyAll(
                                                                     const Color
-                                                                            .fromARGB(
+                                                                        .fromARGB(
                                                                         255,
                                                                         171,
                                                                         183,
@@ -779,11 +748,15 @@ class DeskSignUp extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => LoginPage(),
-                                          ));
+                                      //           Navigator.of(context)
+                                      // .pop(); // Dismiss the current alert dialog
+
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return LoginPage(); // Your custom dialog widget
+                                        },
+                                      );
                                     },
                                     child: Text(
                                       "Login",
