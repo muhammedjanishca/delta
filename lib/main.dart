@@ -56,12 +56,11 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(
-            create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(
-          create: (context) => UserInputProvider(),
+        create: (context) => UserInputProvider(),
         ),
         ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
@@ -132,24 +131,7 @@ class _MyAppState extends State<MyApp> {
           // '/sighn':(context) => SignUpPage()
         },
         initialRoute: '/',
-        // onGenerateRoute: (RouteSettings setting) {
-        //   List<String> elements = setting.name!.split('/');
-        //   if (elements[0] == '') {
-        //     if (elements[1] == "productdetailsofglands") {
-        //       print(elements);
-        //       var index = elements[1];
-        //       return MaterialPageRoute(builder: (BuildContext context) {
-        //         return AppBarMain(
-        //           body: ProductDetailsOfGlands(
-        //             selectedProductIndex: Int(),
-        //           ),
-        //         );
-        //       });
-        //     }
-        //   }
-        //   return null;
-        // },
-      ),
+              ),
     );
   }
 }

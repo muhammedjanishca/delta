@@ -26,13 +26,14 @@ void _handlePopupSelection(String choice) {
   switch (choice) {
     case 'Account':
       // Handle Account action
-      break;
-    case 'Login':
-      // Handle Login action
-      break;
-    case 'Logout':
+       case 'Logout':
       // Handle Logout action
       break;
+       // Handle Login action
+    case 'Login':
+     
+      break;
+   
   }
 }
 
