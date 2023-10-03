@@ -189,11 +189,12 @@ class DesktopAppBar extends StatelessWidget {
                       onTap: () {
                         user != null
                             ? Navigator.pushNamed(context, '/cart')
-                            : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpPage(),
-                                ));
+                            :  showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
                       },
                       child: badges.Badge(
                           badgeContent: Text(
@@ -549,17 +550,13 @@ class MobileAppBar extends StatelessWidget {
           ),
           backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 90),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 5,
-              horizontal: 10,
-            ),
-            height: 48,
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: _searchBox( context),
-          ),
+        Container(
+          color:janishcolor,
+        
+          padding: EdgeInsets.only(bottom: 5,top: 5,left: 55,right: 10),
+          height: 49,
+          width:double.infinity,
+          child: _searchBox( context),
         ),
       ],
     );

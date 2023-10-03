@@ -5,6 +5,7 @@ import '../main.dart';
 import '../model.dart';
 import '../provider/data_provider.dart';
 import '../provider/thumbnail.dart';
+import '../style.dart';
 import 'bottom_sheet.dart';
 import 'carousal_slider.dart';
 
@@ -20,6 +21,8 @@ class _LugsPageState extends State<LugsPage> {
 
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
 
@@ -27,7 +30,6 @@ class _LugsPageState extends State<LugsPage> {
       return FutureBuilder<ProduceNewModal>(
         future: context.read<DataProvider>().newlugs,
         builder: (context, snapshot) {
-          // print(snapshot.data);
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
           } else if (snapshot.hasError) {
@@ -40,30 +42,60 @@ class _LugsPageState extends State<LugsPage> {
             return ListView(
               children: [
                 Container(
-                    // Customize the properties of your Container as needed
-                    // color: Colors.blue,
-                    height: MediaQuery.of(context).size.height / 2.5,
-                    child: custCarosal(context, sliderlugs, Index)
-                  
+                  width: MediaQuery.of(context).size.width / 4,
+                  height: MediaQuery.of(context).size.height / 2.5,
+                  child: custCarosal(context, sliderGlands, Index),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 4,
+                  // height: MediaQuery.of(context).size.height / 13,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 26),
+                    child: Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "HOME>>",
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 54, 98, 98),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "GLANDS",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: janishcolor,
+                          ),
+                        )
+                      ],
                     ),
+                  ),
+                ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                  padding: EdgeInsets.symmetric(
+                    horizontal:
+                        MediaQuery.of(context).size.width >= 600 ? 30 : 10,
+                  ),
                   child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount:
-                          4, // Set the number of columns in the grid
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: MediaQuery.of(context).size.width <= 800
+                          ? 2
+                          : MediaQuery.of(context).size.width <= 1200
+                              ? 3
+                              : 4,
                     ),
                     itemCount: snapshot.data!.data.length,
-                    shrinkWrap:
-                        true, // Allow the GridView to be scrollable within the ListView
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
                       var productData = snapshot.data!.data[index];
 
                       return GestureDetector(
                         onTap: () {
-                          // Set the selected thumbnail for this product
                           selectedThumbnailProvider.setSelectedThumbnail(
                             productData.thumbnail ?? "",
                           );
@@ -71,56 +103,93 @@ class _LugsPageState extends State<LugsPage> {
                           navigateToProductDetailsofLugs(context, index);
                         },
                         child: Container(
-                          color: Colors.white,
-                          padding:
-                              EdgeInsets.all(8.0), // Add spacing on all sides
-                          margin:
-                              EdgeInsets.all(8.0), // Add margin on all sides
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              MouseRegion(
-                                 onEnter: (_) {
-                                  // Handle mouse enter event, e.g., change image size or color
-                                  setState(() {
-                                    // Update the state to apply hover effect
-
-                                    selectedImageIndex =
-                                        index; // Set the selected image index
-                                  });
-                                },
-                                onExit: (_) {
-                                  // Handle mouse exit event, e.g., reset image size or color
-                                  setState(() {
-                                    // Update the state to remove hover effect
-                                    selectedImageIndex =
-                                        -1; // Reset the selected image index
-                                  });
-                                },
-                                child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 200),
-                                   height: selectedImageIndex == index
-                                        ? 210
-                                        : 160, // Expand selected image
-                                    width: selectedImageIndex == index
-                                        ? MediaQuery.of(context).size.width / 4
-                                        : MediaQuery.of(context).size.width / 5,
-                              
-                                  child: Image.network(
-                                    productData.thumbnail ?? "",
-                                    height: 200, // Adjust the height as needed
-                                    width: 200, // Adjust the width as needed
-                                    // fit: BoxFit.cover,
-                                  ),
-                                ),
+                          //  height: 200,
+                          width: _width / 4,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 229, 229, 229)
+                                    .withOpacity(
+                                        0.5), // Set the shadow color here
+                                spreadRadius:
+                                    5, // Set the spread radius of the shadow
+                                blurRadius:
+                                    7, // Set the blur radius of the shadow
+                                offset: Offset(
+                                    0, 3), // Set the offset of the shadow
                               ),
-                              SizedBox(
-                                  height:
-                                      8.0), // Add spacing between image and text
-                              Text(
-                                productData.productName ?? "",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
+                            ],
+                          ),
+                          padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
+                          ),
+                          margin: EdgeInsets.all(
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
+                          ),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  MouseRegion(
+                                    onEnter: (_) {
+                                      setState(() {
+                                        selectedImageIndex = index;
+                                      });
+                                    },
+                                    onExit: (_) {
+                                      setState(() {
+                                        selectedImageIndex = -1;
+                                      });
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 200),
+                                      height: selectedImageIndex == index
+                                          ? 210
+                                          : 160,
+                                      width: selectedImageIndex == index
+                                          ? MediaQuery.of(context).size.width /
+                                              4
+                                          : MediaQuery.of(context).size.width /
+                                              5,
+                                      child: Image.network(
+                                        productData.thumbnail ?? "",
+                                        height: 150,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
+                                  ),
+                                  Text(
+                                    productData.productName ?? "",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                              // Asset image as foreground decoration
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: Image.asset(
+                                  'assets/image/images.png',
+                                  width: 25,
+                                  height: 25,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ],
                           ),
@@ -130,11 +199,14 @@ class _LugsPageState extends State<LugsPage> {
                   ),
                 ),
                 Container(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    child: MediaQuery.of(context).size.width >= 700
-                        ? deskBottomSheett()
-                        : mobiledeskBottomSheett())
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  height: MediaQuery.of(context).size.width >= 700
+                      ? MediaQuery.of(context).size.height / 1.5
+                      : 950,
+                  child: MediaQuery.of(context).size.width >= 700
+                      ? deskBottomSheett()
+                      : mobiledeskBottomSheett(),
+                ),
               ],
             );
           }
