@@ -111,9 +111,11 @@ class _MyAppState extends State<MyApp> {
           '/productdetailsofconnectors': (context) => AppBarMain(
                 body: ProductDetailsOfConnectors(),
               ),
-          '/productdetailsofglands': (context) => AppBarMain(
-                body: ProductDetailsOfGlands(),
-              ),
+          // '/productdetailsofglands/:id': (context) {
+          //   return AppBarMain(
+          //     body: ProductDetailsOfGlands(),
+          //   );
+          // },
           '/productdetailsofaccessories': (context) => AppBarMain(
                 body: ProductDetailsOfAccessories(),
               ),
@@ -130,6 +132,23 @@ class _MyAppState extends State<MyApp> {
           // '/sighn':(context) => SignUpPage()
         },
         initialRoute: '/',
+        // onGenerateRoute: (RouteSettings setting) {
+        //   List<String> elements = setting.name!.split('/');
+        //   if (elements[0] == '') {
+        //     if (elements[1] == "productdetailsofglands") {
+        //       print(elements);
+        //       var index = elements[1];
+        //       return MaterialPageRoute(builder: (BuildContext context) {
+        //         return AppBarMain(
+        //           body: ProductDetailsOfGlands(
+        //             selectedProductIndex: Int(),
+        //           ),
+        //         );
+        //       });
+        //     }
+        //   }
+        //   return null;
+        // },
       ),
     );
   }
@@ -149,8 +168,8 @@ void navigateToProductDetailsOfConnectors(
 
 void navigateToProductDetailsOfGlands(
     BuildContext context, int selectedProductIndex) {
-  Navigator.of(context)
-      .pushNamed('/productdetailsofglands', arguments: selectedProductIndex);
+  Navigator.pushNamed(context, '/productdetailsofglands/$selectedProductIndex',
+      arguments: selectedProductIndex);
 }
 
 void navigateToProductDetailsOfAccessories(

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/customtextfield.dart';
 import 'package:firebase_hex/pages/landing_page.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
+import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -304,23 +305,26 @@ class mobiledeskBottomSheett extends StatelessWidget {
     TextEditingController email = TextEditingController();
     TextEditingController phoneNumber = TextEditingController();
 
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.black,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  color: Colors.transparent,
-                  child: Expanded(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
+    return Container(
+      color: Colors.black,
+      child: Column(
+        children: [
+          Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                         SizedBox(
+                          height:_height/20,
+                        ),
                         Text(
                           'Delta',
                           style: GoogleFonts.pacifico(
@@ -367,19 +371,17 @@ class mobiledeskBottomSheett extends StatelessWidget {
                       ],
                       // ),
                     ),
-                  )),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width / 1.6,
-                  color: Colors.transparent,
-                  child: Expanded(
-                    // flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 40),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Padding( 
+                      padding: const EdgeInsets.only(left: 22),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          SizedBox(
+                            height:_height/6,
+                          ),
                           Text(
                             'Address\n',
                             style: TextStyle(
@@ -408,128 +410,119 @@ class mobiledeskBottomSheett extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                ),
-              ],
-            ),
-
-            // Expanded(
-            //     flex: 3,
-            Padding(
+                  )
+                ],
+              )),
+          Expanded(
+            flex: 3,
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                color: Colors.black,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 20,
+                  ),
+                  Text(
+                    'Write To Us',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 20,
+                  ),
+                  Row(
                     children: [
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 20,
-                      ),
-                      Text(
-                        'Write To Us',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          child: CustTextField('name', name, context)),
+                      // _TextField("C", name, context),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 35,
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 20,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: CustTextField('name', name, context)),
-                          // _TextField("C", name, context),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 35,
-                          ),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: CustTextField(
-                                  "Company Name", companyName, context))
-                          // _TextField("Company Name", companyName, context)
-                        ],
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 25,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: CustTextField("Email", email, context)),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 35,
-                          ),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: CustTextField(
-                                  'Phone Number', phoneNumber, context))
-                        ],
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 25,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width / 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            TextFormField(
-                              controller: textarea,
-                              keyboardType: TextInputType.multiline,
-                              style: TextStyle(color: Colors.white),
-                              maxLines: 5,
-                              decoration: InputDecoration(
-                                  hintText: "Message",
-                                  hintStyle: TextStyle(color: Colors.white),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors
-                                          .white, // Set border color to white
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 2))),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 25,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                print(textarea.text);
-                              },
-                              child: Text(
-                                'SUBMIT',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.white),
-                                minimumSize:
-                                    MaterialStateProperty.all(Size(150, 50)),
-                              ),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 25,
-                            ),
-                          ],
-                        ),
-                      )
+                          width: MediaQuery.of(context).size.width / 2,
+                          child:
+                              CustTextField("Company Name", companyName, context))
+                      // _TextField("Company Name", companyName, context)
                     ],
                   ),
-                ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 25,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          child: CustTextField("Email", email, context)),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 35,
+                      ),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width / 2,
+                          child:
+                              CustTextField('Phone Number', phoneNumber, context))
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 25,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: textarea,
+                          keyboardType: TextInputType.multiline,
+                          style: TextStyle(color: Colors.white),
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                              hintText: "Message",
+                              hintStyle: TextStyle(color: Colors.white),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      Colors.white, // Set border color to white
+                                  width: 2.0,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 2))),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 25,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            print(textarea.text);
+                          },
+                          child: Text(
+                            'SUBMIT',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 25,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

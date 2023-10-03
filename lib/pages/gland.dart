@@ -6,7 +6,6 @@ import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
 import '../main.dart';
 import '../model.dart';
 import '../provider/thumbnail.dart';
@@ -25,6 +24,8 @@ class _GlandPageState extends State<GlandPage> {
 
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
 
@@ -103,12 +104,28 @@ class _GlandPageState extends State<GlandPage> {
                           navigateToProductDetailsOfGlands(context, index);
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width / 4,
-                          color: Colors.white,
-                          padding: EdgeInsets.all(5.0),
-                          margin: EdgeInsets.all(5.0),
+                                         height: 200,
+                          width: _width / 4,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 230, 228, 228)
+                                    .withOpacity(
+                                        0.5), // Set the shadow color here
+                                spreadRadius:
+                                    5, // Set the spread radius of the shadow
+                                blurRadius:
+                                    7, // Set the blur radius of the shadow
+                                offset: Offset(
+                                    0, 3), // Set the offset of the shadow
+                              ),
+                            ],
+                          ),
+                          padding: EdgeInsets.all(12.0),
+                          margin: EdgeInsets.all(15.0),
                           child: Stack(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.center,
                             children: [
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -136,18 +153,22 @@ class _GlandPageState extends State<GlandPage> {
                                               5,
                                       child: Image.network(
                                         productData.thumbnail ?? "",
-                                        height: 160,
-                                        width: MediaQuery.of(context).size.width / 5,
+                                        height: 150,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                       ),
                                     ),
                                   ),
                                   SizedBox(
                                     height: 8,
-                                    width: MediaQuery.of(context).size.width / 4,
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
                                   ),
                                   Text(
                                     productData.productName ?? "",
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -172,7 +193,7 @@ class _GlandPageState extends State<GlandPage> {
                 ),
                 Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  height: MediaQuery.of(context).size.height / 1.5,
+                  height: 950,
                   child: MediaQuery.of(context).size.width >= 700
                       ? deskBottomSheett()
                       : mobiledeskBottomSheett(),
