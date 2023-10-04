@@ -65,7 +65,7 @@ class _LugsPageState extends State<LugsPage> {
                           ),
                         ),
                         Text(
-                          "GLANDS",
+                          "LUGS",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
