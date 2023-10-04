@@ -96,7 +96,7 @@ class DesktopAppBar extends StatelessWidget {
               Container(
                 color: Colors.black,
                 height: 64,
-                width: MediaQuery.of(context).size.width,
+                width:  MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
@@ -156,7 +156,7 @@ class DesktopAppBar extends StatelessWidget {
                         showMenu(
                           context: context,
                           position: RelativeRect.fromLTRB(
-                              0, 100, 0, 0), // Adjust the position as needed
+                              0, 50, 0, 0), // Adjust the position as needed
                           items: [
                             PopupMenuItem<String>(
                               value: 'Account',
@@ -178,7 +178,8 @@ class DesktopAppBar extends StatelessWidget {
                           }
                         });
                       },
-                      child: Icon(
+                      child: Icon 
+                      (
                         Icons.person,
                         color: Colors.white,
                       ),
