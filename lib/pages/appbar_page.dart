@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/address.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/connecters.dart';
@@ -25,15 +26,13 @@ void _handlePopupSelection(String choice) {
   // Handle the selected menu item here
   switch (choice) {
     case 'Account':
-      // Handle Account action
-       case 'Logout':
+    // Handle Account action
+    case 'Logout':
       // Handle Logout action
       break;
-       // Handle Login action
+    // Handle Login action
     case 'Login':
-     
       break;
-   
   }
 }
 
@@ -99,6 +98,10 @@ class DesktopAppBar extends StatelessWidget {
                 width:  MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
+                    TextButton(onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddressAddPage()
+                      ));
+                    }, child: Text('address')),
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
                     // Container(
                     //   width: 200,
@@ -115,10 +118,10 @@ class DesktopAppBar extends StatelessWidget {
                             fontWeight: FontWeight.w700),
                       ),
                     ),
-                                        SizedBox(width: MediaQuery.of(context).size.width / 10),
+                    SizedBox(width: MediaQuery.of(context).size.width / 10),
 
                     // Spacer(),
-                    Expanded(child: _searchBox( context)),
+                    Expanded(child: _searchBox(context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
                     user == null
@@ -156,7 +159,11 @@ class DesktopAppBar extends StatelessWidget {
                         showMenu(
                           context: context,
                           position: RelativeRect.fromLTRB(
-                              0, 50, 0, 0), // Adjust the position as needed
+                            200,
+                            100,
+                            180,
+                            0,
+                          ), // Adjust the position as needed
                           items: [
                             PopupMenuItem<String>(
                               value: 'Account',
@@ -191,11 +198,12 @@ class DesktopAppBar extends StatelessWidget {
                       onTap: () {
                         user != null
                             ? Navigator.pushNamed(context, '/cart')
-                            : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpPage(),
-                                ));
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
                       },
                       child: badges.Badge(
                           badgeContent: Text(
@@ -551,17 +559,12 @@ class MobileAppBar extends StatelessWidget {
           ),
           backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 90),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 5,
-              horizontal: 10,
-            ),
-            height: 48,
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: _searchBox( context),
-          ),
+        Container(
+          color: janishcolor,
+          padding: EdgeInsets.only(bottom: 5, top: 5, left: 55, right: 10),
+          height: 49,
+          width: double.infinity,
+          child: _searchBox(context),
         ),
       ],
     );
@@ -627,7 +630,6 @@ Widget _searchBox(BuildContext context) {
     ),
   );
 }
-
 
 Widget _productList(BuildContext context) {
   final productProvider = Provider.of<ProductProvider>(context, listen: false);

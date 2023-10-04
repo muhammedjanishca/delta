@@ -18,7 +18,7 @@ class ProductDetailsoflugs extends StatelessWidget {
   Widget build(BuildContext context) {
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
-TextEditingController quantityController = TextEditingController();
+    TextEditingController quantityController = TextEditingController();
 
     final int selectedProductIndex =
         ModalRoute.of(context)!.settings.arguments as int;
@@ -37,28 +37,28 @@ TextEditingController quantityController = TextEditingController();
             return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
-          } else {  
+          } else {
             var textpass =
                 snapshot.data!.data[selectedProductIndex].productName;
             var thumbnail = snapshot.data!.data[selectedProductIndex].thumbnail;
             var description =
                 snapshot.data!.data[selectedProductIndex].description;
-            var price = snapshot.data!.data[selectedProductIndex].codesAndPrice!;
+            var price =
+                snapshot.data!.data[selectedProductIndex].codesAndPrice!;
             var image = snapshot.data!.data[selectedProductIndex].images;
             var pdf = snapshot.data!.data[selectedProductIndex].pdf;
 
             //  String selectedPrice = '';
 
-            return 
-            pdf!=null?
-            DefaultTabController(
-              length: 2,
-              child: Container(
-                height: MediaQuery.of(context).size.height * 1.3,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                   Expanded(
+            return pdf != null
+                ? DefaultTabController(
+                    length: 2,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 1.3,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
                             flex: 2,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
@@ -166,7 +166,6 @@ TextEditingController quantityController = TextEditingController();
                                                 child) {
                                               return Container(
                                                 width: 120,
-                                                
                                                 padding: EdgeInsets.all(8.0),
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
@@ -180,7 +179,9 @@ TextEditingController quantityController = TextEditingController();
                                           ),
                                         ],
                                       ),
-                                                                                SizedBox(height: 30,),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
 
                                       Column(
                                         crossAxisAlignment:
@@ -246,21 +247,22 @@ TextEditingController quantityController = TextEditingController();
                               ),
                             ),
                           ),
-                    Expanded(
+                          Expanded(
                             flex: 3,
                             child: Column(
                               children: [
-                               TabBar(
-                            unselectedLabelColor: Color.fromARGB(255, 5, 5, 5),
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            indicator: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Color.fromARGB(255, 0, 0, 0),
-                                  Color.fromARGB(255, 0, 0, 0)
-                                ]),
-                                borderRadius: BorderRadius.circular(0),
-                                color:
-                                    const Color.fromARGB(255, 255, 255, 255)),
+                                TabBar(
+                                  unselectedLabelColor:
+                                      Color.fromARGB(255, 5, 5, 5),
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                  indicator: BoxDecoration(
+                                      gradient: LinearGradient(colors: [
+                                        Color.fromARGB(255, 0, 0, 0),
+                                        Color.fromARGB(255, 0, 0, 0)
+                                      ]),
+                                      borderRadius: BorderRadius.circular(0),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255)),
                                   tabs: [
                                     Tab(
                                       text: 'Description',
@@ -326,32 +328,39 @@ TextEditingController quantityController = TextEditingController();
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 20.0),
-                                                                                 Container(
-  height: 40,
-  width: 140,
-  decoration: BoxDecoration(
-    color: Colors.white,
-    border: Border.all(
-      color: Colors.black, // Set the border color
-      width: 1.0, // Set the border width
-    ),
-    borderRadius: BorderRadius.all(Radius.circular(4.0)), // Add border radius
-  ),
-  child: TextFormField(
-    controller: quantityController,
-    keyboardType: TextInputType.number,
-    textAlign: TextAlign.center,
-    decoration: InputDecoration(
-      hintText: 'Enter quantity',
-      contentPadding: EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 8.0,
-      ),
-      isDense: true,
-      border: InputBorder.none, // Remove the default input border
-    ),
-  ),
-),
+                                            Container(
+                                              height: 40,
+                                              width: 140,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .black, // Set the border color
+                                                  width:
+                                                      1.0, // Set the border width
+                                                ),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(
+                                                        4.0)), // Add border radius
+                                              ),
+                                              child: TextFormField(
+                                                controller: quantityController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                decoration: InputDecoration(
+                                                  hintText: 'Enter quantity',
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                    vertical: 8.0,
+                                                    horizontal: 8.0,
+                                                  ),
+                                                  isDense: true,
+                                                  border: InputBorder
+                                                      .none, // Remove the default input border
+                                                ),
+                                              ),
+                                            ),
                                             SizedBox(
                                               height: 30,
                                             ),
@@ -397,7 +406,7 @@ TextEditingController quantityController = TextEditingController();
                                                           quantity,
                                                           imageUrl ?? "",
                                                           productName ?? "");
-                                                           ScaffoldMessenger.of(
+                                                      ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(SnackBar(
                                                               content: Text(
@@ -457,14 +466,12 @@ TextEditingController quantityController = TextEditingController();
                                       SingleChildScrollView(
                                         child: Container(
                                             height: 1500,
+                                            alignment: Alignment.topCenter,
                                             color: const Color.fromARGB(
                                                 255, 230, 233, 235),
                                             child: pdf != null
                                                 ? SfPdfViewer.network(pdf)
-                                                : Nopdf()
-                                            
-
-                                            ),
+                                                : Nopdf()),
                                       ),
                                     ],
                                   ),
@@ -472,16 +479,18 @@ TextEditingController quantityController = TextEditingController();
                               ],
                             ),
                           ),
-                  ],
-                ),
-              ),
-            ):Nopdf(typeOfProduct: 'lugs');
+                        ],
+                      ),
+                    ),
+                  )
+                : Nopdf(typeOfProduct: 'lugs');
           }
         },
       ),
     );
   }
 }
+
 class MobileProduct extends StatelessWidget {
   const MobileProduct({super.key});
 

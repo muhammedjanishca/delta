@@ -51,7 +51,7 @@ class _GlandPageState extends State<GlandPage> {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 4,
-                  height: MediaQuery.of(context).size.height / 13,
+                  // height: MediaQuery.of(context).size.height / 13,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 26),
                     child: Row(
@@ -81,7 +81,7 @@ class _GlandPageState extends State<GlandPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                     EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,),
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width <= 800
@@ -104,13 +104,13 @@ class _GlandPageState extends State<GlandPage> {
                           navigateToProductDetailsOfGlands(context, index);
                         },
                         child: Container(
-                                         height: 200,
+                          //  height: 200,
                           width: _width / 4,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: Color.fromARGB(255, 230, 228, 228)
+                                color: Color.fromARGB(255, 229, 229, 229)
                                     .withOpacity(
                                         0.5), // Set the shadow color here
                                 spreadRadius:
@@ -122,8 +122,12 @@ class _GlandPageState extends State<GlandPage> {
                               ),
                             ],
                           ),
-                          padding: EdgeInsets.all(12.0),
-                          margin: EdgeInsets.all(15.0),
+                          padding: EdgeInsets.all(
+                             MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                          ),
+                          margin: EdgeInsets.all(
+                            MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                          ),
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
@@ -193,11 +197,13 @@ class _GlandPageState extends State<GlandPage> {
                 ),
                 Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  height: 950,
+                  height: MediaQuery.of(context).size.width >= 700
+                      ? MediaQuery.of(context).size.height / 1.5
+                      : 950,
                   child: MediaQuery.of(context).size.width >= 700
                       ? deskBottomSheett()
                       : mobiledeskBottomSheett(),
-                )
+                ),
               ],
             );
           }
