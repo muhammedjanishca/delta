@@ -24,6 +24,8 @@ class _GlandPageState extends State<GlandPage> {
 
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
 
@@ -49,7 +51,7 @@ class _GlandPageState extends State<GlandPage> {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 4,
-                  height: MediaQuery.of(context).size.height / 13,
+                  // height: MediaQuery.of(context).size.height / 13,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 26),
                     child: Row(
@@ -79,7 +81,7 @@ class _GlandPageState extends State<GlandPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                     EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,),
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width <= 800
@@ -102,12 +104,32 @@ class _GlandPageState extends State<GlandPage> {
                           navigateToProductDetailsOfGlands(context, index);
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width / 4,
-                          color: Colors.white,
-                          padding: EdgeInsets.all(5.0),
-                          margin: EdgeInsets.all(5.0),
+                          //  height: 200,
+                          width: _width / 4,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 229, 229, 229)
+                                    .withOpacity(
+                                        0.5), // Set the shadow color here
+                                spreadRadius:
+                                    5, // Set the spread radius of the shadow
+                                blurRadius:
+                                    7, // Set the blur radius of the shadow
+                                offset: Offset(
+                                    0, 3), // Set the offset of the shadow
+                              ),
+                            ],
+                          ),
+                          padding: EdgeInsets.all(
+                             MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                          ),
+                          margin: EdgeInsets.all(
+                            MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                          ),
                           child: Stack(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.center,
                             children: [
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -135,18 +157,22 @@ class _GlandPageState extends State<GlandPage> {
                                               5,
                                       child: Image.network(
                                         productData.thumbnail ?? "",
-                                        height: 160,
-                                        width: MediaQuery.of(context).size.width / 5,
+                                        height: 150,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                       ),
                                     ),
                                   ),
                                   SizedBox(
                                     height: 8,
-                                    width: MediaQuery.of(context).size.width / 4,
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
                                   ),
                                   Text(
                                     productData.productName ?? "",
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -156,7 +182,7 @@ class _GlandPageState extends State<GlandPage> {
                                 top: 0,
                                 right: 0,
                                 child: Image.asset(
-                                  'assets/image/deltalogo.jpg.jpg',
+                                  'assets/image/images.png',
                                   width: 25,
                                   height: 25,
                                   fit: BoxFit.cover,
@@ -171,11 +197,13 @@ class _GlandPageState extends State<GlandPage> {
                 ),
                 Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  height: MediaQuery.of(context).size.height / 1.5,
+                  height: MediaQuery.of(context).size.width >= 700
+                      ? MediaQuery.of(context).size.height / 1.5
+                      : 950,
                   child: MediaQuery.of(context).size.width >= 700
                       ? deskBottomSheett()
                       : mobiledeskBottomSheett(),
-                )
+                ),
               ],
             );
           }

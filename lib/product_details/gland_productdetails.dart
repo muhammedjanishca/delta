@@ -12,7 +12,11 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsOfGlands extends StatelessWidget {
+  // ProductDetailsOfGlands({selectedProductIndex)}
+   final int selectedProductIndex ;
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+
+  ProductDetailsOfGlands({super.key, required this.selectedProductIndex});
   // ProductDetails({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {

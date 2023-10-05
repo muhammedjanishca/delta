@@ -465,6 +465,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                       SingleChildScrollView(
                                         child: Container(
                                             height: 1500,
+                                            alignment: Alignment.topCenter,
                                             color: const Color.fromARGB(
                                                 255, 230, 233, 235),
                                             child: pdf != null
