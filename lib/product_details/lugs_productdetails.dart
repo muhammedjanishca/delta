@@ -3,7 +3,6 @@ import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../provider/Text_color.dart';
 import '../provider/cart_provider.dart';
 import '../provider/data_provider.dart';
 import '../provider/thumbnail.dart';

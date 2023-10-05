@@ -95,7 +95,7 @@ class DesktopAppBar extends StatelessWidget {
               Container(
                 color: Colors.black,
                 height: 64,
-                width: MediaQuery.of(context).size.width,
+                width:  MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
                     TextButton(onPressed: (){
@@ -185,7 +185,8 @@ class DesktopAppBar extends StatelessWidget {
                           }
                         });
                       },
-                      child: Icon(
+                      child: Icon 
+                      (
                         Icons.person,
                         color: Colors.white,
                       ),
