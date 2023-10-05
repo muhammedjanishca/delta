@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:emailjs/emailjs.dart';
 import 'package:http/http.dart' as http;
 
 class EmailOTP {
@@ -12,6 +11,7 @@ class EmailOTP {
     var responseJson = json.decode(response.body);
     return responseJson["id"];
   }
+
   Future<String> verifyOtp(id, userOtp) async {
     Uri requestUrl = Uri.parse(
         'https://evolvingmillennials.com/mail-verification/verify-otp.php?id=$id&otp=$userOtp');
@@ -20,4 +20,3 @@ class EmailOTP {
     return responseJson["status"];
   }
 }
-
