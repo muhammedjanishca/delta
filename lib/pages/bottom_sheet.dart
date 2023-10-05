@@ -1,12 +1,13 @@
+import 'dart:convert';
+import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/customtextfield.dart';
-import 'package:firebase_hex/pages/landing_page.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
 import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
 import '../login_and_signing/authentication.dart';
 
 class BottomSheet extends StatelessWidget {
@@ -28,18 +29,59 @@ class deskBottomSheett extends StatefulWidget {
 }
 
 class _deskBottomSheettState extends State<deskBottomSheett> {
-  bool hover = true;
+  // bool hover = true;
 
   @override
   Widget build(BuildContext context) {
     Provider.of<AuthenticationHelper>(context).getCurrentUser();
     var user = Provider.of<AuthenticationHelper>(context).user;
+    final _formKey = GlobalKey<FormState>();
+    final messageController = TextEditingController();
+    final companyNameController = TextEditingController();
+    final nameController = TextEditingController();
+    final emailController = TextEditingController();
+    final phoneNumberController = TextEditingController();
 
-    TextEditingController textarea = TextEditingController();
-    TextEditingController companyName = TextEditingController();
-    TextEditingController name = TextEditingController();
-    TextEditingController email = TextEditingController();
-    TextEditingController phoneNumber = TextEditingController();
+    Future<void> sendEmail(String name, String email, String company,
+        String phone, String message) async {
+      final apiUrl = 'https://api.emailjs.com/api/v1.0/email/send';
+
+      // Replace these values with your actual service, template, and user IDs
+      final serviceId = 'service_54jno8o';
+      final templateId = 'template_leg6o7l';
+      final userId = 'pyy8mA7J7LWSzgAMF';
+
+      final data = {
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'name': name,
+          'email': email,
+          'company': company,
+          'phone': phone,
+          'message': message,
+        },
+      };
+
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(data),
+      );
+
+      if (response.statusCode == 200) {
+        // Email sent successfully
+        print(name);
+        print(email);
+        print(company);
+        print(phone);
+        print(message);
+        print('Your mail is sent!');
+      } else {
+        print('Oops... ${response.body}');
+      }
+    }
 
     return Container(
       color: Colors.black,
@@ -193,12 +235,13 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
                       ),
                       Row(
                         children: [
-                          CustTextField('name', name, context),
+                          CustTextField('Name', nameController, context),
                           // _TextField("C", name, context),
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 35,
                           ),
-                          CustTextField("Company Name", companyName, context)
+                          CustTextField(
+                              "Company Name", companyNameController, context)
                           // _TextField("Company Name", companyName, context)
                         ],
                       ),
@@ -207,25 +250,32 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
                       ),
                       Row(
                         children: [
-                          CustTextField("Email", email, context),
+                          CustTextField("Email", emailController, context),
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 35,
                           ),
-                          CustTextField('Phone Number', phoneNumber, context)
+                          CustTextField(
+                              'Phone Number', phoneNumberController, context)
                         ],
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 25,
                       ),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width / 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             TextFormField(
-                              controller: textarea,
+                              controller: messageController,
                               keyboardType: TextInputType.multiline,
+                              // validator: (value) {
+                              //   if (value == null || value.isEmpty) {
+                              //     return '*Required';
+                              //   }
+                              //   return null;
+                              // },
                               style: TextStyle(color: Colors.white),
                               maxLines: 5,
                               decoration: InputDecoration(
@@ -245,38 +295,75 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height / 25,
                             ),
-                            MouseRegion(
-                              onEnter: (h) {
-                                setState(() {
-                                  hover = false;
-                                });
-                              },
-                              onExit: (h) {
-                                setState(() {
-                                  hover = true;
-                                });
-                              },
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: hover == true
-                                        ? Colors.white
-                                        : Color.fromARGB(255, 76, 138, 131),
-                                    // minimumSize:
-                                    //     MaterialStateProperty.all(Size(150, 50)),
-                                  ),
-                                  onPressed: () {
-                                    print(textarea.text);
-                                  },
-                                  child: hover == true
-                                      ? Text(
-                                          'SUBMIT',
-                                          style: TextStyle(color: Colors.black),
-                                        )
-                                      : Text(
-                                          'SUBMIT',
-                                          style: TextStyle(color: Colors.black),
-                                        )),
-                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  sendEmail(
+                                      nameController.text,
+                                      emailController.text,
+                                      companyNameController.text,
+                                      phoneNumberController.text,
+                                      messageController.text);
+                                },
+                                child: Text('Submit'))
+                            // MouseRegion(
+                            //   onEnter: (h) {
+                            //     setState(() {
+                            //       // hover = false;
+                            //     });
+                            //   },
+                            //   onExit: (h) {
+                            //     setState(() {
+                            //       // hover = true;
+                            //     });
+                            //   },
+                            //   child: ElevatedButton(
+                            //       style: ElevatedButton.styleFrom(
+                            //         // backgroundColor: hover == true
+                            //             // ? Colors.white
+                            //             // : Color.fromARGB(255, 76, 138, 131),
+                            //         // minimumSize:
+                            //         //     MaterialStateProperty.all(Size(150, 50)),
+                            //       ),
+                            //       onPressed: () async {
+                            //         sendEmail(
+                            //             nameController.text,
+                            //             emailController.text,
+                            //             companyNameController.text,
+                            //             phoneNumberController.text,
+                            //             messageController.text);
+                            //         // if (_formKey.currentState!.validate()) {
+                            //         // final response = await sendEmail(
+                            //         //     nameController.value.text,
+                            //         //     emailController.value.text,
+                            //         //     companyNameController.value.text,
+                            //         //     phoneNumberController.value.text,
+                            //         //     messageController.value.text);
+                            //         // ScaffoldMessenger.of(context)
+                            //         //     .showSnackBar(
+                            //         //   response == 200
+                            //         //       ? const SnackBar(
+                            //         //           content: Text('Message Sent!'),
+                            //         //           backgroundColor: Colors.green)
+                            //         //       : const SnackBar(
+                            //         //           content: Text(
+                            //         //               'Failed to send message!'),
+                            //         //           backgroundColor: Colors.red),
+                            //         // );
+                            //         // nameController.clear();
+                            //         // emailController.clear();
+                            //         // messageController.clear();
+                            //       },
+                            //       // },
+                            //       // child: hover == true
+                            //       //     ? Text(
+                            //       //         'SUBMIT',
+                            //       //         style: TextStyle(color: Colors.black),
+                            //       //       )
+                            //       child: Text(
+                            //         'SUBMIT',
+                            //         style: TextStyle(color: Colors.black),
+                            //       )),
+                            // ),
                           ],
                         ),
                       )

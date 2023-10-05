@@ -1,11 +1,8 @@
 import 'dart:convert';
-
-import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
-
 //Local imports
 import 'save_file_mobile.dart' if (dart.library.html) 'save_file_web.dart';
 

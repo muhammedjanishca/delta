@@ -3,7 +3,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/login_and_signing/welcome_page.dart';
 import 'package:firebase_hex/pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/appbar_page.dart';
 import 'package:firebase_hex/pages/cart.dart';

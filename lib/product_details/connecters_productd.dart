@@ -5,7 +5,6 @@ import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../login_and_signing/signup_page.dart';

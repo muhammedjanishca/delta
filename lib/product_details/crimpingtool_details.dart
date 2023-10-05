@@ -242,21 +242,22 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                               ),
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 3,
                             child: Column(
                               children: [
-                               TabBar(
-                            unselectedLabelColor: Color.fromARGB(255, 5, 5, 5),
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            indicator: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Color.fromARGB(255, 0, 0, 0),
-                                  Color.fromARGB(255, 0, 0, 0)
-                                ]),
-                                borderRadius: BorderRadius.circular(0),
-                                color:
-                                    const Color.fromARGB(255, 255, 255, 255)),
+                                TabBar(
+                                  unselectedLabelColor:
+                                      Color.fromARGB(255, 5, 5, 5),
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                  indicator: BoxDecoration(
+                                      gradient: LinearGradient(colors: [
+                                        Color.fromARGB(255, 0, 0, 0),
+                                        Color.fromARGB(255, 0, 0, 0)
+                                      ]),
+                                      borderRadius: BorderRadius.circular(0),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255)),
                                   tabs: [
                                     Tab(
                                       text: 'Description',
@@ -322,32 +323,39 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 20.0),
-                                                                                 Container(
-  height: 40,
-  width: 140,
-  decoration: BoxDecoration(
-    color: Colors.white,
-    border: Border.all(
-      color: Colors.black, // Set the border color
-      width: 1.0, // Set the border width
-    ),
-    borderRadius: BorderRadius.all(Radius.circular(4.0)), // Add border radius
-  ),
-  child: TextFormField(
-    controller: quantityController,
-    keyboardType: TextInputType.number,
-    textAlign: TextAlign.center,
-    decoration: InputDecoration(
-      hintText: 'Enter quantity',
-      contentPadding: EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 8.0,
-      ),
-      isDense: true,
-      border: InputBorder.none, // Remove the default input border
-    ),
-  ),
-),
+                                            Container(
+                                              height: 40,
+                                              width: 140,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .black, // Set the border color
+                                                  width:
+                                                      1.0, // Set the border width
+                                                ),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(
+                                                        4.0)), // Add border radius
+                                              ),
+                                              child: TextFormField(
+                                                controller: quantityController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                decoration: InputDecoration(
+                                                  hintText: 'Enter quantity',
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                    vertical: 8.0,
+                                                    horizontal: 8.0,
+                                                  ),
+                                                  isDense: true,
+                                                  border: InputBorder
+                                                      .none, // Remove the default input border
+                                                ),
+                                              ),
+                                            ),
                                             SizedBox(
                                               height: 30,
                                             ),
@@ -393,7 +401,7 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                                           quantity,
                                                           imageUrl ?? "",
                                                           productName ?? "");
-                                                           ScaffoldMessenger.of(
+                                                      ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(SnackBar(
                                                               content: Text(
@@ -472,7 +480,8 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),                        ],
+                          ),
+                        ],
                       ),
                     ),
                   )
