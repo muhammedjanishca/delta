@@ -49,35 +49,36 @@ class _DeskCartState extends State<DeskCart> {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 10,
-                  
                 ),
                 SizedBox(
                   height: 700,
                   width: MediaQuery.of(context).size.width / 2,
                   child: Column(
                     children: [
-                      SizedBox(height: 60,
-                      child: Row(
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "HOME>>",
-                                style: TextStyle(
-                                    color:
-                                        const Color.fromARGB(255, 54, 98, 98),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w300),
-                              )),
-                          Text(
-                            "CART",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: janishcolor),
-                          )
-                        ],
-                      ),),
+                      SizedBox(
+                        height: 60,
+                        child: Row(
+                          children: [
+                            TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "HOME>>",
+                                  style: TextStyle(
+                                      color:
+                                          const Color.fromARGB(255, 54, 98, 98),
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w300),
+                                )),
+                            Text(
+                              "CART",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: janishcolor),
+                            )
+                          ],
+                        ),
+                      ),
                       Expanded(
                         child: ListView.separated(
                           itemCount: cartItems["cartItems"].length,
@@ -110,130 +111,142 @@ class _DeskCartState extends State<DeskCart> {
                                         MediaQuery.of(context).size.width / 30,
                                   ),
                                   SizedBox(
-                                height: MediaQuery.of(context).size.height / 5,
-                                width: MediaQuery.of(context).size.width / 3,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${item["productName"]}',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    item["productName"] == item['productCode']
-                                        ? SizedBox()
-                                        : Text(
-                                            '${item['productCode']}',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                    Text(
-                                        // toStringAsFixed(2)
-                                        'Price: \$${item['price'].toStringAsFixed(2)}'),
-                                    Row(
+                                    height:
+                                        MediaQuery.of(context).size.height / 5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text('Quantity:${item['quantity']}'),
-                                        IconButton(
-                                            icon: Icon(
-                                              Icons.edit,
-                                              color: Colors.black,
-                                            ),
-                                            onPressed: () {
-                                              int newQuantity =
-                                                  item['quantity'];
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return AlertDialog(
-                                                      title:
-                                                          Text('Edit Quantity'),
-                                                      content: TextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                                labelText:
-                                                                    'Quantity'),
-                                                        onChanged: (value) {
-                                                          newQuantity =
-                                                              int.tryParse(
-                                                                      value) ??
+                                        Text(
+                                          '${item["productName"]}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        item["productName"] ==
+                                                item['productCode']
+                                            ? SizedBox()
+                                            : Text(
+                                                '${item['productCode']}',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                        Text(
+                                            // toStringAsFixed(2)
+                                            'Price: \$${item['price'].toStringAsFixed(2)}'),
+                                        Row(
+                                          children: [
+                                            Text(
+                                                'Quantity:${item['quantity']}'),
+                                            IconButton(
+                                                icon: Icon(
+                                                  Icons.edit,
+                                                  color: Colors.black,
+                                                ),
+                                                onPressed: () {
+                                                  int newQuantity =
+                                                      item['quantity'];
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Edit Quantity'),
+                                                          content: TextField(
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            decoration:
+                                                                InputDecoration(
+                                                                    labelText:
+                                                                        'Quantity'),
+                                                            onChanged: (value) {
+                                                              newQuantity = int
+                                                                      .tryParse(
+                                                                          value) ??
                                                                   newQuantity;
-                                                        },
-                                                      ),
-                                                      actions: [
+                                                            },
+                                                          ),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                  'Cancel'),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                cartProvider
+                                                                    .updateQuantity(
+                                                                        index,
+                                                                        newQuantity);
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child:
+                                                                  Text('Save'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      });
+                                                }),
+                                            // Divider(),
+                                            // Text("|"),
+
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.delete_rounded,
+                                                color: Colors.black,
+                                              ),
+                                              onPressed: () async {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'Confirm Removal'),
+                                                      content: Text(
+                                                          'Are you sure you want to remove this product?'),
+                                                      actions: <Widget>[
                                                         TextButton(
+                                                          child: Text('No'),
                                                           onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
                                                           },
-                                                          child: Text('Cancel'),
                                                         ),
                                                         TextButton(
+                                                          child: Text('Yes'),
                                                           onPressed: () {
                                                             cartProvider
-                                                                .updateQuantity(
+                                                                .removeFromCart(
                                                                     index,
-                                                                    newQuantity);
-                                                            Navigator.pop(
-                                                                context);
+                                                                    cartItems[
+                                                                        'cartItems']);
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
                                                           },
-                                                          child: Text('Save'),
                                                         ),
                                                       ],
                                                     );
-                                                  });
-                                            }),
-                                        // Divider(),
-                                        // Text("|"),
-
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.delete_rounded,
-                                            color: Colors.black,
-                                          ),
-                                          onPressed: () async {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title:
-                                                      Text('Confirm Removal'),
-                                                  content: Text(
-                                                      'Are you sure you want to remove this product?'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: Text('No'),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                    ),
-                                                    TextButton(
-                                                      child: Text('Yes'),
-                                                      onPressed: () {
-                                                        cartProvider
-                                                            .removeFromCart(
-                                                                index,
-                                                                cartItems[
-                                                                    'cartItems']);
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                    ),
-                                                  ],
+                                                  },
                                                 );
                                               },
-                                            );
-                                          },
-                                        ),
+                                            ),
+                                          ],
+                                        )
                                       ],
-                                    )
-                                  ],
-                                ),
-                              ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             );
@@ -402,7 +415,6 @@ class Mobilecart extends StatefulWidget {
 class _MobilecartState extends State<Mobilecart> {
   @override
   Widget build(BuildContext context) {
-    
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -423,7 +435,7 @@ class _MobilecartState extends State<Mobilecart> {
                   children: [
                     SizedBox(
                       height: 50,
- child: Row(
+                      child: Row(
                         children: [
                           TextButton(
                               onPressed: () {},
@@ -443,27 +455,31 @@ class _MobilecartState extends State<Mobilecart> {
                                 color: janishcolor),
                           )
                         ],
-                      ),                    ),
+                      ),
+                    ),
                     Expanded(
                       child: ListView.separated(
                         itemCount: cartItems["cartItems"].length,
                         separatorBuilder: (context, index) =>
                             Divider(height: 88, color: Colors.grey),
                         itemBuilder: (context, index) {
-                          final item = jsonDecode(cartItems["cartItems"][index]);
-        
+                          final item =
+                              jsonDecode(cartItems["cartItems"][index]);
+
                           // final item = cartProvider.cartItems[index];
                           return GestureDetector(
-                            onTap: (){
-                             // if(index)
-                             //Navigator.of(context).push(mater)
+                            onTap: () {
+                              // if(index)
+                              //Navigator.of(context).push(mater)
                             },
                             child: ListTile(
                               title: Row(
                                 children: [
                                   Container(
-                                    height: MediaQuery.of(context).size.height / 5,
-                                    width: MediaQuery.of(context).size.width / 5,
+                                    height:
+                                        MediaQuery.of(context).size.height / 11,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
                                     color: Colors.white,
                                     child: Image.network(
                                       item['imageUrl'],
@@ -471,32 +487,40 @@ class _MobilecartState extends State<Mobilecart> {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width / 30,
+                                    width:
+                                        MediaQuery.of(context).size.width / 30,
                                   ),
                                   SizedBox(
-                                    height: MediaQuery.of(context).size.height / 5,
-                                    width: MediaQuery.of(context).size.width / 1.5,
+                                    height: MediaQuery.of(context).size.height /
+                                        8,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.5,
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           '${item["productName"]}',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        item["productName"] == item['productCode']
+                                        item["productName"] ==
+                                                item['productCode']
                                             ? SizedBox()
                                             : Text(
                                                 '${item['productCode']}',
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                         Text(
                                             // toStringAsFixed(2)
                                             'Price: \$${item['price'].toStringAsFixed(2)}'),
                                         Row(
                                           children: [
-                                            Text('Quantity:${item['quantity']}'),
+                                            Text(
+                                                'Quantity:${item['quantity']}'),
                                             IconButton(
                                                 icon: Icon(
                                                   Icons.edit,
@@ -509,8 +533,8 @@ class _MobilecartState extends State<Mobilecart> {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title:
-                                                              Text('Edit Quantity'),
+                                                          title: Text(
+                                                              'Edit Quantity'),
                                                           content: TextField(
                                                             keyboardType:
                                                                 TextInputType
@@ -520,10 +544,10 @@ class _MobilecartState extends State<Mobilecart> {
                                                                     labelText:
                                                                         'Quantity'),
                                                             onChanged: (value) {
-                                                              newQuantity =
-                                                                  int.tryParse(
+                                                              newQuantity = int
+                                                                      .tryParse(
                                                                           value) ??
-                                                                      newQuantity;
+                                                                  newQuantity;
                                                             },
                                                           ),
                                                           actions: [
@@ -532,7 +556,8 @@ class _MobilecartState extends State<Mobilecart> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child: Text('Cancel'),
+                                                              child: Text(
+                                                                  'Cancel'),
                                                             ),
                                                             TextButton(
                                                               onPressed: () {
@@ -543,7 +568,8 @@ class _MobilecartState extends State<Mobilecart> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child: Text('Save'),
+                                                              child:
+                                                                  Text('Save'),
                                                             ),
                                                           ],
                                                         );
@@ -551,7 +577,7 @@ class _MobilecartState extends State<Mobilecart> {
                                                 }),
                                             // Divider(),
                                             // Text("|"),
-                                  
+
                                             IconButton(
                                               icon: Icon(
                                                 Icons.delete_rounded,
@@ -560,17 +586,19 @@ class _MobilecartState extends State<Mobilecart> {
                                               onPressed: () async {
                                                 showDialog(
                                                   context: context,
-                                                  builder: (BuildContext context) {
+                                                  builder:
+                                                      (BuildContext context) {
                                                     return AlertDialog(
-                                                      title:
-                                                          Text('Confirm Removal'),
+                                                      title: Text(
+                                                          'Confirm Removal'),
                                                       content: Text(
                                                           'Are you sure you want to remove this product?'),
                                                       actions: <Widget>[
                                                         TextButton(
                                                           child: Text('No'),
                                                           onPressed: () {
-                                                            Navigator.of(context)
+                                                            Navigator.of(
+                                                                    context)
                                                                 .pop(); // Close the dialog
                                                           },
                                                         ),
@@ -582,7 +610,8 @@ class _MobilecartState extends State<Mobilecart> {
                                                                     index,
                                                                     cartItems[
                                                                         'cartItems']);
-                                                            Navigator.of(context)
+                                                            Navigator.of(
+                                                                    context)
                                                                 .pop(); // Close the dialog
                                                           },
                                                         ),
@@ -607,10 +636,10 @@ class _MobilecartState extends State<Mobilecart> {
                   ],
                 ),
               ),
-        
+
               // flex: 2,
               SizedBox(
-                height: 300,
+                height: MediaQuery.of(context).size.height/3,
                 child: Row(
                   children: [
                     SizedBox(
@@ -643,13 +672,13 @@ class _MobilecartState extends State<Mobilecart> {
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                           ),
-        
+
                           // SizedBox(height: 45),
                           ListTile(
                             title: Text('VAT'),
                             // trailing: Text('\$ ${totalPrice.toStringAsFixed(2)}'),
                           ),
-        
+
                           // SizedBox(
                           //   height: 20,
                           // ),
@@ -684,7 +713,7 @@ class _MobilecartState extends State<Mobilecart> {
                             thickness:
                                 1, // Specify the thickness of the divider line
                           ),
-        
+
                           SizedBox(
                             height: 40,
                           ),
@@ -697,11 +726,11 @@ class _MobilecartState extends State<Mobilecart> {
                   ],
                 ),
               ),
-        
+
               Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   // height: MediaQuery.of(context).size.height / 1,
-                  height: 950,
+                  height: 980,
                   child: MediaQuery.of(context).size.width >= 700
                       ? deskBottomSheett()
                       : mobiledeskBottomSheett()),

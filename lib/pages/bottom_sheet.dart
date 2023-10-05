@@ -313,7 +313,7 @@ class mobiledeskBottomSheett extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-              flex: 2,
+              flex: 4,
               child: Row(
                 children: [
                   Expanded(
@@ -414,7 +414,7 @@ class mobiledeskBottomSheett extends StatelessWidget {
                 ],
               )),
           Expanded(
-            flex: 3,
+            flex: 5,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
