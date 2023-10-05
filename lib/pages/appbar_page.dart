@@ -95,13 +95,15 @@ class DesktopAppBar extends StatelessWidget {
               Container(
                 color: Colors.black,
                 height: 64,
-                width:  MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
-                    TextButton(onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchLocationScreen()
-                      ));
-                    }, child: Text('address')),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SearchLocationScreen()));
+                        },
+                        child: Text('address')),
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
                     // Container(
                     //   width: 200,
@@ -109,16 +111,32 @@ class DesktopAppBar extends StatelessWidget {
                     //   child: _searchBox(context),
                     // ), // Add the search box here
                     // Image.asset("assets/image/deltalogo.jpg.jpg"),
-                    Text(
-                      'DELTA',
-                      style: GoogleFonts.oswald(
-                        textStyle: TextStyle(
+                    InkWell(
+                      onTap: () {
+                        // Navigate to the named route '/your_destination_screen'
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: Text(
+                        'DELTA',
+                        style: GoogleFonts.oswald(
+                          textStyle: TextStyle(
                             color: Color.fromARGB(255, 251, 236, 221),
                             fontSize: 45,
-                            fontWeight: FontWeight.w700),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width / 10),
+                    Text("NATIONAL",
+                    style: GoogleFonts.oswald(
+                          textStyle: TextStyle(
+                            color: Color.fromARGB(255, 251, 236, 221),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),),
+
+                    SizedBox(width: MediaQuery.of(context).size.width / 15),
 
                     // Spacer(),
                     Expanded(child: _searchBox(context)),
@@ -135,10 +153,9 @@ class DesktopAppBar extends StatelessWidget {
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<
-                                  Color>(const Color
-                                      .fromARGB(255, 194, 192,
-                                  192)), // Change the color to your desired color
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 194, 192,
+                                      192)), // Change the color to your desired color
                             ),
                             child: Text('SignUp/SignIn'),
                           )
@@ -185,8 +202,7 @@ class DesktopAppBar extends StatelessWidget {
                           }
                         });
                       },
-                      child: Icon 
-                      (
+                      child: Icon(
                         Icons.person,
                         color: Colors.white,
                       ),
@@ -507,15 +523,23 @@ class MobileAppBar extends StatelessWidget {
         AppBar(
           title: Row(
             children: [
-              Text(
-                'DELTA',
-                style: GoogleFonts.oswald(
-                  textStyle: TextStyle(
+              InkWell(
+                onTap: () {
+                  // Navigate to the named route '/your_destination_screen'
+                  Navigator.pushNamed(context, '/');
+                },
+                child: Text(
+                  'DELTA',
+                  style: GoogleFonts.oswald(
+                    textStyle: TextStyle(
                       color: Color.fromARGB(255, 251, 236, 221),
-                      fontSize: 40,
-                      fontWeight: FontWeight.w700),
+                      fontSize: 45,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ),
+              
               Spacer(),
               user == null
                   ? TextButton(

@@ -1,6 +1,7 @@
 import 'package:firebase_hex/main.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
+import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ class CrimpingToolPage extends StatefulWidget {
   CrimpingToolPage({super.key});
 
   @override
+  
   State<CrimpingToolPage> createState() => _CrimpingToolPageState();
 }
 
@@ -37,82 +39,108 @@ class _CrimpingToolPageState extends State<CrimpingToolPage> {
                 products.where((product) => product != null).toList();
 
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4, // Set the number of columns in the grid
+  padding: EdgeInsets.symmetric(
+    horizontal: MediaQuery.of(context).size.width >= 600 ? 0 : 0,
+  ),
+  child: Column(
+    children: [
+      // Add your container here
+      Container(
+        height: 20,
+        color: janishcolor,
+        // Container properties here
+      ),
+      Expanded(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: MediaQuery.of(context).size.width <= 700
+                ? 2
+                : MediaQuery.of(context).size.width <= 1200
+                    ? 3
+                    : 4,
+          ),
+          itemCount: snapshot.data!.data.length,
+          itemBuilder: (context, index) {
+            var productData = snapshot.data!.data[index];
+
+            return GestureDetector(
+              onTap: () {
+                // Set the selected thumbnail for this product
+                selectedThumbnailProvider.setSelectedThumbnail(
+                  productData.thumbnail ?? "",
+                );
+
+                navigateToProductDetailsOfCrimpinTools(context, index);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(255, 229, 229, 229)
+                          .withOpacity(
+                              0.5), // Set the shadow color here
+                      spreadRadius:
+                          5, // Set the spread radius of the shadow
+                      blurRadius:
+                          7, // Set the blur radius of the shadow
+                      offset: Offset(
+                          0, 3), // Set the offset of the shadow
+                    ),
+                  ],
                 ),
-                itemCount: snapshot.data!.data.length,
-                itemBuilder: (context, index) {
-                  var productData = snapshot.data!.data[index];
-
-                  return GestureDetector(
-                    onTap: () {
-                      // Set the selected thumbnail for this product
-                      selectedThumbnailProvider.setSelectedThumbnail(
-                        productData.thumbnail ?? "",
-                      );
-
-                      navigateToProductDetailsOfCrimpinTools(context, index);
-                    },
-                    child: Container(
-                      color: Colors.white,
-
-                      padding: EdgeInsets.all(8.0), // Add spacing on all sides
-                      margin: EdgeInsets.all(8.0), // Add margin on all sides
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MouseRegion(
-                            onEnter: (_) {
-                              // Handle mouse enter event, e.g., change image size or color
-                              setState(() {
-                                // Update the state to apply hover effect
-
-                                selectedImageIndex =
-                                    index; // Set the selected image index
-                              });
-                            },
-                            onExit: (_) {
-                              // Handle mouse exit event, e.g., reset image size or color
-                              setState(() {
-                                // Update the state to remove hover effect
-                                selectedImageIndex =
-                                    -1; // Reset the selected image index
-                              });
-                            },
-                            child: AnimatedContainer(
-                              duration: Duration(milliseconds: 200),
-                               height: selectedImageIndex == index
-                                      ? 180
-                                      : 160, // Expand selected image
-                                  width: selectedImageIndex == index
-                                      ? MediaQuery.of(context).size.width / 4
-                                      : MediaQuery.of(context).size.width / 5,
-
-                              child: Image.network(
-                                productData.thumbnail ?? "",
-                                height: 200, // Adjust the height as needed
-                                width: 200, // Adjust the width as needed
-                                // fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                              height:
-                                  8.0), // Add spacing between image and text
-                          Text(
-                            productData.productName ?? "",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                padding: EdgeInsets.all(
+                  MediaQuery.of(context).size.width >= 700
+                      ? 15.0
+                      : 5.0,
+                ),
+                margin: EdgeInsets.all(
+                  MediaQuery.of(context).size.width >= 700
+                      ? 15.0
+                      : 5.0,
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          productData.thumbnail ?? "",
+                          // height: 150,
+                          width: MediaQuery.of(context).size.width / 5,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 25,
+                        ),
+                        Text(
+                          productData.productName ?? "",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Image.asset(
+                        'assets/image/images.png',
+                        width: 25,
+                        height: 25,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  );
-                },
+                  ],
+                ),
               ),
             );
+          },
+        ),
+      ),
+    ],
+  ),
+);
+
           }
         },
       );
