@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/address.dart';
+import 'package:firebase_hex/add.dart/address.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/connecters.dart';
@@ -99,7 +99,7 @@ class DesktopAppBar extends StatelessWidget {
                 child: Row(
                   children: [
                     TextButton(onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddressAddPage()
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchLocationScreen()
                       ));
                     }, child: Text('address')),
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
