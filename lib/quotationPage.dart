@@ -166,60 +166,60 @@ class QuotationPage extends StatelessWidget {
                         fontWeight: FontWeight.bold)),
                   ],
                 ),
-                 // NET BEFORE VAT Row
-                DataRow(
-                  color: MaterialStateColor.resolveWith(
-                      (states) => const Color.fromARGB(0, 208, 9, 9)),
-                  cells: [
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(
-                      _buildTableCell('NET BEFORE VAT:',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    DataCell(_buildTableCell(
-                        '\$${totalPrice.toStringAsFixed(2)}',
-                        fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                 // VAT Row
-                DataRow(
-                  color: MaterialStateColor.resolveWith(
-                      (states) => const Color.fromARGB(0, 208, 9, 9)),
-                  cells: [
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(
-                      _buildTableCell('VAT:',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    DataCell(_buildTableCell(
-                        '\$${15}',
-                        fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                 // Total WITH VAT Row
-                DataRow(
-                  color: MaterialStateColor.resolveWith(
-                      (states) => const Color.fromARGB(0, 208, 9, 9)),
-                  cells: [
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(
-                      _buildTableCell('Total WITH VAT:',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    DataCell(_buildTableCell(
-                        '\$${totalPrice.toStringAsFixed(2)}',
-                        fontWeight: FontWeight.bold)),
-                  ],
-                ),
+                //  // NET BEFORE VAT Row
+                // DataRow(
+                //   color: MaterialStateColor.resolveWith(
+                //       (states) => const Color.fromARGB(0, 208, 9, 9)),
+                //   cells: [
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(
+                //       _buildTableCell('NET BEFORE VAT:',
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     DataCell(_buildTableCell(
+                //         '\$${totalPrice.toStringAsFixed(2)}',
+                //         fontWeight: FontWeight.bold)),
+                //   ],
+                // ),
+                //  // VAT Row
+                // DataRow(
+                //   color: MaterialStateColor.resolveWith(
+                //       (states) => const Color.fromARGB(0, 208, 9, 9)),
+                //   cells: [
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(
+                //       _buildTableCell('VAT:',
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     DataCell(_buildTableCell(
+                //         '\$${15}',
+                //         fontWeight: FontWeight.bold)),
+                //   ],
+                // ),
+                //  // Total WITH VAT Row
+                // DataRow(
+                //   color: MaterialStateColor.resolveWith(
+                //       (states) => const Color.fromARGB(0, 208, 9, 9)),
+                //   cells: [
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(_buildTableCell('')),
+                //     DataCell(
+                //       _buildTableCell('Total WITH VAT:',
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     DataCell(_buildTableCell(
+                //         '\$${totalPrice.toStringAsFixed(2)}',
+                //         fontWeight: FontWeight.bold)),
+                //   ],
+                // ),
               ],
             ),
           ],

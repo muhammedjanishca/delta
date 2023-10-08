@@ -8,7 +8,7 @@ import 'save_file_mobile.dart' if (dart.library.html) 'save_file_web.dart';
 
 class PdfService {
   Future<void> generateInvoice(List cartItems) async {
-    // print(cartItems);
+    // cartItems);
     //Create a PDF document.
     final PdfDocument document = PdfDocument();
     //Add page to the PDF
@@ -163,7 +163,7 @@ void drawFooter(PdfPage page, Size pageSize) {
   //Add rows
   for (int i = 0; i < cartItems.length; i++) {
     final item = jsonDecode(cartItems[i]);
-    print(item);
+    
     final PdfGridRow row = grid.rows.add();
 
     row.cells[0].value = (i + 1).toString(); // SINO

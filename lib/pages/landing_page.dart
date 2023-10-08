@@ -268,7 +268,6 @@ class MobilLanding extends StatelessWidget {
                       SizedBox(
                         height: 320,
                       ),
-                     
                       SizedBox(
                         height: 280,
                       ),
@@ -320,17 +319,17 @@ class MobilLanding extends StatelessWidget {
             ),
           ],
         ),
-         Padding(
-                        padding: const EdgeInsets.only(left: 20,right: 10),
-                        child: Text(
-                          'Industrial Cable Management System for your Electrical Projects!',
-                          style: GoogleFonts.abel(
-                              textStyle: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold)),
-                        ),
-                      ),
         Padding(
-          padding: const EdgeInsets.only(left: 20, right:20 ),
+          padding: const EdgeInsets.only(left: 20, right: 10),
+          child: Text(
+            'Industrial Cable Management System for your Electrical Projects!',
+            style: GoogleFonts.abel(
+                textStyle:
+                    TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Text(
             '\n      Delta Cable Management Systems are used to organise and secure electrical or electronic cables and wires  \nin a facility, home, or office. The main goal of Industrial Cable Manufacturers in India\n is to manufacture cables that maintain a clean and organized workspace, reduce trip hazards, eliminate short\ncircuits and enhance your overall electrical safety and functionality\n',
             style: GoogleFonts.abel(fontSize: 20, fontWeight: FontWeight.w300),
@@ -361,7 +360,8 @@ class MobilLanding extends StatelessWidget {
                 : mobiledeskBottomSheett())
       ],
     );
-  }}
+  }
+}
  // return Container(
     //   color: Colors.black,
     //   child: Column(
@@ -561,7 +561,7 @@ class MobilLanding extends StatelessWidget {
     //                       ),
     //                       ElevatedButton(
     //                         onPressed: () {
-    //                           print(textarea.text);
+    //                           textarea.text);
     //                         },
     //                         child: Text(
     //                           'SUBMIT',

@@ -13,24 +13,31 @@ import 'nonpdf_product.dart';
 
 class ProductDetailsOfGlands extends StatelessWidget {
   // ProductDetailsOfGlands({selectedProductIndex)}
-   final int selectedProductIndex ;
+  //  final int selectedProductIndex ;
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
-  ProductDetailsOfGlands({super.key, required this.selectedProductIndex});
+  ProductDetailsOfGlands({super.key});
   // ProductDetails({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
+    // print("dfdghjkl");
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     TextEditingController quantityController = TextEditingController();
 
-    final int selectedProductIndex =
-        ModalRoute.of(context)!.settings.arguments as int;
+    String selectedProductIndex =
+        ModalRoute.of(context)!.settings.name as String;
+    var setting_list = selectedProductIndex.split('/');
+    String product_name = setting_list[2];
+    print(product_name);
+
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
+
+
       //******************MOBILE VIEW****************************
 
       mobileProductPage: FutureBuilder(
@@ -43,15 +50,18 @@ class ProductDetailsOfGlands extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass =
-                snapshot.data!.data[selectedProductIndex].productName;
-            var thumbnail = snapshot.data!.data[selectedProductIndex].thumbnail;
-            var description =
-                snapshot.data!.data[selectedProductIndex].description;
-            var price =
-                snapshot.data!.data[selectedProductIndex].codesAndPrice!;
-            var image = snapshot.data!.data[selectedProductIndex].images;
-            var pdf = snapshot.data!.data[selectedProductIndex].pdf;
+            var textpass = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].productName;
+            var thumbnail = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+            var description = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].description;
+            var price = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+            var image = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+            var pdf = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
             //  String selectedPrice = '';
 
@@ -88,6 +98,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   .width /
                                               2,
                                           child: Image.network(
+                                            // thumbnail!,)
                                               selectedThumbnailProvider
                                                       .selectedThumbnail ??
                                                   ''),
@@ -414,8 +425,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                                           .text) ??
                                                                   0;
                                                           final imageUrl =
-                                                              selectedThumbnailProvider
-                                                                      .selectedThumbnail ??
+                                                              // selectedThumbnailProvider
+                                                              //         .selectedThumbnail ??
                                                                   thumbnail;
                                                           final productName =
                                                               textpass;
@@ -448,7 +459,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                             builder:
                                                                 (BuildContext
                                                                     context) {
-                                                              return LoginPage();// Your custom dialog widget
+                                                              return LoginPage(); // Your custom dialog widget
                                                             },
                                                           );
                                                         }
@@ -547,19 +558,23 @@ class ProductDetailsOfGlands extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
+            print("hgfghfhfgu");
             return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass =
-                snapshot.data!.data[selectedProductIndex].productName;
-            var thumbnail = snapshot.data!.data[selectedProductIndex].thumbnail;
-            var description =
-                snapshot.data!.data[selectedProductIndex].description;
-            var price =
-                snapshot.data!.data[selectedProductIndex].codesAndPrice!;
-            var image = snapshot.data!.data[selectedProductIndex].images;
-            var pdf = snapshot.data!.data[selectedProductIndex].pdf;
+            var textpass = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].productName;
+            var thumbnail = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+            var description = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].description;
+            var price = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+            var image = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+            var pdf = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
             //  String selectedPrice = '';
 
@@ -594,9 +609,11 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
+                                      //  thumbnail!,
                                             selectedThumbnailProvider
                                                     .selectedThumbnail ??
-                                                ''),
+                                                ''
+                                                ),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -903,8 +920,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                                   .text) ??
                                                           0;
                                                       final imageUrl =
-                                                          selectedThumbnailProvider
-                                                                  .selectedThumbnail ??
+                                                          // selectedThumbnailProvider
+                                                          //         .selectedThumbnail ??
                                                               thumbnail;
                                                       final productName =
                                                           textpass;
@@ -927,12 +944,13 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                                   "Added to cart")));
                                                     } else {
                                                       // signed out
-                                                        showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return LoginPage(); // Your custom dialog widget
-                        },
-                      );
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
                                                     }
                                                   },
                                                   child:

@@ -37,19 +37,15 @@ import 'package:flutter/material.dart';
 
 // final _formKey = GlobalKey<FormState>();
 
-Container CustTextField(String hintText, controller, context) {
+Container CustTextField(String hintText, controller, context,String? Function(String?)? validator) {
   return Container(
     width: MediaQuery.of(context).size.width / 4,
-    height: 40,
+    height:40,
     child: TextFormField(
       controller: controller,
       keyboardType: TextInputType.phone,
-      // validator: (value) {
-      //   if (value == null || value.isEmpty) {
-      //     return '*Required';
-      //   }
-      //   return null;
-      // },
+      validator: validator,
+      
       style: TextStyle(
         color: Colors.white,
         fontSize: 15,

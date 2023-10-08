@@ -2,14 +2,17 @@ import 'package:flutter/foundation.dart';
 
 class SelectedThumbnailProvider extends ChangeNotifier {
   String? _selectedThumbnail;
+  int? selectedIndex;
 
   String? get selectedThumbnail => _selectedThumbnail;
 
-  void setSelectedThumbnail(String thumbnailUrl) {
+  void setSelectedThumbnail(String thumbnailUrl,{int? index}) {
     _selectedThumbnail = thumbnailUrl;
+    selectedIndex = index??selectedIndex;
     notifyListeners();
   }
 }
+
 class SelectedCodeProvider extends ChangeNotifier {
   String? _selectedProductCode;
 
@@ -20,3 +23,4 @@ class SelectedCodeProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+

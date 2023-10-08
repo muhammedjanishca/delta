@@ -8,7 +8,6 @@ import 'package:firebase_hex/pages/gland.dart';
 import 'package:firebase_hex/pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
-import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/style.dart';
@@ -18,7 +17,6 @@ import 'package:provider/provider.dart';
 import '../login_and_signing/authentication.dart';
 import '../login_and_signing/loginpage.dart';
 import '../whatsApp.dart';
-import 'cart.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:badges/badges.dart' as badges;
 
@@ -105,12 +103,7 @@ class DesktopAppBar extends StatelessWidget {
                         },
                         child: Text('address')),
                     SizedBox(width: MediaQuery.of(context).size.width / 8),
-                    // Container(
-                    //   width: 200,
-                    //   height: 40,
-                    //   child: _searchBox(context),
-                    // ), // Add the search box here
-                    // Image.asset("assets/image/deltalogo.jpg.jpg"),
+
                     InkWell(
                       onTap: () {
                         // Navigate to the named route '/your_destination_screen'
@@ -127,14 +120,16 @@ class DesktopAppBar extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text("NATIONAL",
-                    style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),),
+                    Text(
+                      "NATIONAL",
+                      style: GoogleFonts.oswald(
+                        textStyle: TextStyle(
+                          color: Color.fromARGB(255, 251, 236, 221),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
 
                     SizedBox(width: MediaQuery.of(context).size.width / 15),
 
@@ -153,9 +148,10 @@ class DesktopAppBar extends StatelessWidget {
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 194, 192,
-                                      192)), // Change the color to your desired color
+                              foregroundColor: MaterialStateProperty.all<
+                                  Color>(const Color
+                                      .fromARGB(255, 194, 192,
+                                  192)), // Change the color to your desired color
                             ),
                             child: Text('SignUp/SignIn'),
                           )
@@ -177,7 +173,7 @@ class DesktopAppBar extends StatelessWidget {
                           context: context,
                           position: RelativeRect.fromLTRB(
                             200,
-                            100,
+                            60,
                             180,
                             0,
                           ), // Adjust the position as needed
@@ -191,8 +187,46 @@ class DesktopAppBar extends StatelessWidget {
                               child: Text('Login'),
                             ),
                             PopupMenuItem<String>(
-                              value: 'Logout',
-                              child: Text('Logout'),
+                              child: user != null
+                                  ? TextButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  "Are you sure to logout?"),
+                                              // content: Text("This is my message."),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('Cancel')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      FirebaseAuth.instance
+                                                          .signOut();
+                                                      // Navigator.pop(context);
+
+                                                      Navigator.pushNamed(
+                                                          context, '/');
+                                                    },
+                                                    child: Text('Yes'))
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        // FirebaseAuth.instance.signOut();
+                                      },
+                                      child: Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ))
+                                  : SizedBox(),
                             ),
                           ],
                         ).then((value) {
@@ -240,15 +274,6 @@ class DesktopAppBar extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: janishcolor,
-                  // gradient: LinearGradient(
-                  //   colors: ,
-                  //   // colors: [
-                  //   //   Color.fromARGB(223, 13, 13, 13), // First color
-                  //   //   Color.fromARGB(223, 0, 0, 0), // Second color
-                  //   // ],
-                  //   begin: Alignment.topCenter,
-                  //   end: Alignment.bottomCenter,
-                  // ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -259,16 +284,9 @@ class DesktopAppBar extends StatelessWidget {
                       'Cable Terminal Ends',
                       ['Lugs', 'Connectors'],
                       (selectedDataType) async {
-                        final dataProvider =
-                            Provider.of<DataProvider>(context, listen: false);
                         if (selectedDataType == 'Lugs') {
-                          // final connectorsData =
-                          //     await dataProvider.fetchConnectorsData();
-                          final lugsdata = await dataProvider.fetchLugsData();
                           Navigator.pushNamed(context, '/Lugs');
                         } else if (selectedDataType == 'Connectors') {
-                          final connectorsData =
-                              await dataProvider.fetchConnectorsData();
                           Navigator.pushNamed(context, '/Connecters');
                         }
                         // Add similar conditions for other data types
@@ -279,17 +297,9 @@ class DesktopAppBar extends StatelessWidget {
                       'Brass Cable Gland Kits & Accessories',
                       ['Glands', 'Accessories'],
                       (selectedDataType) async {
-                        final dataProvider =
-                            Provider.of<DataProvider>(context, listen: false);
                         if (selectedDataType == 'Glands') {
-                          // final connectorsData =
-                          //     await dataProvider.fetchConnectorsData();
-                          final glandsdata =
-                              await dataProvider.fetchGlandsData();
                           Navigator.pushNamed(context, '/Glands');
                         } else if (selectedDataType == 'Accessories') {
-                          final AccessoriesData =
-                              await dataProvider.fetchAccssoriesData();
                           Navigator.pushNamed(context, '/Accssories');
                         }
                         // Add similar conditions for other data types
@@ -300,11 +310,7 @@ class DesktopAppBar extends StatelessWidget {
                       'Crimping Tool',
                       ['Crimping Tool'],
                       (selectedDataType) async {
-                        final dataProvider =
-                            Provider.of<DataProvider>(context, listen: false);
                         if (selectedDataType == 'Crimping Tool') {
-                          final Crimpingtooldata =
-                              await dataProvider.fetchCrimpingtoolData();
                           Navigator.pushNamed(context, '/CrimpingTools');
                         }
                       },
@@ -365,10 +371,9 @@ Widget custmobileDrawer(BuildContext context) {
   return ChangeNotifierProvider(
     create: (context) => DataProvider(),
     child: Theme(
-      data: ThemeData(
-        canvasColor: Color.fromARGB(
-            255, 0, 0, 0), // Set the background color of the Drawer to black
-      ),
+      data: ThemeData(canvasColor: Colors.black
+          // Set the background color of the Drawer to black
+          ),
       child: Drawer(
         child: ListView(
           children: [
@@ -376,6 +381,9 @@ Widget custmobileDrawer(BuildContext context) {
               height: 50,
             ),
             ExpansionTile(
+              // collapsedBackgroundColor: janishcolor,
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
               title: Text(
                 'Cable Terminal Ends',
                 style: TextStyle(
@@ -385,14 +393,12 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
+                  hoverColor: janishcolor,
                   title: Text(
                     'Lugs',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
-                    final dataProvider =
-                        Provider.of<DataProvider>(context, listen: false);
-                    final Lugsdata = await dataProvider.fetchLugsData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -401,15 +407,12 @@ Widget custmobileDrawer(BuildContext context) {
                   },
                 ),
                 ListTile(
+                  hoverColor: janishcolor,
                   title: Text(
                     'Connectors',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
-                    final dataProvider =
-                        Provider.of<DataProvider>(context, listen: false);
-                    final Connectersdata =
-                        await dataProvider.fetchConnectorsData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -420,7 +423,12 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
               ],
             ),
+            Divider(),
             ExpansionTile(
+              
+              // collapsedBackgroundColor: janishcolor,
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
               title: Text(
                 'Brass Cable Gland Kits & Accessories',
                 style: TextStyle(
@@ -430,14 +438,12 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
+                  hoverColor: janishcolor,
                   title: Text(
                     'Glands',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
-                    final dataProvider =
-                        Provider.of<DataProvider>(context, listen: false);
-                    final Glandsdata = await dataProvider.fetchGlandsData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -446,15 +452,12 @@ Widget custmobileDrawer(BuildContext context) {
                   },
                 ),
                 ListTile(
+                  hoverColor: janishcolor,
                   title: Text(
                     'Accessories',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
-                    final dataProvider =
-                        Provider.of<DataProvider>(context, listen: false);
-                    final Accessoriesdata =
-                        await dataProvider.fetchAccssoriesData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -465,7 +468,10 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
               ],
             ),
+            Divider(),
             ExpansionTile(
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
               title: Text(
                 'Crimping Tool',
                 style: TextStyle(
@@ -475,15 +481,12 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
+                  hoverColor: janishcolor,
                   title: Text(
                     'Crimping Tool',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
-                    final dataProvider =
-                        Provider.of<DataProvider>(context, listen: false);
-                    final Crimpingtooldata =
-                        await dataProvider.fetchCrimpingtoolData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -539,7 +542,6 @@ class MobileAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-              
               Spacer(),
               user == null
                   ? TextButton(

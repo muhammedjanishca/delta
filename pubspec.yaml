@@ -61,6 +61,7 @@ dependencies:
   flutter_typeahead: ^4.8.0
   flutter_svg: ^2.0.7
   emailjs: ^1.3.0
+  email_validator: ^2.1.17
   
 
 dev_dependencies:

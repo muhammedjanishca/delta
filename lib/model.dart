@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final produceNewModal = produceNewModalFromJson(jsonString);
 
 import 'dart:convert';
 

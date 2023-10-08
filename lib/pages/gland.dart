@@ -9,8 +9,7 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 import '../model.dart';
 import '../provider/thumbnail.dart';
-import 'gridview.dart';
-// ... (Your imports and other code)
+
 
 class GlandPage extends StatefulWidget {
   GlandPage({super.key});
@@ -83,6 +82,7 @@ class _GlandPageState extends State<GlandPage> {
                   padding:
                      EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,),
                   child: GridView.builder(
+                    physics: ScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width <= 800
                           ? 2
@@ -97,11 +97,12 @@ class _GlandPageState extends State<GlandPage> {
 
                       return GestureDetector(
                         onTap: () {
+                          
                           selectedThumbnailProvider.setSelectedThumbnail(
-                            productData.thumbnail ?? "",
+                            productData.thumbnail ?? "",index: index
                           );
 
-                          navigateToProductDetailsOfGlands(context, index);
+                          navigateToProductDetailsOfGlands(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
                         },
                         child: Container(
                           //  height: 200,

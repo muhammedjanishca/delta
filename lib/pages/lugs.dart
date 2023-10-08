@@ -86,25 +86,29 @@ class _LugsPageState extends State<LugsPage> {
                     child: InkWell(
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: MediaQuery.of(context).size.width <= 800
-                              ? 2
-                              : MediaQuery.of(context).size.width <= 1200
-                                  ? 3
-                                  : 4,
+                          crossAxisCount:
+                              MediaQuery.of(context).size.width <= 800
+                                  ? 2
+                                  : MediaQuery.of(context).size.width <= 1200
+                                      ? 3
+                                      : 4,
                         ),
                         itemCount: snapshot.data!.data.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           var productData = snapshot.data!.data[index];
-                                
+
                           return InkWell(
                             child: GestureDetector(
                               onTap: () {
                                 selectedThumbnailProvider.setSelectedThumbnail(
-                                  productData.thumbnail ?? "",
-                                );
-                                  
-                                navigateToProductDetailsofLugs(context, index);
+                                    productData.thumbnail ?? "",
+                                    index: index);
+
+                                navigateToProductDetailsofLugs(context, index,
+                                    productname: snapshot
+                                        .data!.data[index].productName!
+                                        .replaceAll(" ", "_"));
                               },
                               child: Container(
                                 //  height: 200,
@@ -139,7 +143,8 @@ class _LugsPageState extends State<LugsPage> {
                                   alignment: Alignment.center,
                                   children: [
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         MouseRegion(
                                           onEnter: (_) {
@@ -153,21 +158,27 @@ class _LugsPageState extends State<LugsPage> {
                                             });
                                           },
                                           child: AnimatedContainer(
-                                            duration: Duration(milliseconds: 200),
+                                            duration:
+                                                Duration(milliseconds: 200),
                                             height: selectedImageIndex == index
                                                 ? 210
                                                 : 160,
                                             width: selectedImageIndex == index
-                                                ? MediaQuery.of(context).size.width /
+                                                ? MediaQuery.of(context)
+                                                        .size
+                                                        .width /
                                                     4
-                                                : MediaQuery.of(context).size.width /
+                                                : MediaQuery.of(context)
+                                                        .size
+                                                        .width /
                                                     5,
                                             child: Image.network(
                                               productData.thumbnail ?? "",
                                               // height: 150,
-                                              width:
-                                                  MediaQuery.of(context).size.width /
-                                                      5,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
                                             ),
                                           ),
                                         ),
@@ -178,8 +189,8 @@ class _LugsPageState extends State<LugsPage> {
                                         // ),
                                         Text(
                                           productData.productName ?? "",
-                                          style:
-                                              TextStyle(fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
                                           textAlign: TextAlign.center,
                                         ),
                                       ],
@@ -250,7 +261,7 @@ class _LugsPageState extends State<LugsPage> {
 //       return FutureBuilder<ProduceNewModal>(
 //         future: context.read<DataProvider>().newcrimpingtool,
 //         builder: (context, snapshot) {
-//           // print(snapshot.data);
+//           // snapshot.data);
 //           if (snapshot.connectionState == ConnectionState.waiting) {
 //             return CircularProgressIndicator();
 //           } else if (snapshot.hasError) {
