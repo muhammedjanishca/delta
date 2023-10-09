@@ -740,47 +740,47 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             runSpacing:
                                                 8.0, // Adjust the spacing between rows as needed
                                             children: List<Widget>.generate(
-                                                  price.length, (index) {
-                                                final codeAndPrice =
-                                                    price[index];
-                                                return InkWell(
-                                                  onTap: () {
-                                                    String noprice = '0';
-                                                    codeAndPrice.price != null
-                                                        ? codeAndPrice.price
-                                                        : noprice;
-                                                    // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                                    selectedPriceNotifier
-                                                            .value =
-                                                        '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-                                                  },
-                                                  child: Container(
-                                                    width: 100,
-                                                    padding: EdgeInsets.all(
-                                                        8.0), // Adjust the padding as needed
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: codeAndPrice.productCode ==
-                                                                selectedCodeProvider.selectedProductCode
-                                                            // codeAndPrice.productCode
-                                                            ? Colors
-                                                                .blue // Set border color to blue for selected container
-                                                            : Colors
-                                                                .black, // Set border color to black for non-selected containers
-                                                        width:
-                                                            1.0, // Set your desired border width
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      '${codeAndPrice.productCode}',
-                                                      style: TextStyle(
-                                                        color: Colors
-                                                            .black, // Set your desired text color
-                                                      ),
+                                                price.length, (index) {
+                                              final codeAndPrice = price[index];
+                                              return InkWell(
+                                                onTap: () {
+                                                  String noprice = '0';
+                                                  codeAndPrice.price != null
+                                                      ? codeAndPrice.price
+                                                      : noprice;
+                                                  // When a container is tapped, update the selectedPrice using ValueNotifier.
+                                                  selectedPriceNotifier.value =
+                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                                },
+                                                child: Container(
+                                                  width: 100,
+                                                  padding: EdgeInsets.all(
+                                                      8.0), // Adjust the padding as needed
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: codeAndPrice
+                                                                  .productCode ==
+                                                              selectedCodeProvider
+                                                                  .selectedProductCode
+                                                          // codeAndPrice.productCode
+                                                          ? Colors
+                                                              .blue // Set border color to blue for selected container
+                                                          : Colors
+                                                              .black, // Set border color to black for non-selected containers
+                                                      width:
+                                                          1.0, // Set your desired border width
                                                     ),
                                                   ),
-                                                );
-                                              }),
+                                                  child: Text(
+                                                    '${codeAndPrice.productCode}',
+                                                    style: TextStyle(
+                                                      color: Colors
+                                                          .black, // Set your desired text color
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }),
                                           ),
                                         ],
                                       )
@@ -915,73 +915,64 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () {
-                                                        if (FirebaseAuth
-                                                                .instance
-                                                                .currentUser !=
-                                                            null) {
-                                                          // signed in
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      // signed in
 
-                                                          final selectedPrice =
-                                                              selectedPriceNotifier
-                                                                          .value !=
-                                                                      null
-                                                                  ? selectedPriceNotifier
-                                                                      .value
-                                                                  : 'No Price';
-                                                          final productCode =
-                                                              selectedPrice
-                                                                  .split(
-                                                                      ': ')[0];
-                                                          final price = double
-                                                              .parse(selectedPrice
-                                                                  .split(
-                                                                      ': ')[1]);
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                                      .value !=
+                                                                  null
+                                                              ? selectedPriceNotifier
+                                                                  .value
+                                                              : 'No Price';
+                                                      final productCode =
+                                                          selectedPrice
+                                                              .split(': ')[0];
+                                                      final price = double
+                                                          .parse(selectedPrice
+                                                              .split(': ')[1]);
 
-                                                          final quantity =
-                                                              int.tryParse(
-                                                                      quantityController
-                                                                          .text) ??
-                                                                  0;
-                                                          final imageUrl =
-                                                              // selectedThumbnailProvider
-                                                              //         .selectedThumbnail ??
-                                                              thumbnail;
-                                                          final productName =
-                                                              textpass;
-                                                          final cartProvider =
-                                                              Provider.of<
-                                                                      CartProvider>(
-                                                                  context,
-                                                                  listen:
-                                                                      false);
+                                                      final quantity = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      final imageUrl =
+                                                          // selectedThumbnailProvider
+                                                          //         .selectedThumbnail ??
+                                                          thumbnail;
+                                                      final productName =
+                                                          textpass;
+                                                      final cartProvider =
+                                                          Provider.of<
+                                                                  CartProvider>(
+                                                              context,
+                                                              listen: false);
 
-                                                          cartProvider
-                                                              .addToCart(
-                                                                  productCode,
-                                                                  price,
-                                                                  quantity,
-                                                                  imageUrl ??
-                                                                      "",
-                                                                  productName ??
-                                                                      "");
+                                                      cartProvider.addToCart(
+                                                          productCode,
+                                                          price,
+                                                          quantity,
+                                                          imageUrl ?? "",
+                                                          productName ?? "");
 
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(SnackBar(
-                                                                  content: Text(
-                                                                      "Added to cart")));
-                                                        } else {
-                                                          // signed out
-                                                          showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return LoginPage(); // Your custom dialog widget
-                                                            },
-                                                          );
-                                                        }
-                                                      },
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(SnackBar(
+                                                              content: Text(
+                                                                  "Added to cart")));
+                                                    } else {
+                                                      // signed out
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
+                                                    }
+                                                  },
                                                   child:
                                                       const Text('ADD TO CART'),
                                                   style: ButtonStyle(
@@ -1023,24 +1014,34 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      Container(
+                                        child: ListView.builder(
+                                            itemBuilder: (context, index) {
+                                          return Container(
+                                            child:pdf != null
+                                                  ? SfPdfViewer.network(pdf)
+                                                  : Nopdf() ,
+                                          );
+                                        }),
+                                      )
                                       // Tab 2 content goes here
-                                      SingleChildScrollView(
-                                        child: Container(
-                                            height: 1500,
-                                            color: const Color.fromARGB(
-                                                255, 230, 233, 235),
-                                            child: pdf != null
-                                                ? SfPdfViewer.network(pdf)
-                                                : Nopdf()
-                                            // PDFView(
-                                            //   filePath:
-                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                            //   // height: 300,   // Set the desired height for the PDF viewer
-                                            //   // width: 300,    // Set the desired width for the PDF viewer
-                                            // ),
+                                      // SingleChildScrollView(
+                                      //   child: Container(
+                                      //       height: 1500,
+                                      //       color: const Color.fromARGB(
+                                      //           255, 230, 233, 235),
+                                      //       child: pdf != null
+                                      //           ? SfPdfViewer.network(pdf)
+                                      //           : Nopdf()
+                                      //       PDFView(
+                                      //         filePath:
+                                      //             pdf, // Replace 'pdf' with the actual PDF file path or URL
+                                      //         // height: 300,   // Set the desired height for the PDF viewer
+                                      //         // width: 300,    // Set the desired width for the PDF viewer
+                                      //       ),
 
-                                            ),
-                                      ),
+                                      //       ),
+                                      // ),
                                     ],
                                   ),
                                 ),

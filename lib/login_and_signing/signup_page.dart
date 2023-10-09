@@ -8,7 +8,6 @@ import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/Text_color.dart';
 import 'email_otp.dart';
 import 'mail_verification.dart';
@@ -104,7 +103,8 @@ class DeskSignUp extends StatelessWidget {
                                   indicatorRadius: 0,
                                   itemSpacing: 20,
                                   alignment: Alignment.bottomCenter,
-                                  padding: const EdgeInsets.only(top: 30)),
+                                  padding: const EdgeInsets.only(top: 30)
+                                  ),
                               slideBuilder: (index) {
                                 return Column(
                                   children: [

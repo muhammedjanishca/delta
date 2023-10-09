@@ -19,6 +19,7 @@ import 'package:firebase_hex/product_details/lugs_productdetails.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/search_api.dart';
@@ -64,7 +65,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
-        ChangeNotifierProvider(create: (context) => TextProvider())
+        ChangeNotifierProvider(create: (context) => TextProvider()),
+        ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
+
       ],
       child: MaterialApp(
         //this use using for handle null data

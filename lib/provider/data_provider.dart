@@ -27,12 +27,12 @@ class DataProvider extends ChangeNotifier {
 
 //for set up the product type for the product details
   Future<ProduceNewModal> setTypeOfProducts(type) async {
-    print("fdghjk");
-    print(type);
+    // print("fdghjk");
+    // print(type);
  final response = await http
       .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/$type'));
-  print("++++++++++++++++++++++++++++++");
-  print(response.statusCode);
+  // print("++++++++++++++++++++++++++++++");
+  // print(response.statusCode);
   // print(response.body);
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
@@ -44,10 +44,10 @@ class DataProvider extends ChangeNotifier {
 
   Future<dynamic> _fetchDataFromApi(String apiUrl) async {
     final response = await http.get(Uri.parse(apiUrl));
-    print("++++++++++++++++++++++++++++++");
-    print(response.statusCode);
+    // print("++++++++++++++++++++++++++++++");
+    // print(response.statusCode);
     // print(response.body);
-    print('gggggggggggggggggg');
+    // print('gggggggggggggggggg');
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
@@ -104,9 +104,9 @@ class DataProvider extends ChangeNotifier {
 Future<ProduceNewModal> _fetchLugsData() async {
   final response = await http
       .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/lugs'));
-  print("++++++++++++++++++++++++++++++");
-  print(response.statusCode);
-  print(response.body);
+  // print("++++++++++++++++++++++++++++++");
+  // print(response.statusCode);
+  // print(response.body);
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;
@@ -118,9 +118,9 @@ Future<ProduceNewModal> _fetchLugsData() async {
 Future<ProduceNewModal> _fetchglandsApiUrl() async {
   final response = await http
       .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/glands'));
-  print("++++++++++++++++++++++++++++++");
-  print(response.statusCode);
-  print(response.body);
+  // print("++++++++++++++++++++++++++++++");
+  // print(response.statusCode);
+  // print(response.body);
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;
@@ -132,9 +132,9 @@ Future<ProduceNewModal> _fetchglandsApiUrl() async {
 Future<ProduceNewModal> _fetchaccessoriesApiUrl() async {
   final response = await http.get(
       Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/accessories'));
-  print("++++++++++++++++++++++++++++++");
-  print(response.statusCode);
-  print(response.body);
+  // print("++++++++++++++++++++++++++++++");
+  // print(response.statusCode);
+  // print(response.body);
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;
@@ -146,9 +146,9 @@ Future<ProduceNewModal> _fetchaccessoriesApiUrl() async {
 Future<ProduceNewModal> _fetchconnectersApiUrl() async {
   final response = await http.get(
       Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/connectors'));
-  print("++++++++++++++++++++++++++++++");
-  print(response.statusCode);
-  print(response.body);
+  // print("++++++++++++++++++++++++++++++");
+  // print(response.statusCode);
+  // print(response.body);
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;
@@ -160,9 +160,9 @@ Future<ProduceNewModal> _fetchconnectersApiUrl() async {
 Future<ProduceNewModal> _fetchcrimpingtoolApiUrl() async {
   final response = await http.get(Uri.parse(
       'http://newdelta.ap-south-1.elasticbeanstalk.com/crimpingtools'));
-  print("++++++++++++++++++++++++++++++");
-  print(response.statusCode);
-  print(response.body);
+  // print("++++++++++++++++++++++++++++++");
+  // print(response.statusCode);
+  // print(response.body);
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;

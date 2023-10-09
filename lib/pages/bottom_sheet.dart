@@ -21,16 +21,10 @@ class BottomSheet extends StatelessWidget {
   }
 }
 
-class deskBottomSheett extends StatefulWidget {
+class deskBottomSheett extends StatelessWidget {
   const deskBottomSheett({super.key});
 
-  @override
-  State<deskBottomSheett> createState() => _deskBottomSheettState();
-}
-
-class _deskBottomSheettState extends State<deskBottomSheett> {
   // bool hover = true;
-
   @override
   Widget build(BuildContext context) {
     Provider.of<AuthenticationHelper>(context).getCurrentUser();
@@ -41,7 +35,7 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
     final nameController = TextEditingController();
     final emailController = TextEditingController();
     final phoneNumberController = TextEditingController();
-    bool _validate = false;
+    // bool _validate = false;
     Future<void> sendEmail(String name, String email, String company,
         String phone, String message) async {
       final apiUrl = 'https://api.emailjs.com/api/v1.0/email/send';
@@ -294,6 +288,7 @@ class _deskBottomSheettState extends State<deskBottomSheett> {
       ),
     );
   }
+
    bool isValidEmail(String email) {
     final emailRegex = RegExp(
         r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
