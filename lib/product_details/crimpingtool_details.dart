@@ -36,8 +36,6 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-
-
       //******************MOBILE VIEW****************************
 
       mobileProductPage: FutureBuilder(
@@ -46,7 +44,9 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -98,7 +98,7 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                                   .width /
                                               2,
                                           child: Image.network(
-                                            // thumbnail!,)
+                                              // thumbnail!,)
                                               selectedThumbnailProvider
                                                       .selectedThumbnail ??
                                                   ''),
@@ -427,7 +427,7 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                                           final imageUrl =
                                                               // selectedThumbnailProvider
                                                               //         .selectedThumbnail ??
-                                                                  thumbnail;
+                                                              thumbnail;
                                                           final productName =
                                                               textpass;
                                                           final cartProvider =
@@ -559,7 +559,9 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             print("hgfghfhfgu");
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -609,11 +611,10 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                      //  thumbnail!,
+                                            //  thumbnail!,
                                             selectedThumbnailProvider
                                                     .selectedThumbnail ??
-                                                ''
-                                                ),
+                                                ''),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -922,7 +923,7 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
                                                       final imageUrl =
                                                           // selectedThumbnailProvider
                                                           //         .selectedThumbnail ??
-                                                              thumbnail;
+                                                          thumbnail;
                                                       final productName =
                                                           textpass;
                                                       final cartProvider =
@@ -1031,5 +1032,3 @@ class ProductDetailsOfCrimpingTool extends StatelessWidget {
     );
   }
 }
-
-

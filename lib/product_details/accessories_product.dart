@@ -29,15 +29,12 @@ class ProductDetailsOfAccessories extends StatelessWidget {
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
     String product_name = setting_list[2];
-   
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-
-
       //******************MOBILE VIEW****************************
 
       mobileProductPage: FutureBuilder(
@@ -46,7 +43,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -98,7 +97,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   .width /
                                               2,
                                           child: Image.network(
-                                            // thumbnail!,)
+                                              // thumbnail!,)
                                               selectedThumbnailProvider
                                                       .selectedThumbnail ??
                                                   ''),
@@ -172,7 +171,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                 // color: Colors.amber,
 
                                                 child: Text(
-                                                  'selected Product code&Price:',
+                                                  'Product Price :',
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -198,7 +197,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       width: 1.0,
                                                     ),
                                                   ),
-                                                  child: Text(selectedPrice),
+                                                  child: Text(selectedPrice.split(':').first.toString()),
                                                 );
                                               },
                                             ),
@@ -427,7 +426,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                           final imageUrl =
                                                               // selectedThumbnailProvider
                                                               //         .selectedThumbnail ??
-                                                                  thumbnail;
+                                                              thumbnail;
                                                           final productName =
                                                               textpass;
                                                           final cartProvider =
@@ -558,8 +557,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-           
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -609,11 +609,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                      //  thumbnail!,
+                                            //  thumbnail!,
                                             selectedThumbnailProvider
                                                     .selectedThumbnail ??
-                                                ''
-                                                ),
+                                                ''),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -678,7 +677,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               // color: Colors.amber,
 
                                               child: Text(
-                                                'selected Product code&Price:',
+                                                'Product Price : ',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.0,
@@ -703,7 +702,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                     width: 1.0,
                                                   ),
                                                 ),
-                                                child: Text(selectedPrice),
+                                                child: Text(selectedPrice.split(':').last),
                                               );
                                             },
                                           ),
@@ -716,14 +715,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           SizedBox(
                                             height: 30,
                                           ),
-
-                                          // Text(
-                                          //   'Codes and Prices:',
-                                          //   style: TextStyle(
-                                          //     fontWeight: FontWeight.bold,
-                                          //     fontSize: 18,
-                                          //   ),
-                                          // ),
                                           Wrap(
                                             spacing:
                                                 8.0, // Adjust the spacing between buttons as needed
@@ -922,7 +913,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       final imageUrl =
                                                           // selectedThumbnailProvider
                                                           //         .selectedThumbnail ??
-                                                              thumbnail;
+                                                          thumbnail;
                                                       final productName =
                                                           textpass;
                                                       final cartProvider =

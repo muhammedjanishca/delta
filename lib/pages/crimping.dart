@@ -33,7 +33,7 @@ class _CrimpingToolPageState extends State<CrimpingToolPage> {
         future: context.read<DataProvider>().newcrimpingtool,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {

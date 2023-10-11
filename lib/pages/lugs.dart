@@ -31,7 +31,7 @@ class _LugsPageState extends State<LugsPage> {
         future: context.read<DataProvider>().newlugs,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {

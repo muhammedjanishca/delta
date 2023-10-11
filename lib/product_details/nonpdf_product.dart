@@ -36,7 +36,7 @@ class Nopdf extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -390,7 +390,7 @@ class Nopdf extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {

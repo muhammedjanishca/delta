@@ -46,7 +46,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -172,7 +172,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                 // color: Colors.amber,
 
                                                 child: Text(
-                                                  'selected Product code&Price:',
+                                                  'Selected Product code&Price:',
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -559,7 +559,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             print("hgfghfhfgu");
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {

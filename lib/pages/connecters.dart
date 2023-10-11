@@ -32,7 +32,7 @@ class _ConnectersPageState extends State<ConnectersPage> {
         future: context.read<DataProvider>().newconnecters,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
