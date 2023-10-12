@@ -10,13 +10,18 @@ import 'package:flutter/material.dart';
 class QuotationPage extends StatelessWidget {
   // final List<User> cartItems;
   final double totalPrice;
-  final cartItems; // Update the type if needed
+  final cartItems;
+  final totalPriceWithVAT;
+  final vat; // Update the type if needed
 
-  QuotationPage({required this.cartItems, required this.totalPrice});
+  QuotationPage(
+      {required this.cartItems,
+      required this.totalPrice,
+      required this.vat,
+      required this.totalPriceWithVAT});
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Column(
         children: [
@@ -48,7 +53,7 @@ class QuotationPage extends StatelessWidget {
                   padding: EdgeInsets.all(16.0),
                   child: Center(
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       padding: EdgeInsets.only(top: 20.0),
                       child: _buildQuotationTable(),
                     ),
@@ -73,7 +78,8 @@ class QuotationPage extends StatelessWidget {
 
   Widget _buildQuotationTable() {
     return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
+      scrollDirection: Axis.horizontal,
+      
       child: Container(
         // width: double.infinity,
         // decoration: BoxDecoration(
@@ -83,145 +89,219 @@ class QuotationPage extends StatelessWidget {
 
         child: Column(
           children: [
-            DataTable(
-              columnSpacing: 10.0,
-              dividerThickness: 2,
-              headingRowColor: MaterialStateColor.resolveWith(
-                (states) => Color.fromARGB(255, 76, 138, 131),
-              ),
-              dataRowMaxHeight: 50,
-              headingRowHeight: 60,
-              horizontalMargin: 10,
-              columns: [
-                // DataColumn(
-                //   label: _buildTableCell('SINO'),
-                //   tooltip: 'Serial Number',
-                // ),
-                DataColumn(
-                  label: _buildTableCell(
-                    'Description',
+            Container(
+              child: DataTable(
+                columnSpacing: 10.0,
+                dividerThickness: 2,
+                headingRowColor: MaterialStateColor.resolveWith(
+                  (states) => Color.fromARGB(255, 76, 138, 131),
+                ),
+                dataRowMaxHeight: 60,
+                headingRowHeight: 60,
+                horizontalMargin: 10,
+                columns: [
+                  // DataColumn(
+                  //   label: _buildTableCell('SINO'),
+                  //   tooltip: 'Serial Number',
+                  // ),
+                  DataColumn(
+                    label: _buildTableCell(
+                      'Description',
+                    ),
+                    tooltip: 'Product Description',
                   ),
-                  tooltip: 'Product Description',
-                ),
-                DataColumn(
-                  label: _buildTableCell('code '),
-                  tooltip: 'Product Description',
-                ),
-                DataColumn(
-                  label: _buildTableCell('Quantity'),
-                  tooltip: 'Product Quantity',
-                ),
-                DataColumn(
-                  label: _buildTableCell('Unit'),
-                  tooltip: 'Unit',
-                ),
-                DataColumn(
-                  label: _buildTableCell('Price'),
-                  tooltip: 'Price per Unit',
-                ),
-                DataColumn(
-                  label: _buildTableCell('Total Amount'),
-                  tooltip: 'Total Amount',
-                ),
-              ],
-              rows: [
-                for (var i = 0; i < cartItems.length; i++)
-                  DataRow(
-                    color: MaterialStateColor.resolveWith((states) =>
-                        i % 2 == 0 ? Colors.white : Colors.transparent),
-                    cells: [
-                      // DataCell(_buildTableCell('${i + 1}')),
-                      DataCell(_buildTableCell(
-                          jsonDecode(cartItems[i])['productName'])),
-                      DataCell(_buildTableCell(
-                          jsonDecode(cartItems[i])['productCode'])),
+                  DataColumn(
+                    label: _buildTableCell('code '),
+                    tooltip: 'Product Description',
+                  ),
+                  DataColumn(
+                    label: _buildTableCell('Quantity'),
+                    tooltip: 'Product Quantity',
+                  ),
+                  DataColumn(
+                    label: _buildTableCell('Unit'),
+                    tooltip: 'Unit',
+                  ),
+                  DataColumn(
+                    label: _buildTableCell('Price'),
+                    tooltip: 'Price per Unit',
+                  ),
+                  DataColumn(
+                    label: _buildTableCell('Total Amount'),
+                    tooltip: 'Total Amount',
+                  ),
+                ],
+                rows: [
+                  for (var i = 0; i < cartItems.length; i++)
+                    DataRow(
+                      color: MaterialStateColor.resolveWith((states) =>
+                          i % 2 == 0 ? Colors.white : Colors.transparent),
+                      cells: [
+                        // DataCell(_buildTableCell('${i + 1}')),
+                        DataCell(_buildTableCell(
+                            jsonDecode(cartItems[i])['productName'])),
+                        DataCell(_buildTableCell(
+                            jsonDecode(cartItems[i])['productCode'])),
 
-                      DataCell(_buildTableCell(
-                          '${jsonDecode(cartItems[i])['quantity']}')),
-                      DataCell(_buildTableCell('unit')),
-                      DataCell(
-                        _buildTableCell(
-                            '\$${jsonDecode(cartItems[i])['price']}',
-                            fontWeight: FontWeight.bold),
+                        DataCell(_buildTableCell(
+                            '${jsonDecode(cartItems[i])['quantity']}')),
+                        DataCell(_buildTableCell('unit')),
+                        DataCell(
+                          _buildTableCell(
+                              '\$${jsonDecode(cartItems[i])['price']}',
+                              fontWeight: FontWeight.bold),
+                        ),
+                        DataCell(_buildTableCell(
+                            '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
+                      ],
+                    ),
+                  // Total Amount Row
+                  // DataRow(
+                  //   color: MaterialStateColor.resolveWith(
+                  //       (states) => const Color.fromARGB(0, 208, 9, 9)),
+                  //   cells: [
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(
+                  //       _buildTableCell('Total Amount:',
+                  //           fontWeight: FontWeight.bold),
+                  //     ),
+                  //     DataCell(_buildTableCell(
+                  //         '\$${totalPrice.toStringAsFixed(2)}',
+                  //         fontWeight: FontWeight.bold)),
+                  //   ],
+                  // ),
+                  //  // NET BEFORE VAT Row
+                  // DataRow(
+                  //   color: MaterialStateColor.resolveWith(
+                  //       (states) => const Color.fromARGB(0, 208, 9, 9)),
+                  //   cells: [
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(
+                  //       _buildTableCell('NET BEFORE VAT:',
+                  //           fontWeight: FontWeight.bold),
+                  //     ),
+                  //     DataCell(_buildTableCell(
+                  //         '\$${totalPrice.toStringAsFixed(2)}',
+                  //         fontWeight: FontWeight.bold)),
+                  //   ],
+                  // ),
+                  //  // VAT Row
+                  // DataRow(
+                  //   color: MaterialStateColor.resolveWith(
+                  //       (states) => const Color.fromARGB(0, 208, 9, 9)),
+                  //   cells: [
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(
+                  //       _buildTableCell('VAT:',
+                  //           fontWeight: FontWeight.bold),
+                  //     ),
+                  //     DataCell(_buildTableCell(
+                  //         '\$${15}',
+                  //         fontWeight: FontWeight.bold)),
+                  //   ],
+                  // ),
+                  //  // Total WITH VAT Row
+                  // DataRow(
+                  //   color: MaterialStateColor.resolveWith(
+                  //       (states) => const Color.fromARGB(0, 208, 9, 9)),
+                  //   cells: [
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(_buildTableCell('')),
+                  //     DataCell(
+                  //       _buildTableCell('Total WITH VAT:',
+                  //           fontWeight: FontWeight.bold),
+                  //     ),
+                  //     DataCell(_buildTableCell(
+                  //         '\$${totalPrice.toStringAsFixed(2)}',
+                  //         fontWeight: FontWeight.bold)),
+                  //   ],
+                  // ),
+                ],
+              ),
+            ),
+            //*****_______GANERATE QUATATION TOTAL AMOUNT CONTAINER____********
+            Row(
+              children: [
+                SizedBox(
+                  width: 600,
+                  height: 200,
+                ),
+                Container(
+                  width: 264,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(width: 1)),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildTableCell('Total Amount:',
+                              fontWeight: FontWeight.bold),
+                          _buildTableCell('\$${totalPrice.toStringAsFixed(2)}',
+                              fontWeight: FontWeight.bold)
+                        ],
                       ),
-                      DataCell(_buildTableCell(
-                          '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
+                      Divider(
+                        indent: 20,
+                        endIndent: 20,
+                        color: const Color.fromARGB(255, 108, 106, 106),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildTableCell('NET BEFORE VAT:',
+                              fontWeight: FontWeight.bold),
+                          _buildTableCell('\$${totalPrice.toStringAsFixed(2)}',
+                              fontWeight: FontWeight.bold)
+                        ],
+                      ),
+                      Divider(
+                        indent: 20,
+                        endIndent: 20,
+                        color: const Color.fromARGB(255, 108, 106, 106),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildTableCell('VAT:', fontWeight: FontWeight.bold),
+                          _buildTableCell('\$${vat.toStringAsFixed(2)}',
+                              fontWeight: FontWeight.bold)
+                        ],
+                      ),
+                      Divider(
+                        indent: 20,
+                        endIndent: 20,
+                        color: const Color.fromARGB(255, 108, 106, 106),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildTableCell('Total WITH VAT:',
+                              fontWeight: FontWeight.bold),
+                          _buildTableCell(
+                              '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                              fontWeight: FontWeight.bold)
+                        ],
+                      )
                     ],
                   ),
-                // Total Amount Row
-                DataRow(
-                  color: MaterialStateColor.resolveWith(
-                      (states) => const Color.fromARGB(0, 208, 9, 9)),
-                  cells: [
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(_buildTableCell('')),
-                    DataCell(
-                      _buildTableCell('Total Amount:',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    DataCell(_buildTableCell(
-                        '\$${totalPrice.toStringAsFixed(2)}',
-                        fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                //  // NET BEFORE VAT Row
-                // DataRow(
-                //   color: MaterialStateColor.resolveWith(
-                //       (states) => const Color.fromARGB(0, 208, 9, 9)),
-                //   cells: [
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(
-                //       _buildTableCell('NET BEFORE VAT:',
-                //           fontWeight: FontWeight.bold),
-                //     ),
-                //     DataCell(_buildTableCell(
-                //         '\$${totalPrice.toStringAsFixed(2)}',
-                //         fontWeight: FontWeight.bold)),
-                //   ],
-                // ),
-                //  // VAT Row
-                // DataRow(
-                //   color: MaterialStateColor.resolveWith(
-                //       (states) => const Color.fromARGB(0, 208, 9, 9)),
-                //   cells: [
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(
-                //       _buildTableCell('VAT:',
-                //           fontWeight: FontWeight.bold),
-                //     ),
-                //     DataCell(_buildTableCell(
-                //         '\$${15}',
-                //         fontWeight: FontWeight.bold)),
-                //   ],
-                // ),
-                //  // Total WITH VAT Row
-                // DataRow(
-                //   color: MaterialStateColor.resolveWith(
-                //       (states) => const Color.fromARGB(0, 208, 9, 9)),
-                //   cells: [
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(_buildTableCell('')),
-                //     DataCell(
-                //       _buildTableCell('Total WITH VAT:',
-                //           fontWeight: FontWeight.bold),
-                //     ),
-                //     DataCell(_buildTableCell(
-                //         '\$${totalPrice.toStringAsFixed(2)}',
-                //         fontWeight: FontWeight.bold)),
-                //   ],
-                // ),
+                )
               ],
-            ),
+            )
+            //*********________END_______********* */
           ],
         ),
       ),
@@ -242,5 +322,4 @@ class QuotationPage extends StatelessWidget {
       ),
     );
   }
-
 }

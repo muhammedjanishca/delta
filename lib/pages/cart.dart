@@ -18,6 +18,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return ResponsiveCart(
       desktopCart: DeskCart(),
       mobileCart: Mobilecart(),
@@ -40,6 +41,11 @@ class _DeskCartState extends State<DeskCart> {
     final cartProvider = Provider.of<CartProvider>(context);
     cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
+    double subtotal = cartProvider.getTotalPrice();
+    double vatRate = 15.0;
+    double vat = cartProvider.calculateVAT(subtotal, vatRate);
+    double totalPriceWithVAT =
+        cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -81,9 +87,11 @@ class _DeskCartState extends State<DeskCart> {
                       ),
                       Expanded(
                         child: ListView.separated(
+                         
+                           physics: const ScrollPhysics(),
                           itemCount: cartItems["cartItems"].length,
                           separatorBuilder: (context, index) =>
-                              Divider(height: 88, color: Colors.grey),
+                              const Divider(height: 88, color: Colors.grey),
                           itemBuilder: (context, index) {
                             final item =
                                 jsonDecode(cartItems["cartItems"][index]);
@@ -289,16 +297,10 @@ class _DeskCartState extends State<DeskCart> {
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                             ),
-
-                            // SizedBox(height: 45),
                             ListTile(
-                              title: Text('VAT'),
-                              // trailing: Text('\$ ${totalPrice.toStringAsFixed(2)}'),
+                              title: Text('VAT (${vatRate}%)'),
+                              trailing: Text('\$${vat.toStringAsFixed(2)}'),
                             ),
-
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
                             Divider(
                               height:
                                   1, // Adjust the height of the divider as needed
@@ -312,12 +314,12 @@ class _DeskCartState extends State<DeskCart> {
                             ),
                             ListTile(
                               title: Text(
-                                'Total Price',
+                                'Total Price (with VAT)',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                               trailing: Text(
-                                '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                '\$${totalPriceWithVAT.toStringAsFixed(2)}',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
@@ -343,7 +345,9 @@ class _DeskCartState extends State<DeskCart> {
                                             totalPrice:
                                                 cartProvider.getTotalPrice(),
                                             cartItems:
-                                                cartItems["cartItems"])));
+                                                cartItems["cartItems"],
+                                                 totalPriceWithVAT: cartProvider.getTotalPriceWithVAT(subtotal, vatRate),
+                                                 vat: cartProvider.calculateVAT(subtotal, vatRate),)));
                               },
                               child: Text(
                                 'GANERATE QUATATION',
@@ -363,22 +367,6 @@ class _DeskCartState extends State<DeskCart> {
                             SizedBox(
                               width: 40,
                             ),
-                            // ElevatedButton(
-                            //   onPressed: () {
-                            //     // Navigator.pushNamed(
-                            //     //     context, '/cart');
-                            //   },
-                            //   child: Text(
-                            //     'CHECKOUT',
-                            //     style: TextStyle(color: Colors.black),
-                            //   ),
-                            //   style: ButtonStyle(
-                            //     backgroundColor:
-                            //         MaterialStateProperty.all(Colors.white),
-                            //     minimumSize:
-                            //         MaterialStateProperty.all(Size(150, 55)),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -491,14 +479,15 @@ class _MobilecartState extends State<Mobilecart> {
                                         MediaQuery.of(context).size.width / 30,
                                   ),
                                   SizedBox(
-                                    height: MediaQuery.of(context).size.height /
-                                        8,
+                                    height:
+                                        MediaQuery.of(context).size.height / 8,
                                     width:
                                         MediaQuery.of(context).size.width / 1.5,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           '${item["productName"]}',
@@ -639,7 +628,7 @@ class _MobilecartState extends State<Mobilecart> {
 
               // flex: 2,
               SizedBox(
-                height: MediaQuery.of(context).size.height/3,
+                height: MediaQuery.of(context).size.height / 3,
                 child: Row(
                   children: [
                     SizedBox(
@@ -751,7 +740,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
     // cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
-
+ double subtotal = cartProvider.getTotalPrice();
+    double vatRate = 15.0;
+    double vat = cartProvider.calculateVAT(subtotal, vatRate);
+    double totalPriceWithVAT =
+        cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
     return BottomAppBar(
       child: Container(
         color: Colors.black,
@@ -778,6 +771,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       builder: (context) => QuotationPage(
                         totalPrice: cartProvider.getTotalPrice(),
                         cartItems: cartItems["cartItems"],
+                         totalPriceWithVAT: cartProvider.getTotalPriceWithVAT(subtotal, vatRate), 
+                        vat: cartProvider.calculateVAT(subtotal, vatRate),
                       ),
                     ),
                   );
@@ -812,50 +807,48 @@ class MobileBottomNavigationBaru extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
                 color: janishcolor,
-                
               ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuotationPage(
-                        totalPrice: cartProvider.getTotalPrice(),
-                        cartItems: cartItems["cartItems"],
-                      ),
-                    ),
-                  );
-                },
-                child: Text(
-                  'GENERATE QUOTATION',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+              // child: TextButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => QuotationPage(
+              //           totalPrice: cartProvider.getTotalPrice(),
+              //           cartItems: cartItems["cartItems"],
+              //         ),
+              //       ),
+              //     );
+              //   },
+              //   child: Text(
+              //     'GENERATE QUOTATION',
+              //     style: TextStyle(color: Colors.white),
+              //   ),
+              // ),
             ),
-             Container(
+            Container(
               height: 50,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
-                color:Colors.black,
-                
+                color: Colors.black,
               ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuotationPage(
-                        totalPrice: cartProvider.getTotalPrice(),
-                        cartItems: cartItems["cartItems"],
-                      ),
-                    ),
-                  );
-                },
-                child: Text(
-                  'GENERATE QUOTATION',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+              // child: TextButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => QuotationPage(
+              //           totalPrice: cartProvider.getTotalPrice(),
+              //           cartItems: cartItems["cartItems"],
+              //         ),
+              //       ),
+              //     );
+              //   },
+              //   child: Text(
+              //     'GENERATE QUOTATION',
+              //     style: TextStyle(color: Colors.white),
+              //   ),
+              // ),
             )
           ],
         ),

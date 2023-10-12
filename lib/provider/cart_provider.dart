@@ -54,13 +54,30 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  double getTotalPrice() {
-    double totalPrice = 0.0;
-    for (var item in fetchedItems["cartItems"]) {
-      totalPrice += jsonDecode(item)["price"] * jsonDecode(item)["quantity"];
-    }
-    return totalPrice;
+  // double getTotalPrice() {
+  //   double totalPrice = 0.0;
+  //   for (var item in fetchedItems["cartItems"]) {
+  //     totalPrice += jsonDecode(item)["price"] * jsonDecode(item)["quantity"];
+  //   }
+  //   return totalPrice;
+  // }
+ double getTotalPrice() {
+  double totalPrice = 0.0;
+  for (var item in fetchedItems["cartItems"]) {
+    totalPrice += jsonDecode(item)["price"] * jsonDecode(item)["quantity"];
   }
+  return totalPrice;
+}
+
+double calculateVAT(double subtotal, double vatRate) {
+  return subtotal * (vatRate / 100);
+}
+
+double getTotalPriceWithVAT(double subtotal, double vatRate) {
+  double vat = calculateVAT(subtotal, vatRate);
+  return subtotal + vat;
+}
+
 
   void updateQuantity(int productIndex, int newQuantity) async {
     await getCartData();

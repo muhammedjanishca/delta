@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../login_and_signing/signup_page.dart';
+import '../model.dart';
 import '../provider/cart_provider.dart';
 import '../provider/data_provider.dart';
 import '../provider/thumbnail.dart';
@@ -12,6 +13,7 @@ import 'accessories_product.dart';
 class Nopdf extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
   String? typeOfProduct;
+
   Nopdf({this.typeOfProduct});
   // Nopdf({required this.productData, required this.selectedIndex});
   @override
@@ -30,7 +32,7 @@ class Nopdf extends StatelessWidget {
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-      mobileProductPage:FutureBuilder(
+      mobileProductPage: FutureBuilder(
         future: context.read<DataProvider>().setTypeOfProducts(typeOfProduct),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
@@ -40,17 +42,20 @@ class Nopdf extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].productName;
-            var thumbnail = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-            var description =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].description;
-            var price =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-            var priceofproduct =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].priceofproduct;
-            var image = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].images;
-            var pdf = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            var textpass = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].productName;
+            var thumbnail = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+            var description = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].description;
+            var price = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+            var priceofproduct = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].priceofproduct;
+            var image = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+            var pdf = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
             //  String selectedPrice = '';
 
@@ -288,7 +293,8 @@ class Nopdf extends StatelessWidget {
                                                 final productCode = textpass;
                                                 print(
                                                     'ooooooooooooooooooooooooo');
-                                                final price = double.parse(priceofproduct!);
+                                                final price = double.parse(
+                                                    priceofproduct!);
 
                                                 final quantity = int.tryParse(
                                                         quantityController
@@ -298,7 +304,7 @@ class Nopdf extends StatelessWidget {
                                                 final imageUrl =
                                                     // selectedThumbnailProvider
                                                     //         .selectedThumbnail ??
-                                                        thumbnail;
+                                                    thumbnail;
                                                 final productName = textpass;
 
                                                 final cartProvider =
@@ -383,7 +389,6 @@ class Nopdf extends StatelessWidget {
           }
         },
       ),
- 
       desktopProductPage: FutureBuilder(
         future: context.read<DataProvider>().setTypeOfProducts(typeOfProduct),
         builder: (context, snapshot) {
@@ -394,18 +399,116 @@ class Nopdf extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].productName;
-            var thumbnail = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-            var description =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].description;
-            var price =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-            var priceofproduct =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].priceofproduct;
-            var image = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].images;
-            var pdf = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            print("knnkjn");
+            String? textpass;
+            String? thumbnail;
+            String description = "";
+            String? priceofproduct;
+            List<CodesAndPrice>? price;
+            List<String> image = [];
+            String? pdf;
 
+            //  selectedThumbnailProvider.setSelectedThumbnail(snapshot.data!.data.map((e) {
+            //       // print(e.productName);
+            //       if (e.productName == product_name) {
+            //         return e.thumbnail;
+            //       }
+            //     }).first!,
+            //     index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
+            //     );
+            if (selectedThumbnailProvider.selectedIndex != null) {
+              textpass = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].productName;
+              thumbnail = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+              description = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .description ??
+                  "";
+              priceofproduct = snapshot
+                  .data!
+                  .data[selectedThumbnailProvider.selectedIndex!]
+                  .priceofproduct!;
+              price = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice;
+              image = snapshot.data!
+                      .data[selectedThumbnailProvider.selectedIndex!].images ??
+                  [];
+              pdf = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            } else {
+              print("kghjgh");
+              // print(snapshot.data!.data[0].description);
+              // selectedThumbnailProvider.setSelectedThumbnail(snapshot.data!.data.map((e) {
+              //     // print(e.productName);
+              //     if (e.productName == product_name) {
+              //       return e.thumbnail;
+              //     }
+              //   }).first!,
+              //   index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
+              //   );
+
+              // print(snapshot.data!.data.map((e) {
+              //   // print(e.productName);
+              //   if (e.productName == product_name) {
+              //     return e.productName;
+              //   }
+              // }));
+
+              // print(object)
+              // print(snapshot.data!.data[0].productName);
+              // for (int i = 0; i < snapshot.data!.data.length; i++) {
+              //   print(snapshot.data!.data[i].productName);
+              //   print("kjhk");
+              // }
+              textpass = snapshot.data!.data.map((e) {
+                print(snapshot.data!.data.length);
+                print(e.productName);
+                print("njnjgf");
+                if (e.productName == product_name) {
+                  print("kjhk");
+                  return e.productName;
+                }
+              }).first;
+              // print(textpass);
+              // print(product_name);
+              thumbnail = snapshot.data!.data.map((e) {
+                // print(e.productName);
+                if (e.productName == product_name) {
+                  return e.thumbnail;
+                }
+              }).first;
+              description = snapshot.data!.data.map((e) {
+                    // print(e.productName);
+                    if (e.productName == product_name) {
+                      return e.description;
+                    }
+                  }).first ??
+                  "";
+              price = snapshot.data!.data.map((e) {
+                // print(e.productName);
+                if (e.productName == product_name) {
+                  e.codesAndPrice!.map((e) => e);
+                }
+              }).first;
+              // print(price!.length);
+              image = snapshot.data!.data.map((e) {
+                    // print(e.productName);
+                    if (e.productName == product_name) {
+                      e.images!.map((e) => e);
+                    }
+                  }).first ??
+                  [];
+              // print("kjhn");
+              // print(image!.length);
+              pdf = snapshot.data!.data.map((e) {
+                // print(e.productName);
+                if (e.productName == product_name) {
+                  return e.pdf;
+                }
+              }).first;
+            }
             //  String selectedPrice = '';
 
             return
@@ -443,7 +546,7 @@ class Nopdf extends StatelessWidget {
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
-                                    children: image!.map((imageUrl) {
+                                    children: image.map((imageUrl) {
                                       return GestureDetector(
                                         onTap: () {
                                           // When an image is clicked, set it as the selected thumbnail.
@@ -642,7 +745,8 @@ class Nopdf extends StatelessWidget {
                                                 final productCode = textpass;
                                                 print(
                                                     'ooooooooooooooooooooooooo');
-                                                final price = double.parse(priceofproduct!);
+                                                final price = double.parse(
+                                                    priceofproduct!);
 
                                                 final quantity = int.tryParse(
                                                         quantityController
@@ -652,7 +756,7 @@ class Nopdf extends StatelessWidget {
                                                 final imageUrl =
                                                     // selectedThumbnailProvider
                                                     //         .selectedThumbnail ??
-                                                        thumbnail;
+                                                    thumbnail;
                                                 final productName = textpass;
 
                                                 final cartProvider =

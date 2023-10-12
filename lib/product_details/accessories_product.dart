@@ -17,6 +17,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
   ProductDetailsOfAccessories({super.key});
+  
+
   // ProductDetails({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     TextEditingController quantityController = TextEditingController();
+    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
@@ -857,40 +860,38 @@ class ProductDetailsOfAccessories extends StatelessWidget {
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 20.0),
-                                            Container(
-                                              height: 40,
-                                              width: 140,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                border: Border.all(
-                                                  color: Colors
-                                                      .black, // Set the border color
-                                                  width:
-                                                      1.0, // Set the border width
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(
-                                                        4.0)), // Add border radius
-                                              ),
-                                              child: TextFormField(
-                                                controller: quantityController,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                textAlign: TextAlign.center,
-                                                decoration: InputDecoration(
-                                                  hintText: 'Enter quantity',
-                                                  contentPadding:
-                                                      EdgeInsets.symmetric(
-                                                    vertical: 8.0,
-                                                    horizontal: 8.0,
+                                            Form(
+                                                key: _formKey,
+                                                child: Container(
+                                                  // height:
+                                                  // MediaQuery.of(context).size.height/18,
+                                                  width:200,
+                                                  //  MediaQuery.of(context).size.width/10,
+                                                  child: TextFormField(
+                                                    controller: quantityController,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                      border: OutlineInputBorder(),
+                                                      hintText:
+                                                          'Enter the quantity',
+                                                    ),
+                                                    validator: (value) {
+                                                      if (value!.isEmpty) {
+                                                        return 'Please enter a quantity';
+                                                      }
+                                                      int? quantity =
+                                                          int.tryParse(value);
+                                                      if (quantity == null ||
+                                                          quantity <= 0) {
+                                                        return 'Quantity must be a positive number';
+                                                      }
+                                                      return null; // Return null if the input is valid
+                                                    },
                                                   ),
-                                                  isDense: true,
-                                                  border: InputBorder
-                                                      .none, // Remove the default input border
                                                 ),
                                               ),
-                                            ),
-
+                                      
                                             SizedBox(
                                               height: 30,
                                             ),
@@ -900,59 +901,64 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   width: 30,
                                                 ),
                                                 ElevatedButton(
-                                                  onPressed: () {
-                                                    if (FirebaseAuth.instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      // signed in
-                                                      final selectedPrice =
-                                                          selectedPriceNotifier
-                                                              .value;
-                                                      final productCode =
-                                                          selectedPrice
-                                                              .split(': ')[0];
-                                                      final price = double
-                                                          .parse(selectedPrice
-                                                              .split(': ')[1]);
-
-                                                      final quantity = int.tryParse(
-                                                              quantityController
-                                                                  .text) ??
-                                                          0;
-                                                      final imageUrl =
-                                                          // selectedThumbnailProvider
-                                                          //         .selectedThumbnail ??
-                                                              thumbnail;
-                                                      final productName =
-                                                          textpass;
-                                                      final cartProvider =
-                                                          Provider.of<
-                                                                  CartProvider>(
-                                                              context,
-                                                              listen: false);
-                                                      cartProvider.addToCart(
-                                                          productCode,
-                                                          price,
-                                                          quantity,
-                                                          imageUrl ?? "",
-                                                          productName ?? "");
-
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(SnackBar(
-                                                              content: Text(
-                                                                  "Added to cart")));
-                                                    } else {
-                                                      // signed out
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  },
+                                                 onPressed: () {
+                                                        if (_formKey.currentState!
+                                                            .validate()) {
+                                                          if (FirebaseAuth.instance
+                                                                  .currentUser !=
+                                                              null) {
+                                                            // signed in
+                                                            final selectedPrice =
+                                                                selectedPriceNotifier
+                                                                    .value;
+                                                            final productCode =
+                                                                selectedPrice
+                                                                    .split(': ')[0];
+                                                            final price = double
+                                                                .parse(selectedPrice
+                                                                    .split(
+                                                                        ': ')[1]);
+                                                                                        
+                                                            final quantity =
+                                                                int.tryParse(
+                                                                        quantityController
+                                                                            .text) ??
+                                                                    0;
+                                                            final imageUrl =
+                                                                // selectedThumbnailProvider
+                                                                //         .selectedThumbnail ??
+                                                                thumbnail;
+                                                            final productName =
+                                                                textpass;
+                                                            final cartProvider =
+                                                                Provider.of<
+                                                                        CartProvider>(
+                                                                    context,
+                                                                    listen: false);
+                                                            cartProvider.addToCart(
+                                                                productCode,
+                                                                price,
+                                                                quantity,
+                                                                imageUrl ?? "",
+                                                                productName ?? "");
+                                                                                        
+                                                            ScaffoldMessenger.of(
+                                                                    context)
+                                                                .showSnackBar(SnackBar(
+                                                                    content: Text(
+                                                                        "Added to cart")));
+                                                          } else {
+                                                            // signed out
+                                                            showDialog(
+                                                              context: context,
+                                                              builder: (BuildContext
+                                                                  context) {
+                                                                return LoginPage(); // Your custom dialog widget
+                                                              },
+                                                            );
+                                                          }
+                                                        }
+                                                      },
                                                   child:
                                                       const Text('ADD TO CART'),
                                                   style: ButtonStyle(
