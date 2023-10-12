@@ -91,7 +91,6 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          
                                           Container(
                                             color: Colors.white,
                                             height: MediaQuery.of(context)
@@ -165,20 +164,38 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                           SizedBox(
                                             height: 30,
                                           ),
-                                           Padding(
-                                             padding: const EdgeInsets.only(bottom: 15,left:15),
-                                             child: Text(
-                                                      textpass ?? "",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 22),
-                                                    ),
-                                           ),
-                                           Divider(),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 15, left: 15),
+                                            child: Text(
+                                              textpass ?? "",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 22),
+                                            ),
+                                          ),
+                                          Divider(),
+                                          TextButton(
+                                              onPressed: () {
+                                                showBottomSheet(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return SingleChildScrollView(
+                                                        child: Container(
+                                            height: 1500,
+                                            color: const Color.fromARGB(
+                                                255, 230, 233, 235),
+                                            child: pdf != null
+                                                ? SfPdfViewer.network(pdf)
+                                                : Nopdf()
+                                            ),
+                                                      );
+                                                    });
+                                              },
+                                              child: Text("fgbhn")),
                                           Row(
                                             children: [
-                                             
                                               SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
@@ -266,7 +283,12 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                                   selectedCodeProvider
                                                                       .selectedProductCode
                                                               // codeAndPrice.productCode
-                                                              ? const Color.fromARGB(255, 3, 30, 52) // Set border color to blue for selected container
+                                                              ? const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  3,
+                                                                  30,
+                                                                  52) // Set border color to blue for selected container
                                                               : Colors
                                                                   .black, // Set border color to black for non-selected containers
                                                           width:
@@ -281,61 +303,67 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                         ),
                                                       ),
                                                     ),
-                                                  
                                                   );
                                                 }),
                                               ),
                                             ],
                                           ),
                                           SizedBox(
-                                            height: MediaQuery.of(context).size.height/20,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                20,
                                           ),
                                           Container(
                                             alignment: Alignment.bottomLeft,
-                                            child: Text("    DESCRIPTION :\n",style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600,
-                                            ),),
+                                            child: Text(
+                                              "    DESCRIPTION :\n",
+                                              style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
                                           ),
-                                         Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: description!
-                                                        .toUpperCase()
-                                                        .split('\n')
-                                                        .map((line) {
-                                                      return Row(
-                                                        children: [
-                                                          Icon(Icons.star,
-                                                              size:
-                                                                  10, // Adjust the size as needed
-                                                              color: Colors
-                                                                  .black // Adjust the color as needed
-                                                              ),
-                                                          SizedBox(
-                                                            width:
-                                                                8, // Add some space between the circle icon and text
-                                                          ),
-                                                          Flexible(
-                                                            child: Text(
-                                                              line,
-                                                              style: TextStyle(
-                                                                fontSize: 16,
-                                                              ),
-                                                              overflow: TextOverflow
-                                                                  .visible, // Handle text overflow
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    }).toList(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: description!
+                                                .toUpperCase()
+                                                .split('\n')
+                                                .map((line) {
+                                              return Row(
+                                                children: [
+                                                  Icon(Icons.star,
+                                                      size:
+                                                          10, // Adjust the size as needed
+                                                      color: Colors
+                                                          .black // Adjust the color as needed
+                                                      ),
+                                                  SizedBox(
+                                                    width:
+                                                        8, // Add some space between the circle icon and text
                                                   ),
-                                                   SizedBox(
-                                            height: MediaQuery.of(context).size.height/20,
+                                                  Flexible(
+                                                    child: Text(
+                                                      line,
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                      ),
+                                                      overflow: TextOverflow
+                                                          .visible, // Handle text overflow
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            }).toList(),
+                                          ),
+                                          SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                20,
                                           ),
                                         ],
-
                                       ),
                                     ),
                                   ),

@@ -1050,12 +1050,3 @@ class ProductDetailsOfAccessories extends StatelessWidget {
     );
   }
 }
-
-// class MobileProduct extends StatelessWidget {
-//   const MobileProduct({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }

@@ -1016,19 +1016,13 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                       // Tab 2 content goes here
                                       SingleChildScrollView(
                                         child: Container(
-                                            height: 1500,
+                                            // height: 300,
                                             color: const Color.fromARGB(
                                                 255, 230, 233, 235),
-                                            child: pdf != null
+                                            child: 
+                                            pdf != null
                                                 ? SfPdfViewer.network(pdf)
                                                 : Nopdf()
-                                            // PDFView(
-                                            //   filePath:
-                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                            //   // height: 300,   // Set the desired height for the PDF viewer
-                                            //   // width: 300,    // Set the desired width for the PDF viewer
-                                            // ),
-
                                             ),
                                       ),
                                     ],
@@ -1051,11 +1045,4 @@ class ProductDetailsOfConnectors extends StatelessWidget {
   }
 }
 
-// class MobileProduct extends StatelessWidget {
-//   const MobileProduct({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }

@@ -1027,34 +1027,34 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                        child: ListView.builder(
-                                            itemBuilder: (context, index) {
-                                          return Container(
-                                            child:pdf != null
-                                                  ? SfPdfViewer.network(pdf)
-                                                  : Nopdf() ,
-                                          );
-                                        }),
-                                      )
+                                      // Container(
+                                      //   child: ListView.builder(
+                                      //       itemBuilder: (context, index) {
+                                      //     return Container(
+                                      //       child:pdf != null
+                                      //             ? SfPdfViewer.network(pdf)
+                                      //             : Nopdf() ,
+                                      //     );
+                                      //   }),
+                                      // )
                                       // Tab 2 content goes here
-                                      // SingleChildScrollView(
-                                      //   child: Container(
-                                      //       height: 1500,
-                                      //       color: const Color.fromARGB(
-                                      //           255, 230, 233, 235),
-                                      //       child: pdf != null
-                                      //           ? SfPdfViewer.network(pdf)
-                                      //           : Nopdf()
-                                      //       PDFView(
-                                      //         filePath:
-                                      //             pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                      //         // height: 300,   // Set the desired height for the PDF viewer
-                                      //         // width: 300,    // Set the desired width for the PDF viewer
-                                      //       ),
+                                      SingleChildScrollView(
+                                        child: Container(
+                                            height: 1500,
+                                            color: const Color.fromARGB(
+                                                255, 230, 233, 235),
+                                            child: pdf != null
+                                                ? SfPdfViewer.network(pdf)
+                                                : Nopdf()
+                                            // PDFView(
+                                            //   filePath:
+                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
+                                            //   // height: 300,   // Set the desired height for the PDF viewer
+                                            //   // width: 300,    // Set the desired width for the PDF viewer
+                                            // ),
 
-                                      //       ),
-                                      // ),
+                                            ),
+                                      ),
                                     ],
                                   ),
                                 ),
