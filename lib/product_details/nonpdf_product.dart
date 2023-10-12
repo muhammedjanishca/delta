@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../login_and_signing/signup_page.dart';
@@ -18,9 +19,10 @@ class Nopdf extends StatelessWidget {
   Widget build(BuildContext context) {
     print("gfhjkl");
     print(typeOfProduct);
-    final userInputProvider = Provider.of<UserInputProvider>(context);
-    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    // final userInputProvider = Provider.of<UserInputProvider>(context);
+    // final cartProvider = Provider.of<CartProvider>(context, listen: false);
     TextEditingController quantityController = TextEditingController();
+    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
@@ -30,7 +32,7 @@ class Nopdf extends StatelessWidget {
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-      mobileProductPage:FutureBuilder(
+      mobileProductPage: FutureBuilder(
         future: context.read<DataProvider>().setTypeOfProducts(typeOfProduct),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
@@ -40,17 +42,20 @@ class Nopdf extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].productName;
-            var thumbnail = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-            var description =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].description;
-            var price =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-            var priceofproduct =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].priceofproduct;
-            var image = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].images;
-            var pdf = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            var textpass = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].productName;
+            var thumbnail = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+            var description = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].description;
+            var price = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+            var priceofproduct = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].priceofproduct;
+            var image = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+            var pdf = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
             //  String selectedPrice = '';
 
@@ -288,7 +293,8 @@ class Nopdf extends StatelessWidget {
                                                 final productCode = textpass;
                                                 print(
                                                     'ooooooooooooooooooooooooo');
-                                                final price = double.parse(priceofproduct!);
+                                                final price = double.parse(
+                                                    priceofproduct!);
 
                                                 final quantity = int.tryParse(
                                                         quantityController
@@ -298,7 +304,7 @@ class Nopdf extends StatelessWidget {
                                                 final imageUrl =
                                                     // selectedThumbnailProvider
                                                     //         .selectedThumbnail ??
-                                                        thumbnail;
+                                                    thumbnail;
                                                 final productName = textpass;
 
                                                 final cartProvider =
@@ -383,7 +389,6 @@ class Nopdf extends StatelessWidget {
           }
         },
       ),
- 
       desktopProductPage: FutureBuilder(
         future: context.read<DataProvider>().setTypeOfProducts(typeOfProduct),
         builder: (context, snapshot) {
@@ -394,17 +399,20 @@ class Nopdf extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].productName;
-            var thumbnail = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-            var description =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].description;
-            var price =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-            var priceofproduct =
-                snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].priceofproduct;
-            var image = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].images;
-            var pdf = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            var textpass = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].productName;
+            var thumbnail = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+            var description = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].description;
+            var price = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+            var priceofproduct = snapshot.data!
+                .data[selectedThumbnailProvider.selectedIndex!].priceofproduct;
+            var image = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+            var pdf = snapshot
+                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
             //  String selectedPrice = '';
 
@@ -591,128 +599,152 @@ class Nopdf extends StatelessWidget {
 
                                       // SizedBox(height: 8.0),
                                       SizedBox(height: 20.0),
-                                      Container(
-                                        height: 40,
-                                        width: 140,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                            color: Colors
-                                                .black, // Set the border color
-                                            width: 1.0, // Set the border width
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(
-                                                  4.0)), // Add border radius
-                                        ),
-                                        child: TextFormField(
-                                          controller: quantityController,
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          decoration: InputDecoration(
-                                            hintText: 'Enter quantity',
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                              vertical: 8.0,
-                                              horizontal: 8.0,
-                                            ),
-                                            isDense: true,
-                                            border: InputBorder
-                                                .none, // Remove the default input border
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
                                       Row(
                                         children: [
                                           SizedBox(
-                                            width: 30,
+                                            width: 20,
                                           ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              if (FirebaseAuth
-                                                      .instance.currentUser !=
-                                                  null) {
-                                                // signed in
-                                                final selectedPrice =
-                                                    selectedPriceNotifier.value;
+                                          Form(
+                                            key: _formKey,
+                                            child: Container(
+                                              width: 200,
+                                              child: TextFormField(
+                                                controller: quantityController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  hintText:
+                                                      'Enter the quantity',
+                                                ),
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return 'Please enter a quantity';
+                                                  }
+                                                  int? quantity =
+                                                      int.tryParse(value);
+                                                  if (quantity == null ||
+                                                      quantity <= 0) {
+                                                    return 'Quantity must be a positive number';
+                                                  }
+                                                  return null; // Return null if the input is valid
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
 
-                                                final productCode = textpass;
-                                                print(
-                                                    'ooooooooooooooooooooooooo');
-                                                final price = double.parse(priceofproduct!);
+                                      SizedBox(
+                                        height: 30,
+                                      ),
 
-                                                final quantity = int.tryParse(
-                                                        quantityController
-                                                            .text) ??
-                                                    0;
-
-                                                final imageUrl =
-                                                    // selectedThumbnailProvider
-                                                    //         .selectedThumbnail ??
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          SizedBox(
+                                             width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  if (FirebaseAuth
+                                                          .instance.currentUser !=
+                                                      null) {
+                                                    // signed in
+                                                    final selectedPrice =
+                                                        selectedPriceNotifier
+                                                            .value;
+                                          
+                                                    final productCode = textpass;
+                                                    print(
+                                                        'ooooooooooooooooooooooooo');
+                                                    final price = double.parse(
+                                                        priceofproduct!);
+                                          
+                                                    final quantity = int.tryParse(
+                                                            quantityController
+                                                                .text) ??
+                                                        0;
+                                          
+                                                    final imageUrl =
+                                                        // selectedThumbnailProvider
+                                                        //         .selectedThumbnail ??
                                                         thumbnail;
-                                                final productName = textpass;
-
-                                                final cartProvider =
-                                                    Provider.of<CartProvider>(
-                                                        context,
-                                                        listen: false);
-
-                                                print(
-                                                    'ooooooooooooooooooooo   $textpass');
-                                                cartProvider.addToCart(
-                                                    productCode ?? "",
-                                                    price,
-                                                    quantity,
-                                                    imageUrl ?? "",
-                                                    productName ?? "");
-
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                        content: Text(
-                                                            "Added to cart")));
-                                              } else {
-                                                // signed out
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          SignUpPage(),
-                                                    ));
-                                              }
-                                            },
-                                            child: const Text('ADD TO CART'),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.black),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(150, 50)),
+                                                    final productName = textpass;
+                                          
+                                                    final cartProvider =
+                                                        Provider.of<CartProvider>(
+                                                            context,
+                                                            listen: false);
+                                          
+                                                    print(
+                                                        'ooooooooooooooooooooo   $textpass');
+                                                    cartProvider.addToCart(
+                                                        productCode ?? "",
+                                                        price,
+                                                        quantity,
+                                                        imageUrl ?? "",
+                                                        productName ?? "");
+                                          
+                                                    ScaffoldMessenger.of(context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Added to cart")));
+                                                  } else {
+                                                    // signed out
+                                                    showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (BuildContext context) {
+                                                        return LoginPage(); // Your custom dialog widget
+                                                      },
+                                                    );
+                                                  }
+                                                }
+                                              },
+                                              child: const Text('ADD TO CART'),
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.black),
+                                                minimumSize:
+                                                    MaterialStateProperty.all(
+                                                        Size(150, 50)),
+                                              ),
                                             ),
                                           ),
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pushNamed(
-                                                  context, '/cart');
-                                            },
-                                            child: const Text(
-                                              'GO TO CART',
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.white),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(150, 50)),
+                                          SizedBox(
+                                             width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pushNamed(
+                                                    context, '/cart');
+                                              },
+                                              child: const Text(
+                                                'GO TO CART',
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.white),
+                                                minimumSize:
+                                                    MaterialStateProperty.all(
+                                                        Size(150, 50)),
+                                              ),
                                             ),
                                           ),
                                         ],
