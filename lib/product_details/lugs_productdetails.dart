@@ -13,31 +13,23 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsoflugs extends StatelessWidget {
-  // ProductDetailsoflugs({selectedProductIndex)}
-  //  final int selectedProductIndex ;
+
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
   ProductDetailsoflugs({super.key});
-  // ProductDetails({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
-    // print("janishkuttan");
-    // final userInputProvider = Provider.of<UserInputProvider>(context);
-    // final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    
     TextEditingController quantityController = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-    String selectedProductIndex =
-        ModalRoute.of(context)!.settings.name as String;
-    var setting_list = selectedProductIndex.split('/');
-    String product_name = setting_list[2];
-    print(product_name);
-    print("hgfhf");
-
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
+    final selectedThumbnailProvider = Provider.of<SelectedThumbnailProvider>(context);
 
-    final selectedThumbnailProvider =
-        Provider.of<SelectedThumbnailProvider>(context);
+    String selectedProductIndex = ModalRoute.of(context)!.settings.name as String;
+    var setting_list = selectedProductIndex.split('/');
+    String product_name = setting_list[2].replaceAll('_', " ");
+
+
     return ResponsiveProductPage(
       //******************MOBILE VIEW****************************
 
@@ -568,9 +560,9 @@ class ProductDetailsoflugs extends StatelessWidget {
         future: context.read<DataProvider>().fetchLugsData(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
-          print("jhjhh");
+          // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
-            print("hgfghfhfgu");
+            // print("hgfghfhfgu");
             return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -581,7 +573,7 @@ class ProductDetailsoflugs extends StatelessWidget {
             List<CodesAndPrice>? price = [];
             List<String>? image = [];
             String? pdf;
-            
+
             //  selectedThumbnailProvider.setSelectedThumbnail(snapshot.data!.data.map((e) {
             //       // print(e.productName);
             //       if (e.productName == product_name) {
@@ -615,58 +607,21 @@ class ProductDetailsoflugs extends StatelessWidget {
               //   }).first!,
               //   index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
               //   );
-
-              print(snapshot.data!.data.map((e) {
-                // print(e.productName);
-                if (e.productName == product_name) {
-                  return e.productName;
+              snapshot.data!.data.firstWhere((element) {
+                if (element.productName == product_name) {
+                  print("2121");
+                  textpass = element.productName;
+                  thumbnail = element.thumbnail;
+                  description = element.description;
+                  price?.addAll(element.codesAndPrice!.map((e) => e));
+                  image?.addAll(element.images!.map((e) => e));
+                  pdf = element.pdf;
+                  return true;
+                } else {
+                  return false;
                 }
-              }));
-              try {
-                // print(object)
-                textpass = snapshot.data!.data.map((e) {
-                  // print(e.productName);
-                  if (e.productName == product_name) {
-                    return e.productName;
-                  }
-                }).first;
-                // print(textpass);
-                thumbnail = snapshot.data!.data.map((e) {
-                  // print(e.productName);
-                  if (e.productName == product_name) {
-                    return e.thumbnail;
-                  }
-                }).first;
-                description = snapshot.data!.data.map((e) {
-                  // print(e.productName);
-                  if (e.productName == product_name) {
-                    return e.description;
-                  }
-                }).first;
-                price = snapshot.data!.data.map((e) {
-                  // print(e.productName);
-                  if (e.productName == product_name) {
-                    e.codesAndPrice!.map((e) => e);
-                  }
-                }).first;
-                image = snapshot.data!.data.map((e) {
-                  // print(e.productName);
-                  if (e.productName == product_name) {
-                    e.images!.map((e) => e);
-                  }
-                }).first;
-                pdf = snapshot.data!.data.map((e) {
-                  // print(e.productName);
-                  if (e.productName == product_name) {
-                    return e.pdf;
-                  }
-                }).first;
-              } catch (e) {
-                // print(e);
-                print("kjhjh");
-              }
+              });
             }
-            //  String selectedPrice = '';
 
             return pdf != null
                 ? DefaultTabController(
@@ -954,38 +909,39 @@ class ProductDetailsoflugs extends StatelessWidget {
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 20.0),
-                                             Form(
-                                                key: _formKey,
-                                                child: Container(
-                                                  // height:
-                                                  // MediaQuery.of(context).size.height/18,
-                                                  width:200,
-                                                  //  MediaQuery.of(context).size.width/10,
-                                                  child: TextFormField(
-                                                    controller: quantityController,
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      border: OutlineInputBorder(),
-                                                      hintText:
-                                                          'Enter the quantity',
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value!.isEmpty) {
-                                                        return 'Please enter a quantity';
-                                                      }
-                                                      int? quantity =
-                                                          int.tryParse(value);
-                                                      if (quantity == null ||
-                                                          quantity <= 0) {
-                                                        return 'Quantity must be a positive number';
-                                                      }
-                                                      return null; // Return null if the input is valid
-                                                    },
+                                            Form(
+                                              key: _formKey,
+                                              child: Container(
+                                                // height:
+                                                // MediaQuery.of(context).size.height/18,
+                                                width: 200,
+                                                //  MediaQuery.of(context).size.width/10,
+                                                child: TextFormField(
+                                                  controller:
+                                                      quantityController,
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    border:
+                                                        OutlineInputBorder(),
+                                                    hintText:
+                                                        'Enter the quantity',
                                                   ),
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter a quantity';
+                                                    }
+                                                    int? quantity =
+                                                        int.tryParse(value);
+                                                    if (quantity == null ||
+                                                        quantity <= 0) {
+                                                      return 'Quantity must be a positive number';
+                                                    }
+                                                    return null; // Return null if the input is valid
+                                                  },
                                                 ),
                                               ),
-                                      
+                                            ),
 
                                             SizedBox(
                                               height: 30,
@@ -996,64 +952,64 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   width: 30,
                                                 ),
                                                 ElevatedButton(
-                                                 onPressed: () {
-                                                        if (_formKey.currentState!
-                                                            .validate()) {
-                                                          if (FirebaseAuth.instance
-                                                                  .currentUser !=
-                                                              null) {
-                                                            // signed in
-                                                            final selectedPrice =
-                                                                selectedPriceNotifier
-                                                                    .value;
-                                                            final productCode =
-                                                                selectedPrice
-                                                                    .split(': ')[0];
-                                                            final price = double
-                                                                .parse(selectedPrice
-                                                                    .split(
-                                                                        ': ')[1]);
-                                                                                        
-                                                            final quantity =
-                                                                int.tryParse(
-                                                                        quantityController
-                                                                            .text) ??
-                                                                    0;
-                                                            final imageUrl =
-                                                                // selectedThumbnailProvider
-                                                                //         .selectedThumbnail ??
-                                                                thumbnail;
-                                                            final productName =
-                                                                textpass;
-                                                            final cartProvider =
-                                                                Provider.of<
-                                                                        CartProvider>(
-                                                                    context,
-                                                                    listen: false);
-                                                            cartProvider.addToCart(
-                                                                productCode,
-                                                                price,
-                                                                quantity,
-                                                                imageUrl ?? "",
-                                                                productName ?? "");
-                                                                                        
-                                                            ScaffoldMessenger.of(
-                                                                    context)
-                                                                .showSnackBar(SnackBar(
-                                                                    content: Text(
-                                                                        "Added to cart")));
-                                                          } else {
-                                                            // signed out
-                                                            showDialog(
-                                                              context: context,
-                                                              builder: (BuildContext
-                                                                  context) {
-                                                                return LoginPage(); // Your custom dialog widget
-                                                              },
-                                                            );
-                                                          }
-                                                        }
-                                                      },
+                                                  onPressed: () {
+                                                    if (_formKey.currentState!
+                                                        .validate()) {
+                                                      if (FirebaseAuth.instance
+                                                              .currentUser !=
+                                                          null) {
+                                                        // signed in
+                                                        final selectedPrice =
+                                                            selectedPriceNotifier
+                                                                .value;
+                                                        final productCode =
+                                                            selectedPrice
+                                                                .split(': ')[0];
+                                                        final price = double
+                                                            .parse(selectedPrice
+                                                                .split(
+                                                                    ': ')[1]);
+
+                                                        final quantity =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        final imageUrl =
+                                                            // selectedThumbnailProvider
+                                                            //         .selectedThumbnail ??
+                                                            thumbnail;
+                                                        final productName =
+                                                            textpass;
+                                                        final cartProvider =
+                                                            Provider.of<
+                                                                    CartProvider>(
+                                                                context,
+                                                                listen: false);
+                                                        cartProvider.addToCart(
+                                                            productCode,
+                                                            price,
+                                                            quantity,
+                                                            imageUrl ?? "",
+                                                            productName ?? "");
+
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    "Added to cart")));
+                                                      } else {
+                                                        // signed out
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return LoginPage(); // Your custom dialog widget
+                                                          },
+                                                        );
+                                                      }
+                                                    }
+                                                  },
                                                   child:
                                                       const Text('ADD TO CART'),
                                                   style: ButtonStyle(
@@ -1095,27 +1051,27 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                        child: ListView.builder(
-                                            itemBuilder: (context, index) {
-                                          return Container(
-                                            child: pdf != null
-                                                ? SfPdfViewer.network(pdf)
-                                                : Nopdf(),
-                                          );
-                                        }),
-                                      )
-                                      // Tab 2 content goes here
-                                      // SingleChildScrollView(
-                                      //   child: Container(
-                                      //       height: 1500,
-                                      //       color: const Color.fromARGB(
-                                      //           255, 230, 233, 235),
+                                      // Container(
+                                      //   child: ListView.builder(
+                                      //       itemBuilder: (context, index) {
+                                      //     return Container(
                                       //       child: pdf != null
                                       //           ? SfPdfViewer.network(pdf)
-                                      //           : Nopdf()
-                                      //       PDFView(
-                                      //         filePath:
+                                      //           : Nopdf(),
+                                      //     );
+                                      //   }),
+                                      // )
+                                      // Tab 2 content goes here
+                                      SingleChildScrollView(
+                                          child: Container(
+                                              height: 1500,
+                                              color: const Color.fromARGB(
+                                                  255, 230, 233, 235),
+                                              child: pdf != null
+                                                  ? SfPdfViewer.network(pdf!)
+                                                  : Nopdf()))
+                                      // PDFView(
+                                      //   filePath:
                                       //             pdf, // Replace 'pdf' with the actual PDF file path or URL
                                       //         // height: 300,   // Set the desired height for the PDF viewer
                                       //         // width: 300,    // Set the desired width for the PDF viewer

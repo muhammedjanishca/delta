@@ -14,13 +14,10 @@ class DataProvider extends ChangeNotifier {
   Future<ProduceNewModal> fetchLugsData() async {
     final response = await http
         .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/lugs'));
-    // print("++++++++++++++++++++++++++++++");
-    // print(response.statusCode);
-    // print(response.body);
+
     if (response.statusCode == 200) {
       ProduceNewModal pro =
           ProduceNewModal.fromJson(json.decode(response.body));
-      // print(response.body);
       return pro;
     } else {
       throw Exception('Failed to load data');
@@ -45,13 +42,12 @@ class DataProvider extends ChangeNotifier {
     print(type);
     final response = await http.get(
         Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/$type'));
-    // print("++++++++++++++++++++++++++++++");
-    // print(response.statusCode);
-    // print(response.body);
+
     if (response.statusCode == 200) {
+      // print(response.body);
+      // print("lnjl");
       ProduceNewModal pro =
           ProduceNewModal.fromJson(json.decode(response.body));
-      // print(pro.data[0].description);
       return pro;
     } else {
       throw Exception('Failed to load data');
@@ -60,10 +56,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<dynamic> _fetchDataFromApi(String apiUrl) async {
     final response = await http.get(Uri.parse(apiUrl));
-    // print("++++++++++++++++++++++++++++++");
-    // print(response.statusCode);
-    // print(response.body);
-    // print('gggggggggggggggggg');
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data;
@@ -73,12 +66,6 @@ class DataProvider extends ChangeNotifier {
   }
 
   late Future lugsdata = getProduct(lugsApiUrl);
-
-  // Future<dynamic> fetchLugsData() async {
-  //   final lugsData = await _fetchDataFromApi(lugsApiUrl);
-  //   return lugsData;
-  // }
-
   late Future connectorsData = getProduct(connectorsApiUrl);
 
   Future<dynamic> fetchConnectorsData() async {
@@ -119,9 +106,7 @@ class DataProvider extends ChangeNotifier {
 Future<ProduceNewModal> _fetchglandsApiUrl() async {
   final response = await http
       .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/glands'));
-  // print("++++++++++++++++++++++++++++++");
-  // print(response.statusCode);
-  // print(response.body);
+
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;
@@ -133,9 +118,7 @@ Future<ProduceNewModal> _fetchglandsApiUrl() async {
 Future<ProduceNewModal> _fetchaccessoriesApiUrl() async {
   final response = await http.get(
       Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/accessories'));
-  // print("++++++++++++++++++++++++++++++");
-  // print(response.statusCode);
-  // print(response.body);
+
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;
@@ -147,9 +130,7 @@ Future<ProduceNewModal> _fetchaccessoriesApiUrl() async {
 Future<ProduceNewModal> _fetchconnectersApiUrl() async {
   final response = await http.get(
       Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/connectors'));
-  // print("++++++++++++++++++++++++++++++");
-  // print(response.statusCode);
-  // print(response.body);
+
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;
@@ -161,9 +142,7 @@ Future<ProduceNewModal> _fetchconnectersApiUrl() async {
 Future<ProduceNewModal> _fetchcrimpingtoolApiUrl() async {
   final response = await http.get(Uri.parse(
       'http://newdelta.ap-south-1.elasticbeanstalk.com/crimpingtools'));
-  // print("++++++++++++++++++++++++++++++");
-  // print(response.statusCode);
-  // print(response.body);
+
   if (response.statusCode == 200) {
     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
     return pro;

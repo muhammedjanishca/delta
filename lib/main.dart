@@ -108,15 +108,6 @@ class _MyAppState extends State<MyApp> {
                 body: GlandPage(),
               ),
           '/signup/signin': (context) => SignUpPage(),
-          // '/productdetailsofconnectors': (context) => AppBarMain(
-          //       body: ProductDetailsOfConnectors(),
-          //     ),
-          // '/productdetailsofaccessories': (context) => AppBarMain(
-          //       body: ProductDetailsOfAccessories(),
-          //     ),
-          // '/productdetailsofcrimpingtools': (context) => AppBarMain(
-          //       body: ProductDetailsOfCrimpingTool(),
-          // ),
           '/Accssories': (context) => AppBarMain(
                 body: AccessoriesPage(),
               ),
@@ -132,8 +123,8 @@ class _MyAppState extends State<MyApp> {
           if (elements[0] == '') {
             switch (elements[1]) {
               case "productdetailsofglands":
-                print(elements);
-                print("glands");
+                // print(elements);
+                // print("glands");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(body: ProductDetailsOfGlands());
@@ -141,8 +132,8 @@ class _MyAppState extends State<MyApp> {
                   settings: setting,
                 );
               case "productdetailslugs":
-                print(elements);
-                print("lugs");
+                // print(elements);
+                // print("lugs");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -151,9 +142,9 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-              case "productdetailsofconnectors":
-                print(elements);
-                print("connectors");
+              case "productdetailconnectors":
+                // print(elements);
+                // print("connectors");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -162,9 +153,9 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-              case "productdetailsofaccessories":
-                print(elements);
-                print("accessories");
+              case "productdetailaccessories":
+                // print(elements);
+                // print("accessories");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -173,9 +164,9 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-              case "productdetailsofcrimpingtools":
-                print(elements);
-                print("crimpingtools");
+              case "productdetailcrimpingtools":
+                // print(elements);
+                // print("crimpingtools");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -226,24 +217,24 @@ void navigateToProductDetailsOfConnectors(
     {String? productname}) {
   Navigator.pushNamed(
     context,
-    '/productdetailsofconnectors/$productname',
+    '/productdetailsconnectors/$productname',
   );
 }
 
 void navigateToProductDetailsOfGlands(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
-  Navigator.pushNamed(context, '/productdetailsofglands/$productname');
+  Navigator.pushNamed(context, '/productdetailsglands/$productname');
 }
 
 void navigateToProductDetailsOfAccessories(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
-  Navigator.pushNamed(context, '/productdetailsofaccessories/$productname');
+  Navigator.pushNamed(context, '/productdetailsaccessories/$productname');
 }
 
 void navigateToProductDetailsOfCrimpinTools(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
-  Navigator.pushNamed(context, '/productdetailsofcrimpingtools/$productname');
+  Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
 }
