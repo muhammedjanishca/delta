@@ -13,7 +13,16 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchLugsData() async {
     final response = await http
-        .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/lugs'));
+        .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/lugs'),
+    //      headers: {
+    //   "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+    //   "Access-Control-Allow-Credentials":
+    //       'true', // Required for cookies, authorization headers with HTTPS
+    //   "Access-Control-Allow-Headers":
+    //       "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+    //   "Access-Control-Allow-Methods": "POST, OPTIONS"
+    // }
+        );
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
