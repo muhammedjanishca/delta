@@ -794,3 +794,72 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 }
+
+class MobileBottomNavigationBaru extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    // cartProvider.getCartData();
+    var cartItems = cartProvider.fetchedItems;
+
+    return BottomAppBar(
+      child: Container(
+        color: Colors.black,
+        child: Row(
+          children: [
+            Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width / 2,
+              decoration: BoxDecoration(
+                color: janishcolor,
+                
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuotationPage(
+                        totalPrice: cartProvider.getTotalPrice(),
+                        cartItems: cartItems["cartItems"],
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'GENERATE QUOTATION',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+             Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width / 2,
+              decoration: BoxDecoration(
+                color:Colors.black,
+                
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuotationPage(
+                        totalPrice: cartProvider.getTotalPrice(),
+                        cartItems: cartItems["cartItems"],
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'GENERATE QUOTATION',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

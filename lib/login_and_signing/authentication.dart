@@ -154,7 +154,7 @@ class AuthenticationHelper extends ChangeNotifier {
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
-             print(fetchedItems.exists);
+            //  print(fetchedItems.exists);
       !fetchedItems.exists
           ? await FirebaseFirestore.instance
               .collection('users')
@@ -167,7 +167,7 @@ class AuthenticationHelper extends ChangeNotifier {
           : null;
       Navigator.pop(context);
     } catch (e) {
-      print(e);
+      // print(e);
     }
     notifyListeners();
   }
@@ -184,7 +184,7 @@ class AuthenticationHelper extends ChangeNotifier {
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
-      print(fetchedItems.exists);
+      // print(fetchedItems.exists);
      !fetchedItems.exists
           ? await FirebaseFirestore.instance
               .collection('users')

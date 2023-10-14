@@ -2,24 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/pages/bottom_sheet.dart';
 import 'package:firebase_hex/pages/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 import '../model.dart';
 import '../provider/thumbnail.dart';
 
-
-class GlandPage extends StatefulWidget {
+class GlandPage extends StatelessWidget {
   GlandPage({super.key});
 
-  @override
-  State<GlandPage> createState() => _GlandPageState();
-}
-
-class _GlandPageState extends State<GlandPage> {
-  int selectedImageIndex = -1;
+  // int selectedImageIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +21,8 @@ class _GlandPageState extends State<GlandPage> {
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
-
+ final ImageHoverProvider =
+        Provider.of<ImageHoveroProvider>(context);
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
         future: context.read<DataProvider>().newglands,
@@ -79,8 +74,10 @@ class _GlandPageState extends State<GlandPage> {
                   ),
                 ),
                 Padding(
-                  padding:
-                     EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,),
+                  padding: EdgeInsets.symmetric(
+                    horizontal:
+                        MediaQuery.of(context).size.width >= 600 ? 30 : 10,
+                  ),
                   child: GridView.builder(
                     physics: ScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -97,12 +94,14 @@ class _GlandPageState extends State<GlandPage> {
 
                       return GestureDetector(
                         onTap: () {
-                          
                           selectedThumbnailProvider.setSelectedThumbnail(
-                            productData.thumbnail ?? "",index: index
-                          );
+                              productData.thumbnail ?? "",
+                              index: index);
 
-                          navigateToProductDetailsOfGlands(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
+                          navigateToProductDetailsOfGlands(context, index,
+                              productname: snapshot
+                                  .data!.data[index].productName!
+                                  .replaceAll(" ", "_"));
                         },
                         child: Container(
                           //  height: 200,
@@ -124,10 +123,14 @@ class _GlandPageState extends State<GlandPage> {
                             ],
                           ),
                           padding: EdgeInsets.all(
-                             MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           margin: EdgeInsets.all(
-                            MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           child: Stack(
                             alignment: Alignment.center,
@@ -137,31 +140,21 @@ class _GlandPageState extends State<GlandPage> {
                                 children: [
                                   MouseRegion(
                                     onEnter: (_) {
-                                      setState(() {
-                                        selectedImageIndex = index;
-                                      });
+                                        ImageHoverProvider  .setSelectedImageIndex(index);
                                     },
                                     onExit: (_) {
-                                      setState(() {
-                                        selectedImageIndex = -1;
-                                      });
+                                       ImageHoverProvider   .setSelectedImageIndex(-1);
                                     },
                                     child: AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      height: selectedImageIndex == index
-                                          ? 210
-                                          : 160,
-                                      width: selectedImageIndex == index
-                                          ? MediaQuery.of(context).size.width /
-                                              4
-                                          : MediaQuery.of(context).size.width /
-                                              5,
+                                      height:ImageHoverProvider.selectedImageIndex == index? 210: 160,
+                                      width:ImageHoverProvider.selectedImageIndex == index
+                                          ? MediaQuery.of(context).size.width / 4
+                                          : MediaQuery.of(context).size.width / 5,
                                       child: Image.network(
                                         productData.thumbnail ?? "",
                                         height: 150,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
+                                        width:MediaQuery.of(context).size.width /5,
                                       ),
                                     ),
                                   ),

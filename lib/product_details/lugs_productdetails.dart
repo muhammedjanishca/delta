@@ -11,15 +11,22 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsoflugs extends StatelessWidget {
-  // ProductDetailsoflugs({selectedProductIndex)}
-  //  final int selectedProductIndex ;
-  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+class ProductDetailsoflugs extends StatefulWidget {
 
   ProductDetailsoflugs({super.key});
+
+  @override
+  State<ProductDetailsoflugs> createState() => _ProductDetailsoflugsState();
+}
+
+class _ProductDetailsoflugsState extends State<ProductDetailsoflugs> {
+  // ProductDetailsoflugs({selectedProductIndex)}
+  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+
   // ProductDetails({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
+    GlobalKey containerKey = GlobalKey();
     // print("janishkuttan");
     // final userInputProvider = Provider.of<UserInputProvider>(context);
     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
@@ -700,37 +707,42 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   selectedPriceNotifier.value =
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
                                                 },
-                                                child: Container(
-                                                  width: 100,
-                                                  padding: EdgeInsets.all(
-                                                      8.0), // Adjust the padding as needed
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: codeAndPrice
-                                                                  .price ==
-                                                              null
-                                                          ? Colors
-                                                              .red // Set border color to red when selectedPrice is null
-                                                          : codeAndPrice
-                                                                      .productCode ==
-                                                                  selectedCodeProvider
-                                                                      .selectedProductCode
-                                                              ? Colors
-                                                                  .blue // Set border color to blue for selected container
-                                                              : Colors
-                                                                  .black, // Set border color to black for non-selected containers
-                                                      width:
-                                                          1.0, // Set your desired border width
+                                                child: Form(
+                                                  key: containerKey,
+                                                  autovalidateMode: AutovalidateMode.always,
+                                                  child: Container(
+                                                    width: 100,
+                                                    
+                                                    padding: EdgeInsets.all(
+                                                        8.0), // Adjust the padding as needed
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: codeAndPrice
+                                                                    .price ==
+                                                                null
+                                                            ? Colors
+                                                                .red // Set border color to red when selectedPrice is null
+                                                            : codeAndPrice
+                                                                        .productCode ==
+                                                                    selectedCodeProvider
+                                                                        .selectedProductCode
+                                                                ? Colors
+                                                                    .blue // Set border color to blue for selected container
+                                                                : Colors
+                                                                    .black, // Set border color to black for non-selected containers
+                                                        width:
+                                                            1.0, // Set your desired border width
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      '${codeAndPrice.productCode}',
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight: FontWeight
-                                                              .w600 // Set your desired text color
-                                                          ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        '${codeAndPrice.productCode}',
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight
+                                                                .w600 // Set your desired text color
+                                                            ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -944,7 +956,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     if (FirebaseAuth.instance
                                                             .currentUser !=
                                                         null) {
-                                                      // signed in
+                                                      
 
                                                       final selectedPrice =
                                                           selectedPriceNotifier
@@ -953,13 +965,13 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                               ? selectedPriceNotifier
                                                                   .value
                                                               : 'No Price';
+                                                            
                                                       final productCode =
                                                           selectedPrice
                                                               .split(': ')[0];
                                                       final price = double
                                                           .parse(selectedPrice
                                                               .split(': ')[1]);
-
                                                       final quantity = int.tryParse(
                                                               quantityController
                                                                   .text) ??
@@ -1040,24 +1052,34 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      Container(
+                                        child: ListView.builder(
+                                            itemBuilder: (context, index) {
+                                          return Container(
+                                            child:pdf != null
+                                                  ? SfPdfViewer.network(pdf)
+                                                  : Nopdf() ,
+                                          );
+                                        }),
+                                      )
                                       // Tab 2 content goes here
-                                      SingleChildScrollView(
-                                        child: Container(
-                                            height: 1500,
-                                            color: const Color.fromARGB(
-                                                255, 230, 233, 235),
-                                            child: pdf != null
-                                                ? SfPdfViewer.network(pdf)
-                                                : Nopdf()
-                                            // PDFView(
-                                            //   filePath:
-                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                            //   // height: 300,   // Set the desired height for the PDF viewer
-                                            //   // width: 300,    // Set the desired width for the PDF viewer
-                                            // ),
+                                      // SingleChildScrollView(
+                                      //   child: Container(
+                                      //       height: 1500,
+                                      //       color: const Color.fromARGB(
+                                      //           255, 230, 233, 235),
+                                      //       child: pdf != null
+                                      //           ? SfPdfViewer.network(pdf)
+                                      //           : Nopdf()
+                                      //       PDFView(
+                                      //         filePath:
+                                      //             pdf, // Replace 'pdf' with the actual PDF file path or URL
+                                      //         // height: 300,   // Set the desired height for the PDF viewer
+                                      //         // width: 300,    // Set the desired width for the PDF viewer
+                                      //       ),
 
-                                            ),
-                                      ),
+                                      //       ),
+                                      // ),
                                     ],
                                   ),
                                 ),
