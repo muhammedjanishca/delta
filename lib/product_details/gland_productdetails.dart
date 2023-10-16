@@ -11,27 +11,22 @@ import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../model.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsOfGlands extends StatelessWidget {
-  // ProductDetailsOfGlands({selectedProductIndex)}
-  //  final int selectedProductIndex ;
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
   ProductDetailsOfGlands({super.key});
-  // ProductDetails({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
-    // print("dfdghjkl");
-    // final userInputProvider = Provider.of<UserInputProvider>(context);
-    // final cartProvider = Provider.of<CartProvider>(context, listen: false);
     TextEditingController quantityController = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
-    String product_name = setting_list[2];
+    String product_name = setting_list[2].replaceAll('_', " ");
     // print(product_name);
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
@@ -43,7 +38,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
 
       mobileProductPage: Scaffold(
         body: FutureBuilder(
-          future: context.read<DataProvider>().newglands,
+        future: context.read<DataProvider>().fetchglandsApiUrl(),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
 
@@ -52,22 +47,48 @@ class ProductDetailsOfGlands extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              var textpass = snapshot.data!
+               String? textpass;
+            String? thumbnail;
+            String? description;
+            List<CodesAndPrice>? price = [];
+            List<String>? image = [];
+            String? pdf;
+
+            
+            if (selectedThumbnailProvider.selectedIndex != null) {
+              textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
-              var thumbnail = snapshot.data!
+              thumbnail = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-              var description = snapshot.data!
+              description = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].description;
-              var price = snapshot
+              price = snapshot
                   .data!
                   .data[selectedThumbnailProvider.selectedIndex!]
                   .codesAndPrice!;
-              var image = snapshot
+              image = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-              var pdf = snapshot
+              pdf = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            } else {
+             
+              snapshot.data!.data.firstWhere((element) {
+                if (element.productName == product_name) {
+                  print("2121");
+                  textpass = element.productName;
+                  thumbnail = element.thumbnail;
+                  description = element.description;
+                  price?.addAll(element.codesAndPrice!.map((e) => e));
+                  image?.addAll(element.images!.map((e) => e));
+                  pdf = element.pdf;
+                  return true;
+                } else {
+                  return false;
+                }
+              });
+            }
 
-              //  String selectedPrice = '';
+
 
               return pdf != null
                   ? DefaultTabController(
@@ -102,10 +123,11 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     .width /
                                                 2,
                                             child: Image.network(
-                                                // thumbnail!,)
-                                                selectedThumbnailProvider
-                                                        .selectedThumbnail ??
-                                                    ''),
+                                                thumbnail!,
+                                                // selectedThumbnailProvider
+                                                //         .selectedThumbnail ??
+                                                //     ''
+                                                    ),
                                           ), // Display the selected thumbnail here
                                           SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
@@ -126,9 +148,9 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
-                                                          color: imageUrl ==
-                                                                  selectedThumbnailProvider
-                                                                      .selectedThumbnail
+                                                          color: imageUrl ==imageUrl
+                                                                  // selectedThumbnailProvider
+                                                                  //     .selectedThumbnail
                                                               ? Colors
                                                                   .blue // Highlight the selected image
                                                               : Colors
@@ -187,7 +209,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                             color: const Color.fromARGB(
                                                 255, 230, 233, 235),
                                             child: pdf != null
-                                                ? SfPdfViewer.network(pdf)
+                                                ? SfPdfViewer.network(pdf!)
                                                 : Nopdf()
                                             ),
                                                       );
@@ -264,7 +286,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 children: List<Widget>.generate(
                                                     price.length, (index) {
                                                   final codeAndPrice =
-                                                      price[index];
+                                                      price![index];
                                                   return InkWell(
                                                     onTap: () {
                                                       // When a container is tapped, update the selectedPrice using ValueNotifier.
@@ -625,7 +647,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 color: const Color.fromARGB(
                                                     255, 230, 233, 235),
                                                 child: pdf != null
-                                                    ? SfPdfViewer.network(pdf)
+                                                    ? SfPdfViewer.network(pdf!)
                                                     : Nopdf()
                                                 // PDFView(
                                                 //   filePath:
@@ -653,6 +675,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
             }
           },
         ),
+
         bottomNavigationBar: BottomAppBar(
           child: Container(
             color: Colors.black,
@@ -668,6 +691,76 @@ class ProductDetailsOfGlands extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/cart');
                       },
+                      //  onPressed: () {
+                      //                                     if (_formKey
+                      //                                         .currentState!
+                      //                                         .validate()) {
+                      //                                       if (FirebaseAuth
+                      //                                               .instance
+                      //                                               .currentUser !=
+                      //                                           null) {
+                      //                                         // signed in
+                      //                                         final selectedPrice =
+                      //                                             selectedPriceNotifier
+                      //                                                 .value;
+                      //                                         final productCode =
+                      //                                             selectedPrice
+                      //                                                 .split(
+                      //                                                     ': ')[0];
+                      //                                         final price =
+                      //                                             double.parse(
+                      //                                                 selectedPrice
+                      //                                                     .split(
+                      //                                                         ': ')[1]);
+
+                      //                                         final quantity =
+                      //                                             int.tryParse(
+                      //                                                     quantityController
+                      //                                                         .text) ??
+                      //                                                 0;
+                      //                                         final imageUrl =
+                      //                                             // selectedThumbnailProvider
+                      //                                             //         .selectedThumbnail ??
+                      //                                             thumbnail;
+                      //                                         final productName =
+                      //                                             textpass;
+                      //                                         final cartProvider =
+                      //                                             Provider.of<
+                      //                                                     CartProvider>(
+                      //                                                 context,
+                      //                                                 listen:
+                      //                                                     false);
+
+                      //                                         cartProvider.addToCart(
+                      //                                             productCode,
+                      //                                             price,
+                      //                                             quantity,
+                      //                                             imageUrl ??
+                      //                                                 "",
+                      //                                             productName ??
+                      //                                                 "");
+
+                      //                                         ScaffoldMessenger
+                      //                                                 .of(
+                      //                                                     context)
+                      //                                             .showSnackBar(
+                      //                                                 SnackBar(
+                      //                                                     content:
+                      //                                                         Text("Added to cart")));
+                      //                                       } else {
+                      //                                         // signed out
+                      //                                         showDialog(
+                      //                                           context:
+                      //                                               context,
+                      //                                           builder:
+                      //                                               (BuildContext
+                      //                                                   context) {
+                      //                                             return LoginPage(); // Your custom dialog widget
+                      //                                           },
+                      //                                         );
+                      //                                       }
+                      //                                     }
+                      //                                   },
                       child: Text(
                         'ADD TO CART',
                         style: TextStyle(color: Colors.white),
@@ -700,31 +793,57 @@ class ProductDetailsOfGlands extends StatelessWidget {
 
 //-----------desktop--------------------------------------------------------
 
-      desktopProductPage: FutureBuilder(
-        future: context.read<DataProvider>().newglands,
+    desktopProductPage: FutureBuilder(
+        future: context.read<DataProvider>().fetchglandsApiUrl(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
-
+          // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             // print("hgfghfhfgu");
             return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].productName;
-            var thumbnail = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-            var description = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].description;
-            var price = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-            var image = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-            var pdf = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            String? textpass;
+            String? thumbnail;
+            String? description;
+            List<CodesAndPrice>? price = [];
+            List<String>? image = [];
+            String? pdf;
 
-            //  String selectedPrice = '';
+            
+            if (selectedThumbnailProvider.selectedIndex != null) {
+              textpass = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].productName;
+              thumbnail = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+              description = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].description;
+              price = snapshot
+                  .data!
+                  .data[selectedThumbnailProvider.selectedIndex!]
+                  .codesAndPrice!;
+              image = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+              pdf = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            } else {
+             
+              snapshot.data!.data.firstWhere((element) {
+                if (element.productName == product_name) {
+                  print("2121");
+                  textpass = element.productName;
+                  thumbnail = element.thumbnail;
+                  description = element.description;
+                  price?.addAll(element.codesAndPrice!.map((e) => e));
+                  image?.addAll(element.images!.map((e) => e));
+                  pdf = element.pdf;
+                  return true;
+                } else {
+                  return false;
+                }
+              });
+            }
 
             return pdf != null
                 ? DefaultTabController(
@@ -753,14 +872,15 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 3,
-                                        width: 300,
-                                        // MediaQuery.of(context).size.width /
-                                        //     5,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                         child: Image.network(
-                                            //  thumbnail!,
-                                            selectedThumbnailProvider
-                                                    .selectedThumbnail ??
-                                                ''),
+                                             thumbnail!,
+                                            // selectedThumbnailProvider
+                                            //         .selectedThumbnail ??
+                                            //     ''
+                                                ),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -780,9 +900,9 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
-                                                      color: imageUrl ==
-                                                              selectedThumbnailProvider
-                                                                  .selectedThumbnail
+                                                      color: imageUrl ==imageUrl
+                                                              // selectedThumbnailProvider
+                                                              //     .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors
@@ -850,6 +970,9 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     width: 1.0,
                                                   ),
                                                 ),
+                                                // child: selectedPrice != null
+                                                //     ? Text(selectedPrice)
+                                                //     : Text('NO Price'),
                                                 child: Text(selectedPrice),
                                               );
                                             },
@@ -877,10 +1000,15 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                             runSpacing:
                                                 8.0, // Adjust the spacing between rows as needed
                                             children: List<Widget>.generate(
-                                                price.length, (index) {
-                                              final codeAndPrice = price[index];
+                                                price!.length, (index) {
+                                              final codeAndPrice =
+                                                  price![index];
                                               return InkWell(
                                                 onTap: () {
+                                                  // String noprice = '0';
+                                                  // codeAndPrice.price != null
+                                                  //     ? codeAndPrice.price
+                                                  //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
@@ -1001,48 +1129,42 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 );
                                               }).toList(),
                                             ),
-                                            SizedBox(height: 20.0),
-
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Form(
-                                                  key: _formKey,
-                                                  child: Container(
-                                                    width: 200,
-                                                    child: TextFormField(
-                                                      controller:
-                                                          quantityController,
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                        hintText:
-                                                            'Enter the quantity',
-                                                      ),
-                                                      validator: (value) {
-                                                        if (value!.isEmpty) {
-                                                          return 'Please enter a quantity';
-                                                        }
-                                                        int? quantity =
-                                                            int.tryParse(value);
-                                                        if (quantity == null ||
-                                                            quantity <= 0) {
-                                                          return 'Quantity must be a positive number';
-                                                        }
-                                                        return null; // Return null if the input is valid
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
 
                                             // SizedBox(height: 8.0),
+                                            SizedBox(height: 20.0),
+                                            Form(
+                                              key: _formKey,
+                                              child: Container(
+                                                // height:
+                                                // MediaQuery.of(context).size.height/18,
+                                                width: 200,
+                                                //  MediaQuery.of(context).size.width/10,
+                                                child: TextFormField(
+                                                  controller:
+                                                      quantityController,
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    border:
+                                                        OutlineInputBorder(),
+                                                    hintText:
+                                                        'Enter the quantity',
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter a quantity';
+                                                    }
+                                                    int? quantity =
+                                                        int.tryParse(value);
+                                                    if (quantity == null ||
+                                                        quantity <= 0) {
+                                                      return 'Quantity must be a positive number';
+                                                    }
+                                                    return null; // Return null if the input is valid
+                                                  },
+                                                ),
+                                              ),
+                                            ),
 
                                             SizedBox(
                                               height: 30,
@@ -1050,121 +1172,98 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                             Row(
                                               children: [
                                                 SizedBox(
-                                                  width: 20,
+                                                  width: 30,
                                                 ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {
-                                                      if (_formKey.currentState!
-                                                          .validate()) {
-                                                        if (FirebaseAuth
-                                                                .instance
-                                                                .currentUser !=
-                                                            null) {
-                                                          // signed in
-                                                          final selectedPrice =
-                                                              selectedPriceNotifier
-                                                                  .value;
-                                                          final productCode =
-                                                              selectedPrice
-                                                                  .split(
-                                                                      ': ')[0];
-                                                          final price = double
-                                                              .parse(selectedPrice
-                                                                  .split(
-                                                                      ': ')[1]);
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    if (_formKey.currentState!
+                                                        .validate()) {
+                                                      if (FirebaseAuth.instance
+                                                              .currentUser !=
+                                                          null) {
+                                                        // signed in
+                                                        final selectedPrice =
+                                                            selectedPriceNotifier
+                                                                .value;
+                                                        final productCode =
+                                                            selectedPrice
+                                                                .split(': ')[0];
+                                                        final price = double
+                                                            .parse(selectedPrice
+                                                                .split(
+                                                                    ': ')[1]);
 
-                                                          final quantity =
-                                                              int.tryParse(
-                                                                      quantityController
-                                                                          .text) ??
-                                                                  0;
-                                                          final imageUrl =
-                                                              // selectedThumbnailProvider
-                                                              //         .selectedThumbnail ??
-                                                              thumbnail;
-                                                          final productName =
-                                                              textpass;
-                                                          final cartProvider =
-                                                              Provider.of<
-                                                                      CartProvider>(
-                                                                  context,
-                                                                  listen:
-                                                                      false);
-                                                          cartProvider
-                                                              .addToCart(
-                                                                  productCode,
-                                                                  price,
-                                                                  quantity,
-                                                                  imageUrl ??
-                                                                      "",
-                                                                  productName ??
-                                                                      "");
+                                                        final quantity =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        final imageUrl =
+                                                            // selectedThumbnailProvider
+                                                            //         .selectedThumbnail ??
+                                                            thumbnail;
+                                                        final productName =
+                                                            textpass;
+                                                        final cartProvider =
+                                                            Provider.of<
+                                                                    CartProvider>(
+                                                                context,
+                                                                listen: false);
+                                                        cartProvider.addToCart(
+                                                            productCode,
+                                                            price,
+                                                            quantity,
+                                                            imageUrl ?? "",
+                                                            productName ?? "");
 
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(SnackBar(
-                                                                  content: Text(
-                                                                      "Added to cart")));
-                                                        } else {
-                                                          // signed out
-                                                          showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return LoginPage(); // Your custom dialog widget
-                                                            },
-                                                          );
-                                                        }
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    "Added to cart")));
+                                                      } else {
+                                                        // signed out
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return LoginPage(); // Your custom dialog widget
+                                                          },
+                                                        );
                                                       }
-                                                    },
-                                                    child: const Text(
-                                                        'ADD TO CART'),
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all(
-                                                                  Colors.black),
-                                                      minimumSize:
-                                                          MaterialStateProperty
-                                                              .all(Size(
-                                                                  150, 50)),
-                                                    ),
+                                                    }
+                                                  },
+                                                  child:
+                                                      const Text('ADD TO CART'),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.black),
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(Size(150, 50)),
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 20,
                                                 ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.pushNamed(
-                                                          context, '/cart');
-                                                    },
-                                                    child: const Text(
-                                                      'GO TO CART',
-                                                      style: TextStyle(
-                                                          color: Colors.black),
-                                                    ),
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all(
-                                                                  Colors.white),
-                                                      minimumSize:
-                                                          MaterialStateProperty
-                                                              .all(Size(
-                                                                  150, 50)),
-                                                    ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.pushNamed(
+                                                        context, '/cart');
+                                                  },
+                                                  child: const Text(
+                                                    'GO TO CART',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  ),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.white),
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(Size(150, 50)),
                                                   ),
                                                 ),
                                               ],
@@ -1175,24 +1274,34 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      // Container(
+                                      //   child: ListView.builder(
+                                      //       itemBuilder: (context, index) {
+                                      //     return Container(
+                                      //       child: pdf != null
+                                      //           ? SfPdfViewer.network(pdf)
+                                      //           : Nopdf(),
+                                      //     );
+                                      //   }),
+                                      // )
                                       // Tab 2 content goes here
                                       SingleChildScrollView(
-                                        child: Container(
-                                            height: 1500,
-                                            color: const Color.fromARGB(
-                                                255, 230, 233, 235),
-                                            child: pdf != null
-                                                ? SfPdfViewer.network(pdf)
-                                                : Nopdf()
-                                            // PDFView(
-                                            //   filePath:
-                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                            //   // height: 300,   // Set the desired height for the PDF viewer
-                                            //   // width: 300,    // Set the desired width for the PDF viewer
-                                            // ),
+                                          child: Container(
+                                              height: 1500,
+                                              color: const Color.fromARGB(
+                                                  255, 230, 233, 235),
+                                              child: pdf != null
+                                                  ? SfPdfViewer.network(pdf!)
+                                                  : Nopdf()))
+                                      // PDFView(
+                                      //   filePath:
+                                      //             pdf, // Replace 'pdf' with the actual PDF file path or URL
+                                      //         // height: 300,   // Set the desired height for the PDF viewer
+                                      //         // width: 300,    // Set the desired width for the PDF viewer
+                                      //       ),
 
-                                            ),
-                                      ),
+                                      //       ),
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -1212,3 +1321,13 @@ class ProductDetailsOfGlands extends StatelessWidget {
     );
   }
 }
+
+
+// class CustottomNavigationBarPro extends StatelessWidget {
+//   const CustottomNavigationBarPro({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }

@@ -1,14 +1,26 @@
 import 'package:flutter/foundation.dart';
 
 class SelectedThumbnailProvider extends ChangeNotifier {
-  String? _selectedThumbnail;
+  // String? _selectedThumbnail;
   int? selectedIndex;
 
-  String? get selectedThumbnail => _selectedThumbnail;
+  // String? get selectedThumbnail => _selectedThumbnail;
 
   void setSelectedThumbnail(String thumbnailUrl,{int? index}) {
-    _selectedThumbnail = thumbnailUrl;
+    // _selectedThumbnail = thumbnailUrl;
     selectedIndex = index??selectedIndex;
+    notifyListeners();
+  }
+}
+
+class ImageSelection extends ChangeNotifier {
+  String? _selectedImage;
+
+
+  String? get selectedThumbnail => _selectedImage;
+
+  void setSelectedThumbnail(String thumbnailUrl,{int? index}) {
+    _selectedImage = thumbnailUrl;
     notifyListeners();
   }
 }

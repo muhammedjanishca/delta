@@ -29,7 +29,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
+      options: const FirebaseOptions(
     authDomain: "login-fab91.firebaseapp.com",
     apiKey: "AIzaSyAZX6f4F_fXF9gI5ckltoKmnO34OZAixXs",
     appId: "1:461889425921:web:b9d4481b84a3345161a600",
@@ -58,7 +58,8 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(
+            create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
@@ -67,7 +68,6 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
         ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
-
       ],
       child: MaterialApp(
         //this use using for handle null data
@@ -87,15 +87,16 @@ class _MyAppState extends State<MyApp> {
           if (widget is Scaffold || widget is Navigator) {
             error = Scaffold(body: Center(child: error));
           }
-          ErrorWidget.builder = (errorDetails) => error;
+          ErrorWidget.builder = (errorDetails) {
+            return Text(errorDetails.toString());
+          };
           if (widget != null) return widget;
           throw ('widget is null');
         },
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => AppBarMain(body: LandinPage()),
-          // '/productdetailslugs': (context) => AppBarMain(
-          //       body: ProductDetailsoflugs()),
+        
           '/cart': (context) => AppBarMain(
                 body: CartPage(),
               ),
@@ -106,15 +107,6 @@ class _MyAppState extends State<MyApp> {
                 body: GlandPage(),
               ),
           '/signup/signin': (context) => SignUpPage(),
-          // '/productdetailsofconnectors': (context) => AppBarMain(
-          //       body: ProductDetailsOfConnectors(),
-          //     ),
-          // '/productdetailsofaccessories': (context) => AppBarMain(
-          //       body: ProductDetailsOfAccessories(),
-          //     ),
-          // '/productdetailsofcrimpingtools': (context) => AppBarMain(
-          //       body: ProductDetailsOfCrimpingTool(),
-              // ),
           '/Accssories': (context) => AppBarMain(
                 body: AccessoriesPage(),
               ),
@@ -126,70 +118,68 @@ class _MyAppState extends State<MyApp> {
         },
         initialRoute: '/',
         onGenerateRoute: (RouteSettings setting) {
-  List<String> elements = setting.name!.split('/');
-  if (elements[0] == '') {
-    switch (elements[1]) {
-      case "productdetailsofglands":
-        print(elements);
-        print("glands");
-        return MaterialPageRoute(
-          builder: (BuildContext context) {
-            return AppBarMain(
-              body: ProductDetailsOfGlands());
-          },
-          settings: setting,
-        );
-         case "productdetailslugs":
-        print(elements);
-        print("lugs");
-        return MaterialPageRoute(
-          builder: (BuildContext context) {
-            return AppBarMain(
-              body: ProductDetailsoflugs(),
-            );
-          },
-          settings: setting,
-        );
-      case "productdetailsofconnectors":
-        print(elements);
-        print("connectors");
-        return MaterialPageRoute(
-          builder: (BuildContext context) {
-            return AppBarMain(
-              body: ProductDetailsOfConnectors(),
-            );
-          },
-          settings: setting,
-        );
-      case "productdetailsofaccessories":
-        print(elements);
-        print("accessories");
-        return MaterialPageRoute(
-          builder: (BuildContext context) {
-            return AppBarMain(
-              body: 
-              ProductDetailsOfAccessories(),
-            );
-          },
-          settings: setting,
-        );
-      case "productdetailsofcrimpingtools":
-        print(elements);
-        print("crimpingtools");
-        return MaterialPageRoute(
-          builder: (BuildContext context) {
-            return AppBarMain(
-              body: ProductDetailsOfCrimpingTool(),
-            );
-          },
-          settings: setting,
-        );
-      default:
-        return null;
-    }
-  }
-  return null;
-},
+          List<String> elements = setting.name!.split('/');
+          if (elements[0] == '') {
+            switch (elements[1]) {
+              case "productdetailsglands":
+                // print(elements);
+                // print("glands");
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(body: ProductDetailsOfGlands());
+                  },
+                  settings: setting,
+                );
+              case "productdetailslugs":
+                // print(elements);
+                // print("lugs");
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(
+                      body: ProductDetailsoflugs(),
+                    );
+                  },
+                  settings: setting,
+                );
+              case "productdetailsconnectors":
+                // print(elements);
+                // print("connectors");
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(
+                      body: ProductDetailsOfConnectors(),
+                    );
+                  },
+                  settings: setting,
+                );
+              case "productdetailsaccessories":
+                // print(elements);
+                // print("accessories");
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(
+                      body: ProductDetailsOfAccessories(),
+                    );
+                  },
+                  settings: setting,
+                );
+              case "productdetailscrimpingtools":
+                // print(elements);
+                // print("crimpingtools");
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(
+                      body: ProductDetailsOfCrimpingTool(),
+                    );
+                  },
+                  settings: setting,
+                );
+              default:
+                return null;
+            }
+          }
+          return null;
+        },
 
         // onGenerateRoute: (RouteSettings setting) {
         //   List<String> elements = setting.name!.split('/');
@@ -200,7 +190,7 @@ class _MyAppState extends State<MyApp> {
         //       var index = elements[1];
         //       return MaterialPageRoute(builder: (BuildContext context) {
         //         return AppBarMain(
-        //           body: ProductDetailsOfGlands(        
+        //           body: ProductDetailsOfGlands(
         //           ),
         //         );
         //       },
@@ -216,27 +206,34 @@ class _MyAppState extends State<MyApp> {
 }
 
 void navigateToProductDetailsofLugs(
-    BuildContext context, int selectedProductIndex,{String? productname}) {
-  Navigator.pushNamed(context,'/productdetailslugs/$productname');
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/productdetailslugs/$productname');
 }
 
 void navigateToProductDetailsOfConnectors(
-    BuildContext context, int selectedProductIndex,{String? productname}) {
-  Navigator.pushNamed(context,'/productdetailsofconnectors/$productname',
-      );
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(
+    context,
+    '/productdetailsconnectors/$productname',
+  );
 }
 
 void navigateToProductDetailsOfGlands(
-    BuildContext context, int selectedProductIndex,{String? productname}) {
-  Navigator.pushNamed(context, '/productdetailsofglands/$productname');
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/productdetailsglands/$productname');
 }
 
 void navigateToProductDetailsOfAccessories(
-    BuildContext context, int selectedProductIndex,{String? productname}) {
-  Navigator.pushNamed(context,'/productdetailsofaccessories/$productname');
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/productdetailsaccessories/$productname');
 }
 
 void navigateToProductDetailsOfCrimpinTools(
-    BuildContext context, int selectedProductIndex,{String? productname}) {
-  Navigator.pushNamed(context,'/productdetailsofcrimpingtools/$productname');
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
 }

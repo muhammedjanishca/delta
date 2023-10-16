@@ -149,22 +149,37 @@ class DesktopLanding extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 50, bottom: 40),
           child: Text(
-            '      Delta Cable Management Systems are used to organise and secure electrical or electronic cables and wires  \nin a facility, home, or office. The main goal of Industrial Cable Manufacturers in India\n is to manufacture cables that maintain a clean and organized workspace, reduce trip hazards, eliminate short\ncircuits and enhance your overall electrical safety and functionality',
+            
+'          Delta Cable Management Systems are designed to efficiently organize and secure electrical and electronic\ncables in various settings, be it a facility, residence, or office. Industrial cable wholesale sellers in Saudi Arabia\nprioritize crafting cables that promote tidy workspaces, minimize trip hazards, prevent short circuits, and ultimately\nelevate electrical safety and functionality within your environment',
             style: GoogleFonts.abel(fontSize: 20, fontWeight: FontWeight.w300),
           ),
         ),
+       
+        
         Container(
           height: 550,
           width: double.infinity,
+          // color: Colors.amber,
           child: Row(
             children: [
               Expanded(
                   child: Container(
-                color: Colors.white,
+                color:  Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/image/hex-logo-new.png'),
+                    Text("\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700
+                    ),)
+                  ],
+                )
               )),
               Expanded(
                   child: Container(
-                color: Colors.white,
+                color: const Color.fromARGB(255, 122, 111, 111),
               ))
             ],
           ),
@@ -331,7 +346,7 @@ class MobilLanding extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Text(
-            '\n      Delta Cable Management Systems are used to organise and secure electrical or electronic cables and wires  \nin a facility, home, or office. The main goal of Industrial Cable Manufacturers in India\n is to manufacture cables that maintain a clean and organized workspace, reduce trip hazards, eliminate short\ncircuits and enhance your overall electrical safety and functionality\n',
+            '\n      Delta Cable Management Systems are designed to efficiently organize and secure electrical and electronic\ncables in various settings, be it a facility, residence, or office. Industrial cable wholesale sellers in Saudi Arabia\nprioritize crafting cables that promote tidy workspaces, minimize trip hazards, prevent short circuits, and ultimately\nelevate electrical safety and functionality within your environment\n',
             style: GoogleFonts.abel(fontSize: 20, fontWeight: FontWeight.w300),
           ),
         ),
@@ -362,229 +377,3 @@ class MobilLanding extends StatelessWidget {
     );
   }
 }
- // return Container(
-    //   color: Colors.black,
-    //   child: Column(
-    //     children: [
-    //       Row(
-    //         children: [
-    //           Container(
-    //             width: MediaQuery.of(context).size.width / 3,
-    //             color: Colors.transparent,
-    //             child: Expanded(
-    //                 child: Padding(
-    //               padding: const EdgeInsets.symmetric(vertical: 30),
-    //               child: Column(
-    //                 mainAxisAlignment: MainAxisAlignment.start,
-    //                 crossAxisAlignment: CrossAxisAlignment.end,
-    //                 children: [
-    //                   Text(
-    //                     'Delta',
-    //                     style: GoogleFonts.pacifico(
-    //                       textStyle: TextStyle(
-    //                         color: Color.fromARGB(255, 122, 102, 54),
-    //                         fontSize: 35,
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   SizedBox(
-    //                     height: MediaQuery.of(context).size.height / 30,
-    //                   ),
-    //                   TextButton(
-    //                       onPressed: () {},
-    //                       child: Text(
-    //                         "About Us\n",
-    //                         style: TextStyle(
-    //                             fontSize: 15,
-    //                             fontWeight: FontWeight.bold,
-    //                             color: Colors.white),
-    //                       )),
-    //                   TextButton(
-    //                       onPressed: () {},
-    //                       child: Text(
-    //                         "Contact Us\n",
-    //                         style: TextStyle(
-    //                             fontSize: 15,
-    //                             fontWeight: FontWeight.bold,
-    //                             color: Colors.white),
-    //                       )),
-    //                   user != null
-    //                       ? TextButton(
-    //                           onPressed: () {
-    //                             FirebaseAuth.instance.signOut();
-    //                           },
-    //                           child: Text(
-    //                             'Logout',
-    //                             style: TextStyle(
-    //                                 fontSize: 15,
-    //                                 fontWeight: FontWeight.bold,
-    //                                 color: Colors.white),
-    //                           ))
-    //                       : SizedBox(),
-    //                 ],
-    //                 // ),
-    //               ),
-    //             )),
-    //           ),
-    //           Container(
-    //             width: MediaQuery.of(context).size.width / 1.6,
-    //             color: Colors.transparent,
-    //             child: Expanded(
-    //               // flex: 2,
-    //               child: Padding(
-    //                 padding: const EdgeInsets.symmetric(
-    //                     horizontal: 25, vertical: 40),
-    //                 child: Column(
-    //                   crossAxisAlignment: CrossAxisAlignment.start,
-    //                   children: [
-    //                     Text(
-    //                       'Address\n',
-    //                       style: TextStyle(
-    //                           color: Colors.white,
-    //                           fontWeight: FontWeight.bold,
-    //                           fontSize: 20),
-    //                     ),
-    //                     Text(
-    //                       'DELTA NATIONALS Baladiya St,\nAlanwar Center P.O.Box: 101447, jiddah 21311\nTel: 0126652671, jiddah -Soudi Arabia\nE-mail : sales@deltanationals.com',
-    //                       style: TextStyle(fontSize: 15, color: Colors.white),
-    //                     ),
-    //                     SizedBox(
-    //                       height: MediaQuery.of(context).size.height / 20,
-    //                     ),
-    //                     Text(
-    //                       'Contact Us\n',
-    //                       style: TextStyle(
-    //                           color: Colors.white,
-    //                           fontWeight: FontWeight.bold,
-    //                           fontSize: 20),
-    //                     ),
-    //                     Text(
-    //                       '+91 6238636935',
-    //                       style: TextStyle(color: Colors.white, fontSize: 15),
-    //                     )
-    //                   ],
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-
-    //       // Expanded(
-    //       //     flex: 3,
-    //       Padding(
-    //         padding: const EdgeInsets.symmetric(horizontal: 15),
-    //         child: Container(
-    //           color: Colors.black,
-    //           child: Padding(
-    //             padding: const EdgeInsets.only(right: 0),
-    //             child: Column(
-    //               mainAxisAlignment: MainAxisAlignment.start,
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 SizedBox(
-    //                   height: MediaQuery.of(context).size.height / 20,
-    //                 ),
-    //                 Text(
-    //                   'Write To Us',
-    //                   style: TextStyle(
-    //                       color: Colors.white,
-    //                       fontWeight: FontWeight.bold,
-    //                       fontSize: 20),
-    //                 ),
-    //                 SizedBox(
-    //                   height: MediaQuery.of(context).size.height / 20,
-    //                 ),
-    //                 Row(
-    //                   children: [
-    //                     SizedBox(
-    //                         width: MediaQuery.of(context).size.width / 2.5,
-    //                         child: CustTextField('name', name, context)),
-    //                     // _TextField("C", name, context),
-    //                     SizedBox(
-    //                       width: MediaQuery.of(context).size.width / 35,
-    //                     ),
-    //                     SizedBox(
-    //                         width: MediaQuery.of(context).size.width / 2,
-    //                         child: CustTextField(
-    //                             "Company Name", companyName, context))
-    //                     // _TextField("Company Name", companyName, context)
-    //                   ],
-    //                 ),
-    //                 SizedBox(
-    //                   height: MediaQuery.of(context).size.height / 25,
-    //                 ),
-    //                 Row(
-    //                   children: [
-    //                     SizedBox(
-    //                         width: MediaQuery.of(context).size.width / 2.5,
-    //                         child: CustTextField("Email", email, context)),
-    //                     SizedBox(
-    //                       width: MediaQuery.of(context).size.width / 35,
-    //                     ),
-    //                     SizedBox(
-    //                         width: MediaQuery.of(context).size.width / 2,
-    //                         child: CustTextField(
-    //                             'Phone Number', phoneNumber, context))
-    //                   ],
-    //                 ),
-    //                 SizedBox(
-    //                   height: MediaQuery.of(context).size.height / 25,
-    //                 ),
-    //                 Container(
-    //                   width: MediaQuery.of(context).size.width / 1,
-    //                   child: Column(
-    //                     crossAxisAlignment: CrossAxisAlignment.start,
-    //                     mainAxisAlignment: MainAxisAlignment.start,
-    //                     children: [
-    //                       TextFormField(
-    //                         controller: textarea,
-    //                         keyboardType: TextInputType.multiline,
-    //                         style: TextStyle(color: Colors.white),
-    //                         maxLines: 5,
-    //                         decoration: InputDecoration(
-    //                             hintText: "Message",
-    //                             hintStyle: TextStyle(color: Colors.white),
-    //                             border: OutlineInputBorder(
-    //                               borderSide: BorderSide(
-    //                                 color: Colors
-    //                                     .white, // Set border color to white
-    //                                 width: 2.0,
-    //                               ),
-    //                             ),
-    //                             enabledBorder: OutlineInputBorder(
-    //                                 borderSide: BorderSide(
-    //                                     color: Colors.white, width: 2))),
-    //                       ),
-    //                       SizedBox(
-    //                         height: MediaQuery.of(context).size.height / 25,
-    //                       ),
-    //                       ElevatedButton(
-    //                         onPressed: () {
-    //                           textarea.text);
-    //                         },
-    //                         child: Text(
-    //                           'SUBMIT',
-    //                           style: TextStyle(color: Colors.black),
-    //                         ),
-    //                         style: ButtonStyle(
-    //                           backgroundColor:
-    //                               MaterialStateProperty.all(Colors.white),
-    //                           minimumSize:
-    //                               MaterialStateProperty.all(Size(150, 50)),
-    //                         ),
-    //                       ),
-    //                       SizedBox(
-    //                         height: MediaQuery.of(context).size.height / 25,
-    //                       ),
-    //                     ],
-    //                   ),
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       )
-    //     ],
-    //   ),
-    // );

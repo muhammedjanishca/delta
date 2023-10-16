@@ -66,7 +66,7 @@ class _ConnectersPageState extends State<ConnectersPage> {
                           ),
                         ),
                         Text(
-                          "GLANDS",
+                          "CONNECTERS",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
