@@ -17,9 +17,9 @@ class ImageSelection extends ChangeNotifier {
   String? _selectedImage;
 
 
-  String? get selectedThumbnail => _selectedImage;
+  String? get selecteImage => _selectedImage;
 
-  void setSelectedThumbnail(String thumbnailUrl,{int? index}) {
+  void setSelectedImage(String thumbnailUrl,) {
     _selectedImage = thumbnailUrl;
     notifyListeners();
   }

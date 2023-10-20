@@ -16,6 +16,7 @@ import 'package:firebase_hex/product_details/connecters_productd.dart';
 import 'package:firebase_hex/product_details/crimpingtool_details.dart';
 import 'package:firebase_hex/product_details/gland_productdetails.dart';
 import 'package:firebase_hex/product_details/lugs_productdetails.dart';
+import 'package:firebase_hex/product_details/nonpdf_product.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
@@ -58,8 +59,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(
-            create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
@@ -68,6 +68,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
         ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
+        ChangeNotifierProvider(create: (context) =>ImageSelection()),
+
       ],
       child: MaterialApp(
         //this use using for handle null data
@@ -169,7 +171,7 @@ class _MyAppState extends State<MyApp> {
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
-                      body: ProductDetailsOfCrimpingTool(),
+                      body: Nopdf(),
                     );
                   },
                   settings: setting,
@@ -232,7 +234,7 @@ void navigateToProductDetailsOfAccessories(
   Navigator.pushNamed(context, '/productdetailsaccessories/$productname');
 }
 
-void navigateToProductDetailsOfCrimpinTools(
+void noPdfProductPage(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');

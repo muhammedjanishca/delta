@@ -11,7 +11,7 @@ class LandinPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: ResponsiveLandingPage(
-            mobileAppBar: MobilLanding(), desktopAppBar: DesktopLanding()));
+            mobileAppBar: MobileLanding(), desktopAppBar: DesktopLanding()));
   }
 }
 
@@ -20,6 +20,31 @@ class DesktopLanding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData queryDataa = MediaQuery.of(context);
+    MediaQueryData queryData = MediaQuery.of(context);
+    Widget industrialCableText = queryData.size.width >= 950
+        ? Padding(
+            padding: EdgeInsets.only(left: 50),
+            child: Text(
+              'Industrial Cable Management System for your Electrical Projects!',
+              style: GoogleFonts.abel(
+                textStyle: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+            ),
+          )
+        : SizedBox();
+
+    Widget industrialCableTextt = queryData.size.width >= 950
+        ?  SizedBox()
+        : Padding(
+            padding: EdgeInsets.only(left: 50),
+            child: Text(
+              '\nIndustrial Cable Management System for your Electrical Projects!\n',
+              style: GoogleFonts.abel(
+                textStyle: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+            ),
+          );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,7 +56,6 @@ class DesktopLanding extends StatelessWidget {
               color: Colors.transparent,
               child: Image.network(
                 'https://i0.wp.com/www.compliancesigns.com/blog/wp-content/uploads/2023/05/5-Electrical-Safety-Tips.jpg?fit=1200%2C630&ssl=1',
-                // 'https://electrek.co/wp-content/uploads/sites/3/2021/05/bird-three-header-scooter.jpg?quality=82&strip=all',
                 width: 200,
                 height: 200,
                 // color: Colors.amber,
@@ -86,15 +110,16 @@ class DesktopLanding extends StatelessWidget {
                       SizedBox(
                         height: 320,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 50),
-                        child: Text(
-                          'Industrial Cable Management System for your Electrical Projects!',
-                          style: GoogleFonts.abel(
-                              textStyle: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold)),
-                        ),
-                      ),
+                      industrialCableText,
+                      // Padding(
+                      //   padding:  EdgeInsets.only(left: 50),
+                      //   child: Text(
+                      //     'Industrial Cable Management System for your Electrical Projects!',
+                      //     style: GoogleFonts.abel(
+                      //         textStyle: TextStyle(
+                      //             fontSize: 30, fontWeight: FontWeight.bold)),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 30,
                       ),
@@ -102,7 +127,7 @@ class DesktopLanding extends StatelessWidget {
                   ),
                 )),
             Positioned(
-              right: 100,
+              right: MediaQuery.of(context).size.width * 0.1,
               top: 30,
               child: Container(
                 width: 450,
@@ -146,16 +171,14 @@ class DesktopLanding extends StatelessWidget {
             ),
           ],
         ),
+        industrialCableTextt,
         Padding(
           padding: const EdgeInsets.only(left: 50, bottom: 40),
           child: Text(
-            
-'          Delta Cable Management Systems are designed to efficiently organize and secure electrical and electronic\ncables in various settings, be it a facility, residence, or office. Industrial cable wholesale sellers in Saudi Arabia\nprioritize crafting cables that promote tidy workspaces, minimize trip hazards, prevent short circuits, and ultimately\nelevate electrical safety and functionality within your environment',
+            '          Delta Cable Management Systems are designed to efficiently organize and secure electrical and electronic\ncables in various settings, be it a facility, residence, or office. Industrial cable wholesale sellers in Saudi Arabia\nprioritize crafting cables that promote tidy workspaces, minimize trip hazards, prevent short circuits, and ultimately\nelevate electrical safety and functionality within your environment',
             style: GoogleFonts.abel(fontSize: 20, fontWeight: FontWeight.w300),
           ),
         ),
-       
-        
         Container(
           height: 550,
           width: double.infinity,
@@ -164,19 +187,18 @@ class DesktopLanding extends StatelessWidget {
             children: [
               Expanded(
                   child: Container(
-                color:  Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/image/hex-logo-new.png'),
-                    Text("\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700
-                    ),)
-                  ],
-                )
-              )),
+                      color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/image/hex-logo-new.png'),
+                          Text(
+                            "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.w700),
+                          )
+                        ],
+                      ))),
               Expanded(
                   child: Container(
                 color: const Color.fromARGB(255, 122, 111, 111),
@@ -211,8 +233,8 @@ final List<String> descriptionn = [
   '\nHEX provides a wide range ofcrimping\ntools for use with otherproducts.'
 ];
 
-class MobilLanding extends StatelessWidget {
-  const MobilLanding({super.key});
+class MobileLanding extends StatelessWidget {
+  const MobileLanding({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -291,6 +313,7 @@ class MobilLanding extends StatelessWidget {
                 )),
             Positioned(
               right: 30,
+              left: 30,
               top: 230,
               child: Container(
                 width: 450,
@@ -320,7 +343,7 @@ class MobilLanding extends StatelessWidget {
                               )),
                           Text(
                             descriptionn[index],
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w400),
                           )
                         ],
@@ -334,13 +357,20 @@ class MobilLanding extends StatelessWidget {
             ),
           ],
         ),
+        // MediaQuery.of(context).size.width >= 700
+        //                         ? 15.0
+        //                         : 5.0,
+        //                   ),
         Padding(
-          padding: const EdgeInsets.only(left: 20, right: 10),
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 10,
+          ),
           child: Text(
             'Industrial Cable Management System for your Electrical Projects!',
             style: GoogleFonts.abel(
                 textStyle:
-                    TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           ),
         ),
         Padding(
@@ -350,22 +380,35 @@ class MobilLanding extends StatelessWidget {
             style: GoogleFonts.abel(fontSize: 20, fontWeight: FontWeight.w300),
           ),
         ),
-        Container(
-          height: 550,
-          width: double.infinity,
-          child: Row(
-            children: [
-              Expanded(
-                  child: Container(
-                color: Colors.white,
-              )),
-              Expanded(
-                  child: Container(
-                color: Colors.white,
-              ))
-            ],
-          ),
-        ),
+        // Container(
+        //   height: 550,
+        //   width: double.infinity,
+          // child: Row(
+          //   children: [
+          //     Expanded(
+          //         child: Container(
+          //       color: Colors.white,
+          //     )),
+          //     Expanded(
+          //         child: Container(
+          //       color: Colors.white,
+          //     ))
+          //   ],
+          // ),
+        // ),
+          Container(
+                      color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/image/hex-logo-new.png'),
+                          Text(
+                            "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.w700),
+                          )
+                        ],
+                      )),
         Container(
             color: const Color.fromARGB(255, 255, 255, 255),
             height: 1000,

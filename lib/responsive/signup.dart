@@ -11,7 +11,7 @@ class ResponsiveSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, Constraints) {
-      if (Constraints.maxWidth < 600) {
+      if (Constraints.maxWidth < 950) {
         return mobileSignUp;
       } else {
         return desktopSignUp;

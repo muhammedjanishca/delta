@@ -1095,10 +1095,7 @@ class Nopdf extends StatelessWidget {
                                             width: 20,
                                           ),
                                           SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
+                                            width: MediaQuery.of(context).size.width /5,
                                             child: ElevatedButton(
                                               onPressed: () {
                                                 if (_formKey.currentState!

@@ -1,39 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/pages/bottom_sheet.dart';
 import 'package:firebase_hex/pages/carousal_slider.dart';
+import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 import '../model.dart';
 import '../provider/data_provider.dart';
 import '../provider/thumbnail.dart';
-import 'gridview.dart';
 
 
-class AccessoriesPage extends StatefulWidget {
+class AccessoriesPage extends StatelessWidget {
   AccessoriesPage({super.key});
 
-  @override
-  State<AccessoriesPage> createState() => _AccessoriesPageState();
-}
-
-class _AccessoriesPageState extends State<AccessoriesPage> {
-     int selectedImageIndex = -1; // Initialize with an invalid index
-
+     int selectedImageIndex = -1; 
+ // Initialize with an invalid index
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
+        final ImageHoverProvider =
+        Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
         future: context.read<DataProvider>().newaccessories,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return Center(
+              child: SpinKitCubeGrid(
+                size:140,
+                color:janishcolor
+              ));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -67,7 +69,7 @@ class _AccessoriesPageState extends State<AccessoriesPage> {
                           ),
                         ),
                         Text(
-                          "GLANDS",
+                          "ACCESSORIES",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
@@ -137,31 +139,21 @@ class _AccessoriesPageState extends State<AccessoriesPage> {
                                 children: [
                                   MouseRegion(
                                     onEnter: (_) {
-                                      setState(() {
-                                        selectedImageIndex = index;
-                                      });
+                                        ImageHoverProvider  .setSelectedImageIndex(index);
                                     },
                                     onExit: (_) {
-                                      setState(() {
-                                        selectedImageIndex = -1;
-                                      });
+                                       ImageHoverProvider   .setSelectedImageIndex(-1);
                                     },
                                     child: AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      height: selectedImageIndex == index
-                                          ? 210
-                                          : 160,
-                                      width: selectedImageIndex == index
-                                          ? MediaQuery.of(context).size.width /
-                                              4
-                                          : MediaQuery.of(context).size.width /
-                                              5,
+                                      height:ImageHoverProvider.selectedImageIndex == index? 210: 160,
+                                      width:ImageHoverProvider.selectedImageIndex == index
+                                          ? MediaQuery.of(context).size.width / 4
+                                          : MediaQuery.of(context).size.width / 5,
                                       child: Image.network(
                                         productData.thumbnail ?? "",
                                         height: 150,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
+                                        width:MediaQuery.of(context).size.width /5,
                                       ),
                                     ),
                                   ),
@@ -212,5 +204,4 @@ class _AccessoriesPageState extends State<AccessoriesPage> {
       );
     });
   }
-
 }

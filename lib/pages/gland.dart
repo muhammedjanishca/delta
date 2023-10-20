@@ -5,6 +5,7 @@ import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 import '../model.dart';
@@ -23,12 +24,17 @@ class GlandPage extends StatelessWidget {
         Provider.of<SelectedThumbnailProvider>(context);
  final ImageHoverProvider =
         Provider.of<ImageHoveroProvider>(context);
+
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
         future: context.read<DataProvider>().newglands,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return Center(
+              child: SpinKitCubeGrid(
+                size:140,
+                color:janishcolor
+              ));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {

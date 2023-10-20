@@ -1132,38 +1132,45 @@ class ProductDetailsOfGlands extends StatelessWidget {
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 20.0),
-                                            Form(
-                                              key: _formKey,
-                                              child: Container(
-                                                // height:
-                                                // MediaQuery.of(context).size.height/18,
-                                                width: 200,
-                                                //  MediaQuery.of(context).size.width/10,
-                                                child: TextFormField(
-                                                  controller:
-                                                      quantityController,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                    hintText:
-                                                        'Enter the quantity',
+                                            Row(
+                                              children: [
+                                                  SizedBox(
+                                            width: 20,
+                                          ),
+                                                Form(
+                                                  key: _formKey,
+                                                  child: Container(
+                                                    // height:
+                                                    // MediaQuery.of(context).size.height/18,
+                                                    width: 200,
+                                                    //  MediaQuery.of(context).size.width/10,
+                                                    child: TextFormField(
+                                                      controller:
+                                                          quantityController,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      decoration: InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        hintText:
+                                                            'Enter the quantity',
+                                                      ),
+                                                      validator: (value) {
+                                                        if (value!.isEmpty) {
+                                                          return 'Please enter a quantity';
+                                                        }
+                                                        int? quantity =
+                                                            int.tryParse(value);
+                                                        if (quantity == null ||
+                                                            quantity <= 0) {
+                                                          return 'Quantity must be a positive number';
+                                                        }
+                                                        return null; // Return null if the input is valid
+                                                      },
+                                                    ),
                                                   ),
-                                                  validator: (value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'Please enter a quantity';
-                                                    }
-                                                    int? quantity =
-                                                        int.tryParse(value);
-                                                    if (quantity == null ||
-                                                        quantity <= 0) {
-                                                      return 'Quantity must be a positive number';
-                                                    }
-                                                    return null; // Return null if the input is valid
-                                                  },
                                                 ),
-                                              ),
+                                              ],
                                             ),
 
                                             SizedBox(
@@ -1174,96 +1181,108 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 SizedBox(
                                                   width: 30,
                                                 ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    if (_formKey.currentState!
-                                                        .validate()) {
-                                                      if (FirebaseAuth.instance
-                                                              .currentUser !=
-                                                          null) {
-                                                        // signed in
-                                                        final selectedPrice =
-                                                            selectedPriceNotifier
-                                                                .value;
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
-                                                        final price = double
-                                                            .parse(selectedPrice
-                                                                .split(
-                                                                    ': ')[1]);
-
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            // selectedThumbnailProvider
-                                                            //         .selectedThumbnail ??
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                        cartProvider.addToCart(
-                                                            productCode,
-                                                            price,
-                                                            quantity,
-                                                            imageUrl ?? "",
-                                                            productName ?? "");
-
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    "Added to cart")));
-                                                      } else {
-                                                        // signed out
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return LoginPage(); // Your custom dialog widget
-                                                          },
-                                                        );
+                                                SizedBox(
+                                                   width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      if (_formKey.currentState!
+                                                          .validate()) {
+                                                        if (FirebaseAuth.instance
+                                                                .currentUser !=
+                                                            null) {
+                                                          // signed in
+                                                          final selectedPrice =
+                                                              selectedPriceNotifier
+                                                                  .value;
+                                                          final productCode =
+                                                              selectedPrice
+                                                                  .split(': ')[0];
+                                                          final price = double
+                                                              .parse(selectedPrice
+                                                                  .split(
+                                                                      ': ')[1]);
+                                                
+                                                          final quantity =
+                                                              int.tryParse(
+                                                                      quantityController
+                                                                          .text) ??
+                                                                  0;
+                                                          final imageUrl =
+                                                              // selectedThumbnailProvider
+                                                              //         .selectedThumbnail ??
+                                                              thumbnail;
+                                                          final productName =
+                                                              textpass;
+                                                          final cartProvider =
+                                                              Provider.of<
+                                                                      CartProvider>(
+                                                                  context,
+                                                                  listen: false);
+                                                          cartProvider.addToCart(
+                                                              productCode,
+                                                              price,
+                                                              quantity,
+                                                              imageUrl ?? "",
+                                                              productName ?? "");
+                                                
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(SnackBar(
+                                                                  content: Text(
+                                                                      "Added to cart")));
+                                                        } else {
+                                                          // signed out
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (BuildContext
+                                                                context) {
+                                                              return LoginPage(); // Your custom dialog widget
+                                                            },
+                                                          );
+                                                        }
                                                       }
-                                                    }
-                                                  },
-                                                  child:
-                                                      const Text('ADD TO CART'),
-                                                  style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(Colors.black),
-                                                    minimumSize:
-                                                        MaterialStateProperty
-                                                            .all(Size(150, 50)),
+                                                    },
+                                                    child:
+                                                        const Text('ADD TO CART'),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all(Colors.black),
+                                                      minimumSize:
+                                                          MaterialStateProperty
+                                                              .all(Size(150, 50)),
+                                                    ),
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   width: 20,
                                                 ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pushNamed(
-                                                        context, '/cart');
-                                                  },
-                                                  child: const Text(
-                                                    'GO TO CART',
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                  ),
-                                                  style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(Colors.white),
-                                                    minimumSize:
-                                                        MaterialStateProperty
-                                                            .all(Size(150, 50)),
+                                                SizedBox(
+                                                   width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pushNamed(
+                                                          context, '/cart');
+                                                    },
+                                                    child: const Text(
+                                                      'GO TO CART',
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                    ),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all(Colors.white),
+                                                      minimumSize:
+                                                          MaterialStateProperty
+                                                              .all(Size(150, 50)),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
