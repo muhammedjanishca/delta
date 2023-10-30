@@ -98,16 +98,14 @@ class deskBottomSheett extends StatelessWidget {
                       )),
                   Row(
                     children: [
-                      Text(
-                        'DELTA',
-                        style: GoogleFonts.ptSerif(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 213, 120, 26),
-                            fontSize: 45,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
+                      Text("DELTA",style: GoogleFonts.oswald(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 45,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),),
+             
                       Text(
                         "\nNATIONAL",
                         style: GoogleFonts.oswald(
@@ -344,16 +342,14 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                       )),
                   Row(
                     children: [
-                      Text(
-                        'DELTA',
-                        style: GoogleFonts.ptSerif(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 213, 120, 26),
-                            fontSize: 45,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
+                         Text("DELTA",style: GoogleFonts.oswald(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 45,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),),
+             
                       Text(
                         "\nNATIONAL",
                         style: GoogleFonts.oswald(

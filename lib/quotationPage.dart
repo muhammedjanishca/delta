@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:firebase_hex/jr_appbar.dart';
 import 'package:firebase_hex/pdfservies.dart';
 // import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // import 'package:syncfusion_flutter_pdf/pdf.dart';
 // import 'package:intl/intl.dart';
@@ -23,6 +25,38 @@ class QuotationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leadingWidth: 48,
+         title:Row(
+           children: [
+             InkWell(
+              onTap: (){
+                  Navigator.pushNamed(context, '/');
+              },
+               child: Text("DELTA",style: GoogleFonts.oswald(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),),
+             ),
+
+               Text("\n NATIONAL",style: GoogleFonts.oswald(
+                              textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),),
+             
+ 
+           ],
+
+         ),
+        ),
       body: Column(
         children: [
           Padding(
