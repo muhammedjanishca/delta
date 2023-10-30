@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_hex/jr_appbar.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/responsive/signup.dart';
@@ -1465,6 +1466,7 @@ class mobilesignup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -1499,13 +1501,13 @@ class mobilesignup extends StatelessWidget {
         ),
         body: SizedBox(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
+            padding:  EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 15,
-                ),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height / 32,
+                // ),
                 Text(
                     "Sign Up",
                     style: TextStyle(fontSize: 55, fontWeight: FontWeight.w600),
