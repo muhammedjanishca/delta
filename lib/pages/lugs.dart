@@ -1,37 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 import '../model.dart';
 import '../provider/data_provider.dart';
+import '../provider/hover_image_provider.dart';
 import '../provider/thumbnail.dart';
 import '../style.dart';
 import 'bottom_sheet.dart';
 import 'carousal_slider.dart';
 
-class LugsPage extends StatefulWidget {
+class LugsPage extends StatelessWidget {
   LugsPage({super.key});
 
-  @override
-  State<LugsPage> createState() => _LugsPageState();
-}
-
-class _LugsPageState extends State<LugsPage> {
-  int selectedImageIndex = -1; // Initialize with an invalid index
-
+  int selectedImageIndex = -1; 
+ // Initialize with an invalid index
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
+        final ImageHoverProvider =
+        Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
         future: context.read<DataProvider>().newlugs,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: SpinKitCubeGrid(
+                size:140,
+                color:janishcolor
+              ));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -85,6 +88,7 @@ class _LugsPageState extends State<LugsPage> {
                     ),
                     child: InkWell(
                       child: GridView.builder(
+                        physics: ScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount:
                               MediaQuery.of(context).size.width <= 800
@@ -147,41 +151,25 @@ class _LugsPageState extends State<LugsPage> {
                                           MainAxisAlignment.center,
                                       children: [
                                         MouseRegion(
-                                          onEnter: (_) {
-                                            setState(() {
-                                              selectedImageIndex = index;
-                                            });
-                                          },
-                                          onExit: (_) {
-                                            setState(() {
-                                              selectedImageIndex = -1;
-                                            });
-                                          },
-                                          child: AnimatedContainer(
-                                            duration:
-                                                Duration(milliseconds: 200),
-                                            height: selectedImageIndex == index
-                                                ? 210
-                                                : 160,
-                                            width: selectedImageIndex == index
-                                                ? MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4
-                                                : MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                            child: Image.network(
-                                              productData.thumbnail ?? "",
-                                              // height: 150,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  5,
-                                            ),
-                                          ),
-                                        ),
+                                    onEnter: (_) {
+                                        ImageHoverProvider  .setSelectedImageIndex(index);
+                                    },
+                                    onExit: (_) {
+                                       ImageHoverProvider   .setSelectedImageIndex(-1);
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 200),
+                                      height:ImageHoverProvider.selectedImageIndex == index? 210: 160,
+                                      width:ImageHoverProvider.selectedImageIndex == index
+                                          ? MediaQuery.of(context).size.width / 4
+                                          : MediaQuery.of(context).size.width / 5,
+                                      child: Image.network(
+                                        productData.thumbnail ?? "",
+                                        height: 150,
+                                        width:MediaQuery.of(context).size.width /5,
+                                      ),
+                                    ),
+                                  ),
                                         // SizedBox(
                                         //   height: 8,
                                         //   width:
@@ -233,6 +221,7 @@ class _LugsPageState extends State<LugsPage> {
     });
   }
 }
+
 // import 'package:firebase_hex/main.dart';
 // import 'package:firebase_hex/provider/data_provider.dart';
 // import 'package:firebase_hex/provider/thumbnail.dart';

@@ -9,6 +9,7 @@ import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../model.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsOfAccessories extends StatelessWidget {
@@ -29,7 +30,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
-    String product_name = setting_list[2];
+    String product_name = setting_list[2].replaceAll('_', " ");
+   
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
@@ -39,7 +41,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
       //******************MOBILE VIEW****************************
 
       mobileProductPage: FutureBuilder(
-        future: context.read<DataProvider>().newaccessories,
+        future: context.read<DataProvider>().fetchaccessoriesApiUrl(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
 
@@ -50,21 +52,54 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].productName;
-            var thumbnail = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-            var description = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].description;
-            var price = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-            var image = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-            var pdf = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+           String? textpass = "";
+            String? thumbnail = "";
+            String? description = "";
+            List<CodesAndPrice>? price = [];
+            String? priceofproduct = "";
+            List<String>? image = [];
+            String? pdf = "";
 
-            //  String selectedPrice = '';
+            if (selectedThumbnailProvider.selectedIndex != null) {
+              print("kjh");
+              textpass = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].productName;
+              thumbnail = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+              description = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].description;
+              price = snapshot
+                  .data!
+                  .data[selectedThumbnailProvider.selectedIndex!]
+                  .codesAndPrice!;
+              priceofproduct = snapshot
+                  .data!
+                  .data[selectedThumbnailProvider.selectedIndex!]
+                  .priceofproduct;
+              image = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+              pdf = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            } else {
+              print(product_name);
+              print("khgg");
 
+              snapshot.data!.data.firstWhere((element) {
+                if (element.productName == product_name) {
+                  print("2121");
+                  textpass = element.productName;
+                  thumbnail = element.thumbnail;
+                  description = element.description;
+                  price?.addAll(element.codesAndPrice!.map((e) => e));
+                  image?.addAll(element.images!.map((e) => e));
+                  pdf = element.pdf ?? "";
+                  return true;
+                } else {
+                  return false;
+                }
+              });
+              
+            }
             return pdf != null
                 ? DefaultTabController(
                     length: 2,
@@ -98,10 +133,11 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   .width /
                                               2,
                                           child: Image.network(
-                                              // thumbnail!,)
-                                              selectedThumbnailProvider
-                                                      .selectedThumbnail ??
-                                                  ''),
+                                            thumbnail!,
+                                              // selectedThumbnailProvider
+                                              //         .selectedThumbnail ??
+                                              //     ''
+                                                  ),
                                         ), // Display the selected thumbnail here
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
@@ -121,9 +157,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   child: Container(
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
-                                                        color: imageUrl ==
-                                                                selectedThumbnailProvider
-                                                                    .selectedThumbnail
+                                                        color: imageUrl ==imageUrl
+                                                                // selectedThumbnailProvider
+                                                                //     .selectedThumbnail
                                                             ? Colors
                                                                 .blue // Highlight the selected image
                                                             : Colors
@@ -227,7 +263,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               children: List<Widget>.generate(
                                                   price.length, (index) {
                                                 final codeAndPrice =
-                                                    price[index];
+                                                    price![index];
                                                 return InkWell(
                                                   onTap: () {
                                                     // When a container is tapped, update the selectedPrice using ValueNotifier.
@@ -521,7 +557,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               color: const Color.fromARGB(
                                                   255, 230, 233, 235),
                                               child: pdf != null
-                                                  ? SfPdfViewer.network(pdf)
+                                                  ? SfPdfViewer.network(pdf!)
                                                   : Nopdf()
                                               // PDFView(
                                               //   filePath:
@@ -553,10 +589,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
 //-----------desktop--------------------------------------------------------
 
       desktopProductPage: FutureBuilder(
-        future: context.read<DataProvider>().newaccessories,
+        future: context.read<DataProvider>().fetchaccessoriesApiUrl(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
-
+          // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
                 child:
@@ -564,20 +600,61 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            var textpass = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].productName;
-            var thumbnail = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-            var description = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].description;
-            var price = snapshot.data!
-                .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-            var image = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-            var pdf = snapshot
-                .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            String? textpass;
+            String? thumbnail;
+            String? description;
+            List<CodesAndPrice>? price = [];
+            List<String>? image = [];
+            String? pdf;
 
-            //  String selectedPrice = '';
+            //  selectedThumbnailProvider.setSelectedThumbnail(snapshot.data!.data.map((e) {
+            //       // print(e.productName);
+            //       if (e.productName == product_name) {
+            //         return e.thumbnail;
+            //       }
+            //     }).first!,
+            //     index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
+            //     );
+            if (selectedThumbnailProvider.selectedIndex != null) {
+              textpass = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].productName;
+              thumbnail = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+              description = snapshot.data!
+                  .data[selectedThumbnailProvider.selectedIndex!].description;
+              price = snapshot
+                  .data!
+                  .data[selectedThumbnailProvider.selectedIndex!]
+                  .codesAndPrice!;
+              image = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+              pdf = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+            } else {
+              // print(snapshot.data!.data[0].description);
+              // selectedThumbnailProvider.setSelectedThumbnail(snapshot.data!.data.map((e) {
+              //     // print(e.productName);
+              //     if (e.productName == product_name) {
+              //       return e.thumbnail;
+              //     }
+              //   }).first!,
+              //   index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
+              //   );
+              snapshot.data!.data.firstWhere((element) {
+                if (element.productName == product_name) {
+                  print("2121");
+                  textpass = element.productName;
+                  thumbnail = element.thumbnail;
+                  description = element.description;
+                  price?.addAll(element.codesAndPrice!.map((e) => e));
+                  image?.addAll(element.images!.map((e) => e));
+                  pdf = element.pdf;
+                  return true;
+                } else {
+                  return false;
+                }
+              });
+            }
 
             return pdf != null
                 ? DefaultTabController(
@@ -610,10 +687,11 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                            //  thumbnail!,
-                                            selectedThumbnailProvider
-                                                    .selectedThumbnail ??
-                                                ''),
+                                             thumbnail!,
+                                            // selectedThumbnailProvider
+                                            //         .selectedThumbnail ??
+                                            //     ''
+                                                ),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -633,9 +711,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
-                                                      color: imageUrl ==
-                                                              selectedThumbnailProvider
-                                                                  .selectedThumbnail
+                                                      color: imageUrl ==imageUrl
+                                                              // selectedThumbnailProvider
+                                                              //     .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors
@@ -722,10 +800,15 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             runSpacing:
                                                 8.0, // Adjust the spacing between rows as needed
                                             children: List<Widget>.generate(
-                                                price.length, (index) {
-                                              final codeAndPrice = price[index];
+                                                price!.length, (index) {
+                                              final codeAndPrice =
+                                                  price![index];
                                               return InkWell(
                                                 onTap: () {
+                                                  // String noprice = '0';
+                                                  // codeAndPrice.price != null
+                                                  //     ? codeAndPrice.price
+                                                  //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
@@ -849,56 +932,60 @@ class ProductDetailsOfAccessories extends StatelessWidget {
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 20.0),
-                                         Row(
+                                            Row(
                                               children: [
-                                                 SizedBox(
-                                                  width: 20,
-                                                ),
+                                                  SizedBox(
+                                            width: 20,
+                                          ),
                                                 Form(
-                                              key: _formKey,
-                                              child: Container(
-                                                width: 200,
-                                                child: TextFormField(
-                                                  controller: quantityController,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  decoration: InputDecoration(
-                                                    border: OutlineInputBorder(),
-                                                    hintText:
-                                                        'Enter the quantity',
+                                                  key: _formKey,
+                                                  child: Container(
+                                                    // height:
+                                                    // MediaQuery.of(context).size.height/18,
+                                                    width: 200,
+                                                    //  MediaQuery.of(context).size.width/10,
+                                                    child: TextFormField(
+                                                      controller:
+                                                          quantityController,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      decoration: InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        hintText:
+                                                            'Enter the quantity',
+                                                      ),
+                                                      validator: (value) {
+                                                        if (value!.isEmpty) {
+                                                          return 'Please enter a quantity';
+                                                        }
+                                                        int? quantity =
+                                                            int.tryParse(value);
+                                                        if (quantity == null ||
+                                                            quantity <= 0) {
+                                                          return 'Quantity must be a positive number';
+                                                        }
+                                                        return null; // Return null if the input is valid
+                                                      },
+                                                    ),
                                                   ),
-                                                  validator: (value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'Please enter a quantity';
-                                                    }
-                                                    int? quantity =
-                                                        int.tryParse(value);
-                                                    if (quantity == null ||
-                                                        quantity <= 0) {
-                                                      return 'Quantity must be a positive number';
-                                                    }
-                                                    return null; // Return null if the input is valid
-                                                  },
                                                 ),
-                                              ),
-                                            ),
-
                                               ],
                                             ),
 
-                                            // SizedBox(height: 8.0),
-                                            
-
                                             SizedBox(
-                                              height:30,
+                                              height: 30,
                                             ),
                                             Row(
                                               children: [
                                                 SizedBox(
-                                                  width: 20,
+                                                  width: 30,
                                                 ),
                                                 SizedBox(
-                                                  width: MediaQuery.of(context).size.width/5,
+                                                   width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       if (_formKey.currentState!
@@ -974,8 +1061,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   width: 20,
                                                 ),
                                                 SizedBox(
-                                                                                                    width: MediaQuery.of(context).size.width/5,
-
+                                                   width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       Navigator.pushNamed(
@@ -1004,24 +1093,34 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      // Container(
+                                      //   child: ListView.builder(
+                                      //       itemBuilder: (context, index) {
+                                      //     return Container(
+                                      //       child: pdf != null
+                                      //           ? SfPdfViewer.network(pdf)
+                                      //           : Nopdf(),
+                                      //     );
+                                      //   }),
+                                      // )
                                       // Tab 2 content goes here
                                       SingleChildScrollView(
-                                        child: Container(
-                                            height: 1500,
-                                            color: const Color.fromARGB(
-                                                255, 230, 233, 235),
-                                            child: pdf != null
-                                                ? SfPdfViewer.network(pdf)
-                                                : Nopdf()
-                                            // PDFView(
-                                            //   filePath:
-                                            //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                            //   // height: 300,   // Set the desired height for the PDF viewer
-                                            //   // width: 300,    // Set the desired width for the PDF viewer
-                                            // ),
+                                          child: Container(
+                                              height: 1500,
+                                              color: const Color.fromARGB(
+                                                  255, 230, 233, 235),
+                                              child: pdf != null
+                                                  ? SfPdfViewer.network(pdf!)
+                                                  : Nopdf()))
+                                      // PDFView(
+                                      //   filePath:
+                                      //             pdf, // Replace 'pdf' with the actual PDF file path or URL
+                                      //         // height: 300,   // Set the desired height for the PDF viewer
+                                      //         // width: 300,    // Set the desired width for the PDF viewer
+                                      //       ),
 
-                                            ),
-                                      ),
+                                      //       ),
+                                      // ),
                                     ],
                                   ),
                                 ),

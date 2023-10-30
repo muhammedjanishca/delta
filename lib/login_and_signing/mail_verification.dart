@@ -14,7 +14,7 @@ class MailVerificationPgae extends StatelessWidget {
   final String otpId;
   MailVerificationPgae(
       {super.key,
-      required this.name,
+      required this.name, 
       required this.email,
       required this.password,
       required this.otpId});
@@ -27,20 +27,41 @@ class MailVerificationPgae extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: InkWell(
-              onTap: () => Navigator.pop(context),
-              child: Image.asset(
-                "assets/icons/arrow-left.png",
-                color: Colors.black,
-              )),
-          centerTitle: true,
-          title: Text(
-            "Verification",
-            style: GoogleFonts.inter(fontSize: 18, color: Colors.black),
-          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leadingWidth: 48,
+         title:Row(
+           children: [
+             InkWell(
+              onTap: (){
+                  Navigator.pushNamed(context, '/');
+              },
+               child: Text("DELTA",style: GoogleFonts.oswald(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 45,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),),
+             ),
+
+               Text("\n NATIONAL",style: GoogleFonts.oswald(
+                              textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),),
+             
+ 
+           ],
+
+         ),
         ),
-        body: Padding(
+        body:
+         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -134,9 +155,9 @@ class MailVerificationPgae extends StatelessWidget {
                           ),
                     style: ButtonStyle(
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16))),
+                            borderRadius: BorderRadius.circular(0))),
                         backgroundColor:
-                            MaterialStatePropertyAll(Colors.deepPurple)),
+                            MaterialStatePropertyAll(Color.fromARGB(255, 33, 124, 159))),
                   ),
                 ),
               ),

@@ -96,19 +96,19 @@ class DesktopAppBar extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SearchLocationScreen()));
-                        },
-                        child: Text('address')),
-                    SizedBox(width: MediaQuery.of(context).size.width / 8),
-
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width <=
+                              950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                          ? MediaQuery.of(context).size.width /
+                              30 // If the screen width is less than 600, set width to half of the screen width
+                          : MediaQuery.of(context).size.width /
+                              8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                    ),
                     InkWell(
-                      onTap: () {
-                        // Navigate to the named route '/your_destination_screen'
-                        Navigator.pushNamed(context, '/');
-                      },
+                       onTap: () {
+                    // Navigate to the named route '/your_destination_screen'
+                    Navigator.pushNamed(context, '/');
+                  },
                       child: Text(
                         'DELTA',
                         style: GoogleFonts.oswald(
@@ -123,7 +123,7 @@ class DesktopAppBar extends StatelessWidget {
                     Text(
                       "NATIONAL",
                       style: GoogleFonts.oswald(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           color: Color.fromARGB(255, 251, 236, 221),
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -265,7 +265,14 @@ class DesktopAppBar extends StatelessWidget {
                             color: Colors.white,
                           )),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width / 8),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width <=
+                              950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                          ? MediaQuery.of(context).size.width /
+                              30 // If the screen width is less than 600, set width to half of the screen width
+                          : MediaQuery.of(context).size.width /
+                              8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                    ),
                   ],
                 ),
               ),
@@ -425,7 +432,6 @@ Widget custmobileDrawer(BuildContext context) {
             ),
             Divider(),
             ExpansionTile(
-              
               // collapsedBackgroundColor: janishcolor,
               iconColor: Colors.white,
               collapsedIconColor: Colors.white,
@@ -526,22 +532,32 @@ class MobileAppBar extends StatelessWidget {
         AppBar(
           title: Row(
             children: [
-              InkWell(
-                onTap: () {
-                  // Navigate to the named route '/your_destination_screen'
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Text(
-                  'DELTA',
-                  style: GoogleFonts.oswald(
-                    textStyle: TextStyle(
-                      color: Color.fromARGB(255, 251, 236, 221),
-                      fontSize: 45,
-                      fontWeight: FontWeight.w700,
+               InkWell(
+                       onTap: () {
+                    // Navigate to the named route '/your_destination_screen'
+                    Navigator.pushNamed(context, '/');
+                  },
+                      child: Text(
+                        'DELTA',
+                        style: GoogleFonts.oswald(
+                          textStyle: TextStyle(
+                            color: Color.fromARGB(255, 251, 236, 221),
+                            fontSize: 35,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                    Text(
+                      "NATIONAL",
+                      style: GoogleFonts.oswald(
+                        textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 251, 236, 221),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
               Spacer(),
               user == null
                   ? TextButton(
