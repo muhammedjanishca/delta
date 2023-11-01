@@ -1,24 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_hex/pages/bottom_sheet.dart';
-import 'package:firebase_hex/pages/carousal_slider.dart';
+import 'package:firebase_hex/widgets/bottom_sheet.dart';
+import 'package:firebase_hex/widgets/carousal_slider.dart';
+import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
-import 'package:firebase_hex/style.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../main.dart';
-import '../model.dart';
-import '../provider/data_provider.dart';
-import '../provider/thumbnail.dart';
+import '../../main.dart';
+import '../../model.dart';
+import '../../provider/thumbnail.dart';
 
+class CrimpingToolPage extends StatelessWidget {
+  CrimpingToolPage({super.key});
 
-class AccessoriesPage extends StatelessWidget {
-  AccessoriesPage({super.key});
-
-     int selectedImageIndex = -1; 
+  int selectedImageIndex = -1; 
  // Initialize with an invalid index
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
@@ -28,13 +28,13 @@ class AccessoriesPage extends StatelessWidget {
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
-        future: context.read<DataProvider>().newaccessories,
+        future: context.read<DataProvider>().newcrimpingtool,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: SpinKitCubeGrid(
                 size:140,
-                color:janishcolor
+                color:Deltacolor
               ));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -69,11 +69,11 @@ class AccessoriesPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "ACCESSORIES",
+                          "CRIMPING TOOLS",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: janishcolor,
+                            color: Deltacolor,
                           ),
                         )
                       ],
@@ -104,7 +104,7 @@ class AccessoriesPage extends StatelessWidget {
                             productData.thumbnail ?? "",index: index
                           );
 
-                          navigateToProductDetailsOfAccessories(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
+                          noPdfProductPage(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
                         },
                         child: Container(
                           //  height: 200,
@@ -203,5 +203,4 @@ class AccessoriesPage extends StatelessWidget {
         },
       );
     });
-  }
-}
+  }}

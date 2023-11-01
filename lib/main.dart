@@ -3,27 +3,27 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/pages/AccessoriesPage.dart';
-import 'package:firebase_hex/pages/appbar_page.dart';
-import 'package:firebase_hex/pages/cart.dart';
-import 'package:firebase_hex/pages/connecters.dart';
-import 'package:firebase_hex/pages/crimping.dart';
-import 'package:firebase_hex/pages/gland.dart';
-import 'package:firebase_hex/pages/landing_page.dart';
-import 'package:firebase_hex/pages/lugs.dart';
-import 'package:firebase_hex/product_details/accessories_product.dart';
-import 'package:firebase_hex/product_details/connecters_productd.dart';
-import 'package:firebase_hex/product_details/crimpingtool_details.dart';
-import 'package:firebase_hex/product_details/gland_productdetails.dart';
-import 'package:firebase_hex/product_details/lugs_productdetails.dart';
-import 'package:firebase_hex/product_details/nonpdf_product.dart';
+import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
+import 'package:firebase_hex/pages/another_pages/appbar_page.dart';
+import 'package:firebase_hex/pages/another_pages/cart.dart';
+import 'package:firebase_hex/pages/product_pages/connecters.dart';
+import 'package:firebase_hex/pages/product_pages/crimping.dart';
+import 'package:firebase_hex/pages/product_pages/gland.dart';
+import 'package:firebase_hex/pages/another_pages/landing_page.dart';
+import 'package:firebase_hex/pages/product_pages/lugs.dart';
+import 'package:firebase_hex/pages/details_pages/accessories_product.dart';
+import 'package:firebase_hex/pages/details_pages/connecters_productd.dart';
+import 'package:firebase_hex/pages/details_pages/crimpingtool_details.dart';
+import 'package:firebase_hex/pages/details_pages/gland_productdetails.dart';
+import 'package:firebase_hex/pages/details_pages/lugs_productdetails.dart';
+import 'package:firebase_hex/pages/details_pages/nonpdf_product.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
-import 'package:firebase_hex/search_api.dart';
+import 'package:firebase_hex/api/search_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -69,6 +69,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
         ChangeNotifierProvider(create: (context) =>ImageSelection()),
+        ChangeNotifierProvider(create: (context) =>SelectedKiduProvider()),
 
       ],
       child: MaterialApp(

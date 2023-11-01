@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_hex/jr_appbar.dart';
+import 'package:firebase_hex/widgets/jr_appbar.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/responsive/signup.dart';
-import 'package:firebase_hex/style.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
@@ -20,7 +20,9 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSignUp(
-        mobileSignUp: mobilesignup(), desktopSignUp: DeskSignUp());
+        mobileSignUp: mobilesignup(),
+        desktopSignUp: DeskSignUp()
+        );
   }
 }
 
@@ -704,12 +706,7 @@ class DeskSignUp extends StatelessWidget {
                                                                               1))),
                                                               backgroundColor:
                                                                   MaterialStatePropertyAll(
-                                                                      const Color
-                                                                              .fromARGB(
-                                                                          255,
-                                                                          171,
-                                                                          183,
-                                                                          58))),
+                                                                      Color.fromARGB(255, 22, 145, 156))),
                                                         ),
                                                       ),
                                                     ),
@@ -765,9 +762,24 @@ class DeskSignUp extends StatelessWidget {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("\nBy proceeding, you agree to the"),
+                      TextButton(onPressed: (){},
+                      child: Text("\nTerms and Conditions")),
+                      Text("\nand"),
+                       TextButton(onPressed: (){},
+                      child: Text("\nPrivacy Policy")),
+                    ],
+                  ),
+
                 ],
-              ))
+                
+              )
+              )
           // body: Container(
           //   color: Colors.white,
           //   child: Padding(

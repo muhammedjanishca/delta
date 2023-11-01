@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import '../main.dart';
-import '../model.dart';
-import '../provider/data_provider.dart';
-import '../provider/hover_image_provider.dart';
-import '../provider/thumbnail.dart';
-import '../style.dart';
-import 'bottom_sheet.dart';
-import 'carousal_slider.dart';
+import '../../main.dart';
+import '../../model.dart';
+import '../../provider/data_provider.dart';
+import '../../provider/hover_image_provider.dart';
+import '../../provider/thumbnail.dart';
+import '../../widgets/style.dart';
+import '../../widgets/bottom_sheet.dart';
+import '../../widgets/carousal_slider.dart';
 
 class LugsPage extends StatelessWidget {
   LugsPage({super.key});
@@ -33,7 +33,7 @@ class LugsPage extends StatelessWidget {
             return Center(
               child: SpinKitCubeGrid(
                 size:140,
-                color:janishcolor
+                color:Deltacolor
               ));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -74,7 +74,7 @@ class LugsPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
-                              color: janishcolor,
+                              color: Deltacolor,
                             ),
                           )
                         ],
@@ -101,14 +101,14 @@ class LugsPage extends StatelessWidget {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           var productData = snapshot.data!.data[index];
-
+              
                           return InkWell(
                             child: GestureDetector(
                               onTap: () {
                                 selectedThumbnailProvider.setSelectedThumbnail(
                                     productData.thumbnail ?? "",
                                     index: index);
-
+              
                                 navigateToProductDetailsofLugs(context, index,
                                     productname: snapshot
                                         .data!.data[index].productName!

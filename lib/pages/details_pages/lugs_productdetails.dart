@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/model.dart';
@@ -23,6 +24,8 @@ class ProductDetailsoflugs extends StatelessWidget {
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
+         var user = Provider.of<AuthenticationHelper>(context).user;
+   
     final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
@@ -519,9 +522,15 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     ),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        Navigator.pushNamed(
-                                                            context, '/cart');
-                                                      },
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                                       child: const Text(
                                                         'GO TO CART',
                                                         style: TextStyle(
@@ -1088,9 +1097,15 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                                                      Navigator.pushNamed(
-                                                          context, '/cart');
-                                                    },
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                                     child: const Text(
                                                       'GO TO CART',
                                                       style: TextStyle(

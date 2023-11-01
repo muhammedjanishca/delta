@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
@@ -9,7 +10,7 @@ import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../model.dart';
+import '../../model.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsOfAccessories extends StatelessWidget {
@@ -34,7 +35,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
    
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
-
+ var user = Provider.of<AuthenticationHelper>(context).user;
+   
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
@@ -517,10 +519,16 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       width: 20,
                                                     ),
                                                     ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.pushNamed(
-                                                            context, '/cart');
-                                                      },
+                                                       onPressed: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                                       child: const Text(
                                                         'GO TO CART',
                                                         style: TextStyle(
@@ -1077,9 +1085,15 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                                                      Navigator.pushNamed(
-                                                          context, '/cart');
-                                                    },
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                                     child: const Text(
                                                       'GO TO CART',
                                                       style: TextStyle(

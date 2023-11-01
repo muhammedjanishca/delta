@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:firebase_hex/pages/bottom_sheet.dart';
+import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
