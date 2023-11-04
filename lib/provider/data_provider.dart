@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../api.dart';
 import '../model.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,6 +22,7 @@ class DataProvider extends ChangeNotifier {
       throw Exception('Failed to load data');
     }
   }
+  
    Future<ProduceNewModal> fetchglandsApiUrl() async {
     final response = await http
         .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/glands'));
