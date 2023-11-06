@@ -1,24 +1,19 @@
 import 'dart:convert';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_hex/login_and_signing/signup_page.dart';
-// import 'package:firebase_hex/login_and_signing/welcome_page.dart';
-import 'package:firebase_hex/pages/bottom_sheet.dart';
+import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/res_cartpage.dart';
-import 'package:firebase_hex/style.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
-// import 'package:footer/footer.dart';
 import 'package:provider/provider.dart';
-import '../provider/cart_provider.dart';
-import '../provider/user_input_provider.dart';
-import '../quotationPage.dart';
+import '../../provider/cart_provider.dart';
+import '../../provider/user_input_provider.dart';
+import 'quotationPage.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-  
     return ResponsiveCart(
       desktopCart: DeskCart(),
       mobileCart: Mobilecart(),
@@ -80,15 +75,14 @@ class _DeskCartState extends State<DeskCart> {
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
-                                  color: janishcolor),
+                                  color: Deltacolor),
                             )
                           ],
                         ),
                       ),
                       Expanded(
                         child: ListView.separated(
-                         
-                           physics: const ScrollPhysics(),
+                          physics: const ScrollPhysics(),
                           itemCount: cartItems["cartItems"].length,
                           separatorBuilder: (context, index) =>
                               const Divider(height: 88, color: Colors.grey),
@@ -342,12 +336,15 @@ class _DeskCartState extends State<DeskCart> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => QuotationPage(
-                                            totalPrice:
-                                                cartProvider.getTotalPrice(),
-                                            cartItems:
-                                                cartItems["cartItems"],
-                                                 totalPriceWithVAT: cartProvider.getTotalPriceWithVAT(subtotal, vatRate),
-                                                 vat: cartProvider.calculateVAT(subtotal, vatRate),)));
+                                              totalPrice:
+                                                  cartProvider.getTotalPrice(),
+                                              cartItems: cartItems["cartItems"],
+                                              totalPriceWithVAT: cartProvider
+                                                  .getTotalPriceWithVAT(
+                                                      subtotal, vatRate),
+                                              vat: cartProvider.calculateVAT(
+                                                  subtotal, vatRate),
+                                            )));
                               },
                               child: Text(
                                 'GANERATE QUATATION',
@@ -405,10 +402,14 @@ class _MobilecartState extends State<Mobilecart> {
   Widget build(BuildContext context) {
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final FirebaseAuth auth = FirebaseAuth.instance;
-
     final cartProvider = Provider.of<CartProvider>(context);
     cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
+    double subtotal = cartProvider.getTotalPrice();
+    double vatRate = 15.0;
+    double vat = cartProvider.calculateVAT(subtotal, vatRate);
+    double totalPriceWithVAT =
+        cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -440,7 +441,7 @@ class _MobilecartState extends State<Mobilecart> {
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
-                                color: janishcolor),
+                                color: Deltacolor),
                           )
                         ],
                       ),
@@ -465,7 +466,7 @@ class _MobilecartState extends State<Mobilecart> {
                                 children: [
                                   Container(
                                     height:
-                                        MediaQuery.of(context).size.height / 11,
+                                        MediaQuery.of(context).size.height / 8,
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     color: Colors.white,
@@ -480,7 +481,7 @@ class _MobilecartState extends State<Mobilecart> {
                                   ),
                                   SizedBox(
                                     height:
-                                        MediaQuery.of(context).size.height / 8,
+                                        MediaQuery.of(context).size.height / 5.5,
                                     width:
                                         MediaQuery.of(context).size.width / 1.5,
                                     child: Column(
@@ -628,7 +629,7 @@ class _MobilecartState extends State<Mobilecart> {
 
               // flex: 2,
               SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
+                height: MediaQuery.of(context).size.height / 2,
                 child: Row(
                   children: [
                     SizedBox(
@@ -661,16 +662,33 @@ class _MobilecartState extends State<Mobilecart> {
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                           ),
-
-                          // SizedBox(height: 45),
                           ListTile(
-                            title: Text('VAT'),
-                            // trailing: Text('\$ ${totalPrice.toStringAsFixed(2)}'),
+                            title: Text('VAT (${vatRate}%)'),
+                            trailing: Text('\$${vat.toStringAsFixed(2)}'),
                           ),
-
-                          // SizedBox(
-                          //   height: 20,
-                          // ),
+                          Divider(
+                            height:
+                                1, // Adjust the height of the divider as needed
+                            color: const Color.fromARGB(255, 147, 146,
+                                146), // Choose the color of the divider
+                            thickness:
+                                1, // Specify the thickness of the divider line
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ListTile(
+                            title: Text(
+                              'Total Price (with VAT)',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            ),
+                            trailing: Text(
+                              '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
                           Divider(
                             height:
                                 1, // Adjust the height of the divider as needed
@@ -740,7 +758,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
     // cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
- double subtotal = cartProvider.getTotalPrice();
+    double subtotal = cartProvider.getTotalPrice();
     double vatRate = 15.0;
     double vat = cartProvider.calculateVAT(subtotal, vatRate);
     double totalPriceWithVAT =
@@ -755,7 +773,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               height: 50,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
-                color: janishcolor,
+                color: Deltacolor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(
                       20), // Adjust the top-left radius as needed
@@ -771,7 +789,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       builder: (context) => QuotationPage(
                         totalPrice: cartProvider.getTotalPrice(),
                         cartItems: cartItems["cartItems"],
-                         totalPriceWithVAT: cartProvider.getTotalPriceWithVAT(subtotal, vatRate), 
+                        totalPriceWithVAT: cartProvider.getTotalPriceWithVAT(
+                            subtotal, vatRate),
                         vat: cartProvider.calculateVAT(subtotal, vatRate),
                       ),
                     ),
@@ -806,7 +825,7 @@ class MobileBottomNavigationBaru extends StatelessWidget {
               height: 50,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
-                color: janishcolor,
+                color: Deltacolor,
               ),
               // child: TextButton(
               //   onPressed: () {

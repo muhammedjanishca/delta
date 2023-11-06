@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'dart:math';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/pages/customtextfield.dart';
+import 'package:firebase_hex/widgets/customtextfield.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
-import 'package:firebase_hex/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

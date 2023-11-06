@@ -1,14 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../login_and_signing/signup_page.dart';
-import '../model.dart';
-import '../provider/cart_provider.dart';
-import '../provider/data_provider.dart';
-import '../provider/thumbnail.dart';
-import '../provider/user_input_provider.dart';
-import '../responsive/product_page.dart';
+import '../../login_and_signing/signup_page.dart';
+import '../../model.dart';
+import '../../provider/cart_provider.dart';
+import '../../provider/data_provider.dart';
+import '../../provider/thumbnail.dart';
+import '../../provider/user_input_provider.dart';
+import '../../responsive/product_page.dart';
 import 'accessories_product.dart';
 
 class Nopdf extends StatelessWidget {
@@ -21,7 +22,8 @@ class Nopdf extends StatelessWidget {
     // final userInputProvider = Provider.of<UserInputProvider>(context);
     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
     TextEditingController quantityController = TextEditingController();
-
+ var user = Provider.of<AuthenticationHelper>(context).user;
+   
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
@@ -408,9 +410,15 @@ class Nopdf extends StatelessWidget {
                                                 5,
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.pushNamed(
-                                                    context, '/cart');
-                                              },
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                               child: const Text(
                                                 'GO TO CART',
                                                 style: TextStyle(
@@ -1179,9 +1187,15 @@ class Nopdf extends StatelessWidget {
                                                 5,
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.pushNamed(
-                                                    context, '/cart');
-                                              },
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                               child: const Text(
                                                 'GO TO CART',
                                                 style: TextStyle(

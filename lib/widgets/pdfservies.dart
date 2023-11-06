@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 //Local imports
-import 'save_file_mobile.dart' if (dart.library.html) 'save_file_web.dart';
+import '../save_file_mobile.dart' if (dart.library.html) 'save_file_web.dart';
 
 class PdfService {
   Future<void> generateInvoice(List cartItems) async {

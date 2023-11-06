@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/model.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
@@ -10,34 +10,40 @@ import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../../model.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsoflugs extends StatelessWidget {
-  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('Select the Code');
+class ProductDetailsOfAccessories extends StatelessWidget {
+  // ProductDetailsOfAccessories({selectedProductIndex)}
+  //  final int selectedProductIndex ;
+  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
-  ProductDetailsoflugs({super.key});
+  ProductDetailsOfAccessories({super.key});
   // ProductDetails({required this.productData, required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
-    // print("janishkuttan");
+    // "dfdghjkl");
     // final userInputProvider = Provider.of<UserInputProvider>(context);
     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
     TextEditingController quantityController = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
-    final selectedThumbnailProvider =
-        Provider.of<SelectedThumbnailProvider>(context);
-    final imageSelection = Provider.of<ImageSelection>(context);
+
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
     String product_name = setting_list[2].replaceAll('_', " ");
+   
 
+    final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
+ var user = Provider.of<AuthenticationHelper>(context).user;
+   
+    final selectedThumbnailProvider =
+        Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-      //*******MOBILE VIEW*********
+      //******************MOBILE VIEW****************************
 
       mobileProductPage: FutureBuilder(
-        future: context.read<DataProvider>().fetchLugsData(),
+        future: context.read<DataProvider>().fetchaccessoriesApiUrl(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
 
@@ -48,14 +54,16 @@ class ProductDetailsoflugs extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            String? textpass;
-            String? thumbnail;
-            String? description;
+           String? textpass = "";
+            String? thumbnail = "";
+            String? description = "";
             List<CodesAndPrice>? price = [];
+            String? priceofproduct = "";
             List<String>? image = [];
-            String? pdf;
+            String? pdf = "";
 
             if (selectedThumbnailProvider.selectedIndex != null) {
+              print("kjh");
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
               thumbnail = snapshot.data!
@@ -66,11 +74,18 @@ class ProductDetailsoflugs extends StatelessWidget {
                   .data!
                   .data[selectedThumbnailProvider.selectedIndex!]
                   .codesAndPrice!;
+              priceofproduct = snapshot
+                  .data!
+                  .data[selectedThumbnailProvider.selectedIndex!]
+                  .priceofproduct;
               image = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].images;
               pdf = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
+              print(product_name);
+              print("khgg");
+
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
                   print("2121");
@@ -79,14 +94,14 @@ class ProductDetailsoflugs extends StatelessWidget {
                   description = element.description;
                   price?.addAll(element.codesAndPrice!.map((e) => e));
                   image?.addAll(element.images!.map((e) => e));
-                  pdf = element.pdf;
+                  pdf = element.pdf ?? "";
                   return true;
                 } else {
                   return false;
                 }
               });
+              
             }
-
             return pdf != null
                 ? DefaultTabController(
                     length: 2,
@@ -120,13 +135,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   .width /
                                               2,
                                           child: Image.network(
-                                              // thumbnail!,
-                                              imageSelection.selecteImage ?? ''
-
+                                            thumbnail!,
                                               // selectedThumbnailProvider
                                               //         .selectedThumbnail ??
                                               //     ''
-                                              ),
+                                                  ),
                                         ), // Display the selected thumbnail here
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
@@ -135,14 +148,10 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               return GestureDetector(
                                                 onTap: () {
                                                   // When an image is clicked, set it as the selected thumbnail.
-                                                  imageSelection.setSelectedImage(
-                                                      imageUrl ??
-                                                          "data:image/jpeg;base64,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");
-
-                                                  // selectedThumbnailProvider
-                                                  //     .setSelectedThumbnail(
-                                                  //         imageUrl ??
-                                                  //             "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ8NDQ0NFREWFhURFRUYHSggGBstIBUVIjEhMTUtLi8wFyszOD8tNzQtOC0BCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAKoBKAMBIgACEQEDEQH/xAAbAAEBAQEAAwEAAAAAAAAAAAAAAQQFAgMGB//EADEQAQACAQIEBAQGAQUAAAAAAAABAhEDIQQSQWEiMVGREzJxgQUGUqHR8BQjcpKx4f/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD9U4jjeK59asU1aRSmpOhjQtqRrXi2pGJtFcRERWkx5Z5vOSv43xGIzwOtmZxERXU886WazM0xExGpff5Z+HOJ9O3v2N+wOXwHE8TrU5rVmlptq8sTS9IiscvLnnrFsbz0iWmOJ1MViaeKYrPlbeZxt5ee8z9vbXv2N+wMf+XfETyZnriLbft16fz564mczHLiI8rZjf7Lv2N+wKJv2N+wKJv2XfsAJv2N+wKJv2XfsAJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2N+wKJv2AUAAAAAAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUQAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABUAAAAAAAFQAAAAAAAABUAAVAVAAAAVAFQAFQAAAVAAAAAAAAAAAAAAAAAAAAAAAGfj+KjQ0ralukeGP1W6Q+Y4H8a1q60W1dS16WnF6z5RE9Yjph5/mTjviavwqz4NKZifSdTr7eXu8fxHg9GnCcNqUiYvqRXmnMzzZpmdvqD66JzGY3id4npI4v5Z47n050bT4tKPD30/8Azy9naAAAAAAAAAAAAAAABQQAAAAAAFBAAAAAAAAGH8Z434Gja0fPbw6f+6ev28258n+aNS88Ri2YpWkfD9Jz5z77fYHIbuM4iLcPwtImJmka3NGd48Xhz9mDMesNGtxVLaelpxp0pbTzzakfNqfUE4LibaOpTUr51neP1V6w+60dWt61vWc1tEWie0vz7MesPqfyre86N4tnkrf/AE5nv5xH96g7YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9PGWtGnM1znNMzWM2inNHNMd8ZYtXi/h5+FNr18UxN86lZmIrmtbTOZ859evpOA6Y59OI4iZpXwR8TlnPw74pE11JmJ8W/wAtff6PVPG61qRMctLTibU5LTbSr4Z5pnO8Tv79pB1cQYhk1OI5NXUiZz/pac6dc45782pmI7/L+zNq/iGpWJxy3xSbRaunaK2tFczp4m2c+87+W0g6mIGHh9e99WImYx8PVzWK2jktF6xEWnrOM/8Afkz24u/w9Dlt4uTSnVti1uWefTieaI7Tb2ny3B1hzY43V3meWK5isW5LYtm145t7RERisf8AL6ZaXG601raaVjn5KVryXia6ltOts2zPy5m0T9AdIAAAAAAAAAAAAAAAAAAAAAAAAAGSnF3xE205iJiJicxtmOvbun+fERMzS3TrGcT1/vrHq2KDLrcZFJmJpecYnONun8wf5teXm5bec1iNszOM4aQGO/HRForyWzm2d42xE+/TH1WvG5rzcltpiLR6bT/H7w2IDNbjIjGa2xMZzG/WY29fX6PGnGxOfDMRFb2tOf0zHl6xvPs2JMZ2nePSQZZ46N/BfPSNszOcY+vX6LqcXi01ikzyzi2JjaIpzZ/eI92pAZI47f5LYxWYnMb5mYx/e/oW4mszpzyTa1vk2jwzOYzn089+7WAzU4zOZ5LYjl9ObMzMYx9o93rj8Q3xyW+WJ6ee+Yn08s/RtUHo0OIi8zGJiYx543z1h7gABQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//Z");
+                                                  selectedThumbnailProvider
+                                                      .setSelectedThumbnail(
+                                                          imageUrl ??
+                                                              "data:image/jpeg;base64,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");
                                                 },
                                                 child: Padding(
                                                   padding:
@@ -150,12 +159,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   child: Container(
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
-                                                        color: imageUrl ==
-                                                                // imageUrl
-                                                                imageSelection
-                                                                    .selecteImage
-                                                            // selectedThumbnailProvider
-                                                            //     .selectedThumbnail
+                                                        color: imageUrl ==imageUrl
+                                                                // selectedThumbnailProvider
+                                                                //     .selectedThumbnail
                                                             ? Colors
                                                                 .blue // Highlight the selected image
                                                             : Colors
@@ -204,7 +210,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 // color: Colors.amber,
 
                                                 child: Text(
-                                                  'selected Product code&Price:',
+                                                  'Product Price :',
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -230,9 +236,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       width: 1.0,
                                                     ),
                                                   ),
-                                                  child: selectedPrice != null
-                                                      ? Text(selectedPrice)
-                                                      : Text('NO Price'),
+                                                  child: Text(selectedPrice.split(':').first.toString()),
                                                 );
                                               },
                                             ),
@@ -259,15 +263,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               runSpacing:
                                                   8.0, // Adjust the spacing between rows as needed
                                               children: List<Widget>.generate(
-                                                  price!.length, (index) {
+                                                  price.length, (index) {
                                                 final codeAndPrice =
                                                     price![index];
                                                 return InkWell(
                                                   onTap: () {
-                                                    String noprice = '0';
-                                                    codeAndPrice.price != null
-                                                        ? codeAndPrice.price
-                                                        : noprice;
                                                     // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                     selectedPriceNotifier
                                                             .value =
@@ -391,6 +391,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     );
                                                   }).toList(),
                                                 ),
+
+                                                // SizedBox(height: 8.0),
                                                 SizedBox(height: 20.0),
                                                 Container(
                                                   height: 40,
@@ -427,6 +429,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
+
                                                 SizedBox(
                                                   height: 30,
                                                 ),
@@ -442,14 +445,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                 .currentUser !=
                                                             null) {
                                                           // signed in
-
                                                           final selectedPrice =
                                                               selectedPriceNotifier
-                                                                          .value !=
-                                                                      null
-                                                                  ? selectedPriceNotifier
-                                                                      .value
-                                                                  : 'No Price';
+                                                                  .value;
                                                           final productCode =
                                                               selectedPrice
                                                                   .split(
@@ -521,10 +519,16 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       width: 20,
                                                     ),
                                                     ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.pushNamed(
-                                                            context, '/cart');
-                                                      },
+                                                       onPressed: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                                       child: const Text(
                                                         'GO TO CART',
                                                         style: TextStyle(
@@ -584,22 +588,23 @@ class ProductDetailsoflugs extends StatelessWidget {
                     ),
                   )
                 : Nopdf(
-                    typeOfProduct: 'lugs',
+                    typeOfProduct: 'accessories',
                   );
           }
         },
       ),
 
-//---------------------------------desktop-----------------------------
+//-----------desktop--------------------------------------------------------
 
       desktopProductPage: FutureBuilder(
-        future: context.read<DataProvider>().fetchLugsData(),
+        future: context.read<DataProvider>().fetchaccessoriesApiUrl(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
-            print("hgfghfhfgu");
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -690,11 +695,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                          thumbnail!,
-                                          // selectedThumbnailProvider
-                                          //         .selectedThumbnail ??
-                                          //     ''
-                                        ),
+                                             thumbnail!,
+                                            // selectedThumbnailProvider
+                                            //         .selectedThumbnail ??
+                                            //     ''
+                                                ),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -705,7 +710,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 // When an image is clicked, set it as the selected thumbnail.
                                                 selectedThumbnailProvider
                                                     .setSelectedThumbnail(
-                                                        imageUrl ?? "");
+                                                        imageUrl ??
+                                                            "data:image/jpeg;base64,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");
                                               },
                                               child: Padding(
                                                 padding:
@@ -713,10 +719,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
-                                                      color: imageUrl ==
-                                                              imageUrl
-                                                          // selectedThumbnailProvider
-                                                          //     .selectedThumbnail
+                                                      color: imageUrl ==imageUrl
+                                                              // selectedThumbnailProvider
+                                                              //     .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors
@@ -726,7 +731,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     ),
                                                   ),
                                                   child: Image.network(
-                                                    imageUrl ?? "",
+                                                    imageUrl ??
+                                                        "data:image/jpeg;base64,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",
                                                     width:
                                                         100, // Set the desired width for each image
                                                     height:
@@ -752,13 +758,13 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     .size
                                                     .width /
                                                 20,
-                                           ),
+                                          ),
                                           Flexible(
                                             child: Container(
                                               // color: Colors.amber,
 
                                               child: Text(
-                                                'selected Product code&Price:',
+                                                'Product Price : ',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.0,
@@ -783,16 +789,12 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     width: 1.0,
                                                   ),
                                                 ),
-                                                // child: selectedPrice != null
-                                                //     ? Text(selectedPrice)
-                                                //     : Text('NO Price'),
-                                                child: Text(selectedPrice != null ? selectedPrice : 'NO Price'),
+                                                child: Text(selectedPrice.split(':').last),
                                               );
                                             },
                                           ),
                                         ],
                                       ),
-
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -819,43 +821,30 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   selectedPriceNotifier.value =
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
                                                 },
-                                                child: Form(
-                                                  // key: containerKey,
-                                                  autovalidateMode:
-                                                      AutovalidateMode.always,
-                                                  child: Container(
-                                                    width: 100,
-
-                                                    padding: EdgeInsets.all(
-                                                        8.0), // Adjust the padding as needed
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: codeAndPrice
-                                                                    .price ==
-                                                                null
-                                                            ? Colors
-                                                                .red // Set border color to red when selectedPrice is null
-                                                            : codeAndPrice
-                                                                        .productCode ==
-                                                                    selectedCodeProvider
-                                                                        .selectedProductCode
-                                                                ? Colors
-                                                                    .blue // Set border color to blue for selected container
-                                                                : Colors
-                                                                    .black, // Set border color to black for non-selected containers
-                                                        width:
-                                                            1.0, // Set your desired border width
-                                                      ),
+                                                child: Container(
+                                                  width: 100,
+                                                  padding: EdgeInsets.all(
+                                                      8.0), // Adjust the padding as needed
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: codeAndPrice
+                                                                  .productCode ==
+                                                              selectedCodeProvider
+                                                                  .selectedProductCode
+                                                          // codeAndPrice.productCode
+                                                          ? Colors
+                                                              .blue // Set border color to blue for selected container
+                                                          : Colors
+                                                              .black, // Set border color to black for non-selected containers
+                                                      width:
+                                                          1.0, // Set your desired border width
                                                     ),
-                                                    child: Center(
-                                                      child: Text(
-                                                        '${codeAndPrice.productCode}',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight: FontWeight
-                                                                .w600 // Set your desired text color
-                                                            ),
-                                                      ),
+                                                  ),
+                                                  child: Text(
+                                                    '${codeAndPrice.productCode}',
+                                                    style: TextStyle(
+                                                      color: Colors
+                                                          .black, // Set your desired text color
                                                     ),
                                                   ),
                                                 ),
@@ -904,8 +893,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                       Container(
                                         // height: 1000,
                                         child: Column(
-                                          // crossAxisAlignment:
-                                          //     CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             SizedBox(height: 16.0),
                                             Text(
@@ -951,45 +940,46 @@ class ProductDetailsoflugs extends StatelessWidget {
 
                                             // SizedBox(height: 8.0),
                                             SizedBox(height: 20.0),
-                                             Row(
+                                            Row(
                                               children: [
-                                                 SizedBox(
-                                                  width: 20,
-                                                ),
+                                                  SizedBox(
+                                            width: 20,
+                                          ),
                                                 Form(
-                                              key: _formKey,
-                                              child: Container(
-                                                width: 200,
-                                                child: TextFormField(
-                                                  controller: quantityController,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  decoration: InputDecoration(
-                                                    border: OutlineInputBorder(),
-                                                    hintText:
-                                                        'Enter the quantity',
+                                                  key: _formKey,
+                                                  child: Container(
+                                                    // height:
+                                                    // MediaQuery.of(context).size.height/18,
+                                                    width: 200,
+                                                    //  MediaQuery.of(context).size.width/10,
+                                                    child: TextFormField(
+                                                      controller:
+                                                          quantityController,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      decoration: InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        hintText:
+                                                            'Enter the quantity',
+                                                      ),
+                                                      validator: (value) {
+                                                        if (value!.isEmpty) {
+                                                          return 'Please enter a quantity';
+                                                        }
+                                                        int? quantity =
+                                                            int.tryParse(value);
+                                                        if (quantity == null ||
+                                                            quantity <= 0) {
+                                                          return 'Quantity must be a positive number';
+                                                        }
+                                                        return null; // Return null if the input is valid
+                                                      },
+                                                    ),
                                                   ),
-                                                  validator: (value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'Please enter a quantity';
-                                                    }
-                                                    int? quantity =
-                                                        int.tryParse(value);
-                                                    if (quantity == null ||
-                                                        quantity <= 0) {
-                                                      return 'Quantity must be a positive number';
-                                                    }
-                                                    return null; // Return null if the input is valid
-                                                  },
                                                 ),
-                                              ),
-                                            ),
-
                                               ],
                                             ),
-
-                                            // SizedBox(height: 8.0),
-                                            
 
                                             SizedBox(
                                               height: 30,
@@ -997,10 +987,13 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             Row(
                                               children: [
                                                 SizedBox(
-                                                  width: 20,
+                                                  width: 30,
                                                 ),
                                                 SizedBox(
-                                                  width: MediaQuery.of(context).size.width/5,
+                                                   width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       if (_formKey.currentState!
@@ -1076,13 +1069,21 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   width: 20,
                                                 ),
                                                 SizedBox(
-                                                                                                    width: MediaQuery.of(context).size.width/5,
-
+                                                   width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                                                      Navigator.pushNamed(
-                                                          context, '/cart');
-                                                    },
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                                                     child: const Text(
                                                       'GO TO CART',
                                                       style: TextStyle(
@@ -1091,12 +1092,10 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(
-                                                                  Colors.white),
+                                                              .all(Colors.white),
                                                       minimumSize:
                                                           MaterialStateProperty
-                                                              .all(Size(
-                                                                  150, 50)),
+                                                              .all(Size(150, 50)),
                                                     ),
                                                   ),
                                                 ),
@@ -1147,7 +1146,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                     ),
                   )
                 : Nopdf(
-                    typeOfProduct: 'lugs',
+                    typeOfProduct: 'accessories',
                   );
           }
         },

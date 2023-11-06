@@ -1,22 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/add.dart/address.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/pages/AccessoriesPage.dart';
-import 'package:firebase_hex/pages/connecters.dart';
-import 'package:firebase_hex/pages/crimping.dart';
-import 'package:firebase_hex/pages/gland.dart';
-import 'package:firebase_hex/pages/lugs.dart';
+import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
+import 'package:firebase_hex/pages/product_pages/connecters.dart';
+import 'package:firebase_hex/pages/product_pages/crimping.dart';
+import 'package:firebase_hex/pages/product_pages/gland.dart';
+import 'package:firebase_hex/pages/product_pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
-import 'package:firebase_hex/search_api.dart';
-import 'package:firebase_hex/style.dart';
+import 'package:firebase_hex/api/search_api.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../login_and_signing/authentication.dart';
-import '../login_and_signing/loginpage.dart';
-import '../whatsApp.dart';
+import '../../login_and_signing/authentication.dart';
+import '../../login_and_signing/loginpage.dart';
+import '../../widgets/whatsApp.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:badges/badges.dart' as badges;
 
@@ -105,10 +104,10 @@ class DesktopAppBar extends StatelessWidget {
                               8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
                     ),
                     InkWell(
-                       onTap: () {
-                    // Navigate to the named route '/your_destination_screen'
-                    Navigator.pushNamed(context, '/');
-                  },
+                      onTap: () {
+                        // Navigate to the named route '/your_destination_screen'
+                        Navigator.pushNamed(context, '/');
+                      },
                       child: Text(
                         'DELTA',
                         style: GoogleFonts.oswald(
@@ -280,7 +279,7 @@ class DesktopAppBar extends StatelessWidget {
                 height: 41,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: janishcolor,
+                  color: Deltacolor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -400,7 +399,7 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
-                  hoverColor: janishcolor,
+                  hoverColor: Deltacolor,
                   title: Text(
                     'Lugs',
                     style: TextStyle(color: Colors.white),
@@ -414,7 +413,7 @@ Widget custmobileDrawer(BuildContext context) {
                   },
                 ),
                 ListTile(
-                  hoverColor: janishcolor,
+                  hoverColor: Deltacolor,
                   title: Text(
                     'Connectors',
                     style: TextStyle(color: Colors.white),
@@ -444,7 +443,7 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
-                  hoverColor: janishcolor,
+                  hoverColor: Deltacolor,
                   title: Text(
                     'Glands',
                     style: TextStyle(color: Colors.white),
@@ -458,7 +457,7 @@ Widget custmobileDrawer(BuildContext context) {
                   },
                 ),
                 ListTile(
-                  hoverColor: janishcolor,
+                  hoverColor: Deltacolor,
                   title: Text(
                     'Accessories',
                     style: TextStyle(color: Colors.white),
@@ -487,7 +486,7 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
-                  hoverColor: janishcolor,
+                  hoverColor: Deltacolor,
                   title: Text(
                     'Crimping Tool',
                     style: TextStyle(color: Colors.white),
@@ -532,32 +531,32 @@ class MobileAppBar extends StatelessWidget {
         AppBar(
           title: Row(
             children: [
-               InkWell(
-                       onTap: () {
-                    // Navigate to the named route '/your_destination_screen'
-                    Navigator.pushNamed(context, '/');
-                  },
-                      child: Text(
-                        'DELTA',
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 35,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
+              InkWell(
+                onTap: () {
+                  // Navigate to the named route '/your_destination_screen'
+                  Navigator.pushNamed(context, '/');
+                },
+                child: Text(
+                  'DELTA',
+                  style: GoogleFonts.oswald(
+                    textStyle: TextStyle(
+                      color: Color.fromARGB(255, 251, 236, 221),
+                      fontSize: 35,
+                      fontWeight: FontWeight.w700,
                     ),
-                    Text(
-                      "NATIONAL",
-                      style: GoogleFonts.oswald(
-                        textStyle: const TextStyle(
-                          color: Color.fromARGB(255, 251, 236, 221),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
+                  ),
+                ),
+              ),
+              Text(
+                "NATIONAL",
+                style: GoogleFonts.oswald(
+                  textStyle: const TextStyle(
+                    color: Color.fromARGB(255, 251, 236, 221),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
               Spacer(),
               user == null
                   ? TextButton(
@@ -602,7 +601,7 @@ class MobileAppBar extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
         Container(
-          color: janishcolor,
+          color: Deltacolor,
           padding: EdgeInsets.only(bottom: 5, top: 5, left: 55, right: 10),
           height: 49,
           width: double.infinity,

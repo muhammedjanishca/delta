@@ -1,39 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_hex/pages/bottom_sheet.dart';
-import 'package:firebase_hex/pages/carousal_slider.dart';
-import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/widgets/bottom_sheet.dart';
+import 'package:firebase_hex/widgets/carousal_slider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
-import 'package:firebase_hex/style.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import '../main.dart';
-import '../model.dart';
-import '../provider/thumbnail.dart';
+import '../../main.dart';
+import '../../model.dart';
+import '../../provider/data_provider.dart';
+import '../../provider/thumbnail.dart';
 
-class GlandPage extends StatelessWidget {
-  GlandPage({super.key});
 
-  // int selectedImageIndex = -1;
+class AccessoriesPage extends StatelessWidget {
+  AccessoriesPage({super.key});
 
+     int selectedImageIndex = -1; 
+ // Initialize with an invalid index
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
- final ImageHoverProvider =
+        final ImageHoverProvider =
         Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
-        future: context.read<DataProvider>().newglands,
+        future: context.read<DataProvider>().newaccessories,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: SpinKitCubeGrid(
                 size:140,
-                color:janishcolor
+                color:Deltacolor
               ));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -68,11 +69,11 @@ class GlandPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "GLANDS",
+                          "ACCESSORIES",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: janishcolor,
+                            color: Deltacolor,
                           ),
                         )
                       ],
@@ -80,10 +81,8 @@ class GlandPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal:
-                        MediaQuery.of(context).size.width >= 600 ? 30 : 10,
-                  ),
+                  padding:
+                     EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,),
                   child: GridView.builder(
                     physics: ScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,14 +99,12 @@ class GlandPage extends StatelessWidget {
 
                       return GestureDetector(
                         onTap: () {
+                          
                           selectedThumbnailProvider.setSelectedThumbnail(
-                              productData.thumbnail ?? "",
-                              index: index);
+                            productData.thumbnail ?? "",index: index
+                          );
 
-                          navigateToProductDetailsOfGlands(context, index,
-                              productname: snapshot
-                                  .data!.data[index].productName!
-                                  .replaceAll(" ", "_"));
+                          navigateToProductDetailsOfAccessories(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
                         },
                         child: Container(
                           //  height: 200,
@@ -129,14 +126,10 @@ class GlandPage extends StatelessWidget {
                             ],
                           ),
                           padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.width >= 700
-                                ? 15.0
-                                : 5.0,
+                             MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
                           ),
                           margin: EdgeInsets.all(
-                            MediaQuery.of(context).size.width >= 700
-                                ? 15.0
-                                : 5.0,
+                            MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
                           ),
                           child: Stack(
                             alignment: Alignment.center,
