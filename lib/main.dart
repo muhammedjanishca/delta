@@ -23,7 +23,7 @@ import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
-import 'package:firebase_hex/api/search_api.dart';
+import 'package:firebase_hex/search_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

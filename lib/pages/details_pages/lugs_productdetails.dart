@@ -24,8 +24,8 @@ class ProductDetailsoflugs extends StatelessWidget {
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
-         var user = Provider.of<AuthenticationHelper>(context).user;
-   
+    var user = Provider.of<AuthenticationHelper>(context).user;
+
     final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
@@ -522,15 +522,21 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     ),
                                                     ElevatedButton(
                                                       onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                        user != null
+                                                            ? Navigator
+                                                                .pushNamed(
+                                                                    context,
+                                                                    '/cart')
+                                                            : showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return LoginPage(); // Your custom dialog widget
+                                                                },
+                                                              );
+                                                      },
                                                       child: const Text(
                                                         'GO TO CART',
                                                         style: TextStyle(
@@ -771,7 +777,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 style: TextStyle(
                                                   fontSize: 16.0,
                                                   fontFamily: 'Roboto',
-                                                  color: Color(0xFF212121),
+                                                      color: Color.fromARGB(255, 143, 143, 143),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -780,21 +786,28 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ValueListenableBuilder<String>(
                                             valueListenable:
                                                 selectedPriceNotifier,
-                                            builder: (context, selectedPrice,
-                                                child) {
+                                            builder: (context, selectedPrice,                                               
+                                            child) {
+                                             
                                               return Container(
                                                 width: 110,
-                                                padding: EdgeInsets.all(8.0),
+                                                padding: EdgeInsets.all(8.0),  
                                                 decoration: BoxDecoration(
+                                                   borderRadius: BorderRadius.circular(5),
                                                   border: Border.all(
-                                                    color: Colors.black,
+                                                    color: const Color.fromARGB(255, 126, 125, 125),
                                                     width: 1.0,
                                                   ),
                                                 ),
                                                 // child: selectedPrice != null
                                                 //     ? Text(selectedPrice)
                                                 //     : Text('NO Price'),
-                                                child: Text(selectedPrice),
+                                                child: 
+                                                // lastPrice == "null"
+                                                //     ? const Text('product available based on request')
+                                                //     : 
+                                                selectedPrice==" null"?Text('product available based on request'):
+                                                    Text(selectedPrice ),
                                               );
                                             },
                                           ),
@@ -807,14 +820,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           SizedBox(
                                             height: 30,
                                           ),
-
-                                          // Text(
-                                          //   'Codes and Prices:',
-                                          //   style: TextStyle(
-                                          //     fontWeight: FontWeight.bold,
-                                          //     fontSize: 18,
-                                          //   ),
-                                          // ),
                                           Wrap(
                                             spacing:
                                                 8.0, // Adjust the spacing between buttons as needed
@@ -826,38 +831,43 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   price![index];
                                               return InkWell(
                                                 onTap: () {
-                                                  // String noprice = '0';
-                                                  // codeAndPrice.price != null
-                                                  //     ? codeAndPrice.price
-                                                  //     : noprice;
-                                                  // When a container is tapped, update the selectedPrice using ValueNotifier.
+                                                
                                                   selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                                      ' ${codeAndPrice.price}';
                                                 },
-                                                child: Container(
-                                                  width: 100,
-                                                  padding: EdgeInsets.all(
-                                                      8.0), // Adjust the padding as needed
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: codeAndPrice
-                                                                  .productCode ==
-                                                              selectedCodeProvider
-                                                                  .selectedProductCode
-                                                          // codeAndPrice.productCode
-                                                          ? Colors
-                                                              .blue // Set border color to blue for selected container
-                                                          : Colors
-                                                              .black, // Set border color to black for non-selected containers
-                                                      width:
-                                                          1.0, // Set your desired border width
+                                                child: Form(
+                                                  autovalidateMode:
+                                                      AutovalidateMode.always,
+                                                  child: Container(
+                                                    width: 100,
+                                                    padding: EdgeInsets.all(
+                                                        8.0), // Adjust the padding as needed
+                                                    decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(
+                                                        color: codeAndPrice
+                                                                    .price ==
+                                                                null
+                                                            ? Colors
+                                                                .red // Set border color to red when selectedPrice is null
+                                                            : codeAndPrice
+                                                                        .productCode ==
+                                                                    selectedCodeProvider
+                                                                        .selectedProductCode
+                                                                ? Colors
+                                                                    .blue // Set border color to blue for selected container
+                                                                : Colors
+                                                                    .black, // Set border color to black for non-selected containers
+                                                        width:
+                                                            1.0, // Set your desired border width
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Text(
-                                                    '${codeAndPrice.productCode}',
-                                                    style: TextStyle(
-                                                      color: Colors
-                                                          .black, // Set your desired text color
+                                                    child: Text(
+                                                      '${codeAndPrice.productCode}',
+                                                      style: TextStyle(
+                                                        color: Colors
+                                                            .black, // Set your desired text color
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -955,9 +965,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             SizedBox(height: 20.0),
                                             Row(
                                               children: [
-                                                  SizedBox(
-                                            width: 20,
-                                          ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
                                                 Form(
                                                   key: _formKey,
                                                   child: Container(
@@ -970,7 +980,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           quantityController,
                                                       keyboardType:
                                                           TextInputType.number,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         border:
                                                             OutlineInputBorder(),
                                                         hintText:
@@ -1091,21 +1102,24 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   width: 20,
                                                 ),
                                                 SizedBox(
-                                                    width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                      user != null
+                                                          ? Navigator.pushNamed(
+                                                              context, '/cart')
+                                                          : showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return LoginPage(); // Your custom dialog widget
+                                                              },
+                                                            );
+                                                    },
                                                     child: const Text(
                                                       'GO TO CART',
                                                       style: TextStyle(
@@ -1114,10 +1128,12 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Colors.white),
+                                                              .all(
+                                                                  Colors.white),
                                                       minimumSize:
                                                           MaterialStateProperty
-                                                              .all(Size(150, 50)),
+                                                              .all(Size(
+                                                                  150, 50)),
                                                     ),
                                                   ),
                                                 ),

@@ -1,6 +1,6 @@
 
 import 'dart:convert';
-import '../model.dart';
+import 'model.dart';
 import 'package:http/http.dart' as http;
 
 Future<ProduceNewModal?> getProduct(String apiUrl) async {

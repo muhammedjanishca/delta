@@ -197,82 +197,100 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                         SizedBox(
                                           height: 30,
                                         ),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  20,
-                                            ),
-                                            Flexible(
-                                              child: Container(
-                                                // color: Colors.amber,
+                                       Row(
+                                        children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                20,
+                                          ),
+                                          Flexible(
+                                            child: Container(
+                                              // color: Colors.amber,
 
-                                                child: Text(
-                                                  'selected Product code&Price:',
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                    fontSize: 16.0,
-                                                    fontFamily: 'Roboto',
-                                                    color: Color(0xFF212121),
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                              child: Text(
+                                                'selected Product code&Price:',
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontFamily: 'Roboto',
+                                                  color: Color(0xFF212121),
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
-                                            ValueListenableBuilder<String>(
-                                              valueListenable:
-                                                  selectedPriceNotifier,
-                                              builder: (context, selectedPrice,
-                                                  child) {
-                                                return Container(
-                                                  width: 110,
-                                                  padding: EdgeInsets.all(8.0),
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: Colors.black,
-                                                      width: 1.0,
-                                                    ),
+                                          ),
+                                          ValueListenableBuilder<String>(
+                                            valueListenable:
+                                                selectedPriceNotifier,
+                                            builder: (context, selectedPrice,                                               child) {
+                                              // String lastPrice =
+                                              //     selectedPrice.substring(
+                                              //         selectedPrice.length - 4);
+                                              // print(lastPrice);
+                                              // print(
+                                              //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+                                              return Container(
+                                                width: 110,
+                                                padding: EdgeInsets.all(8.0),  
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 1.0,
                                                   ),
-                                                  child: Text(selectedPrice),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 30,
-                                            ),
+                                                ),
+                                                // child: selectedPrice != null
+                                                //     ? Text(selectedPrice)
+                                                //     : Text('NO Price'),
+                                                child: 
+                                                // lastPrice == "null"
+                                                //     ? const Text('product available based on request')
+                                                //     : 
+                                                selectedPrice==" null"?Text('product available based on request'):
+                                                    Text(selectedPrice ),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 30,
+                                          ),
 
-                                            // Text(
-                                            //   'Codes and Prices:',
-                                            //   style: TextStyle(
-                                            //     fontWeight: FontWeight.bold,
-                                            //     fontSize: 18,
-                                            //   ),
-                                            // ),
-                                            Wrap(
-                                              spacing:
-                                                  8.0, // Adjust the spacing between buttons as needed
-                                              runSpacing:
-                                                  8.0, // Adjust the spacing between rows as needed
-                                              children: List<Widget>.generate(
-                                                  price.length, (index) {
-                                                final codeAndPrice =
-                                                    price![index];
-                                                return InkWell(
-                                                  onTap: () {
-                                                    // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                                    selectedPriceNotifier
-                                                            .value =
-                                                        '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-                                                  },
+                                          // Text(
+                                          //   'Codes and Prices:',
+                                          //   style: TextStyle(
+                                          //     fontWeight: FontWeight.bold,
+                                          //     fontSize: 18,
+                                          //   ),
+                                          // ),
+                                          Wrap(
+                                            spacing:
+                                                8.0, // Adjust the spacing between buttons as needed
+                                            runSpacing:
+                                                8.0, // Adjust the spacing between rows as needed
+                                            children: List<Widget>.generate(
+                                                price!.length, (index) {
+                                              final codeAndPrice =
+                                                  price![index];
+                                              return InkWell(
+                                                onTap: () {
+                                                  // String noprice = '0';
+                                                  // codeAndPrice.price != null
+                                                  //     ? codeAndPrice.price
+                                                  //     : noprice;
+                                                  // When a container is tapped, update the selectedPrice using ValueNotifier.
+                                                  selectedPriceNotifier.value =
+                                                      ' ${codeAndPrice.price}';
+                                                },
+                                                child: Form(
+                                                  autovalidateMode:
+                                                      AutovalidateMode.always,
                                                   child: Container(
                                                     width: 100,
                                                     padding: EdgeInsets.all(
@@ -280,14 +298,18 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color: codeAndPrice
-                                                                    .productCode ==
-                                                                selectedCodeProvider
-                                                                    .selectedProductCode
-                                                            // codeAndPrice.productCode
+                                                                    .price ==
+                                                                null
                                                             ? Colors
-                                                                .blue // Set border color to blue for selected container
-                                                            : Colors
-                                                                .black, // Set border color to black for non-selected containers
+                                                                .red // Set border color to red when selectedPrice is null
+                                                            : codeAndPrice
+                                                                        .productCode ==
+                                                                    selectedCodeProvider
+                                                                        .selectedProductCode
+                                                                ? Colors
+                                                                    .blue // Set border color to blue for selected container
+                                                                : Colors
+                                                                    .black, // Set border color to black for non-selected containers
                                                         width:
                                                             1.0, // Set your desired border width
                                                       ),
@@ -300,17 +322,18 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                );
-                                              }),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                                ),
+                                              );
+                                            }),
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
+                          ),
                             Expanded(
                               flex: 2,
                               child: Column(
@@ -750,7 +773,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                       SizedBox(
                                         height: 30,
                                       ),
-                                      Row(
+                                     Row(
                                         children: [
                                           SizedBox(
                                             width: MediaQuery.of(context)
@@ -777,11 +800,16 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           ValueListenableBuilder<String>(
                                             valueListenable:
                                                 selectedPriceNotifier,
-                                            builder: (context, selectedPrice,
-                                                child) {
+                                            builder: (context, selectedPrice,                                               child) {
+                                              // String lastPrice =
+                                              //     selectedPrice.substring(
+                                              //         selectedPrice.length - 4);
+                                              // print(lastPrice);
+                                              // print(
+                                              //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
                                               return Container(
                                                 width: 110,
-                                                padding: EdgeInsets.all(8.0),
+                                                padding: EdgeInsets.all(8.0),  
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: Colors.black,
@@ -791,7 +819,12 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                 // child: selectedPrice != null
                                                 //     ? Text(selectedPrice)
                                                 //     : Text('NO Price'),
-                                                child: Text(selectedPrice),
+                                                child: 
+                                                // lastPrice == "null"
+                                                //     ? const Text('product available based on request')
+                                                //     : 
+                                                selectedPrice==" null"?Text('product available based on request'):
+                                                    Text(selectedPrice ),
                                               );
                                             },
                                           ),
@@ -829,32 +862,40 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                                      ' ${codeAndPrice.price}';
                                                 },
-                                                child: Container(
-                                                  width: 100,
-                                                  padding: EdgeInsets.all(
-                                                      8.0), // Adjust the padding as needed
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: codeAndPrice
-                                                                  .productCode ==
-                                                              selectedCodeProvider
-                                                                  .selectedProductCode
-                                                          // codeAndPrice.productCode
-                                                          ? Colors
-                                                              .blue // Set border color to blue for selected container
-                                                          : Colors
-                                                              .black, // Set border color to black for non-selected containers
-                                                      width:
-                                                          1.0, // Set your desired border width
+                                                child: Form(
+                                                  autovalidateMode:
+                                                      AutovalidateMode.always,
+                                                  child: Container(
+                                                    width: 100,
+                                                    padding: EdgeInsets.all(
+                                                        8.0), // Adjust the padding as needed
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: codeAndPrice
+                                                                    .price ==
+                                                                null
+                                                            ? Colors
+                                                                .red // Set border color to red when selectedPrice is null
+                                                            : codeAndPrice
+                                                                        .productCode ==
+                                                                    selectedCodeProvider
+                                                                        .selectedProductCode
+                                                                ? Colors
+                                                                    .blue // Set border color to blue for selected container
+                                                                : Colors
+                                                                    .black, // Set border color to black for non-selected containers
+                                                        width:
+                                                            1.0, // Set your desired border width
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Text(
-                                                    '${codeAndPrice.productCode}',
-                                                    style: TextStyle(
-                                                      color: Colors
-                                                          .black, // Set your desired text color
+                                                    child: Text(
+                                                      '${codeAndPrice.productCode}',
+                                                      style: TextStyle(
+                                                        color: Colors
+                                                            .black, // Set your desired text color
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
