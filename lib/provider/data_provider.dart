@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../api/api.dart';
+import '../api.dart';
 import '../model.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,7 +13,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchLugsData() async {
     final response = await http
-        .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/lugs'));
+        .get(Uri.parse('https://deltabackend.com/lugs'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -25,7 +25,7 @@ class DataProvider extends ChangeNotifier {
   }
    Future<ProduceNewModal> fetchglandsApiUrl() async {
     final response = await http
-        .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/glands'));
+        .get(Uri.parse('https://deltabackend.com/glands'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -37,7 +37,7 @@ class DataProvider extends ChangeNotifier {
   }
   Future<ProduceNewModal> fetchconnectersApiUrl() async {
     final response = await http
-        .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/connectors'));
+        .get(Uri.parse('https://deltabackend.com/connectors'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -49,7 +49,7 @@ class DataProvider extends ChangeNotifier {
   }
    Future<ProduceNewModal> fetchaccessoriesApiUrl() async {
     final response = await http
-        .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/accessories'));
+        .get(Uri.parse('https://deltabackend.com/accessories'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -61,7 +61,7 @@ class DataProvider extends ChangeNotifier {
   }
    Future<ProduceNewModal> fetchcrimpingtoolApiUrl() async {
     final response = await http
-        .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/crimpingtools'));
+        .get(Uri.parse('https://deltabackend.com/crimpingtools'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -89,7 +89,7 @@ class DataProvider extends ChangeNotifier {
     // print("fdghjk");
     // print(type);
     final response = await http.get(
-        Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/$type'));
+        Uri.parse('https://deltabackend.com/$type'));
 
     if (response.statusCode == 200) {
       // print(response.body);
