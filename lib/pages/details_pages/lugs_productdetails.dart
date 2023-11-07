@@ -838,21 +838,25 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   width: 100,
                                                   padding: EdgeInsets.all(
                                                       8.0), // Adjust the padding as needed
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: codeAndPrice
-                                                                  .productCode ==
-                                                              selectedCodeProvider
-                                                                  .selectedProductCode
-                                                          // codeAndPrice.productCode
-                                                          ? Colors
-                                                              .blue // Set border color to blue for selected container
-                                                          : Colors
-                                                              .black, // Set border color to black for non-selected containers
-                                                      width:
-                                                          1.0, // Set your desired border width
+                                                 decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: codeAndPrice
+                                                                    .price ==
+                                                                null
+                                                            ? Colors
+                                                                .red // Set border color to red when selectedPrice is null
+                                                            : codeAndPrice
+                                                                        .productCode ==
+                                                                    selectedCodeProvider
+                                                                        .selectedProductCode
+                                                                ? Colors
+                                                                    .blue // Set border color to blue for selected container
+                                                                : Colors
+                                                                    .black, // Set border color to black for non-selected containers
+                                                        width:
+                                                            1.0, // Set your desired border width
+                                                      ),
                                                     ),
-                                                  ),
                                                   child: Text(
                                                     '${codeAndPrice.productCode}',
                                                     style: TextStyle(
