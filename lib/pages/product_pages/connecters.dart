@@ -136,26 +136,31 @@ class ConnectersPage extends StatelessWidget {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  MouseRegion(
-                                    onEnter: (_) {
-                                        ImageHoverProvider  .setSelectedImageIndex(index);
-                                    },
-                                    onExit: (_) {
-                                       ImageHoverProvider   .setSelectedImageIndex(-1);
-                                    },
-                                    child: AnimatedContainer(
-                                      duration: Duration(milliseconds: 200),
-                                      height:ImageHoverProvider.selectedImageIndex == index? 210: 160,
-                                      width:ImageHoverProvider.selectedImageIndex == index
-                                          ? MediaQuery.of(context).size.width / 4
-                                          : MediaQuery.of(context).size.width / 5,
-                                      child: Image.network(
+                                  // MouseRegion(
+                                  //   onEnter: (_) {
+                                  //       ImageHoverProvider  .setSelectedImageIndex(index);
+                                  //   },
+                                  //   onExit: (_) {
+                                  //      ImageHoverProvider   .setSelectedImageIndex(-1);
+                                  //   },
+                                  //   child: AnimatedContainer(
+                                  //     duration: Duration(milliseconds: 200),
+                                  //     height:ImageHoverProvider.selectedImageIndex == index? 210: 160,
+                                  //     width:ImageHoverProvider.selectedImageIndex == index
+                                  //         ? MediaQuery.of(context).size.width / 4
+                                  //         : MediaQuery.of(context).size.width / 5,
+                                  //     child: Image.network(
+                                  //       productData.thumbnail ?? "",
+                                  //       height: 150,
+                                  //       width:MediaQuery.of(context).size.width /5,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                    Image.network(
                                         productData.thumbnail ?? "",
                                         height: 150,
                                         width:MediaQuery.of(context).size.width /5,
                                       ),
-                                    ),
-                                  ),
                                   SizedBox(
                                     height: 8,
                                     width:

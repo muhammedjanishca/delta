@@ -19,9 +19,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
   ProductDetailsOfGlands({super.key});
-  
+
   String? textpass;
-  
   String? thumbnail;
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
     // print(product_name);
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
- var user = Provider.of<AuthenticationHelper>(context).user;
-   
+    var user = Provider.of<AuthenticationHelper>(context).user;
+
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
@@ -126,11 +125,10 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     .width /
                                                 2,
                                             child: Image.network(
-                                              // thumbnail!,
-                                              selectedThumbnailProvider
-                                                      .selectedThumbnail ??
-                                                  ''
-                                            ),
+                                                // thumbnail!,
+                                                selectedThumbnailProvider
+                                                        .selectedThumbnail ??
+                                                    ''),
                                           ), // Display the selected thumbnail here
                                           SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
@@ -153,8 +151,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                         border: Border.all(
                                                           color: imageUrl ==
                                                                   // imageUrl
-                                                              selectedThumbnailProvider
-                                                                  .selectedThumbnail
+                                                                  selectedThumbnailProvider
+                                                                      .selectedThumbnail
                                                               ? Colors
                                                                   .blue // Highlight the selected image
                                                               : Colors
@@ -200,59 +198,22 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   fontSize: 22),
                                             ),
                                           ),
-                                          
+
                                           Divider(),
-                                           SizedBox(
-                                                height: MediaQuery.of(context).size.height/30,
-                                              ),
-                                          Row(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              
-                                               Form(
-                                                    key: _formKey,
-                                                    child: Container(
-                                                      width: 150,
-                                                      child: TextFormField(
-                                                        controller:
-                                                            quantityController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                          hintText:
-                                                              'Enter the quantity',
-                                                        ),
-                                                        validator: (value) {
-                                                          if (value!.isEmpty) {
-                                                            return 'Please enter a quantity';
-                                                          }
-                                                          int? quantity =
-                                                              int.tryParse(
-                                                                  value);
-                                                          if (quantity ==
-                                                                  null ||
-                                                              quantity <= 0) {
-                                                            return 'Quantity must be a positive number';
-                                                          }
-                                                          return null; // Return null if the input is valid
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                width: MediaQuery.of(context).size.width/13,
-                                              ),
-                                            ],
-                                          ),
                                           SizedBox(
-                                                height: MediaQuery.of(context).size.height/30,
-                                              ),
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                30,
+                                          ),
                                          
+                                          SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                30,
+                                          ),
+
                                           Row(
                                             children: [
                                               SizedBox(
@@ -261,7 +222,6 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                         .width /
                                                     15,
                                               ),
-                                              
                                               Flexible(
                                                 child: Container(
                                                   // color: Colors.amber,
@@ -273,7 +233,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     style: TextStyle(
                                                       fontSize: 14.0,
                                                       fontFamily: 'Roboto',
-                                                      color: Color.fromARGB(255, 143, 143, 143),
+                                                      color: Color.fromARGB(
+                                                          255, 143, 143, 143),
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     ),
@@ -290,300 +251,139 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     padding:
                                                         EdgeInsets.all(8.0),
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
                                                       border: Border.all(
-                                                        color: const Color.fromARGB(255, 126, 125, 125),
+                                                        color: const Color
+                                                                .fromARGB(
+                                                            255, 126, 125, 125),
                                                         width: 1.0,
                                                       ),
                                                     ),
-                                                    child:  selectedPrice==" null"?Text('product available based on request'):
-                                                    Text(selectedPrice ),
+                                                    child: selectedPrice ==
+                                                            " null"
+                                                        ? Text(
+                                                            'product available based on request')
+                                                        : Text(selectedPrice),
                                                   );
                                                 },
                                               ),
-                                               SizedBox(
+                                              SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
                                                     25,
                                               ),
-                                               TextButton(
-                                              onPressed: () {
-                                                showModalBottomSheet(
-                                                    context: context,
-                                                    isScrollControlled: true,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return SingleChildScrollView(
-                                                          child: Stack(
-                                                        children: [
-                                                          Container(
-                                                           height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    1,
-                                                            color:Colors.white,
-                                                            child: pdf != null
-                                                                ? SfPdfViewer
-                                                                    .network(
-                                                                        pdf!)
-                                                                : Nopdf(),
-                                                          ),
-                                                          Positioned(
-                                                            top:
-                                                                16, // Adjust the top position as needed
-                                                            right:
-                                                                16, // Adjust the left position as needed
-                                                            child: IconButton(
-                                                              icon: Icon(Icons
-                                                                  .close), // You can use any icon you like
-                                                              onPressed: () {
-                                                                 Navigator.pop(context);
-                                                                // Add your close button action here
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ));
-                                                    });
-                                              },
-                                              child:
-                                              Row(
-                                                children: [
-                                                  Icon(Icons.edit_document),
-                                                  Text("size chart")
-                                                ],
-                                              )
-                                              //  Text("size chart")
-                                               ),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    showModalBottomSheet(
+                                                        context: context,
+                                                        isScrollControlled:
+                                                            true,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return SingleChildScrollView(
+                                                              child: Stack(
+                                                            children: [
+                                                              Container(
+                                                                height: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .height /
+                                                                    1,
+                                                                color: Colors
+                                                                    .white,
+                                                                child: pdf !=
+                                                                        null
+                                                                    ? SfPdfViewer
+                                                                        .network(
+                                                                            pdf!)
+                                                                    : Nopdf(),
+                                                              ),
+                                                              Positioned(
+                                                                top:
+                                                                    16, // Adjust the top position as needed
+                                                                right:
+                                                                    16, // Adjust the left position as needed
+                                                                child:
+                                                                    IconButton(
+                                                                  icon: Icon(Icons
+                                                                      .close), // You can use any icon you like
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                    // Add your close button action here
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ));
+                                                        });
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.edit_document),
+                                                      Text("size chart")
+                                                    ],
+                                                  )
+                                                  //  Text("size chart")
+                                                  ),
                                             ],
                                           ),
-                                          Column(
+                                           SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    20,
+                                              ),
+                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             children: [
-                                              SizedBox(
-                                                height: 10,
+                                               SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    13,
                                               ),
-                                              Wrap(
-                                                spacing:
-                                                    8.0, // Adjust the spacing between buttons as needed
-                                                runSpacing:
-                                                    8.0, // Adjust the spacing between rows as needed
-                                                children: List<Widget>.generate(
-                                                    price.length, (index) {
-                                                  final codeAndPrice =
-                                                      price![index];
-                                                  return InkWell(
-                                                    onTap: () {
-                                                        selectedPriceNotifier.value =
-                                                      ' ${codeAndPrice.price}';
-                                                      // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                                      // selectedPriceNotifier
-                                                      //         .value =
-                                                      //     '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                              Form(
+                                                key: _formKey,
+                                                child: Container(
+                                                  width: 140,
+                                                  // height: 43,
+                                                  child: TextFormField(
+                                                    controller:
+                                                        quantityController,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                      border:
+                                                          OutlineInputBorder(),
+                                                      hintText:
+                                                          'Enter the quantity',hintStyle: TextStyle(
+                                                            fontSize: 14
+                                                          )
+                                                    ),
+                                                    validator: (value) {
+                                                      if (value!.isEmpty) {
+                                                        return 'Please enter a quantity';
+                                                      }
+                                                      int? quantity =
+                                                          int.tryParse(value);
+                                                      if (quantity == null ||
+                                                          quantity <= 0) {
+                                                        return 'Quantity must be a positive number';
+                                                      }
+                                                      return null; // Return null if the input is valid
                                                     },
-                                                    child: Form(
-                                                       autovalidateMode:
-                                                      AutovalidateMode.always,
-                                                      child: Container(
-                                                        width: 100,
-                                                        padding: EdgeInsets.all(
-                                                            8.0), // Adjust the padding as needed
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(5),
-                                                          border: Border.all(
-                                                        color: codeAndPrice
-                                                                    .price ==
-                                                                null
-                                                            ? Colors
-                                                                .red // Set border color to red when selectedPrice is null
-                                                            : codeAndPrice
-                                                                        .productCode ==
-                                                                    selectedCodeProvider
-                                                                        .selectedProductCode
-                                                                ? Colors
-                                                                    .blue // Set border color to blue for selected container
-                                                                : Colors
-                                                                    .black, // Set border color to black for non-selected containers
-                                                        width:
-                                                            1.0, // Set your desired border width
-                                                      ),
-                                                        ),
-                                                        child: Text(
-                                                          '${codeAndPrice.productCode}',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .black, // Set your desired text color
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                20,
-                                          ),
-                                          Container(
-                                            alignment: Alignment.bottomLeft,
-                                            child: Text(
-                                              "    DESCRIPTION :\n",
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left:13),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: description!
-                                                  .toUpperCase()
-                                                  .split('\n')
-                                                  .map((line) {
-                                                return Row(
-                                                  children: [
-                                                    Icon(Icons.star,
-                                                        size:
-                                                            10, // Adjust the size as needed
-                                                        color: Colors
-                                                            .black // Adjust the color as needed
-                                                        ),
-                                                    SizedBox(
-                                                      width:
-                                                          8, // Add some space between the circle icon and text
-                                                    ),
-                                                    Flexible(
-                                                      child: Text(
-                                                        line,
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                        ),
-                                                        overflow: TextOverflow
-                                                            .visible, // Handle text overflow
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                20,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Column(
-                                  children: [
-                                    TabBar(
-                                      unselectedLabelColor:
-                                          Color.fromARGB(255, 5, 5, 5),
-                                      indicatorSize: TabBarIndicatorSize.tab,
-                                      indicator: BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            Color.fromARGB(255, 0, 0, 0),
-                                            Color.fromARGB(255, 0, 0, 0)
-                                          ]),
-                                          borderRadius:
-                                              BorderRadius.circular(0),
-                                          color: const Color.fromARGB(
-                                              255, 255, 255, 255)),
-                                      tabs: [
-                                        Tab(
-                                          text: 'Description',
-                                        ),
-                                        Tab(
-                                          text: 'Technical Details',
-                                        ),
-                                      ],
-                                      labelColor: Colors.white,
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: TabBarView(
-                                        children: [
-                                          // Tab 1 content goes here
-                                          SingleChildScrollView(
-                                            child: Container(
-                                              // height: 1000,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  // SizedBox(height: 16.0),
-                                                  // Text(
-                                                  //   textpass ?? "",
-                                                  //   style: TextStyle(
-                                                  //       fontWeight:
-                                                  //           FontWeight.bold,
-                                                  //       fontSize: 30),
-                                                  // ),
-                                                  // SizedBox(height: 8.0),
-                                                  // Column(
-                                                  //   crossAxisAlignment:
-                                                  //       CrossAxisAlignment
-                                                  //           .start,
-                                                  //   children: description!
-                                                  //       .toUpperCase()
-                                                  //       .split('\n')
-                                                  //       .map((line) {
-                                                  //     return Row(
-                                                  //       children: [
-                                                  //         Icon(Icons.star,
-                                                  //             size:
-                                                  //                 10, // Adjust the size as needed
-                                                  //             color: Colors
-                                                  //                 .black // Adjust the color as needed
-                                                  //             ),
-                                                  //         SizedBox(
-                                                  //           width:
-                                                  //               8, // Add some space between the circle icon and text
-                                                  //         ),
-                                                  //         Flexible(
-                                                  //           child: Text(
-                                                  //             line,
-                                                  //             style: TextStyle(
-                                                  //               fontSize: 16,
-                                                  //             ),
-                                                  //             overflow: TextOverflow
-                                                  //                 .visible, // Handle text overflow
-                                                  //           ),
-                                                  //         ),
-                                                  //       ],
-                                                  //     );
-                                                  //   }).toList(),
-                                                  // ),
-
-                                                  // SizedBox(height: 8.0),
-                                                  SizedBox(height: 20.0),
-                                                  
-
-                                                  SizedBox(
-                                                    height: 30,
                                                   ),
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 30,
-                                                      ),
-                                                      ElevatedButton(
+                                                ),
+                                              ),
+                                                 ElevatedButton(
                                                         onPressed: () {
                                                           if (_formKey
                                                               .currentState!
@@ -596,6 +396,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                               final selectedPrice =
                                                                   selectedPriceNotifier
                                                                       .value;
+                                                              // final productCode =
+                                                                  
                                                               final productCode =
                                                                   selectedPrice
                                                                       .split(
@@ -667,71 +469,143 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                                       150, 50)),
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 20,
-                                                      ),
-                                                      ElevatedButton(
-                                                        onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
-                                                        child: const Text(
-                                                          'GO TO CART',
+                                             
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Wrap(
+                                                spacing:
+                                                    8.0, // Adjust the spacing between buttons as needed
+                                                runSpacing:
+                                                    8.0, // Adjust the spacing between rows as needed
+                                                children: List<Widget>.generate(
+                                                    price.length, (index) {
+                                                  final codeAndPrice =
+                                                      price![index];
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      selectedPriceNotifier
+                                                              .value =
+                                                          ' ${codeAndPrice.price}';
+                                                      // When a container is tapped, update the selectedPrice using ValueNotifier.
+                                                      // selectedPriceNotifier
+                                                      //         .value =
+                                                      //     '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                                    },
+                                                    child: Form(
+                                                      autovalidateMode:
+                                                          AutovalidateMode
+                                                              .always,
+                                                      child: Container(
+                                                        width: 100,
+                                                        padding: EdgeInsets.all(
+                                                            8.0), // Adjust the padding as needed
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          border: Border.all(
+                                                            color: codeAndPrice
+                                                                        .price ==
+                                                                    null
+                                                                ? Colors
+                                                                    .red // Set border color to red when selectedPrice is null
+                                                                : codeAndPrice
+                                                                            .productCode ==
+                                                                        selectedCodeProvider
+                                                                            .selectedProductCode
+                                                                    ? Colors
+                                                                        .blue // Set border color to blue for selected container
+                                                                    : Colors
+                                                                        .black, // Set border color to black for non-selected containers
+                                                            width:
+                                                                1.0, // Set your desired border width
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          '${codeAndPrice.productCode}',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Colors.black),
-                                                        ),
-                                                        style: ButtonStyle(
-                                                          backgroundColor:
-                                                              MaterialStateProperty
-                                                                  .all(Colors
-                                                                      .white),
-                                                          minimumSize:
-                                                              MaterialStateProperty
-                                                                  .all(Size(
-                                                                      150, 50)),
+                                                            color: Colors
+                                                                .black, // Set your desired text color
+                                                          ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                ],
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                20,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Text(
+                                              "    DESCRIPTION :\n",
+                                              style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
                                           ),
-                                          // Tab 2 content goes here
-                                          SingleChildScrollView(
-                                            child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    1,
-                                                color: const Color.fromARGB(
-                                                    255, 230, 233, 235),
-                                                child: pdf != null
-                                                    ? SfPdfViewer.network(pdf!)
-                                                    : Nopdf()
-                                                // PDFView(
-                                                //   filePath:
-                                                //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                                //   // height: 300,   // Set the desired height for the PDF viewer
-                                                //   // width: 300,    // Set the desired width for the PDF viewer
-                                                // ),
-
-                                                ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 13),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: description!
+                                                  .toUpperCase()
+                                                  .split('\n')
+                                                  .map((line) {
+                                                return Row(
+                                                  children: [
+                                                    Icon(Icons.star,
+                                                        size:
+                                                            10, // Adjust the size as needed
+                                                        color: Colors
+                                                            .black // Adjust the color as needed
+                                                        ),
+                                                    SizedBox(
+                                                      width:
+                                                          8, // Add some space between the circle icon and text
+                                                    ),
+                                                    Flexible(
+                                                      child: Text(
+                                                        line,
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .visible, // Handle text overflow
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                20,
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -754,91 +628,49 @@ class ProductDetailsOfGlands extends StatelessWidget {
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
-                      color: Deltacolor,
+                      color: Colors.amber,
                     ),
                     child: ElevatedButton(
-                                                        onPressed: () {
-                                                          if (_formKey
-                                                              .currentState!
-                                                              .validate()) {
-                                                            if (FirebaseAuth
-                                                                    .instance
-                                                                    .currentUser !=
-                                                                null) {
-                                                              // signed in
-                                                              final selectedPrice =
-                                                                  selectedPriceNotifier
-                                                                      .value;
-                                                              final productCode =
-                                                                  selectedPrice
-                                                                      .split(
-                                                                          ': ')[0];
-                                                              final price =
-                                                                  double.parse(
-                                                                      selectedPrice
-                                                                          .split(
-                                                                              ': ')[1]);
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            // signed in
+                            final selectedPrice = selectedPriceNotifier.value;
+                            final productCode = selectedPrice.split(': ')[0];
+                            final price =
+                                double.parse(selectedPrice.split(': ')[1]);
 
-                                                              final quantity =
-                                                                  int.tryParse(
-                                                                          quantityController
-                                                                              .text) ??
-                                                                      0;
-                                                              final imageUrl =
-                                                                 
-                                                                  thumbnail;
-                                                              final productName =
-                                                                  textpass;
-                                                              final cartProvider =
-                                                                  Provider.of<
-                                                                          CartProvider>(
-                                                                      context,
-                                                                      listen:
-                                                                          false);
+                            final quantity =
+                                int.tryParse(quantityController.text) ?? 0;
+                            final imageUrl = thumbnail;
+                            final productName = textpass;
+                            final cartProvider = Provider.of<CartProvider>(
+                                context,
+                                listen: false);
 
-                                                              cartProvider.addToCart(
-                                                                  productCode,
-                                                                  price,
-                                                                  quantity,
-                                                                  imageUrl ??
-                                                                      "",
-                                                                  productName ??
-                                                                      "");
+                            cartProvider.addToCart(productCode, price, quantity,
+                                imageUrl ?? "", productName ?? "");
 
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text("Added to cart")));
-                                                            } else {
-                                                              // signed out
-                                                              showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (BuildContext
-                                                                        context) {
-                                                                  return LoginPage(); // Your custom dialog widget
-                                                                },
-                                                              );
-                                                            }
-                                                          }
-                                                        },
-                                                        child: const Text(
-                                                            'ADD TO CART'),
-                                                        style: ButtonStyle(
-                                                          backgroundColor:
-                                                              MaterialStateProperty
-                                                                  .all(Colors
-                                                                      .white),
-                                                          minimumSize:
-                                                              MaterialStateProperty
-                                                                  .all(Size(
-                                                                      150, 50)),
-                                                        ),
-                                                      ),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Added to cart")));
+                          } else {
+                            // signed out
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LoginPage(); // Your custom dialog widget
+                              },
+                            );
+                          }
+                        }
+                      },
+                      child: const Text('ADD TO CART'),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(const Color.fromARGB(255, 54, 98, 98)),
+                        minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -867,7 +699,6 @@ class ProductDetailsOfGlands extends StatelessWidget {
 //-----------desktop--------------------------------------------------------
 
       desktopProductPage: FutureBuilder(
-        
         future: context.read<DataProvider>().fetchglandsApiUrl(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
@@ -933,7 +764,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                 // height: do
                                 // width: MediaQuery.of(context).size.width / 1,
                                 child: Padding(
-                                  padding: const EdgeInsets.only( top: 25),
+                                  padding: const EdgeInsets.only(top: 25),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -1004,7 +835,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                       SizedBox(
                                         height: 30,
                                       ),
-                                     Row(
+                                      Row(
                                         children: [
                                           SizedBox(
                                             width: MediaQuery.of(context)
@@ -1031,7 +862,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                           ValueListenableBuilder<String>(
                                             valueListenable:
                                                 selectedPriceNotifier,
-                                            builder: (context, selectedPrice,                                               child) {
+                                            builder: (context, selectedPrice,
+                                                child) {
                                               // String lastPrice =
                                               //     selectedPrice.substring(
                                               //         selectedPrice.length - 4);
@@ -1040,7 +872,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                               //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
                                               return Container(
                                                 width: 110,
-                                                padding: EdgeInsets.all(8.0),  
+                                                padding: EdgeInsets.all(8.0),
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: Colors.black,
@@ -1050,12 +882,14 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 // child: selectedPrice != null
                                                 //     ? Text(selectedPrice)
                                                 //     : Text('NO Price'),
-                                                child: 
-                                                // lastPrice == "null"
-                                                //     ? const Text('product available based on request')
-                                                //     : 
-                                                selectedPrice==" null"?Text('product available based on request'):
-                                                    Text(selectedPrice ),
+                                                child:
+                                                    // lastPrice == "null"
+                                                    //     ? const Text('product available based on request')
+                                                    //     :
+                                                    selectedPrice == " null"
+                                                        ? Text(
+                                                            'product available based on request')
+                                                        : Text(selectedPrice),
                                               );
                                             },
                                           ),
@@ -1367,15 +1201,18 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                       5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                      user != null
+                                                          ? Navigator.pushNamed(
+                                                              context, '/cart')
+                                                          : showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return LoginPage(); // Your custom dialog widget
+                                                              },
+                                                            );
+                                                    },
                                                     child: const Text(
                                                       'GO TO CART',
                                                       style: TextStyle(
@@ -1401,16 +1238,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      // Container(
-                                      //   child: ListView.builder(
-                                      //       itemBuilder: (context, index) {
-                                      //     return Container(
-                                      //       child: pdf != null
-                                      //           ? SfPdfViewer.network(pdf)
-                                      //           : Nopdf(),
-                                      //     );
-                                      //   }),
-                                      // )
+                                    
                                       // Tab 2 content goes here
                                       SingleChildScrollView(
                                           child: Container(
@@ -1449,12 +1277,3 @@ class ProductDetailsOfGlands extends StatelessWidget {
   }
 }
 
-
-// class CustottomNavigationBarPro extends StatelessWidget {
-//   const CustottomNavigationBarPro({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }

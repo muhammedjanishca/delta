@@ -697,33 +697,8 @@ class _MobilecartState extends State<Mobilecart> {
                             thickness:
                                 1, // Specify the thickness of the divider line
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ListTile(
-                            title: Text(
-                              'Total Price',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                            ),
-                            trailing: Text(
-                              '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Divider(
-                            height:
-                                1, // Adjust the height of the divider as needed
-                            color: const Color.fromARGB(255, 147, 146,
-                                146), // Choose the color of the divider
-                            thickness:
-                                1, // Specify the thickness of the divider line
-                          ),
-
-                          SizedBox(
-                            height: 40,
-                          ),
+                         
+                         
                         ],
                       ),
                     ),
