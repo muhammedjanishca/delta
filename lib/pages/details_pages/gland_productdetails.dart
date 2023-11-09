@@ -20,6 +20,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
 
   ProductDetailsOfGlands({super.key});
 
+
   String? textpass;
   String? thumbnail;
   @override
@@ -1107,90 +1108,99 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   width: 30,
                                                 ),
                                                 SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {
-                                                      if (_formKey.currentState!
-                                                          .validate()) {
-                                                        if (FirebaseAuth
-                                                                .instance
-                                                                .currentUser !=
-                                                            null) {
-                                                          // signed in
-                                                          final selectedPrice =
-                                                              selectedPriceNotifier
-                                                                  .value;
-                                                          final productCode =
-                                                              selectedPrice
-                                                                  .split(
-                                                                      ': ')[0];
-                                                          final price = double
-                                                              .parse(selectedPrice
-                                                                  .split(
-                                                                      ': ')[1]);
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    child: ElevatedButton(
+                                                      onPressed: () {
+                                                        if (_formKey
+                                                            .currentState!
+                                                            .validate()) {
+                                                          if (FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser !=
+                                                              null) {
+                                                            final selectedPrice =
+                                                                selectedPriceNotifier
+                                                                    .value;
 
-                                                          final quantity =
-                                                              int.tryParse(
-                                                                      quantityController
-                                                                          .text) ??
-                                                                  0;
-                                                          final imageUrl =
-                                                              // selectedThumbnailProvider
-                                                              //         .selectedThumbnail ??
-                                                              thumbnail;
-                                                          final productName =
-                                                              textpass;
-                                                          final cartProvider =
-                                                              Provider.of<
-                                                                      CartProvider>(
-                                                                  context,
-                                                                  listen:
-                                                                      false);
-                                                          cartProvider
-                                                              .addToCart(
+                                                            // Check if selectedPrice is empty or null, and provide a default value if needed
+                                                            if (selectedPrice !=
+                                                                    null &&
+                                                                selectedPrice
+                                                                    .isNotEmpty) {
+                                                              final productCode =
+                                                                  selectedPrice
+                                                                      .split(
+                                                                          ': ')[0];
+                                                              final price =
+                                                                  double.tryParse(
+                                                                          selectedPrice
+                                                                              .split(': ')[1]) ??
+                                                                      0;
+                                                              final quantity =
+                                                                  int.tryParse(
+                                                                          quantityController
+                                                                              .text) ??
+                                                                      0;
+                                                              final imageUrl =
+                                                                  thumbnail;
+                                                              final productName =
+                                                                  textpass;
+                                                              final cartProvider =
+                                                                  Provider.of<
+                                                                          CartProvider>(
+                                                                      context,
+                                                                      listen:
+                                                                          false);
+                                                              cartProvider.addToCart(
                                                                   productCode,
                                                                   price,
                                                                   quantity,
                                                                   imageUrl ??
-                                                                      "",
+                                                                      '',
                                                                   productName ??
-                                                                      "");
+                                                                      '');
 
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(SnackBar(
-                                                                  content: Text(
-                                                                      "Added to cart")));
-                                                        } else {
-                                                          // signed out
-                                                          showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return LoginPage(); // Your custom dialog widget
-                                                            },
-                                                          );
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('Added to cart')));
+                                                            } else {
+                                                              // Handle the case where selectedPrice is empty or null
+                                                              // You might want to display an error message or take appropriate action.
+                                                            }
+                                                          } else {
+                                                            // Handle the case where the user is not signed in
+                                                            showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return LoginPage(); // Your custom dialog widget
+                                                              },
+                                                            );
+                                                          }
                                                         }
-                                                      }
-                                                    },
-                                                    child: const Text(
-                                                        'ADD TO CART'),
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all(
-                                                                  Colors.black),
-                                                      minimumSize:
-                                                          MaterialStateProperty
-                                                              .all(Size(
-                                                                  150, 50)),
-                                                    ),
-                                                  ),
-                                                ),
+                                                      },
+                                                      child: const Text(
+                                                          'ADD TO CART'),
+                                                      style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStateProperty
+                                                                .all(Colors
+                                                                    .black),
+                                                        minimumSize:
+                                                            MaterialStateProperty
+                                                                .all(Size(
+                                                                    150, 50)),
+                                                      ),
+                                                    )),
                                                 SizedBox(
                                                   width: 20,
                                                 ),

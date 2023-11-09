@@ -13,7 +13,6 @@ import 'package:firebase_hex/pages/another_pages/landing_page.dart';
 import 'package:firebase_hex/pages/product_pages/lugs.dart';
 import 'package:firebase_hex/pages/details_pages/accessories_product.dart';
 import 'package:firebase_hex/pages/details_pages/connecters_productd.dart';
-import 'package:firebase_hex/pages/details_pages/crimpingtool_details.dart';
 import 'package:firebase_hex/pages/details_pages/gland_productdetails.dart';
 import 'package:firebase_hex/pages/details_pages/lugs_productdetails.dart';
 import 'package:firebase_hex/pages/details_pages/nonpdf_product.dart';
