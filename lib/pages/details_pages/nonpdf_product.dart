@@ -70,8 +70,8 @@ class Nopdf extends StatelessWidget {
               pdf = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
-              print(product_name);
-              print("khgg");
+              // print(product_name);
+              // print("khgg");
 
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {

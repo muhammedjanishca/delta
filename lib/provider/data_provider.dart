@@ -116,28 +116,21 @@ class DataProvider extends ChangeNotifier {
 
   // late Future lugsdata = getProduct(lugsApiUrl);
   // late Future connectorsData = getProduct(connectorsApiUrl);
-
   // Future<dynamic> fetchConnectorsData() async {
   //   final connectorsData = await _fetchDataFromApi(connectorsApiUrl);
   //   return connectorsData;
   // }
-
   // late Future glandData = getProduct(glandsApiUrl);
-
   // Future<dynamic> fetchGlandsData() async {
   //   final glandData = await _fetchDataFromApi(glandsApiUrl);
   //   return glandData;
   // }
-
   // late Future accessoriesData = getProduct(accessoriesApiUrl);
-
   // Future<dynamic> fetchAccssoriesData() async {
   //   final accessoriesData = await _fetchDataFromApi(accessoriesApiUrl);
   //   return accessoriesData;
   // }
-
   // late Future crimpingtoolData = getProduct(crimpingtoolsApiUrl);
-
   // Future<dynamic> fetchCrimpingtoolData() async {
   //   final crimpingtoolData = await _fetchDataFromApi(crimpingtoolsApiUrl);
   //   return crimpingtoolData;
