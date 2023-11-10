@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
 import 'package:flutter/material.dart';
@@ -94,8 +95,13 @@ class DesktopLanding extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          // Navigator.pushNamed(
-                          //     context, '/cart');
+                          print('wwwwwwwwwwwwwwwwwwwweeeeeeeeeeeeeeeeeeeeeeee');
+                     Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>Delivarypage()
+              ),
+            );
                         },
                         child: Text(
                           'CHECKOUT',
