@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../login_and_signing/loginpage.dart';
+import '../../main.dart';
 import '../../widgets/whatsApp.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:badges/badges.dart' as badges;
@@ -663,7 +664,8 @@ Widget _searchBox(BuildContext context) {
               );
             },
             onSuggestionSelected: (suggestion) {
-              // Handle search submission here
+             final productName = suggestion['product_name'];
+              navigateToProductDetailsFromSearch(context, productName);
             },
           ),
         ),

@@ -53,7 +53,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // print("++++++++++++++++++++++++++++++");
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
@@ -238,4 +237,21 @@ void noPdfProductPage(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
+}
+void navigateToProductDetailsFromSearch(
+    BuildContext context, String productname) {
+  String endpoint = "";
+  if (productname == "$productname") {
+    endpoint += "/productdetailslugs/$productname";
+  } else if (productname == "$productname") {
+    endpoint += "/productdetailsconnectors/$productname";
+  } else if (productname == "$productname") {
+    endpoint += "/productdetailsglands/$productname";
+  } else if (productname == "$productname") {
+    endpoint += "/productdetailsaccessories/$productname";
+  } else {
+    endpoint += "/productdetailscrimpingtools/$productname";
+  }
+
+  Navigator.pushNamed(context, endpoint);
 }

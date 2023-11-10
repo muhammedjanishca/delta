@@ -611,7 +611,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                       ),
                     )
                   : Nopdf(
-                      typeOfProduct: 'glands',
+                      typeOfProduct: 'lugs',
                     );
             }
           },
