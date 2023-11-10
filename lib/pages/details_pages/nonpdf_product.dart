@@ -3,18 +3,15 @@ import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../login_and_signing/signup_page.dart';
 import '../../model.dart';
 import '../../provider/cart_provider.dart';
 import '../../provider/data_provider.dart';
 import '../../provider/thumbnail.dart';
-import '../../provider/user_input_provider.dart';
 import '../../responsive/product_page.dart';
-import 'accessories_product.dart';
 
 class Nopdf extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
-  String? typeOfProduct;
+   String? typeOfProduct;
   Nopdf({this.typeOfProduct});
   // Nopdf({required this.productData, required this.selectedIndex});
   @override

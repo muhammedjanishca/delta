@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
+import 'package:firebase_hex/main.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/product_pages/connecters.dart';
 import 'package:firebase_hex/pages/product_pages/crimping.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_hex/pages/product_pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
-import 'package:firebase_hex/api/search_api.dart';
+import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -147,10 +148,9 @@ class DesktopAppBar extends StatelessWidget {
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<
-                                  Color>(const Color
-                                      .fromARGB(255, 194, 192,
-                                  192)), // Change the color to your desired color
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 194, 192,
+                                      192)), // Change the color to your desired color
                             ),
                             child: Text('SignUp/SignIn'),
                           )
@@ -293,7 +293,7 @@ class DesktopAppBar extends StatelessWidget {
                         if (selectedDataType == 'Lugs') {
                           Navigator.pushNamed(context, '/Lugs');
                         } else if (selectedDataType == 'Connectors') {
-                          Navigator.pushNamed(context, '/Connecters');
+                          Navigator.pushNamed(context, '/Connectors');
                         }
                         // Add similar conditions for other data types
                       },
@@ -663,7 +663,9 @@ Widget _searchBox(BuildContext context) {
               );
             },
             onSuggestionSelected: (suggestion) {
-              // Handle search submission here
+              final productName = suggestion['product_name'];
+              final type = suggestion['type'];
+              navigateToProductDetailsFromSearch(context, productName, type);
             },
           ),
         ),

@@ -9,11 +9,10 @@ class ProductProvider extends ChangeNotifier {
   Future<List<Map<String, dynamic>>> fetchData(String query) async {
     try {
       final response = await http.get(
-        Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/searching?query=$query'),
+        Uri.parse('https://deltabackend.com/searching?query=$query'),
       );
 
       if (response.statusCode == 200) {
-        // print('rbntbxdvffffffffffffff');
         final List<dynamic> data = json.decode(response.body)['data'];
         return data.cast<Map<String, dynamic>>();
       } else {

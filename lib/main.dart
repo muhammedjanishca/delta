@@ -20,7 +20,7 @@ import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
-import 'package:firebase_hex/api/search_api.dart';
+import 'package:firebase_hex/search_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
           '/Accssories': (context) => AppBarMain(
                 body: AccessoriesPage(),
               ),
-          '/Connecters': (context) => AppBarMain(body: ConnectersPage()),
+          '/Connectors': (context) => AppBarMain(body: ConnectersPage()),
           '/CrimpingTools': (context) => AppBarMain(
                 body: CrimpingToolPage(),
               ),
@@ -226,6 +226,35 @@ void navigateToProductDetailsOfAccessories(
 }
 
 void noPdfProductPage(BuildContext context, int selectedProductIndex,
-    {String? productname}) {
+    {String? productname}) {  
   Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
+}
+
+void navigateToProductDetailsFromSearch(
+  BuildContext context,
+  String productname,
+  String type,
+) {
+  String endpoint = "";
+
+  switch (type) {
+    case 'lugs':
+      endpoint = '/productdetailslugs/$productname';
+      break;
+    case 'connectors':
+      endpoint = '/productdetailsconnectors/$productname';
+      break;
+    case 'glands':
+      endpoint = '/productdetailsglands/$productname';
+      break;
+    case 'accessories':
+      endpoint = '/productdetailsaccessories/$productname';
+      break;
+    case 'tools':
+      endpoint = '/productdetailscrimpingtools/$productname';
+      break;
+    default:
+      return;
+  }
+  Navigator.pushNamed(context, endpoint);
 }
