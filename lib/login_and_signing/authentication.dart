@@ -71,7 +71,7 @@ class AuthenticationHelper extends ChangeNotifier {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCred.user!.uid)
-          .set({'name': name, 'email': email, 'cartItems': []});
+          .set({'name': name, 'email': email, 'cartItems': [] , 'address': []});
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -162,7 +162,8 @@ class AuthenticationHelper extends ChangeNotifier {
               .set({
               'name': user?.displayName,
               'email': user?.email,
-              'cartItems': []
+              'cartItems': [],
+              'address': []
             })
           : null;
       Navigator.pop(context);
@@ -191,7 +192,8 @@ class AuthenticationHelper extends ChangeNotifier {
               .doc(FirebaseAuth.instance.currentUser?.uid)
               .set({
               'mobile': FirebaseAuth.instance.currentUser?.phoneNumber,
-              'cartItems': []
+              'cartItems': [],
+              'address': []
             })
           : null;
   
