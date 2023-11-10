@@ -48,6 +48,32 @@ class _DelivarypageState extends State<Delivarypage> {
         .get();
     return ad;
   }
+Future<void> removeAddress() async {
+  try {
+    var documentReference = FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+
+    // Check if the document exists before trying to delete it
+    var documentSnapshot = await documentReference.get();
+    if (documentSnapshot.exists) {
+      // Document exists, proceed with deletion
+      await documentReference.delete();
+      print("Address removed successfully");
+    } else {
+      print("No address found to remove");
+    }
+  } catch (e) {
+    print("Error removing address: $e");
+    // Handle the error as needed
+  }
+}
+
+  // removalAddress() async {
+  //   var remove = await FirebaseFirestore.instance
+  //   .collection("users");
+  //   .doc(FirebaseAuth.instance.currentUser! .uid)
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +228,7 @@ class _DelivarypageState extends State<Delivarypage> {
                       Gap(5),
                       ElevatedButton(
                         onPressed: () async {
-                              Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => addressshow()));
@@ -226,7 +252,6 @@ class _DelivarypageState extends State<Delivarypage> {
                               .collection('users')
                               .doc(FirebaseAuth.instance.currentUser!.uid)
                               .update({'address': fetchedAddressDetails});
-                      
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Colors
@@ -238,7 +263,7 @@ class _DelivarypageState extends State<Delivarypage> {
                       //
                     ],
                   ),
-                 ),
+                ),
                 // SizedBox(
                 //     width: MediaQuery.of(context).size.width / 2.5,
                 //     height: MediaQuery.of(context).size.width / 2.1,
