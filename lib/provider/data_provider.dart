@@ -23,6 +23,7 @@ class DataProvider extends ChangeNotifier {
       throw Exception('Failed to load data');
     }
   }
+  
    Future<ProduceNewModal> fetchglandsApiUrl() async {
     final response = await http
         .get(Uri.parse('https://deltabackend.com/glands'));

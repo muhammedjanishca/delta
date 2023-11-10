@@ -40,8 +40,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-
-
       //******************MOBILE VIEW****************************
 
       mobileProductPage: FutureBuilder(
@@ -50,7 +48,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -488,7 +488,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                           final imageUrl =
                                                               // selectedThumbnailProvider
                                                               //         .selectedThumbnail ??
-                                                                  thumbnail;
+                                                              thumbnail;
                                                           final productName =
                                                               textpass;
                                                           final cartProvider =
@@ -625,8 +625,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           snapshot.data!.data.length;
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // print("hgfghfhfgu");
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -786,7 +787,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               // color: Colors.amber,
 
                                               child: Text(
-                                                'selected Product code&Price:',
+                                                'Product Price : ',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.0,
@@ -837,14 +838,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           SizedBox(
                                             height: 30,
                                           ),
-
-                                          // Text(
-                                          //   'Codes and Prices:',
-                                          //   style: TextStyle(
-                                          //     fontWeight: FontWeight.bold,
-                                          //     fontSize: 18,
-                                          //   ),
-                                          // ),
                                           Wrap(
                                             spacing:
                                                 8.0, // Adjust the spacing between buttons as needed

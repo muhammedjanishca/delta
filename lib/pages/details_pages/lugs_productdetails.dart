@@ -37,7 +37,7 @@ class ProductDetailsoflugs extends StatelessWidget {
     String product_name = setting_list[2].replaceAll('_', " ");
 
     return ResponsiveProductPage(
-      //*******MOBILE VIEW*********
+      //******MOBILE VIEW********
 
       mobileProductPage: Scaffold(
         // backgroundColor: Colors.white,
@@ -692,9 +692,6 @@ class ProductDetailsoflugs extends StatelessWidget {
           ),
         ),
       ),
-
-//---------------------------------desktop-----------------------------
-
       desktopProductPage: FutureBuilder(
         future: context.read<DataProvider>().fetchLugsData(),
         builder: (context, snapshot) {

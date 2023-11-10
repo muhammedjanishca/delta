@@ -50,7 +50,9 @@ class ProductDetailsOfGlands extends StatelessWidget {
             snapshot.data!.data.length;
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+              return Center(
+                  child:
+                      const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -491,13 +493,13 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                       price![index];
                                                   return InkWell(
                                                     onTap: () {
-                                                      selectedPriceNotifier
-                                                              .value =
-                                                          ' ${codeAndPrice.price}';
-                                                      // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                       // selectedPriceNotifier
                                                       //         .value =
-                                                      //     '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+                                                      //     ' ${codeAndPrice.price}';
+                                                      // When a container is tapped, update the selectedPrice using ValueNotifier.
+                                                      selectedPriceNotifier
+                                                              .value =
+                                                          '${codeAndPrice.productCode}: ${codeAndPrice.price}';
                                                     },
                                                     child: Form(
                                                       autovalidateMode:
@@ -705,7 +707,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
           snapshot.data!.data.length;
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // print("hgfghfhfgu");
+            print("hgfghfhfgu");
             return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -928,7 +930,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
-                                                      ' ${codeAndPrice.price}';
+                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
@@ -1128,8 +1130,10 @@ class ProductDetailsOfGlands extends StatelessWidget {
 
                                                             // Check if selectedPrice is empty or null, and provide a default value if needed
                                                             if (selectedPrice !=
-                                                                    null &&
+                                                                    null ||
                                                                 selectedPrice
+                                                                    .split(
+                                                                        ': ')[1]
                                                                     .isNotEmpty) {
                                                               final productCode =
                                                                   selectedPrice
@@ -1287,3 +1291,11 @@ class ProductDetailsOfGlands extends StatelessWidget {
   }
 }
 
+// class CustottomNavigationBarPro extends StatelessWidget {
+//   const CustottomNavigationBarPro({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }
