@@ -31,18 +31,27 @@ class ProductDetailsOfConnectors extends StatelessWidget {
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
-    
-    String product_name = setting_list[2].replaceAll('_', " ");
+
+    String product_name = "";
+    if (setting_list.length > 2) {
+// product_name=(setting_list[2]+"/"+setting_list[3]).replaceAll('_', ' ');
+      for (int i = 2; i < setting_list.length; i++) {
+        product_name += setting_list[i].replaceAll('_', ' ');
+        if (i < setting_list.length - 1) {
+          product_name += "/";
+        }
+      }
+    } else
+      product_name = setting_list[2].replaceAll('_', " ");
     print(product_name);
+    print('rycrg');
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
- var user = Provider.of<AuthenticationHelper>(context).user;
-   
+    var user = Provider.of<AuthenticationHelper>(context).user;
+
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-
-
       //******************MOBILE VIEW****************************
 
       mobileProductPage: FutureBuilder(
@@ -51,18 +60,19 @@ class ProductDetailsOfConnectors extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-             String? textpass;
+            String? textpass;
             String? thumbnail;
             String? description;
             List<CodesAndPrice>? price = [];
             List<String>? image = [];
             String? pdf;
 
-            
             if (selectedThumbnailProvider.selectedIndex != null) {
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
@@ -79,7 +89,6 @@ class ProductDetailsOfConnectors extends StatelessWidget {
               pdf = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
-             
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
                   print("2121");
@@ -95,8 +104,6 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                 }
               });
             }
-
-
 
             //  String selectedPrice = '';
 
@@ -134,10 +141,10 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                               2,
                                           child: Image.network(
                                             thumbnail!,
-                                              // selectedThumbnailProvider
-                                              //         .selectedThumbnail ??
-                                              //     ''
-                                                  ),
+                                            // selectedThumbnailProvider
+                                            //         .selectedThumbnail ??
+                                            //     ''
+                                          ),
                                         ), // Display the selected thumbnail here
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
@@ -157,9 +164,10 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                   child: Container(
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
-                                                        color: imageUrl ==imageUrl
-                                                                // selectedThumbnailProvider
-                                                                //     .selectedThumbnail
+                                                        color: imageUrl ==
+                                                                imageUrl
+                                                            // selectedThumbnailProvider
+                                                            //     .selectedThumbnail
                                                             ? Colors
                                                                 .blue // Highlight the selected image
                                                             : Colors
@@ -463,7 +471,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                           final imageUrl =
                                                               // selectedThumbnailProvider
                                                               //         .selectedThumbnail ??
-                                                                  thumbnail;
+                                                              thumbnail;
                                                           final productName =
                                                               textpass;
                                                           final cartProvider =
@@ -518,15 +526,21 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                     ),
                                                     ElevatedButton(
                                                       onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                        user != null
+                                                            ? Navigator
+                                                                .pushNamed(
+                                                                    context,
+                                                                    '/cart')
+                                                            : showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return LoginPage(); // Your custom dialog widget
+                                                                },
+                                                              );
+                                                      },
                                                       child: const Text(
                                                         'GO TO CART',
                                                         style: TextStyle(
@@ -601,7 +615,9 @@ class ProductDetailsOfConnectors extends StatelessWidget {
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             print("hgfghfhfgu");
-            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -628,7 +644,6 @@ class ProductDetailsOfConnectors extends StatelessWidget {
               pdf = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
-              
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
                   print("2121");
@@ -676,11 +691,11 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                             thumbnail!,
-                                            // selectedThumbnailProvider
-                                            //         .selectedThumbnail ??
-                                            //     ''
-                                                ),
+                                          thumbnail!,
+                                          // selectedThumbnailProvider
+                                          //         .selectedThumbnail ??
+                                          //     ''
+                                        ),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -700,9 +715,10 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
-                                                      color: imageUrl == imageUrl
-                                                              // selectedThumbnailProvider
-                                                              //     .selectedThumbnail
+                                                      color: imageUrl ==
+                                                              imageUrl
+                                                          // selectedThumbnailProvider
+                                                          //     .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors
@@ -732,7 +748,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                       SizedBox(
                                         height: 30,
                                       ),
-                                     Row(
+                                      Row(
                                         children: [
                                           SizedBox(
                                             width: MediaQuery.of(context)
@@ -759,7 +775,8 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                           ValueListenableBuilder<String>(
                                             valueListenable:
                                                 selectedPriceNotifier,
-                                            builder: (context, selectedPrice,                                               child) {
+                                            builder: (context, selectedPrice,
+                                                child) {
                                               // String lastPrice =
                                               //     selectedPrice.substring(
                                               //         selectedPrice.length - 4);
@@ -768,7 +785,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                               //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
                                               return Container(
                                                 width: 110,
-                                                padding: EdgeInsets.all(8.0),  
+                                                padding: EdgeInsets.all(8.0),
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: Colors.black,
@@ -778,12 +795,14 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                 // child: selectedPrice != null
                                                 //     ? Text(selectedPrice)
                                                 //     : Text('NO Price'),
-                                                child: 
-                                                // lastPrice == "null"
-                                                //     ? const Text('product available based on request')
-                                                //     : 
-                                                selectedPrice==" null"?Text('product available based on request'):
-                                                    Text(selectedPrice ),
+                                                child:
+                                                    // lastPrice == "null"
+                                                    //     ? const Text('product available based on request')
+                                                    //     :
+                                                    selectedPrice == " null"
+                                                        ? Text(
+                                                            'product available based on request')
+                                                        : Text(selectedPrice),
                                               );
                                             },
                                           ),
@@ -952,9 +971,9 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                             SizedBox(height: 20.0),
                                             Row(
                                               children: [
-                                                  SizedBox(
-                                            width: 20,
-                                          ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
                                                 Form(
                                                   key: _formKey,
                                                   child: Container(
@@ -967,7 +986,8 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                           quantityController,
                                                       keyboardType:
                                                           TextInputType.number,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         border:
                                                             OutlineInputBorder(),
                                                         hintText:
@@ -1000,7 +1020,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                   width: 30,
                                                 ),
                                                 SizedBox(
-                                                   width: MediaQuery.of(context)
+                                                  width: MediaQuery.of(context)
                                                           .size
                                                           .width /
                                                       5,
@@ -1008,7 +1028,8 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                     onPressed: () {
                                                       if (_formKey.currentState!
                                                           .validate()) {
-                                                        if (FirebaseAuth.instance
+                                                        if (FirebaseAuth
+                                                                .instance
                                                                 .currentUser !=
                                                             null) {
                                                           // signed in
@@ -1017,12 +1038,13 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                                   .value;
                                                           final productCode =
                                                               selectedPrice
-                                                                  .split(': ')[0];
+                                                                  .split(
+                                                                      ': ')[0];
                                                           final price = double
                                                               .parse(selectedPrice
                                                                   .split(
                                                                       ': ')[1]);
-                                                
+
                                                           final quantity =
                                                               int.tryParse(
                                                                       quantityController
@@ -1038,14 +1060,18 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                               Provider.of<
                                                                       CartProvider>(
                                                                   context,
-                                                                  listen: false);
-                                                          cartProvider.addToCart(
-                                                              productCode,
-                                                              price,
-                                                              quantity,
-                                                              imageUrl ?? "",
-                                                              productName ?? "");
-                                                
+                                                                  listen:
+                                                                      false);
+                                                          cartProvider
+                                                              .addToCart(
+                                                                  productCode,
+                                                                  price,
+                                                                  quantity,
+                                                                  imageUrl ??
+                                                                      "",
+                                                                  productName ??
+                                                                      "");
+
                                                           ScaffoldMessenger.of(
                                                                   context)
                                                               .showSnackBar(SnackBar(
@@ -1055,23 +1081,26 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                           // signed out
                                                           showDialog(
                                                             context: context,
-                                                            builder: (BuildContext
-                                                                context) {
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
                                                               return LoginPage(); // Your custom dialog widget
                                                             },
                                                           );
                                                         }
                                                       }
                                                     },
-                                                    child:
-                                                        const Text('ADD TO CART'),
+                                                    child: const Text(
+                                                        'ADD TO CART'),
                                                     style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Colors.black),
+                                                              .all(
+                                                                  Colors.black),
                                                       minimumSize:
                                                           MaterialStateProperty
-                                                              .all(Size(150, 50)),
+                                                              .all(Size(
+                                                                  150, 50)),
                                                     ),
                                                   ),
                                                 ),
@@ -1079,21 +1108,24 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                   width: 20,
                                                 ),
                                                 SizedBox(
-                                                   width: MediaQuery.of(context)
+                                                  width: MediaQuery.of(context)
                                                           .size
                                                           .width /
                                                       5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                      user != null
+                                                          ? Navigator.pushNamed(
+                                                              context, '/cart')
+                                                          : showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return LoginPage(); // Your custom dialog widget
+                                                              },
+                                                            );
+                                                    },
                                                     child: const Text(
                                                       'GO TO CART',
                                                       style: TextStyle(
@@ -1102,10 +1134,12 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                     style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Colors.white),
+                                                              .all(
+                                                                  Colors.white),
                                                       minimumSize:
                                                           MaterialStateProperty
-                                                              .all(Size(150, 50)),
+                                                              .all(Size(
+                                                                  150, 50)),
                                                     ),
                                                   ),
                                                 ),

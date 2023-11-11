@@ -72,13 +72,13 @@ class QuotationPage extends StatelessWidget {
                     // ),
                     width: MediaQuery.of(context).size.width / 1.9,
                     // width: MediaQuery.of(context).size.width * 0.6,
-                    padding: EdgeInsets.only(top: 20.0),
+                  //  padding: EdgeInsets.only(top: 20.0),
                     child: Center(
                         child: Column(
                       children: [
                         Container(
                           color: Colors.white,
-                          height: MediaQuery.of(context).size.height / 5,
+                          height: MediaQuery.of(context).size.height / 4,
                           child: MyClipPath(),
                         ),
                         Container(
@@ -153,7 +153,7 @@ class QuotationPage extends StatelessWidget {
                     columnSpacing: 10.0,
                     dividerThickness: 2,
                     headingRowColor: MaterialStateColor.resolveWith(
-                      (states) => Color.fromARGB(255, 76, 138, 131),
+                      (states) =>  Color.fromARGB(255, 91, 166, 157),
                     ),
                     dataRowMaxHeight: 60,
                     headingRowHeight: 60,
@@ -519,7 +519,7 @@ class MyClipPath extends StatelessWidget {
     return ClipPath(
       clipper: BottomWaveClipper(),
       child: Container(
-        height: 100,
+        height: 150,
         width: double.infinity,
         color: backgroundColor,
         child: Row(
@@ -528,7 +528,7 @@ class MyClipPath extends StatelessWidget {
              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
+                  SizedBox(height: 20,),
                   Text("Abdullah Shaher Alsulami Est.",
                       style: GoogleFonts.oswald(
                         textStyle: TextStyle(

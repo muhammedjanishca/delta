@@ -258,3 +258,4 @@ void navigateToProductDetailsFromSearch(
   }
   Navigator.pushNamed(context, endpoint);
 }
+

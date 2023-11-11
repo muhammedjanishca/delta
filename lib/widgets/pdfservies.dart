@@ -155,7 +155,7 @@ void drawFooter(PdfPage page, Size pageSize) {
   headerRow.style.textBrush = PdfBrushes.white;
   headerRow.cells[0].value = "SINO";
   headerRow.cells[1].value = "Description";
-  headerRow.cells[2].value = "product code";
+  headerRow.cells[2].value = "Product Code";
   headerRow.cells[3].value = "Quantity";
   headerRow.cells[4].value = "Unit";
   headerRow.cells[5].value = "Price";

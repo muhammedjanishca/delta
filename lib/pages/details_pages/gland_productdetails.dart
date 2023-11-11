@@ -20,7 +20,6 @@ class ProductDetailsOfGlands extends StatelessWidget {
 
   ProductDetailsOfGlands({super.key});
 
-
   String? textpass;
   String? thumbnail;
   @override
@@ -31,8 +30,20 @@ class ProductDetailsOfGlands extends StatelessWidget {
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
-    String product_name = setting_list[2].replaceAll('_', " ");
-    // print(product_name);
+    String product_name = "";
+    if (setting_list.length > 2) {
+// product_name=(setting_list[2]+"/"+setting_list[3]).replaceAll('_', ' ');
+      for (int i = 2; i < setting_list.length; i++) {
+        
+        product_name += setting_list[i].replaceAll('_', ' ');
+        if(i<setting_list.length-1){
+          product_name+="/";
+        }
+      }
+    } else
+      product_name = setting_list[2].replaceAll('_', " ");
+    print(product_name);
+    print('rycrg');
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
@@ -209,7 +220,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     .height /
                                                 30,
                                           ),
-                                         
+
                                           SizedBox(
                                             height: MediaQuery.of(context)
                                                     .size
@@ -259,7 +270,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                               5),
                                                       border: Border.all(
                                                         color: const Color
-                                                                .fromARGB(
+                                                            .fromARGB(
                                                             255, 126, 125, 125),
                                                         width: 1.0,
                                                       ),
@@ -335,19 +346,19 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   ),
                                             ],
                                           ),
-                                           SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    20,
-                                              ),
-                                           Row(
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                20,
+                                          ),
+                                          Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                               SizedBox(
+                                              SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -364,13 +375,12 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     keyboardType:
                                                         TextInputType.number,
                                                     decoration: InputDecoration(
-                                                      border:
-                                                          OutlineInputBorder(),
-                                                      hintText:
-                                                          'Enter the quantity',hintStyle: TextStyle(
-                                                            fontSize: 14
-                                                          )
-                                                    ),
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        hintText:
+                                                            'Enter the quantity',
+                                                        hintStyle: TextStyle(
+                                                            fontSize: 14)),
                                                     validator: (value) {
                                                       if (value!.isEmpty) {
                                                         return 'Please enter a quantity';
@@ -386,93 +396,77 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                                 ElevatedButton(
-                                                        onPressed: () {
-                                                          if (_formKey
-                                                              .currentState!
-                                                              .validate()) {
-                                                            if (FirebaseAuth
-                                                                    .instance
-                                                                    .currentUser !=
-                                                                null) {
-                                                              // signed in
-                                                              final selectedPrice =
-                                                                  selectedPriceNotifier
-                                                                      .value;
-                                                              // final productCode =
-                                                                  
-                                                              final productCode =
-                                                                  selectedPrice
-                                                                      .split(
-                                                                          ': ')[0];
-                                                              final price =
-                                                                  double.parse(
-                                                                      selectedPrice
-                                                                          .split(
-                                                                              ': ')[1]);
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      // signed in
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                              .value;
+                                                      // final productCode =
 
-                                                              final quantity =
-                                                                  int.tryParse(
-                                                                          quantityController
-                                                                              .text) ??
-                                                                      0;
-                                                              final imageUrl =
-                                                                  // selectedThumbnailProvider
-                                                                  //         .selectedThumbnail ??
-                                                                  thumbnail;
-                                                              final productName =
-                                                                  textpass;
-                                                              final cartProvider =
-                                                                  Provider.of<
-                                                                          CartProvider>(
-                                                                      context,
-                                                                      listen:
-                                                                          false);
+                                                      final productCode =
+                                                          selectedPrice
+                                                              .split(': ')[0];
+                                                      final price = double
+                                                          .parse(selectedPrice
+                                                              .split(': ')[1]);
 
-                                                              cartProvider.addToCart(
-                                                                  productCode,
-                                                                  price,
-                                                                  quantity,
-                                                                  imageUrl ??
-                                                                      "",
-                                                                  productName ??
-                                                                      "");
+                                                      final quantity = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      final imageUrl =
+                                                          // selectedThumbnailProvider
+                                                          //         .selectedThumbnail ??
+                                                          thumbnail;
+                                                      final productName =
+                                                          textpass;
+                                                      final cartProvider =
+                                                          Provider.of<
+                                                                  CartProvider>(
+                                                              context,
+                                                              listen: false);
 
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text("Added to cart")));
-                                                            } else {
-                                                              // signed out
-                                                              showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (BuildContext
-                                                                        context) {
-                                                                  return LoginPage(); // Your custom dialog widget
-                                                                },
-                                                              );
-                                                            }
-                                                          }
+                                                      cartProvider.addToCart(
+                                                          productCode,
+                                                          price,
+                                                          quantity,
+                                                          imageUrl ?? "",
+                                                          productName ?? "");
+
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(SnackBar(
+                                                              content: Text(
+                                                                  "Added to cart")));
+                                                    } else {
+                                                      // signed out
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
                                                         },
-                                                        child: const Text(
-                                                            'ADD TO CART'),
-                                                        style: ButtonStyle(
-                                                          backgroundColor:
-                                                              MaterialStateProperty
-                                                                  .all(Colors
-                                                                      .black),
-                                                          minimumSize:
-                                                              MaterialStateProperty
-                                                                  .all(Size(
-                                                                      150, 50)),
-                                                        ),
-                                                      ),
-                                             
+                                                      );
+                                                    }
+                                                  }
+                                                },
+                                                child:
+                                                    const Text('ADD TO CART'),
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size(150, 50)),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                           Column(
@@ -669,8 +663,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                       },
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(const Color.fromARGB(255, 54, 98, 98)),
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color.fromARGB(255, 54, 98, 98)),
                         minimumSize: MaterialStateProperty.all(Size(150, 50)),
                       ),
                     ),
@@ -1252,7 +1246,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                    
+
                                       // Tab 2 content goes here
                                       SingleChildScrollView(
                                           child: Container(

@@ -8,6 +8,7 @@ import 'package:firebase_hex/pages/product_pages/gland.dart';
 import 'package:firebase_hex/pages/product_pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/style.dart';
@@ -617,6 +618,8 @@ class MobileAppBar extends StatelessWidget {
 
 Widget _searchBox(BuildContext context) {
   final productProvider = Provider.of<ProductProvider>(context, listen: false);
+     final selectedThumbnailProvider =
+        Provider.of<SelectedThumbnailProvider>(context);
 
   return Container(
     height: MediaQuery.of(context).size.height / 18,
@@ -666,7 +669,10 @@ Widget _searchBox(BuildContext context) {
             onSuggestionSelected: (suggestion) {
               final productName = suggestion['product_name'];
               final type = suggestion['type'];
-              navigateToProductDetailsFromSearch(context, productName, type);
+              final productNameWithUnderscores = productName.replaceAll(" ", "_");
+              selectedThumbnailProvider.setSelectedThumbnail("",index: null);
+              
+              navigateToProductDetailsFromSearch(context, productNameWithUnderscores, type);
             },
           ),
         ),

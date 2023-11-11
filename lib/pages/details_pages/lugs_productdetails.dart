@@ -29,12 +29,16 @@ class ProductDetailsoflugs extends StatelessWidget {
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
+  print(selectedThumbnailProvider.selectedIndex);
+  print("khbkh");
 
     final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
     String product_name = setting_list[2].replaceAll('_', " ");
+    print(selectedProductIndex);
+    print("lkkjlj");
 
     return ResponsiveProductPage(
       //******MOBILE VIEW********
@@ -57,8 +61,9 @@ class ProductDetailsoflugs extends StatelessWidget {
               List<CodesAndPrice>? price = [];
               List<String>? image = [];
               String? pdf;
-
+               ;
               if (selectedThumbnailProvider.selectedIndex != null) {
+               
                 textpass = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].productName;
                 thumbnail = snapshot.data!
@@ -712,6 +717,8 @@ class ProductDetailsoflugs extends StatelessWidget {
 
             
             if (selectedThumbnailProvider.selectedIndex != null) {
+               print(selectedThumbnailProvider.selectedIndex);
+                print("ihhkh");
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
               thumbnail = snapshot.data!
