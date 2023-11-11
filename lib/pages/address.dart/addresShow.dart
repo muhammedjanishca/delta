@@ -15,6 +15,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:side_sheet/side_sheet.dart';
 
 // class SignUpPage extends StatelessWidget {
 //   const SignUpPage({super.key});
@@ -34,181 +35,213 @@ class addressshow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final cartProvider = Provider.of<CartProvider>(context);
-    cartProvider.getCartData();
+    final cartProvider = Provider.of<CartProvider>(context);
+    cartProvider.getAddressData();
     var cartItems = cartProvider.fetchedItems;
+    // var removAdd = cartProvider.removeAddress();
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
-      return Scaffold(
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leadingWidth: 48,
-            title: Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                  child: Text(
-                    "DELTA",
-                    style: GoogleFonts.oswald(
-                      textStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 45,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-                Text(
-                  "\n NATIONAL",
+          elevation: 0,
+          leadingWidth: 48,
+          title: Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/');
+                },
+                child: Text(
+                  "DELTA",
                   style: GoogleFonts.oswald(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 45,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Text(
+                "\n NATIONAL",
+                style: GoogleFonts.oswald(
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
           ),
-          body: Container(
-              width: double.infinity,
-            
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: _width / 2.5,
-                          height: _height / 2,
+        ),
+        body: Container(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: _width / 2.5,
+                        height: _height / 2,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                // height:
+                                //     MediaQuery.of(context).size.width / 2.1,
+                                child: Column(
+                                  // mainAxisAlignment:
+                                  //     MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      color: janishcolor,
+                                      child: Column(
+                                        children: [
+                                          ListView.builder(
+                                            scrollDirection: Axis.vertical,
+                                            shrinkWrap: true,
+                                            itemCount:
+                                                cartItems["address"].length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              // Check if it's not the first item
+                                              bool isNotFirstItem = index != 0;
+
+                                              // If it's not the first item, add a Divider
+                                              if (isNotFirstItem) {
+                                                return Column(
+                                                  children: [
+                                                    Divider(
+                                                      color: Colors
+                                                          .black, // Set the color of the divider
+                                                      thickness:
+                                                          1, // Set the thickness of the divider
+                                                    ),
+                                                    AddressData(jsonDecode(
+                                                        cartItems["address"]
+                                                            [index])),
+                                                  ],
+                                                );
+                                              }
+
+                                              // If it's the first item, don't add a Divider
+                                              return AddressData(jsonDecode(
+                                                  cartItems["address"][index]));
+                                            },
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              ElevatedButton(
+                                                  onPressed: ()
+                                                  //  async 
+                                                   {
+                                                    // await removAdd;
+                                                  },
+                                                  child: Icon(Icons.delete)),
+                                              ElevatedButton(
+                                                  onPressed: () => SideSheet.right(
+                                                      body: const Text(
+                                                          "Width is set to 0.3 of device Screen With"),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4,
+                                                      context: context),
+                                                  child: Text(
+                                                      'OPEN SHEET WITH CUSTOM WIDTH')),
+                                              // ElevatedButton(
+                                              //   onPressed: () {
+                                              //     // Your button's action here
+                                              //   },
+                                              //   style: ButtonStyle(
+                                              //     backgroundColor:
+                                              //         MaterialStateProperty
+                                              //             .all<Color>(Colors
+                                              //                 .black), // Change the color to your desired color
+                                              //   ),
+                                              //   child: Text('Add Address to Quote'),
+                                              // ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                )),
+                          ],
+                        ),
+                      ),
+                      Gap(25),
+                      Column(
+                        children: [
+                          Container(
+                            width: 0.5,
+                            height: 130,
+                            color: Color.fromARGB(255, 122, 122, 122),
+                          ),
+                          Text("or"),
+                          Container(
+                            width: 0.5,
+                            height: 130,
+                            color: const Color.fromARGB(255, 122, 122, 122),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: _width / 2.5,
+                        height: _height / 2,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 40, right: 25),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 2.5,
-                                  // height:
-                                  //     MediaQuery.of(context).size.width / 2.1,
-                                  child: Column(
-                                    // mainAxisAlignment:
-                                    //     MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Container(
-                                        color: janishcolor,
-                                        child: Column(
-                                          children: [
-                                            ListView.builder(
-                                              scrollDirection: Axis.vertical,
-                                              shrinkWrap: true,
-                                              itemCount:
-                                                  cartItems["address"].length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                // Check if it's not the first item
-                                                bool isNotFirstItem =
-                                                    index != 0;
-
-                                                // If it's not the first item, add a Divider
-                                                if (isNotFirstItem) {
-                                                  return Column(
-                                                    children: [
-                                                      Divider(
-                                                        color: Colors
-                                                            .black, // Set the color of the divider
-                                                        thickness:
-                                                            1, // Set the thickness of the divider
-                                                      ),
-                                                      AddressData(jsonDecode(
-                                                          cartItems["address"]
-                                                              [index])),
-                                                    ],
-                                                  );
-                                                }
-
-                                                // If it's the first item, don't add a Divider
-                                                return AddressData(jsonDecode(
-                                                    cartItems["address"]
-                                                        [index]));
-                                              },
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    // Your button's action here
-                                                  },
-                                                  style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(Colors
-                                                                .black), // Change the color to your desired color
-                                                  ),
-                                                  child: Text('Add Address to Quote'),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )),
+                                height: MediaQuery.of(context).size.height / 45,
+                              ),
                             ],
                           ),
                         ),
-                        Gap(25),
-                        Column(
-                          children: [
-                            Container(
-                              width: 0.5,
-                              height: 130,
-                              color: Color.fromARGB(255, 122, 122, 122),
-                            ),
-                            Text("or"),
-                            Container(
-                              width: 0.5,
-                              height: 130,
-                              color: const Color.fromARGB(255, 122, 122, 122),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: _width / 2.5,
-                          height: _height / 2,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 40, right: 25),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                             
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height / 45,
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                ],
-              )));
-    
+                ),
+              ],
+            )));
   }
 }
+// Future<void> removeAddress() async {
+//     try {
+//       var documentReference = FirebaseFirestore.instance
+//           .collection("users")
+//           .doc(FirebaseAuth.instance.currentUser!.uid);
 
+//       // Check if the document exists before trying to delete it
+//       var documentSnapshot = await documentReference.get();
+//       if (documentSnapshot.exists) {
+//         // Document exists, proceed with deletion
+//         await documentReference.delete();
+//         print("Address removed successfully");
+
+//         // Optionally, you can add code here to update your UI or perform any additional actions after deletion.
+//       } else {
+//         print("No address found to remove");
+//       }
+//     } catch (e) {
+//       print("Error removing address: $e");
+//       // Handle the error as needed
+//     }
+//   }
 // ignore: must_be_immutable
 
 // ignore: must_be_immutable
