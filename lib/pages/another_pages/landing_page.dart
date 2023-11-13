@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/pages/address.dart/add_textfield.dart';
+import 'package:firebase_hex/pages/address.dart/addresShow.dart';
 import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:side_sheet/side_sheet.dart';
 
 class LandinPage extends StatelessWidget {
   @override
@@ -367,24 +366,24 @@ class MobileLanding extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             color: Colors.white),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Delivarypage()),
-                          );
-                        },
-                        child: Text(
-                          'CHECKOUT',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 54, 98, 98)),
-                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
-                        ),
-                      ),
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => const Delivarypage()),
+                      //     );
+                      //   },
+                      //   child: Text(
+                      //     'CHECKOUT',
+                      //     style: TextStyle(color: Colors.white),
+                      //   ),
+                      //   style: ButtonStyle(
+                      //     backgroundColor: MaterialStateProperty.all(
+                      //         const Color.fromARGB(255, 54, 98, 98)),
+                      //     minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 320,
                       ),
