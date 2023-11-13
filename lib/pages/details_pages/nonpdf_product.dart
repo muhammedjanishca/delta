@@ -180,8 +180,9 @@ class Nopdf extends StatelessWidget {
                                       child: Container(
                                         // color: Colors.amber,
 
-                                        child: Text(
-                                          'Product Price: $priceofproduct',
+                                        child: priceofproduct==null?
+                                        Text(
+                                          'Product Price : 0.00',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 16.0,
@@ -189,7 +190,7 @@ class Nopdf extends StatelessWidget {
                                             color: Color(0xFF212121),
                                             fontWeight: FontWeight.bold,
                                           ),
-                                        ),
+                                        ):Text(priceofproduct!)
                                       ),
                                     ),
                                     // ValueListenableBuilder<String>(
@@ -960,8 +961,9 @@ class Nopdf extends StatelessWidget {
                                       child: Container(
                                         // color: Colors.amber,
 
-                                        child: Text(
-                                          'Product Price: $priceofproduct',
+                                        child: priceofproduct==null?
+                                        Text(
+                                          'Product Price: 0.00',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 16.0,
@@ -969,7 +971,7 @@ class Nopdf extends StatelessWidget {
                                             color: Color(0xFF212121),
                                             fontWeight: FontWeight.bold,
                                           ),
-                                        ),
+                                        ):Text(priceofproduct!)
                                       ),
                                     ),
                                     // ValueListenableBuilder<String>(

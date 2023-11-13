@@ -25,19 +25,27 @@ class ProductDetailsOfAccessories extends StatelessWidget {
   String? thumbnail;
   @override
   Widget build(BuildContext context) {
-  
     TextEditingController quantityController = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
-    String product_name = setting_list[2].replaceAll('_', " ");
-   
 
+    String product_name = "";
+    if (setting_list.length > 2) {
+// product_name=(setting_list[2]+"/"+setting_list[3]).replaceAll('_', ' ');
+      for (int i = 2; i < setting_list.length; i++) {
+        product_name += setting_list[i].replaceAll('_', ' ');
+        if (i < setting_list.length - 1) {
+          product_name += "/";
+        }
+      }
+    } else
+      product_name = setting_list[2].replaceAll('_', " ");
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
- var user = Provider.of<AuthenticationHelper>(context).user;
-   
+    var user = Provider.of<AuthenticationHelper>(context).user;
+
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
@@ -48,7 +56,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           future: context.read<DataProvider>().fetchaccessoriesApiUrl(),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
-      
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                   child:
@@ -56,14 +64,14 @@ class ProductDetailsOfAccessories extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-             String? textpass = "";
+              String? textpass = "";
               String? thumbnail = "";
               String? description = "";
               List<CodesAndPrice>? price = [];
               String? priceofproduct = "";
               List<String>? image = [];
               String? pdf = "";
-      
+
               if (selectedThumbnailProvider.selectedIndex != null) {
                 print("kjh");
                 textpass = snapshot.data!
@@ -80,14 +88,14 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                     .data!
                     .data[selectedThumbnailProvider.selectedIndex!]
                     .priceofproduct;
-                image = snapshot
-                    .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+                image = snapshot.data!
+                    .data[selectedThumbnailProvider.selectedIndex!].images;
                 pdf = snapshot
                     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
               } else {
                 print(product_name);
                 print("khgg");
-      
+
                 snapshot.data!.data.firstWhere((element) {
                   if (element.productName == product_name) {
                     print("2121");
@@ -102,7 +110,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                     return false;
                   }
                 });
-                
               }
               return pdf != null
                   ? DefaultTabController(
@@ -396,11 +403,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               ),
                                               ElevatedButton(
                                                 onPressed: () {
-                                                  if (_formKey
-                                                      .currentState!
+                                                  if (_formKey.currentState!
                                                       .validate()) {
-                                                    if (FirebaseAuth
-                                                            .instance
+                                                    if (FirebaseAuth.instance
                                                             .currentUser !=
                                                         null) {
                                                       final selectedPrice =
@@ -411,18 +416,17 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       if (selectedPrice !=
                                                               null ||
                                                           selectedPrice
-                                                              .split(
-                                                                  ': ')[1]
+                                                              .split(': ')[1]
                                                               .isNotEmpty) {
                                                         final productCode =
                                                             selectedPrice
-                                                                .split(
-                                                                    ': ')[0];
-                                                        final price =
-                                                            double.tryParse(
-                                                                    selectedPrice
-                                                                        .split(': ')[1]) ??
-                                                                0;
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
                                                         final quantity =
                                                             int.tryParse(
                                                                     quantityController
@@ -436,24 +440,19 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                             Provider.of<
                                                                     CartProvider>(
                                                                 context,
-                                                                listen:
-                                                                    false);
+                                                                listen: false);
                                                         cartProvider.addToCart(
                                                             productCode,
                                                             price,
                                                             quantity,
-                                                            imageUrl ??
-                                                                '',
-                                                            productName ??
-                                                                '');
+                                                            imageUrl ?? '',
+                                                            productName ?? '');
 
-                                                        ScaffoldMessenger
-                                                                .of(
-                                                                    context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                                    content:
-                                                                        Text('Added to cart')));
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
                                                       } else {
                                                         // Handle the case where selectedPrice is empty or null
                                                         // You might want to display an error message or take appropriate action.
@@ -462,26 +461,23 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       // Handle the case where the user is not signed in
                                                       showDialog(
                                                         context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                                context) {
+                                                        builder: (BuildContext
+                                                            context) {
                                                           return LoginPage(); // Your custom dialog widget
                                                         },
                                                       );
                                                     }
                                                   }
                                                 },
-                                                child: const Text(
-                                                    'ADD TO CART'),
+                                                child:
+                                                    const Text('ADD TO CART'),
                                                 style: ButtonStyle(
                                                   backgroundColor:
-                                                      MaterialStateProperty
-                                                          .all(Colors
-                                                              .black),
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
                                                   minimumSize:
-                                                      MaterialStateProperty
-                                                          .all(Size(
-                                                              150, 50)),
+                                                      MaterialStateProperty.all(
+                                                          Size(150, 50)),
                                                 ),
                                               )
                                             ],
@@ -510,7 +506,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                       selectedPriceNotifier
                                                               .value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
+                                                          '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
                                                     },
                                                     child: Form(
                                                       autovalidateMode:
@@ -633,7 +629,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
             }
           },
         ),
-         bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: BottomAppBar(
           child: Container(
             color: Colors.black,
             child: Row(
@@ -811,11 +807,11 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                             thumbnail!,
-                                            // selectedThumbnailProvider
-                                            //         .selectedThumbnail ??
-                                            //     ''
-                                                ),
+                                          thumbnail!,
+                                          // selectedThumbnailProvider
+                                          //         .selectedThumbnail ??
+                                          //     ''
+                                        ),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -835,9 +831,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
-                                                      color: imageUrl ==imageUrl
-                                                              // selectedThumbnailProvider
-                                                              //     .selectedThumbnail
+                                                      color: imageUrl ==
+                                                              imageUrl
+                                                          // selectedThumbnailProvider
+                                                          //     .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors
@@ -867,7 +864,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                       SizedBox(
                                         height: 30,
                                       ),
-                                     Row(
+                                      Row(
                                         children: [
                                           SizedBox(
                                             width: MediaQuery.of(context)
@@ -894,7 +891,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           ValueListenableBuilder<String>(
                                             valueListenable:
                                                 selectedPriceNotifier,
-                                            builder: (context, selectedPrice,                                               child) {
+                                            builder: (context, selectedPrice,
+                                                child) {
                                               // String lastPrice =
                                               //     selectedPrice.substring(
                                               //         selectedPrice.length - 4);
@@ -903,7 +901,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
                                               return Container(
                                                 width: 110,
-                                                padding: EdgeInsets.all(8.0),  
+                                                padding: EdgeInsets.all(8.0),
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: Colors.black,
@@ -913,15 +911,46 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                 // child: selectedPrice != null
                                                 //     ? Text(selectedPrice)
                                                 //     : Text('NO Price'),
-                                                child: 
-                                                // lastPrice == "null"
-                                                //     ? const Text('product available based on request')
-                                                //     : 
-                                                selectedPrice==" null"?Text('product available based on request'):
-                                                    Text(selectedPrice ),
+                                                child:
+                                                    // lastPrice == "null"
+                                                    //     ? const Text('product available based on request')
+                                                    //     :
+                                                    selectedPrice == " null"
+                                                        ? Text(
+                                                            'Product available based on Request')
+                                                        : Text(selectedPrice),
                                               );
                                             },
                                           ),
+                                          Gap(95),
+                                          TextButton(
+                                              onPressed: () => SideSheet.right(
+                                                  body: Container(
+                                                      height: 1500,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              230,
+                                                              233,
+                                                              235),
+                                                      child: pdf != null
+                                                          ? SfPdfViewer.network(
+                                                              pdf!)
+                                                          : Nopdf()),
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  context: context),
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.edit_document),
+                                                  Text(
+                                                    "Size Chart",
+                                                    style: TextStyle(),
+                                                  )
+                                                ],
+                                              ))
                                         ],
                                       ),
                                       Column(
@@ -948,7 +977,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
-                                                      ' ${codeAndPrice.price}';
+                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
@@ -1079,9 +1108,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             SizedBox(height: 20.0),
                                             Row(
                                               children: [
-                                                  SizedBox(
-                                            width: 20,
-                                          ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
                                                 Form(
                                                   key: _formKey,
                                                   child: Container(
@@ -1094,7 +1123,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                           quantityController,
                                                       keyboardType:
                                                           TextInputType.number,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         border:
                                                             OutlineInputBorder(),
                                                         hintText:
@@ -1127,7 +1157,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   width: 30,
                                                 ),
                                                 SizedBox(
-                                                   width: MediaQuery.of(context)
+                                                  width: MediaQuery.of(context)
                                                           .size
                                                           .width /
                                                       5,
@@ -1135,7 +1165,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                     onPressed: () {
                                                       if (_formKey.currentState!
                                                           .validate()) {
-                                                        if (FirebaseAuth.instance
+                                                        if (FirebaseAuth
+                                                                .instance
                                                                 .currentUser !=
                                                             null) {
                                                           // signed in
@@ -1144,12 +1175,13 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                   .value;
                                                           final productCode =
                                                               selectedPrice
-                                                                  .split(': ')[0];
+                                                                  .split(
+                                                                      ': ')[0];
                                                           final price = double
                                                               .parse(selectedPrice
                                                                   .split(
                                                                       ': ')[1]);
-                                                
+
                                                           final quantity =
                                                               int.tryParse(
                                                                       quantityController
@@ -1165,14 +1197,18 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                               Provider.of<
                                                                       CartProvider>(
                                                                   context,
-                                                                  listen: false);
-                                                          cartProvider.addToCart(
-                                                              productCode,
-                                                              price,
-                                                              quantity,
-                                                              imageUrl ?? "",
-                                                              productName ?? "");
-                                                
+                                                                  listen:
+                                                                      false);
+                                                          cartProvider
+                                                              .addToCart(
+                                                                  productCode,
+                                                                  price,
+                                                                  quantity,
+                                                                  imageUrl ??
+                                                                      "",
+                                                                  productName ??
+                                                                      "");
+
                                                           ScaffoldMessenger.of(
                                                                   context)
                                                               .showSnackBar(SnackBar(
@@ -1182,23 +1218,26 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                           // signed out
                                                           showDialog(
                                                             context: context,
-                                                            builder: (BuildContext
-                                                                context) {
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
                                                               return LoginPage(); // Your custom dialog widget
                                                             },
                                                           );
                                                         }
                                                       }
                                                     },
-                                                    child:
-                                                        const Text('ADD TO CART'),
+                                                    child: const Text(
+                                                        'ADD TO CART'),
                                                     style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Colors.black),
+                                                              .all(
+                                                                  Colors.black),
                                                       minimumSize:
                                                           MaterialStateProperty
-                                                              .all(Size(150, 50)),
+                                                              .all(Size(
+                                                                  150, 50)),
                                                     ),
                                                   ),
                                                 ),
@@ -1206,21 +1245,24 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   width: 20,
                                                 ),
                                                 SizedBox(
-                                                   width: MediaQuery.of(context)
+                                                  width: MediaQuery.of(context)
                                                           .size
                                                           .width /
                                                       5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                      user != null
+                                                          ? Navigator.pushNamed(
+                                                              context, '/cart')
+                                                          : showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return LoginPage(); // Your custom dialog widget
+                                                              },
+                                                            );
+                                                    },
                                                     child: const Text(
                                                       'GO TO CART',
                                                       style: TextStyle(
@@ -1229,10 +1271,12 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                     style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Colors.white),
+                                                              .all(
+                                                                  Colors.white),
                                                       minimumSize:
                                                           MaterialStateProperty
-                                                              .all(Size(150, 50)),
+                                                              .all(Size(
+                                                                  150, 50)),
                                                     ),
                                                   ),
                                                 ),

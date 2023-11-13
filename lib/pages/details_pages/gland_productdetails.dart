@@ -894,7 +894,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     
                                                     selectedPrice == " null"
                                                         ? Text(
-                                                            'product available based on request')
+                                                            'Product available based on Request')
                                                         : Text(selectedPrice),
                                               );
                                             },
@@ -947,7 +947,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
+                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
                                                 },
                                                 child: Form(
                                                   autovalidateMode:

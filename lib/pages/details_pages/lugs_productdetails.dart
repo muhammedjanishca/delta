@@ -31,14 +31,25 @@ class ProductDetailsoflugs extends StatelessWidget {
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
-  print(selectedThumbnailProvider.selectedIndex);
-  print("khbkh");
+    print(selectedThumbnailProvider.selectedIndex);
+    print("khbkh");
 
     final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var setting_list = selectedProductIndex.split('/');
-    String product_name = setting_list[2].replaceAll('_', " ");
+
+    String product_name = "";
+    if (setting_list.length > 2) {
+// product_name=(setting_list[2]+"/"+setting_list[3]).replaceAll('_', ' ');
+      for (int i = 2; i < setting_list.length; i++) {
+        product_name += setting_list[i].replaceAll('_', ' ');
+        if (i < setting_list.length - 1) {
+          product_name += "/";
+        }
+      }
+    } else
+      product_name = setting_list[2].replaceAll('_', " ");
     print(selectedProductIndex);
     print("lkkjlj");
 
@@ -63,9 +74,8 @@ class ProductDetailsoflugs extends StatelessWidget {
               List<CodesAndPrice>? price = [];
               List<String>? image = [];
               String? pdf;
-               ;
+              ;
               if (selectedThumbnailProvider.selectedIndex != null) {
-               
                 textpass = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].productName;
                 thumbnail = snapshot.data!
@@ -98,7 +108,7 @@ class ProductDetailsoflugs extends StatelessWidget {
               }
 
               return pdf != null
-                 ? DefaultTabController(
+                  ? DefaultTabController(
                       length: 2,
                       child: SingleChildScrollView(
                         child: Container(
@@ -389,11 +399,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                               ElevatedButton(
                                                 onPressed: () {
-                                                  if (_formKey
-                                                      .currentState!
+                                                  if (_formKey.currentState!
                                                       .validate()) {
-                                                    if (FirebaseAuth
-                                                            .instance
+                                                    if (FirebaseAuth.instance
                                                             .currentUser !=
                                                         null) {
                                                       final selectedPrice =
@@ -404,18 +412,17 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       if (selectedPrice !=
                                                               null ||
                                                           selectedPrice
-                                                              .split(
-                                                                  ': ')[1]
+                                                              .split(': ')[1]
                                                               .isNotEmpty) {
                                                         final productCode =
                                                             selectedPrice
-                                                                .split(
-                                                                    ': ')[0];
-                                                        final price =
-                                                            double.tryParse(
-                                                                    selectedPrice
-                                                                        .split(': ')[1]) ??
-                                                                0;
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
                                                         final quantity =
                                                             int.tryParse(
                                                                     quantityController
@@ -429,24 +436,19 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             Provider.of<
                                                                     CartProvider>(
                                                                 context,
-                                                                listen:
-                                                                    false);
+                                                                listen: false);
                                                         cartProvider.addToCart(
                                                             productCode,
                                                             price,
                                                             quantity,
-                                                            imageUrl ??
-                                                                '',
-                                                            productName ??
-                                                                '');
+                                                            imageUrl ?? '',
+                                                            productName ?? '');
 
-                                                        ScaffoldMessenger
-                                                                .of(
-                                                                    context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                                    content:
-                                                                        Text('Added to cart')));
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
                                                       } else {
                                                         // Handle the case where selectedPrice is empty or null
                                                         // You might want to display an error message or take appropriate action.
@@ -455,26 +457,23 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       // Handle the case where the user is not signed in
                                                       showDialog(
                                                         context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                                context) {
+                                                        builder: (BuildContext
+                                                            context) {
                                                           return LoginPage(); // Your custom dialog widget
                                                         },
                                                       );
                                                     }
                                                   }
                                                 },
-                                                child: const Text(
-                                                    'ADD TO CART'),
+                                                child:
+                                                    const Text('ADD TO CART'),
                                                 style: ButtonStyle(
                                                   backgroundColor:
-                                                      MaterialStateProperty
-                                                          .all(Colors
-                                                              .black),
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
                                                   minimumSize:
-                                                      MaterialStateProperty
-                                                          .all(Size(
-                                                              150, 50)),
+                                                      MaterialStateProperty.all(
+                                                          Size(150, 50)),
                                                 ),
                                               )
                                             ],
@@ -503,7 +502,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                       selectedPriceNotifier
                                                               .value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
+                                                          '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
                                                     },
                                                     child: Form(
                                                       autovalidateMode:
@@ -720,10 +719,9 @@ class ProductDetailsoflugs extends StatelessWidget {
             List<String>? image = [];
             String? pdf;
 
-            
             if (selectedThumbnailProvider.selectedIndex != null) {
-               print(selectedThumbnailProvider.selectedIndex);
-                print("ihhkh");
+              print(selectedThumbnailProvider.selectedIndex);
+              print("ihhkh");
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
               thumbnail = snapshot.data!
@@ -739,7 +737,6 @@ class ProductDetailsoflugs extends StatelessWidget {
               pdf = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
-              
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
                   print("2121");
@@ -844,10 +841,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                       SizedBox(
                                         height: 30,
                                       ),
-                                       Row(
+                                      Row(
                                         children: [
                                           Gap(45),
-                                          
                                           Flexible(
                                             child: Container(
                                               // color: Colors.amber,
@@ -869,7 +865,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 selectedPriceNotifier,
                                             builder: (context, selectedPrice,
                                                 child) {
-                                              
                                               return Container(
                                                 width: 110,
                                                 padding: EdgeInsets.all(8.0),
@@ -879,41 +874,45 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     width: 1.0,
                                                   ),
                                                 ),
-                                               
-                                                child:
-                                                    
-                                                    selectedPrice == " null"
-                                                        ? Text(
-                                                            'product available based on request')
-                                                        : Text(selectedPrice),
+                                                child: selectedPrice == " null"
+                                                    ? Text(
+                                                        'Product available based on Request')
+                                                    : Text(selectedPrice),
                                               );
                                             },
                                           ),
                                           Gap(95),
-                                          TextButton( 
-                                           onPressed: () => SideSheet.right(
-                                              body: Container(
-                                              height: 1500,
-                                              color: const Color.fromARGB(
-                                                  255, 230, 233, 235),
-                                              child: pdf != null
-                                                  ? SfPdfViewer.network(pdf!)
-                                                  : Nopdf()),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              context: context),
-                                           child: Row(
-                                            children: [
-                                              Icon(Icons.edit_document),
-                                              Text("Size Chart",style: TextStyle(),)
-                                            ],
-                                           )
-                                            )
+                                          TextButton(
+                                              onPressed: () => SideSheet.right(
+                                                  body: Container(
+                                                      height: 1500,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              230,
+                                                              233,
+                                                              235),
+                                                      child: pdf != null
+                                                          ? SfPdfViewer.network(
+                                                              pdf!)
+                                                          : Nopdf()),
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  context: context),
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.edit_document),
+                                                  Text(
+                                                    "Size Chart",
+                                                    style: TextStyle(),
+                                                  )
+                                                ],
+                                              ))
                                         ],
                                       ),
-                                       Column(
+                                      Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -937,7 +936,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
+                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
@@ -989,7 +988,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                             flex: 3,
                             child: Column(
                               children: [
-                               
                                 Container(
                                   // height: 1000,
                                   child: Column(
@@ -1053,14 +1051,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               width: 200,
                                               //  MediaQuery.of(context).size.width/10,
                                               child: TextFormField(
-                                                controller:
-                                                    quantityController,
+                                                controller: quantityController,
                                                 keyboardType:
                                                     TextInputType.number,
-                                                decoration:
-                                                    InputDecoration(
-                                                  border:
-                                                      OutlineInputBorder(),
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
                                                   hintText:
                                                       'Enter the quantity',
                                                 ),
@@ -1091,17 +1086,15 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             width: 20,
                                           ),
                                           SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                           child: ElevatedButton(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              child: ElevatedButton(
                                                 onPressed: () {
-                                                  if (_formKey
-                                                      .currentState!
+                                                  if (_formKey.currentState!
                                                       .validate()) {
-                                                    if (FirebaseAuth
-                                                            .instance
+                                                    if (FirebaseAuth.instance
                                                             .currentUser !=
                                                         null) {
                                                       final selectedPrice =
@@ -1112,18 +1105,17 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       if (selectedPrice !=
                                                               null ||
                                                           selectedPrice
-                                                              .split(
-                                                                  ': ')[1]
+                                                              .split(': ')[1]
                                                               .isNotEmpty) {
                                                         final productCode =
                                                             selectedPrice
-                                                                .split(
-                                                                    ': ')[0];
-                                                        final price =
-                                                            double.tryParse(
-                                                                    selectedPrice
-                                                                        .split(': ')[1]) ??
-                                                                0;
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
                                                         final quantity =
                                                             int.tryParse(
                                                                     quantityController
@@ -1137,24 +1129,19 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             Provider.of<
                                                                     CartProvider>(
                                                                 context,
-                                                                listen:
-                                                                    false);
+                                                                listen: false);
                                                         cartProvider.addToCart(
                                                             productCode,
                                                             price,
                                                             quantity,
-                                                            imageUrl ??
-                                                                '',
-                                                            productName ??
-                                                                '');
+                                                            imageUrl ?? '',
+                                                            productName ?? '');
 
-                                                        ScaffoldMessenger
-                                                                .of(
-                                                                    context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                                    content:
-                                                                        Text('Added to cart')));
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
                                                       } else {
                                                         // Handle the case where selectedPrice is empty or null
                                                         // You might want to display an error message or take appropriate action.
@@ -1163,29 +1150,25 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       // Handle the case where the user is not signed in
                                                       showDialog(
                                                         context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                                context) {
+                                                        builder: (BuildContext
+                                                            context) {
                                                           return LoginPage(); // Your custom dialog widget
                                                         },
                                                       );
                                                     }
                                                   }
                                                 },
-                                                child: const Text(
-                                                    'ADD TO CART'),
+                                                child:
+                                                    const Text('ADD TO CART'),
                                                 style: ButtonStyle(
                                                   backgroundColor:
-                                                      MaterialStateProperty
-                                                          .all(Colors
-                                                              .black),
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
                                                   minimumSize:
-                                                      MaterialStateProperty
-                                                          .all(Size(
-                                                              150, 50)),
+                                                      MaterialStateProperty.all(
+                                                          Size(150, 50)),
                                                 ),
-                                              )
-                                          ),
+                                              )),
                                           SizedBox(
                                             width: 20,
                                           ),
@@ -1201,9 +1184,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                         context, '/cart')
                                                     : showDialog(
                                                         context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                                context) {
+                                                        builder: (BuildContext
+                                                            context) {
                                                           return LoginPage(); // Your custom dialog widget
                                                         },
                                                       );
@@ -1215,13 +1197,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                               style: ButtonStyle(
                                                 backgroundColor:
-                                                    MaterialStateProperty
-                                                        .all(
-                                                            Colors.white),
+                                                    MaterialStateProperty.all(
+                                                        Colors.white),
                                                 minimumSize:
-                                                    MaterialStateProperty
-                                                        .all(Size(
-                                                            150, 50)),
+                                                    MaterialStateProperty.all(
+                                                        Size(150, 50)),
                                               ),
                                             ),
                                           ),
