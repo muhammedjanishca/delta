@@ -19,6 +19,14 @@ class CartProvider with ChangeNotifier {
 
     notifyListeners();
   }
+   getAddressData() async {
+    fetchedItems = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .get();
+
+    notifyListeners();
+  }
   
 
   void addToCart(String productCode, double price, int quantity,

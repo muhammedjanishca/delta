@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/res_cartpage.dart';
 import 'package:firebase_hex/widgets/style.dart';
@@ -758,6 +759,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               ),
               child: TextButton(
                 onPressed: () {
+                     
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -770,6 +772,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       ),
                     ),
                   );
+
                 },
                 child: Text(
                   'GENERATE QUOTATION',

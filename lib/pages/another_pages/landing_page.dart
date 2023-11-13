@@ -1,11 +1,16 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/pages/address.dart/addresShow.dart';
 import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
+import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LandinPage extends StatelessWidget {
   @override
@@ -17,7 +22,39 @@ class LandinPage extends StatelessWidget {
 }
 
 class DesktopLanding extends StatelessWidget {
-  const DesktopLanding({Key? key}) : super(key: key);
+  // const DesktopLanding({Key? key}) : super(key: key);
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+//   Future<bool> isUserDataAvailable(context) async {
+//     User? user = _auth.currentUser;
+//     if (user != null) {
+//       DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+//           .collection("users")
+//           .doc(FirebaseAuth.instance.currentUser!.uid)
+//           .get();
+//       print('sssssssssssssssssss');
+//       List<dynamic> arrayFromFirestore = userSnapshot.get('address');
+//       print(arrayFromFirestore);
+// // var addressDataLength=userSnapshot.exists && userSnapshot['address'] ;
+// // print(userSnapshot.exists && userSnapshot['address'] );
+
+//       if (arrayFromFirestore.length != 0) {
+//         Navigator.push(
+//           context,
+//           MaterialPageRoute(builder: (context) => addressshow()),
+//         );
+//       } else {
+//         Navigator.push(
+//           context,
+//           MaterialPageRoute(builder: (context) => Delivarypage()),
+//         );
+//       }
+//       // Check if the desired field exists and contains data
+//       // return userSnapshot.exists && userSnapshot['address'] != null;
+//     }
+//     return false;
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +73,7 @@ class DesktopLanding extends StatelessWidget {
         : SizedBox();
 
     Widget industrialCableTextt = queryData.size.width >= 950
-        ?  SizedBox()
+        ? SizedBox()
         : Padding(
             padding: EdgeInsets.only(left: 50),
             child: Text(
@@ -94,14 +131,24 @@ class DesktopLanding extends StatelessWidget {
                             color: Colors.white),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          print('wwwwwwwwwwwwwwwwwwwweeeeeeeeeeeeeeeeeeeeeeee');
-                     Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>Delivarypage()
-              ),
-            );
+                        onPressed: () async {
+                          //  bool isDataAvailable = await
+                     context.read<address_provider>().
+                          isUserDataAvailable(context);
+// print(isDataAvailable);
+// print('2222222222222222');
+                          // if (isDataAvailable) {
+                          //      Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context) => Delivarypage()),
+                          //   );
+
+                          // } else {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context) => addressshow()),
+                          //   );
+                          // }
                         },
                         child: Text(
                           'CHECKOUT',
@@ -112,7 +159,10 @@ class DesktopLanding extends StatelessWidget {
                               const Color.fromARGB(255, 54, 98, 98)),
                           minimumSize: MaterialStateProperty.all(Size(150, 50)),
                         ),
-                      ),
+                      ),ElevatedButton(onPressed: (){
+                        print('1111111111111111111111111111111');
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>puthiyapage()));
+                      } , child: Text('fghjk')),
                       SizedBox(
                         height: 320,
                       ),
@@ -220,6 +270,18 @@ class DesktopLanding extends StatelessWidget {
                 : mobiledeskBottomSheett())
       ],
     );
+  }
+
+  Future<bool> checkIfDataExists() async {
+    // Replace 'users' with your actual collection name
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
+        .instance
+        .collection('users')
+        .where('address', isNotEqualTo: null)
+        .limit(1)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
   }
 }
 
@@ -389,32 +451,31 @@ class MobileLanding extends StatelessWidget {
         // Container(
         //   height: 550,
         //   width: double.infinity,
-          // child: Row(
-          //   children: [
-          //     Expanded(
-          //         child: Container(
-          //       color: Colors.white,
-          //     )),
-          //     Expanded(
-          //         child: Container(
-          //       color: Colors.white,
-          //     ))
-          //   ],
-          // ),
+        // child: Row(
+        //   children: [
+        //     Expanded(
+        //         child: Container(
+        //       color: Colors.white,
+        //     )),
+        //     Expanded(
+        //         child: Container(
+        //       color: Colors.white,
+        //     ))
+        //   ],
         // ),
-          Container(
-                      color: Colors.white,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/image/hex-logo-new.png'),
-                          Text(
-                            "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      )),
+        // ),
+        Container(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/image/hex-logo-new.png'),
+                Text(
+                  "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                )
+              ],
+            )),
         Container(
             color: const Color.fromARGB(255, 255, 255, 255),
             height: 1000,
