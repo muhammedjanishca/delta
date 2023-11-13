@@ -170,10 +170,7 @@ class DesktopLanding extends StatelessWidget {
                               const Color.fromARGB(255, 54, 98, 98)),
                           minimumSize: MaterialStateProperty.all(Size(150, 50)),
                         ),
-                      ),ElevatedButton(onPressed: (){
-                        print('1111111111111111111111111111111');
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>puthiyapage()));
-                      } , child: Text('fghjk')),
+                      ),
                       SizedBox(
                         height: 320,
                       ),

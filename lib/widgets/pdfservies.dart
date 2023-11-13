@@ -40,7 +40,7 @@ class PdfService {
 PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,current_address) {
   //Draw rectangle
   page.graphics.drawRectangle(
-      brush: PdfSolidBrush(PdfColor(75, 138, 131)),
+      brush: PdfSolidBrush(PdfColor(68, 114, 196)),
       bounds: Rect.fromLTWH(0, 0, pageSize.width - 115, 90));
   //Draw string
   page.graphics.drawString(
@@ -51,7 +51,7 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,current_add
 
   page.graphics.drawRectangle(
       bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 90),
-      brush: PdfSolidBrush(PdfColor(75, 138, 131)));
+      brush: PdfSolidBrush(PdfColor(68, 114, 196)));
 
   page.graphics.drawString(r'$' + getTotalAmount(grid).toString(),
       PdfStandardFont(PdfFontFamily.helvetica, 18),
