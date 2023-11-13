@@ -74,13 +74,13 @@ class QuotationPage extends StatelessWidget {
                     // ),
                     width: MediaQuery.of(context).size.width / 1.9,
                     // width: MediaQuery.of(context).size.width * 0.6,
-                    padding: EdgeInsets.only(top: 20.0),
+                  //  padding: EdgeInsets.only(top: 20.0),
                     child: Center(
                         child: Column(
                       children: [
                         Container(
                           color: Colors.white,
-                          height: MediaQuery.of(context).size.height / 5,
+                          height: MediaQuery.of(context).size.height / 4,
                           child: MyClipPath(),
                         ),
                         Container(
@@ -161,7 +161,7 @@ print('3333333333333333');
                     columnSpacing: 10.0,
                     dividerThickness: 2,
                     headingRowColor: MaterialStateColor.resolveWith(
-                      (states) => Color.fromARGB(255, 76, 138, 131),
+                      (states) =>  Color.fromARGB(255, 91, 166, 157),
                     ),
                     dataRowMaxHeight: 60,
                     headingRowHeight: 60,
@@ -371,25 +371,34 @@ print('3333333333333333');
                 //*****_______GANERATE QUATATION TOTAL AMOUNT CONTAINER____********
                 Row(
                   children: [
+                    Container(
+                      // color: Colors.amber,
+                      width:20,
+                      height: 10,),
                     SizedBox(
-                      width: 520,
-                      height: 200,
+                      // color: const Color.fromARGB(255, 128, 118, 91),
+                      width: 500,
+                      height:200,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("Terms & Conditions",
-                        style: TextStyle(fontWeight: FontWeight.w400,fontSize:17),),
-                        Text("Payment	      :  30 Dyas",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
+                        children: [
+                          // _buildTableCell("janish"),
+                        Text("TERM AND CONDITIONS",
+                        style: TextStyle(fontWeight: FontWeight.w500,fontSize:15),),
+                        Gap(5),
+                        Text("Payment	      : 30 Dyas",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
                         Text("Delivery	       : 03 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                        Text("Validity		    : 07 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                        Text("We hope our offer will meet your entire satisfaction and\nlook forward to receive your valued order soon.Should you require\nany further information on our products, please feel\nfree to contact us. We assure our prompt and professional service \nat all the time we remain",
+                        Text("Validity		        : 07 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
+                        Text("We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
                         style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),)
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: 264,
                       height: 200,
+                      // color: Color.fromARGB(255, 31, 135, 86),
                       // decoration:
                       // BoxDecoration(
                       //     borderRadius: BorderRadius.circular(15),
@@ -518,8 +527,57 @@ class MyClipPath extends StatelessWidget {
     return ClipPath(
       clipper: BottomWaveClipper(),
       child: Container(
+        height: 150,
+        width: double.infinity,
         color: backgroundColor,
-        // child: Text("cvbnm"),
+        child: Row(
+          children: [
+            Gap(15),
+             Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20,),
+                  Text("Abdullah Shaher Alsulami Est.",
+                      style: GoogleFonts.oswald(
+                        textStyle: TextStyle(
+                        color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      )),
+                      // Gap(1),
+                  Row(
+                    children: [
+                      Text("DELTA",style: GoogleFonts.oswald(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),),
+             
+                      Text(
+                        "\nNATIONAL",
+                        style: GoogleFonts.oswald(
+                          textStyle: TextStyle(
+color: Colors.black,                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    'TRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 10),
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }

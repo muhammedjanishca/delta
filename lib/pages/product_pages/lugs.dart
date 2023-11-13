@@ -104,7 +104,7 @@ class LugsPage extends StatelessWidget {
                               productData.thumbnail ?? "",
                               index: index);
 
-                          navigateToProductDetailsOfGlands(context, index,
+                          navigateToProductDetailsofLugs(context, index,
                               productname: snapshot
                                   .data!.data[index].productName!
                                   .replaceAll(" ", "_"));

@@ -8,7 +8,7 @@ class SelectedThumbnailProvider extends ChangeNotifier {
 
   void setSelectedThumbnail(String thumbnailUrl,{int? index}) {
     _selectedThumbnail = thumbnailUrl;
-    selectedIndex = index??selectedIndex;
+    selectedIndex = index;
     notifyListeners();
   }
 }

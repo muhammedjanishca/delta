@@ -13,7 +13,6 @@ class ProductProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        // print('rbntbxdvffffffffffffff');
         final List<dynamic> data = json.decode(response.body)['data'];
         return data.cast<Map<String, dynamic>>();
       } else {

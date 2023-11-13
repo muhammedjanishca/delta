@@ -3,18 +3,15 @@ import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../login_and_signing/signup_page.dart';
 import '../../model.dart';
 import '../../provider/cart_provider.dart';
 import '../../provider/data_provider.dart';
 import '../../provider/thumbnail.dart';
-import '../../provider/user_input_provider.dart';
 import '../../responsive/product_page.dart';
-import 'accessories_product.dart';
 
 class Nopdf extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
-  String? typeOfProduct;
+   String? typeOfProduct;
   Nopdf({this.typeOfProduct});
   // Nopdf({required this.productData, required this.selectedIndex});
   @override
@@ -40,7 +37,7 @@ class Nopdf extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -73,8 +70,8 @@ class Nopdf extends StatelessWidget {
               pdf = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
-              print(product_name);
-              print("khgg");
+              // print(product_name);
+              // print("khgg");
 
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
@@ -820,7 +817,7 @@ class Nopdf extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {

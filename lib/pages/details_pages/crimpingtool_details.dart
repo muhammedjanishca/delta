@@ -1,98 +1,71 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_hex/login_and_signing/loginpage.dart';
-// import 'package:firebase_hex/login_and_signing/signup_page.dart';
-// import 'package:firebase_hex/provider/cart_provider.dart';
-// import 'package:firebase_hex/provider/data_provider.dart';
-// import 'package:firebase_hex/provider/thumbnail.dart';
-// import 'package:firebase_hex/provider/user_input_provider.dart';
-// import 'package:firebase_hex/responsive/product_page.dart';
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-// import '../model.dart';
-// import 'nonpdf_product.dart';
+// // import 'package:firebase_auth/firebase_auth.dart';
+// // import 'package:firebase_hex/login_and_signing/loginpage.dart';
+// // import 'package:firebase_hex/login_and_signing/signup_page.dart';
+// // import 'package:firebase_hex/provider/cart_provider.dart';
+// // import 'package:firebase_hex/provider/data_provider.dart';
+// // import 'package:firebase_hex/provider/thumbnail.dart';
+// // import 'package:firebase_hex/provider/user_input_provider.dart';
+// // import 'package:firebase_hex/responsive/product_page.dart';
+// // import 'package:flutter/material.dart';
+// // import 'package:provider/provider.dart';
+// // import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+// // import '../model.dart';
+// // import 'nonpdf_product.dart';
 
-// class ProductDetailsOfCrimpingTool extends StatelessWidget {
-//   // ProductDetailsOfCrimpingTool({selectedProductIndex)}
-//   //  final int selectedProductIndex ;
-//   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+// // class ProductDetailsOfCrimpingTool extends StatelessWidget {
+// //   // ProductDetailsOfCrimpingTool({selectedProductIndex)}
+// //   //  final int selectedProductIndex ;
+// //   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
-//   ProductDetailsOfCrimpingTool({super.key});
-//   // ProductDetails({required this.productData, required this.selectedIndex});
-//   @override
-//   Widget build(BuildContext context) {
-//     // print("dfdghjkl");
-//     // final userInputProvider = Provider.of<UserInputProvider>(context);
-//     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
-//     TextEditingController quantityController = TextEditingController();
-//     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+// //   ProductDetailsOfCrimpingTool({super.key});
+// //   // ProductDetails({required this.productData, required this.selectedIndex});
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     // print("dfdghjkl");
+// //     // final userInputProvider = Provider.of<UserInputProvider>(context);
+// //     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
+// //     TextEditingController quantityController = TextEditingController();
+// //     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-//     String selectedProductIndex =
-//         ModalRoute.of(context)!.settings.name as String;
-//     var setting_list = selectedProductIndex.split('/');
-//     String product_name = setting_list[2].replaceAll('_', " ");;
-//     print(product_name);
+// //     String selectedProductIndex =
+// //         ModalRoute.of(context)!.settings.name as String;
+// //     var setting_list = selectedProductIndex.split('/');
+// //     String product_name = setting_list[2].replaceAll('_', " ");;
+// //     print(product_name);
 
-//     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
+// //     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
 //     final selectedThumbnailProvider =
 //         Provider.of<SelectedThumbnailProvider>(context);
 //     return ResponsiveProductPage(
-
-
 //       //******************MOBILE VIEW****************************
 
-//       mobileProductPage: FutureBuilder(
-//         future: context.read<DataProvider>().fetchcrimpingtoolApiUrl(),
-//         builder: (context, snapshot) {
-//           snapshot.data!.data.length;
+//       // mobileProductPage: FutureBuilder(
+//       //   future: context.read<DataProvider>().fetchcrimpingtoolApiUrl(),
+//       //   builder: (context, snapshot) {
+//       //     snapshot.data!.data.length;
 
 //           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+//             return Center(
+//                 child:
+//                     const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
 //           } else if (snapshot.hasError) {
 //             return Text('Error: ${snapshot.error}');
 //           } else {
-//              String? textpass;
-//             String? thumbnail;
-//             String? description;
-//             List<CodesAndPrice>? price = [];
-//             List<String>? image = [];
-//             String? pdf;
+//             var textpass = snapshot.data!
+//                 .data[selectedThumbnailProvider.selectedIndex!].productName;
+//             var thumbnail = snapshot
+//                 .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+//             var description = snapshot.data!
+//                 .data[selectedThumbnailProvider.selectedIndex!].description;
+//             var price = snapshot.data!
+//                 .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+//             var image = snapshot
+//                 .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+//             var pdf = snapshot
+//                 .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
-            
-//             if (selectedThumbnailProvider.selectedIndex != null) {
-//               textpass = snapshot.data!
-//                   .data[selectedThumbnailProvider.selectedIndex!].productName;
-//               thumbnail = snapshot.data!
-//                   .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-//               description = snapshot.data!
-//                   .data[selectedThumbnailProvider.selectedIndex!].description;
-//               price = snapshot
-//                   .data!
-//                   .data[selectedThumbnailProvider.selectedIndex!]
-//                   .codesAndPrice!;
-//               image = snapshot
-//                   .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-//               pdf = snapshot
-//                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
-//             } else {
-             
-//               snapshot.data!.data.firstWhere((element) {
-//                 if (element.productName == product_name) {
-//                   print("2121");
-//                   textpass = element.productName;
-//                   thumbnail = element.thumbnail;
-//                   description = element.description;
-//                   price?.addAll(element.codesAndPrice!.map((e) => e));
-//                   image?.addAll(element.images!.map((e) => e));
-//                   pdf = element.pdf;
-//                   return true;
-//                 } else {
-//                   return false;
-//                 }
-//               });
-//             }
-
+//             //  String selectedPrice = '';
 
 //             return pdf != null
 //                 ? DefaultTabController(
@@ -127,11 +100,10 @@
 //                                                   .width /
 //                                               2,
 //                                           child: Image.network(
-//                                             thumbnail!,
-//                                               // selectedThumbnailProvider
-//                                               //         .selectedThumbnail ??
-//                                               //     ''
-//                                                   ),
+//                                               // thumbnail!,)
+//                                               selectedThumbnailProvider
+//                                                       .selectedThumbnail ??
+//                                                   ''),
 //                                         ), // Display the selected thumbnail here
 //                                         SingleChildScrollView(
 //                                           scrollDirection: Axis.horizontal,
@@ -151,9 +123,9 @@
 //                                                   child: Container(
 //                                                     decoration: BoxDecoration(
 //                                                       border: Border.all(
-//                                                         color: imageUrl ==imageUrl
-//                                                                 // selectedThumbnailProvider
-//                                                                 //     .selectedThumbnail
+//                                                         color: imageUrl ==
+//                                                                 selectedThumbnailProvider
+//                                                                     .selectedThumbnail
 //                                                             ? Colors
 //                                                                 .blue // Highlight the selected image
 //                                                             : Colors
@@ -186,268 +158,268 @@
 //                                         ),
 //                                         //--------Product Price-----------
 
-//                                         SizedBox(
-//                                           height: 30,
-//                                         ),
-//                                         Row(
-//                                           children: [
-//                                             SizedBox(
-//                                               width: MediaQuery.of(context)
-//                                                       .size
-//                                                       .width /
-//                                                   20,
-//                                             ),
-//                                             Flexible(
-//                                               child: Container(
-//                                                 // color: Colors.amber,
+// //                                         SizedBox(
+// //                                           height: 30,
+// //                                         ),
+// //                                         Row(
+// //                                           children: [
+// //                                             SizedBox(
+// //                                               width: MediaQuery.of(context)
+// //                                                       .size
+// //                                                       .width /
+// //                                                   20,
+// //                                             ),
+// //                                             Flexible(
+// //                                               child: Container(
+// //                                                 // color: Colors.amber,
 
-//                                                 child: Text(
-//                                                   'selected Product code&Price:',
-//                                                   overflow:
-//                                                       TextOverflow.ellipsis,
-//                                                   style: TextStyle(
-//                                                     fontSize: 16.0,
-//                                                     fontFamily: 'Roboto',
-//                                                     color: Color(0xFF212121),
-//                                                     fontWeight: FontWeight.bold,
-//                                                   ),
-//                                                 ),
-//                                               ),
-//                                             ),
-//                                             ValueListenableBuilder<String>(
-//                                               valueListenable:
-//                                                   selectedPriceNotifier,
-//                                               builder: (context, selectedPrice,
-//                                                   child) {
-//                                                 return Container(
-//                                                   width: 110,
-//                                                   padding: EdgeInsets.all(8.0),
-//                                                   decoration: BoxDecoration(
-//                                                     border: Border.all(
-//                                                       color: Colors.black,
-//                                                       width: 1.0,
-//                                                     ),
-//                                                   ),
-//                                                   child: Text(selectedPrice),
-//                                                 );
-//                                               },
-//                                             ),
-//                                           ],
-//                                         ),
-//                                         Column(
-//                                           crossAxisAlignment:
-//                                               CrossAxisAlignment.start,
-//                                           children: [
-//                                             SizedBox(
-//                                               height: 30,
-//                                             ),
+// //                                                 child: Text(
+// //                                                   'selected Product code&Price:',
+// //                                                   overflow:
+// //                                                       TextOverflow.ellipsis,
+// //                                                   style: TextStyle(
+// //                                                     fontSize: 16.0,
+// //                                                     fontFamily: 'Roboto',
+// //                                                     color: Color(0xFF212121),
+// //                                                     fontWeight: FontWeight.bold,
+// //                                                   ),
+// //                                                 ),
+// //                                               ),
+// //                                             ),
+// //                                             ValueListenableBuilder<String>(
+// //                                               valueListenable:
+// //                                                   selectedPriceNotifier,
+// //                                               builder: (context, selectedPrice,
+// //                                                   child) {
+// //                                                 return Container(
+// //                                                   width: 110,
+// //                                                   padding: EdgeInsets.all(8.0),
+// //                                                   decoration: BoxDecoration(
+// //                                                     border: Border.all(
+// //                                                       color: Colors.black,
+// //                                                       width: 1.0,
+// //                                                     ),
+// //                                                   ),
+// //                                                   child: Text(selectedPrice),
+// //                                                 );
+// //                                               },
+// //                                             ),
+// //                                           ],
+// //                                         ),
+// //                                         Column(
+// //                                           crossAxisAlignment:
+// //                                               CrossAxisAlignment.start,
+// //                                           children: [
+// //                                             SizedBox(
+// //                                               height: 30,
+// //                                             ),
 
-//                                             // Text(
-//                                             //   'Codes and Prices:',
-//                                             //   style: TextStyle(
-//                                             //     fontWeight: FontWeight.bold,
-//                                             //     fontSize: 18,
-//                                             //   ),
-//                                             // ),
-//                                             Wrap(
-//                                               spacing:
-//                                                   8.0, // Adjust the spacing between buttons as needed
-//                                               runSpacing:
-//                                                   8.0, // Adjust the spacing between rows as needed
-//                                               children: List<Widget>.generate(
-//                                                   price.length, (index) {
-//                                                 final codeAndPrice =
-//                                                     price![index];
-//                                                 return InkWell(
-//                                                   onTap: () {
-//                                                     // When a container is tapped, update the selectedPrice using ValueNotifier.
-//                                                     selectedPriceNotifier
-//                                                             .value =
-//                                                         '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-//                                                   },
-//                                                   child: Container(
-//                                                     width: 100,
-//                                                     padding: EdgeInsets.all(
-//                                                         8.0), // Adjust the padding as needed
-//                                                     decoration: BoxDecoration(
-//                                                       border: Border.all(
-//                                                         color: codeAndPrice
-//                                                                     .productCode ==
-//                                                                 selectedCodeProvider
-//                                                                     .selectedProductCode
-//                                                             // codeAndPrice.productCode
-//                                                             ? Colors
-//                                                                 .blue // Set border color to blue for selected container
-//                                                             : Colors
-//                                                                 .black, // Set border color to black for non-selected containers
-//                                                         width:
-//                                                             1.0, // Set your desired border width
-//                                                       ),
-//                                                     ),
-//                                                     child: Text(
-//                                                       '${codeAndPrice.productCode}',
-//                                                       style: TextStyle(
-//                                                         color: Colors
-//                                                             .black, // Set your desired text color
-//                                                       ),
-//                                                     ),
-//                                                   ),
-//                                                 );
-//                                               }),
-//                                             ),
-//                                           ],
-//                                         )
-//                                       ],
-//                                     ),
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                             Expanded(
-//                               flex: 2,
-//                               child: Column(
-//                                 children: [
-//                                   TabBar(
-//                                     unselectedLabelColor:
-//                                         Color.fromARGB(255, 5, 5, 5),
-//                                     indicatorSize: TabBarIndicatorSize.tab,
-//                                     indicator: BoxDecoration(
-//                                         gradient: LinearGradient(colors: [
-//                                           Color.fromARGB(255, 0, 0, 0),
-//                                           Color.fromARGB(255, 0, 0, 0)
-//                                         ]),
-//                                         borderRadius: BorderRadius.circular(0),
-//                                         color: const Color.fromARGB(
-//                                             255, 255, 255, 255)),
-//                                     tabs: [
-//                                       Tab(
-//                                         text: 'Description',
-//                                       ),
-//                                       Tab(
-//                                         text: 'Technical Details',
-//                                       ),
-//                                     ],
-//                                     labelColor: Colors.white,
-//                                   ),
-//                                   Expanded(
-//                                     flex: 2,
-//                                     child: TabBarView(
-//                                       children: [
-//                                         // Tab 1 content goes here
-//                                         SingleChildScrollView(
-//                                           child: Container(
-//                                             // height: 1000,
-//                                             child: Column(
-//                                               crossAxisAlignment:
-//                                                   CrossAxisAlignment.start,
-//                                               children: [
-//                                                 SizedBox(height: 16.0),
-//                                                 Text(
-//                                                   textpass ?? "",
-//                                                   style: TextStyle(
-//                                                       fontWeight:
-//                                                           FontWeight.bold,
-//                                                       fontSize: 30),
-//                                                 ),
-//                                                 SizedBox(height: 8.0),
-//                                                 Column(
-//                                                   crossAxisAlignment:
-//                                                       CrossAxisAlignment.start,
-//                                                   children: description!
-//                                                       .toUpperCase()
-//                                                       .split('\n')
-//                                                       .map((line) {
-//                                                     return Row(
-//                                                       children: [
-//                                                         Icon(Icons.star,
-//                                                             size:
-//                                                                 10, // Adjust the size as needed
-//                                                             color: Colors
-//                                                                 .black // Adjust the color as needed
-//                                                             ),
-//                                                         SizedBox(
-//                                                           width:
-//                                                               8, // Add some space between the circle icon and text
-//                                                         ),
-//                                                         Flexible(
-//                                                           child: Text(
-//                                                             line,
-//                                                             style: TextStyle(
-//                                                               fontSize: 16,
-//                                                             ),
-//                                                             overflow: TextOverflow
-//                                                                 .visible, // Handle text overflow
-//                                                           ),
-//                                                         ),
-//                                                       ],
-//                                                     );
-//                                                   }).toList(),
-//                                                 ),
+// //                                             // Text(
+// //                                             //   'Codes and Prices:',
+// //                                             //   style: TextStyle(
+// //                                             //     fontWeight: FontWeight.bold,
+// //                                             //     fontSize: 18,
+// //                                             //   ),
+// //                                             // ),
+// //                                             Wrap(
+// //                                               spacing:
+// //                                                   8.0, // Adjust the spacing between buttons as needed
+// //                                               runSpacing:
+// //                                                   8.0, // Adjust the spacing between rows as needed
+// //                                               children: List<Widget>.generate(
+// //                                                   price.length, (index) {
+// //                                                 final codeAndPrice =
+// //                                                     price![index];
+// //                                                 return InkWell(
+// //                                                   onTap: () {
+// //                                                     // When a container is tapped, update the selectedPrice using ValueNotifier.
+// //                                                     selectedPriceNotifier
+// //                                                             .value =
+// //                                                         '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+// //                                                   },
+// //                                                   child: Container(
+// //                                                     width: 100,
+// //                                                     padding: EdgeInsets.all(
+// //                                                         8.0), // Adjust the padding as needed
+// //                                                     decoration: BoxDecoration(
+// //                                                       border: Border.all(
+// //                                                         color: codeAndPrice
+// //                                                                     .productCode ==
+// //                                                                 selectedCodeProvider
+// //                                                                     .selectedProductCode
+// //                                                             // codeAndPrice.productCode
+// //                                                             ? Colors
+// //                                                                 .blue // Set border color to blue for selected container
+// //                                                             : Colors
+// //                                                                 .black, // Set border color to black for non-selected containers
+// //                                                         width:
+// //                                                             1.0, // Set your desired border width
+// //                                                       ),
+// //                                                     ),
+// //                                                     child: Text(
+// //                                                       '${codeAndPrice.productCode}',
+// //                                                       style: TextStyle(
+// //                                                         color: Colors
+// //                                                             .black, // Set your desired text color
+// //                                                       ),
+// //                                                     ),
+// //                                                   ),
+// //                                                 );
+// //                                               }),
+// //                                             ),
+// //                                           ],
+// //                                         )
+// //                                       ],
+// //                                     ),
+// //                                   ),
+// //                                 ),
+// //                               ),
+// //                             ),
+// //                             Expanded(
+// //                               flex: 2,
+// //                               child: Column(
+// //                                 children: [
+// //                                   TabBar(
+// //                                     unselectedLabelColor:
+// //                                         Color.fromARGB(255, 5, 5, 5),
+// //                                     indicatorSize: TabBarIndicatorSize.tab,
+// //                                     indicator: BoxDecoration(
+// //                                         gradient: LinearGradient(colors: [
+// //                                           Color.fromARGB(255, 0, 0, 0),
+// //                                           Color.fromARGB(255, 0, 0, 0)
+// //                                         ]),
+// //                                         borderRadius: BorderRadius.circular(0),
+// //                                         color: const Color.fromARGB(
+// //                                             255, 255, 255, 255)),
+// //                                     tabs: [
+// //                                       Tab(
+// //                                         text: 'Description',
+// //                                       ),
+// //                                       Tab(
+// //                                         text: 'Technical Details',
+// //                                       ),
+// //                                     ],
+// //                                     labelColor: Colors.white,
+// //                                   ),
+// //                                   Expanded(
+// //                                     flex: 2,
+// //                                     child: TabBarView(
+// //                                       children: [
+// //                                         // Tab 1 content goes here
+// //                                         SingleChildScrollView(
+// //                                           child: Container(
+// //                                             // height: 1000,
+// //                                             child: Column(
+// //                                               crossAxisAlignment:
+// //                                                   CrossAxisAlignment.start,
+// //                                               children: [
+// //                                                 SizedBox(height: 16.0),
+// //                                                 Text(
+// //                                                   textpass ?? "",
+// //                                                   style: TextStyle(
+// //                                                       fontWeight:
+// //                                                           FontWeight.bold,
+// //                                                       fontSize: 30),
+// //                                                 ),
+// //                                                 SizedBox(height: 8.0),
+// //                                                 Column(
+// //                                                   crossAxisAlignment:
+// //                                                       CrossAxisAlignment.start,
+// //                                                   children: description!
+// //                                                       .toUpperCase()
+// //                                                       .split('\n')
+// //                                                       .map((line) {
+// //                                                     return Row(
+// //                                                       children: [
+// //                                                         Icon(Icons.star,
+// //                                                             size:
+// //                                                                 10, // Adjust the size as needed
+// //                                                             color: Colors
+// //                                                                 .black // Adjust the color as needed
+// //                                                             ),
+// //                                                         SizedBox(
+// //                                                           width:
+// //                                                               8, // Add some space between the circle icon and text
+// //                                                         ),
+// //                                                         Flexible(
+// //                                                           child: Text(
+// //                                                             line,
+// //                                                             style: TextStyle(
+// //                                                               fontSize: 16,
+// //                                                             ),
+// //                                                             overflow: TextOverflow
+// //                                                                 .visible, // Handle text overflow
+// //                                                           ),
+// //                                                         ),
+// //                                                       ],
+// //                                                     );
+// //                                                   }).toList(),
+// //                                                 ),
 
-//                                                 // SizedBox(height: 8.0),
-//                                                 SizedBox(height: 20.0),
-//                                                 Container(
-//                                                   height: 40,
-//                                                   width: 140,
-//                                                   decoration: BoxDecoration(
-//                                                     color: Colors.white,
-//                                                     border: Border.all(
-//                                                       color: Colors
-//                                                           .black, // Set the border color
-//                                                       width:
-//                                                           1.0, // Set the border width
-//                                                     ),
-//                                                     borderRadius: BorderRadius
-//                                                         .all(Radius.circular(
-//                                                             4.0)), // Add border radius
-//                                                   ),
-//                                                   child: TextFormField(
-//                                                     controller:
-//                                                         quantityController,
-//                                                     keyboardType:
-//                                                         TextInputType.number,
-//                                                     textAlign: TextAlign.center,
-//                                                     decoration: InputDecoration(
-//                                                       hintText:
-//                                                           'Enter quantity',
-//                                                       contentPadding:
-//                                                           EdgeInsets.symmetric(
-//                                                         vertical: 8.0,
-//                                                         horizontal: 8.0,
-//                                                       ),
-//                                                       isDense: true,
-//                                                       border: InputBorder
-//                                                           .none, // Remove the default input border
-//                                                     ),
-//                                                   ),
-//                                                 ),
+// //                                                 // SizedBox(height: 8.0),
+// //                                                 SizedBox(height: 20.0),
+// //                                                 Container(
+// //                                                   height: 40,
+// //                                                   width: 140,
+// //                                                   decoration: BoxDecoration(
+// //                                                     color: Colors.white,
+// //                                                     border: Border.all(
+// //                                                       color: Colors
+// //                                                           .black, // Set the border color
+// //                                                       width:
+// //                                                           1.0, // Set the border width
+// //                                                     ),
+// //                                                     borderRadius: BorderRadius
+// //                                                         .all(Radius.circular(
+// //                                                             4.0)), // Add border radius
+// //                                                   ),
+// //                                                   child: TextFormField(
+// //                                                     controller:
+// //                                                         quantityController,
+// //                                                     keyboardType:
+// //                                                         TextInputType.number,
+// //                                                     textAlign: TextAlign.center,
+// //                                                     decoration: InputDecoration(
+// //                                                       hintText:
+// //                                                           'Enter quantity',
+// //                                                       contentPadding:
+// //                                                           EdgeInsets.symmetric(
+// //                                                         vertical: 8.0,
+// //                                                         horizontal: 8.0,
+// //                                                       ),
+// //                                                       isDense: true,
+// //                                                       border: InputBorder
+// //                                                           .none, // Remove the default input border
+// //                                                     ),
+// //                                                   ),
+// //                                                 ),
 
-//                                                 SizedBox(
-//                                                   height: 30,
-//                                                 ),
-//                                                 Row(
-//                                                   children: [
-//                                                     SizedBox(
-//                                                       width: 30,
-//                                                     ),
-//                                                     ElevatedButton(
-//                                                       onPressed: () {
-//                                                         if (FirebaseAuth
-//                                                                 .instance
-//                                                                 .currentUser !=
-//                                                             null) {
-//                                                           // signed in
-//                                                           final selectedPrice =
-//                                                               selectedPriceNotifier
-//                                                                   .value;
-//                                                           final productCode =
-//                                                               selectedPrice
-//                                                                   .split(
-//                                                                       ': ')[0];
-//                                                           final price = double
-//                                                               .parse(selectedPrice
-//                                                                   .split(
-//                                                                       ': ')[1]);
+// //                                                 SizedBox(
+// //                                                   height: 30,
+// //                                                 ),
+// //                                                 Row(
+// //                                                   children: [
+// //                                                     SizedBox(
+// //                                                       width: 30,
+// //                                                     ),
+// //                                                     ElevatedButton(
+// //                                                       onPressed: () {
+// //                                                         if (FirebaseAuth
+// //                                                                 .instance
+// //                                                                 .currentUser !=
+// //                                                             null) {
+// //                                                           // signed in
+// //                                                           final selectedPrice =
+// //                                                               selectedPriceNotifier
+// //                                                                   .value;
+// //                                                           final productCode =
+// //                                                               selectedPrice
+// //                                                                   .split(
+// //                                                                       ': ')[0];
+// //                                                           final price = double
+// //                                                               .parse(selectedPrice
+// //                                                                   .split(
+// //                                                                       ': ')[1]);
 
 //                                                           final quantity =
 //                                                               int.tryParse(
@@ -457,7 +429,7 @@
 //                                                           final imageUrl =
 //                                                               // selectedThumbnailProvider
 //                                                               //         .selectedThumbnail ??
-//                                                                   thumbnail;
+//                                                               thumbnail;
 //                                                           final productName =
 //                                                               textpass;
 //                                                           final cartProvider =
@@ -467,186 +439,148 @@
 //                                                                   listen:
 //                                                                       false);
 
-//                                                           cartProvider
-//                                                               .addToCart(
-//                                                                   productCode,
-//                                                                   price,
-//                                                                   quantity,
-//                                                                   imageUrl ??
-//                                                                       "",
-//                                                                   productName ??
-//                                                                       "");
+// //                                                           cartProvider
+// //                                                               .addToCart(
+// //                                                                   productCode,
+// //                                                                   price,
+// //                                                                   quantity,
+// //                                                                   imageUrl ??
+// //                                                                       "",
+// //                                                                   productName ??
+// //                                                                       "");
 
-//                                                           ScaffoldMessenger.of(
-//                                                                   context)
-//                                                               .showSnackBar(SnackBar(
-//                                                                   content: Text(
-//                                                                       "Added to cart")));
-//                                                         } else {
-//                                                           // signed out
-//                                                           showDialog(
-//                                                             context: context,
-//                                                             builder:
-//                                                                 (BuildContext
-//                                                                     context) {
-//                                                               return LoginPage(); // Your custom dialog widget
-//                                                             },
-//                                                           );
-//                                                         }
-//                                                       },
-//                                                       child: const Text(
-//                                                           'ADD TO CART'),
-//                                                       style: ButtonStyle(
-//                                                         backgroundColor:
-//                                                             MaterialStateProperty
-//                                                                 .all(Colors
-//                                                                     .black),
-//                                                         minimumSize:
-//                                                             MaterialStateProperty
-//                                                                 .all(Size(
-//                                                                     150, 50)),
-//                                                       ),
-//                                                     ),
-//                                                     SizedBox(
-//                                                       width: 20,
-//                                                     ),
-//                                                     ElevatedButton(
-//                                                       onPressed: () {
-//                                                         Navigator.pushNamed(
-//                                                             context, '/cart');
-//                                                       },
-//                                                       child: const Text(
-//                                                         'GO TO CART',
-//                                                         style: TextStyle(
-//                                                             color:
-//                                                                 Colors.black),
-//                                                       ),
-//                                                       style: ButtonStyle(
-//                                                         backgroundColor:
-//                                                             MaterialStateProperty
-//                                                                 .all(Colors
-//                                                                     .white),
-//                                                         minimumSize:
-//                                                             MaterialStateProperty
-//                                                                 .all(Size(
-//                                                                     150, 50)),
-//                                                       ),
-//                                                     ),
-//                                                   ],
-//                                                 ),
-//                                                 SizedBox(
-//                                                   height: 20,
-//                                                 ),
-//                                               ],
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         // Tab 2 content goes here
-//                                         SingleChildScrollView(
-//                                           child: Container(
-//                                               height: MediaQuery.of(context)
-//                                                       .size
-//                                                       .height /
-//                                                   1,
-//                                               color: const Color.fromARGB(
-//                                                   255, 230, 233, 235),
-//                                               child: pdf != null
-//                                                   ? SfPdfViewer.network(pdf!)
-//                                                   : Nopdf()
-//                                               // PDFView(
-//                                               //   filePath:
-//                                               //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-//                                               //   // height: 300,   // Set the desired height for the PDF viewer
-//                                               //   // width: 300,    // Set the desired width for the PDF viewer
-//                                               // ),
+// //                                                           ScaffoldMessenger.of(
+// //                                                                   context)
+// //                                                               .showSnackBar(SnackBar(
+// //                                                                   content: Text(
+// //                                                                       "Added to cart")));
+// //                                                         } else {
+// //                                                           // signed out
+// //                                                           showDialog(
+// //                                                             context: context,
+// //                                                             builder:
+// //                                                                 (BuildContext
+// //                                                                     context) {
+// //                                                               return LoginPage(); // Your custom dialog widget
+// //                                                             },
+// //                                                           );
+// //                                                         }
+// //                                                       },
+// //                                                       child: const Text(
+// //                                                           'ADD TO CART'),
+// //                                                       style: ButtonStyle(
+// //                                                         backgroundColor:
+// //                                                             MaterialStateProperty
+// //                                                                 .all(Colors
+// //                                                                     .black),
+// //                                                         minimumSize:
+// //                                                             MaterialStateProperty
+// //                                                                 .all(Size(
+// //                                                                     150, 50)),
+// //                                                       ),
+// //                                                     ),
+// //                                                     SizedBox(
+// //                                                       width: 20,
+// //                                                     ),
+// //                                                     ElevatedButton(
+// //                                                       onPressed: () {
+// //                                                         Navigator.pushNamed(
+// //                                                             context, '/cart');
+// //                                                       },
+// //                                                       child: const Text(
+// //                                                         'GO TO CART',
+// //                                                         style: TextStyle(
+// //                                                             color:
+// //                                                                 Colors.black),
+// //                                                       ),
+// //                                                       style: ButtonStyle(
+// //                                                         backgroundColor:
+// //                                                             MaterialStateProperty
+// //                                                                 .all(Colors
+// //                                                                     .white),
+// //                                                         minimumSize:
+// //                                                             MaterialStateProperty
+// //                                                                 .all(Size(
+// //                                                                     150, 50)),
+// //                                                       ),
+// //                                                     ),
+// //                                                   ],
+// //                                                 ),
+// //                                                 SizedBox(
+// //                                                   height: 20,
+// //                                                 ),
+// //                                               ],
+// //                                             ),
+// //                                           ),
+// //                                         ),
+// //                                         // Tab 2 content goes here
+// //                                         SingleChildScrollView(
+// //                                           child: Container(
+// //                                               height: MediaQuery.of(context)
+// //                                                       .size
+// //                                                       .height /
+// //                                                   1,
+// //                                               color: const Color.fromARGB(
+// //                                                   255, 230, 233, 235),
+// //                                               child: pdf != null
+// //                                                   ? SfPdfViewer.network(pdf!)
+// //                                                   : Nopdf()
+// //                                               // PDFView(
+// //                                               //   filePath:
+// //                                               //       pdf, // Replace 'pdf' with the actual PDF file path or URL
+// //                                               //   // height: 300,   // Set the desired height for the PDF viewer
+// //                                               //   // width: 300,    // Set the desired width for the PDF viewer
+// //                                               // ),
 
-//                                               ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   )
-//                 : Nopdf(
-//                     typeOfProduct: 'crimpingtools',
-//                   );
-//           }
-//         },
-//       ),
+// //                                               ),
+// //                                         ),
+// //                                       ],
+// //                                     ),
+// //                                   ),
+// //                                 ],
+// //                               ),
+// //                             ),
+// //                           ],
+// //                         ),
+// //                       ),
+// //                     ),
+// //                   )
+// //                 : Nopdf(
+// //                     typeOfProduct: 'crimpingtools',
+// //                   );
+// //           }
+// //         },
+// //       ),
 
 // //-----------desktop--------------------------------------------------------
-//  desktopProductPage: FutureBuilder(
-//         future: context.read<DataProvider>().fetchcrimpingtoolApiUrl(),
+
+//       desktopProductPage: FutureBuilder(
+//         future: context.read<DataProvider>().newcrimpingtool,
 //         builder: (context, snapshot) {
 //           snapshot.data!.data.length;
-//           // print("jhjhh");
+
 //           if (snapshot.connectionState == ConnectionState.waiting) {
-//             // print("hgfghfhfgu");
-//             return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+//             print("hgfghfhfgu");
+//             return Center(
+//                 child:
+//                     const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
 //           } else if (snapshot.hasError) {
 //             return Text('Error: ${snapshot.error}');
 //           } else {
-//             String? textpass;
-//             String? thumbnail;
-//             String? description;
-//             List<CodesAndPrice>? price = [];
-//             List<String>? image = [];
-//             String? pdf;
+//             var textpass = snapshot.data!
+//                 .data[selectedThumbnailProvider.selectedIndex!].productName;
+//             var thumbnail = snapshot
+//                 .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+//             var description = snapshot.data!
+//                 .data[selectedThumbnailProvider.selectedIndex!].description;
+//             var price = snapshot.data!
+//                 .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+//             var image = snapshot
+//                 .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+//             var pdf = snapshot
+//                 .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
-//             //  selectedThumbnailProvider.setSelectedThumbnail(snapshot.data!.data.map((e) {
-//             //       // print(e.productName);
-//             //       if (e.productName == product_name) {
-//             //         return e.thumbnail;
-//             //       }
-//             //     }).first!,
-//             //     index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
-//             //     );
-//             if (selectedThumbnailProvider.selectedIndex != null) {
-//               textpass = snapshot.data!
-//                   .data[selectedThumbnailProvider.selectedIndex!].productName;
-//               thumbnail = snapshot.data!
-//                   .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-//               description = snapshot.data!
-//                   .data[selectedThumbnailProvider.selectedIndex!].description;
-//               price = snapshot
-//                   .data!
-//                   .data[selectedThumbnailProvider.selectedIndex!]
-//                   .codesAndPrice!;
-//               image = snapshot
-//                   .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-//               pdf = snapshot
-//                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
-//             } else {
-//               // print(snapshot.data!.data[0].description);
-//               // selectedThumbnailProvider.setSelectedThumbnail(snapshot.data!.data.map((e) {
-//               //     // print(e.productName);
-//               //     if (e.productName == product_name) {
-//               //       return e.thumbnail;
-//               //     }
-//               //   }).first!,
-//               //   index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
-//               //   );
-//               snapshot.data!.data.firstWhere((element) {
-//                 if (element.productName == product_name) {
-//                   print("2121");
-//                   textpass = element.productName;
-//                   thumbnail = element.thumbnail;
-//                   description = element.description;
-//                   price?.addAll(element.codesAndPrice!.map((e) => e));
-//                   image?.addAll(element.images!.map((e) => e));
-//                   pdf = element.pdf;
-//                   return true;
-//                 } else {
-//                   return false;
-//                 }
-//               });
-//             }
+//             //  String selectedPrice = '';
 
 //             return pdf != null
 //                 ? DefaultTabController(
@@ -679,11 +613,10 @@
 //                                             MediaQuery.of(context).size.width /
 //                                                 5,
 //                                         child: Image.network(
-//                                              thumbnail!,
-//                                             // selectedThumbnailProvider
-//                                             //         .selectedThumbnail ??
-//                                                 // ''
-//                                                 ),
+//                                             //  thumbnail!,
+//                                             selectedThumbnailProvider
+//                                                     .selectedThumbnail ??
+//                                                 ''),
 //                                       ), // Display the selected thumbnail here
 //                                       SingleChildScrollView(
 //                                         scrollDirection: Axis.horizontal,
@@ -703,9 +636,9 @@
 //                                                 child: Container(
 //                                                   decoration: BoxDecoration(
 //                                                     border: Border.all(
-//                                                       color: imageUrl ==imageUrl
-//                                                               // selectedThumbnailProvider
-//                                                               //     .selectedThumbnail
+//                                                       color: imageUrl ==
+//                                                               selectedThumbnailProvider
+//                                                                   .selectedThumbnail
 //                                                           ? Colors
 //                                                               .blue // Highlight the selected image
 //                                                           : Colors
@@ -732,281 +665,281 @@
 //                                       ),
 //                                       //--------Product Price-----------
 
-//                                       SizedBox(
-//                                         height: 30,
-//                                       ),
-//                                       Row(
-//                                         children: [
-//                                           SizedBox(
-//                                             width: MediaQuery.of(context)
-//                                                     .size
-//                                                     .width /
-//                                                 20,
-//                                           ),
-//                                           Flexible(
-//                                             child: Container(
-//                                               // color: Colors.amber,
+// //                                       SizedBox(
+// //                                         height: 30,
+// //                                       ),
+// //                                       Row(
+// //                                         children: [
+// //                                           SizedBox(
+// //                                             width: MediaQuery.of(context)
+// //                                                     .size
+// //                                                     .width /
+// //                                                 20,
+// //                                           ),
+// //                                           Flexible(
+// //                                             child: Container(
+// //                                               // color: Colors.amber,
 
-//                                               child: Text(
-//                                                 'selected Product code&Price:',
-//                                                 overflow: TextOverflow.ellipsis,
-//                                                 style: TextStyle(
-//                                                   fontSize: 16.0,
-//                                                   fontFamily: 'Roboto',
-//                                                   color: Color(0xFF212121),
-//                                                   fontWeight: FontWeight.bold,
-//                                                 ),
-//                                               ),
-//                                             ),
-//                                           ),
-//                                           ValueListenableBuilder<String>(
-//                                             valueListenable:
-//                                                 selectedPriceNotifier,
-//                                             builder: (context, selectedPrice,
-//                                                 child) {
-//                                               return Container(
-//                                                 width: 110,
-//                                                 padding: EdgeInsets.all(8.0),
-//                                                 decoration: BoxDecoration(
-//                                                   border: Border.all(
-//                                                     color: Colors.black,
-//                                                     width: 1.0,
-//                                                   ),
-//                                                 ),
-//                                                 // child: selectedPrice != null
-//                                                 //     ? Text(selectedPrice)
-//                                                 //     : Text('NO Price'),
-//                                                 child: Text(selectedPrice),
-//                                               );
-//                                             },
-//                                           ),
-//                                         ],
-//                                       ),
-//                                       Column(
-//                                         crossAxisAlignment:
-//                                             CrossAxisAlignment.start,
-//                                         children: [
-//                                           SizedBox(
-//                                             height: 30,
-//                                           ),
+// //                                               child: Text(
+// //                                                 'selected Product code&Price:',
+// //                                                 overflow: TextOverflow.ellipsis,
+// //                                                 style: TextStyle(
+// //                                                   fontSize: 16.0,
+// //                                                   fontFamily: 'Roboto',
+// //                                                   color: Color(0xFF212121),
+// //                                                   fontWeight: FontWeight.bold,
+// //                                                 ),
+// //                                               ),
+// //                                             ),
+// //                                           ),
+// //                                           ValueListenableBuilder<String>(
+// //                                             valueListenable:
+// //                                                 selectedPriceNotifier,
+// //                                             builder: (context, selectedPrice,
+// //                                                 child) {
+// //                                               return Container(
+// //                                                 width: 110,
+// //                                                 padding: EdgeInsets.all(8.0),
+// //                                                 decoration: BoxDecoration(
+// //                                                   border: Border.all(
+// //                                                     color: Colors.black,
+// //                                                     width: 1.0,
+// //                                                   ),
+// //                                                 ),
+// //                                                 // child: selectedPrice != null
+// //                                                 //     ? Text(selectedPrice)
+// //                                                 //     : Text('NO Price'),
+// //                                                 child: Text(selectedPrice),
+// //                                               );
+// //                                             },
+// //                                           ),
+// //                                         ],
+// //                                       ),
+// //                                       Column(
+// //                                         crossAxisAlignment:
+// //                                             CrossAxisAlignment.start,
+// //                                         children: [
+// //                                           SizedBox(
+// //                                             height: 30,
+// //                                           ),
 
-//                                           // Text(
-//                                           //   'Codes and Prices:',
-//                                           //   style: TextStyle(
-//                                           //     fontWeight: FontWeight.bold,
-//                                           //     fontSize: 18,
-//                                           //   ),
-//                                           // ),
-//                                           Wrap(
-//                                             spacing:
-//                                                 8.0, // Adjust the spacing between buttons as needed
-//                                             runSpacing:
-//                                                 8.0, // Adjust the spacing between rows as needed
-//                                             children: List<Widget>.generate(
-//                                                 price!.length, (index) {
-//                                               final codeAndPrice =
-//                                                   price![index];
-//                                               return InkWell(
-//                                                 onTap: () {
-//                                                   // String noprice = '0';
-//                                                   // codeAndPrice.price != null
-//                                                   //     ? codeAndPrice.price
-//                                                   //     : noprice;
-//                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
-//                                                   selectedPriceNotifier.value =
-//                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-//                                                 },
-//                                                 child: Container(
-//                                                   width: 100,
-//                                                   padding: EdgeInsets.all(
-//                                                       8.0), // Adjust the padding as needed
-//                                                   decoration: BoxDecoration(
-//                                                     border: Border.all(
-//                                                       color: codeAndPrice
-//                                                                   .productCode ==
-//                                                               selectedCodeProvider
-//                                                                   .selectedProductCode
-//                                                           // codeAndPrice.productCode
-//                                                           ? Colors
-//                                                               .blue // Set border color to blue for selected container
-//                                                           : Colors
-//                                                               .black, // Set border color to black for non-selected containers
-//                                                       width:
-//                                                           1.0, // Set your desired border width
-//                                                     ),
-//                                                   ),
-//                                                   child: Text(
-//                                                     '${codeAndPrice.productCode}',
-//                                                     style: TextStyle(
-//                                                       color: Colors
-//                                                           .black, // Set your desired text color
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                               );
-//                                             }),
-//                                           ),
-//                                         ],
-//                                       )
-//                                     ],
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                           Expanded(
-//                             flex: 3,
-//                             child: Column(
-//                               children: [
-//                                 TabBar(
-//                                   unselectedLabelColor:
-//                                       Color.fromARGB(255, 5, 5, 5),
-//                                   indicatorSize: TabBarIndicatorSize.tab,
-//                                   indicator: BoxDecoration(
-//                                       gradient: LinearGradient(colors: [
-//                                         Color.fromARGB(255, 0, 0, 0),
-//                                         Color.fromARGB(255, 0, 0, 0)
-//                                       ]),
-//                                       borderRadius: BorderRadius.circular(0),
-//                                       color: const Color.fromARGB(
-//                                           255, 255, 255, 255)),
-//                                   tabs: [
-//                                     Tab(
-//                                       text: 'Description',
-//                                     ),
-//                                     Tab(
-//                                       text: 'Technical Details',
-//                                     ),
-//                                   ],
-//                                   labelColor: Colors.white,
-//                                 ),
-//                                 Expanded(
-//                                   flex: 2,
-//                                   child: TabBarView(
-//                                     children: [
-//                                       // Tab 1 content goes here
-//                                       Container(
-//                                         // height: 1000,
-//                                         child: Column(
-//                                           crossAxisAlignment:
-//                                               CrossAxisAlignment.start,
-//                                           children: [
-//                                             SizedBox(height: 16.0),
-//                                             Text(
-//                                               textpass ?? "",
-//                                               style: TextStyle(
-//                                                   fontWeight: FontWeight.bold,
-//                                                   fontSize: 30),
-//                                             ),
-//                                             SizedBox(height: 8.0),
-//                                             Column(
-//                                               crossAxisAlignment:
-//                                                   CrossAxisAlignment.start,
-//                                               children: description!
-//                                                   .toUpperCase()
-//                                                   .split('\n')
-//                                                   .map((line) {
-//                                                 return Row(
-//                                                   children: [
-//                                                     Icon(Icons.star,
-//                                                         size:
-//                                                             10, // Adjust the size as needed
-//                                                         color: Colors
-//                                                             .black // Adjust the color as needed
-//                                                         ),
-//                                                     SizedBox(
-//                                                       width:
-//                                                           8, // Add some space between the circle icon and text
-//                                                     ),
-//                                                     Flexible(
-//                                                       child: Text(
-//                                                         line,
-//                                                         style: TextStyle(
-//                                                           fontSize: 16,
-//                                                         ),
-//                                                         overflow: TextOverflow
-//                                                             .visible, // Handle text overflow
-//                                                       ),
-//                                                     ),
-//                                                   ],
-//                                                 );
-//                                               }).toList(),
-//                                             ),
+// //                                           // Text(
+// //                                           //   'Codes and Prices:',
+// //                                           //   style: TextStyle(
+// //                                           //     fontWeight: FontWeight.bold,
+// //                                           //     fontSize: 18,
+// //                                           //   ),
+// //                                           // ),
+// //                                           Wrap(
+// //                                             spacing:
+// //                                                 8.0, // Adjust the spacing between buttons as needed
+// //                                             runSpacing:
+// //                                                 8.0, // Adjust the spacing between rows as needed
+// //                                             children: List<Widget>.generate(
+// //                                                 price!.length, (index) {
+// //                                               final codeAndPrice =
+// //                                                   price![index];
+// //                                               return InkWell(
+// //                                                 onTap: () {
+// //                                                   // String noprice = '0';
+// //                                                   // codeAndPrice.price != null
+// //                                                   //     ? codeAndPrice.price
+// //                                                   //     : noprice;
+// //                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
+// //                                                   selectedPriceNotifier.value =
+// //                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+// //                                                 },
+// //                                                 child: Container(
+// //                                                   width: 100,
+// //                                                   padding: EdgeInsets.all(
+// //                                                       8.0), // Adjust the padding as needed
+// //                                                   decoration: BoxDecoration(
+// //                                                     border: Border.all(
+// //                                                       color: codeAndPrice
+// //                                                                   .productCode ==
+// //                                                               selectedCodeProvider
+// //                                                                   .selectedProductCode
+// //                                                           // codeAndPrice.productCode
+// //                                                           ? Colors
+// //                                                               .blue // Set border color to blue for selected container
+// //                                                           : Colors
+// //                                                               .black, // Set border color to black for non-selected containers
+// //                                                       width:
+// //                                                           1.0, // Set your desired border width
+// //                                                     ),
+// //                                                   ),
+// //                                                   child: Text(
+// //                                                     '${codeAndPrice.productCode}',
+// //                                                     style: TextStyle(
+// //                                                       color: Colors
+// //                                                           .black, // Set your desired text color
+// //                                                     ),
+// //                                                   ),
+// //                                                 ),
+// //                                               );
+// //                                             }),
+// //                                           ),
+// //                                         ],
+// //                                       )
+// //                                     ],
+// //                                   ),
+// //                                 ),
+// //                               ),
+// //                             ),
+// //                           ),
+// //                           Expanded(
+// //                             flex: 3,
+// //                             child: Column(
+// //                               children: [
+// //                                 TabBar(
+// //                                   unselectedLabelColor:
+// //                                       Color.fromARGB(255, 5, 5, 5),
+// //                                   indicatorSize: TabBarIndicatorSize.tab,
+// //                                   indicator: BoxDecoration(
+// //                                       gradient: LinearGradient(colors: [
+// //                                         Color.fromARGB(255, 0, 0, 0),
+// //                                         Color.fromARGB(255, 0, 0, 0)
+// //                                       ]),
+// //                                       borderRadius: BorderRadius.circular(0),
+// //                                       color: const Color.fromARGB(
+// //                                           255, 255, 255, 255)),
+// //                                   tabs: [
+// //                                     Tab(
+// //                                       text: 'Description',
+// //                                     ),
+// //                                     Tab(
+// //                                       text: 'Technical Details',
+// //                                     ),
+// //                                   ],
+// //                                   labelColor: Colors.white,
+// //                                 ),
+// //                                 Expanded(
+// //                                   flex: 2,
+// //                                   child: TabBarView(
+// //                                     children: [
+// //                                       // Tab 1 content goes here
+// //                                       Container(
+// //                                         // height: 1000,
+// //                                         child: Column(
+// //                                           crossAxisAlignment:
+// //                                               CrossAxisAlignment.start,
+// //                                           children: [
+// //                                             SizedBox(height: 16.0),
+// //                                             Text(
+// //                                               textpass ?? "",
+// //                                               style: TextStyle(
+// //                                                   fontWeight: FontWeight.bold,
+// //                                                   fontSize: 30),
+// //                                             ),
+// //                                             SizedBox(height: 8.0),
+// //                                             Column(
+// //                                               crossAxisAlignment:
+// //                                                   CrossAxisAlignment.start,
+// //                                               children: description!
+// //                                                   .toUpperCase()
+// //                                                   .split('\n')
+// //                                                   .map((line) {
+// //                                                 return Row(
+// //                                                   children: [
+// //                                                     Icon(Icons.star,
+// //                                                         size:
+// //                                                             10, // Adjust the size as needed
+// //                                                         color: Colors
+// //                                                             .black // Adjust the color as needed
+// //                                                         ),
+// //                                                     SizedBox(
+// //                                                       width:
+// //                                                           8, // Add some space between the circle icon and text
+// //                                                     ),
+// //                                                     Flexible(
+// //                                                       child: Text(
+// //                                                         line,
+// //                                                         style: TextStyle(
+// //                                                           fontSize: 16,
+// //                                                         ),
+// //                                                         overflow: TextOverflow
+// //                                                             .visible, // Handle text overflow
+// //                                                       ),
+// //                                                     ),
+// //                                                   ],
+// //                                                 );
+// //                                               }).toList(),
+// //                                             ),
 
-//                                             // SizedBox(height: 8.0),
-//                                             SizedBox(height: 20.0),
-//                                             Row(
-//                                               children: [
-//                                                   SizedBox(
-//                                             width: 20,
-//                                           ),
-//                                                 Form(
-//                                                   key: _formKey,
-//                                                   child: Container(
-//                                                     // height:
-//                                                     // MediaQuery.of(context).size.height/18,
-//                                                     width: 200,
-//                                                     //  MediaQuery.of(context).size.width/10,
-//                                                     child: TextFormField(
-//                                                       controller:
-//                                                           quantityController,
-//                                                       keyboardType:
-//                                                           TextInputType.number,
-//                                                       decoration: InputDecoration(
-//                                                         border:
-//                                                             OutlineInputBorder(),
-//                                                         hintText:
-//                                                             'Enter the quantity',
-//                                                       ),
-//                                                       validator: (value) {
-//                                                         if (value!.isEmpty) {
-//                                                           return 'Please enter a quantity';
-//                                                         }
-//                                                         int? quantity =
-//                                                             int.tryParse(value);
-//                                                         if (quantity == null ||
-//                                                             quantity <= 0) {
-//                                                           return 'Quantity must be a positive number';
-//                                                         }
-//                                                         return null; // Return null if the input is valid
-//                                                       },
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                               ],
-//                                             ),
+// //                                             // SizedBox(height: 8.0),
+// //                                             SizedBox(height: 20.0),
+// //                                             Row(
+// //                                               children: [
+// //                                                   SizedBox(
+// //                                             width: 20,
+// //                                           ),
+// //                                                 Form(
+// //                                                   key: _formKey,
+// //                                                   child: Container(
+// //                                                     // height:
+// //                                                     // MediaQuery.of(context).size.height/18,
+// //                                                     width: 200,
+// //                                                     //  MediaQuery.of(context).size.width/10,
+// //                                                     child: TextFormField(
+// //                                                       controller:
+// //                                                           quantityController,
+// //                                                       keyboardType:
+// //                                                           TextInputType.number,
+// //                                                       decoration: InputDecoration(
+// //                                                         border:
+// //                                                             OutlineInputBorder(),
+// //                                                         hintText:
+// //                                                             'Enter the quantity',
+// //                                                       ),
+// //                                                       validator: (value) {
+// //                                                         if (value!.isEmpty) {
+// //                                                           return 'Please enter a quantity';
+// //                                                         }
+// //                                                         int? quantity =
+// //                                                             int.tryParse(value);
+// //                                                         if (quantity == null ||
+// //                                                             quantity <= 0) {
+// //                                                           return 'Quantity must be a positive number';
+// //                                                         }
+// //                                                         return null; // Return null if the input is valid
+// //                                                       },
+// //                                                     ),
+// //                                                   ),
+// //                                                 ),
+// //                                               ],
+// //                                             ),
 
-//                                             SizedBox(
-//                                               height: 30,
-//                                             ),
-//                                             Row(
-//                                               children: [
-//                                                 SizedBox(
-//                                                   width: 30,
-//                                                 ),
-//                                                 SizedBox(
-//                                                    width: MediaQuery.of(context)
-//                                                           .size
-//                                                           .width /
-//                                                       5,
-//                                                   child: ElevatedButton(
-//                                                     onPressed: () {
-//                                                       if (_formKey.currentState!
-//                                                           .validate()) {
-//                                                         if (FirebaseAuth.instance
-//                                                                 .currentUser !=
-//                                                             null) {
-//                                                           // signed in
-//                                                           final selectedPrice =
-//                                                               selectedPriceNotifier
-//                                                                   .value;
-//                                                           final productCode =
-//                                                               selectedPrice
-//                                                                   .split(': ')[0];
-//                                                           final price = double
-//                                                               .parse(selectedPrice
-//                                                                   .split(
-//                                                                       ': ')[1]);
+// //                                             SizedBox(
+// //                                               height: 30,
+// //                                             ),
+// //                                             Row(
+// //                                               children: [
+// //                                                 SizedBox(
+// //                                                   width: 30,
+// //                                                 ),
+// //                                                 SizedBox(
+// //                                                    width: MediaQuery.of(context)
+// //                                                           .size
+// //                                                           .width /
+// //                                                       5,
+// //                                                   child: ElevatedButton(
+// //                                                     onPressed: () {
+// //                                                       if (_formKey.currentState!
+// //                                                           .validate()) {
+// //                                                         if (FirebaseAuth.instance
+// //                                                                 .currentUser !=
+// //                                                             null) {
+// //                                                           // signed in
+// //                                                           final selectedPrice =
+// //                                                               selectedPriceNotifier
+// //                                                                   .value;
+// //                                                           final productCode =
+// //                                                               selectedPrice
+// //                                                                   .split(': ')[0];
+// //                                                           final price = double
+// //                                                               .parse(selectedPrice
+// //                                                                   .split(
+// //                                                                       ': ')[1]);
                                                 
 //                                                           final quantity =
 //                                                               int.tryParse(
@@ -1031,99 +964,99 @@
 //                                                               imageUrl ?? "",
 //                                                               productName ?? "");
                                                 
-//                                                           ScaffoldMessenger.of(
-//                                                                   context)
-//                                                               .showSnackBar(SnackBar(
-//                                                                   content: Text(
-//                                                                       "Added to cart")));
-//                                                         } else {
-//                                                           // signed out
-//                                                           showDialog(
-//                                                             context: context,
-//                                                             builder: (BuildContext
-//                                                                 context) {
-//                                                               return LoginPage(); // Your custom dialog widget
-//                                                             },
-//                                                           );
-//                                                         }
-//                                                       }
-//                                                     },
-//                                                     child:
-//                                                         const Text('ADD TO CART'),
-//                                                     style: ButtonStyle(
-//                                                       backgroundColor:
-//                                                           MaterialStateProperty
-//                                                               .all(Colors.black),
-//                                                       minimumSize:
-//                                                           MaterialStateProperty
-//                                                               .all(Size(150, 50)),
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                                 SizedBox(
-//                                                   width: 20,
-//                                                 ),
-//                                                 SizedBox(
-//                                                    width: MediaQuery.of(context)
-//                                                           .size
-//                                                           .width /
-//                                                       5,
-//                                                   child: ElevatedButton(
-//                                                     onPressed: () {
-//                                                       Navigator.pushNamed(
-//                                                           context, '/cart');
-//                                                     },
-//                                                     child: const Text(
-//                                                       'GO TO CART',
-//                                                       style: TextStyle(
-//                                                           color: Colors.black),
-//                                                     ),
-//                                                     style: ButtonStyle(
-//                                                       backgroundColor:
-//                                                           MaterialStateProperty
-//                                                               .all(Colors.white),
-//                                                       minimumSize:
-//                                                           MaterialStateProperty
-//                                                               .all(Size(150, 50)),
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                               ],
-//                                             ),
-//                                             SizedBox(
-//                                               height: 20,
-//                                             ),
-//                                           ],
-//                                         ),
-//                                       ),
-//                                       // Container(
-//                                       //   child: ListView.builder(
-//                                       //       itemBuilder: (context, index) {
-//                                       //     return Container(
-//                                       //       child: pdf != null
-//                                       //           ? SfPdfViewer.network(pdf)
-//                                       //           : Nopdf(),
-//                                       //     );
-//                                       //   }),
-//                                       // )
-//                                       // Tab 2 content goes here
-//                                       SingleChildScrollView(
-//                                           child: Container(
-//                                               height: 1500,
-//                                               color: const Color.fromARGB(
-//                                                   255, 230, 233, 235),
-//                                               child: pdf != null
-//                                                   ? SfPdfViewer.network(pdf!)
-//                                                   : Nopdf()))
-//                                       // PDFView(
-//                                       //   filePath:
-//                                       //             pdf, // Replace 'pdf' with the actual PDF file path or URL
-//                                       //         // height: 300,   // Set the desired height for the PDF viewer
-//                                       //         // width: 300,    // Set the desired width for the PDF viewer
-//                                       //       ),
+// //                                                           ScaffoldMessenger.of(
+// //                                                                   context)
+// //                                                               .showSnackBar(SnackBar(
+// //                                                                   content: Text(
+// //                                                                       "Added to cart")));
+// //                                                         } else {
+// //                                                           // signed out
+// //                                                           showDialog(
+// //                                                             context: context,
+// //                                                             builder: (BuildContext
+// //                                                                 context) {
+// //                                                               return LoginPage(); // Your custom dialog widget
+// //                                                             },
+// //                                                           );
+// //                                                         }
+// //                                                       }
+// //                                                     },
+// //                                                     child:
+// //                                                         const Text('ADD TO CART'),
+// //                                                     style: ButtonStyle(
+// //                                                       backgroundColor:
+// //                                                           MaterialStateProperty
+// //                                                               .all(Colors.black),
+// //                                                       minimumSize:
+// //                                                           MaterialStateProperty
+// //                                                               .all(Size(150, 50)),
+// //                                                     ),
+// //                                                   ),
+// //                                                 ),
+// //                                                 SizedBox(
+// //                                                   width: 20,
+// //                                                 ),
+// //                                                 SizedBox(
+// //                                                    width: MediaQuery.of(context)
+// //                                                           .size
+// //                                                           .width /
+// //                                                       5,
+// //                                                   child: ElevatedButton(
+// //                                                     onPressed: () {
+// //                                                       Navigator.pushNamed(
+// //                                                           context, '/cart');
+// //                                                     },
+// //                                                     child: const Text(
+// //                                                       'GO TO CART',
+// //                                                       style: TextStyle(
+// //                                                           color: Colors.black),
+// //                                                     ),
+// //                                                     style: ButtonStyle(
+// //                                                       backgroundColor:
+// //                                                           MaterialStateProperty
+// //                                                               .all(Colors.white),
+// //                                                       minimumSize:
+// //                                                           MaterialStateProperty
+// //                                                               .all(Size(150, 50)),
+// //                                                     ),
+// //                                                   ),
+// //                                                 ),
+// //                                               ],
+// //                                             ),
+// //                                             SizedBox(
+// //                                               height: 20,
+// //                                             ),
+// //                                           ],
+// //                                         ),
+// //                                       ),
+// //                                       // Container(
+// //                                       //   child: ListView.builder(
+// //                                       //       itemBuilder: (context, index) {
+// //                                       //     return Container(
+// //                                       //       child: pdf != null
+// //                                       //           ? SfPdfViewer.network(pdf)
+// //                                       //           : Nopdf(),
+// //                                       //     );
+// //                                       //   }),
+// //                                       // )
+// //                                       // Tab 2 content goes here
+// //                                       SingleChildScrollView(
+// //                                           child: Container(
+// //                                               height: 1500,
+// //                                               color: const Color.fromARGB(
+// //                                                   255, 230, 233, 235),
+// //                                               child: pdf != null
+// //                                                   ? SfPdfViewer.network(pdf!)
+// //                                                   : Nopdf()))
+// //                                       // PDFView(
+// //                                       //   filePath:
+// //                                       //             pdf, // Replace 'pdf' with the actual PDF file path or URL
+// //                                       //         // height: 300,   // Set the desired height for the PDF viewer
+// //                                       //         // width: 300,    // Set the desired width for the PDF viewer
+// //                                       //       ),
 
-//                                       //       ),
-//                                       // ),
+//                                             ),
+//                                       ),
 //                                     ],
 //                                   ),
 //                                 ),
@@ -1135,7 +1068,7 @@
 //                     ),
 //                   )
 //                 : Nopdf(
-//                     typeOfProduct: 'connectors',
+//                     typeOfProduct: 'crimpingtools',
 //                   );
 //           }
 //         },
@@ -1143,3 +1076,5 @@
 //     );
 //   }
 // }
+
+

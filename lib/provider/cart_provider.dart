@@ -103,6 +103,28 @@ double getTotalPriceWithVAT(double subtotal, double vatRate) {
 
     notifyListeners();
   }
+  // Future<void> removeAddress() async {
+  //   try {
+  //     var documentReference = FirebaseFirestore.instance
+  //         .collection("users")
+  //         .doc(FirebaseAuth.instance.currentUser!.uid);
+
+  //     // Check if the document exists before trying to delete it
+  //     var documentSnapshot = await documentReference.get();
+  //     if (documentSnapshot.exists) {
+  //       // Document exists, proceed with deletion
+  //       await documentReference.delete();
+  //       print("Address removed successfully");
+
+  //       // Optionally, you can add code here to update your UI or perform any additional actions after deletion.
+  //     } else {
+  //       print("No address found to remove");
+  //     }
+  //   } catch (e) {
+  //     print("Error removing address: $e");
+  //     // Handle the error as needed
+  //   }
+  // }
   // void updateQuantity(String productCode, int newQuantity) {
   //   final cartItem = _cartItems.firstWhere((item) => item.productCode == productCode);
   //   cartItem.updateQuantity(newQuantity);
@@ -126,16 +148,3 @@ class CartItem {
 }
 
 
-
- // void removeFromCart(String productCode) {
-  //   _cartItems.removeWhere((item) => item.productCode == productCode);
-  //   notifyListeners();
-  // }
-
-  // double getTotalPrice() {
-  //   double totalPrice = 0.0;
-  //   for (var item in _cartItems) {
-  //     totalPrice += item.price * item.quantity;
-  //   }
-  //   return totalPrice;
-  // }

@@ -1,5 +1,3 @@
-// import 'dart:ffi';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
@@ -54,12 +52,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // print("++++++++++++++++++++++++++++++");
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(
+            create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
@@ -100,7 +98,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => AppBarMain(body: LandinPage()),
-        
+
           '/cart': (context) => AppBarMain(
                 body: CartPage(),
               ),
@@ -114,7 +112,7 @@ class _MyAppState extends State<MyApp> {
           '/Accssories': (context) => AppBarMain(
                 body: AccessoriesPage(),
               ),
-          '/Connecters': (context) => AppBarMain(body: ConnectersPage()),
+          '/Connectors': (context) => AppBarMain(body: ConnectersPage()),
           '/CrimpingTools': (context) => AppBarMain(
                 body: CrimpingToolPage(),
               ),
@@ -126,8 +124,6 @@ class _MyAppState extends State<MyApp> {
           if (elements[0] == '') {
             switch (elements[1]) {
               case "productdetailsglands":
-                // print(elements);
-                // print("glands");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(body: ProductDetailsOfGlands());
@@ -135,8 +131,6 @@ class _MyAppState extends State<MyApp> {
                   settings: setting,
                 );
               case "productdetailslugs":
-                // print(elements);
-                // print("lugs");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -146,8 +140,6 @@ class _MyAppState extends State<MyApp> {
                   settings: setting,
                 );
               case "productdetailsconnectors":
-                // print(elements);
-                // print("connectors");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -236,8 +228,37 @@ void navigateToProductDetailsOfAccessories(
   Navigator.pushNamed(context, '/productdetailsaccessories/$productname');
 }
 
-void noPdfProductPage(
-    BuildContext context, int selectedProductIndex,
-    {String? productname}) {
+void noPdfProductPage(BuildContext context, int selectedProductIndex,
+    {String? productname}) {  
   Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
 }
+
+void navigateToProductDetailsFromSearch(
+  BuildContext context,
+  String productname,
+  String type,
+) {
+  String endpoint = "";
+
+  switch (type) {
+    case 'lugs':
+      endpoint = '/productdetailslugs/$productname';
+      break;
+    case 'connectors':
+      endpoint = '/productdetailsconnectors/$productname';
+      break;
+    case 'glands':
+      endpoint = '/productdetailsglands/$productname';
+      break;
+    case 'accessories':
+      endpoint = '/productdetailsaccessories/$productname';
+      break;
+    case 'tools':
+      endpoint = '/productdetailscrimpingtools/$productname';
+      break;
+    default:
+      return;
+  }
+  Navigator.pushNamed(context, endpoint);
+}
+

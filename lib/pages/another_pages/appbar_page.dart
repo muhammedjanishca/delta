@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
+import 'package:firebase_hex/main.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/product_pages/connecters.dart';
 import 'package:firebase_hex/pages/product_pages/crimping.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_hex/pages/product_pages/gland.dart';
 import 'package:firebase_hex/pages/product_pages/lugs.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
+import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/style.dart';
@@ -15,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../login_and_signing/loginpage.dart';
+import '../../main.dart';
 import '../../widgets/whatsApp.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:badges/badges.dart' as badges;
@@ -147,10 +150,9 @@ class DesktopAppBar extends StatelessWidget {
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<
-                                  Color>(const Color
-                                      .fromARGB(255, 194, 192,
-                                  192)), // Change the color to your desired color
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 194, 192,
+                                      192)), // Change the color to your desired color
                             ),
                             child: Text('SignUp/SignIn'),
                           )
@@ -223,7 +225,7 @@ class DesktopAppBar extends StatelessWidget {
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                                            color: Colors.black),
                                       ))
                                   : SizedBox(),
                             ),
@@ -293,7 +295,7 @@ class DesktopAppBar extends StatelessWidget {
                         if (selectedDataType == 'Lugs') {
                           Navigator.pushNamed(context, '/Lugs');
                         } else if (selectedDataType == 'Connectors') {
-                          Navigator.pushNamed(context, '/Connecters');
+                          Navigator.pushNamed(context, '/Connectors');
                         }
                         // Add similar conditions for other data types
                       },
@@ -616,6 +618,8 @@ class MobileAppBar extends StatelessWidget {
 
 Widget _searchBox(BuildContext context) {
   final productProvider = Provider.of<ProductProvider>(context, listen: false);
+     final selectedThumbnailProvider =
+        Provider.of<SelectedThumbnailProvider>(context);
 
   return Container(
     height: MediaQuery.of(context).size.height / 18,
@@ -663,7 +667,12 @@ Widget _searchBox(BuildContext context) {
               );
             },
             onSuggestionSelected: (suggestion) {
-              // Handle search submission here
+              final productName = suggestion['product_name'];
+              final type = suggestion['type'];
+              final productNameWithUnderscores = productName.replaceAll(" ", "_");
+              selectedThumbnailProvider.setSelectedThumbnail("",index: null);
+              
+              navigateToProductDetailsFromSearch(context, productNameWithUnderscores, type);
             },
           ),
         ),

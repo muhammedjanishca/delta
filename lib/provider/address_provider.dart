@@ -39,7 +39,7 @@ class address_provider with ChangeNotifier {
         print('aaaaaaaaaaaaaaaaaaaaaa');
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Delivarypage()),
+          MaterialPageRoute(builder: (context) => TextAddress()),
         );
       }
       // Check if the desired field exists and contains data
