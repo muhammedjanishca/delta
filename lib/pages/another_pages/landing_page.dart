@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:firebase_hex/pages/address.dart/add_textfield.dart';
 import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:side_sheet/side_sheet.dart';
 
 class LandinPage extends StatelessWidget {
   @override
@@ -36,7 +38,7 @@ class DesktopLanding extends StatelessWidget {
         : SizedBox();
 
     Widget industrialCableTextt = queryData.size.width >= 950
-        ?  SizedBox()
+        ? SizedBox()
         : Padding(
             padding: EdgeInsets.only(left: 50),
             child: Text(
@@ -93,15 +95,24 @@ class DesktopLanding extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             color: Colors.white),
                       ),
+                      // ElevatedButton(
+                      //                             onPressed: () => SideSheet.right(
+                      //                                 body: TextAddress(),
+                      //                                 width:
+                      //                                     MediaQuery.of(context)
+                      //                                             .size
+                      //                                             .width *
+                      //                                         0.4,
+                      //                                 context: context),
+                      //                             child: Text(
+                      //                                 'OPEN SHEET WITH CUSTOM WIDTH')),
                       ElevatedButton(
                         onPressed: () {
-                          print('wwwwwwwwwwwwwwwwwwwweeeeeeeeeeeeeeeeeeeeeeee');
-                     Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>Delivarypage()
-              ),
-            );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Delivarypage()),
+                          );
                         },
                         child: Text(
                           'CHECKOUT',
@@ -295,8 +306,11 @@ class MobileLanding extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          // Navigator.pushNamed(
-                          //     context, '/cart');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Delivarypage()),
+                          );
                         },
                         child: Text(
                           'CHECKOUT',
@@ -389,32 +403,31 @@ class MobileLanding extends StatelessWidget {
         // Container(
         //   height: 550,
         //   width: double.infinity,
-          // child: Row(
-          //   children: [
-          //     Expanded(
-          //         child: Container(
-          //       color: Colors.white,
-          //     )),
-          //     Expanded(
-          //         child: Container(
-          //       color: Colors.white,
-          //     ))
-          //   ],
-          // ),
+        // child: Row(
+        //   children: [
+        //     Expanded(
+        //         child: Container(
+        //       color: Colors.white,
+        //     )),
+        //     Expanded(
+        //         child: Container(
+        //       color: Colors.white,
+        //     ))
+        //   ],
         // ),
-          Container(
-                      color: Colors.white,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/image/hex-logo-new.png'),
-                          Text(
-                            "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      )),
+        // ),
+        Container(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/image/hex-logo-new.png'),
+                Text(
+                  "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                )
+              ],
+            )),
         Container(
             color: const Color.fromARGB(255, 255, 255, 255),
             height: 1000,
