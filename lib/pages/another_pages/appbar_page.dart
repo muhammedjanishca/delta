@@ -225,7 +225,7 @@ class DesktopAppBar extends StatelessWidget {
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                                            color: Colors.black),
                                       ))
                                   : SizedBox(),
                             ),
