@@ -23,14 +23,11 @@ class address_provider with ChangeNotifier {
           .get();
 
       arrayFromFirestore = userSnapshot.get('address');
-      print('6666666666666666666');
-      print(arrayFromFirestore.length);
 
-      print(arrayFromFirestore);
 // var addressDataLength=userSnapshot.exists && userSnapshot['address'] ;
 // print(userSnapshot.exists && userSnapshot['address'] );
 
-      if (arrayFromFirestore.length != 0) {
+      if (arrayFromFirestore.isNotEmpty) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => addressshow()),
@@ -48,7 +45,9 @@ class address_provider with ChangeNotifier {
     return false;
   }
 
+  // ignore: non_constant_identifier_names
   Future get_current_address(cartItems) async {
+    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -57,8 +56,10 @@ class address_provider with ChangeNotifier {
 
     arrayFromFirestore = userSnapshot.get('address');
     current_address = arrayFromFirestore[0];
-    if (current_address != null) {
-      PdfService().generateInvoice(cartItems, current_address);
+    final last_address = jsonDecode(arrayFromFirestore[0]);
+    if (current_address.isNotEmpty) {
+      print('22222222222222222222222222');
+      PdfService().generateInvoice(cartItems, current_address,last_address);
     }
 // print(current_address);
   }
@@ -91,7 +92,7 @@ class puthiyapage extends StatelessWidget {
 
         // Create a Container for each item
         return Container(
-          padding: EdgeInsets.all(8.0),
+          padding:const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(8.0),
@@ -109,7 +110,7 @@ class puthiyapage extends StatelessWidget {
       } else {
         // Handle the case where the item is null
         return Container(
-          child: Text('Item is null'),
+          child:const Text('Item is null'),
         );
       }
     }),
