@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/widgets/pdfservies.dart';
 // import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // import 'package:syncfusion_flutter_pdf/pdf.dart';
 // import 'package:intl/intl.dart';
@@ -150,11 +152,17 @@ class QuotationPage extends StatelessWidget {
       //     ),
       //   ],
       // ),
-      floatingActionButton: FloatingActionButton(
+      
+ floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
         onPressed: () {
+          context.read<address_provider>().get_current_address(cartItems);
+// late var address_data=context.read<address_provider>().current_address;
+// print(address_data);
+print(cartItems);
+print('3333333333333333');
           // Add your FloatingActionButton logic here
-          PdfService().generateInvoice(cartItems);
+          // PdfService().generateInvoice(cartItems,);
         },
         child: const Icon(Icons.print),
       ),
