@@ -1,16 +1,13 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/pages/address.dart/addresShow.dart';
-import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
-import 'package:firebase_hex/provider/address_provider.dart';
+import 'package:firebase_hex/pages/address.dart/first_address.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+
 
 class LandinPage extends StatelessWidget {
   @override
@@ -22,43 +19,12 @@ class LandinPage extends StatelessWidget {
 }
 
 class DesktopLanding extends StatelessWidget {
-  // const DesktopLanding({Key? key}) : super(key: key);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-//   Future<bool> isUserDataAvailable(context) async {
-//     User? user = _auth.currentUser;
-//     if (user != null) {
-//       DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
-//           .collection("users")
-//           .doc(FirebaseAuth.instance.currentUser!.uid)
-//           .get();
-//       print('sssssssssssssssssss');
-//       List<dynamic> arrayFromFirestore = userSnapshot.get('address');
-//       print(arrayFromFirestore);
-// // var addressDataLength=userSnapshot.exists && userSnapshot['address'] ;
-// // print(userSnapshot.exists && userSnapshot['address'] );
-
-//       if (arrayFromFirestore.length != 0) {
-//         Navigator.push(
-//           context,
-//           MaterialPageRoute(builder: (context) => addressshow()),
-//         );
-//       } else {
-//         Navigator.push(
-//           context,
-//           MaterialPageRoute(builder: (context) => Delivarypage()),
-//         );
-//       }
-//       // Check if the desired field exists and contains data
-//       // return userSnapshot.exists && userSnapshot['address'] != null;
-//     }
-//     return false;
-//   }
-
   @override
   Widget build(BuildContext context) {
-    MediaQueryData queryDataa = MediaQuery.of(context);
+    // MediaQueryData queryDataa = MediaQuery.of(context);
     MediaQueryData queryData = MediaQuery.of(context);
     Widget industrialCableText = queryData.size.width >= 950
         ? Padding(
@@ -130,37 +96,36 @@ class DesktopLanding extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             color: Colors.white),
                       ),
-                      // ElevatedButton(
-                      //                             onPressed: () => SideSheet.right(
-                      //                                 body: TextAddress(),
-                      //                                 width:
-                      //                                     MediaQuery.of(context)
-                      //                                             .size
-                      //                                             .width *
-                      //                                         0.4,
-                      //                                 context: context),
-                      //                             child: Text(
-                      //                                 'OPEN SHEET WITH CUSTOM WIDTH')),
                       ElevatedButton(
-                        onPressed: () async {
-                          //  bool isDataAvailable = await
-                     context.read<address_provider>().
-                          isUserDataAvailable(context);
-// print(isDataAvailable);
-// print('2222222222222222');
-                          // if (isDataAvailable) {
-                          //      Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(builder: (context) => Delivarypage()),
-                          //   );
-
-                          // } else {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(builder: (context) => addressshow()),
-                          //   );
-                          // }
+                        onPressed: (){
+                           Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>TextTheAddress()),
+                            );
                         },
+                      //  onPressed: () async {
+                      //  context.read<address_provider>().
+                      //  isUserDataAvailable(context);
+                      // },
+
+                    //       isUserDa
+                    //     onPressed: () async {
+                    //        bool isDataAvailable = await
+                    //  context.read<address_provider>().
+                    //       isUserDataAvailable(context);
+                    //       if (isDataAvailable) {
+                    //            Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(builder: (context) =>TextAddress()),
+                    //         );
+
+                    //       } else {
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(builder: (context) => addressshow()),
+                    //         );
+                    //       }
+                    //     },
                         child: Text(
                           'CHECKOUT',
                           style: TextStyle(color: Colors.white),
@@ -175,15 +140,6 @@ class DesktopLanding extends StatelessWidget {
                         height: 320,
                       ),
                       industrialCableText,
-                      // Padding(
-                      //   padding:  EdgeInsets.only(left: 50),
-                      //   child: Text(
-                      //     'Industrial Cable Management System for your Electrical Projects!',
-                      //     style: GoogleFonts.abel(
-                      //         textStyle: TextStyle(
-                      //             fontSize: 30, fontWeight: FontWeight.bold)),
-                      //   ),
-                      // ),
                       SizedBox(
                         height: 30,
                       ),
@@ -196,8 +152,6 @@ class DesktopLanding extends StatelessWidget {
               child: Container(
                 width: 450,
                 height: 900,
-                // color: Colors.white,
-                // color: Colors.transparent,
                 child: Swiper(
                   itemWidth: 400,
                   itemHeight: 360,
@@ -214,10 +168,8 @@ class DesktopLanding extends StatelessWidget {
                           Text(headingss[index],
                               style: GoogleFonts.abrilFatface(
                                 textStyle: TextStyle(
-                                    color:
-                                        const Color.fromARGB(255, 54, 98, 98),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700),
+                                    color:const Color.fromARGB(255, 54, 98, 98),
+                                    fontSize: 20,fontWeight: FontWeight.w700),
                               )),
                           Text(
                             descriptionn[index],

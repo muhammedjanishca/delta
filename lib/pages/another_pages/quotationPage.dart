@@ -1,23 +1,40 @@
 import 'dart:convert';
 import 'package:firebase_hex/provider/address_provider.dart';
-import 'package:firebase_hex/widgets/pdfservies.dart';
-// import 'package:firebase_hex/provider/cart_provider.dart';
+import 'package:firebase_hex/provider/cart_provider.dart';
+import 'package:firebase_hex/responsive/quatation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-// import 'package:syncfusion_flutter_pdf/pdf.dart';
-// import 'package:intl/intl.dart';
-
 class QuotationPage extends StatelessWidget {
+
+QuotationPage(
+      {required this.cartItems,
+      required this.totalPrice,
+      required this.vat,
+      required this.totalPriceWithVAT});
+  final double totalPrice;
+  final cartItems;
+  final totalPriceWithVAT;
+  final vat; 
+  @override
+  Widget build(BuildContext context) {
+    return ResQuotation(mobileQuatation: QuotationMobilePage(
+      cartItems: cartItems, totalPrice: totalPrice, totalPriceWithVAT: totalPriceWithVAT, vat: vat,),
+      deskQuatation: QuotationDeskPage(
+        cartItems: cartItems, totalPrice: totalPrice, totalPriceWithVAT: totalPriceWithVAT, vat: vat),
+        );
+  }
+}
+class QuotationDeskPage extends StatelessWidget {
   // final List<User> cartItems;
   final double totalPrice;
   final cartItems;
   final totalPriceWithVAT;
   final vat; // Update the type if needed
 
-  QuotationPage(
+  QuotationDeskPage(
       {required this.cartItems,
       required this.totalPrice,
       required this.vat,
@@ -65,6 +82,7 @@ class QuotationPage extends StatelessWidget {
        child: Center(
          child: Container(
           width: 800,
+          // width: MediaQuery.of(context).size.width/2,
           color: Colors.white,
           child: Column(
             children: [
@@ -96,71 +114,15 @@ class QuotationPage extends StatelessWidget {
          ),
        ),
      ),
-      // body: Column(
-      //   children: [
-      //     Expanded(
-      //       child: ListView(
-      //         children: [
-      //           Center(
-      //             child: Container(
-      //               color: Colors.white,
-      //               // decoration: BoxDecoration(
-      //               //   border: Border.symmetric(vertical: BorderSide(width: .4,color: Colors.black))
-      //               // ),
-      //               width: MediaQuery.of(context).size.width / 1.9,
-      //               // width: MediaQuery.of(context).size.width * 0.6,
-      //             //  padding: EdgeInsets.only(top: 20.0),
-      //               child: Center(
-      //                   child: Column(
-      //                 children: [
-      //                   Container(
-      //                     color: Colors.white,
-      //                     height: MediaQuery.of(context).size.height / 4,
-      //                     child: MyClipPath(),
-      //                   ),
-      //                   Container(
-                           
-      //                       child: _buildQuotationTable()),
-      //                   SingleChildScrollView(
-      //                     scrollDirection: Axis.vertical,
-      //                     child: Container(
-      //                       height: MediaQuery.of(context).size.height / 7,
-      //                       decoration: BoxDecoration(
-      //                         gradient: LinearGradient(
-      //                           colors: [
-      //                             Colors.white,
-      //                             const Color.fromARGB(255, 76, 138, 131),
-      //                             const Color.fromARGB(255, 76, 138, 131)
-      //                           ],
-      //                           begin: Alignment.topCenter,
-      //                           end: Alignment.bottomCenter,
-      //                         ),
-      //                       ),
-      //                       child: MyClipPat(),
-      //                     ),
-      //                   ),
-      //                   // cont(
-      //                   //   height: MediaQuery.of(context).size.height / 15,
-      //                   // )
-      //                 ],
-      //               )),
-      //             ),
-      //           ),
-      //           // Add more widgets to your ListView here
-      //         ],
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      
+     
  floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
         onPressed: () {
           context.read<address_provider>().get_current_address(cartItems);
 // late var address_data=context.read<address_provider>().current_address;
 // print(address_data);
-print(cartItems);
-print('3333333333333333');
+// print(cartItems);
+// print('3333333333333333');
           // Add your FloatingActionButton logic here
           // PdfService().generateInvoice(cartItems,);
         },
@@ -173,13 +135,6 @@ print('3333333333333333');
     return Row(
       children: [
         Container(
-          // color: Color.fromARGB(255, 169, 53, 125),
-          // width: double.infinity,
-          // decoration: BoxDecoration(
-          //   border: Border.all(color: Colors.transparent),
-          //   borderRadius: BorderRadius.circular(8),
-          // ),
-
           child: Column(
             children: [
               Container(
@@ -197,18 +152,18 @@ print('3333333333333333');
                   columns: [
                     DataColumn(
                       label: Text(
-                        '            Description',
+                        '                               DESCRIPTION',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.white // Adjust the font size as needed
                           // You can also apply other text styles like fontWeight, color, etc. here
                         ),
                       ),
-                      tooltip: 'Product Description',
+                      tooltip: 'PRODUCT DESCRIPTION',
                     ),
                       DataColumn(
                       label: Text(
-                        'Code',
+                        'CODE',
                         style: TextStyle(
                           fontSize: 15,
                            color: Colors.white // Adjust the font size as needed
@@ -219,7 +174,7 @@ print('3333333333333333');
                     ),
                       DataColumn(
                       label: Text(
-                        'Quantity',
+                        'QTY',
                         style: TextStyle(
                           fontSize: 15,
                            color: Colors.white // Adjust the font size as needed
@@ -230,7 +185,7 @@ print('3333333333333333');
                     ),
                       DataColumn(
                       label: Text(
-                        'Unit',
+                        'UNIT',
                         style: TextStyle(
                           fontSize: 15,
                            color: Colors.white // Adjust the font size as needed
@@ -241,7 +196,7 @@ print('3333333333333333');
                     ),
                       DataColumn(
                       label: Text(
-                        'Price',
+                        'PRICE',
                         style: TextStyle(
                           fontSize: 15,
                            color: Colors.white // Adjust the font size as needed
@@ -252,7 +207,7 @@ print('3333333333333333');
                     ),
                       DataColumn(
                       label: Text(
-                        'Total Amount',
+                        'AMOUNT',
                         style: TextStyle(
                           fontSize: 15,
                            color: Colors.white // Adjust the font size as needed
@@ -261,32 +216,7 @@ print('3333333333333333');
                       ),
                       tooltip: 'Total Amount',
                     ),
-                    // DataColumn(
-                    //   label: _buildTableCell(
-                    //     'Description',
-                    //   ),
-                    //   tooltip: 'Product Description',
-                    // ),
-                    // DataColumn(
-                    //   label: _buildTableCell('code '),
-                    //   tooltip: 'Product Description',
-                    // ),
-                    // DataColumn(
-                    //   label: _buildTableCell('Quantity'),
-                    //   tooltip: 'Product Quantity',
-                    // ),
-                    // DataColumn(
-                    //   label: _buildTableCell('Unit'),
-                    //   tooltip: 'Unit',
-                    // ),
-                    // DataColumn(
-                    //   label: _buildTableCell('Price'),
-                    //   tooltip: 'Price per Unit',
-                    // ),
-                    // DataColumn(
-                    //   label: _buildTableCell('Total Amount'),
-                    //   tooltip: 'Total Amount',
-                    // ),
+                  
                   ],
                   rows: [
                     for (var i = 0; i < cartItems.length; i++)
@@ -312,85 +242,10 @@ print('3333333333333333');
                               '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
                         ],
                       ),
-                    // Total Amount Row
-                    // DataRow(
-                    //   color: MaterialStateColor.resolveWith(
-                    //       (states) => const Color.fromARGB(0, 208, 9, 9)),
-                    //   cells: [
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(
-                    //       _buildTableCell('Total Amount:',
-                    //           fontWeight: FontWeight.bold),
-                    //     ),
-                    //     DataCell(_buildTableCell(
-                    //         '\$${totalPrice.toStringAsFixed(2)}',
-                    //         fontWeight: FontWeight.bold)),
-                    //   ],
-                    // ),
-                    //  // NET BEFORE VAT Row
-                    // DataRow(
-                    //   color: MaterialStateColor.resolveWith(
-                    //       (states) => const Color.fromARGB(0, 208, 9, 9)),
-                    //   cells: [
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(
-                    //       _buildTableCell('NET BEFORE VAT:',
-                    //           fontWeight: FontWeight.bold),
-                    //     ),
-                    //     DataCell(_buildTableCell(
-                    //         '\$${totalPrice.toStringAsFixed(2)}',
-                    //         fontWeight: FontWeight.bold)),
-                    //   ],
-                    // ),
-                    //  // VAT Row
-                    // DataRow(
-                    //   color: MaterialStateColor.resolveWith(
-                    //       (states) => const Color.fromARGB(0, 208, 9, 9)),
-                    //   cells: [
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(
-                    //       _buildTableCell('VAT:',
-                    //           fontWeight: FontWeight.bold),
-                    //     ),
-                    //     DataCell(_buildTableCell(
-                    //         '\$${15}',
-                    //         fontWeight: FontWeight.bold)),
-                    //   ],
-                    // ),
-                    //  // Total WITH VAT Row
-                    // DataRow(
-                    //   color: MaterialStateColor.resolveWith(
-                    //       (states) => const Color.fromARGB(0, 208, 9, 9)),
-                    //   cells: [
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(_buildTableCell('')),
-                    //     DataCell(
-                    //       _buildTableCell('Total WITH VAT:',
-                    //           fontWeight: FontWeight.bold),
-                    //     ),
-                    //     DataCell(_buildTableCell(
-                    //         '\$${totalPrice.toStringAsFixed(2)}',
-                    //         fontWeight: FontWeight.bold)),
-                    //   ],
-                    // ),
+                   
                   ],
                 ),
               ),
-
-              // SizedBox(
-              //   height: 30,
-              // ),
               Divider(
                 indent: 10,
                 endIndent: 20,
@@ -426,11 +281,7 @@ print('3333333333333333');
                   SizedBox(
                     width: 264,
                     height: 200,
-                    // color: Color.fromARGB(255, 31, 135, 86),
-                    // decoration:
-                    // BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(15),
-                    //     border: Border.all(width: 1)),
+                  
                     child: Column(
                       children: [
                        
@@ -478,7 +329,6 @@ print('3333333333333333');
                   )
                 ],
               )
-              //*********________END_______********* */
             ],
           ),
         ),
@@ -501,6 +351,332 @@ print('3333333333333333');
     );
   }
 }
+
+class QuotationMobilePage extends StatelessWidget {
+  // final List<User> cartItems;
+  final double totalPrice;
+  final cartItems;
+  final totalPriceWithVAT;
+  final vat; // Update the type if needed
+
+  QuotationMobilePage(
+      {required this.cartItems,
+      required this.totalPrice,
+      required this.vat,
+      required this.totalPriceWithVAT});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 232, 230, 230),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 232,230, 230),
+        elevation: 0,
+        leadingWidth: 48,
+        title: Row(
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/');
+              },
+              child: Text(
+                "DELTA",
+                style: GoogleFonts.oswald(
+                  textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              "\n NATIONAL",
+              style: GoogleFonts.oswald(
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+     body: SingleChildScrollView(
+       child: Center(
+         child: Container(
+          width: 800,
+          // width: MediaQuery.of(context).size.width/2,
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height*0.2,
+                child:MyClipPath() ,
+              ),
+              Container(
+                child:_buildQuotationTable() ,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                 gradient: LinearGradient(
+                                colors: [
+                                  Colors.white,
+                                  const Color.fromARGB(255, 76, 138, 131),
+                                  const Color.fromARGB(255, 76, 138, 131)
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                ),
+                height: MediaQuery.of(context).size.height*0.1,
+                child: MyClipPat(),
+              )
+            ],
+          ),
+         ),
+       ),
+     ),
+     
+ floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 76, 138, 131),
+        onPressed: () {
+          context.read<address_provider>().get_current_address(cartItems);
+// late var address_data=context.read<address_provider>().current_address;
+// print(address_data);
+// print(cartItems);
+// print('3333333333333333');
+          // Add your FloatingActionButton logic here
+          // PdfService().generateInvoice(cartItems,);
+        },
+        child: const Icon(Icons.print),
+      ),
+    );
+  }
+
+  Widget _buildQuotationTable() {
+    return Row(
+      children: [
+        Container(
+          child: Column(
+            children: [
+              Container(
+                width:800,
+                color: const Color.fromARGB(255, 192, 173, 114),
+                child: DataTable(
+                  columnSpacing: 10.0,
+                  dividerThickness: 2,
+                  headingRowColor: MaterialStateColor.resolveWith(
+                    (states) =>  Color.fromARGB(255, 91, 166, 157),
+                  ),
+                  dataRowMaxHeight: 60,
+                  headingRowHeight: 60,
+                  horizontalMargin: 10,
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        '                               DESCRIPTION',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white // Adjust the font size as needed
+                          // You can also apply other text styles like fontWeight, color, etc. here
+                        ),
+                      ),
+                      tooltip: 'PRODUCT DESCRIPTION',
+                    ),
+                      DataColumn(
+                      label: Text(
+                        'CODE',
+                        style: TextStyle(
+                          fontSize: 15,
+                           color: Colors.white // Adjust the font size as needed
+                          // You can also apply other text styles like fontWeight, color, etc. here
+                        ),
+                      ),
+                      tooltip: 'Product Description',
+                    ),
+                      DataColumn(
+                      label: Text(
+                        'QTY',
+                        style: TextStyle(
+                          fontSize: 15,
+                           color: Colors.white // Adjust the font size as needed
+                          // You can also apply other text styles like fontWeight, color, etc. here
+                        ),
+                      ),
+                      tooltip: 'Product Quantity',
+                    ),
+                      DataColumn(
+                      label: Text(
+                        'UNIT',
+                        style: TextStyle(
+                          fontSize: 15,
+                           color: Colors.white // Adjust the font size as needed
+                          // You can also apply other text styles like fontWeight, color, etc. here
+                        ),
+                      ),
+                      tooltip: 'Unit',
+                    ),
+                      DataColumn(
+                      label: Text(
+                        'PRICE',
+                        style: TextStyle(
+                          fontSize: 15,
+                           color: Colors.white // Adjust the font size as needed
+                          // You can also apply other text styles like fontWeight, color, etc. here
+                        ),
+                      ),
+                      tooltip: 'Price per Unit',
+                    ),
+                      DataColumn(
+                      label: Text(
+                        'AMOUNT',
+                        style: TextStyle(
+                          fontSize: 15,
+                           color: Colors.white // Adjust the font size as needed
+                          // You can also apply other text styles like fontWeight, color, etc. here
+                        ),
+                      ),
+                      tooltip: 'Total Amount',
+                    ),
+                  
+                  ],
+                  rows: [
+                    for (var i = 0; i < cartItems.length; i++)
+                      DataRow(
+                        color: MaterialStateColor.resolveWith((states) =>
+                            i % 2 == 0 ? Colors.white : Colors.transparent),
+                        cells: [
+                          // DataCell(_buildTableCell('${i + 1}')),
+                          DataCell(_buildTableCell(
+                              jsonDecode(cartItems[i])['productName'])),
+                          DataCell(_buildTableCell(
+                              jsonDecode(cartItems[i])['productCode'])),
+
+                          DataCell(_buildTableCell(
+                              '${jsonDecode(cartItems[i])['quantity']}')),
+                          DataCell(_buildTableCell('unit')),
+                          DataCell(
+                            _buildTableCell(
+                                '\$${jsonDecode(cartItems[i])['price']}',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          DataCell(_buildTableCell(
+                              '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
+                        ],
+                      ),
+                   
+                  ],
+                ),
+              ),
+              Divider(
+                indent: 10,
+                endIndent: 20,
+                color: const Color.fromARGB(255, 108, 106, 106),
+              ),
+              //*****_______GANERATE QUATATION TOTAL AMOUNT CONTAINER____********
+              Row(
+                children: [
+                  Container(
+                    // color: Colors.amber,
+                    width:20,
+                    height: 10,),
+                  SizedBox(
+                    // color: const Color.fromARGB(255, 128, 118, 91),
+                    width: 500,
+                    height:200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // _buildTableCell("janish"),
+                      Text("TERM AND CONDITIONS",
+                      style: TextStyle(fontWeight: FontWeight.w500,fontSize:15),),
+                      Gap(5),
+                      Text("Payment	      : 30 Dyas",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
+                      Text("Delivery	       : 03 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
+                      Text("Validity		        : 07 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
+                      Text("We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
+                      style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),)
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 264,
+                    height: 200,
+                  
+                    child: Column(
+                      children: [
+                       
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildTableCell(' Net before VAT',
+                                fontWeight: FontWeight.bold),
+                            _buildTableCell(
+                                '\$${totalPrice.toStringAsFixed(2)}',
+                                fontWeight: FontWeight.bold)
+                          ],
+                        ),
+                        Divider(
+                          indent: 20,
+                          endIndent: 20,
+                          color: Color.fromARGB(255, 186, 185, 185),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildTableCell('VAT ',
+                                fontWeight: FontWeight.bold),
+                            _buildTableCell(
+                                '              \$${vat.toStringAsFixed(2)}',
+                                fontWeight: FontWeight.bold)
+                          ],
+                        ),
+
+                        Container(
+                          color: Colors.amber,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              _buildTableCell('Total Amount',
+                                  fontWeight: FontWeight.bold),
+                              _buildTableCell(
+                                  '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                  fontWeight: FontWeight.bold)
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTableCell(String text,
+      {FontWeight fontWeight = FontWeight.normal}) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      alignment: Alignment.center,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontWeight: fontWeight,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
 
 class MyClipPath extends StatelessWidget {
   final Color backgroundColor = Color.fromARGB(255, 76, 138, 131);

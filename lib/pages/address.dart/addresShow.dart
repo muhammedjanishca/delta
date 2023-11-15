@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:firebase_hex/pages/address.dart/address_text.dart';
+import 'package:firebase_hex/pages/address.dart/first_address.dart';
+import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/res_address_show.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +28,6 @@ class addressshow extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
     cartProvider.getAddressData();
     var cartItems = cartProvider.fetchedItems;
-    // var removAdd = cartProvider.removeAddress();
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
@@ -94,7 +94,8 @@ class addressshow extends StatelessWidget {
                                       Icon(Icons.add),
                                       TextButton(
                                           onPressed: () => SideSheet.right(
-                                              body: TextAddress(),
+                                              body:TextAddress(),
+                                              //  TextAddress(),
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *

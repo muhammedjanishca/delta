@@ -184,7 +184,6 @@ class _TextAddressState extends State<TextAddress> {
     );
   }
 }
-// String _selectedLocation = 'Please choose a location';
 
 
 
