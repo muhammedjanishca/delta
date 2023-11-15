@@ -1,12 +1,16 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/pages/address.dart/addresShow.dart';
 import 'package:firebase_hex/pages/address.dart/first_address.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/address_provider.dart';
 
 
 class LandinPage extends StatelessWidget {
@@ -97,18 +101,16 @@ class DesktopLanding extends StatelessWidget {
                             color: Colors.white),
                       ),
                       ElevatedButton(
-                        onPressed: (){
-                           Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>TextTheAddress()),
-                            );
-                        },
-                      //  onPressed: () async {
-                      //  context.read<address_provider>().
-                      //  isUserDataAvailable(context);
-                      // },
-
-                    //       isUserDa
+                        // onPressed: (){
+                        //    Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(builder: (context) =>const TextTheAddress()),
+                        //     );
+                        // },
+                       onPressed: () async {
+                       context.read<address_provider>().
+                       isUserDataAvailable(context);
+                      }, 
                     //     onPressed: () async {
                     //        bool isDataAvailable = await
                     //  context.read<address_provider>().
@@ -116,13 +118,12 @@ class DesktopLanding extends StatelessWidget {
                     //       if (isDataAvailable) {
                     //            Navigator.push(
                     //           context,
-                    //           MaterialPageRoute(builder: (context) =>TextAddress()),
+                    //           MaterialPageRoute(builder: (context) =>TextTheAddress()),
                     //         );
-
                     //       } else {
                     //       Navigator.push(
                     //           context,
-                    //           MaterialPageRoute(builder: (context) => addressshow()),
+                    //           MaterialPageRoute(builder: (context) => AddressShowPage ()),
                     //         );
                     //       }
                     //     },
