@@ -6,7 +6,9 @@ class SelectedThumbnailProvider extends ChangeNotifier {
 
   String? get selectedThumbnail => _selectedThumbnail;
 
-  void setSelectedThumbnail(String thumbnailUrl,{int? index}) {
+  void setSelectedThumbnail(
+    String thumbnailUrl,
+  {int? index}) {
     _selectedThumbnail = thumbnailUrl;
     selectedIndex = index;
     notifyListeners();

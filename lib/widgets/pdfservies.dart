@@ -7,7 +7,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import '../save_file_mobile.dart' if (dart.library.html) 'save_file_web.dart';
 
 class PdfService {
-  Future<void> generateInvoice(List cartItems) async {
+  Future<void> generateInvoice(List cartItems,String current_address,last_address) async {
     // cartItems);
     //Create a PDF document.
     final PdfDocument document = PdfDocument();
@@ -22,7 +22,7 @@ class PdfService {
     //Generate PDF grid.
     final PdfGrid grid = getGrid(cartItems);
     //Draw the header section by creating text element
-    final PdfLayoutResult result = drawHeader(page, pageSize, grid);
+    final PdfLayoutResult result = drawHeader(page, pageSize, grid,current_address,last_address);
     //Draw grid
     drawGrid(page, grid, result);
     //Add invoice footer
@@ -37,10 +37,10 @@ class PdfService {
 }
 
 //Draws the invoice header
-PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid) {
+PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,String current_address,last_address) {
   //Draw rectangle
   page.graphics.drawRectangle(
-      brush: PdfSolidBrush(PdfColor(75, 138, 131)),
+      brush: PdfSolidBrush(PdfColor(68, 114, 196)),
       bounds: Rect.fromLTWH(0, 0, pageSize.width - 115, 90));
   //Draw string
   page.graphics.drawString(
@@ -51,7 +51,7 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid) {
 
   page.graphics.drawRectangle(
       bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 90),
-      brush: PdfSolidBrush(PdfColor(75, 138, 131)));
+      brush: PdfSolidBrush(PdfColor(68, 114, 196)));
 
   page.graphics.drawString(r'$' + getTotalAmount(grid).toString(),
       PdfStandardFont(PdfFontFamily.helvetica, 18),
@@ -74,17 +74,19 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid) {
   final String invoiceNumber =
       'Invoice Number: 2058557939\r\n\r\nDate: ${format.format(DateTime.now())}';
   final Size contentSize = contentFont.measureString(invoiceNumber);
+
+
+
+  
   // ignore: leading_newlines_in_multiline_strings
-  const String address = '''Bill To: \r\n\r\nAbraham Swearegin, 
-        \r\n\r\nUnited States, California, San Mateo, 
-        \r\n\r\n9920 BridgePointe Parkway, \r\n\r\n9365550136''';
+ String address = current_address;
 
   PdfTextElement(text: invoiceNumber, font: contentFont).draw(
       page: page,
       bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 120,
           contentSize.width + 30, pageSize.height - 120));
 
-  return PdfTextElement(text: address, font: contentFont).draw(
+  return PdfTextElement(text:' ${last_address['COMPANY NAME']} \n${last_address['Contact Number']}\n${last_address['Street Address']}\n${last_address['city']} ', font: contentFont).draw(
       page: page,
       bounds: Rect.fromLTWH(30, 120, pageSize.width - (contentSize.width + 30),
           pageSize.height - 120))!;

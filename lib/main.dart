@@ -15,6 +15,7 @@ import 'package:firebase_hex/pages/details_pages/gland_productdetails.dart';
 import 'package:firebase_hex/pages/details_pages/lugs_productdetails.dart';
 import 'package:firebase_hex/pages/details_pages/nonpdf_product.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
+import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
@@ -55,8 +56,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(
-            create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
@@ -65,8 +65,11 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
         ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
-        ChangeNotifierProvider(create: (context) => ImageSelection()),
+        ChangeNotifierProvider(create: (context) =>ImageSelection()),
+        ChangeNotifierProvider(create: (context) =>SelectedKiduProvider()),
+        ChangeNotifierProvider(create: (context) =>address_provider()),
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
+
       ],
       child: MaterialApp(
         //this use using for handle null data

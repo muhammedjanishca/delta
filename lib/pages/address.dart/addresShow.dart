@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:firebase_hex/pages/address.dart/add_textfield.dart';
+import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
+
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/res_address_show.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +28,6 @@ class addressshow extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
     cartProvider.getAddressData();
     var cartItems = cartProvider.fetchedItems;
-    // var removAdd = cartProvider.removeAddress();
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
@@ -94,7 +94,8 @@ class addressshow extends StatelessWidget {
                                       Icon(Icons.add),
                                       TextButton(
                                           onPressed: () => SideSheet.right(
-                                              body: TextAddress(),
+                                              body:TextAddress(),
+                                              //  TextAddress(),
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -108,66 +109,67 @@ class addressshow extends StatelessWidget {
                                     ],
                                   ),
                                   Container(
-                                    color: Color.fromARGB(255, 174, 210, 220),
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 198, 245, 249),
+                                    border: Border.all(width: 0.5)
+ 
+                                    ),
                                     child: Column(
                                       children: [
                                         Column(
                                           children: [
-                                            ListView.builder(
-                                              scrollDirection: Axis.vertical,
-                                              shrinkWrap: true,
-                                              itemCount:
-                                                  cartItems["address"].length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                // Check if it's not the first item
-                                                bool isNotFirstItem =
-                                                    index != 0;
+                                          ListView.builder(
+  scrollDirection: Axis.vertical,
+  shrinkWrap: true,
+  itemCount: cartItems["address"].length,
+  itemBuilder: (BuildContext context, int index) {
+    // Extracting the address data from the JSON string
+    var addressData = jsonDecode(cartItems["address"][index]);
 
-                                                // If it's not the first item, add a Divider
-                                                if (isNotFirstItem) {
-                                                  return Column(
-                                                    children: [
-                                                      Container(
-                                                        width: double.infinity,
-                                                        height: 20,
-                                                        color: Colors.white,
-                                                      ),
-                                                      AddressData(jsonDecode(
-                                                          cartItems["address"]
-                                                              [index])),
-                                                    ],
-                                                  );
-                                                }
-                                                // If it's the first item, don't add a Divider
-                                                return AddressData(jsonDecode(
-                                                    cartItems["address"]
-                                                        [index]));
-                                              },
-                                            ),
+    // Check if it's not the first item
+    bool isNotFirstItem = index != 0;
+
+    // If it's not the first item, add a Divider
+    if (isNotFirstItem) {
+      return Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 20,
+            color: Colors.white,
+          ),
+          _buildAddressListItem(addressData, index),
+        ],
+      );
+    }
+    // If it's the first item, don't add a Divider
+    return _buildAddressListItem(addressData, index);
+  },
+)
+
                                             // Add your button here
-                                            ElevatedButton(
-                                              onPressed: ()
-                                                  //  async
-                                                  {
-                                                // await removAdd;
-                                              },
-                                              child: Text(
-                                                'Deliver to this Address',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              style: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        Color.fromARGB(
-                                                            255, 97, 128, 190)),
-                                                minimumSize:
-                                                    MaterialStateProperty.all(
-                                                        Size(200, 40)),
-                                              ),
-                                            ),
+                                            // ElevatedButton(
+                                            //   onPressed: ()
+                                            //       //  async
+                                            //       {
+                                            //     // await removAdd;
+                                            //   },
+                                            //   child: Text(
+                                            //     'Deliver to this Address',
+                                            //     style: TextStyle(
+                                            //         color: Colors.white),
+                                            //   ),
+                                            //   style: ButtonStyle(
+                                            //     backgroundColor:
+                                            //         MaterialStateProperty.all(
+                                            //             Color.fromARGB(
+                                            //                 255, 97, 128, 190)),
+                                            //     minimumSize:
+                                            //         MaterialStateProperty.all(
+                                            //             Size(200, 40)),
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ],
@@ -209,7 +211,33 @@ class addressshow extends StatelessWidget {
             )));
   }
 }
-
+Widget _buildAddressListItem(Map<String, dynamic> addressData, int index) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(
+        child: AddressData(addressData),
+      ),
+      IconButton(
+        icon: Icon(Icons.delete),
+        onPressed: () {
+          // Handle the remove button action
+          // You can use the index to identify and remove the corresponding item
+          // cartItems["address"].removeAt(index);
+          // Perform any other necessary actions
+        },
+      ),
+      IconButton(
+        icon: Icon(Icons.add_box),
+        onPressed: () {
+          // Handle the select button action
+          // You can use the index to identify the selected item
+          // Perform any other necessary actions
+        },
+      ),
+    ],
+  );
+}
 String _selectedLocation = 'Please choose a location';
 AddressData(data) {
   final item = data;
