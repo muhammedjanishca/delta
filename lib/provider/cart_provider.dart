@@ -27,30 +27,32 @@ class CartProvider with ChangeNotifier {
 
     notifyListeners();
   }
-  
 
-  void addToCart(String productCode, double price, int quantity,
-      String imageUrl, String productName) async {
-    _cartItems
-        .add(CartItem(productCode, price, quantity, imageUrl, productName));
-    _newCartItem["productCode"] = productCode;
-    _newCartItem["price"] = price;
-    _newCartItem["quantity"] = quantity;
-    _newCartItem["imageUrl"] = imageUrl;
-    _newCartItem["productName"] = productName;
-    var details = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(auth.currentUser!.uid)
-        .get();
-    _cartData = details["cartItems"];
-    _cartData.add(jsonEncode(_newCartItem));
+void addToCart({String? productCode, double? price, required int quantity, required String imageUrl, required String productName}) async {
+   String? _productCode = productCode;
+   double? _price=price;
+  _cartItems.add(CartItem(productCode, price!, quantity, imageUrl, productName));
+  _newCartItem["productCode"] = _productCode!=null?productCode:''; 
+  _newCartItem["price"] = _price!=null?price:0.00;
+  _newCartItem["quantity"] = quantity;
+  _newCartItem["imageUrl"] = imageUrl;
+  _newCartItem["productName"] = productName;
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .update({'cartItems': _cartData});
-    notifyListeners();
-  }
+  var details = await FirebaseFirestore.instance
+      .collection("users")
+      .doc(auth.currentUser!.uid)
+      .get();
+  _cartData = details["cartItems"];
+  _cartData.add(jsonEncode(_newCartItem));
+
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(auth.currentUser!.uid)
+      .update({'cartItems': _cartData});
+  notifyListeners();
+}
+
+
 
   void removeFromCart(int index, var cartItems) async {
     cartItems.removeAt(index);
@@ -62,13 +64,6 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // double getTotalPrice() {
-  //   double totalPrice = 0.0;
-  //   for (var item in fetchedItems["cartItems"]) {
-  //     totalPrice += jsonDecode(item)["price"] * jsonDecode(item)["quantity"];
-  //   }
-  //   return totalPrice;
-  // }
  double getTotalPrice() {
   double totalPrice = 0.0;
   for (var item in fetchedItems["cartItems"]) {
@@ -133,8 +128,8 @@ double getTotalPriceWithVAT(double subtotal, double vatRate) {
 }
 
 class CartItem {
-  final String productCode;
-  final double price;
+  final String? productCode;
+  final double? price;
   int quantity;
   final String imageUrl;
   final String productName;
@@ -146,5 +141,3 @@ class CartItem {
     quantity = newQuantity;
   }
 }
-
-

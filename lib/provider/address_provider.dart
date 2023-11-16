@@ -24,7 +24,7 @@ class address_provider with ChangeNotifier {
 // var addressDataLength=userSnapshot.exists && userSnapshot['address'] ;
 // print(userSnapshot.exists && userSnapshot['address'] );
 
-      if (arrayFromFirestore.isNotEmpty) {
+      if (arrayFromFirestore!=null) {
          print('aaaaaaaaaaaaaaaaaaaaaa');
         Navigator.push(
           context,

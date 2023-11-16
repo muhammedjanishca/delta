@@ -37,10 +37,9 @@ class ProductDetailsOfGlands extends StatelessWidget {
     if (setting_list.length > 2) {
 // product_name=(setting_list[2]+"/"+setting_list[3]).replaceAll('_', ' ');
       for (int i = 2; i < setting_list.length; i++) {
-        
         product_name += setting_list[i].replaceAll('_', ' ');
-        if(i<setting_list.length-1){
-          product_name+="/";
+        if (i < setting_list.length - 1) {
+          product_name += "/";
         }
       }
     } else
@@ -76,7 +75,6 @@ class ProductDetailsOfGlands extends StatelessWidget {
               String? pdf;
 
               if (selectedThumbnailProvider.selectedIndex != null) {
-                
                 textpass = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].productName;
                 thumbnail = snapshot.data!
@@ -398,7 +396,89 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                           
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      final selectedPrice =
+                                                          selectedPriceNotifier
+                                                              .value;
+
+                                                      // Check if selectedPrice is empty or null, and provide a default value if needed
+                                                      if (selectedPrice !=
+                                                              null ||
+                                                          selectedPrice
+                                                              .split(': ')[1]
+                                                              .isNotEmpty) {
+                                                        final productCode =
+                                                            selectedPrice
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
+                                                        final quantity =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        final imageUrl =
+                                                            thumbnail;
+                                                        final productName =
+                                                            textpass;
+                                                        final cartProvider =
+                                                            Provider.of<
+                                                                    CartProvider>(
+                                                                context,
+                                                                listen: false);
+                                                        cartProvider.addToCart(
+                                                            productCode:
+                                                                productCode,
+                                                            price: price,
+                                                            quantity: quantity,
+                                                            imageUrl:
+                                                                imageUrl ?? '',
+                                                            productName:
+                                                                productName ??
+                                                                    '');
+
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
+                                                      } else {
+                                                        // Handle the case where selectedPrice is empty or null
+                                                        // You might want to display an error message or take appropriate action.
+                                                      }
+                                                    } else {
+                                                      // Handle the case where the user is not signed in
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
+                                                    }
+                                                  }
+                                                },
+                                                child:
+                                                    const Text('ADD TO CART'),
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size(150, 50)),
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Column(
@@ -425,7 +505,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                       // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                       selectedPriceNotifier
                                                               .value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
+                                                          '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
                                                     },
                                                     child: Form(
                                                       autovalidateMode:
@@ -555,101 +635,62 @@ class ProductDetailsOfGlands extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                    ),
-                    child: ElevatedButton(
-                                                onPressed: () {
-                                                  if (_formKey
-                                                      .currentState!
-                                                      .validate()) {
-                                                    if (FirebaseAuth
-                                                            .instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      final selectedPrice =
-                                                          selectedPriceNotifier
-                                                              .value;
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (FirebaseAuth.instance.currentUser != null) {
+                              final selectedPrice = selectedPriceNotifier.value;
 
-                                                      // Check if selectedPrice is empty or null, and provide a default value if needed
-                                                      if (selectedPrice !=
-                                                              null ||
-                                                          selectedPrice
-                                                              .split(
-                                                                  ': ')[1]
-                                                              .isNotEmpty) {
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(
-                                                                    ': ')[0];
-                                                        final price =
-                                                            double.tryParse(
-                                                                    selectedPrice
-                                                                        .split(': ')[1]) ??
-                                                                0;
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen:
-                                                                    false);
-                                                        cartProvider.addToCart(
-                                                            productCode,
-                                                            price,
-                                                            quantity,
-                                                            imageUrl ??
-                                                                '',
-                                                            productName ??
-                                                                '');
+                              // Check if selectedPrice is empty or null, and provide a default value if needed
+                              if (selectedPrice != null ||
+                                  selectedPrice.split(': ')[1].isNotEmpty) {
+                                final productCode =
+                                    selectedPrice.split(': ')[0];
+                                final price = double.tryParse(
+                                        selectedPrice.split(': ')[1]) ??
+                                    0;
+                                final quantity =
+                                    int.tryParse(quantityController.text) ?? 0;
+                                final imageUrl = thumbnail;
+                                final productName = textpass;
+                                final cartProvider = Provider.of<CartProvider>(
+                                    context,
+                                    listen: false);
+                                cartProvider.addToCart(
+                                    productCode: productCode,
+                                    price: price,
+                                    quantity: quantity,
+                                    imageUrl: imageUrl ?? '',
+                                    productName: productName ?? '');
 
-                                                        ScaffoldMessenger
-                                                                .of(
-                                                                    context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                                    content:
-                                                                        Text('Added to cart')));
-                                                      } else {
-                                                        // Handle the case where selectedPrice is empty or null
-                                                        // You might want to display an error message or take appropriate action.
-                                                      }
-                                                    } else {
-                                                      // Handle the case where the user is not signed in
-                                                      showDialog(
-                                                        context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                                context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  }
-                                                },
-                                                child: const Text(
-                                                    'ADD TO CART'),
-                                                style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty
-                                                          .all(Colors
-                                                              .black),
-                                                  minimumSize:
-                                                      MaterialStateProperty
-                                                          .all(Size(
-                                                              150, 50)),
-                                                ),
-                                              )
-                  ),
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Added to cart')));
+                              } else {
+                                // Handle the case where selectedPrice is empty or null
+                                // You might want to display an error message or take appropriate action.
+                              }
+                            } else {
+                              // Handle the case where the user is not signed in
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                            }
+                          }
+                        },
+                        child: const Text('ADD TO CART'),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black),
+                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                        ),
+                      )),
                 ),
                 Expanded(
                   child: Container(
@@ -816,7 +857,6 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                       Row(
                                         children: [
                                           Gap(45),
-                                          
                                           Flexible(
                                             child: Container(
                                               // color: Colors.amber,
@@ -838,7 +878,6 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 selectedPriceNotifier,
                                             builder: (context, selectedPrice,
                                                 child) {
-                                              
                                               return Container(
                                                 width: 110,
                                                 padding: EdgeInsets.all(8.0),
@@ -848,38 +887,42 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                     width: 1.0,
                                                   ),
                                                 ),
-                                               
-                                                child:
-                                                    
-                                                    selectedPrice == " null"
-                                                        ? Text(
-                                                            'product available based on request')
-                                                        : Text(selectedPrice),
+                                                child: selectedPrice == " null"
+                                                    ? Text(
+                                                        'Product available based on Request')
+                                                    : Text(selectedPrice),
                                               );
                                             },
                                           ),
                                           Gap(95),
-                                          TextButton( 
-                                           onPressed: () => SideSheet.right(
-                                              body: Container(
-                                              height: 1500,
-                                              color: const Color.fromARGB(
-                                                  255, 230, 233, 235),
-                                              child: pdf != null
-                                                  ? SfPdfViewer.network(pdf!)
-                                                  : Nopdf()),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              context: context),
-                                           child: Row(
-                                            children: [
-                                              Icon(Icons.edit_document),
-                                              Text("Size Chart",style: TextStyle(),)
-                                            ],
-                                           )
-                                            )
+                                          TextButton(
+                                              onPressed: () => SideSheet.right(
+                                                  body: Container(
+                                                      height: 1500,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              230,
+                                                              233,
+                                                              235),
+                                                      child: pdf != null
+                                                          ? SfPdfViewer.network(
+                                                              pdf!)
+                                                          : Nopdf()),
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  context: context),
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.edit_document),
+                                                  Text(
+                                                    "Size Chart",
+                                                    style: TextStyle(),
+                                                  )
+                                                ],
+                                              ))
                                         ],
                                       ),
                                       Column(
@@ -906,7 +949,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   //     : noprice;
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
                                                   selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
+                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
@@ -1021,14 +1064,11 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                               width: 200,
                                               //  MediaQuery.of(context).size.width/10,
                                               child: TextFormField(
-                                                controller:
-                                                    quantityController,
+                                                controller: quantityController,
                                                 keyboardType:
                                                     TextInputType.number,
-                                                decoration:
-                                                    InputDecoration(
-                                                  border:
-                                                      OutlineInputBorder(),
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
                                                   hintText:
                                                       'Enter the quantity',
                                                 ),
@@ -1059,18 +1099,15 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                             width: 30,
                                           ),
                                           SizedBox(
-                                              width:
-                                                  MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  if (_formKey
-                                                      .currentState!
+                                                  if (_formKey.currentState!
                                                       .validate()) {
-                                                    if (FirebaseAuth
-                                                            .instance
+                                                    if (FirebaseAuth.instance
                                                             .currentUser !=
                                                         null) {
                                                       final selectedPrice =
@@ -1081,18 +1118,17 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                       if (selectedPrice !=
                                                               null ||
                                                           selectedPrice
-                                                              .split(
-                                                                  ': ')[1]
+                                                              .split(': ')[1]
                                                               .isNotEmpty) {
                                                         final productCode =
                                                             selectedPrice
-                                                                .split(
-                                                                    ': ')[0];
-                                                        final price =
-                                                            double.tryParse(
-                                                                    selectedPrice
-                                                                        .split(': ')[1]) ??
-                                                                0;
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
                                                         final quantity =
                                                             int.tryParse(
                                                                     quantityController
@@ -1106,24 +1142,23 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                             Provider.of<
                                                                     CartProvider>(
                                                                 context,
-                                                                listen:
-                                                                    false);
+                                                                listen: false);
                                                         cartProvider.addToCart(
-                                                            productCode,
-                                                            price,
-                                                            quantity,
-                                                            imageUrl ??
-                                                                '',
-                                                            productName ??
-                                                                '');
+                                                            productCode:
+                                                                productCode,
+                                                            price: price,
+                                                            quantity: quantity,
+                                                            imageUrl:
+                                                                imageUrl ?? '',
+                                                            productName:
+                                                                productName ??
+                                                                    '');
 
-                                                        ScaffoldMessenger
-                                                                .of(
-                                                                    context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                                    content:
-                                                                        Text('Added to cart')));
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
                                                       } else {
                                                         // Handle the case where selectedPrice is empty or null
                                                         // You might want to display an error message or take appropriate action.
@@ -1132,26 +1167,23 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                       // Handle the case where the user is not signed in
                                                       showDialog(
                                                         context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                                context) {
+                                                        builder: (BuildContext
+                                                            context) {
                                                           return LoginPage(); // Your custom dialog widget
                                                         },
                                                       );
                                                     }
                                                   }
                                                 },
-                                                child: const Text(
-                                                    'ADD TO CART'),
+                                                child:
+                                                    const Text('ADD TO CART'),
                                                 style: ButtonStyle(
                                                   backgroundColor:
-                                                      MaterialStateProperty
-                                                          .all(Colors
-                                                              .black),
+                                                      MaterialStateProperty.all(
+                                                          Colors.black),
                                                   minimumSize:
-                                                      MaterialStateProperty
-                                                          .all(Size(
-                                                              150, 50)),
+                                                      MaterialStateProperty.all(
+                                                          Size(150, 50)),
                                                 ),
                                               )),
                                           SizedBox(
@@ -1169,9 +1201,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                         context, '/cart')
                                                     : showDialog(
                                                         context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                                context) {
+                                                        builder: (BuildContext
+                                                            context) {
                                                           return LoginPage(); // Your custom dialog widget
                                                         },
                                                       );
@@ -1183,13 +1214,11 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                               ),
                                               style: ButtonStyle(
                                                 backgroundColor:
-                                                    MaterialStateProperty
-                                                        .all(
-                                                            Colors.white),
+                                                    MaterialStateProperty.all(
+                                                        Colors.white),
                                                 minimumSize:
-                                                    MaterialStateProperty
-                                                        .all(Size(
-                                                            150, 50)),
+                                                    MaterialStateProperty.all(
+                                                        Size(150, 50)),
                                               ),
                                             ),
                                           ),
@@ -1217,5 +1246,3 @@ class ProductDetailsOfGlands extends StatelessWidget {
     );
   }
 }
-
-
