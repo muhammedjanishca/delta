@@ -438,11 +438,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                 context,
                                                                 listen: false);
                                                         cartProvider.addToCart(
-                                                            productCode,
-                                                            price,
-                                                            quantity,
-                                                            imageUrl ?? '',
-                                                            productName ?? '');
+                                                            productCode:productCode,
+                                                            price:price,
+                                                            quantity:quantity,
+                                                            imageUrl:imageUrl ?? '',
+                                                            productName:productName ?? '');
 
                                                         ScaffoldMessenger.of(
                                                                 context)
@@ -654,8 +654,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                 context,
                                 listen: false);
 
-                            cartProvider.addToCart(productCode, price, quantity,
-                                imageUrl ?? "", productName ?? "");
+                            cartProvider.addToCart(productCode:productCode, price:price, quantity:quantity,
+                                imageUrl:imageUrl ?? "", productName:productName ?? "");
 
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Added to cart")));
@@ -1131,11 +1131,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                 context,
                                                                 listen: false);
                                                         cartProvider.addToCart(
-                                                            productCode,
-                                                            price,
-                                                            quantity,
-                                                            imageUrl ?? '',
-                                                            productName ?? '');
+                                                            productCode:productCode,
+                                                            price:price,
+                                                            quantity:quantity,
+                                                            imageUrl:imageUrl ?? '',
+                                                            productName:productName ?? '');
 
                                                         ScaffoldMessenger.of(
                                                                 context)

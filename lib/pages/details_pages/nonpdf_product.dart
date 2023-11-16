@@ -11,7 +11,7 @@ import '../../responsive/product_page.dart';
 
 class Nopdf extends StatelessWidget {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
-   String? typeOfProduct;
+  String? typeOfProduct;
   Nopdf({this.typeOfProduct});
   // Nopdf({required this.productData, required this.selectedIndex});
   @override
@@ -19,8 +19,8 @@ class Nopdf extends StatelessWidget {
     // final userInputProvider = Provider.of<UserInputProvider>(context);
     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
     TextEditingController quantityController = TextEditingController();
- var user = Provider.of<AuthenticationHelper>(context).user;
-   
+    var user = Provider.of<AuthenticationHelper>(context).user;
+
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
@@ -37,17 +37,19 @@ class Nopdf extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
             String? textpass = "";
             String? thumbnail = "";
             String? description = "";
-            List<CodesAndPrice>? price = [];
+            // List<CodesAndPrice>? price = [];
             String? priceofproduct = "";
             List<String>? image = [];
-            String? pdf = "";
+            // String? pdf = "";
 
             if (selectedThumbnailProvider.selectedIndex != null) {
               print("kjh");
@@ -57,18 +59,18 @@ class Nopdf extends StatelessWidget {
                   .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
               description = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].description;
-              price = snapshot
-                  .data!
-                  .data[selectedThumbnailProvider.selectedIndex!]
-                  .codesAndPrice!;
+              // price = snapshot
+              //     .data!
+              //     .data[selectedThumbnailProvider.selectedIndex!]
+              //     .codesAndPrice!;
               priceofproduct = snapshot
                   .data!
                   .data[selectedThumbnailProvider.selectedIndex!]
                   .priceofproduct;
               image = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-              pdf = snapshot
-                  .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+              // pdf = snapshot
+              //     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
               // print(product_name);
               // print("khgg");
@@ -79,15 +81,15 @@ class Nopdf extends StatelessWidget {
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
-                  price?.addAll(element.codesAndPrice!.map((e) => e));
+                  priceofproduct = element.priceofproduct;
+                  // priceo?.addAll(element.codesAndPrice!.map((e) => e));
                   image?.addAll(element.images!.map((e) => e));
-                  pdf = element.pdf ?? "";
+                  // pdf = element.pdf ?? "";
                   return true;
                 } else {
                   return false;
                 }
               });
-              
             }
 
             return DefaultTabController(
@@ -121,7 +123,7 @@ class Nopdf extends StatelessWidget {
                                     // selectedThumbnailProvider
                                     //       .selectedThumbnail ??
                                     //   ''
-                                      ),
+                                  ),
                                 ), // Display the selected thumbnail here
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -139,9 +141,9 @@ class Nopdf extends StatelessWidget {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               border: Border.all(
-                                                color: imageUrl ==imageUrl
-                                                        // selectedThumbnailProvider
-                                                        //     .selectedThumbnail
+                                                color: imageUrl == imageUrl
+                                                    // selectedThumbnailProvider
+                                                    //     .selectedThumbnail
                                                     ? Colors
                                                         .blue // Highlight the selected image
                                                     : Colors
@@ -178,20 +180,21 @@ class Nopdf extends StatelessWidget {
                                     ),
                                     Flexible(
                                       child: Container(
-                                        // color: Colors.amber,
+                                          // color: Colors.amber,
 
-                                        child: priceofproduct==null?
-                                        Text(
-                                          'Product Price : 0.00',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontFamily: 'Roboto',
-                                            color: Color(0xFF212121),
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ):Text(priceofproduct!)
-                                      ),
+                                          child: priceofproduct == null
+                                              ? Text(
+                                                  'Product Price : 0.00',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontFamily: 'Roboto',
+                                                    color: Color(0xFF212121),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )
+                                              : Text(priceofproduct!)),
                                     ),
                                     // ValueListenableBuilder<String>(
                                     //   valueListenable: selectedPriceNotifier,
@@ -301,7 +304,7 @@ class Nopdf extends StatelessWidget {
                                                       int.tryParse(value);
                                                   if (quantity == null ||
                                                       quantity <= 0) {
-                                                    return 'Quantity must be a positive number';
+                                                    return 'Enter a number only';
                                                   }
                                                   return null; // Return null if the input is valid
                                                 },
@@ -333,12 +336,12 @@ class Nopdf extends StatelessWidget {
                                                           .currentUser !=
                                                       null) {
                                                     // signed in
-                                                    final selectedPrice =
-                                                        selectedPriceNotifier
-                                                            .value;
+                                                    // final selectedPrice =
+                                                    //     selectedPriceNotifier
+                                                    //         .value;
 
-                                                    final productCode =
-                                                        textpass;
+                                                    // final productCode =
+                                                    //     textpass;
 
                                                     final price = double.parse(
                                                         priceofproduct!);
@@ -364,11 +367,13 @@ class Nopdf extends StatelessWidget {
                                                     // print(
                                                     //     'ooooooooooooooooooooo   $textpass');
                                                     cartProvider.addToCart(
-                                                        productCode ?? "",
-                                                        price,
-                                                        quantity,
-                                                        imageUrl ?? "",
-                                                        productName ?? "");
+                                                        // productCode:productCode,
+                                                        price: price,
+                                                        quantity: quantity,
+                                                        imageUrl:
+                                                            imageUrl ?? '',
+                                                        productName:
+                                                            productName ?? '');
 
                                                     ScaffoldMessenger.of(
                                                             context)
@@ -408,15 +413,17 @@ class Nopdf extends StatelessWidget {
                                                 5,
                                             child: ElevatedButton(
                                               onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                user != null
+                                                    ? Navigator.pushNamed(
+                                                        context, '/cart')
+                                                    : showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
+                                              },
                                               child: const Text(
                                                 'GO TO CART',
                                                 style: TextStyle(
@@ -468,7 +475,7 @@ class Nopdf extends StatelessWidget {
       //       String? description;
       //       List<CodesAndPrice>? price = [];
       //       List<String>? image = [];
-      //       String? pdf;   
+      //       String? pdf;
       //       if (selectedThumbnailProvider.selectedIndex != null) {
       //         textpass = snapshot.data!
       //             .data[selectedThumbnailProvider.selectedIndex!].productName;
@@ -484,7 +491,7 @@ class Nopdf extends StatelessWidget {
       //             .data!.data[selectedThumbnailProvider.selectedIndex!].images;
       //         pdf = snapshot
       //             .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
-      //       } else {           
+      //       } else {
       //         snapshot.data!.data.firstWhere((element) {
       //           if (element.productName == product_name) {
       //             print("2121");
@@ -597,7 +604,7 @@ class Nopdf extends StatelessWidget {
       //                           //           ),
       //                           //         ),
       //                           //       ),
-      //                           //     ),                                 
+      //                           //     ),
       //                           //   ],
       //                           // ),
       //                         ],
@@ -818,17 +825,19 @@ class Nopdf extends StatelessWidget {
           snapshot.data!.data.length;
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child:
+                    const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
             String? textpass = "";
             String? thumbnail = "";
             String? description = "";
-            List<CodesAndPrice>? price = [];
+            // List<CodesAndPrice>? price = [];
             String? priceofproduct = "";
             List<String>? image = [];
-            String? pdf = "";
+            // String? pdf = "";
 
             if (selectedThumbnailProvider.selectedIndex != null) {
               print("kjh");
@@ -838,18 +847,18 @@ class Nopdf extends StatelessWidget {
                   .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
               description = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].description;
-              price = snapshot
-                  .data!
-                  .data[selectedThumbnailProvider.selectedIndex!]
-                  .codesAndPrice!;
+              // price = snapshot
+              //     .data!
+              //     .data[selectedThumbnailProvider.selectedIndex!]
+              //     .codesAndPrice!;
               priceofproduct = snapshot
                   .data!
                   .data[selectedThumbnailProvider.selectedIndex!]
                   .priceofproduct;
               image = snapshot
                   .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-              pdf = snapshot
-                  .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+              // pdf = snapshot
+              //     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
               print(product_name);
               print("khgg");
@@ -860,15 +869,15 @@ class Nopdf extends StatelessWidget {
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
-                  price?.addAll(element.codesAndPrice!.map((e) => e));
+                  priceofproduct = element.priceofproduct;
+                  // price?.addAll(element.codesAndPrice!.map((e) => e));
                   image?.addAll(element.images!.map((e) => e));
-                  pdf = element.pdf ?? "";
+                  // pdf = element.pdf ?? "";
                   return true;
                 } else {
                   return false;
                 }
               });
-              
             }
 
             return DefaultTabController(
@@ -897,10 +906,9 @@ class Nopdf extends StatelessWidget {
                                   height:
                                       MediaQuery.of(context).size.height / 3,
                                   width: MediaQuery.of(context).size.width / 5,
-                                  child: Image.network(
-                                    thumbnail!
-                                    // selectedThumbnailProvider
-                                    //       .selectedThumbnail ??
+                                  child: Image.network(thumbnail!
+                                      // selectedThumbnailProvider
+                                      //       .selectedThumbnail ??
                                       // ''
                                       ),
                                 ), // Display the selected thumbnail here
@@ -920,9 +928,9 @@ class Nopdf extends StatelessWidget {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               border: Border.all(
-                                                color: imageUrl ==imageUrl
-                                                        // selectedThumbnailProvider
-                                                        //     .selectedThumbnail
+                                                color: imageUrl == imageUrl
+                                                    // selectedThumbnailProvider
+                                                    //     .selectedThumbnail
                                                     ? Colors
                                                         .blue // Highlight the selected image
                                                     : Colors
@@ -959,20 +967,32 @@ class Nopdf extends StatelessWidget {
                                     ),
                                     Flexible(
                                       child: Container(
-                                        // color: Colors.amber,
+                                          // color: Colors.amber,
 
-                                        child: priceofproduct==null?
-                                        Text(
-                                          'Product Price: 0.00',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontFamily: 'Roboto',
-                                            color: Color(0xFF212121),
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ):Text(priceofproduct!)
-                                      ),
+                                          child: priceofproduct == '0'
+                                              ? Text(
+                                                  'Product Price: \$ 0.00',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontFamily: 'Roboto',
+                                                    color: Color(0xFF212121),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )
+                                              : Text(
+                                                  'Product Price: \$ ' +
+                                                      priceofproduct!,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontFamily: 'Roboto',
+                                                    color: Color(0xFF212121),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )),
                                     ),
                                     // ValueListenableBuilder<String>(
                                     //   valueListenable: selectedPriceNotifier,
@@ -1102,7 +1122,10 @@ class Nopdf extends StatelessWidget {
                                             width: 20,
                                           ),
                                           SizedBox(
-                                            width: MediaQuery.of(context).size.width /5,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                5,
                                             child: ElevatedButton(
                                               onPressed: () {
                                                 if (_formKey.currentState!
@@ -1111,12 +1134,9 @@ class Nopdf extends StatelessWidget {
                                                           .currentUser !=
                                                       null) {
                                                     // signed in
-                                                    final selectedPrice =
-                                                        selectedPriceNotifier
-                                                            .value;
-
-                                                    final productCode =
-                                                        textpass;
+                                                    // final selectedPrice =
+                                                    //     selectedPriceNotifier
+                                                    //         .value;
 
                                                     final price = double.parse(
                                                         priceofproduct!);
@@ -1141,18 +1161,26 @@ class Nopdf extends StatelessWidget {
 
                                                     // print(
                                                     //     'ooooooooooooooooooooo   $textpass');
+                                                    print(price);
+                                                    print(productName);
                                                     cartProvider.addToCart(
-                                                        productCode ?? "",
-                                                        price,
-                                                        quantity,
-                                                        imageUrl ?? "",
-                                                        productName ?? "");
+                                                        // productCode:'null',
+                                                        // productCode: '',
+                                                        price: price,
+                                                        quantity: quantity,
+                                                        imageUrl:
+                                                            imageUrl ?? '',
+                                                        productName:
+                                                            productName ?? '');
 
                                                     ScaffoldMessenger.of(
                                                             context)
-                                                        .showSnackBar(SnackBar(
-                                                            content: Text(
-                                                                "Added to cart")));
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                          content: Text(
+                                                              "Added to cart")),
+                                                    );
+                                                    print(priceofproduct);
                                                   } else {
                                                     // signed out
                                                     showDialog(
@@ -1186,15 +1214,17 @@ class Nopdf extends StatelessWidget {
                                                 5,
                                             child: ElevatedButton(
                                               onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                                user != null
+                                                    ? Navigator.pushNamed(
+                                                        context, '/cart')
+                                                    : showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
+                                              },
                                               child: const Text(
                                                 'GO TO CART',
                                                 style: TextStyle(

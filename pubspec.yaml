@@ -46,9 +46,9 @@ dependencies:
   pinput: ^3.0.1
   cloud_firestore: ^4.9.1
   http: ^1.1.0
-  syncfusion_flutter_pdf: ^22.2.12
-  syncfusion_flutter_pdfviewer: ^22.2.12
-  flutter_full_pdf_viewer_null_safe: ^1.0.0
+  syncfusion_flutter_pdf: ^23.1.44
+  syncfusion_flutter_pdfviewer: ^23.1.44
+  # flutter_full_pdf_viewer_null_safe: ^1.0.0
   oauth2: ^2.0.1
   url_launcher: ^6.1.14
   appinio_swiper: ^2.0.3

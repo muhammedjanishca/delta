@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
-import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
-import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -442,11 +440,11 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                 context,
                                                                 listen: false);
                                                         cartProvider.addToCart(
-                                                            productCode,
-                                                            price,
-                                                            quantity,
-                                                            imageUrl ?? '',
-                                                            productName ?? '');
+                                                           productCode:productCode,
+                                                            price:price,
+                                                            quantity:quantity,
+                                                            imageUrl:imageUrl ?? '',
+                                                            productName:productName ?? '');
 
                                                         ScaffoldMessenger.of(
                                                                 context)
@@ -658,8 +656,11 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                 context,
                                 listen: false);
 
-                            cartProvider.addToCart(productCode, price, quantity,
-                                imageUrl ?? "", productName ?? "");
+                            cartProvider.addToCart(productCode:productCode,
+                                                            price:price,
+                                                            quantity:quantity,
+                                                            imageUrl:imageUrl ?? '',
+                                                            productName:productName ?? '');
 
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Added to cart")));
@@ -1201,13 +1202,11 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                       false);
                                                           cartProvider
                                                               .addToCart(
-                                                                  productCode,
-                                                                  price,
-                                                                  quantity,
-                                                                  imageUrl ??
-                                                                      "",
-                                                                  productName ??
-                                                                      "");
+                                                                  productCode:productCode,
+                                                            price:price,
+                                                            quantity:quantity,
+                                                            imageUrl:imageUrl ?? '',
+                                                            productName:productName ?? '');
 
                                                           ScaffoldMessenger.of(
                                                                   context)
