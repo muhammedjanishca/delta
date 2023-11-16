@@ -109,14 +109,7 @@ class _TextAddressState extends State<TextAddress> {
                 }
                 return null;
               }),
-              // TextFieldAddress(
-              //     "State/Province", TextInputType.text, nameController, context,
-              //     (value) {
-              //   if (value == null || value.isEmpty) {
-              //     return '*This field cannot be empty';
-              //   }
-              //   return null;
-              // }),
+              
         Gap(10),
        DropdownButton(
             hint: Text('Please choose a location'), // Not necessary for Option 1

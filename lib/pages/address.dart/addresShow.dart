@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_hex/pages/address.dart/first_address.dart';
-import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
+import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/res_address_show.dart';
 import 'package:flutter/cupertino.dart';

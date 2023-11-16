@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/address.dart/addresShow.dart';
-import 'package:firebase_hex/pages/address.dart/addresstyping.dart';
+import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
 import 'package:firebase_hex/widgets/pdfservies.dart';
 import 'package:flutter/material.dart';
 
