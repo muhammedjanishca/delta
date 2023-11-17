@@ -13,6 +13,7 @@ class PdfService {
     final PdfDocument document = PdfDocument();
     //Add page to the PDF
     final PdfPage page = document.pages.add();
+    
     //Get page client size
     final Size pageSize = page.getClientSize();
     //Draw rectangle
@@ -22,11 +23,14 @@ class PdfService {
     //Generate PDF grid.
     final PdfGrid grid = getGrid(cartItems);
     //Draw the header section by creating text element
-    final PdfLayoutResult result = drawHeader(page, pageSize, grid,current_address,last_address);
+     PdfLayoutResult result = drawHeader(page, pageSize, grid,current_address,last_address);
+      // drawFooter(page, pageSize,grid,result);
     //Draw grid
     drawGrid(page, grid, result);
     //Add invoice footer
-    drawFooter(page, pageSize);
+    //  final PdfPage page2 = document.pages.add();
+    drawFooter(grid, result, page,document);
+  
     //Save the PDF document
     final List<int> bytes = document.saveSync();
     //Dispose the document.
@@ -97,52 +101,126 @@ void drawGrid(PdfPage page, PdfGrid grid, PdfLayoutResult result) {
   Rect? totalPriceCellBounds;
   Rect? quantityCellBounds;
   //Invoke the beginCellLayout event.
-  grid.beginCellLayout = (Object sender, PdfGridBeginCellLayoutArgs args) {
-    final PdfGrid grid = sender as PdfGrid;
-    if (args.cellIndex == grid.columns.count - 1) {
-      totalPriceCellBounds = args.bounds;
-    } else if (args.cellIndex == grid.columns.count - 2) {
-      quantityCellBounds = args.bounds;
-    }
-  };
+  // grid.beginCellLayout = (Object sender, PdfGridBeginCellLayoutArgs args) {
+  //   final PdfGrid grid = sender as PdfGrid;
+  //   if (args.cellIndex == grid.columns.count - 1) {
+  //     totalPriceCellBounds = args.bounds;
+  //   } else if (args.cellIndex == grid.columns.count - 2) {
+  //     quantityCellBounds = args.bounds;
+  //   }
+  // };
+  // grid.endCellLayout =(sender, args) {
+  // //  final PdfGrid grid = sender as PdfGrid;
+    
+  //   final PdfGrid grid = sender as PdfGrid;
+  //   if (args.cellIndex == grid.columns.count - 1) {
+  //     totalPriceCellBounds = args.bounds;
+  //   } else if (args.cellIndex == grid.columns.count - 2) {
+  //     quantityCellBounds = args.bounds;
+  //   }
+    
+  // };
   //Draw the PDF grid and get the result.
   result = grid.draw(
       page: page, bounds: Rect.fromLTWH(0, result.bounds.bottom + 40, 0, 0))!;
+      // drawFooter(grid, result,page);
 
   //Draw grand total.
-  page.graphics.drawString('Grand Total',
-      PdfStandardFont(PdfFontFamily.helvetica, 9, style: PdfFontStyle.bold),
-      bounds: Rect.fromLTWH(quantityCellBounds!.left, result.bounds.bottom + 10,
-          quantityCellBounds!.width, quantityCellBounds!.height));
-  page.graphics.drawString(getTotalAmount(grid).toString(),
-      PdfStandardFont(PdfFontFamily.helvetica, 9, style: PdfFontStyle.bold),
-      bounds: Rect.fromLTWH(
-          totalPriceCellBounds!.left,
-          result.bounds.bottom + 10,
-          totalPriceCellBounds!.width,
-          totalPriceCellBounds!.height));
+  // grid.endCellLayout = (Object sender, PdfGridEndCellLayoutArgs args) {
+
+  
+//     page.graphics.drawString('Grand Total'+getTotalAmount(grid).toString(),
+//       PdfStandardFont(PdfFontFamily.helvetica, 9, style: PdfFontStyle.bold),
+//       bounds: Rect.fromLTWH(quantityCellBounds!.left, result.bounds.bottom + 10,
+//           quantityCellBounds!.width, quantityCellBounds!.height));
+  
+ 
+// };
+
+  // page.graphics.drawString(getTotalAmount(grid).toString(),
+  //     PdfStandardFont(PdfFontFamily.helvetica, 9, style: PdfFontStyle.bold),
+  //     bounds: Rect.fromLTWH(
+  //         totalPriceCellBounds!.left,
+  //         result.bounds.bottom + 10,
+  //         totalPriceCellBounds!.width,
+  //         totalPriceCellBounds!.height));
 }
 
 //Draw the invoice footer data.
-void drawFooter(PdfPage page, Size pageSize) {
-  final PdfPen linePen =
-      PdfPen(PdfColor(142, 170, 219), dashStyle: PdfDashStyle.custom);
-  linePen.dashPattern = <double>[3, 3];
-  //Draw line
-  page.graphics.drawLine(linePen, Offset(0, pageSize.height - 100),
-      Offset(pageSize.width, pageSize.height - 100));
+ PdfLayoutResult drawFooter(PdfGrid grid,PdfLayoutResult result,PdfPage page,PdfDocument document) {
+  
+  // grid.endCellLayout =(sender, args) {
+  //  final PdfGrid grid = sender as PdfGrid;
+   for(int i=0;i<document.pages.count;i++){
+    if(i==document.pages.count-1){
+          return PdfTextElement(text: 'Grand Totalasssss'+getTotalAmount(grid).toString()
+    
+    ).draw(
+    page:document.pages[i],
+    bounds: Rect.fromLTWH(0,0,0,0)
+      )!
 
-  const String footerContent =
-      // ignore: leading_newlines_in_multiline_strings
-      '''800 Interchange Blvd.\r\n\r\nSuite 2501, Austin,
+    ;
+    }
+   }
+   
+      //  return PdfTextElement(text:' ${last_address['COMPANY NAME']} \n${last_address['Contact Number']}\n${last_address['Street Address']}\n${last_address['city']} ', font: contentFont).draw(
+      // page: page,
+      // bounds: Rect.fromLTWH(30, 120, pageSize.width - (contentSize.width + 30),
+      //     pageSize.height - 120))!;
+      // if(grid.endPageLayout)
+     
+     
+      
+      // 'Grand Totalasssss'+getTotalAmount(grid).toString(), PdfStandardFont(PdfFontFamily.helvetica, 9),
+      // format: PdfStringFormat(alignment: PdfTextAlignment.right),
+      // bounds: Rect.fromLTWH(pageSize.width - 30,pageSize.height - 70, 0, 0));
+
+  // };
+  return PdfTextElement(text: "").draw()! ;
+  
+  // final PdfPen linePen =
+  //     PdfPen(PdfColor(142, 170, 219), dashStyle: PdfDashStyle.custom);
+  // linePen.dashPattern = <double>[3, 3];
+  // //Draw line
+  // page.graphics.drawLine(linePen, Offset(0, pageSize.height - 100),
+  //     Offset(pageSize.width, pageSize.height - 100));
+
+  // const String footerContent =
+  //     // ignore: leading_newlines_in_multiline_strings
+  //     '''800 Interchange Blvd.\r\n\r\nSuite 2501, Austin,
+  //        TX 78721\r\n\r\nAny Questions? support@adventure-works.com''';
+
+  // //Added 30 as a margin for the layout
+  // page.graphics.drawString(
+  //    footerContent, PdfStandardFont(PdfFontFamily.helvetica, 9),
+  //     format: PdfStringFormat(alignment: PdfTextAlignment.right),
+  //     bounds: Rect.fromLTWH(pageSize.width - 30,pageSize.height - 70, 0, 0));
+}
+void lastpage(PdfPage page, Size pageSize,PdfGrid grid, PdfDocument document,PdfLayoutResult result){
+//  if( page.defaultLayerIndex==page.-1)
+// if()
+ page.graphics.drawString(
+      'Grand Totalasssss'+getTotalAmount(grid).toString(), PdfStandardFont(PdfFontFamily.helvetica, 9),
+      format: PdfStringFormat(alignment: PdfTextAlignment.right),
+      bounds: Rect.fromLTWH(pageSize.width - 30,pageSize.height - 70, 0, 0));
+}
+
+  // Function to create a custom footer
+  PdfPageTemplateElement createCustomFooter() {
+    PdfPageTemplateElement footer = PdfPageTemplateElement(
+        Rect.fromLTWH(0, 0, PdfPageSize.letter.width, 100));
+
+    // Add custom footer content
+    String footerContent = '''800 Interchange Blvd.\r\n\r\nSuite 2501, Austin,
          TX 78721\r\n\r\nAny Questions? support@adventure-works.com''';
 
-  //Added 30 as a margin for the layout
-  page.graphics.drawString(
-      footerContent, PdfStandardFont(PdfFontFamily.helvetica, 9),
-      format: PdfStringFormat(alignment: PdfTextAlignment.right),
-      bounds: Rect.fromLTWH(pageSize.width - 30, pageSize.height - 70, 0, 0));
-}
+    PdfFont font = PdfStandardFont(PdfFontFamily.timesRoman, 11);
+    footer.graphics.drawString(footerContent, font,
+        bounds: Rect.fromLTWH(0, 0, PdfPageSize.letter.width, 100));
+
+    return footer;
+  }
 
 //Create PDF grid and return
     PdfGrid getGrid(List cartItems) {
@@ -177,6 +255,7 @@ void drawFooter(PdfPage page, Size pageSize) {
     row.cells[6].value =
         (item['price'] * item['quantity']).toStringAsFixed(2); // Total
   }
+  
   //Apply the table built-in style
   grid.applyBuiltInStyle(PdfGridBuiltInStyle.listTable4Accent5);
   //Set gird columns width
@@ -196,6 +275,7 @@ void drawFooter(PdfPage page, Size pageSize) {
           PdfPaddings(bottom: 5, left: 5, right: 5, top: 5);
     }
   }
+
   return grid;
 }
 

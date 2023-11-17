@@ -1,547 +1,1069 @@
-// // import 'package:firebase_auth/firebase_auth.dart';
-// // import 'package:firebase_hex/login_and_signing/loginpage.dart';
-// // import 'package:firebase_hex/login_and_signing/signup_page.dart';
-// // import 'package:firebase_hex/provider/cart_provider.dart';
-// // import 'package:firebase_hex/provider/data_provider.dart';
-// // import 'package:firebase_hex/provider/thumbnail.dart';
-// // import 'package:firebase_hex/provider/user_input_provider.dart';
-// // import 'package:firebase_hex/responsive/product_page.dart';
-// // import 'package:flutter/material.dart';
-// // import 'package:provider/provider.dart';
-// // import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-// // import '../model.dart';
-// // import 'nonpdf_product.dart';
+// // // import 'package:firebase_auth/firebase_auth.dart';
+// // // import 'package:firebase_hex/login_and_signing/loginpage.dart';
+// // // import 'package:firebase_hex/login_and_signing/signup_page.dart';
+// // // import 'package:firebase_hex/provider/cart_provider.dart';
+// // // import 'package:firebase_hex/provider/data_provider.dart';
+// // // import 'package:firebase_hex/provider/thumbnail.dart';
+// // // import 'package:firebase_hex/provider/user_input_provider.dart';
+// // // import 'package:firebase_hex/responsive/product_page.dart';
+// // // import 'package:flutter/material.dart';
+// // // import 'package:provider/provider.dart';
+// // // import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+// // // import '../model.dart';
+// // // import 'nonpdf_product.dart';
 
-// // class ProductDetailsOfCrimpingTool extends StatelessWidget {
-// //   // ProductDetailsOfCrimpingTool({selectedProductIndex)}
-// //   //  final int selectedProductIndex ;
-// //   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+// // // class ProductDetailsOfCrimpingTool extends StatelessWidget {
+// // //   // ProductDetailsOfCrimpingTool({selectedProductIndex)}
+// // //   //  final int selectedProductIndex ;
+// // //   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
-// //   ProductDetailsOfCrimpingTool({super.key});
-// //   // ProductDetails({required this.productData, required this.selectedIndex});
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     // print("dfdghjkl");
-// //     // final userInputProvider = Provider.of<UserInputProvider>(context);
-// //     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
-// //     TextEditingController quantityController = TextEditingController();
-// //     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+// // //   ProductDetailsOfCrimpingTool({super.key});
+// // //   // ProductDetails({required this.productData, required this.selectedIndex});
+// // //   @override
+// // //   Widget build(BuildContext context) {
+// // //     // print("dfdghjkl");
+// // //     // final userInputProvider = Provider.of<UserInputProvider>(context);
+// // //     // final cartProvider = Provider.of<CartProvider>(context, listen: false);
+// // //     TextEditingController quantityController = TextEditingController();
+// // //     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-// //     String selectedProductIndex =
-// //         ModalRoute.of(context)!.settings.name as String;
-// //     var setting_list = selectedProductIndex.split('/');
-// //     String product_name = setting_list[2].replaceAll('_', " ");;
-// //     print(product_name);
+// // //     String selectedProductIndex =
+// // //         ModalRoute.of(context)!.settings.name as String;
+// // //     var setting_list = selectedProductIndex.split('/');
+// // //     String product_name = setting_list[2].replaceAll('_', " ");;
+// // //     print(product_name);
 
-// //     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
+// // //     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
 
-//     final selectedThumbnailProvider =
-//         Provider.of<SelectedThumbnailProvider>(context);
-//     return ResponsiveProductPage(
-//       //******************MOBILE VIEW****************************
+// //     final selectedThumbnailProvider =
+// //         Provider.of<SelectedThumbnailProvider>(context);
+// //     return ResponsiveProductPage(
+// //       //******************MOBILE VIEW****************************
 
-//       // mobileProductPage: FutureBuilder(
-//       //   future: context.read<DataProvider>().fetchcrimpingtoolApiUrl(),
-//       //   builder: (context, snapshot) {
-//       //     snapshot.data!.data.length;
+// //       // mobileProductPage: FutureBuilder(
+// //       //   future: context.read<DataProvider>().fetchcrimpingtoolApiUrl(),
+// //       //   builder: (context, snapshot) {
+// //       //     snapshot.data!.data.length;
 
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return Center(
-//                 child:
-//                     const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
-//           } else if (snapshot.hasError) {
-//             return Text('Error: ${snapshot.error}');
-//           } else {
-//             var textpass = snapshot.data!
-//                 .data[selectedThumbnailProvider.selectedIndex!].productName;
-//             var thumbnail = snapshot
-//                 .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-//             var description = snapshot.data!
-//                 .data[selectedThumbnailProvider.selectedIndex!].description;
-//             var price = snapshot.data!
-//                 .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-//             var image = snapshot
-//                 .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-//             var pdf = snapshot
-//                 .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+// //           if (snapshot.connectionState == ConnectionState.waiting) {
+// //             return Center(
+// //                 child:
+// //                     const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
+// //           } else if (snapshot.hasError) {
+// //             return Text('Error: ${snapshot.error}');
+// //           } else {
+// //             var textpass = snapshot.data!
+// //                 .data[selectedThumbnailProvider.selectedIndex!].productName;
+// //             var thumbnail = snapshot
+// //                 .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+// //             var description = snapshot.data!
+// //                 .data[selectedThumbnailProvider.selectedIndex!].description;
+// //             var price = snapshot.data!
+// //                 .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+// //             var image = snapshot
+// //                 .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+// //             var pdf = snapshot
+// //                 .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
 
-//             //  String selectedPrice = '';
+// //             //  String selectedPrice = '';
 
-//             return pdf != null
-//                 ? DefaultTabController(
-//                     length: 2,
-//                     child: SingleChildScrollView(
-//                       child: Container(
-//                         height: MediaQuery.of(context).size.height * 1.3,
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Expanded(
-//                               flex: 3,
-//                               child: SingleChildScrollView(
-//                                 child: Container(
-//                                   // height: do
-//                                   // height: MediaQuery.of(context).size.height /0.1,
-//                                   child: Padding(
-//                                     padding: const EdgeInsets.only(
-//                                         left: 0, right: 0, top: 25),
-//                                     child: Column(
-//                                       crossAxisAlignment:
-//                                           CrossAxisAlignment.center,
-//                                       children: [
-//                                         Container(
-//                                           color: Colors.white,
-//                                           height: MediaQuery.of(context)
-//                                                   .size
-//                                                   .height /
-//                                               5,
-//                                           width: MediaQuery.of(context)
-//                                                   .size
-//                                                   .width /
-//                                               2,
-//                                           child: Image.network(
-//                                               // thumbnail!,)
-//                                               selectedThumbnailProvider
-//                                                       .selectedThumbnail ??
-//                                                   ''),
-//                                         ), // Display the selected thumbnail here
-//                                         SingleChildScrollView(
-//                                           scrollDirection: Axis.horizontal,
-//                                           child: Row(
-//                                             children: image!.map((imageUrl) {
-//                                               return GestureDetector(
-//                                                 onTap: () {
-//                                                   // When an image is clicked, set it as the selected thumbnail.
-//                                                   selectedThumbnailProvider
-//                                                       .setSelectedThumbnail(
-//                                                           imageUrl ??
-//                                                               "data:image/jpeg;base64,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");
-//                                                 },
-//                                                 child: Padding(
-//                                                   padding:
-//                                                       const EdgeInsets.all(8.0),
-//                                                   child: Container(
-//                                                     decoration: BoxDecoration(
-//                                                       border: Border.all(
-//                                                         color: imageUrl ==
-//                                                                 selectedThumbnailProvider
-//                                                                     .selectedThumbnail
-//                                                             ? Colors
-//                                                                 .blue // Highlight the selected image
-//                                                             : Colors
-//                                                                 .black, // Border color for non-selected images
-//                                                         width:
-//                                                             1.0, // Border width
-//                                                       ),
-//                                                     ),
-//                                                     child: Image.network(
-//                                                       imageUrl ??
-//                                                           "data:image/jpeg;base64,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",
-//                                                       width: MediaQuery.of(
-//                                                                   context)
-//                                                               .size
-//                                                               .width /
-//                                                           10, // Set the desired width for each image
-//                                                       height: MediaQuery.of(
-//                                                                   context)
-//                                                               .size
-//                                                               .height /
-//                                                           12, // Set the desired height for each image
-//                                                       fit: BoxFit
-//                                                           .cover, // You can adjust the fit as needed
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                               );
-//                                             }).toList(),
-//                                           ),
-//                                         ),
-//                                         //--------Product Price-----------
-
-// //                                         SizedBox(
-// //                                           height: 30,
-// //                                         ),
-// //                                         Row(
-// //                                           children: [
-// //                                             SizedBox(
-// //                                               width: MediaQuery.of(context)
-// //                                                       .size
-// //                                                       .width /
-// //                                                   20,
-// //                                             ),
-// //                                             Flexible(
-// //                                               child: Container(
-// //                                                 // color: Colors.amber,
-
-// //                                                 child: Text(
-// //                                                   'selected Product code&Price:',
-// //                                                   overflow:
-// //                                                       TextOverflow.ellipsis,
-// //                                                   style: TextStyle(
-// //                                                     fontSize: 16.0,
-// //                                                     fontFamily: 'Roboto',
-// //                                                     color: Color(0xFF212121),
-// //                                                     fontWeight: FontWeight.bold,
-// //                                                   ),
-// //                                                 ),
-// //                                               ),
-// //                                             ),
-// //                                             ValueListenableBuilder<String>(
-// //                                               valueListenable:
-// //                                                   selectedPriceNotifier,
-// //                                               builder: (context, selectedPrice,
-// //                                                   child) {
-// //                                                 return Container(
-// //                                                   width: 110,
-// //                                                   padding: EdgeInsets.all(8.0),
-// //                                                   decoration: BoxDecoration(
-// //                                                     border: Border.all(
-// //                                                       color: Colors.black,
-// //                                                       width: 1.0,
-// //                                                     ),
-// //                                                   ),
-// //                                                   child: Text(selectedPrice),
-// //                                                 );
-// //                                               },
-// //                                             ),
-// //                                           ],
-// //                                         ),
-// //                                         Column(
-// //                                           crossAxisAlignment:
-// //                                               CrossAxisAlignment.start,
-// //                                           children: [
-// //                                             SizedBox(
-// //                                               height: 30,
-// //                                             ),
-
-// //                                             // Text(
-// //                                             //   'Codes and Prices:',
-// //                                             //   style: TextStyle(
-// //                                             //     fontWeight: FontWeight.bold,
-// //                                             //     fontSize: 18,
-// //                                             //   ),
-// //                                             // ),
-// //                                             Wrap(
-// //                                               spacing:
-// //                                                   8.0, // Adjust the spacing between buttons as needed
-// //                                               runSpacing:
-// //                                                   8.0, // Adjust the spacing between rows as needed
-// //                                               children: List<Widget>.generate(
-// //                                                   price.length, (index) {
-// //                                                 final codeAndPrice =
-// //                                                     price![index];
-// //                                                 return InkWell(
-// //                                                   onTap: () {
-// //                                                     // When a container is tapped, update the selectedPrice using ValueNotifier.
-// //                                                     selectedPriceNotifier
-// //                                                             .value =
-// //                                                         '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-// //                                                   },
+// //             return pdf != null
+// //                 ? DefaultTabController(
+// //                     length: 2,
+// //                     child: SingleChildScrollView(
+// //                       child: Container(
+// //                         height: MediaQuery.of(context).size.height * 1.3,
+// //                         child: Column(
+// //                           crossAxisAlignment: CrossAxisAlignment.start,
+// //                           children: [
+// //                             Expanded(
+// //                               flex: 3,
+// //                               child: SingleChildScrollView(
+// //                                 child: Container(
+// //                                   // height: do
+// //                                   // height: MediaQuery.of(context).size.height /0.1,
+// //                                   child: Padding(
+// //                                     padding: const EdgeInsets.only(
+// //                                         left: 0, right: 0, top: 25),
+// //                                     child: Column(
+// //                                       crossAxisAlignment:
+// //                                           CrossAxisAlignment.center,
+// //                                       children: [
+// //                                         Container(
+// //                                           color: Colors.white,
+// //                                           height: MediaQuery.of(context)
+// //                                                   .size
+// //                                                   .height /
+// //                                               5,
+// //                                           width: MediaQuery.of(context)
+// //                                                   .size
+// //                                                   .width /
+// //                                               2,
+// //                                           child: Image.network(
+// //                                               // thumbnail!,)
+// //                                               selectedThumbnailProvider
+// //                                                       .selectedThumbnail ??
+// //                                                   ''),
+// //                                         ), // Display the selected thumbnail here
+// //                                         SingleChildScrollView(
+// //                                           scrollDirection: Axis.horizontal,
+// //                                           child: Row(
+// //                                             children: image!.map((imageUrl) {
+// //                                               return GestureDetector(
+// //                                                 onTap: () {
+// //                                                   // When an image is clicked, set it as the selected thumbnail.
+// //                                                   selectedThumbnailProvider
+// //                                                       .setSelectedThumbnail(
+// //                                                           imageUrl ??
+// //                                                               "data:image/jpeg;base64,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");
+// //                                                 },
+// //                                                 child: Padding(
+// //                                                   padding:
+// //                                                       const EdgeInsets.all(8.0),
 // //                                                   child: Container(
-// //                                                     width: 100,
-// //                                                     padding: EdgeInsets.all(
-// //                                                         8.0), // Adjust the padding as needed
 // //                                                     decoration: BoxDecoration(
 // //                                                       border: Border.all(
-// //                                                         color: codeAndPrice
-// //                                                                     .productCode ==
-// //                                                                 selectedCodeProvider
-// //                                                                     .selectedProductCode
-// //                                                             // codeAndPrice.productCode
+// //                                                         color: imageUrl ==
+// //                                                                 selectedThumbnailProvider
+// //                                                                     .selectedThumbnail
 // //                                                             ? Colors
-// //                                                                 .blue // Set border color to blue for selected container
+// //                                                                 .blue // Highlight the selected image
 // //                                                             : Colors
-// //                                                                 .black, // Set border color to black for non-selected containers
+// //                                                                 .black, // Border color for non-selected images
 // //                                                         width:
-// //                                                             1.0, // Set your desired border width
+// //                                                             1.0, // Border width
 // //                                                       ),
 // //                                                     ),
-// //                                                     child: Text(
-// //                                                       '${codeAndPrice.productCode}',
-// //                                                       style: TextStyle(
-// //                                                         color: Colors
-// //                                                             .black, // Set your desired text color
-// //                                                       ),
-// //                                                     ),
-// //                                                   ),
-// //                                                 );
-// //                                               }),
-// //                                             ),
-// //                                           ],
-// //                                         )
-// //                                       ],
-// //                                     ),
-// //                                   ),
-// //                                 ),
-// //                               ),
-// //                             ),
-// //                             Expanded(
-// //                               flex: 2,
-// //                               child: Column(
-// //                                 children: [
-// //                                   TabBar(
-// //                                     unselectedLabelColor:
-// //                                         Color.fromARGB(255, 5, 5, 5),
-// //                                     indicatorSize: TabBarIndicatorSize.tab,
-// //                                     indicator: BoxDecoration(
-// //                                         gradient: LinearGradient(colors: [
-// //                                           Color.fromARGB(255, 0, 0, 0),
-// //                                           Color.fromARGB(255, 0, 0, 0)
-// //                                         ]),
-// //                                         borderRadius: BorderRadius.circular(0),
-// //                                         color: const Color.fromARGB(
-// //                                             255, 255, 255, 255)),
-// //                                     tabs: [
-// //                                       Tab(
-// //                                         text: 'Description',
-// //                                       ),
-// //                                       Tab(
-// //                                         text: 'Technical Details',
-// //                                       ),
-// //                                     ],
-// //                                     labelColor: Colors.white,
-// //                                   ),
-// //                                   Expanded(
-// //                                     flex: 2,
-// //                                     child: TabBarView(
-// //                                       children: [
-// //                                         // Tab 1 content goes here
-// //                                         SingleChildScrollView(
-// //                                           child: Container(
-// //                                             // height: 1000,
-// //                                             child: Column(
-// //                                               crossAxisAlignment:
-// //                                                   CrossAxisAlignment.start,
-// //                                               children: [
-// //                                                 SizedBox(height: 16.0),
-// //                                                 Text(
-// //                                                   textpass ?? "",
-// //                                                   style: TextStyle(
-// //                                                       fontWeight:
-// //                                                           FontWeight.bold,
-// //                                                       fontSize: 30),
-// //                                                 ),
-// //                                                 SizedBox(height: 8.0),
-// //                                                 Column(
-// //                                                   crossAxisAlignment:
-// //                                                       CrossAxisAlignment.start,
-// //                                                   children: description!
-// //                                                       .toUpperCase()
-// //                                                       .split('\n')
-// //                                                       .map((line) {
-// //                                                     return Row(
-// //                                                       children: [
-// //                                                         Icon(Icons.star,
-// //                                                             size:
-// //                                                                 10, // Adjust the size as needed
-// //                                                             color: Colors
-// //                                                                 .black // Adjust the color as needed
-// //                                                             ),
-// //                                                         SizedBox(
-// //                                                           width:
-// //                                                               8, // Add some space between the circle icon and text
-// //                                                         ),
-// //                                                         Flexible(
-// //                                                           child: Text(
-// //                                                             line,
-// //                                                             style: TextStyle(
-// //                                                               fontSize: 16,
-// //                                                             ),
-// //                                                             overflow: TextOverflow
-// //                                                                 .visible, // Handle text overflow
-// //                                                           ),
-// //                                                         ),
-// //                                                       ],
-// //                                                     );
-// //                                                   }).toList(),
-// //                                                 ),
-
-// //                                                 // SizedBox(height: 8.0),
-// //                                                 SizedBox(height: 20.0),
-// //                                                 Container(
-// //                                                   height: 40,
-// //                                                   width: 140,
-// //                                                   decoration: BoxDecoration(
-// //                                                     color: Colors.white,
-// //                                                     border: Border.all(
-// //                                                       color: Colors
-// //                                                           .black, // Set the border color
-// //                                                       width:
-// //                                                           1.0, // Set the border width
-// //                                                     ),
-// //                                                     borderRadius: BorderRadius
-// //                                                         .all(Radius.circular(
-// //                                                             4.0)), // Add border radius
-// //                                                   ),
-// //                                                   child: TextFormField(
-// //                                                     controller:
-// //                                                         quantityController,
-// //                                                     keyboardType:
-// //                                                         TextInputType.number,
-// //                                                     textAlign: TextAlign.center,
-// //                                                     decoration: InputDecoration(
-// //                                                       hintText:
-// //                                                           'Enter quantity',
-// //                                                       contentPadding:
-// //                                                           EdgeInsets.symmetric(
-// //                                                         vertical: 8.0,
-// //                                                         horizontal: 8.0,
-// //                                                       ),
-// //                                                       isDense: true,
-// //                                                       border: InputBorder
-// //                                                           .none, // Remove the default input border
-// //                                                     ),
-// //                                                   ),
-// //                                                 ),
-
-// //                                                 SizedBox(
-// //                                                   height: 30,
-// //                                                 ),
-// //                                                 Row(
-// //                                                   children: [
-// //                                                     SizedBox(
-// //                                                       width: 30,
-// //                                                     ),
-// //                                                     ElevatedButton(
-// //                                                       onPressed: () {
-// //                                                         if (FirebaseAuth
-// //                                                                 .instance
-// //                                                                 .currentUser !=
-// //                                                             null) {
-// //                                                           // signed in
-// //                                                           final selectedPrice =
-// //                                                               selectedPriceNotifier
-// //                                                                   .value;
-// //                                                           final productCode =
-// //                                                               selectedPrice
-// //                                                                   .split(
-// //                                                                       ': ')[0];
-// //                                                           final price = double
-// //                                                               .parse(selectedPrice
-// //                                                                   .split(
-// //                                                                       ': ')[1]);
-
-//                                                           final quantity =
-//                                                               int.tryParse(
-//                                                                       quantityController
-//                                                                           .text) ??
-//                                                                   0;
-//                                                           final imageUrl =
-//                                                               // selectedThumbnailProvider
-//                                                               //         .selectedThumbnail ??
-//                                                               thumbnail;
-//                                                           final productName =
-//                                                               textpass;
-//                                                           final cartProvider =
-//                                                               Provider.of<
-//                                                                       CartProvider>(
-//                                                                   context,
-//                                                                   listen:
-//                                                                       false);
-
-// //                                                           cartProvider
-// //                                                               .addToCart(
-// //                                                                   productCode,
-// //                                                                   price,
-// //                                                                   quantity,
-// //                                                                   imageUrl ??
-// //                                                                       "",
-// //                                                                   productName ??
-// //                                                                       "");
-
-// //                                                           ScaffoldMessenger.of(
+// //                                                     child: Image.network(
+// //                                                       imageUrl ??
+// //                                                           "data:image/jpeg;base64,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",
+// //                                                       width: MediaQuery.of(
 // //                                                                   context)
-// //                                                               .showSnackBar(SnackBar(
-// //                                                                   content: Text(
-// //                                                                       "Added to cart")));
-// //                                                         } else {
-// //                                                           // signed out
-// //                                                           showDialog(
-// //                                                             context: context,
-// //                                                             builder:
-// //                                                                 (BuildContext
-// //                                                                     context) {
-// //                                                               return LoginPage(); // Your custom dialog widget
-// //                                                             },
-// //                                                           );
-// //                                                         }
-// //                                                       },
-// //                                                       child: const Text(
-// //                                                           'ADD TO CART'),
-// //                                                       style: ButtonStyle(
-// //                                                         backgroundColor:
-// //                                                             MaterialStateProperty
-// //                                                                 .all(Colors
-// //                                                                     .black),
-// //                                                         minimumSize:
-// //                                                             MaterialStateProperty
-// //                                                                 .all(Size(
-// //                                                                     150, 50)),
-// //                                                       ),
+// //                                                               .size
+// //                                                               .width /
+// //                                                           10, // Set the desired width for each image
+// //                                                       height: MediaQuery.of(
+// //                                                                   context)
+// //                                                               .size
+// //                                                               .height /
+// //                                                           12, // Set the desired height for each image
+// //                                                       fit: BoxFit
+// //                                                           .cover, // You can adjust the fit as needed
 // //                                                     ),
-// //                                                     SizedBox(
-// //                                                       width: 20,
-// //                                                     ),
-// //                                                     ElevatedButton(
-// //                                                       onPressed: () {
-// //                                                         Navigator.pushNamed(
-// //                                                             context, '/cart');
-// //                                                       },
-// //                                                       child: const Text(
-// //                                                         'GO TO CART',
-// //                                                         style: TextStyle(
-// //                                                             color:
-// //                                                                 Colors.black),
-// //                                                       ),
-// //                                                       style: ButtonStyle(
-// //                                                         backgroundColor:
-// //                                                             MaterialStateProperty
-// //                                                                 .all(Colors
-// //                                                                     .white),
-// //                                                         minimumSize:
-// //                                                             MaterialStateProperty
-// //                                                                 .all(Size(
-// //                                                                     150, 50)),
-// //                                                       ),
-// //                                                     ),
-// //                                                   ],
+// //                                                   ),
 // //                                                 ),
-// //                                                 SizedBox(
-// //                                                   height: 20,
-// //                                                 ),
-// //                                               ],
-// //                                             ),
+// //                                               );
+// //                                             }).toList(),
 // //                                           ),
 // //                                         ),
-// //                                         // Tab 2 content goes here
-// //                                         SingleChildScrollView(
-// //                                           child: Container(
-// //                                               height: MediaQuery.of(context)
-// //                                                       .size
-// //                                                       .height /
-// //                                                   1,
-// //                                               color: const Color.fromARGB(
-// //                                                   255, 230, 233, 235),
-// //                                               child: pdf != null
-// //                                                   ? SfPdfViewer.network(pdf!)
-// //                                                   : Nopdf()
-// //                                               // PDFView(
-// //                                               //   filePath:
-// //                                               //       pdf, // Replace 'pdf' with the actual PDF file path or URL
-// //                                               //   // height: 300,   // Set the desired height for the PDF viewer
-// //                                               //   // width: 300,    // Set the desired width for the PDF viewer
-// //                                               // ),
+// //                                         //--------Product Price-----------
 
+// // //                                         SizedBox(
+// // //                                           height: 30,
+// // //                                         ),
+// // //                                         Row(
+// // //                                           children: [
+// // //                                             SizedBox(
+// // //                                               width: MediaQuery.of(context)
+// // //                                                       .size
+// // //                                                       .width /
+// // //                                                   20,
+// // //                                             ),
+// // //                                             Flexible(
+// // //                                               child: Container(
+// // //                                                 // color: Colors.amber,
+
+// // //                                                 child: Text(
+// // //                                                   'selected Product code&Price:',
+// // //                                                   overflow:
+// // //                                                       TextOverflow.ellipsis,
+// // //                                                   style: TextStyle(
+// // //                                                     fontSize: 16.0,
+// // //                                                     fontFamily: 'Roboto',
+// // //                                                     color: Color(0xFF212121),
+// // //                                                     fontWeight: FontWeight.bold,
+// // //                                                   ),
+// // //                                                 ),
+// // //                                               ),
+// // //                                             ),
+// // //                                             ValueListenableBuilder<String>(
+// // //                                               valueListenable:
+// // //                                                   selectedPriceNotifier,
+// // //                                               builder: (context, selectedPrice,
+// // //                                                   child) {
+// // //                                                 return Container(
+// // //                                                   width: 110,
+// // //                                                   padding: EdgeInsets.all(8.0),
+// // //                                                   decoration: BoxDecoration(
+// // //                                                     border: Border.all(
+// // //                                                       color: Colors.black,
+// // //                                                       width: 1.0,
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                   child: Text(selectedPrice),
+// // //                                                 );
+// // //                                               },
+// // //                                             ),
+// // //                                           ],
+// // //                                         ),
+// // //                                         Column(
+// // //                                           crossAxisAlignment:
+// // //                                               CrossAxisAlignment.start,
+// // //                                           children: [
+// // //                                             SizedBox(
+// // //                                               height: 30,
+// // //                                             ),
+
+// // //                                             // Text(
+// // //                                             //   'Codes and Prices:',
+// // //                                             //   style: TextStyle(
+// // //                                             //     fontWeight: FontWeight.bold,
+// // //                                             //     fontSize: 18,
+// // //                                             //   ),
+// // //                                             // ),
+// // //                                             Wrap(
+// // //                                               spacing:
+// // //                                                   8.0, // Adjust the spacing between buttons as needed
+// // //                                               runSpacing:
+// // //                                                   8.0, // Adjust the spacing between rows as needed
+// // //                                               children: List<Widget>.generate(
+// // //                                                   price.length, (index) {
+// // //                                                 final codeAndPrice =
+// // //                                                     price![index];
+// // //                                                 return InkWell(
+// // //                                                   onTap: () {
+// // //                                                     // When a container is tapped, update the selectedPrice using ValueNotifier.
+// // //                                                     selectedPriceNotifier
+// // //                                                             .value =
+// // //                                                         '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+// // //                                                   },
+// // //                                                   child: Container(
+// // //                                                     width: 100,
+// // //                                                     padding: EdgeInsets.all(
+// // //                                                         8.0), // Adjust the padding as needed
+// // //                                                     decoration: BoxDecoration(
+// // //                                                       border: Border.all(
+// // //                                                         color: codeAndPrice
+// // //                                                                     .productCode ==
+// // //                                                                 selectedCodeProvider
+// // //                                                                     .selectedProductCode
+// // //                                                             // codeAndPrice.productCode
+// // //                                                             ? Colors
+// // //                                                                 .blue // Set border color to blue for selected container
+// // //                                                             : Colors
+// // //                                                                 .black, // Set border color to black for non-selected containers
+// // //                                                         width:
+// // //                                                             1.0, // Set your desired border width
+// // //                                                       ),
+// // //                                                     ),
+// // //                                                     child: Text(
+// // //                                                       '${codeAndPrice.productCode}',
+// // //                                                       style: TextStyle(
+// // //                                                         color: Colors
+// // //                                                             .black, // Set your desired text color
+// // //                                                       ),
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                 );
+// // //                                               }),
+// // //                                             ),
+// // //                                           ],
+// // //                                         )
+// // //                                       ],
+// // //                                     ),
+// // //                                   ),
+// // //                                 ),
+// // //                               ),
+// // //                             ),
+// // //                             Expanded(
+// // //                               flex: 2,
+// // //                               child: Column(
+// // //                                 children: [
+// // //                                   TabBar(
+// // //                                     unselectedLabelColor:
+// // //                                         Color.fromARGB(255, 5, 5, 5),
+// // //                                     indicatorSize: TabBarIndicatorSize.tab,
+// // //                                     indicator: BoxDecoration(
+// // //                                         gradient: LinearGradient(colors: [
+// // //                                           Color.fromARGB(255, 0, 0, 0),
+// // //                                           Color.fromARGB(255, 0, 0, 0)
+// // //                                         ]),
+// // //                                         borderRadius: BorderRadius.circular(0),
+// // //                                         color: const Color.fromARGB(
+// // //                                             255, 255, 255, 255)),
+// // //                                     tabs: [
+// // //                                       Tab(
+// // //                                         text: 'Description',
+// // //                                       ),
+// // //                                       Tab(
+// // //                                         text: 'Technical Details',
+// // //                                       ),
+// // //                                     ],
+// // //                                     labelColor: Colors.white,
+// // //                                   ),
+// // //                                   Expanded(
+// // //                                     flex: 2,
+// // //                                     child: TabBarView(
+// // //                                       children: [
+// // //                                         // Tab 1 content goes here
+// // //                                         SingleChildScrollView(
+// // //                                           child: Container(
+// // //                                             // height: 1000,
+// // //                                             child: Column(
+// // //                                               crossAxisAlignment:
+// // //                                                   CrossAxisAlignment.start,
+// // //                                               children: [
+// // //                                                 SizedBox(height: 16.0),
+// // //                                                 Text(
+// // //                                                   textpass ?? "",
+// // //                                                   style: TextStyle(
+// // //                                                       fontWeight:
+// // //                                                           FontWeight.bold,
+// // //                                                       fontSize: 30),
+// // //                                                 ),
+// // //                                                 SizedBox(height: 8.0),
+// // //                                                 Column(
+// // //                                                   crossAxisAlignment:
+// // //                                                       CrossAxisAlignment.start,
+// // //                                                   children: description!
+// // //                                                       .toUpperCase()
+// // //                                                       .split('\n')
+// // //                                                       .map((line) {
+// // //                                                     return Row(
+// // //                                                       children: [
+// // //                                                         Icon(Icons.star,
+// // //                                                             size:
+// // //                                                                 10, // Adjust the size as needed
+// // //                                                             color: Colors
+// // //                                                                 .black // Adjust the color as needed
+// // //                                                             ),
+// // //                                                         SizedBox(
+// // //                                                           width:
+// // //                                                               8, // Add some space between the circle icon and text
+// // //                                                         ),
+// // //                                                         Flexible(
+// // //                                                           child: Text(
+// // //                                                             line,
+// // //                                                             style: TextStyle(
+// // //                                                               fontSize: 16,
+// // //                                                             ),
+// // //                                                             overflow: TextOverflow
+// // //                                                                 .visible, // Handle text overflow
+// // //                                                           ),
+// // //                                                         ),
+// // //                                                       ],
+// // //                                                     );
+// // //                                                   }).toList(),
+// // //                                                 ),
+
+// // //                                                 // SizedBox(height: 8.0),
+// // //                                                 SizedBox(height: 20.0),
+// // //                                                 Container(
+// // //                                                   height: 40,
+// // //                                                   width: 140,
+// // //                                                   decoration: BoxDecoration(
+// // //                                                     color: Colors.white,
+// // //                                                     border: Border.all(
+// // //                                                       color: Colors
+// // //                                                           .black, // Set the border color
+// // //                                                       width:
+// // //                                                           1.0, // Set the border width
+// // //                                                     ),
+// // //                                                     borderRadius: BorderRadius
+// // //                                                         .all(Radius.circular(
+// // //                                                             4.0)), // Add border radius
+// // //                                                   ),
+// // //                                                   child: TextFormField(
+// // //                                                     controller:
+// // //                                                         quantityController,
+// // //                                                     keyboardType:
+// // //                                                         TextInputType.number,
+// // //                                                     textAlign: TextAlign.center,
+// // //                                                     decoration: InputDecoration(
+// // //                                                       hintText:
+// // //                                                           'Enter quantity',
+// // //                                                       contentPadding:
+// // //                                                           EdgeInsets.symmetric(
+// // //                                                         vertical: 8.0,
+// // //                                                         horizontal: 8.0,
+// // //                                                       ),
+// // //                                                       isDense: true,
+// // //                                                       border: InputBorder
+// // //                                                           .none, // Remove the default input border
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                 ),
+
+// // //                                                 SizedBox(
+// // //                                                   height: 30,
+// // //                                                 ),
+// // //                                                 Row(
+// // //                                                   children: [
+// // //                                                     SizedBox(
+// // //                                                       width: 30,
+// // //                                                     ),
+// // //                                                     ElevatedButton(
+// // //                                                       onPressed: () {
+// // //                                                         if (FirebaseAuth
+// // //                                                                 .instance
+// // //                                                                 .currentUser !=
+// // //                                                             null) {
+// // //                                                           // signed in
+// // //                                                           final selectedPrice =
+// // //                                                               selectedPriceNotifier
+// // //                                                                   .value;
+// // //                                                           final productCode =
+// // //                                                               selectedPrice
+// // //                                                                   .split(
+// // //                                                                       ': ')[0];
+// // //                                                           final price = double
+// // //                                                               .parse(selectedPrice
+// // //                                                                   .split(
+// // //                                                                       ': ')[1]);
+
+// //                                                           final quantity =
+// //                                                               int.tryParse(
+// //                                                                       quantityController
+// //                                                                           .text) ??
+// //                                                                   0;
+// //                                                           final imageUrl =
+// //                                                               // selectedThumbnailProvider
+// //                                                               //         .selectedThumbnail ??
+// //                                                               thumbnail;
+// //                                                           final productName =
+// //                                                               textpass;
+// //                                                           final cartProvider =
+// //                                                               Provider.of<
+// //                                                                       CartProvider>(
+// //                                                                   context,
+// //                                                                   listen:
+// //                                                                       false);
+
+// // //                                                           cartProvider
+// // //                                                               .addToCart(
+// // //                                                                   productCode,
+// // //                                                                   price,
+// // //                                                                   quantity,
+// // //                                                                   imageUrl ??
+// // //                                                                       "",
+// // //                                                                   productName ??
+// // //                                                                       "");
+
+// // //                                                           ScaffoldMessenger.of(
+// // //                                                                   context)
+// // //                                                               .showSnackBar(SnackBar(
+// // //                                                                   content: Text(
+// // //                                                                       "Added to cart")));
+// // //                                                         } else {
+// // //                                                           // signed out
+// // //                                                           showDialog(
+// // //                                                             context: context,
+// // //                                                             builder:
+// // //                                                                 (BuildContext
+// // //                                                                     context) {
+// // //                                                               return LoginPage(); // Your custom dialog widget
+// // //                                                             },
+// // //                                                           );
+// // //                                                         }
+// // //                                                       },
+// // //                                                       child: const Text(
+// // //                                                           'ADD TO CART'),
+// // //                                                       style: ButtonStyle(
+// // //                                                         backgroundColor:
+// // //                                                             MaterialStateProperty
+// // //                                                                 .all(Colors
+// // //                                                                     .black),
+// // //                                                         minimumSize:
+// // //                                                             MaterialStateProperty
+// // //                                                                 .all(Size(
+// // //                                                                     150, 50)),
+// // //                                                       ),
+// // //                                                     ),
+// // //                                                     SizedBox(
+// // //                                                       width: 20,
+// // //                                                     ),
+// // //                                                     ElevatedButton(
+// // //                                                       onPressed: () {
+// // //                                                         Navigator.pushNamed(
+// // //                                                             context, '/cart');
+// // //                                                       },
+// // //                                                       child: const Text(
+// // //                                                         'GO TO CART',
+// // //                                                         style: TextStyle(
+// // //                                                             color:
+// // //                                                                 Colors.black),
+// // //                                                       ),
+// // //                                                       style: ButtonStyle(
+// // //                                                         backgroundColor:
+// // //                                                             MaterialStateProperty
+// // //                                                                 .all(Colors
+// // //                                                                     .white),
+// // //                                                         minimumSize:
+// // //                                                             MaterialStateProperty
+// // //                                                                 .all(Size(
+// // //                                                                     150, 50)),
+// // //                                                       ),
+// // //                                                     ),
+// // //                                                   ],
+// // //                                                 ),
+// // //                                                 SizedBox(
+// // //                                                   height: 20,
+// // //                                                 ),
+// // //                                               ],
+// // //                                             ),
+// // //                                           ),
+// // //                                         ),
+// // //                                         // Tab 2 content goes here
+// // //                                         SingleChildScrollView(
+// // //                                           child: Container(
+// // //                                               height: MediaQuery.of(context)
+// // //                                                       .size
+// // //                                                       .height /
+// // //                                                   1,
+// // //                                               color: const Color.fromARGB(
+// // //                                                   255, 230, 233, 235),
+// // //                                               child: pdf != null
+// // //                                                   ? SfPdfViewer.network(pdf!)
+// // //                                                   : Nopdf()
+// // //                                               // PDFView(
+// // //                                               //   filePath:
+// // //                                               //       pdf, // Replace 'pdf' with the actual PDF file path or URL
+// // //                                               //   // height: 300,   // Set the desired height for the PDF viewer
+// // //                                               //   // width: 300,    // Set the desired width for the PDF viewer
+// // //                                               // ),
+
+// // //                                               ),
+// // //                                         ),
+// // //                                       ],
+// // //                                     ),
+// // //                                   ),
+// // //                                 ],
+// // //                               ),
+// // //                             ),
+// // //                           ],
+// // //                         ),
+// // //                       ),
+// // //                     ),
+// // //                   )
+// // //                 : Nopdf(
+// // //                     typeOfProduct: 'crimpingtools',
+// // //                   );
+// // //           }
+// // //         },
+// // //       ),
+
+// // //-----------desktop--------------------------------------------------------
+
+// //       desktopProductPage: FutureBuilder(
+// //         future: context.read<DataProvider>().newcrimpingtool,
+// //         builder: (context, snapshot) {
+// //           snapshot.data!.data.length;
+
+// //           if (snapshot.connectionState == ConnectionState.waiting) {
+// //             print("hgfghfhfgu");
+// //             return Center(
+// //                 child:
+// //                     const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
+// //           } else if (snapshot.hasError) {
+// //             return Text('Error: ${snapshot.error}');
+// //           } else {
+// //             var textpass = snapshot.data!
+// //                 .data[selectedThumbnailProvider.selectedIndex!].productName;
+// //             var thumbnail = snapshot
+// //                 .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+// //             var description = snapshot.data!
+// //                 .data[selectedThumbnailProvider.selectedIndex!].description;
+// //             var price = snapshot.data!
+// //                 .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
+// //             var image = snapshot
+// //                 .data!.data[selectedThumbnailProvider.selectedIndex!].images;
+// //             var pdf = snapshot
+// //                 .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+
+// //             //  String selectedPrice = '';
+
+// //             return pdf != null
+// //                 ? DefaultTabController(
+// //                     length: 2,
+// //                     child: Container(
+// //                       height: MediaQuery.of(context).size.height * 1.3,
+// //                       child: Row(
+// //                         crossAxisAlignment: CrossAxisAlignment.start,
+// //                         children: [
+// //                           Expanded(
+// //                             flex: 2,
+// //                             child: SingleChildScrollView(
+// //                               scrollDirection: Axis.vertical,
+// //                               child: Container(
+// //                                 // height: do
+// //                                 width: MediaQuery.of(context).size.width / 1,
+// //                                 child: Padding(
+// //                                   padding: const EdgeInsets.only(
+// //                                       left: 0, right: 0, top: 25),
+// //                                   child: Column(
+// //                                     crossAxisAlignment:
+// //                                         CrossAxisAlignment.center,
+// //                                     children: [
+// //                                       Container(
+// //                                         color: Colors.white,
+// //                                         height:
+// //                                             MediaQuery.of(context).size.height /
+// //                                                 3,
+// //                                         width:
+// //                                             MediaQuery.of(context).size.width /
+// //                                                 5,
+// //                                         child: Image.network(
+// //                                             //  thumbnail!,
+// //                                             selectedThumbnailProvider
+// //                                                     .selectedThumbnail ??
+// //                                                 ''),
+// //                                       ), // Display the selected thumbnail here
+// //                                       SingleChildScrollView(
+// //                                         scrollDirection: Axis.horizontal,
+// //                                         child: Row(
+// //                                           children: image!.map((imageUrl) {
+// //                                             return GestureDetector(
+// //                                               onTap: () {
+// //                                                 // When an image is clicked, set it as the selected thumbnail.
+// //                                                 selectedThumbnailProvider
+// //                                                     .setSelectedThumbnail(
+// //                                                         imageUrl ??
+// //                                                             "data:image/jpeg;base64,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");
+// //                                               },
+// //                                               child: Padding(
+// //                                                 padding:
+// //                                                     const EdgeInsets.all(8.0),
+// //                                                 child: Container(
+// //                                                   decoration: BoxDecoration(
+// //                                                     border: Border.all(
+// //                                                       color: imageUrl ==
+// //                                                               selectedThumbnailProvider
+// //                                                                   .selectedThumbnail
+// //                                                           ? Colors
+// //                                                               .blue // Highlight the selected image
+// //                                                           : Colors
+// //                                                               .black, // Border color for non-selected images
+// //                                                       width:
+// //                                                           1.0, // Border width
+// //                                                     ),
+// //                                                   ),
+// //                                                   child: Image.network(
+// //                                                     imageUrl ??
+// //                                                         "data:image/jpeg;base64,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",
+// //                                                     width:
+// //                                                         100, // Set the desired width for each image
+// //                                                     height:
+// //                                                         100, // Set the desired height for each image
+// //                                                     fit: BoxFit
+// //                                                         .cover, // You can adjust the fit as needed
+// //                                                   ),
+// //                                                 ),
 // //                                               ),
+// //                                             );
+// //                                           }).toList(),
 // //                                         ),
-// //                                       ],
-// //                                     ),
+// //                                       ),
+// //                                       //--------Product Price-----------
+
+// // //                                       SizedBox(
+// // //                                         height: 30,
+// // //                                       ),
+// // //                                       Row(
+// // //                                         children: [
+// // //                                           SizedBox(
+// // //                                             width: MediaQuery.of(context)
+// // //                                                     .size
+// // //                                                     .width /
+// // //                                                 20,
+// // //                                           ),
+// // //                                           Flexible(
+// // //                                             child: Container(
+// // //                                               // color: Colors.amber,
+
+// // //                                               child: Text(
+// // //                                                 'selected Product code&Price:',
+// // //                                                 overflow: TextOverflow.ellipsis,
+// // //                                                 style: TextStyle(
+// // //                                                   fontSize: 16.0,
+// // //                                                   fontFamily: 'Roboto',
+// // //                                                   color: Color(0xFF212121),
+// // //                                                   fontWeight: FontWeight.bold,
+// // //                                                 ),
+// // //                                               ),
+// // //                                             ),
+// // //                                           ),
+// // //                                           ValueListenableBuilder<String>(
+// // //                                             valueListenable:
+// // //                                                 selectedPriceNotifier,
+// // //                                             builder: (context, selectedPrice,
+// // //                                                 child) {
+// // //                                               return Container(
+// // //                                                 width: 110,
+// // //                                                 padding: EdgeInsets.all(8.0),
+// // //                                                 decoration: BoxDecoration(
+// // //                                                   border: Border.all(
+// // //                                                     color: Colors.black,
+// // //                                                     width: 1.0,
+// // //                                                   ),
+// // //                                                 ),
+// // //                                                 // child: selectedPrice != null
+// // //                                                 //     ? Text(selectedPrice)
+// // //                                                 //     : Text('NO Price'),
+// // //                                                 child: Text(selectedPrice),
+// // //                                               );
+// // //                                             },
+// // //                                           ),
+// // //                                         ],
+// // //                                       ),
+// // //                                       Column(
+// // //                                         crossAxisAlignment:
+// // //                                             CrossAxisAlignment.start,
+// // //                                         children: [
+// // //                                           SizedBox(
+// // //                                             height: 30,
+// // //                                           ),
+
+// // //                                           // Text(
+// // //                                           //   'Codes and Prices:',
+// // //                                           //   style: TextStyle(
+// // //                                           //     fontWeight: FontWeight.bold,
+// // //                                           //     fontSize: 18,
+// // //                                           //   ),
+// // //                                           // ),
+// // //                                           Wrap(
+// // //                                             spacing:
+// // //                                                 8.0, // Adjust the spacing between buttons as needed
+// // //                                             runSpacing:
+// // //                                                 8.0, // Adjust the spacing between rows as needed
+// // //                                             children: List<Widget>.generate(
+// // //                                                 price!.length, (index) {
+// // //                                               final codeAndPrice =
+// // //                                                   price![index];
+// // //                                               return InkWell(
+// // //                                                 onTap: () {
+// // //                                                   // String noprice = '0';
+// // //                                                   // codeAndPrice.price != null
+// // //                                                   //     ? codeAndPrice.price
+// // //                                                   //     : noprice;
+// // //                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
+// // //                                                   selectedPriceNotifier.value =
+// // //                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
+// // //                                                 },
+// // //                                                 child: Container(
+// // //                                                   width: 100,
+// // //                                                   padding: EdgeInsets.all(
+// // //                                                       8.0), // Adjust the padding as needed
+// // //                                                   decoration: BoxDecoration(
+// // //                                                     border: Border.all(
+// // //                                                       color: codeAndPrice
+// // //                                                                   .productCode ==
+// // //                                                               selectedCodeProvider
+// // //                                                                   .selectedProductCode
+// // //                                                           // codeAndPrice.productCode
+// // //                                                           ? Colors
+// // //                                                               .blue // Set border color to blue for selected container
+// // //                                                           : Colors
+// // //                                                               .black, // Set border color to black for non-selected containers
+// // //                                                       width:
+// // //                                                           1.0, // Set your desired border width
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                   child: Text(
+// // //                                                     '${codeAndPrice.productCode}',
+// // //                                                     style: TextStyle(
+// // //                                                       color: Colors
+// // //                                                           .black, // Set your desired text color
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                 ),
+// // //                                               );
+// // //                                             }),
+// // //                                           ),
+// // //                                         ],
+// // //                                       )
+// // //                                     ],
+// // //                                   ),
+// // //                                 ),
+// // //                               ),
+// // //                             ),
+// // //                           ),
+// // //                           Expanded(
+// // //                             flex: 3,
+// // //                             child: Column(
+// // //                               children: [
+// // //                                 TabBar(
+// // //                                   unselectedLabelColor:
+// // //                                       Color.fromARGB(255, 5, 5, 5),
+// // //                                   indicatorSize: TabBarIndicatorSize.tab,
+// // //                                   indicator: BoxDecoration(
+// // //                                       gradient: LinearGradient(colors: [
+// // //                                         Color.fromARGB(255, 0, 0, 0),
+// // //                                         Color.fromARGB(255, 0, 0, 0)
+// // //                                       ]),
+// // //                                       borderRadius: BorderRadius.circular(0),
+// // //                                       color: const Color.fromARGB(
+// // //                                           255, 255, 255, 255)),
+// // //                                   tabs: [
+// // //                                     Tab(
+// // //                                       text: 'Description',
+// // //                                     ),
+// // //                                     Tab(
+// // //                                       text: 'Technical Details',
+// // //                                     ),
+// // //                                   ],
+// // //                                   labelColor: Colors.white,
+// // //                                 ),
+// // //                                 Expanded(
+// // //                                   flex: 2,
+// // //                                   child: TabBarView(
+// // //                                     children: [
+// // //                                       // Tab 1 content goes here
+// // //                                       Container(
+// // //                                         // height: 1000,
+// // //                                         child: Column(
+// // //                                           crossAxisAlignment:
+// // //                                               CrossAxisAlignment.start,
+// // //                                           children: [
+// // //                                             SizedBox(height: 16.0),
+// // //                                             Text(
+// // //                                               textpass ?? "",
+// // //                                               style: TextStyle(
+// // //                                                   fontWeight: FontWeight.bold,
+// // //                                                   fontSize: 30),
+// // //                                             ),
+// // //                                             SizedBox(height: 8.0),
+// // //                                             Column(
+// // //                                               crossAxisAlignment:
+// // //                                                   CrossAxisAlignment.start,
+// // //                                               children: description!
+// // //                                                   .toUpperCase()
+// // //                                                   .split('\n')
+// // //                                                   .map((line) {
+// // //                                                 return Row(
+// // //                                                   children: [
+// // //                                                     Icon(Icons.star,
+// // //                                                         size:
+// // //                                                             10, // Adjust the size as needed
+// // //                                                         color: Colors
+// // //                                                             .black // Adjust the color as needed
+// // //                                                         ),
+// // //                                                     SizedBox(
+// // //                                                       width:
+// // //                                                           8, // Add some space between the circle icon and text
+// // //                                                     ),
+// // //                                                     Flexible(
+// // //                                                       child: Text(
+// // //                                                         line,
+// // //                                                         style: TextStyle(
+// // //                                                           fontSize: 16,
+// // //                                                         ),
+// // //                                                         overflow: TextOverflow
+// // //                                                             .visible, // Handle text overflow
+// // //                                                       ),
+// // //                                                     ),
+// // //                                                   ],
+// // //                                                 );
+// // //                                               }).toList(),
+// // //                                             ),
+
+// // //                                             // SizedBox(height: 8.0),
+// // //                                             SizedBox(height: 20.0),
+// // //                                             Row(
+// // //                                               children: [
+// // //                                                   SizedBox(
+// // //                                             width: 20,
+// // //                                           ),
+// // //                                                 Form(
+// // //                                                   key: _formKey,
+// // //                                                   child: Container(
+// // //                                                     // height:
+// // //                                                     // MediaQuery.of(context).size.height/18,
+// // //                                                     width: 200,
+// // //                                                     //  MediaQuery.of(context).size.width/10,
+// // //                                                     child: TextFormField(
+// // //                                                       controller:
+// // //                                                           quantityController,
+// // //                                                       keyboardType:
+// // //                                                           TextInputType.number,
+// // //                                                       decoration: InputDecoration(
+// // //                                                         border:
+// // //                                                             OutlineInputBorder(),
+// // //                                                         hintText:
+// // //                                                             'Enter the quantity',
+// // //                                                       ),
+// // //                                                       validator: (value) {
+// // //                                                         if (value!.isEmpty) {
+// // //                                                           return 'Please enter a quantity';
+// // //                                                         }
+// // //                                                         int? quantity =
+// // //                                                             int.tryParse(value);
+// // //                                                         if (quantity == null ||
+// // //                                                             quantity <= 0) {
+// // //                                                           return 'Quantity must be a positive number';
+// // //                                                         }
+// // //                                                         return null; // Return null if the input is valid
+// // //                                                       },
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                 ),
+// // //                                               ],
+// // //                                             ),
+
+// // //                                             SizedBox(
+// // //                                               height: 30,
+// // //                                             ),
+// // //                                             Row(
+// // //                                               children: [
+// // //                                                 SizedBox(
+// // //                                                   width: 30,
+// // //                                                 ),
+// // //                                                 SizedBox(
+// // //                                                    width: MediaQuery.of(context)
+// // //                                                           .size
+// // //                                                           .width /
+// // //                                                       5,
+// // //                                                   child: ElevatedButton(
+// // //                                                     onPressed: () {
+// // //                                                       if (_formKey.currentState!
+// // //                                                           .validate()) {
+// // //                                                         if (FirebaseAuth.instance
+// // //                                                                 .currentUser !=
+// // //                                                             null) {
+// // //                                                           // signed in
+// // //                                                           final selectedPrice =
+// // //                                                               selectedPriceNotifier
+// // //                                                                   .value;
+// // //                                                           final productCode =
+// // //                                                               selectedPrice
+// // //                                                                   .split(': ')[0];
+// // //                                                           final price = double
+// // //                                                               .parse(selectedPrice
+// // //                                                                   .split(
+// // //                                                                       ': ')[1]);
+                                                
+// //                                                           final quantity =
+// //                                                               int.tryParse(
+// //                                                                       quantityController
+// //                                                                           .text) ??
+// //                                                                   0;
+// //                                                           final imageUrl =
+// //                                                               // selectedThumbnailProvider
+// //                                                               //         .selectedThumbnail ??
+// //                                                               thumbnail;
+// //                                                           final productName =
+// //                                                               textpass;
+// //                                                           final cartProvider =
+// //                                                               Provider.of<
+// //                                                                       CartProvider>(
+// //                                                                   context,
+// //                                                                   listen: false);
+// //                                                           cartProvider.addToCart(
+// //                                                               productCode,
+// //                                                               price,
+// //                                                               quantity,
+// //                                                               imageUrl ?? "",
+// //                                                               productName ?? "");
+                                                
+// // //                                                           ScaffoldMessenger.of(
+// // //                                                                   context)
+// // //                                                               .showSnackBar(SnackBar(
+// // //                                                                   content: Text(
+// // //                                                                       "Added to cart")));
+// // //                                                         } else {
+// // //                                                           // signed out
+// // //                                                           showDialog(
+// // //                                                             context: context,
+// // //                                                             builder: (BuildContext
+// // //                                                                 context) {
+// // //                                                               return LoginPage(); // Your custom dialog widget
+// // //                                                             },
+// // //                                                           );
+// // //                                                         }
+// // //                                                       }
+// // //                                                     },
+// // //                                                     child:
+// // //                                                         const Text('ADD TO CART'),
+// // //                                                     style: ButtonStyle(
+// // //                                                       backgroundColor:
+// // //                                                           MaterialStateProperty
+// // //                                                               .all(Colors.black),
+// // //                                                       minimumSize:
+// // //                                                           MaterialStateProperty
+// // //                                                               .all(Size(150, 50)),
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                 ),
+// // //                                                 SizedBox(
+// // //                                                   width: 20,
+// // //                                                 ),
+// // //                                                 SizedBox(
+// // //                                                    width: MediaQuery.of(context)
+// // //                                                           .size
+// // //                                                           .width /
+// // //                                                       5,
+// // //                                                   child: ElevatedButton(
+// // //                                                     onPressed: () {
+// // //                                                       Navigator.pushNamed(
+// // //                                                           context, '/cart');
+// // //                                                     },
+// // //                                                     child: const Text(
+// // //                                                       'GO TO CART',
+// // //                                                       style: TextStyle(
+// // //                                                           color: Colors.black),
+// // //                                                     ),
+// // //                                                     style: ButtonStyle(
+// // //                                                       backgroundColor:
+// // //                                                           MaterialStateProperty
+// // //                                                               .all(Colors.white),
+// // //                                                       minimumSize:
+// // //                                                           MaterialStateProperty
+// // //                                                               .all(Size(150, 50)),
+// // //                                                     ),
+// // //                                                   ),
+// // //                                                 ),
+// // //                                               ],
+// // //                                             ),
+// // //                                             SizedBox(
+// // //                                               height: 20,
+// // //                                             ),
+// // //                                           ],
+// // //                                         ),
+// // //                                       ),
+// // //                                       // Container(
+// // //                                       //   child: ListView.builder(
+// // //                                       //       itemBuilder: (context, index) {
+// // //                                       //     return Container(
+// // //                                       //       child: pdf != null
+// // //                                       //           ? SfPdfViewer.network(pdf)
+// // //                                       //           : Nopdf(),
+// // //                                       //     );
+// // //                                       //   }),
+// // //                                       // )
+// // //                                       // Tab 2 content goes here
+// // //                                       SingleChildScrollView(
+// // //                                           child: Container(
+// // //                                               height: 1500,
+// // //                                               color: const Color.fromARGB(
+// // //                                                   255, 230, 233, 235),
+// // //                                               child: pdf != null
+// // //                                                   ? SfPdfViewer.network(pdf!)
+// // //                                                   : Nopdf()))
+// // //                                       // PDFView(
+// // //                                       //   filePath:
+// // //                                       //             pdf, // Replace 'pdf' with the actual PDF file path or URL
+// // //                                       //         // height: 300,   // Set the desired height for the PDF viewer
+// // //                                       //         // width: 300,    // Set the desired width for the PDF viewer
+// // //                                       //       ),
+
+// //                                             ),
+// //                                       ),
+// //                                     ],
 // //                                   ),
-// //                                 ],
-// //                               ),
+// //                                 ),
+// //                               ],
 // //                             ),
-// //                           ],
-// //                         ),
+// //                           ),
+// //                         ],
 // //                       ),
 // //                     ),
 // //                   )
@@ -551,530 +1073,230 @@
 // //           }
 // //         },
 // //       ),
+// //     );
+// //   }
+// // }
 
-// //-----------desktop--------------------------------------------------------
 
-//       desktopProductPage: FutureBuilder(
-//         future: context.read<DataProvider>().newcrimpingtool,
-//         builder: (context, snapshot) {
-//           snapshot.data!.data.length;
+// import 'dart:convert';
+// import 'package:flutter/material.dart';
+// // ignore: depend_on_referenced_packages
+// import 'package:intl/intl.dart';
+// import 'package:syncfusion_flutter_pdf/pdf.dart';
+// //Local imports
+// import '../save_file_mobile.dart' if (dart.library.html) 'save_file_web.dart';
 
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             print("hgfghfhfgu");
-//             return Center(
-//                 child:
-//                     const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
-//           } else if (snapshot.hasError) {
-//             return Text('Error: ${snapshot.error}');
-//           } else {
-//             var textpass = snapshot.data!
-//                 .data[selectedThumbnailProvider.selectedIndex!].productName;
-//             var thumbnail = snapshot
-//                 .data!.data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-//             var description = snapshot.data!
-//                 .data[selectedThumbnailProvider.selectedIndex!].description;
-//             var price = snapshot.data!
-//                 .data[selectedThumbnailProvider.selectedIndex!].codesAndPrice!;
-//             var image = snapshot
-//                 .data!.data[selectedThumbnailProvider.selectedIndex!].images;
-//             var pdf = snapshot
-//                 .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+// class PdfService {
+//   Future<void> generateInvoice(List cartItems) async {
+//     // cartItems);
+//     //Create a PDF document.
+//     final PdfDocument document = PdfDocument();
+//     //Add page to the PDF
+//     final PdfPage page = document.pages.add();
+//     //Get page client size
+//     final Size pageSize = page.getClientSize();
+//     //Draw rectangle
+//     page.graphics.drawRectangle(
+//         bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
+//         pen: PdfPen(PdfColor(142, 170, 219)));
+//     //Generate PDF grid.
+//     final PdfGrid grid = getGrid(cartItems);
+//     //Draw the header section by creating text element
+//     final PdfLayoutResult result =
+//         drawHeader(document.pages[0], document.pages[0].getClientSize(), grid);
+//     //Draw grid
+//     drawGrid(document.pages[0], grid, result);
+//     //Add invoice footer
+//     // Add the footer only to the last page
+//     //  for (int i = 1; i < document.pages.count; i--){
+//     // if (document.pages.count > 0) {
+//     //   document.template.bottom = createCustomFooter();
+//     // }
+//     //  }
+//     // Create the custom footer for the last page
+//     PdfPageTemplateElement footer = createCustomFooter();
+//     document.template.bottom = footer;
+//     //Save the PDF document
+//     final List<int> bytes = document.saveSync();
+//     //Dispose the document.
+//     document.dispose();
+//     //Save and launch the file.
+//     await saveAndLaunchFile(bytes, 'Invoice.pdf');
+//   }
 
-//             //  String selectedPrice = '';
+// //Draws the invoice header
+//   PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid) {
+//     //Draw rectangle
+//     page.graphics.drawRectangle(
+//         brush: PdfSolidBrush(PdfColor(75, 138, 131)),
+//         bounds: Rect.fromLTWH(0, 0, pageSize.width - 115, 90));
+//     //Draw string
+//     page.graphics.drawString(
+//         'INVOICE', PdfStandardFont(PdfFontFamily.helvetica, 30),
+//         brush: PdfBrushes.white,
+//         bounds: Rect.fromLTWH(25, 0, pageSize.width - 115, 90),
+//         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
-//             return pdf != null
-//                 ? DefaultTabController(
-//                     length: 2,
-//                     child: Container(
-//                       height: MediaQuery.of(context).size.height * 1.3,
-//                       child: Row(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           Expanded(
-//                             flex: 2,
-//                             child: SingleChildScrollView(
-//                               scrollDirection: Axis.vertical,
-//                               child: Container(
-//                                 // height: do
-//                                 width: MediaQuery.of(context).size.width / 1,
-//                                 child: Padding(
-//                                   padding: const EdgeInsets.only(
-//                                       left: 0, right: 0, top: 25),
-//                                   child: Column(
-//                                     crossAxisAlignment:
-//                                         CrossAxisAlignment.center,
-//                                     children: [
-//                                       Container(
-//                                         color: Colors.white,
-//                                         height:
-//                                             MediaQuery.of(context).size.height /
-//                                                 3,
-//                                         width:
-//                                             MediaQuery.of(context).size.width /
-//                                                 5,
-//                                         child: Image.network(
-//                                             //  thumbnail!,
-//                                             selectedThumbnailProvider
-//                                                     .selectedThumbnail ??
-//                                                 ''),
-//                                       ), // Display the selected thumbnail here
-//                                       SingleChildScrollView(
-//                                         scrollDirection: Axis.horizontal,
-//                                         child: Row(
-//                                           children: image!.map((imageUrl) {
-//                                             return GestureDetector(
-//                                               onTap: () {
-//                                                 // When an image is clicked, set it as the selected thumbnail.
-//                                                 selectedThumbnailProvider
-//                                                     .setSelectedThumbnail(
-//                                                         imageUrl ??
-//                                                             "data:image/jpeg;base64,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");
-//                                               },
-//                                               child: Padding(
-//                                                 padding:
-//                                                     const EdgeInsets.all(8.0),
-//                                                 child: Container(
-//                                                   decoration: BoxDecoration(
-//                                                     border: Border.all(
-//                                                       color: imageUrl ==
-//                                                               selectedThumbnailProvider
-//                                                                   .selectedThumbnail
-//                                                           ? Colors
-//                                                               .blue // Highlight the selected image
-//                                                           : Colors
-//                                                               .black, // Border color for non-selected images
-//                                                       width:
-//                                                           1.0, // Border width
-//                                                     ),
-//                                                   ),
-//                                                   child: Image.network(
-//                                                     imageUrl ??
-//                                                         "data:image/jpeg;base64,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",
-//                                                     width:
-//                                                         100, // Set the desired width for each image
-//                                                     height:
-//                                                         100, // Set the desired height for each image
-//                                                     fit: BoxFit
-//                                                         .cover, // You can adjust the fit as needed
-//                                                   ),
-//                                                 ),
-//                                               ),
-//                                             );
-//                                           }).toList(),
-//                                         ),
-//                                       ),
-//                                       //--------Product Price-----------
+//     page.graphics.drawRectangle(
+//         bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 90),
+//         brush: PdfSolidBrush(PdfColor(75, 138, 131)));
 
-// //                                       SizedBox(
-// //                                         height: 30,
-// //                                       ),
-// //                                       Row(
-// //                                         children: [
-// //                                           SizedBox(
-// //                                             width: MediaQuery.of(context)
-// //                                                     .size
-// //                                                     .width /
-// //                                                 20,
-// //                                           ),
-// //                                           Flexible(
-// //                                             child: Container(
-// //                                               // color: Colors.amber,
+//     page.graphics.drawString(r'$' + getTotalAmount(grid).toString(),
+//         PdfStandardFont(PdfFontFamily.helvetica, 18),
+//         bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 100),
+//         brush: PdfBrushes.white,
+//         format: PdfStringFormat(
+//             alignment: PdfTextAlignment.center,
+//             lineAlignment: PdfVerticalAlignment.middle));
 
-// //                                               child: Text(
-// //                                                 'selected Product code&Price:',
-// //                                                 overflow: TextOverflow.ellipsis,
-// //                                                 style: TextStyle(
-// //                                                   fontSize: 16.0,
-// //                                                   fontFamily: 'Roboto',
-// //                                                   color: Color(0xFF212121),
-// //                                                   fontWeight: FontWeight.bold,
-// //                                                 ),
-// //                                               ),
-// //                                             ),
-// //                                           ),
-// //                                           ValueListenableBuilder<String>(
-// //                                             valueListenable:
-// //                                                 selectedPriceNotifier,
-// //                                             builder: (context, selectedPrice,
-// //                                                 child) {
-// //                                               return Container(
-// //                                                 width: 110,
-// //                                                 padding: EdgeInsets.all(8.0),
-// //                                                 decoration: BoxDecoration(
-// //                                                   border: Border.all(
-// //                                                     color: Colors.black,
-// //                                                     width: 1.0,
-// //                                                   ),
-// //                                                 ),
-// //                                                 // child: selectedPrice != null
-// //                                                 //     ? Text(selectedPrice)
-// //                                                 //     : Text('NO Price'),
-// //                                                 child: Text(selectedPrice),
-// //                                               );
-// //                                             },
-// //                                           ),
-// //                                         ],
-// //                                       ),
-// //                                       Column(
-// //                                         crossAxisAlignment:
-// //                                             CrossAxisAlignment.start,
-// //                                         children: [
-// //                                           SizedBox(
-// //                                             height: 30,
-// //                                           ),
+//     final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+//     //Draw string
+//     page.graphics.drawString('Amount', contentFont,
+//         brush: PdfBrushes.white,
+//         bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 33),
+//         format: PdfStringFormat(
+//             alignment: PdfTextAlignment.center,
+//             lineAlignment: PdfVerticalAlignment.bottom));
+//     //Create data foramt and convert it to text.
+//     final DateFormat format = DateFormat.yMMMMd('en_US');
+//     final String invoiceNumber =
+//         'Invoice Number: 2058557939\r\n\r\nDate: ${format.format(DateTime.now())}';
+//     final Size contentSize = contentFont.measureString(invoiceNumber);
+//     // ignore: leading_newlines_in_multiline_strings
+//     const String address = '''Bill To: \r\n\r\nAbraham Swearegin, 
+//         \r\n\r\nUnited States, California, San Mateo, 
+//         \r\n\r\n9920 BridgePointe Parkway, \r\n\r\n9365550136''';
 
-// //                                           // Text(
-// //                                           //   'Codes and Prices:',
-// //                                           //   style: TextStyle(
-// //                                           //     fontWeight: FontWeight.bold,
-// //                                           //     fontSize: 18,
-// //                                           //   ),
-// //                                           // ),
-// //                                           Wrap(
-// //                                             spacing:
-// //                                                 8.0, // Adjust the spacing between buttons as needed
-// //                                             runSpacing:
-// //                                                 8.0, // Adjust the spacing between rows as needed
-// //                                             children: List<Widget>.generate(
-// //                                                 price!.length, (index) {
-// //                                               final codeAndPrice =
-// //                                                   price![index];
-// //                                               return InkWell(
-// //                                                 onTap: () {
-// //                                                   // String noprice = '0';
-// //                                                   // codeAndPrice.price != null
-// //                                                   //     ? codeAndPrice.price
-// //                                                   //     : noprice;
-// //                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
-// //                                                   selectedPriceNotifier.value =
-// //                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price}';
-// //                                                 },
-// //                                                 child: Container(
-// //                                                   width: 100,
-// //                                                   padding: EdgeInsets.all(
-// //                                                       8.0), // Adjust the padding as needed
-// //                                                   decoration: BoxDecoration(
-// //                                                     border: Border.all(
-// //                                                       color: codeAndPrice
-// //                                                                   .productCode ==
-// //                                                               selectedCodeProvider
-// //                                                                   .selectedProductCode
-// //                                                           // codeAndPrice.productCode
-// //                                                           ? Colors
-// //                                                               .blue // Set border color to blue for selected container
-// //                                                           : Colors
-// //                                                               .black, // Set border color to black for non-selected containers
-// //                                                       width:
-// //                                                           1.0, // Set your desired border width
-// //                                                     ),
-// //                                                   ),
-// //                                                   child: Text(
-// //                                                     '${codeAndPrice.productCode}',
-// //                                                     style: TextStyle(
-// //                                                       color: Colors
-// //                                                           .black, // Set your desired text color
-// //                                                     ),
-// //                                                   ),
-// //                                                 ),
-// //                                               );
-// //                                             }),
-// //                                           ),
-// //                                         ],
-// //                                       )
-// //                                     ],
-// //                                   ),
-// //                                 ),
-// //                               ),
-// //                             ),
-// //                           ),
-// //                           Expanded(
-// //                             flex: 3,
-// //                             child: Column(
-// //                               children: [
-// //                                 TabBar(
-// //                                   unselectedLabelColor:
-// //                                       Color.fromARGB(255, 5, 5, 5),
-// //                                   indicatorSize: TabBarIndicatorSize.tab,
-// //                                   indicator: BoxDecoration(
-// //                                       gradient: LinearGradient(colors: [
-// //                                         Color.fromARGB(255, 0, 0, 0),
-// //                                         Color.fromARGB(255, 0, 0, 0)
-// //                                       ]),
-// //                                       borderRadius: BorderRadius.circular(0),
-// //                                       color: const Color.fromARGB(
-// //                                           255, 255, 255, 255)),
-// //                                   tabs: [
-// //                                     Tab(
-// //                                       text: 'Description',
-// //                                     ),
-// //                                     Tab(
-// //                                       text: 'Technical Details',
-// //                                     ),
-// //                                   ],
-// //                                   labelColor: Colors.white,
-// //                                 ),
-// //                                 Expanded(
-// //                                   flex: 2,
-// //                                   child: TabBarView(
-// //                                     children: [
-// //                                       // Tab 1 content goes here
-// //                                       Container(
-// //                                         // height: 1000,
-// //                                         child: Column(
-// //                                           crossAxisAlignment:
-// //                                               CrossAxisAlignment.start,
-// //                                           children: [
-// //                                             SizedBox(height: 16.0),
-// //                                             Text(
-// //                                               textpass ?? "",
-// //                                               style: TextStyle(
-// //                                                   fontWeight: FontWeight.bold,
-// //                                                   fontSize: 30),
-// //                                             ),
-// //                                             SizedBox(height: 8.0),
-// //                                             Column(
-// //                                               crossAxisAlignment:
-// //                                                   CrossAxisAlignment.start,
-// //                                               children: description!
-// //                                                   .toUpperCase()
-// //                                                   .split('\n')
-// //                                                   .map((line) {
-// //                                                 return Row(
-// //                                                   children: [
-// //                                                     Icon(Icons.star,
-// //                                                         size:
-// //                                                             10, // Adjust the size as needed
-// //                                                         color: Colors
-// //                                                             .black // Adjust the color as needed
-// //                                                         ),
-// //                                                     SizedBox(
-// //                                                       width:
-// //                                                           8, // Add some space between the circle icon and text
-// //                                                     ),
-// //                                                     Flexible(
-// //                                                       child: Text(
-// //                                                         line,
-// //                                                         style: TextStyle(
-// //                                                           fontSize: 16,
-// //                                                         ),
-// //                                                         overflow: TextOverflow
-// //                                                             .visible, // Handle text overflow
-// //                                                       ),
-// //                                                     ),
-// //                                                   ],
-// //                                                 );
-// //                                               }).toList(),
-// //                                             ),
+//     PdfTextElement(text: invoiceNumber, font: contentFont).draw(
+//         page: page,
+//         bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 120,
+//             contentSize.width + 30, pageSize.height - 120));
 
-// //                                             // SizedBox(height: 8.0),
-// //                                             SizedBox(height: 20.0),
-// //                                             Row(
-// //                                               children: [
-// //                                                   SizedBox(
-// //                                             width: 20,
-// //                                           ),
-// //                                                 Form(
-// //                                                   key: _formKey,
-// //                                                   child: Container(
-// //                                                     // height:
-// //                                                     // MediaQuery.of(context).size.height/18,
-// //                                                     width: 200,
-// //                                                     //  MediaQuery.of(context).size.width/10,
-// //                                                     child: TextFormField(
-// //                                                       controller:
-// //                                                           quantityController,
-// //                                                       keyboardType:
-// //                                                           TextInputType.number,
-// //                                                       decoration: InputDecoration(
-// //                                                         border:
-// //                                                             OutlineInputBorder(),
-// //                                                         hintText:
-// //                                                             'Enter the quantity',
-// //                                                       ),
-// //                                                       validator: (value) {
-// //                                                         if (value!.isEmpty) {
-// //                                                           return 'Please enter a quantity';
-// //                                                         }
-// //                                                         int? quantity =
-// //                                                             int.tryParse(value);
-// //                                                         if (quantity == null ||
-// //                                                             quantity <= 0) {
-// //                                                           return 'Quantity must be a positive number';
-// //                                                         }
-// //                                                         return null; // Return null if the input is valid
-// //                                                       },
-// //                                                     ),
-// //                                                   ),
-// //                                                 ),
-// //                                               ],
-// //                                             ),
+//     return PdfTextElement(text: address, font: contentFont).draw(
+//         page: page,
+//         bounds: Rect.fromLTWH(30, 120,
+//             pageSize.width - (contentSize.width + 30), pageSize.height - 120))!;
+//   }
+//   // Function to create a custom footer
+//   PdfPageTemplateElement createCustomFooter() {
+//     PdfPageTemplateElement footer = PdfPageTemplateElement(
+//         Rect.fromLTWH(0, 0, PdfPageSize.letter.width, 100));
 
-// //                                             SizedBox(
-// //                                               height: 30,
-// //                                             ),
-// //                                             Row(
-// //                                               children: [
-// //                                                 SizedBox(
-// //                                                   width: 30,
-// //                                                 ),
-// //                                                 SizedBox(
-// //                                                    width: MediaQuery.of(context)
-// //                                                           .size
-// //                                                           .width /
-// //                                                       5,
-// //                                                   child: ElevatedButton(
-// //                                                     onPressed: () {
-// //                                                       if (_formKey.currentState!
-// //                                                           .validate()) {
-// //                                                         if (FirebaseAuth.instance
-// //                                                                 .currentUser !=
-// //                                                             null) {
-// //                                                           // signed in
-// //                                                           final selectedPrice =
-// //                                                               selectedPriceNotifier
-// //                                                                   .value;
-// //                                                           final productCode =
-// //                                                               selectedPrice
-// //                                                                   .split(': ')[0];
-// //                                                           final price = double
-// //                                                               .parse(selectedPrice
-// //                                                                   .split(
-// //                                                                       ': ')[1]);
-                                                
-//                                                           final quantity =
-//                                                               int.tryParse(
-//                                                                       quantityController
-//                                                                           .text) ??
-//                                                                   0;
-//                                                           final imageUrl =
-//                                                               // selectedThumbnailProvider
-//                                                               //         .selectedThumbnail ??
-//                                                               thumbnail;
-//                                                           final productName =
-//                                                               textpass;
-//                                                           final cartProvider =
-//                                                               Provider.of<
-//                                                                       CartProvider>(
-//                                                                   context,
-//                                                                   listen: false);
-//                                                           cartProvider.addToCart(
-//                                                               productCode,
-//                                                               price,
-//                                                               quantity,
-//                                                               imageUrl ?? "",
-//                                                               productName ?? "");
-                                                
-// //                                                           ScaffoldMessenger.of(
-// //                                                                   context)
-// //                                                               .showSnackBar(SnackBar(
-// //                                                                   content: Text(
-// //                                                                       "Added to cart")));
-// //                                                         } else {
-// //                                                           // signed out
-// //                                                           showDialog(
-// //                                                             context: context,
-// //                                                             builder: (BuildContext
-// //                                                                 context) {
-// //                                                               return LoginPage(); // Your custom dialog widget
-// //                                                             },
-// //                                                           );
-// //                                                         }
-// //                                                       }
-// //                                                     },
-// //                                                     child:
-// //                                                         const Text('ADD TO CART'),
-// //                                                     style: ButtonStyle(
-// //                                                       backgroundColor:
-// //                                                           MaterialStateProperty
-// //                                                               .all(Colors.black),
-// //                                                       minimumSize:
-// //                                                           MaterialStateProperty
-// //                                                               .all(Size(150, 50)),
-// //                                                     ),
-// //                                                   ),
-// //                                                 ),
-// //                                                 SizedBox(
-// //                                                   width: 20,
-// //                                                 ),
-// //                                                 SizedBox(
-// //                                                    width: MediaQuery.of(context)
-// //                                                           .size
-// //                                                           .width /
-// //                                                       5,
-// //                                                   child: ElevatedButton(
-// //                                                     onPressed: () {
-// //                                                       Navigator.pushNamed(
-// //                                                           context, '/cart');
-// //                                                     },
-// //                                                     child: const Text(
-// //                                                       'GO TO CART',
-// //                                                       style: TextStyle(
-// //                                                           color: Colors.black),
-// //                                                     ),
-// //                                                     style: ButtonStyle(
-// //                                                       backgroundColor:
-// //                                                           MaterialStateProperty
-// //                                                               .all(Colors.white),
-// //                                                       minimumSize:
-// //                                                           MaterialStateProperty
-// //                                                               .all(Size(150, 50)),
-// //                                                     ),
-// //                                                   ),
-// //                                                 ),
-// //                                               ],
-// //                                             ),
-// //                                             SizedBox(
-// //                                               height: 20,
-// //                                             ),
-// //                                           ],
-// //                                         ),
-// //                                       ),
-// //                                       // Container(
-// //                                       //   child: ListView.builder(
-// //                                       //       itemBuilder: (context, index) {
-// //                                       //     return Container(
-// //                                       //       child: pdf != null
-// //                                       //           ? SfPdfViewer.network(pdf)
-// //                                       //           : Nopdf(),
-// //                                       //     );
-// //                                       //   }),
-// //                                       // )
-// //                                       // Tab 2 content goes here
-// //                                       SingleChildScrollView(
-// //                                           child: Container(
-// //                                               height: 1500,
-// //                                               color: const Color.fromARGB(
-// //                                                   255, 230, 233, 235),
-// //                                               child: pdf != null
-// //                                                   ? SfPdfViewer.network(pdf!)
-// //                                                   : Nopdf()))
-// //                                       // PDFView(
-// //                                       //   filePath:
-// //                                       //             pdf, // Replace 'pdf' with the actual PDF file path or URL
-// //                                       //         // height: 300,   // Set the desired height for the PDF viewer
-// //                                       //         // width: 300,    // Set the desired width for the PDF viewer
-// //                                       //       ),
+//     // Add custom footer content
+//     String footerContent = '''800 Interchange Blvd.\r\n\r\nSuite 2501, Austin,
+//          TX 78721\r\n\r\nAny Questions? support@adventure-works.com''';
 
-//                                             ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   )
-//                 : Nopdf(
-//                     typeOfProduct: 'crimpingtools',
-//                   );
-//           }
-//         },
-//       ),
-//     );
+//     PdfFont font = PdfStandardFont(PdfFontFamily.timesRoman, 11);
+//     footer.graphics.drawString(footerContent, font,
+//         bounds: Rect.fromLTWH(0, 0, PdfPageSize.letter.width, 100));
+
+//     return footer;
+//   }
+
+// //Draws the grid
+//   void drawGrid(PdfPage page, PdfGrid grid, PdfLayoutResult result) {
+//     Rect? totalPriceCellBounds;
+//     Rect? quantityCellBounds;
+//     //Invoke the beginCellLayout event.
+//     grid.beginCellLayout = (Object sender, PdfGridBeginCellLayoutArgs args) {
+//       final PdfGrid grid = sender as PdfGrid;
+//       if (args.cellIndex == grid.columns.count - 1) {
+//         totalPriceCellBounds = args.bounds;
+//       } else if (args.cellIndex == grid.columns.count - 2) {
+//         quantityCellBounds = args.bounds;
+//       }
+//     };
+//     //Draw the PDF grid and get the result.
+//     result = grid.draw(
+//         page: page, bounds: Rect.fromLTWH(0, result.bounds.bottom + 40, 0, 0))!;
+
+//     //Draw grand total.
+//     page.graphics.drawString('Grand Total',
+//         PdfStandardFont(PdfFontFamily.helvetica, 9, style: PdfFontStyle.bold),
+//         bounds: Rect.fromLTWH(
+//             quantityCellBounds!.left,
+//             result.bounds.bottom + 10,
+//             quantityCellBounds!.width,
+//             quantityCellBounds!.height));
+//     page.graphics.drawString(getTotalAmount(grid).toString(),
+//         PdfStandardFont(PdfFontFamily.helvetica, 9, style: PdfFontStyle.bold),
+//         bounds: Rect.fromLTWH(
+//             totalPriceCellBounds!.left,
+//             result.bounds.bottom + 10,
+//             totalPriceCellBounds!.width,
+//             totalPriceCellBounds!.height));
+//   }
+
+
+// //Create PDF grid and return
+//   PdfGrid getGrid(List cartItems) {
+
+//     //Create a PDF grid
+//     final PdfGrid grid = PdfGrid();
+//     //Secify the columns count to the grid.
+//     grid.columns.add(count: 7);
+//     //Create the header row of the grid.
+//     final PdfGridRow headerRow = grid.headers.add(1)[0];
+//     //Set style
+//     headerRow.style.backgroundBrush = PdfSolidBrush(PdfColor(68, 114, 196));
+//     headerRow.style.textBrush = PdfBrushes.white;
+//     headerRow.cells[0].value = "SI NO";
+//     headerRow.cells[1].value = "Description";
+//     headerRow.cells[2].value = "Product Code";
+//     headerRow.cells[3].value = "Quantity";
+//     headerRow.cells[4].value = "Unit";
+//     headerRow.cells[5].value = "Price";
+//     headerRow.cells[6].value = "Total";
+//     //Add rows
+//     for (int i = 0; i < cartItems.length; i++) {
+//       final item = jsonDecode(cartItems[i]);
+
+//       final PdfGridRow row = grid.rows.add();
+
+//       row.cells[0].value = (i + 1).toString(); // SINO
+//       row.cells[1].value = item['productName']; // Description
+//       row.cells[2].value = item['productCode']; // Product Code
+//       row.cells[3].value = item['quantity'].toString(); // Quantity
+//       row.cells[4].value =
+//           "Unit"; // Unit (you can replace with the actual unit)
+//       row.cells[5].value = item['price'].toStringAsFixed(2); // Price
+//       row.cells[6].value =
+//           (item['price'] * item['quantity']).toStringAsFixed(2); // Total
+//     }
+//     //Apply the table built-in style
+//     grid.applyBuiltInStyle(PdfGridBuiltInStyle.listTable4Accent5);
+//     //Set gird columns width
+//     grid.columns[1].width = 200;
+//     for (int i = 0; i < headerRow.cells.count; i++) {
+//       headerRow.cells[i].style.cellPadding =
+//           PdfPaddings(bottom: 5, left: 5, right: 5, top: 5);
+//     }
+//     for (int i = 0; i < grid.rows.count; i++) {
+//       final PdfGridRow row = grid.rows[i];
+//       for (int j = 0; j < row.cells.count; j++) {
+//         final PdfGridCell cell = row.cells[j];
+//         if (j == 0) {
+//           cell.stringFormat.alignment = PdfTextAlignment.center;
+//         }
+//         cell.style.cellPadding =
+//             PdfPaddings(bottom: 5, left: 5, right: 5, top: 5);
+
+//       }
+//     }
+//     return grid;
+
+//   }
+
+// //Create and row for the grid.
+
+// //Get the total amount.
+//   double getTotalAmount(PdfGrid grid) {
+//     double total = 0;
+//     for (int i = 0; i < grid.rows.count; i++) {
+//       final String value =
+//           grid.rows[i].cells[grid.columns.count - 1].value as String;
+//       total += double.parse(value);
+//     }
+//     return total;
 //   }
 // }
-
-
