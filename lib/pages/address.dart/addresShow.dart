@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
+import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/res_address_show.dart';
 
@@ -94,7 +95,7 @@ class addressshow extends StatelessWidget {
                                       Icon(Icons.add),
                                       TextButton(
                                           onPressed: () => SideSheet.right(
-                                              body:TextAddress(),
+                                              body: TextAddress(),
                                               //  TextAddress(),
                                               width: MediaQuery.of(context)
                                                       .size
@@ -109,44 +110,65 @@ class addressshow extends StatelessWidget {
                                     ],
                                   ),
                                   Container(
-                                    height: 200,
+                                    height: 800,
                                     decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 198, 245, 249),
-                                    border: Border.all(width: 0.5)
- 
-                                    ),
+                                      
+                                        border: Border.all(width: 0.5)),
                                     child: Column(
                                       children: [
                                         Column(
                                           children: [
-                                          ListView.builder(
-  scrollDirection: Axis.vertical,
-  shrinkWrap: true,
-  itemCount: cartItems["address"].length,
-  itemBuilder: (BuildContext context, int index) {
-    // Extracting the address data from the JSON string
-    var addressData = jsonDecode(cartItems["address"][index]);
+                                            ListView.builder(
+                                              scrollDirection: Axis.vertical,
+                                              shrinkWrap: true,
+                                              itemCount:
+                                                  cartItems["address"].length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                // Extracting the address data from the JSON string
+                                                var addressData = jsonDecode(
+                                                    cartItems["address"]
+                                                        [index]);
 
-    // Check if it's not the first item
-    bool isNotFirstItem = index != 0;
+                                                // Check if it's not the first item
+                                                bool isNotFirstItem =
+                                                    index != 0;
 
-    // If it's not the first item, add a Divider
-    if (isNotFirstItem) {
-      return Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: 20,
-            color: Colors.white,
-          ),
-          _buildAddressListItem(addressData, index),
-        ],
-      );
-    }
-    // If it's the first item, don't add a Divider
-    return _buildAddressListItem(addressData, index);
-  },
-)
+                                                // If it's not the first item, add a Divider
+                                                if (isNotFirstItem) {
+                                                  return Column(
+                                                    children: [
+                                                      Container(
+                                                        width: double.infinity,
+                                                        height: 20,
+                                                        color: Colors.white,
+                                                      ),
+                                                      GestureDetector(
+                                                        onTap: (){
+                                                          context.read<address_provider>().UpdateSelectindex(context,index );
+                                                        },
+                                                        child: Container(
+                                                          color: Colors.amber,
+                                                          child: _buildAddressListItem(
+                                                              addressData, index),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                }
+                                                // If it's the first item, don't add a Divider
+                                                return GestureDetector(
+                                                  onTap: (){
+                                                    context.read<address_provider>().UpdateSelectindex(context,index );
+                                                  },
+                                                  child: Container(
+                                                    child: _buildAddressListItem(
+                                                        addressData, index),
+                                                  ),
+                                                );
+                                              },
+                                            )
 
                                             // Add your button here
                                             // ElevatedButton(
@@ -211,6 +233,7 @@ class addressshow extends StatelessWidget {
             )));
   }
 }
+
 Widget _buildAddressListItem(Map<String, dynamic> addressData, int index) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -238,6 +261,7 @@ Widget _buildAddressListItem(Map<String, dynamic> addressData, int index) {
     ],
   );
 }
+
 String _selectedLocation = 'Please choose a location';
 AddressData(data) {
   final item = data;
@@ -271,6 +295,7 @@ AddressData(data) {
     ],
   );
 }
+
 class AddressShowMob extends StatelessWidget {
   AddressShowMob({super.key});
 

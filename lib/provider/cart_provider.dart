@@ -125,6 +125,11 @@ double getTotalPriceWithVAT(double subtotal, double vatRate) {
   //   cartItem.updateQuantity(newQuantity);
   //   notifyListeners();
   // }
+
+     
+
+     
+
 }
 
 class CartItem {
