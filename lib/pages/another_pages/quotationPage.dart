@@ -118,7 +118,7 @@ class QuotationDeskPage extends StatelessWidget {
  floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
         onPressed: () {
-          context.read<address_provider>().get_current_address(cartItems);
+          context.read<address_provider>().get_current_address(cartItems,context);
 // late var address_data=context.read<address_provider>().current_address;
 // print(address_data);
 // print(cartItems);
@@ -443,7 +443,7 @@ class QuotationMobilePage extends StatelessWidget {
  floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
         onPressed: () {
-          context.read<address_provider>().get_current_address(cartItems);
+          context.read<address_provider>().get_current_address(cartItems,context);
 // late var address_data=context.read<address_provider>().current_address;
 // print(address_data);
 // print(cartItems);

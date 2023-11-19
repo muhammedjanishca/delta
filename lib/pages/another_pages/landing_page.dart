@@ -101,16 +101,16 @@ class DesktopLanding extends StatelessWidget {
                             color: Colors.white),
                       ),
                       ElevatedButton(
-                        onPressed: (){
-                           Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>const TextTheAddress()),
-                            );
-                        },
-                      //  onPressed: () async {
-                      //  context.read<address_provider>().
-                      //  isUserDataAvailable(context);
-                      // }, 
+                        // onPressed: (){
+                        //    Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(builder: (context) =>const TextTheAddress()),
+                        //     );
+                        // },
+                       onPressed: () async {
+                       context.read<address_provider>().
+                       isUserDataAvailable(context);
+                      }, 
                     //     onPressed: () async {
                     //        bool isDataAvailable = await
                     //  context.read<address_provider>().
