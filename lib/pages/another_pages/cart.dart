@@ -17,7 +17,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveCart(
       desktopCart: DeskCart(),
-      mobileCart: Mobilecart(),
+      mobileCart: const Mobilecart(),
     );
   }
 }
@@ -63,11 +63,10 @@ class _DeskCartState extends State<DeskCart> {
                           children: [
                             TextButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   "HOME>>",
                                   style: TextStyle(
-                                      color:
-                                          const Color.fromARGB(255, 54, 98, 98),
+                                      color: Color.fromARGB(255, 54, 98, 98),
                                       fontSize: 17,
                                       fontWeight: FontWeight.w300),
                                 )),
@@ -126,15 +125,15 @@ class _DeskCartState extends State<DeskCart> {
                                       children: [
                                         Text(
                                           '${item["productName"]}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                         item["productName"] ==
                                                 item['productCode']
-                                            ? SizedBox()
+                                            ? const SizedBox()
                                             : Text(
                                                 '${item['productCode']}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -146,7 +145,7 @@ class _DeskCartState extends State<DeskCart> {
                                             Text(
                                                 'Quantity:${item['quantity']}'),
                                             IconButton(
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.edit,
                                                   color: Colors.black,
                                                 ),
@@ -157,14 +156,14 @@ class _DeskCartState extends State<DeskCart> {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title: Text(
+                                                          title: const Text(
                                                               'Edit Quantity'),
                                                           content: TextField(
                                                             keyboardType:
                                                                 TextInputType
                                                                     .number,
                                                             decoration:
-                                                                InputDecoration(
+                                                                const InputDecoration(
                                                                     labelText:
                                                                         'Quantity'),
                                                             onChanged: (value) {
@@ -180,7 +179,7 @@ class _DeskCartState extends State<DeskCart> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child: Text(
+                                                              child: const Text(
                                                                   'Cancel'),
                                                             ),
                                                             TextButton(
@@ -192,8 +191,8 @@ class _DeskCartState extends State<DeskCart> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child:
-                                                                  Text('Save'),
+                                                              child: const Text(
+                                                                  'Save'),
                                                             ),
                                                           ],
                                                         );
@@ -203,7 +202,7 @@ class _DeskCartState extends State<DeskCart> {
                                             // Text("|"),
 
                                             IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.delete_rounded,
                                                 color: Colors.black,
                                               ),
@@ -213,13 +212,14 @@ class _DeskCartState extends State<DeskCart> {
                                                   builder:
                                                       (BuildContext context) {
                                                     return AlertDialog(
-                                                      title: Text(
+                                                      title: const Text(
                                                           'Confirm Removal'),
-                                                      content: Text(
+                                                      content: const Text(
                                                           'Are you sure you want to remove this product?'),
                                                       actions: <Widget>[
                                                         TextButton(
-                                                          child: Text('No'),
+                                                          child:
+                                                              const Text('No'),
                                                           onPressed: () {
                                                             Navigator.of(
                                                                     context)
@@ -227,7 +227,8 @@ class _DeskCartState extends State<DeskCart> {
                                                           },
                                                         ),
                                                         TextButton(
-                                                          child: Text('Yes'),
+                                                          child:
+                                                              const Text('Yes'),
                                                           onPressed: () {
                                                             cartProvider
                                                                 .removeFromCart(
@@ -274,21 +275,21 @@ class _DeskCartState extends State<DeskCart> {
                             // SizedBox(
                             //   height: MediaQuery.of(context).size.height / 6,
                             // ),
-                            Text(
+                            const Text(
                               'Summary\n',
                               style: TextStyle(
                                   fontSize: 23, fontWeight: FontWeight.w500),
                             ),
                             // SizedBox(height: 47),
                             ListTile(
-                              title: Text(
+                              title: const Text(
                                 'Subtotal',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w400),
                               ),
                               trailing: Text(
                                 '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                             ),
@@ -296,39 +297,39 @@ class _DeskCartState extends State<DeskCart> {
                               title: Text('VAT (${vatRate}%)'),
                               trailing: Text('\$${vat.toStringAsFixed(2)}'),
                             ),
-                            Divider(
+                            const Divider(
                               height:
                                   1, // Adjust the height of the divider as needed
-                              color: const Color.fromARGB(255, 147, 146,
+                              color: Color.fromARGB(255, 147, 146,
                                   146), // Choose the color of the divider
                               thickness:
                                   1, // Specify the thickness of the divider line
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             ListTile(
-                              title: Text(
+                              title: const Text(
                                 'Total Price (with VAT)',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                               trailing: Text(
                                 '\$${totalPriceWithVAT.toStringAsFixed(2)}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               height:
                                   1, // Adjust the height of the divider as needed
-                              color: const Color.fromARGB(255, 147, 146,
+                              color: Color.fromARGB(255, 147, 146,
                                   146), // Choose the color of the divider
                               thickness:
                                   1, // Specify the thickness of the divider line
                             ),
 
-                            SizedBox(
+                            const SizedBox(
                               height: 40,
                             ),
                             ElevatedButton(
@@ -347,7 +348,7 @@ class _DeskCartState extends State<DeskCart> {
                                                   subtotal, vatRate),
                                             )));
                               },
-                              child: Text(
+                              child: const Text(
                                 'GANERATE QUATATION',
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -358,11 +359,11 @@ class _DeskCartState extends State<DeskCart> {
                                             BorderRadius.circular(15))),
                                 backgroundColor:
                                     MaterialStateProperty.all(Colors.black),
-                                minimumSize:
-                                    MaterialStateProperty.all(Size(150, 55)),
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(150, 55)),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 40,
                             ),
                           ],
@@ -380,8 +381,8 @@ class _DeskCartState extends State<DeskCart> {
                 color: const Color.fromARGB(255, 255, 255, 255),
                 height: MediaQuery.of(context).size.height / 1.5,
                 child: MediaQuery.of(context).size.width >= 700
-                    ? deskBottomSheett()
-                    : mobiledeskBottomSheett())
+                    ? const deskBottomSheett()
+                    : const mobiledeskBottomSheett())
           ],
         ),
       ),
@@ -419,7 +420,8 @@ class _MobilecartState extends State<Mobilecart> {
             children: [
               Container(
                 height: 650,
-                padding: EdgeInsets.only(left: 16), // Add left padding here
+                padding:
+                    const EdgeInsets.only(left: 16), // Add left padding here
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -429,11 +431,10 @@ class _MobilecartState extends State<Mobilecart> {
                         children: [
                           TextButton(
                               onPressed: () {},
-                              child: Text(
+                              child: const Text(
                                 "HOME>>",
                                 style: TextStyle(
-                                    color:
-                                        const Color.fromARGB(255, 54, 98, 98),
+                                    color: Color.fromARGB(255, 54, 98, 98),
                                     fontSize: 17,
                                     fontWeight: FontWeight.w300),
                               )),
@@ -451,7 +452,7 @@ class _MobilecartState extends State<Mobilecart> {
                       child: ListView.separated(
                         itemCount: cartItems["cartItems"].length,
                         separatorBuilder: (context, index) =>
-                            Divider(height: 88, color: Colors.grey),
+                            const Divider(height: 88, color: Colors.grey),
                         itemBuilder: (context, index) {
                           final item =
                               jsonDecode(cartItems["cartItems"][index]);
@@ -481,8 +482,8 @@ class _MobilecartState extends State<Mobilecart> {
                                         MediaQuery.of(context).size.width / 30,
                                   ),
                                   SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height / 5.5,
+                                    height: MediaQuery.of(context).size.height /
+                                        5.5,
                                     width:
                                         MediaQuery.of(context).size.width / 1.5,
                                     child: Column(
@@ -493,15 +494,15 @@ class _MobilecartState extends State<Mobilecart> {
                                       children: [
                                         Text(
                                           '${item["productName"]}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                         item["productName"] ==
                                                 item['productCode']
-                                            ? SizedBox()
+                                            ? const SizedBox()
                                             : Text(
                                                 '${item['productCode']}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -513,7 +514,7 @@ class _MobilecartState extends State<Mobilecart> {
                                             Text(
                                                 'Quantity:${item['quantity']}'),
                                             IconButton(
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.edit,
                                                   color: Colors.black,
                                                 ),
@@ -524,14 +525,14 @@ class _MobilecartState extends State<Mobilecart> {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title: Text(
+                                                          title: const Text(
                                                               'Edit Quantity'),
                                                           content: TextField(
                                                             keyboardType:
                                                                 TextInputType
                                                                     .number,
                                                             decoration:
-                                                                InputDecoration(
+                                                                const InputDecoration(
                                                                     labelText:
                                                                         'Quantity'),
                                                             onChanged: (value) {
@@ -547,7 +548,7 @@ class _MobilecartState extends State<Mobilecart> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child: Text(
+                                                              child: const Text(
                                                                   'Cancel'),
                                                             ),
                                                             TextButton(
@@ -559,8 +560,8 @@ class _MobilecartState extends State<Mobilecart> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child:
-                                                                  Text('Save'),
+                                                              child: const Text(
+                                                                  'Save'),
                                                             ),
                                                           ],
                                                         );
@@ -570,7 +571,7 @@ class _MobilecartState extends State<Mobilecart> {
                                             // Text("|"),
 
                                             IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.delete_rounded,
                                                 color: Colors.black,
                                               ),
@@ -580,13 +581,14 @@ class _MobilecartState extends State<Mobilecart> {
                                                   builder:
                                                       (BuildContext context) {
                                                     return AlertDialog(
-                                                      title: Text(
+                                                      title: const Text(
                                                           'Confirm Removal'),
-                                                      content: Text(
+                                                      content: const Text(
                                                           'Are you sure you want to remove this product?'),
                                                       actions: <Widget>[
                                                         TextButton(
-                                                          child: Text('No'),
+                                                          child:
+                                                              const Text('No'),
                                                           onPressed: () {
                                                             Navigator.of(
                                                                     context)
@@ -594,7 +596,8 @@ class _MobilecartState extends State<Mobilecart> {
                                                           },
                                                         ),
                                                         TextButton(
-                                                          child: Text('Yes'),
+                                                          child:
+                                                              const Text('Yes'),
                                                           onPressed: () {
                                                             cartProvider
                                                                 .removeFromCart(
@@ -645,21 +648,21 @@ class _MobilecartState extends State<Mobilecart> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 20,
                           ),
-                          Text(
+                          const Text(
                             'Summary\n',
                             style: TextStyle(
                                 fontSize: 23, fontWeight: FontWeight.w500),
                           ),
                           // SizedBox(height: 47),
                           ListTile(
-                            title: Text(
+                            title: const Text(
                               'Subtotal',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
                             trailing: Text(
                               '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                           ),
@@ -667,39 +670,37 @@ class _MobilecartState extends State<Mobilecart> {
                             title: Text('VAT (${vatRate}%)'),
                             trailing: Text('\$${vat.toStringAsFixed(2)}'),
                           ),
-                          Divider(
+                          const Divider(
                             height:
                                 1, // Adjust the height of the divider as needed
-                            color: const Color.fromARGB(255, 147, 146,
+                            color: Color.fromARGB(255, 147, 146,
                                 146), // Choose the color of the divider
                             thickness:
                                 1, // Specify the thickness of the divider line
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           ListTile(
-                            title: Text(
+                            title: const Text(
                               'Total Price (with VAT)',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                             trailing: Text(
                               '\$${totalPriceWithVAT.toStringAsFixed(2)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Divider(
+                          const Divider(
                             height:
                                 1, // Adjust the height of the divider as needed
-                            color: const Color.fromARGB(255, 147, 146,
+                            color: Color.fromARGB(255, 147, 146,
                                 146), // Choose the color of the divider
                             thickness:
                                 1, // Specify the thickness of the divider line
                           ),
-                         
-                         
                         ],
                       ),
                     ),
@@ -715,8 +716,8 @@ class _MobilecartState extends State<Mobilecart> {
                   // height: MediaQuery.of(context).size.height / 1,
                   height: 980,
                   child: MediaQuery.of(context).size.width >= 700
-                      ? deskBottomSheett()
-                      : mobiledeskBottomSheett()),
+                      ? const deskBottomSheett()
+                      : const mobiledeskBottomSheett()),
               //  Footer(child: Container(height: 50,
               //                color: Colors.pink,)),
             ],
@@ -750,7 +751,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
                 color: Deltacolor,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(
                       20), // Adjust the top-left radius as needed
                   topRight: Radius.circular(
@@ -759,7 +760,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
               ),
               child: TextButton(
                 onPressed: () {
-                     
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -772,9 +772,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       ),
                     ),
                   );
-
                 },
-                child: Text(
+                child: const Text(
                   'GENERATE QUOTATION',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -826,7 +825,7 @@ class MobileBottomNavigationBaru extends StatelessWidget {
             Container(
               height: 50,
               width: MediaQuery.of(context).size.width / 2,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.black,
               ),
               // child: TextButton(

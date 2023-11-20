@@ -802,10 +802,10 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                          thumbnail!,
-                                          // selectedThumbnailProvider
-                                          //         .selectedThumbnail ??
-                                          //     ''
+                                          // thumbnail!,
+                                          selectedThumbnailProvider
+                                                  .selectedThumbnail ??
+                                              ''
                                         ),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
@@ -827,9 +827,9 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                       color: imageUrl ==
-                                                              imageUrl
-                                                          // selectedThumbnailProvider
-                                                          //     .selectedThumbnail
+                                                              // imageUrl
+                                                          selectedThumbnailProvider
+                                                              .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors

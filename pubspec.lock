@@ -724,8 +724,7 @@ packages:
       sha256: dd904f795d4b4f3b870833847c461801f6750a9fa8e61ea5ac53f9422b31f250
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.10.0"
+    version: "1.9.1"
   sprintf:
     dependency: transitive
     description:
@@ -734,9 +733,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
-=======
-    version: "1.9.1"
->>>>>>> 519666fc60f9d064e6d92bc279c31545aedee555
   stack_trace:
     dependency: transitive
     description:

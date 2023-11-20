@@ -56,7 +56,8 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(
+            create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
@@ -65,11 +66,10 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
         ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
-        ChangeNotifierProvider(create: (context) =>ImageSelection()),
-        ChangeNotifierProvider(create: (context) =>SelectedKiduProvider()),
-        ChangeNotifierProvider(create: (context) =>address_provider()),
+        ChangeNotifierProvider(create: (context) => ImageSelection()),
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
-
+        ChangeNotifierProvider(create: (context) => AddressProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
       ],
       child: MaterialApp(
         //this use using for handle null data
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                     )),
               ));
           if (widget is Scaffold || widget is Navigator) {
-            error = Scaffold(body: Center(child: error));
+            error = Scaffold(body: Center(child: CircularProgressIndicator()));
           }
           ErrorWidget.builder = (errorDetails) {
             return Text(errorDetails.toString());
@@ -229,7 +229,7 @@ void navigateToProductDetailsOfAccessories(
 }
 
 void noPdfProductPage(BuildContext context, int selectedProductIndex,
-    {String? productname}) {  
+    {String? productname}) {
   Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
 }
 
@@ -261,4 +261,3 @@ void navigateToProductDetailsFromSearch(
   }
   Navigator.pushNamed(context, endpoint);
 }
-

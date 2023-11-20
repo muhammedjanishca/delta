@@ -3,19 +3,15 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/address.dart/addresShow.dart';
+import 'package:firebase_hex/pages/address.dart/dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gap/gap.dart';
 
-class TextAddress extends StatefulWidget {
+class TextAddress extends StatelessWidget {
   const TextAddress({super.key});
 
-  @override
-  State<TextAddress> createState() => _TextAddressState();
-}
-
-class _TextAddressState extends State<TextAddress> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -24,26 +20,10 @@ class _TextAddressState extends State<TextAddress> {
     final line1AddController = TextEditingController();
     final line2AddController = TextEditingController();
     final cityController = TextEditingController();
-    // final Controller = TextEditingController();
     var addressDetails = {};
-  var fetchedAddressDetails = [];
+    var fetchedAddressDetails = [];
     TextEditingController stateController = TextEditingController();
-     List<String> _locations = [
-  'Riyadh (Ar-Riyad)',
-  'Makkah (Makkah Al-Mukarramah)',
-  'Madinah (Al-Madinah Al-Munawwarah)',
-  'Eastern Province (Ash Sharqiyah)',
-  'Asir',
-  'Qassim (Al-Qassim)',
-  'Hail',
-  'Tabuk',
-  'Najran',
-  'Jazan',
-  'Northern Borders (Al-Hudud ash Shamaliyah)',
-  'Al Jawf',
-  'Baha',
-]; // Option 2
-  String? _selectedLocation;
+    String? _selectedLocation;
     return Form(
       key: _formKey,
       child: Container(
@@ -71,7 +51,8 @@ class _TextAddressState extends State<TextAddress> {
                 ],
               ),
               TextFieldAddress(
-                  " COMPANY NAME", TextInputType.text, nameController, context, (value) {
+                  " COMPANY NAME", TextInputType.text, nameController, context,
+                  (value) {
                 if (value == null || value.isEmpty) {
                   return '*This field cannot be empty';
                 }
@@ -94,9 +75,8 @@ class _TextAddressState extends State<TextAddress> {
                   ),
                 ],
               ),
-              TextFieldAddress(
-                  "Street Address", TextInputType.text, line1AddController, context,
-                  (value) {
+              TextFieldAddress("Street Address", TextInputType.text,
+                  line1AddController, context, (value) {
                 if (value == null || value.isEmpty) {
                   return '*This field cannot be empty';
                 }
@@ -109,23 +89,9 @@ class _TextAddressState extends State<TextAddress> {
                 }
                 return null;
               }),
-              
-        Gap(10),
-       DropdownButton(
-            hint: Text('Please choose a location'), // Not necessary for Option 1
-            value: _selectedLocation,
-            onChanged: (newValue) {
-              setState(() {
-                _selectedLocation = newValue;
-              });
-            },
-            items: _locations.map((location) {
-              return DropdownMenuItem(
-                child: new Text(location),
-                value: location,
-              );
-            }).toList(),),
-             TextFieldAddress(
+              Gap(10),
+              DropDownPage(),
+              TextFieldAddress(
                   "City", TextInputType.text, cityController, context, (value) {
                 if (value == null || value.isEmpty) {
                   return '*This field cannot be empty';
@@ -133,43 +99,41 @@ class _TextAddressState extends State<TextAddress> {
                 return null;
               }),
               Gap(25),
-               ElevatedButton(
-                        onPressed: () async {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => addressshow()));
-                          // addressDetails['Name'] = nameController.text;
-                          addressDetails['COMPANY NAME'] =
-                              nameController.text;
-                          addressDetails['Contact Number'] = ctctController.text;
-                          addressDetails['Street Address'] = line1AddController.text;
-                          addressDetails['Street Address line 2'] = line2AddController.text;
-                          addressDetails['city'] = cityController.text;
-                          // addressDetails['phone'] = phoneController.text;
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AddressShow()));
+                  // addressDetails['Name'] = nameController.text;
+                  addressDetails['COMPANY NAME'] = nameController.text;
+                  addressDetails['Contact Number'] = ctctController.text;
+                  addressDetails['Street Address'] = line1AddController.text;
+                  addressDetails['Street Address line 2'] =
+                      line2AddController.text;
+                  addressDetails['city'] = cityController.text;
+                  // addressDetails['phone'] = phoneController.text;
 
-                          var details = await FirebaseFirestore.instance
-                              .collection("users")
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .get();
-                          fetchedAddressDetails = details["address"];
-                          fetchedAddressDetails.add(jsonEncode(addressDetails));
+                  var details = await FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .get();
+                  fetchedAddressDetails = details["address"];
+                  fetchedAddressDetails.add(jsonEncode(addressDetails));
 
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .update({'address': fetchedAddressDetails});
-                        },
-                        child: Text(
-                          'Add ADDRESS',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 54, 98, 98)),
-                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
-                        ),
-                      ),
+                  await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .update({'address': fetchedAddressDetails});
+                },
+                child: Text(
+                  'Add ADDRESS',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 54, 98, 98)),
+                  minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                ),
+              ),
             ],
           ),
         ),
@@ -177,10 +141,8 @@ class _TextAddressState extends State<TextAddress> {
     );
   }
 }
+
 // String _selectedLocation = 'Please choose a location';
-
-
-
 
 Container TextFieldAddress(
   String hintText,
