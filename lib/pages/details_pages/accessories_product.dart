@@ -62,8 +62,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              String? textpass = "";
-              String? thumbnail = "";
               String? description = "";
               List<CodesAndPrice>? price = [];
               String? priceofproduct = "";
@@ -399,85 +397,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    if (FirebaseAuth.instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      final selectedPrice =
-                                                          selectedPriceNotifier
-                                                              .value;
-
-                                                      // Check if selectedPrice is empty or null, and provide a default value if needed
-                                                      if (selectedPrice !=
-                                                              null ||
-                                                          selectedPrice
-                                                              .split(': ')[1]
-                                                              .isNotEmpty) {
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
-                                                        final price = double.tryParse(
-                                                                selectedPrice
-                                                                        .split(
-                                                                            ': ')[
-                                                                    1]) ??
-                                                            0;
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                        cartProvider.addToCart(
-                                                           productCode:productCode,
-                                                            price:price,
-                                                            quantity:quantity,
-                                                            imageUrl:imageUrl ?? '',
-                                                            productName:productName ?? '');
-
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Added to cart')));
-                                                      } else {
-                                                        // Handle the case where selectedPrice is empty or null
-                                                        // You might want to display an error message or take appropriate action.
-                                                      }
-                                                    } else {
-                                                      // Handle the case where the user is not signed in
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  }
-                                                },
-                                                child:
-                                                    const Text('ADD TO CART'),
-                                                style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          Colors.black),
-                                                  minimumSize:
-                                                      MaterialStateProperty.all(
-                                                          Size(150, 50)),
-                                                ),
-                                              )
+                                             
                                             ],
                                           ),
                                           Column(

@@ -14,25 +14,21 @@ class AddressShowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const resAddressShow(
-        mobileaddressShow: AddressShowMob(), deskAddressShow: AddressShow());
+    return resAddressShow(
+        mobileaddressShow: AddressShowMob(), deskAddressShow: addressshow());
   }
 }
 
-class AddressShow extends StatelessWidget {
-  const AddressShow({super.key});
+class addressshow extends StatelessWidget {
+  addressshow({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
-    final addressprovider = Provider.of<AddressProvider>(context);
-
     cartProvider.getAddressData();
     var cartItems = cartProvider.fetchedItems;
-    var addressItem = addressprovider.fetchedItems;
-
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+    double _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -49,7 +45,7 @@ class AddressShow extends StatelessWidget {
                 child: Text(
                   "DELTA",
                   style: GoogleFonts.oswald(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 45,
                       fontWeight: FontWeight.w700,
@@ -79,8 +75,7 @@ class AddressShow extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // color: Color.fromARGB(255, 157, 34, 118),
-
-                    SingleChildScrollView(
+   SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,12 +140,12 @@ class AddressShow extends StatelessWidget {
                                                       const Icon(Icons.delete),
                                                   onPressed: () {
                                                     print("yyyyyyyyyyyyyyyyy");
-                                                    addressprovider
-                                                        .removeAddress(
-                                                            index,
-                                                            addressItem[
-                                                                'address']);
-                                                    Navigator.of(context).pop();
+                                                    // addressprovider
+                                                    //     .removeAddress(
+                                                    //         index,
+                                                    //         addressItem[
+                                                    //             'address']);
+                                                    // Navigator.of(context).pop();
                                                   },
                                                 ),
                                                 IconButton(
@@ -177,14 +172,112 @@ class AddressShow extends StatelessWidget {
                         ],
                       ),
                     ),
+                    // SingleChildScrollView(
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       SizedBox(
+                    //           width: MediaQuery.of(context).size.width / 2.5,
+                    //           child: Column(
+                    //             children: [
+                    //               Row(
+                    //                 crossAxisAlignment: CrossAxisAlignment.end,
+                    //                 mainAxisAlignment: MainAxisAlignment.end,
+                    //                 children: [
+                    //                   Gap(150),
+                    //                   Icon(Icons.add),
+                    //                   TextButton(
+                    //                       onPressed: () => SideSheet.right(
+                    //                           body: TextAddress(),
+                    //                           //  TextAddress(),
+                    //                           width: MediaQuery.of(context)
+                    //                                   .size
+                    //                                   .width *
+                    //                               0.3,
+                    //                           context: context),
+                    //                       child: Text(
+                    //                         "ADD ADDRESS",
+                    //                         style:
+                    //                             TextStyle(color: Colors.black),
+                    //                       ))
+                    //                 ],
+                    //               ),
+                    //               ListView.builder(
+                    //                 scrollDirection: Axis.vertical,
+                    //                 shrinkWrap: true,
+                    //                 itemCount:
+                    //                     cartItems["address"].length,
+                    //                 itemBuilder:
+                    //                     (BuildContext context,
+                    //                         int index) {
+                    //                   // Extracting the address data from the JSON string
+                    //                   var addressData = jsonDecode(
+                    //                       cartItems["address"]
+                    //                           [index]);
 
-                    const Gap(25),
+                    //                   // Check if it's not the first item
+                    //                   bool isNotFirstItem =
+                    //                       index != 0;
+
+                    //                   // If it's not the first item, add a Divider
+                    //                   if (isNotFirstItem) {
+                    //                     return Column(
+                    //                       children: [
+                    //                         Container(
+                    //                           width: double.infinity,
+                    //                           height: 20,
+                    //                           color: Colors.white,
+                    //                         ),
+                    //                         GestureDetector(
+                    //                           onTap: () {
+                    //                             context
+                    //                                 .read<
+                    //                                     AddressProvider>()
+                    //                                 .UpdateSelectindex(
+                    //                                     context,
+                    //                                     index);
+                    //                           },
+                    //                           child: Container(
+                    //                             color: Colors.amber,
+                    //                             child:
+                    //                                 _buildAddressListItem(
+                    //                                     addressData,
+                    //                                     index),
+                    //                           ),
+                    //                         ),
+                    //                       ],
+                    //                     );
+                    //                   }
+                    //                   // If it's the first item, don't add a Divider
+                    //                   return GestureDetector(
+                    //                     onTap: () {
+                    //                       context
+                    //                           .read<AddressProvider>()
+                    //                           .UpdateSelectindex(
+                    //                               context, index);
+                    //                     },
+                    //                     child: Container(
+                    //                       child:
+                    //                           _buildAddressListItem(
+                    //                               addressData, index),
+                    //                     ),
+                    //                   );
+                    //                 },
+                    //               )
+                    //             ],
+                    //           )),
+                    //     ],
+                    //   ),
+                    // ),
+
+                    Gap(25),
                     Column(
                       children: [
                         Container(
                           width: 0.5,
                           height: 130,
-                          color: const Color.fromARGB(255, 122, 122, 122),
+                          color: Color.fromARGB(255, 122, 122, 122),
                         ),
                         Container(
                           width: 0.5,
@@ -193,11 +286,11 @@ class AddressShow extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    Container(
                       // color: Colors.amber,
-                      width: width / 2.5,
-                      height: height / 2,
-                      child: const Column(
+                      width: _width / 2.5,
+                      height: _height / 2,
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [],
                       ),
@@ -209,17 +302,24 @@ class AddressShow extends StatelessWidget {
   }
 }
 
-Widget _buildAddressListItem(
-    Map<String, dynamic> addressData, int index, Function() delete) {
+Widget _buildAddressListItem(Map<String, dynamic> addressData, int index) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Expanded(
         child: AddressData(addressData),
       ),
-      IconButton(icon: const Icon(Icons.delete), onPressed: delete),
       IconButton(
-        icon: const Icon(Icons.add_box),
+        icon: Icon(Icons.delete),
+        onPressed: () {
+          // Handle the remove button action
+          // You can use the index to identify and remove the corresponding item
+          // cartItems["address"].removeAt(index);
+          // Perform any other necessary actions
+        },
+      ),
+      IconButton(
+        icon: Icon(Icons.add_box),
         onPressed: () {
           // Handle the select button action
           // You can use the index to identify the selected item
@@ -236,28 +336,34 @@ AddressData(data) {
   return Column(
     children: [
       Text(
-        "${item['COMPANY NAME']}",
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18
+        "${item['Company Name']}",
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
             // You can also specify other text styles here, e.g., fontSize, color, etc.
             ),
       ),
       Text(
         "${item['Contact Number']}",
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
+            // You can also specify other text styles here, e.g., fontSize, color, etc.
+            ),
+      ),
+     
+      Text(
+        "${item['Street Address']}",
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
             // You can also specify other text styles here, e.g., fontSize, color, etc.
             ),
       ),
       Text(
+        "${item['Street Address line 2']}",
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
+            // You can also specify other text styles here, e.g., fontSize, color, etc.
+            ),
+      ),
+       Text(
         "${item['City']}",
         // "${item['vat']} ,  " "${item['state']}",
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18
-            // You can also specify other text styles here, e.g., fontSize, color, etc.
-            ),
-      ),
-      // Text('Selected Emirate: $selectedEmirate'"),
-      Text(
-        "${item['Street Address']}" "${item['Street Address line 2']}",
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
             // You can also specify other text styles here, e.g., fontSize, color, etc.
             ),
       ),
@@ -266,7 +372,7 @@ AddressData(data) {
 }
 
 class AddressShowMob extends StatelessWidget {
-  const AddressShowMob({super.key});
+  AddressShowMob({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +398,7 @@ class AddressShowMob extends StatelessWidget {
                 child: Text(
                   "DELTA",
                   style: GoogleFonts.oswald(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 45,
                       fontWeight: FontWeight.w700,
@@ -313,7 +419,7 @@ class AddressShowMob extends StatelessWidget {
             ],
           ),
         ),
-        body: SizedBox(
+        body: Container(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -328,7 +434,7 @@ class AddressShowMob extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
+                          Container(
                               width: MediaQuery.of(context).size.width / 2.5,
                               child: Column(
                                 children: [
@@ -336,17 +442,17 @@ class AddressShowMob extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      const Gap(150),
-                                      const Icon(Icons.add),
+                                      Gap(150),
+                                      Icon(Icons.add),
                                       TextButton(
                                           onPressed: () => SideSheet.right(
-                                              body: const TextAddress(),
+                                              body: TextAddress(),
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
                                                   0.3,
                                               context: context),
-                                          child: const Text(
+                                          child: Text(
                                             "ADD ADDRESS",
                                             style:
                                                 TextStyle(color: Colors.black),
@@ -354,8 +460,7 @@ class AddressShowMob extends StatelessWidget {
                                     ],
                                   ),
                                   Container(
-                                    color: const Color.fromARGB(
-                                        255, 174, 210, 220),
+                                    color: Color.fromARGB(255, 174, 210, 220),
                                     child: Column(
                                       children: [
                                         Column(
@@ -400,7 +505,7 @@ class AddressShowMob extends StatelessWidget {
                                                   {
                                                 // await removAdd;
                                               },
-                                              child: const Text(
+                                              child: Text(
                                                 'Deliver to this Address',
                                                 style: TextStyle(
                                                     color: Colors.white),
@@ -408,11 +513,11 @@ class AddressShowMob extends StatelessWidget {
                                               style: ButtonStyle(
                                                 backgroundColor:
                                                     MaterialStateProperty.all(
-                                                        const Color.fromARGB(
+                                                        Color.fromARGB(
                                                             255, 97, 128, 190)),
                                                 minimumSize:
                                                     MaterialStateProperty.all(
-                                                        const Size(200, 40)),
+                                                        Size(200, 40)),
                                               ),
                                             ),
                                           ],

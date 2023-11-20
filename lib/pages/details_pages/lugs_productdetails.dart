@@ -6,7 +6,6 @@ import 'package:firebase_hex/model.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
-import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -21,7 +20,6 @@ class ProductDetailsoflugs extends StatelessWidget {
   ProductDetailsoflugs({super.key});
 
   String? textpass;
-
   String? thumbnail;
   @override
   Widget build(BuildContext context) {
@@ -71,8 +69,6 @@ class ProductDetailsoflugs extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              String? textpass;
-              String? thumbnail;
               String? description;
               List<CodesAndPrice>? price = [];
               List<String>? image = [];
@@ -400,85 +396,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    if (FirebaseAuth.instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      final selectedPrice =
-                                                          selectedPriceNotifier
-                                                              .value;
-
-                                                      // Check if selectedPrice is empty or null, and provide a default value if needed
-                                                      if (selectedPrice !=
-                                                              null ||
-                                                          selectedPrice
-                                                              .split(': ')[1]
-                                                              .isNotEmpty) {
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
-                                                        final price = double.tryParse(
-                                                                selectedPrice
-                                                                        .split(
-                                                                            ': ')[
-                                                                    1]) ??
-                                                            0;
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                        cartProvider.addToCart(
-                                                            productCode:
-                                                                productCode,
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            imageUrl:
-                                                                imageUrl ?? '',
-                                                            productName:
-                                                                productName ??
-                                                                    '');
-
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Added to cart')));
-                                                      } else {}
-                                                    } else {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  }
-                                                },
-                                                style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          Colors.black),
-                                                  minimumSize:
-                                                      MaterialStateProperty.all(
-                                                          Size(150, 50)),
-                                                ),
-                                                child:
-                                                    const Text('ADD TO CART'),
-                                              )
+                                            
                                             ],
                                           ),
                                           Column(
@@ -782,8 +700,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                        color: const Color.fromARGB(
-                                            255, 173, 65, 65),
+                                        color: Colors.white,
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 3,
