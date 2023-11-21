@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class QuotationPage extends StatelessWidget {
 
@@ -117,14 +118,23 @@ class QuotationDeskPage extends StatelessWidget {
      
  floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
-        onPressed: () {
-          context.read<address_provider>().get_current_address(cartItems,context);
-// late var address_data=context.read<address_provider>().current_address;
-// print(address_data);
-// print(cartItems);
-// print('3333333333333333');
-          // Add your FloatingActionButton logic here
-          // PdfService().generateInvoice(cartItems,);
+        onPressed: () async {
+          context.read<address_provider>().get_current_address(cartItems, context);
+          // Call your backend API to increment the invoice number
+          final response = await http.post(
+            Uri.parse('https://deltabackend.com/invoice_number'),
+          );
+
+          if (response.statusCode == 200) {
+            // If the increment was successful, perform other actions
+            // You can also update the UI or display a message here
+            print('Invoice number incremented successfully');
+          } else {
+            // Handle errors appropriately
+            print('Failed to increment invoice number');
+          }
+
+          // Perform other actions if needed
         },
         child: const Icon(Icons.print),
       ),
@@ -442,14 +452,22 @@ class QuotationMobilePage extends StatelessWidget {
      
  floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
-        onPressed: () {
-          context.read<address_provider>().get_current_address(cartItems,context);
-// late var address_data=context.read<address_provider>().current_address;
-// print(address_data);
-// print(cartItems);
-// print('3333333333333333');
-          // Add your FloatingActionButton logic here
-          // PdfService().generateInvoice(cartItems,);
+        onPressed: () async {
+          context.read<address_provider>().get_current_address(cartItems, context);
+          // Call your backend API to increment the invoice number
+          final response = await http.post(
+            Uri.parse('https://deltabackend.com/invoice_number'),
+          );
+
+          if (response.statusCode == 200) {
+            // If the increment was successful, perform other actions
+            // You can also update the UI or display a message here
+            print('Invoice number incremented successfully');
+          } else {
+            // Handle errors appropriately
+            print('Failed to increment invoice number');
+          }
+          // Perform other actions if needed
         },
         child: const Icon(Icons.print),
       ),

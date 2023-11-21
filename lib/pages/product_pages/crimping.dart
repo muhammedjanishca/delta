@@ -11,35 +11,32 @@ import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
 import '../../provider/thumbnail.dart';
+import 'package:http/http.dart' as http;
 
 class CrimpingToolPage extends StatelessWidget {
   CrimpingToolPage({super.key});
 
-  int selectedImageIndex = -1; 
- // Initialize with an invalid index
+  int selectedImageIndex = -1;
+  // Initialize with an invalid index
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
-        final ImageHoverProvider =
-        Provider.of<ImageHoveroProvider>(context);
+    final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
         future: context.read<DataProvider>().newcrimpingtool,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: SpinKitCubeGrid(
-                size:140,
-                color:Deltacolor
-              ));
+            return Center(child: SpinKitCubeGrid(size: 140, color: Deltacolor));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
             final products = snapshot.data!.data;
+            final pro = snapshot.data!.data.length;
             final nonNullProducts =
                 products.where((product) => product != null).toList();
 
@@ -81,8 +78,10 @@ class CrimpingToolPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding:
-                     EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,),
+                  padding: EdgeInsets.symmetric(
+                    horizontal:
+                        MediaQuery.of(context).size.width >= 600 ? 30 : 10,
+                  ),
                   child: GridView.builder(
                     physics: ScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -98,13 +97,14 @@ class CrimpingToolPage extends StatelessWidget {
                       var productData = snapshot.data!.data[index];
 
                       return GestureDetector(
-                        onTap: () {
-                          
+                        onTap: () async {
                           selectedThumbnailProvider.setSelectedThumbnail(
-                            productData.thumbnail ?? "",index: index
-                          );
-
-                          noPdfProductPage(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
+                              productData.thumbnail ?? "",
+                              index: index);
+                          noPdfProductPage(context, index,
+                              productname: snapshot
+                                  .data!.data[index].productName!
+                                  .replaceAll(" ", "_"));
                         },
                         child: Container(
                           //  height: 200,
@@ -126,10 +126,14 @@ class CrimpingToolPage extends StatelessWidget {
                             ],
                           ),
                           padding: EdgeInsets.all(
-                             MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           margin: EdgeInsets.all(
-                            MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           child: Stack(
                             alignment: Alignment.center,
@@ -157,11 +161,12 @@ class CrimpingToolPage extends StatelessWidget {
                                   //     ),
                                   //   ),
                                   // ),
-                                    Image.network(
-                                        productData.thumbnail ?? "",
-                                        height: 150,
-                                        width:MediaQuery.of(context).size.width /5,
-                                      ),
+                                  Image.network(
+                                    productData.thumbnail ?? "",
+                                    height: 150,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
+                                  ),
                                   SizedBox(
                                     height: 8,
                                     width:
@@ -208,4 +213,5 @@ class CrimpingToolPage extends StatelessWidget {
         },
       );
     });
-  }}
+  }
+}

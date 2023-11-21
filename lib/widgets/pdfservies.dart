@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_hex/widgets/fetch_invoice.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
@@ -9,6 +10,7 @@ import '../save_file_mobile.dart' if (dart.library.html) 'save_file_web.dart';
 class PdfService {
   Future<void> generateInvoice(
       List cartItems, String current_address, last_address) async {
+    Services services = await fetchServices();
     //Create a PDF document.
     final PdfDocument document = PdfDocument();
     //Add page to the PDF
@@ -22,8 +24,9 @@ class PdfService {
     //Generate PDF grid.
     final PdfGrid grid = getGrid(cartItems);
     //Draw the header section by creating text element
-    PdfLayoutResult result =
-    drawHeader(page, pageSize, grid, current_address, last_address);
+
+    PdfLayoutResult result = drawHeader(page, pageSize, grid, current_address,
+        last_address, services.invoiceNumber!);
     //Draw grid
     drawGrid(page, grid, result);
     //Add invoice footer
@@ -39,8 +42,8 @@ class PdfService {
 
 //Draws the invoice header
 PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,
-    String current_address, last_address) {
-      int invoiceCounter = 1;
+    String current_address, last_address, int id) {
+  //  Services services = await fetchServices();
   //Draw rectangle
   page.graphics.drawRectangle(
       brush: PdfSolidBrush(PdfColor(68, 114, 196)),
@@ -74,8 +77,9 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,
           lineAlignment: PdfVerticalAlignment.bottom));
   //Create data foramt and convert it to text.
   final DateFormat format = DateFormat.yMMMMd('en_US');
+
   final String invoiceNumber =
-      'Invoice Number: 1234567890\r\n\r\nDate: ${format.format(DateTime.now())}';
+      'Invoice Number: ${id + 1}\r\n\r\nDate: ${format.format(DateTime.now())}';
   final Size contentSize = contentFont.measureString(invoiceNumber);
 
   // ignore: leading_newlines_in_multiline_strings
