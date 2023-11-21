@@ -9,8 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class QuotationPage extends StatelessWidget {
-
-QuotationPage(
+  QuotationPage(
       {required this.cartItems,
       required this.totalPrice,
       required this.vat,
@@ -18,16 +17,25 @@ QuotationPage(
   final double totalPrice;
   final cartItems;
   final totalPriceWithVAT;
-  final vat; 
+  final vat;
   @override
   Widget build(BuildContext context) {
-    return ResQuotation(mobileQuatation: QuotationMobilePage(
-      cartItems: cartItems, totalPrice: totalPrice, totalPriceWithVAT: totalPriceWithVAT, vat: vat,),
+    return ResQuotation(
+      mobileQuatation: QuotationMobilePage(
+        cartItems: cartItems,
+        totalPrice: totalPrice,
+        totalPriceWithVAT: totalPriceWithVAT,
+        vat: vat,
+      ),
       deskQuatation: QuotationDeskPage(
-        cartItems: cartItems, totalPrice: totalPrice, totalPriceWithVAT: totalPriceWithVAT, vat: vat),
-        );
+          cartItems: cartItems,
+          totalPrice: totalPrice,
+          totalPriceWithVAT: totalPriceWithVAT,
+          vat: vat),
+    );
   }
 }
+
 class QuotationDeskPage extends StatelessWidget {
   // final List<User> cartItems;
   final double totalPrice;
@@ -46,7 +54,7 @@ class QuotationDeskPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 232,230, 230),
+        backgroundColor: const Color.fromARGB(255, 232, 230, 230),
         elevation: 0,
         leadingWidth: 48,
         title: Row(
@@ -79,47 +87,46 @@ class QuotationDeskPage extends StatelessWidget {
           ],
         ),
       ),
-     body: SingleChildScrollView(
-       child: Center(
-         child: Container(
-          width: 800,
-          // width: MediaQuery.of(context).size.width/2,
-          color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height*0.2,
-                child:MyClipPath() ,
-              ),
-              Container(
-                child:_buildQuotationTable() ,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                 gradient: LinearGradient(
-                                colors: [
-                                  Colors.white,
-                                  const Color.fromARGB(255, 76, 138, 131),
-                                  const Color.fromARGB(255, 76, 138, 131)
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: 800,
+            // width: MediaQuery.of(context).size.width/2,
+            color: Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: MyClipPath(),
                 ),
-                height: MediaQuery.of(context).size.height*0.1,
-                child: MyClipPat(),
-              )
-            ],
+                Container(
+                  child: _buildQuotationTable(),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white,
+                        const Color.fromARGB(255, 76, 138, 131),
+                        const Color.fromARGB(255, 76, 138, 131)
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: MyClipPat(),
+                )
+              ],
+            ),
           ),
-         ),
-       ),
-     ),
-     
- floatingActionButton: FloatingActionButton(
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
         onPressed: () async {
-          context.read<address_provider>().get_current_address(cartItems, context);
+          context.read<AddressProvider>().get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
             Uri.parse('https://deltabackend.com/invoice_number'),
@@ -148,13 +155,13 @@ class QuotationDeskPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                width:800,
+                width: 800,
                 color: const Color.fromARGB(255, 192, 173, 114),
                 child: DataTable(
                   columnSpacing: 10.0,
                   dividerThickness: 2,
                   headingRowColor: MaterialStateColor.resolveWith(
-                    (states) =>  Color.fromARGB(255, 91, 166, 157),
+                    (states) => Color.fromARGB(255, 91, 166, 157),
                   ),
                   dataRowMaxHeight: 60,
                   headingRowHeight: 60,
@@ -164,69 +171,74 @@ class QuotationDeskPage extends StatelessWidget {
                       label: Text(
                         '                               DESCRIPTION',
                         style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'PRODUCT DESCRIPTION',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'CODE',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Product Description',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'QTY',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Product Quantity',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'UNIT',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Unit',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'PRICE',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Price per Unit',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'AMOUNT',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Total Amount',
                     ),
-                  
                   ],
                   rows: [
                     for (var i = 0; i < cartItems.length; i++)
@@ -252,7 +264,6 @@ class QuotationDeskPage extends StatelessWidget {
                               '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
                         ],
                       ),
-                   
                   ],
                 ),
               ),
@@ -266,35 +277,52 @@ class QuotationDeskPage extends StatelessWidget {
                 children: [
                   Container(
                     // color: Colors.amber,
-                    width:20,
-                    height: 10,),
+                    width: 20,
+                    height: 10,
+                  ),
                   SizedBox(
                     // color: const Color.fromARGB(255, 128, 118, 91),
                     width: 500,
-                    height:200,
+                    height: 200,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // _buildTableCell("janish"),
-                      Text("TERM AND CONDITIONS",
-                      style: TextStyle(fontWeight: FontWeight.w500,fontSize:15),),
-                      Gap(5),
-                      Text("Payment	      : 30 Dyas",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                      Text("Delivery	       : 03 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                      Text("Validity		        : 07 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                      Text("We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
-                      style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),)
+                        Text(
+                          "TERM AND CONDITIONS",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 15),
+                        ),
+                        Gap(5),
+                        Text(
+                          "Payment	      : 30 Dyas",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        Text(
+                          "Delivery	       : 03 Days",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        Text(
+                          "Validity		        : 07 Days",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        Text(
+                          "We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        )
                       ],
                     ),
                   ),
                   SizedBox(
                     width: 264,
                     height: 200,
-                  
                     child: Column(
                       children: [
-                       
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -320,7 +348,6 @@ class QuotationDeskPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold)
                           ],
                         ),
-
                         Container(
                           color: Colors.amber,
                           child: Row(
@@ -380,7 +407,7 @@ class QuotationMobilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 232,230, 230),
+        backgroundColor: const Color.fromARGB(255, 232, 230, 230),
         elevation: 0,
         leadingWidth: 48,
         title: Row(
@@ -413,47 +440,46 @@ class QuotationMobilePage extends StatelessWidget {
           ],
         ),
       ),
-     body: SingleChildScrollView(
-       child: Center(
-         child: Container(
-          width: 800,
-          // width: MediaQuery.of(context).size.width/2,
-          color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height*0.2,
-                child:MyClipPath() ,
-              ),
-              Container(
-                child:_buildQuotationTable() ,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                 gradient: LinearGradient(
-                                colors: [
-                                  Colors.white,
-                                  const Color.fromARGB(255, 76, 138, 131),
-                                  const Color.fromARGB(255, 76, 138, 131)
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: 800,
+            // width: MediaQuery.of(context).size.width/2,
+            color: Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: MyClipPath(),
                 ),
-                height: MediaQuery.of(context).size.height*0.1,
-                child: MyClipPat(),
-              )
-            ],
+                Container(
+                  child: _buildQuotationTable(),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white,
+                        const Color.fromARGB(255, 76, 138, 131),
+                        const Color.fromARGB(255, 76, 138, 131)
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: MyClipPat(),
+                )
+              ],
+            ),
           ),
-         ),
-       ),
-     ),
-     
- floatingActionButton: FloatingActionButton(
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
         onPressed: () async {
-          context.read<address_provider>().get_current_address(cartItems, context);
+          context.read<AddressProvider>().get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
             Uri.parse('https://deltabackend.com/invoice_number'),
@@ -481,13 +507,13 @@ class QuotationMobilePage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                width:800,
+                width: 800,
                 color: const Color.fromARGB(255, 192, 173, 114),
                 child: DataTable(
                   columnSpacing: 10.0,
                   dividerThickness: 2,
                   headingRowColor: MaterialStateColor.resolveWith(
-                    (states) =>  Color.fromARGB(255, 91, 166, 157),
+                    (states) => Color.fromARGB(255, 91, 166, 157),
                   ),
                   dataRowMaxHeight: 60,
                   headingRowHeight: 60,
@@ -497,69 +523,74 @@ class QuotationMobilePage extends StatelessWidget {
                       label: Text(
                         '                               DESCRIPTION',
                         style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'PRODUCT DESCRIPTION',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'CODE',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Product Description',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'QTY',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Product Quantity',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'UNIT',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Unit',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'PRICE',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Price per Unit',
                     ),
-                      DataColumn(
+                    DataColumn(
                       label: Text(
                         'AMOUNT',
                         style: TextStyle(
-                          fontSize: 15,
-                           color: Colors.white // Adjust the font size as needed
-                          // You can also apply other text styles like fontWeight, color, etc. here
-                        ),
+                            fontSize: 15,
+                            color:
+                                Colors.white // Adjust the font size as needed
+                            // You can also apply other text styles like fontWeight, color, etc. here
+                            ),
                       ),
                       tooltip: 'Total Amount',
                     ),
-                  
                   ],
                   rows: [
                     for (var i = 0; i < cartItems.length; i++)
@@ -585,7 +616,6 @@ class QuotationMobilePage extends StatelessWidget {
                               '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
                         ],
                       ),
-                   
                   ],
                 ),
               ),
@@ -599,35 +629,52 @@ class QuotationMobilePage extends StatelessWidget {
                 children: [
                   Container(
                     // color: Colors.amber,
-                    width:20,
-                    height: 10,),
+                    width: 20,
+                    height: 10,
+                  ),
                   SizedBox(
                     // color: const Color.fromARGB(255, 128, 118, 91),
                     width: 500,
-                    height:200,
+                    height: 200,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // _buildTableCell("janish"),
-                      Text("TERM AND CONDITIONS",
-                      style: TextStyle(fontWeight: FontWeight.w500,fontSize:15),),
-                      Gap(5),
-                      Text("Payment	      : 30 Dyas",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                      Text("Delivery	       : 03 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                      Text("Validity		        : 07 Days",style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),),
-                      Text("We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
-                      style: TextStyle(fontWeight: FontWeight.w300,fontSize:14),)
+                        Text(
+                          "TERM AND CONDITIONS",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 15),
+                        ),
+                        Gap(5),
+                        Text(
+                          "Payment	      : 30 Dyas",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        Text(
+                          "Delivery	       : 03 Days",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        Text(
+                          "Validity		        : 07 Days",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        Text(
+                          "We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        )
                       ],
                     ),
                   ),
                   SizedBox(
                     width: 264,
                     height: 200,
-                  
                     child: Column(
                       children: [
-                       
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -653,7 +700,6 @@ class QuotationMobilePage extends StatelessWidget {
                                 fontWeight: FontWeight.bold)
                           ],
                         ),
-
                         Container(
                           color: Colors.amber,
                           child: Row(
@@ -695,7 +741,6 @@ class QuotationMobilePage extends StatelessWidget {
   }
 }
 
-
 class MyClipPath extends StatelessWidget {
   final Color backgroundColor = Color.fromARGB(255, 76, 138, 131);
   @override
@@ -709,50 +754,54 @@ class MyClipPath extends StatelessWidget {
         child: Row(
           children: [
             Gap(15),
-             Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 20,),
-                  Text("Abdullah Shaher Alsulami Est.",
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Abdullah Shaher Alsulami Est.",
+                    style: GoogleFonts.oswald(
+                      textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    )),
+                // Gap(1),
+                Row(
+                  children: [
+                    Text(
+                      "DELTA",
                       style: GoogleFonts.oswald(
                         textStyle: TextStyle(
-                        color: Colors.black,
-                          fontSize: 15,
+                          color: Colors.black,
+                          fontSize: 35,
                           fontWeight: FontWeight.w700,
                         ),
-                      )),
-                      // Gap(1),
-                  Row(
-                    children: [
-                      Text("DELTA",style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
-             
-                      Text(
-                        "\nNATIONAL",
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Colors.black,                            
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      ),
+                    ),
+                    Text(
+                      "\nNATIONAL",
+                      style: GoogleFonts.oswald(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
-                    ],
-                  ),
-                  Text(
-                    'TRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 10),
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                Text(
+                  'TRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 10),
+                ),
+              ],
+            ),
           ],
         ),
       ),

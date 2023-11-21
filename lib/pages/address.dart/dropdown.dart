@@ -13,8 +13,8 @@ class _DropDownPageState extends State<DropDownPage> {
 
   // List of items in our dropdown menu
   var items = [
-    'Select the Emirates of the Provinces of Saudi Arabia',
-    'Riyadh (Ar-Riyad)',
+  'Select the Emirates of the Provinces of Saudi Arabia',
+  'Riyadh (Ar-Riyad)',
   'Makkah (Makkah Al-Mukarramah)',
   'Madinah (Al-Madinah Al-Munawwarah)',
   'Eastern Province (Ash Sharqiyah)',
@@ -23,7 +23,7 @@ class _DropDownPageState extends State<DropDownPage> {
   'Hail',
   'Tabuk',
   'Najran',
-  'Jazan',
+  'Jazan',  
   'Northern Borders (Al-Hudud ash Shamaliyah)',
   'Al Jawf',
   'Baha',
@@ -33,7 +33,6 @@ class _DropDownPageState extends State<DropDownPage> {
     return DropdownButton(
       // Initial Value
       value: dropdownvalue,
-
       // Down Arrow Icon
       icon: const Icon(Icons.keyboard_arrow_down),
 
@@ -42,7 +41,7 @@ class _DropDownPageState extends State<DropDownPage> {
         return DropdownMenuItem(
           value: items,
           child: Text(items),
-        );
+        );  
       }).toList(),
       // After selecting the desired option,it will
       // change button value to selected value

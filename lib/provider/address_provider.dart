@@ -8,8 +8,8 @@ import 'package:firebase_hex/widgets/pdfservies.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class address_provider with ChangeNotifier {
-     int selectIndex = 0;
+class AddressProvider with ChangeNotifier {
+  int selectIndex = 0;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late List<dynamic> arrayFromFirestore;
@@ -29,16 +29,15 @@ class address_provider with ChangeNotifier {
 // print(userSnapshot.exists && userSnapshot['address'] );
 
       if (arrayFromFirestore.isEmpty) {
-         print('aaaaaaaaaaaaaaaaaaaaaadd');
-    await    Navigator.push(
+        print('aaaaaaaaaaaaaaaaaaaaaadd');
+        await Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => TextAddress()),
         );
       } else {
-       
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  addressshow()),
+          MaterialPageRoute(builder: (context) => addressshow()),
         );
       }
       // Check if the desired field exists and contains data
@@ -48,7 +47,7 @@ class address_provider with ChangeNotifier {
   }
 
   // ignore: non_constant_identifier_names
-  Future get_current_address(cartItems,context) async {
+  Future get_current_address(cartItems, context) async {
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 // var sssd=context.read<Indexprovider>().selectIndex;
     DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
@@ -63,14 +62,13 @@ class address_provider with ChangeNotifier {
     final last_address = jsonDecode(arrayFromFirestore[selectIndex]);
     if (current_address.isNotEmpty) {
       print('22222222222222222222222222');
-      PdfService().generateInvoice(cartItems, current_address,last_address);
+      PdfService().generateInvoice(cartItems, current_address, last_address);
     }
   }
 
   UpdateSelectindex(context, id) {
     print("___nottttapped");
-      selectIndex = id;
-      notifyListeners();
-    }
+    selectIndex = id;
+    notifyListeners();
+  }
 }
-

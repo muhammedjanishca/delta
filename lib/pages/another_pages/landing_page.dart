@@ -1,17 +1,14 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/pages/address.dart/addresShow.dart';
-import 'package:firebase_hex/pages/address.dart/first_address.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/address_provider.dart';
-
 
 class LandinPage extends StatelessWidget {
   @override
@@ -23,7 +20,6 @@ class LandinPage extends StatelessWidget {
 }
 
 class DesktopLanding extends StatelessWidget {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -63,7 +59,8 @@ class DesktopLanding extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 1.5,
               color: Colors.transparent,
               child: Image.network(
-                'https://i0.wp.com/www.compliancesigns.com/blog/wp-content/uploads/2023/05/5-Electrical-Safety-Tips.jpg?fit=1200%2C630&ssl=1',
+                "https://knowhow.distrelec.com/wp-content/uploads/2021/11/iStock-1477511739.jpg",
+                // 'https://i0.wp.com/www.compliancesigns.com/blog/wp-content/uploads/2023/05/5-Electrical-Safety-Tips.jpg?fit=1200%2C630&ssl=1',
                 width: 200,
                 height: 200,
                 // color: Colors.amber,
@@ -82,7 +79,7 @@ class DesktopLanding extends StatelessWidget {
                         "EXPERIENCE THE NEW\nDELTA PREMIUM PRODUCTS",
                         style: GoogleFonts.abrilFatface(
                           textStyle: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: 35,
                               shadows: <Shadow>[
                                 Shadow(
@@ -98,7 +95,7 @@ class DesktopLanding extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       ElevatedButton(
                         // onPressed: (){
@@ -107,26 +104,27 @@ class DesktopLanding extends StatelessWidget {
                         //       MaterialPageRoute(builder: (context) =>const TextTheAddress()),
                         //     );
                         // },
-                       onPressed: () async {
-                       context.read<address_provider>().
-                       isUserDataAvailable(context);
-                      }, 
-                    //     onPressed: () async {
-                    //        bool isDataAvailable = await
-                    //  context.read<address_provider>().
-                    //       isUserDataAvailable(context);
-                    //       if (isDataAvailable) {
-                    //            Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(builder: (context) =>TextTheAddress()),
-                    //         );
-                    //       } else {
-                    //       Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(builder: (context) => AddressShowPage ()),
-                    //         );
-                    //       }
-                    //     },
+                        onPressed: () async {
+                          context
+                              .read<AddressProvider>()
+                              .isUserDataAvailable(context);
+                        },
+                        //     onPressed: () async {
+                        //        bool isDataAvailable = await
+                        //  context.read<address_provider>().
+                        //       isUserDataAvailable(context);
+                        //       if (isDataAvailable) {
+                        //            Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(builder: (context) =>TextTheAddress()),
+                        //         );
+                        //       } else {
+                        //       Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(builder: (context) => AddressShowPage ()),
+                        //         );
+                        //       }
+                        //     },
                         child: Text(
                           'CHECKOUT',
                           style: TextStyle(color: Colors.white),
@@ -169,8 +167,10 @@ class DesktopLanding extends StatelessWidget {
                           Text(headingss[index],
                               style: GoogleFonts.abrilFatface(
                                 textStyle: TextStyle(
-                                    color:const Color.fromARGB(255, 54, 98, 98),
-                                    fontSize: 20,fontWeight: FontWeight.w700),
+                                    color:
+                                        const Color.fromARGB(255, 54, 98, 98),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700),
                               )),
                           Text(
                             descriptionn[index],
@@ -218,7 +218,8 @@ class DesktopLanding extends StatelessWidget {
                       ))),
               Expanded(
                   child: Container(
-                color: const Color.fromARGB(255, 122, 111, 111),
+                color: Colors.white,
+                child: Image.network("https://www.lkea.in/assets/images/about/2.jpg"),
               ))
             ],
           ),
@@ -277,7 +278,9 @@ class MobileLanding extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 1.5,
               color: Colors.transparent,
               child: Image.network(
-                'https://i0.wp.com/www.compliancesigns.com/blog/wp-content/uploads/2023/05/5-Electrical-Safety-Tips.jpg?fit=1200%2C630&ssl=1',
+                                "https://knowhow.distrelec.com/wp-content/uploads/2021/11/iStock-1477511739.jpg",
+
+                // 'https://i0.wp.com/www.compliancesigns.com/blog/wp-content/uploads/2023/05/5-Electrical-Safety-Tips.jpg?fit=1200%2C630&ssl=1',
                 // 'https://electrek.co/wp-content/uploads/sites/3/2021/05/bird-three-header-scooter.jpg?quality=82&strip=all',
                 width: 200,
                 height: 200,
@@ -297,7 +300,7 @@ class MobileLanding extends StatelessWidget {
                         "EXPERIENCE THE NEW\nDELTA PREMIUM PRODUCTS",
                         style: GoogleFonts.abrilFatface(
                           textStyle: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               // color: Color.fromARGB(255, 54, 98, 98),
                               fontSize: 35,
                               shadows: <Shadow>[
@@ -314,7 +317,7 @@ class MobileLanding extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       // ElevatedButton(
                       //   onPressed: () {
@@ -433,13 +436,24 @@ class MobileLanding extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                 Gap(15),
                 Image.asset('assets/image/hex-logo-new.png'),
-                Text(
-                  "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                Gap(15),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text("RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),),
                 )
+                // Text(
+                //   "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                // )
               ],
             )),
+            Container(
+              color: Colors.white,
+              child: Image.network("https://www.lkea.in/assets/images/about/2.jpg"),
+            ),
         Container(
             color: const Color.fromARGB(255, 255, 255, 255),
             height: 1000,
