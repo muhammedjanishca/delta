@@ -6,6 +6,7 @@ import 'package:firebase_hex/responsive/res_cartpage.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../login_and_signing/authentication.dart';
 import '../../provider/cart_provider.dart';
 import '../../provider/user_input_provider.dart';
 import 'quotationPage.dart';
@@ -30,8 +31,21 @@ class DeskCart extends StatefulWidget {
 }
 
 class _DeskCartState extends State<DeskCart> {
+  // int cartCount = 0;
+  int addresscount = 0;
   @override
   Widget build(BuildContext context) {
+    var userr = Provider.of<AuthenticationHelper>(context).getCurrentUser();
+    if (userr != null) {
+      Provider.of<AddressProvider>(context)
+          .get_current_address(addresscount, context);
+    }
+//         var user = Provider.of<AddressProvider>(context).isUserDataAvailable(context);
+//  if (user != null) {
+//       Provider.of<AddressProvider>(context).get_current_address(addresscount, context);
+//       addresscount =
+//           Provider.of<AddressProvider>(context).selectIndex;
+//     }
     final userInputProvider = Provider.of<UserInputProvider>(context);
     final FirebaseAuth auth = FirebaseAuth.instance;
     final cartProvider = Provider.of<CartProvider>(context);
@@ -57,6 +71,12 @@ class _DeskCartState extends State<DeskCart> {
                   width: MediaQuery.of(context).size.width / 2,
                   child: Column(
                     children: [
+                       userr !=null
+                       ?Container(
+                        height: 30,
+                        color: Colors.amber,
+                       ):
+                       
                       SizedBox(
                         height: 60,
                         child: Row(
@@ -333,21 +353,26 @@ class _DeskCartState extends State<DeskCart> {
                               height: 40,
                             ),
                             ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => QuotationPage(
-                                              totalPrice:
-                                                  cartProvider.getTotalPrice(),
-                                              cartItems: cartItems["cartItems"],
-                                              totalPriceWithVAT: cartProvider
-                                                  .getTotalPriceWithVAT(
-                                                      subtotal, vatRate),
-                                              vat: cartProvider.calculateVAT(
-                                                  subtotal, vatRate),
-                                            )));
-                              },
+                               onPressed: () async {
+                          context
+                              .read<AddressProvider>()
+                              .isUserDataAvailable(context);
+                        },
+                              // onPressed: () {
+                              //   Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (context) => QuotationPage(
+                              //                 totalPrice:
+                              //                     cartProvider.getTotalPrice(),
+                              //                 cartItems: cartItems["cartItems"],
+                              //                 totalPriceWithVAT: cartProvider
+                              //                     .getTotalPriceWithVAT(
+                              //                         subtotal, vatRate),
+                              //                 vat: cartProvider.calculateVAT(
+                              //                     subtotal, vatRate),
+                              //               )));
+                              // },
                               child: const Text(
                                 'GANERATE QUATATION',
                                 style: TextStyle(color: Colors.white),
@@ -759,20 +784,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 ),
               ),
               child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuotationPage(
-                        totalPrice: cartProvider.getTotalPrice(),
-                        cartItems: cartItems["cartItems"],
-                        totalPriceWithVAT: cartProvider.getTotalPriceWithVAT(
-                            subtotal, vatRate),
-                        vat: cartProvider.calculateVAT(subtotal, vatRate),
-                      ),
-                    ),
-                  );
-                },
+                onPressed: () async {
+                          context
+                              .read<AddressProvider>()
+                              .isUserDataAvailable(context);
+                        },
                 child: const Text(
                   'GENERATE QUOTATION',
                   style: TextStyle(color: Colors.white),

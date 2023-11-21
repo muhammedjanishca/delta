@@ -135,7 +135,6 @@ class DesktopAppBar extends StatelessWidget {
 
                     SizedBox(width: MediaQuery.of(context).size.width / 15),
 
-                    // Spacer(),
                     Expanded(child: _searchBox(context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 

@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_hex/pages/address.dart/addresShow.dart';
-// import 'package:firebase_hex/pages/address.dart/first_address.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/landing.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/address_provider.dart';
 
 class LandinPage extends StatelessWidget {

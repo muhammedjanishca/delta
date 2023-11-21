@@ -1,3 +1,22 @@
+import 'package:flutter/material.dart';
+
+class NothingPageOk extends StatelessWidget {
+  var addressData;
+   NothingPageOk({super.key, required this.addressData});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        child: Text(addressData.toString()),
+      ),
+    );
+  }
+}
+
+
+
 // import 'dart:convert';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
