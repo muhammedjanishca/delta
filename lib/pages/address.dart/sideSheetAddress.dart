@@ -195,7 +195,7 @@ class _TextAddressState extends State<TextAddress> {
                             addressDetails['Street Address line 2'] =
                                 line2AddController.text;
                             addressDetails['City'] = cityController.text;
-                            addressDetails['location'] = selectedLocation;
+                            addressDetails['Location'] = selectedLocation;
                             // addressDetails['phone'] = phoneController.text;
 
                             var details = await FirebaseFirestore.instance
@@ -326,6 +326,7 @@ class _TextAddressState extends State<TextAddress> {
                       Gap(25),
                       ElevatedButton(
                         onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -336,7 +337,7 @@ class _TextAddressState extends State<TextAddress> {
                           addressDetails['Street Address'] = line1AddController.text;
                           addressDetails['Street Address line 2'] = line2AddController.text;
                           addressDetails['City'] = cityController.text;
-                          addressDetails['location'] = selectedLocation;
+                          addressDetails['Location'] = selectedLocation;
 
 
                           var details = await FirebaseFirestore.instance
@@ -350,7 +351,8 @@ class _TextAddressState extends State<TextAddress> {
                               .collection('users')
                               .doc(FirebaseAuth.instance.currentUser!.uid)
                               .update({'address': fetchedAddressDetails});
-                        },
+                        }
+          },
                         child: Text(
                           'Add ADDRESS',
                           style: TextStyle(color: Colors.white),
@@ -375,8 +377,8 @@ class _TextAddressState extends State<TextAddress> {
 Container TextFieldAddress(
   String hintText,
   TextInputType keyboardType,
-  TextEditingController controller,
-  BuildContext context,
+   controller,
+   context,
   String? Function(String?)? validator,
 ) {
   return Container(
@@ -389,7 +391,7 @@ Container TextFieldAddress(
         labelText: hintText,
         labelStyle: TextStyle(
           fontSize: 14,
-          color: const Color.fromARGB(255, 236, 71, 126),
+          color: const Color.fromARGB(255, 54, 98, 98),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(

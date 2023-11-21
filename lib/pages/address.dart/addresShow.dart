@@ -136,7 +136,8 @@ class addressshow extends StatelessWidget {
                                                   height: 150,
                                                   color: const Color.fromARGB(
                                                       255, 136, 191, 200),
-                                                  child: AddressData(addressData),
+                                                  child:
+                                                      AddressData(addressData),
                                                 ),
                                                 trailing: IconButton(
                                                   onPressed: () {},
@@ -167,7 +168,6 @@ class addressshow extends StatelessWidget {
                                                 255, 136, 191, 200),
                                             child: _buildAddressListItem(
                                                 addressData, index),
-                                                
                                           ),
                                         ),
                                       );
@@ -192,15 +192,80 @@ class addressshow extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
-                      // color: Colors.amber,
+                    SizedBox(
                       width: _width / 2.5,
                       height: _height / 2,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(onPressed: (){
-Navigator.push(
+                          SizedBox(
+                        width: MediaQuery.of(context).size.width / 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            // SizedBox(
+                            //   height: MediaQuery.of(context).size.height / 6,
+                            // ),
+                            const Text(
+                              'Summary\n',
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.w500),
+                            ),
+                            // SizedBox(height: 47),
+                            ListTile(
+                              title: const Text(
+                                'Subtotal',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400),
+                              ),
+                              trailing: Text(
+                                '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            ListTile(
+                              title: Text('VAT (${vatRate}%)'),
+                              trailing: Text('\$${vat.toStringAsFixed(2)}'),
+                            ),
+                            const Divider(
+                              height:
+                                  1, // Adjust the height of the divider as needed
+                              color: Color.fromARGB(255, 147, 146,
+                                  146), // Choose the color of the divider
+                              thickness:
+                                  1, // Specify the thickness of the divider line
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            ListTile(
+                              title: const Text(
+                                'Total Price (with VAT)',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                              trailing: Text(
+                                '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            const Divider(
+                              height:
+                                  1, // Adjust the height of the divider as needed
+                              color: Color.fromARGB(255, 147, 146,
+                                  146), // Choose the color of the divider
+                              thickness:
+                                  1, // Specify the thickness of the divider line
+                            ),
+
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            ElevatedButton(
+                               onPressed: () {
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => QuotationPage(
@@ -213,8 +278,30 @@ Navigator.push(
                                               vat: cartProvider.calculateVAT(
                                                   subtotal, vatRate),
                                             )));
-                          }, child: Text("VIew QUAt"))
-                        ],
+                              },
+                             
+                              child: const Text(
+                                'GANERATE QUATATION',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ButtonStyle(
+                                shape: MaterialStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.black),
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(150, 55)),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                          ],
+                        ),
+                      ),
+                                                 ],
                       ),
                     )
                   ],
@@ -245,7 +332,7 @@ AddressData(data) {
   return Column(
     children: [
       Text(
-        "${item['COMPANY NAME']}",
+        "${item['Company Name']}",
         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
             // You can also specify other text styles here, e.g., fontSize, color, etc.
             ),
@@ -257,14 +344,27 @@ AddressData(data) {
             ),
       ),
       Text(
-        "${item['City']}",
+        "${item['Street Address']}",
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
+            // You can also specify other text styles here, e.g., fontSize, color, etc.
+            ),
+      ),
+      Text(
+        "${item['Street Address line 2']}",
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
+            // You can also specify other text styles here, e.g., fontSize, color, etc.
+            ),
+      ),
+      Text(
+        "${item['Location']}",
         // "${item['vat']} ,  " "${item['state']}",
         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
             // You can also specify other text styles here, e.g., fontSize, color, etc.
             ),
       ),
       Text(
-        "${item['Street Address']} ,  " "${item['Street Address line 2']}",
+        "${item['City']}",
+        // "${item['vat']} ,  " "${item['state']}",
         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
             // You can also specify other text styles here, e.g., fontSize, color, etc.
             ),
