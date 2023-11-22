@@ -181,10 +181,7 @@ class _TextAddressState extends State<TextAddress> {
                         Gap(25),
                         ElevatedButton(
                           onPressed: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => addressshow()));
+                           
                             // addressDetails['Name'] = nameController.text;
                             addressDetails['Company Name'] =
                                 nameController.text;
@@ -210,6 +207,10 @@ class _TextAddressState extends State<TextAddress> {
                                 .collection('users')
                                 .doc(FirebaseAuth.instance.currentUser!.uid)
                                 .update({'address': fetchedAddressDetails});
+                                 Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => addressshow()));
                           },
                           child: Text(
                             'Add ADDRESS',
