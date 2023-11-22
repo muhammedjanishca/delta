@@ -892,7 +892,11 @@ packages:
       sha256: dd904f795d4b4f3b870833847c461801f6750a9fa8e61ea5ac53f9422b31f250
       url: "https://pub.dev"
     source: hosted
+<<<<<<< HEAD
     version: "1.9.1"
+=======
+    version: "1.10.0"
+>>>>>>> 3acd960595a5c26d83e4d37bac6e166ca064bb8a
   sprintf:
     dependency: transitive
     description:

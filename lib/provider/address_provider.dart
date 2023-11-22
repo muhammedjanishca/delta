@@ -14,6 +14,13 @@ class AddressProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late List<dynamic> arrayFromFirestore;
   late String current_address;
+    
+     
+    //                                            ##  ADDRESS PAGE CONDITION (GENERATE QUOTATION, ELEVATED BUTTON IN CART.DART) ##
+    //#############################################################################################################
+    //##################################################################################################################################
+    //##################################################################################################################################
+
 
   Future<bool> isUserDataAvailable(context) async {
     User? user = _auth.currentUser;

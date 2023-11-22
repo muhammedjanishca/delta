@@ -210,6 +210,10 @@ class _TextAddressState extends State<TextAddress> {
                                 .collection('users')
                                 .doc(FirebaseAuth.instance.currentUser!.uid)
                                 .update({'address': fetchedAddressDetails});
+                                 Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddressShow()));
                           },
                           child: Text(
                             'Add ADDRESS',
