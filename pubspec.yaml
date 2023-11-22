@@ -68,6 +68,8 @@ dependencies:
   orm: ^3.4.4
   sqflite: ^2.3.0
   moor: ^4.6.1+1
+  flutter_glow: ^0.3.0
+  obs: ^0.0.1
 
 dev_dependencies:
   flutter_test:

@@ -29,7 +29,7 @@ class AddressProvider with ChangeNotifier {
 // print(userSnapshot.exists && userSnapshot['address'] );
 
       if (arrayFromFirestore.isEmpty) {
-        print('aaaaaaaaaaaaaaaaaaaaaadd');
+        // print('aaaaaaaaaaaaaaaaaaaaaadd');
         await Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => TextAddress()),
@@ -37,18 +37,31 @@ class AddressProvider with ChangeNotifier {
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => addressshow()),
+          MaterialPageRoute(builder: (context) => AddressShow()),
         );
       }
-      // Check if the desired field exists and contains data
-      // return userSnapshot.exists && userSnapshot['address'] != null;
     }
     return false;
   }
 
-  // ignore: non_constant_identifier_names
+  void deleteAddress(int index) async{
+    arrayFromFirestore.removeAt(index);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_auth.currentUser!.uid)
+        .update({'address': arrayFromFirestore});
+    notifyListeners();
+    // if (index >= 5 && index < arrayFromFirestore.length) {
+    //   arrayFromFirestore.removeAt(index);
+    //   notifyListeners();
+    // } else {
+    //   print("Invalid index: $index");
+    //   print(arrayFromFirestore[index]);
+    // }
+  }
+
   Future get_current_address(cartItems, context) async {
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 // var sssd=context.read<Indexprovider>().selectIndex;
     DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
         .collection("users")
@@ -61,13 +74,13 @@ class AddressProvider with ChangeNotifier {
     current_address = arrayFromFirestore[selectIndex];
     final last_address = jsonDecode(arrayFromFirestore[selectIndex]);
     if (current_address.isNotEmpty) {
-      print('22222222222222222222222222');
+      // print('22222222222222222222222222');
       PdfService().generateInvoice(cartItems, current_address, last_address);
     }
   }
 
   UpdateSelectindex(context, id) {
-    print("___nottttapped");
+    // print("___nottttapped");
     selectIndex = id;
     notifyListeners();
   }

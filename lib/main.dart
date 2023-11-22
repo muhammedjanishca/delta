@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
+import 'package:firebase_hex/pages/address.dart/color_change_provider.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/another_pages/appbar_page.dart';
 import 'package:firebase_hex/pages/another_pages/cart.dart';
@@ -70,6 +71,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
         ChangeNotifierProvider(create: (context) => AddressProvider()),
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
+        ChangeNotifierProvider(create: (context) => ColorChangingProvider()),
       ],
       child: MaterialApp(
         //this use using for handle null data

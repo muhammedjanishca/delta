@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_hex/widgets/animation_button.dart';
 import 'package:firebase_hex/widgets/customtextfield.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
 import 'package:flutter/material.dart';
@@ -252,12 +253,12 @@ class deskBottomSheett extends StatelessWidget {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 // All text fields are valid, you can perform your action here
-                                // sendEmail(
-                                //     nameController.text,
-                                //     emailController.text,
-                                //     companyNameController.text,
-                                //     phoneNumberController.text,
-                                //     messageController.text);
+                                sendEmail(
+                                    nameController.text,
+                                    emailController.text,
+                                    companyNameController.text,
+                                    phoneNumberController.text,
+                                    messageController.text);
                               }
                             },
                             child: Text(
@@ -271,6 +272,7 @@ class deskBottomSheett extends StatelessWidget {
                                   MaterialStateProperty.all(Size(150, 50)),
                             ),
                           ),
+                          // GlowingButton()
                         ],
                       ),
                     )

@@ -79,7 +79,7 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,
   final DateFormat format = DateFormat.yMMMMd('en_US');
 
   final String invoiceNumber =
-      'Invoice Number: ${id + 1}\r\n\r\nDate: ${format.format(DateTime.now())}';
+      'Invoice Number: ${id}\r\n\r\nDate: ${format.format(DateTime.now())}';
   final Size contentSize = contentFont.measureString(invoiceNumber);
 
   // ignore: leading_newlines_in_multiline_strings
