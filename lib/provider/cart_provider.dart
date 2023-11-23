@@ -9,6 +9,7 @@ class CartProvider with ChangeNotifier {
   List<dynamic> _cartData = [];
   var fetchedItems;
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final user = FirebaseAuth.instance.currentUser!.uid;
 
   List<CartItem> get cartItems => _cartItems;
   getCartData() async {
@@ -51,8 +52,6 @@ void addToCart({String? productCode, double? price, required int quantity, requi
       .update({'cartItems': _cartData});
   notifyListeners();
 }
-
-
 
   void removeFromCart(int index, var cartItems) async {
     cartItems.removeAt(index);

@@ -2,44 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-// Future<String> fetchInvoiceNumber() async {
-//   final response = await http.get(
-//     Uri.parse('https://deltabackend.com/fetchinvoice'),
-//   );
-
-//   if (response.statusCode == 200) {
-//     final Map<String, dynamic> data = json.decode(response.body);
-//     final String invoiceNumber = data['invoiceNumber'].toString();
-//     return invoiceNumber;
-//   } else {
-//     print('Failed to fetch latest invoice number');
-//     return 'N/A'; // Handle the case when fetching fails
-//   }
-// }
-
-class Album {
-  final String id;
-
-  const Album({
-    required this.id,
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'invoiceNumber': String id,
-      } =>
-        Album(
-          id: id,
-        ),
-      _ => throw const FormatException('Failed to load album.'),
-    };
-  }
-}
-
 Future<Services> fetchServices() async {
   final response =
-      await http.get(Uri.parse('https://deltabackend.com/fetchinvoice'));
+      await http.post(Uri.parse('https://deltabackend.com/store_invoice'));
 
   if (response.statusCode == 200) {
     // If the server returns a 200 OK response, parse the JSON
@@ -57,16 +22,20 @@ String servicesToJson(Services data) => json.encode(data.toJson());
 
 class Services {
   int? invoiceNumber;
+  String? u_id;
 
   Services({
     this.invoiceNumber,
+    this.u_id,
   });
 
   factory Services.fromJson(Map<String, dynamic> json) => Services(
-        invoiceNumber: json["invoiceNumber"],
+        invoiceNumber: json["invoice_id"],
+        u_id: json["u_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "invoiceNumber": invoiceNumber,
+        "u_id": u_id,
       };
 }
