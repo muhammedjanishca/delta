@@ -3,10 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/address.dart/addresShow.dart';
 import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
-import 'package:firebase_hex/provider/indexprovider.dart';
 import 'package:firebase_hex/widgets/pdfservies.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class AddressProvider with ChangeNotifier {
@@ -15,6 +13,13 @@ class AddressProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late List<dynamic> arrayFromFirestore;
   late String current_address;
+    
+     
+    //                                            ##  ADDRESS PAGE CONDITION (GENERATE QUOTATION, ELEVATED BUTTON IN CART.DART) ##
+    //#############################################################################################################
+    //##################################################################################################################################
+    //##################################################################################################################################
+
 
   Future<bool> isUserDataAvailable(context) async {
     User? user = _auth.currentUser;
@@ -30,7 +35,7 @@ class AddressProvider with ChangeNotifier {
 // print(userSnapshot.exists && userSnapshot['address'] );
 
       if (arrayFromFirestore.isEmpty) {
-        print('aaaaaaaaaaaaaaaaaaaaaadd');
+        // print('aaaaaaaaaaaaaaaaaaaaaadd');
         await Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => TextAddress()),
@@ -38,18 +43,31 @@ class AddressProvider with ChangeNotifier {
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => addressshow()),
+          MaterialPageRoute(builder: (context) => AddressShow()),
         );
       }
-      // Check if the desired field exists and contains data
-      // return userSnapshot.exists && userSnapshot['address'] != null;
     }
     return false;
   }
 
-  // ignore: non_constant_identifier_names
+  void deleteAddress(int index) async{
+    arrayFromFirestore.removeAt(index);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_auth.currentUser!.uid)
+        .update({'address': arrayFromFirestore});
+    notifyListeners();
+    // if (index >= 5 && index < arrayFromFirestore.length) {
+    //   arrayFromFirestore.removeAt(index);
+    //   notifyListeners();
+    // } else {
+    //   print("Invalid index: $index");
+    //   print(arrayFromFirestore[index]);
+    // }
+  }
+
   Future get_current_address(cartItems, context) async {
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 // var sssd=context.read<Indexprovider>().selectIndex;
     DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
         .collection("users")
@@ -74,7 +92,7 @@ class AddressProvider with ChangeNotifier {
   }
 
   UpdateSelectindex(context, id) {
-    print("___nottttapped");
+    // print("___nottttapped");
     selectIndex = id;
     notifyListeners();
   }

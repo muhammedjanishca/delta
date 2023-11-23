@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
 import 'package:firebase_hex/pages/another_pages/quotationPage.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/res_address_show.dart';
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,12 +16,14 @@ class AddressShowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return resAddressShow(
-        mobileaddressShow: AddressShowMob(), deskAddressShow: addressshow());
+        mobileaddressShow: AddressShowMob(), deskAddressShow: AddressShow());
   }
 }
 
-class addressshow extends StatelessWidget {
-  addressshow({super.key});
+enum SingingCharacter { option1, option2 }
+
+class AddressShow extends StatelessWidget {
+  AddressShow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class addressshow extends StatelessWidget {
     double vat = cartProvider.calculateVAT(subtotal, vatRate);
     double totalPriceWithVAT =
         cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -82,8 +82,6 @@ class addressshow extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // color: Color.fromARGB(255, 157, 34, 118),
-
                     SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +94,10 @@ class addressshow extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Gap(150),
+                                    // SizedBox(
+                                    //   child:  isNotFirstItem =Index !=0,
+                                    // ),
+                                    // const Gap(150),
                                     Icon(Icons.add),
                                     TextButton(
                                         onPressed: () => SideSheet.right(
@@ -114,69 +115,59 @@ class addressshow extends StatelessWidget {
                                   ],
                                 ),
                                 ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount: cartItems["address"].length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      var addressData = jsonDecode(
-                                          cartItems["address"][index]);
-                                      bool isNotFirstItem = index != 0;
-                                      if (isNotFirstItem) {
-                                        return GestureDetector(
-                                            onTap: () {
-                                              context
-                                                  .read<AddressProvider>()
-                                                  .UpdateSelectindex(
-                                                      context, index);
-                                            },
-                                            child: ListTile(
-                                                selectedTileColor: Colors.black,
-                                                title: Container(
-                                                  height: 150,
-                                                  color: const Color.fromARGB(
-                                                      255, 136, 191, 200),
-                                                  child:
-                                                      AddressData(addressData),
-                                                ),
-                                                trailing: IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(Icons.delete),
-                                                  //   trailing: isNotFirstItem
-                                                  //   ? IconButton( icon:  Icon(Icons.delete),
-                                                  //   onPressed: (){
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: cartItems["address"].length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    var addressData =
+                                        jsonDecode(cartItems["address"][index]);
+                                    bool isSelected = context
+                                            .watch<AddressProvider>()
+                                            .selectIndex ==
+                                        index;
 
-                                                  //   },
-
-                                                  // )
-                                                  // :null
-                                                )));
-                                      }
-                                      return GestureDetector(
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4.0),
+                                      child: GestureDetector(
                                         onTap: () {
                                           context
                                               .read<AddressProvider>()
                                               .UpdateSelectindex(
                                                   context, index);
                                         },
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 15, left: 15),
-                                          child: Container(
-                                            height: 150,
-                                            color: Color.fromARGB(
-                                                255, 136, 191, 200),
-                                            child: _buildAddressListItem(
-                                                addressData, index),
+                                        child: Container(
+                                          color: isSelected
+                                              ? Color.fromARGB(255, 239, 234,
+                                                  90) // Set the color for selected state
+                                              : const Color.fromARGB(
+                                                  255,
+                                                  136,
+                                                  191,
+                                                  200), // Set the color for unselected state
+                                          child: ListTile(
+                                            selectedTileColor: Colors.black,
+                                            title: AddressData(addressData),
+                                            trailing: IconButton(
+                                              icon: Icon(Icons.close),
+                                              onPressed: () {
+                                                // Delete the corresponding list tile
+                                                context
+                                                    .read<AddressProvider>()
+                                                    .deleteAddress(index);
+                                              },
+                                            ),
                                           ),
                                         ),
-                                      );
-                                    })
+                                      ),
+                                    );
+                                  },
+                                )
                               ])),
                         ],
                       ),
                     ),
-
                     Gap(25),
                     Column(
                       children: [
@@ -193,115 +184,122 @@ class addressshow extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      width: _width / 2.5,
-                      height: _height / 2,
+                      width: width / 2.5,
+                      height: height / 2,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            // SizedBox(
-                            //   height: MediaQuery.of(context).size.height / 6,
-                            // ),
-                            const Text(
-                              'Summary\n',
-                              style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.w500),
+                            width: MediaQuery.of(context).size.width / 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                // SizedBox(
+                                //   height: MediaQuery.of(context).size.height / 6,
+                                // ),
+                                const Text(
+                                  'Summary\n',
+                                  style: TextStyle(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                // SizedBox(height: 47),
+                                ListTile(
+                                  title: const Text(
+                                    'Subtotal',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  trailing: Text(
+                                    '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                ListTile(
+                                  title: Text('VAT (${vatRate}%)'),
+                                  trailing: Text('\$${vat.toStringAsFixed(2)}'),
+                                ),
+                                const Divider(
+                                  height:
+                                      1, // Adjust the height of the divider as needed
+                                  color: Color.fromARGB(255, 147, 146,
+                                      146), // Choose the color of the divider
+                                  thickness:
+                                      1, // Specify the thickness of the divider line
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ListTile(
+                                  title: const Text(
+                                    'Total Price (with VAT)',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  trailing: Text(
+                                    '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Divider(
+                                  height:
+                                      1, // Adjust the height of the divider as needed
+                                  color: Color.fromARGB(255, 147, 146,
+                                      146), // Choose the color of the divider
+                                  thickness:
+                                      1, // Specify the thickness of the divider line
+                                ),
+                                const SizedBox(
+                                  height: 40,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => QuotationPage(
+                                                  totalPrice: cartProvider
+                                                      .getTotalPrice(),
+                                                  cartItems:
+                                                      cartItems["cartItems"],
+                                                  totalPriceWithVAT:
+                                                      cartProvider
+                                                          .getTotalPriceWithVAT(
+                                                              subtotal,
+                                                              vatRate),
+                                                  vat:
+                                                      cartProvider.calculateVAT(
+                                                          subtotal, vatRate),
+                                                )));
+                                  },
+                                  child: const Text(
+                                    'GANERATE QUATATION',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  style: ButtonStyle(
+                                    shape: MaterialStatePropertyAll(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15))),
+                                    backgroundColor:
+                                        MaterialStateProperty.all(Colors.black),
+                                    minimumSize: MaterialStateProperty.all(
+                                        const Size(150, 55)),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 40,
+                                ),
+                              ],
                             ),
-                            // SizedBox(height: 47),
-                            ListTile(
-                              title: const Text(
-                                'Subtotal',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w400),
-                              ),
-                              trailing: Text(
-                                '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            ListTile(
-                              title: Text('VAT (${vatRate}%)'),
-                              trailing: Text('\$${vat.toStringAsFixed(2)}'),
-                            ),
-                            const Divider(
-                              height:
-                                  1, // Adjust the height of the divider as needed
-                              color: Color.fromARGB(255, 147, 146,
-                                  146), // Choose the color of the divider
-                              thickness:
-                                  1, // Specify the thickness of the divider line
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            ListTile(
-                              title: const Text(
-                                'Total Price (with VAT)',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                              trailing: Text(
-                                '\$${totalPriceWithVAT.toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            const Divider(
-                              height:
-                                  1, // Adjust the height of the divider as needed
-                              color: Color.fromARGB(255, 147, 146,
-                                  146), // Choose the color of the divider
-                              thickness:
-                                  1, // Specify the thickness of the divider line
-                            ),
-
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            ElevatedButton(
-                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => QuotationPage(
-                                              totalPrice:
-                                                  cartProvider.getTotalPrice(),
-                                              cartItems: cartItems["cartItems"],
-                                              totalPriceWithVAT: cartProvider
-                                                  .getTotalPriceWithVAT(
-                                                      subtotal, vatRate),
-                                              vat: cartProvider.calculateVAT(
-                                                  subtotal, vatRate),
-                                            )));
-                              },
-                             
-                              child: const Text(
-                                'GANERATE QUATATION',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: ButtonStyle(
-                                shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15))),
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.black),
-                                minimumSize: MaterialStateProperty.all(
-                                    const Size(150, 55)),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 40,
-                            ),
-                          ],
-                        ),
-                      ),
-                                                 ],
+                          ),
+                        ],
                       ),
                     )
                   ],

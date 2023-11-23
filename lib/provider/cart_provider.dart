@@ -131,7 +131,7 @@ double getTotalPriceWithVAT(double subtotal, double vatRate) {
 
 }
 
-class CartItem {
+class  CartItem {
   final String? productCode;
   final double? price;
   int quantity;

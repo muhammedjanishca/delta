@@ -184,7 +184,7 @@ class _TextAddressState extends State<TextAddress> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => addressshow()));
+                                    builder: (context) => AddressShow()));
                             // addressDetails['Name'] = nameController.text;
                             addressDetails['Company Name'] =
                                 nameController.text;
@@ -210,6 +210,10 @@ class _TextAddressState extends State<TextAddress> {
                                 .collection('users')
                                 .doc(FirebaseAuth.instance.currentUser!.uid)
                                 .update({'address': fetchedAddressDetails});
+                                 Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddressShow()));
                           },
                           child: Text(
                             'Add ADDRESS',
@@ -327,32 +331,36 @@ class _TextAddressState extends State<TextAddress> {
                       ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => addressshow()));
-                          // addressDetails['Name'] = nameController.text;
-                          addressDetails['Company Name'] = nameController.text;
-                          addressDetails['Contact Number'] = ctctController.text;
-                          addressDetails['Street Address'] = line1AddController.text;
-                          addressDetails['Street Address line 2'] = line2AddController.text;
-                          addressDetails['City'] = cityController.text;
-                          addressDetails['Location'] = selectedLocation;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddressShow()));
+                            // addressDetails['Name'] = nameController.text;
+                            addressDetails['Company Name'] =
+                                nameController.text;
+                            addressDetails['Contact Number'] =
+                                ctctController.text;
+                            addressDetails['Street Address'] =
+                                line1AddController.text;
+                            addressDetails['Street Address line 2'] =
+                                line2AddController.text;
+                            addressDetails['City'] = cityController.text;
+                            addressDetails['Location'] = selectedLocation;
 
+                            var details = await FirebaseFirestore.instance
+                                .collection("users")
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .get();
+                            fetchedAddressDetails = details["address"];
+                            fetchedAddressDetails
+                                .add(jsonEncode(addressDetails));
 
-                          var details = await FirebaseFirestore.instance
-                              .collection("users")
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .get();
-                          fetchedAddressDetails = details["address"];
-                          fetchedAddressDetails.add(jsonEncode(addressDetails));
-
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .update({'address': fetchedAddressDetails});
-                        }
-          },
+                            await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .update({'address': fetchedAddressDetails});
+                          }
+                        },
                         child: Text(
                           'Add ADDRESS',
                           style: TextStyle(color: Colors.white),
@@ -377,8 +385,8 @@ class _TextAddressState extends State<TextAddress> {
 Container TextFieldAddress(
   String hintText,
   TextInputType keyboardType,
-   controller,
-   context,
+  controller,
+  context,
   String? Function(String?)? validator,
 ) {
   return Container(
