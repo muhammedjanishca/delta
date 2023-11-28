@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/responsive/quatation.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +126,9 @@ class QuotationDeskPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
         onPressed: () async {
-          context.read<AddressProvider>().get_current_address(cartItems, context);
+          context
+              .read<AddressProvider>()
+              .get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
             Uri.parse('https://deltabackend.com/invoice_number'),
@@ -478,23 +481,12 @@ class QuotationMobilePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
-        onPressed: () async {
-          context.read<AddressProvider>().get_current_address(cartItems, context);
-          // Call your backend API to increment the invoice number
-          final response = await http.post(
-            Uri.parse('https://deltabackend.com/invoice_number'),
-          );
+       onPressed: ()  {
+    context
+        .read<AddressProvider>()
+        .get_current_address(cartItems, context);
+},
 
-          if (response.statusCode == 200) {
-            // If the increment was successful, perform other actions
-            // You can also update the UI or display a message here
-            print('Invoice number incremented successfully');
-          } else {
-            // Handle errors appropriately
-            print('Failed to increment invoice number');
-          }
-          // Perform other actions if needed
-        },
         child: const Icon(Icons.print),
       ),
     );

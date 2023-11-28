@@ -81,7 +81,6 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,
   final String invoiceNumber =
       'Invoice Number: ${id}\r\n\r\nDate: ${format.format(DateTime.now())}';
   final Size contentSize = contentFont.measureString(invoiceNumber);
-
   // ignore: leading_newlines_in_multiline_strings
   // String address = current_address;
 

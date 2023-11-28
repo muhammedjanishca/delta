@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/address.dart/addresShow.dart';
 import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
-import 'package:firebase_hex/provider/indexprovider.dart';
 import 'package:firebase_hex/widgets/pdfservies.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class AddressProvider with ChangeNotifier {
   int selectIndex = 0;
@@ -81,7 +80,13 @@ class AddressProvider with ChangeNotifier {
     current_address = arrayFromFirestore[selectIndex];
     final last_address = jsonDecode(arrayFromFirestore[selectIndex]);
     if (current_address.isNotEmpty) {
-      // print('22222222222222222222222222');
+      print('22222222222222222222222222');
+      http.post(
+        Uri.parse('https://deltabackend.com/store_invoice'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({"u_id": '${FirebaseAuth.instance.currentUser!.uid}'}),
+      );
+      print('${FirebaseAuth.instance.currentUser!.uid}');
       PdfService().generateInvoice(cartItems, current_address, last_address);
     }
   }
