@@ -767,7 +767,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
     return BottomAppBar(
       child: Container(
-        color: Colors.black,
+        color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -808,59 +808,54 @@ class MobileBottomNavigationBaru extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
     // cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
-
+    double subtotal = cartProvider.getTotalPrice();
+    double vatRate = 15.0;
+    double vat = cartProvider.calculateVAT(subtotal, vatRate);
+    double totalPriceWithVAT =
+        cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
     return BottomAppBar(
       child: Container(
-        color: Colors.black,
+        color: Colors.white,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 50,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
                 color: Deltacolor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(
+                      20), // Adjust the top-left radius as needed
+                  topRight: Radius.circular(
+                      20), // Adjust the top-right radius as needed
+                ),
               ),
-              // child: TextButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => QuotationPage(
-              //           totalPrice: cartProvider.getTotalPrice(),
-              //           cartItems: cartItems["cartItems"],
-              //         ),
-              //       ),
-              //     );
-              //   },
-              //   child: Text(
-              //     'GENERATE QUOTATION',
-              //     style: TextStyle(color: Colors.white),
-              //   ),
-              // ),
-            ),
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width / 2,
-              decoration: const BoxDecoration(
-                color: Colors.black,
+              child: TextButton(
+              onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => QuotationPage(
+                                                  totalPrice: cartProvider
+                                                      .getTotalPrice(),
+                                                  cartItems:
+                                                      cartItems["cartItems"],
+                                                  totalPriceWithVAT:
+                                                      cartProvider
+                                                          .getTotalPriceWithVAT(
+                                                              subtotal,
+                                                              vatRate),
+                                                  vat:
+                                                      cartProvider.calculateVAT(
+                                                          subtotal, vatRate),
+                                                )));
+                                  },
+                child: const Text(
+                  'GENERATE QUOTATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              // child: TextButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => QuotationPage(
-              //           totalPrice: cartProvider.getTotalPrice(),
-              //           cartItems: cartItems["cartItems"],
-              //         ),
-              //       ),
-              //     );
-              //   },
-              //   child: Text(
-              //     'GENERATE QUOTATION',
-              //     style: TextStyle(color: Colors.white),
-              //   ),
-              // ),
             )
           ],
         ),

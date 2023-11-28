@@ -17,13 +17,21 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../model.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsOfGlands extends StatelessWidget {
-  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+class ProductDetailsOfGlands extends StatefulWidget {
 
   ProductDetailsOfGlands({super.key});
 
+  @override
+  State<ProductDetailsOfGlands> createState() => _ProductDetailsOfGlandsState();
+}
+
+class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
+  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+
   String? textpass;
+  bool check_pr_code = false;
   String? thumbnail;
+
   @override
   Widget build(BuildContext context) {
     TextEditingController quantityController = TextEditingController();
@@ -860,11 +868,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                   price![index];
                                               return InkWell(
                                                 onTap: () {
-                                                  // String noprice = '0';
-                                                  // codeAndPrice.price != null
-                                                  //     ? codeAndPrice.price
-                                                  //     : noprice;
-                                                  // When a container is tapped, update the selectedPrice using ValueNotifier.
+                                                
                                                   selectedPriceNotifier.value =
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
                                                 },
@@ -1032,11 +1036,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                               .value;
 
                                                       // Check if selectedPrice is empty or null, and provide a default value if needed
-                                                      if (selectedPrice !=
-                                                              null ||
-                                                          selectedPrice
-                                                              .split(': ')[1]
-                                                              .isNotEmpty) {
+                                                      
                                                         final productCode =
                                                             selectedPrice
                                                                 .split(': ')[0];
@@ -1076,10 +1076,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                             .showSnackBar(SnackBar(
                                                                 content: Text(
                                                                     'Added to cart')));
-                                                      } else {
-                                                        // Handle the case where selectedPrice is empty or null
-                                                        // You might want to display an error message or take appropriate action.
-                                                      }
+                                                     
                                                     } else {
                                                       // Handle the case where the user is not signed in
                                                       showDialog(
