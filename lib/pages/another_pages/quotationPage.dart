@@ -127,7 +127,7 @@ class QuotationDeskPage extends StatelessWidget {
             children: [
               Container(
                 width: 800,
-                color: const Color.fromARGB(255, 192, 173, 114),
+                color: const Color.fromARGB(255, 212, 211, 211),
                 child: DataTable(
                   columnSpacing: 10.0,
                   dividerThickness: 2,
@@ -414,7 +414,7 @@ class QuotationMobilePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            width: 500,
+            width: 800,
             // width: MediaQuery.of(context).size.width/2,
             color: Colors.white,
             child: Column(
@@ -465,12 +465,11 @@ class QuotationMobilePage extends StatelessWidget {
     return Row(
       children: [
         Container(
-          color: Colors.black,
           child: Column(
             children: [
               Container(
-                width: 500,
-                color: const Color.fromARGB(255, 192, 173, 114),
+                width: 800,
+                color: const Color.fromARGB(255, 212, 211, 211),
                 child: DataTable(
                   columnSpacing: 10.0,
                   dividerThickness: 2,

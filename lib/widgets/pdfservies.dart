@@ -50,7 +50,7 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,
       bounds: Rect.fromLTWH(0, 0, pageSize.width - 115, 90));
   //Draw string
   page.graphics.drawString(
-      'INVOICE', PdfStandardFont(PdfFontFamily.helvetica, 30),
+      'QUOTE', PdfStandardFont(PdfFontFamily.helvetica, 30),
       brush: PdfBrushes.white,
       bounds: Rect.fromLTWH(25, 0, pageSize.width - 115, 90),
       format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
@@ -114,7 +114,7 @@ PdfLayoutResult drawFooter(
   for (int i = 0; i < document.pages.count; i++) {
     if (i == document.pages.count - 1) {
       return PdfTextElement(
-              text: '''800 Interchange Blvd.\r\n\r\nSuite 2501, Austin,
+              text: '''Abdullah Shaher Alsulami Est.\r\n\r\nTRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES,
           TX 78721\r\n\r\nAny Questions? sales@deltanationals.com''',
               font: PdfStandardFont(PdfFontFamily.timesRoman, 11))
           .draw(page: document.pages[i], bounds: Rect.fromLTWH(20, 670, 0, 0))!;

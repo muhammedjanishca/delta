@@ -54,103 +54,105 @@ class _TextAddressState extends State<TextAddress> {
         body: LayoutBuilder(builder: (context, Constraints) {
           if (Constraints.maxWidth > 850) {
             return Center(
-              child: Form(
-                key: _formKey,
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            height: 40,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: Text("ADD ADDRESS"),
-                            )),
-                        Divider(),
-                        Gap(10),
-                        Row(
-                          children: [
-                            Icon(Icons.phone),
-                            Text(
-                              "CONTACT DETAILS",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        TextFieldAddress("Company Name", TextInputType.text,
-                            nameController, context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
-                        TextFieldAddress("Contact Number", TextInputType.phone,
-                            ctctController, context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
-                        Gap(25),
-                        Row(
-                          children: [
-                            Icon(Icons.location_on_outlined),
-                            Text(
-                              "ADDRES",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        TextFieldAddress("Street Address", TextInputType.text,
-                            line1AddController, context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
-                        TextFieldAddress(
-                            "Street Address line 2",
-                            TextInputType.text,
-                            line2AddController,
-                            context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
-                        Gap(10),
-                        DropdownButton(
-                          hint: Text(
-                              'Please choose a location'), // Not necessary for Option 1
-                          value: selectedLocation,
-                          onChanged: (newValue) {
-                            setState(() {
-                              selectedLocation = newValue;
-                            });
-                          },
-                          items: _locations.map((location) {
-                            return DropdownMenuItem(
-                              child: new Text(location),
-                              value: location,
-                            );
-                          }).toList(),
-                        ),
-                        TextFieldAddress(
-                            "City", TextInputType.text, cityController, context,
-                            (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
-                        Gap(25),
-                        ElevatedButton(
-                          onPressed: () async {
+              child:Form(
+              key: _formKey,
+              child: Container(
+                width: MediaQuery.of(context).size.width/2,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: mai,
+                    children: [
+                      SizedBox(
+                          height: 40,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text("ADD ADDRESS"),
+                          )),
+                      Divider(),
+                      Gap(10),
+                      Row(
+                        children: [
+                          Icon(Icons.phone),
+                          Text(
+                            "Contact Details",
+                            style: TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      TextFieldAddress("Company Name", TextInputType.text,
+                          nameController, context, (value) {
+                        if (value == null || value.isEmpty) {
+                          return '*This field cannot be empty';
+                        }
+                        return null;
+                      }),
+                      TextFieldAddress("Contact Number", TextInputType.phone,
+                          ctctController, context, (value) {
+                        if (value == null || value.isEmpty) {
+                          return '*This field cannot be empty';
+                        }
+                        return null;
+                      }),
+                      Gap(25),
+                      Row(
+                        children: [
+                          Icon(Icons.location_on_outlined),
+                          Text(
+                            "Address",
+                            style: TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      TextFieldAddress("Street Address", TextInputType.text,
+                          line1AddController, context, (value) {
+                        if (value == null || value.isEmpty) {
+                          return '*This field cannot be empty';
+                        }
+                        return null;
+                      }),
+                      TextFieldAddress(
+                          "Street Address line 2",
+                          TextInputType.text,
+                          line2AddController,
+                          context, (value) {
+                        if (value == null || value.isEmpty) {
+                          return '*This field cannot be empty';
+                        }
+                        return null;
+                      }),
+                      Gap(10),
+                      DropdownButton(
+                        hint: Text(
+                            'Please choose a location'), // Not necessary for Option 1
+                        value: selectedLocation,
+                        onChanged: (newValue) {
+                          setState(() {
+                            selectedLocation = newValue;
+                          });
+                        },
+                        items: _locations.map((location) {
+                          return DropdownMenuItem(
+                            child: new Text(location),
+                            value: location,
+                          );
+                        }).toList(),
+                      ),
+                      TextFieldAddress(
+                          "City", TextInputType.text, cityController, context,
+                          (value) {
+                        if (value == null || value.isEmpty) {
+                          return '*This field cannot be empty';
+                        }
+                        return null;
+                      }),
+                      Gap(25),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -166,7 +168,6 @@ class _TextAddressState extends State<TextAddress> {
                                 line2AddController.text;
                             addressDetails['City'] = cityController.text;
                             addressDetails['Location'] = selectedLocation;
-                            // addressDetails['phone'] = phoneController.text;
 
                             var details = await FirebaseFirestore.instance
                                 .collection("users")
@@ -180,27 +181,23 @@ class _TextAddressState extends State<TextAddress> {
                                 .collection('users')
                                 .doc(FirebaseAuth.instance.currentUser!.uid)
                                 .update({'address': fetchedAddressDetails});
-                                 Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddressShowPage()));
-                          },
-                          child: Text(
-                            'ADD ADDRESS',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color.fromARGB(255, 54, 98, 98)),
-                            minimumSize:
-                                MaterialStateProperty.all(Size(150, 50)),
-                          ),
+                          }
+                        },
+                        child: Text(
+                          'ADD ADDRESS',
+                          style: TextStyle(color: Colors.white),
                         ),
-                      ],
-                    ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color.fromARGB(255, 54, 98, 98)),
+                          minimumSize: MaterialStateProperty.all(Size(1500, 50)),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
+            )
             );
           } else {
             return Form(
@@ -338,7 +335,7 @@ class _TextAddressState extends State<TextAddress> {
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                               const Color.fromARGB(255, 54, 98, 98)),
-                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                          minimumSize: MaterialStateProperty.all(Size(500, 50)),
                         ),
                       ),
                     ],
