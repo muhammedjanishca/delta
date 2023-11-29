@@ -124,7 +124,7 @@ class DesktopAppBar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "NATIONAL",
+                      "TRADING",
                       style: GoogleFonts.oswald(
                         textStyle: const TextStyle(
                           color: Color.fromARGB(255, 251, 236, 221),

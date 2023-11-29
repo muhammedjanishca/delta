@@ -29,7 +29,6 @@ Widget searchBox(BuildContext context) {
                   color: Colors.black.withOpacity(0.5),
                   fontSize: 16,
                 ),
-                enabledBorder: OutlineInputBorder(),
                 border: InputBorder.none,
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 10),

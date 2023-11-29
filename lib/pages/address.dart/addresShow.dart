@@ -63,7 +63,7 @@ class AddressShow extends StatelessWidget {
                 ),
               ),
               Text(
-                "\n NATIONAL",
+                "TRADING",
                 style: GoogleFonts.oswald(
                   textStyle: const TextStyle(
                     color: Colors.black,
@@ -140,13 +140,9 @@ class AddressShow extends StatelessWidget {
                                         },
                                         child: Container(
                                           color: isSelected
-                                              ? Color.fromARGB(255, 239, 234,
-                                                  90) // Set the color for selected state
-                                              : const Color.fromARGB(
-                                                  255,
-                                                  136,
-                                                  191,
-                                                  200), // Set the color for unselected state
+                                              ? Color.fromARGB(255, 25, 149, 187) // Set the color for selected state
+                                              :  Color.fromARGB(255, 211, 215, 216),
+                                               // Set the color for unselected state
                                           child: ListTile(
                                             selectedTileColor: Colors.black,
                                             title: AddressData(addressData),
@@ -478,10 +474,8 @@ class AddressShowMob extends StatelessWidget {
                           },
                           child: Container(
                             color: isSelected
-                                ? Color.fromARGB(255, 184, 230,
-                                    86) // Set the color for selected state
-                                : const Color.fromARGB(255, 136, 191,
-                                    200), // Set the color for unselected state
+                                 ? Color.fromARGB(255, 25, 149, 187) // Set the color for selected state
+                                              :  Color.fromARGB(255, 211, 215, 216),// Set the color for unselected state
                             // child: ListTile(
                             //   selectedTileColor: Colors.black,
                             //   title: AddressData(addressData),
