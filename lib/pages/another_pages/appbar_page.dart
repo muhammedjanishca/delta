@@ -117,26 +117,27 @@ class DesktopAppBar extends StatelessWidget {
                      
                       child:Row(
                         children: [
-                         Text(
-              "Trading",
-              style: GoogleFonts.oswald(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-            Text(
+                           Text(
                 "DELTA",
                 style: GoogleFonts.oswald(
                   textStyle: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: 45,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
+                         Text(
+              "Trading",
+              style: GoogleFonts.oswald(
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+           
 
                         ],
                       ),   ),
