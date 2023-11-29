@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
                 body: GlandPage(),
               ),
           '/signup/signin': (context) => SignUpPage(),
-          '/Accssories': (context) => AppBarMain(
+          '/Accessories': (context) => AppBarMain(
                 body: AccessoriesPage(),
               ),
           '/Connectors': (context) => AppBarMain(body: ConnectersPage()),

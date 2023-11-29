@@ -308,7 +308,7 @@ class DesktopAppBar extends StatelessWidget {
                         if (selectedDataType == 'Glands') {
                           Navigator.pushNamed(context, '/Glands');
                         } else if (selectedDataType == 'Accessories') {
-                          Navigator.pushNamed(context, '/Accssories');
+                          Navigator.pushNamed(context, '/Accessories');
                         }
                         // Add similar conditions for other data types
                       },

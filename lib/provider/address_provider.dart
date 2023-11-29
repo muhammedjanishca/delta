@@ -31,11 +31,7 @@ class AddressProvider with ChangeNotifier {
 
       arrayFromFirestore = userSnapshot.get('address');
 
-// var addressDataLength=userSnapshot.exists && userSnapshot['address'] ;
-// print(userSnapshot.exists && userSnapshot['address'] );
-
       if (arrayFromFirestore.isEmpty) {
-        // print('aaaaaaaaaaaaaaaaaaaaaadd');
         await Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => TextAddress()),
