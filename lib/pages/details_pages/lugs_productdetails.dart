@@ -14,13 +14,22 @@ import 'package:side_sheet/side_sheet.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsoflugs extends StatelessWidget {
-  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
-
+class ProductDetailsoflugs extends StatefulWidget {
   ProductDetailsoflugs({super.key});
 
+  @override
+  State<ProductDetailsoflugs> createState() => _ProductDetailsoflugsState();
+}
+
+class _ProductDetailsoflugsState extends State<ProductDetailsoflugs> {
+  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+
+  bool check_pr_code = false;
+
   String? textpass;
+
   String? thumbnail;
+
   @override
   Widget build(BuildContext context) {
     TextEditingController quantityController = TextEditingController();
@@ -30,8 +39,7 @@ class ProductDetailsoflugs extends StatelessWidget {
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
-    print(selectedThumbnailProvider.selectedIndex);
-    print("khbkh");
+   
 
     final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
@@ -270,7 +278,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                               5),
                                                       border: Border.all(
                                                         color: const Color
-                                                            .fromARGB(
+                                                                .fromARGB(
                                                             255, 126, 125, 125),
                                                         width: 1.0,
                                                       ),
@@ -396,7 +404,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                            
                                             ],
                                           ),
                                           Column(
@@ -629,10 +636,9 @@ class ProductDetailsoflugs extends StatelessWidget {
         future: context.read<DataProvider>().fetchLugsData(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
-          // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // print("hgfghfhfgu");
-            return const CircularProgressIndicator(); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+              child: const CircularProgressIndicator()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -644,8 +650,7 @@ class ProductDetailsoflugs extends StatelessWidget {
             String? pdf;
 
             if (selectedThumbnailProvider.selectedIndex != null) {
-              print(selectedThumbnailProvider.selectedIndex);
-              print("ihhkh");
+             
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
               thumbnail = snapshot.data!
@@ -663,7 +668,6 @@ class ProductDetailsoflugs extends StatelessWidget {
             } else {
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
-                  print("2121");
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
@@ -711,10 +715,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             // thumbnail!,
                                             // selectedKiduProvider.selectedKidu ??
                                             //     ''
-                                             selectedThumbnailProvider
-                                                  .selectedThumbnail ??
-                                              ''
-                                                ),
+                                            selectedThumbnailProvider
+                                                    .selectedThumbnail ??
+                                                ''),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -726,7 +729,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 // selectedKiduProvider
                                                 //     .setSelectedKidu(imageUrl ??
                                                 //         "data:image/jpeg;base64,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");
-                                              selectedThumbnailProvider
+                                                selectedThumbnailProvider
                                                     .setSelectedThumbnail(
                                                         imageUrl ??
                                                             "data:image/jpeg;base64,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");
@@ -741,8 +744,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                               // imageUrl
                                                               // selectedKiduProvider
                                                               //     .selectedKidu
-                                                               selectedThumbnailProvider
-                                                              .selectedThumbnail
+                                                              selectedThumbnailProvider
+                                                                  .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors
@@ -861,6 +864,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   price![index];
                                               return InkWell(
                                                 onTap: () {
+                                                  setState(() {
+                                                    check_pr_code = true;
+                                                  });
                                                   selectedPriceNotifier.value =
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
                                                 },
@@ -1023,19 +1029,16 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     if (FirebaseAuth.instance
                                                             .currentUser !=
                                                         null) {
+                                                     
                                                       final selectedPrice =
                                                           selectedPriceNotifier
                                                               .value;
-
-                                                      // Check if selectedPrice is empty or null, and provide a default value if needed
-                                                      if (selectedPrice !=
-                                                              null ||
+                                                      final productCode =
                                                           selectedPrice
-                                                              .split(': ')[1]
-                                                              .isNotEmpty) {
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
+                                                              .split(': ')[0];
+                                                      
+                                                      if (check_pr_code !=
+                                                          false) {
                                                         final price = double.tryParse(
                                                                 selectedPrice
                                                                         .split(
@@ -1057,32 +1060,49 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                 context,
                                                                 listen: false);
                                                         cartProvider.addToCart(
-                                                            productCode:
-                                                                productCode,
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            imageUrl:
-                                                                imageUrl ?? '',
-                                                            productName:
-                                                                productName ??
-                                                                    '');
+                                                          productCode:
+                                                              productCode,
+                                                          price: price,
+                                                          quantity: quantity,
+                                                          imageUrl:
+                                                              imageUrl ?? '',
+                                                          productName:
+                                                              productName ?? '',
+                                                        );
 
                                                         ScaffoldMessenger.of(
                                                                 context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Added to cart')));
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              'Added to cart'),
+                                                        ));
+                                                        setState(() {
+                                                          check_pr_code = false;
+                                                        });
                                                       } else {
-                                                        // Handle the case where selectedPrice is empty or null
-                                                        // You might want to display an error message or take appropriate action.
+                                                              ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Text(
+                                                            'Select the product code'),
+                                                      ));
                                                       }
                                                     } else {
-                                                      // Handle the case where the user is not signed in
+                                                     
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Text(
+                                                            'Select the product code'),
+                                                      ));
                                                       showDialog(
                                                         context: context,
                                                         builder: (BuildContext
                                                             context) {
-                                                          return LoginPage(); // Your custom dialog widget
+                                                          return LoginPage();
                                                         },
                                                       );
                                                     }

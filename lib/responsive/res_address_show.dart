@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-
-class resAddressShow extends StatelessWidget {
+class ResAddressShow extends StatelessWidget {
   final Widget mobileaddressShow;
   final Widget deskAddressShow;
 
-  const resAddressShow(
+  const ResAddressShow(
       {required this.mobileaddressShow, required this.deskAddressShow});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, Constraints) {
-      if (Constraints.maxWidth < 600) {
+      if (Constraints.maxWidth < 800) {
         return mobileaddressShow;
       } else {
         return deskAddressShow;

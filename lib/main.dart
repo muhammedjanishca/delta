@@ -22,6 +22,7 @@ import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
+import 'package:firebase_hex/provider/pdf_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/search_api.dart';
@@ -75,6 +76,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => AddressProvider()),
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
         ChangeNotifierProvider(create: (context) => ColorChangingProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedPriceProvider()),
+
       ],
       child: MaterialApp(
         //this use using for handle null data
@@ -87,8 +90,10 @@ class _MyAppState extends State<MyApp> {
                 child: SizedBox(
                     height: 100,
                     width: 100,
-                    child: CircularProgressIndicator(
-                      color: Colors.greenAccent,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.greenAccent,
+                      ),
                     )),
               ));
           if (widget is Scaffold || widget is Navigator) {

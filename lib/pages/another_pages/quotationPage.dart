@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
-import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/quatation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -446,7 +445,7 @@ class QuotationMobilePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            width: 800,
+            width: 500,
             // width: MediaQuery.of(context).size.width/2,
             color: Colors.white,
             child: Column(
@@ -457,6 +456,7 @@ class QuotationMobilePage extends StatelessWidget {
                   child: MyClipPath(),
                 ),
                 Container(
+                  color: Colors.amber,
                   child: _buildQuotationTable(),
                 ),
                 Container(
@@ -496,10 +496,11 @@ class QuotationMobilePage extends StatelessWidget {
     return Row(
       children: [
         Container(
+          color: Colors.black,
           child: Column(
             children: [
               Container(
-                width: 800,
+                width: 500,
                 color: const Color.fromARGB(255, 192, 173, 114),
                 child: DataTable(
                   columnSpacing: 10.0,
@@ -513,7 +514,7 @@ class QuotationMobilePage extends StatelessWidget {
                   columns: [
                     DataColumn(
                       label: Text(
-                        '                               DESCRIPTION',
+                        'DESCRIPTION',
                         style: TextStyle(
                             fontSize: 15,
                             color:

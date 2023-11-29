@@ -184,7 +184,7 @@ class _TextAddressState extends State<TextAddress> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AddressShow()));
+                                    builder: (context) => AddressShowPage()));
                             // addressDetails['Name'] = nameController.text;
                             addressDetails['Company Name'] =
                                 nameController.text;
@@ -213,7 +213,7 @@ class _TextAddressState extends State<TextAddress> {
                                  Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AddressShow()));
+                                    builder: (context) => AddressShowPage()));
                           },
                           child: Text(
                             'Add ADDRESS',
@@ -334,7 +334,7 @@ class _TextAddressState extends State<TextAddress> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AddressShow()));
+                                    builder: (context) => AddressShowPage()));
                             // addressDetails['Name'] = nameController.text;
                             addressDetails['Company Name'] =
                                 nameController.text;
