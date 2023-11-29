@@ -347,25 +347,12 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                       )),
                   Row(
                     children: [
-                         Text("DELTA",style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 45,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
-             
-                      Text(
-                        "\nNATIONAL",
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ],
+                         Image.asset(
+                                  'assets/image/black beckround remove delta.png',
+                                  width: 170,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                ),           ],
                   ),
                   Text(
                     'TRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES\n\n\n\n',

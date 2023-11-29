@@ -54,8 +54,8 @@ class QuotationDeskPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
-      appBar: appbar(context,const Color.fromARGB(255, 232, 230, 230)),
-     
+      appBar:
+          custSmallAppBar(context, const Color.fromARGB(255, 232, 230, 230)),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -377,40 +377,7 @@ class QuotationMobilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 232, 230, 230),
-        elevation: 0,
-        leadingWidth: 48,
-        title: Row(
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, '/');
-              },
-              child: Text(
-                "DELTA",
-                style: GoogleFonts.oswald(
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 35,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "\n NATIONAL",
-              style: GoogleFonts.oswald(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar:custSmallAppBar(context, Colors.white),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -450,12 +417,11 @@ class QuotationMobilePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
-       onPressed: ()  {
-    context
-        .read<AddressProvider>()
-        .get_current_address(cartItems, context);
-},
-
+        onPressed: () {
+          context
+              .read<AddressProvider>()
+              .get_current_address(cartItems, context);
+        },
         child: const Icon(Icons.print),
       ),
     );

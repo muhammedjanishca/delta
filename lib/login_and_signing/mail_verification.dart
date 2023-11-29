@@ -15,7 +15,7 @@ class MailVerificationPgae extends StatelessWidget {
   final String otpId;
   MailVerificationPgae(
       {super.key,
-      required this.name, 
+      required this.name,
       required this.email,
       required this.password,
       required this.otpId});
@@ -29,9 +29,8 @@ class MailVerificationPgae extends StatelessWidget {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
         backgroundColor: Colors.white,
-        appBar:appbar(context,Colors.white),
-        body:
-         Padding(
+        appBar: custSmallAppBar(context, Colors.white),
+        body: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -89,9 +88,9 @@ class MailVerificationPgae extends StatelessWidget {
                   child: TextButton(
                     onPressed: () async {
                       if (otpController != null) {
-                        String isOtpCorrect = await emailOtpAuth.verifyOtp(
-                            otpId, otpController);
-                      
+                        String isOtpCorrect =
+                            await emailOtpAuth.verifyOtp(otpId, otpController);
+
                         if (isOtpCorrect == "success") {
                           value.changeIsLoading();
                           await AuthenticationHelper()
@@ -126,8 +125,8 @@ class MailVerificationPgae extends StatelessWidget {
                     style: ButtonStyle(
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0))),
-                        backgroundColor:
-                            MaterialStatePropertyAll(Color.fromARGB(255, 33, 124, 159))),
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 33, 124, 159))),
                   ),
                 ),
               ),

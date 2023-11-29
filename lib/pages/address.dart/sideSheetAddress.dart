@@ -49,15 +49,14 @@ class _TextAddressState extends State<TextAddress> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-             appBar:appbar(context, Colors.white),
-
+        appBar: custSmallAppBar(context, Colors.white),
         body: LayoutBuilder(builder: (context, Constraints) {
           if (Constraints.maxWidth > 850) {
             return Center(
-              child:Form(
+                child: Form(
               key: _formKey,
               child: Container(
-                width: MediaQuery.of(context).size.width/2,
+                width: MediaQuery.of(context).size.width / 2,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Column(
@@ -190,15 +189,15 @@ class _TextAddressState extends State<TextAddress> {
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                               const Color.fromARGB(255, 54, 98, 98)),
-                          minimumSize: MaterialStateProperty.all(Size(1500, 50)),
+                          minimumSize:
+                              MaterialStateProperty.all(Size(1500, 50)),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-            )
-            );
+            ));
           } else {
             return Form(
               key: _formKey,

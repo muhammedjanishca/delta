@@ -42,7 +42,7 @@ class AddressShow extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Colors.white,
-      appBar:appbar(context, Colors.white),
+        appBar: custSmallAppBar(context, Colors.white),
         body: Container(
             width: double.infinity,
             child: Column(
@@ -108,9 +108,11 @@ class AddressShow extends StatelessWidget {
                                         },
                                         child: Container(
                                           color: isSelected
-                                              ? Color.fromARGB(255, 25, 149, 187) // Set the color for selected state
-                                              :  Color.fromARGB(255, 211, 215, 216),
-                                               // Set the color for unselected state
+                                              ? Color.fromARGB(255, 25, 149,
+                                                  187) // Set the color for selected state
+                                              : Color.fromARGB(
+                                                  255, 211, 215, 216),
+                                          // Set the color for unselected state
                                           child: ListTile(
                                             selectedTileColor: Colors.black,
                                             title: AddressData(addressData),
@@ -118,11 +120,12 @@ class AddressShow extends StatelessWidget {
                                               icon: Icon(Icons.close),
                                               onPressed: () {
                                                 if (index != 0) {
-                                                         context
+                                                  context
                                                       .read<AddressProvider>()
                                                       .deleteAddress(index);
                                                 } else {
-                                                      print('Cannot delete the address with index 0.');
+                                                  print(
+                                                      'Cannot delete the address with index 0.');
                                                 }
                                               },
                                             ),
@@ -188,7 +191,8 @@ class AddressShow extends StatelessWidget {
                                 ),
                                 ListTile(
                                   title: Text('VAT (${vatRate}%)'),
-                                  trailing: Text('\SAR${vat.toStringAsFixed(2)}'),
+                                  trailing:
+                                      Text('\SAR${vat.toStringAsFixed(2)}'),
                                 ),
                                 const Divider(
                                   height:
@@ -358,7 +362,7 @@ class AddressShowMob extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar:appbar(context, Colors.white),
+      appBar: custSmallAppBar(context, Colors.white),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
@@ -409,8 +413,10 @@ class AddressShowMob extends StatelessWidget {
                           },
                           child: Container(
                             color: isSelected
-                                 ? Color.fromARGB(255, 25, 149, 187) // Set the color for selected state
-                                              :  Color.fromARGB(255, 211, 215, 216),// Set the color for unselected state
+                                ? Color.fromARGB(255, 25, 149,
+                                    187) // Set the color for selected state
+                                : Color.fromARGB(255, 211, 215,
+                                    216), // Set the color for unselected state
                             // child: ListTile(
                             //   selectedTileColor: Colors.black,
                             //   title: AddressData(addressData),
@@ -424,22 +430,23 @@ class AddressShowMob extends StatelessWidget {
                             //     },
                             //   ),
                             // ),
-                             child: ListTile(
-                                            selectedTileColor: Colors.black,
-                                            title: AddressData(addressData),
-                                            trailing: IconButton(
-                                              icon: Icon(Icons.close),
-                                              onPressed: () {
-                                                if (index != 0) {
-                                                         context
-                                                      .read<AddressProvider>()
-                                                      .deleteAddress(index);
-                                                } else {
-                                                      print('Cannot delete the address with index 0.');
-                                                }
-                                              },
-                                            ),
-                                          ),
+                            child: ListTile(
+                              selectedTileColor: Colors.black,
+                              title: AddressData(addressData),
+                              trailing: IconButton(
+                                icon: Icon(Icons.close),
+                                onPressed: () {
+                                  if (index != 0) {
+                                    context
+                                        .read<AddressProvider>()
+                                        .deleteAddress(index);
+                                  } else {
+                                    print(
+                                        'Cannot delete the address with index 0.');
+                                  }
+                                },
+                              ),
+                            ),
                           ),
                         ),
                       );
