@@ -9,6 +9,8 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../another_pages/IRSH.dart';
+
 class TextAddress extends StatefulWidget {
   const TextAddress({super.key});
 
@@ -47,40 +49,8 @@ class _TextAddressState extends State<TextAddress> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 48,
-          title: Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Text(
-                  "DELTA",
-                  style: GoogleFonts.oswald(
-                    textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 45,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                "\n NATIONAL",
-                style: GoogleFonts.oswald(
-                  textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+             appBar:appbar(context, Colors.white),
+
         body: LayoutBuilder(builder: (context, Constraints) {
           if (Constraints.maxWidth > 850) {
             return Center(
@@ -216,7 +186,7 @@ class _TextAddressState extends State<TextAddress> {
                                     builder: (context) => AddressShowPage()));
                           },
                           child: Text(
-                            'Add ADDRESS',
+                            'ADD ADDRESS',
                             style: TextStyle(color: Colors.white),
                           ),
                           style: ButtonStyle(
@@ -362,7 +332,7 @@ class _TextAddressState extends State<TextAddress> {
                           }
                         },
                         child: Text(
-                          'Add ADDRESS',
+                          'ADD ADDRESS',
                           style: TextStyle(color: Colors.white),
                         ),
                         style: ButtonStyle(

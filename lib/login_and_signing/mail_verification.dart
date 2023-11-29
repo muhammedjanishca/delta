@@ -1,4 +1,5 @@
 import 'package:firebase_hex/login_and_signing/authentication.dart';
+import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
@@ -28,38 +29,7 @@ class MailVerificationPgae extends StatelessWidget {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 48,
-         title:Row(
-           children: [
-             InkWell(
-              onTap: (){
-                  Navigator.pushNamed(context, '/');
-              },
-               child: Text("DELTA",style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 45,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
-             ),
-
-               Text("\n NATIONAL",style: GoogleFonts.oswald(
-                              textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),),
-             
- 
-           ],
-
-         ),
-        ),
+        appBar:appbar(context,Colors.white),
         body:
          Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),

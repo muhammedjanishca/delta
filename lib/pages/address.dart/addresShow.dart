@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
+import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:firebase_hex/pages/another_pages/cart.dart';
 import 'package:firebase_hex/pages/another_pages/quotationPage.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
@@ -41,40 +42,7 @@ class AddressShow extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 48,
-          title: Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Text(
-                  "DELTA",
-                  style: GoogleFonts.oswald(
-                    textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 45,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                "\n NATIONAL",
-                style: GoogleFonts.oswald(
-                  textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+      appBar:appbar(context, Colors.white),
         body: Container(
             width: double.infinity,
             child: Column(
@@ -216,7 +184,7 @@ class AddressShow extends StatelessWidget {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   trailing: Text(
-                                    '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                    '\SAR${cartProvider.getTotalPrice().toStringAsFixed(2)}',
                                     style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500),
@@ -224,7 +192,7 @@ class AddressShow extends StatelessWidget {
                                 ),
                                 ListTile(
                                   title: Text('VAT (${vatRate}%)'),
-                                  trailing: Text('\$${vat.toStringAsFixed(2)}'),
+                                  trailing: Text('\SAR${vat.toStringAsFixed(2)}'),
                                 ),
                                 const Divider(
                                   height:
@@ -245,7 +213,7 @@ class AddressShow extends StatelessWidget {
                                         fontWeight: FontWeight.w500),
                                   ),
                                   trailing: Text(
-                                    '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                    '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
                                     style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
@@ -283,7 +251,7 @@ class AddressShow extends StatelessWidget {
                                                 )));
                                   },
                                   child: const Text(
-                                    'GANERATE QUATATION',
+                                    'GENERATE QUATATION',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   style: ButtonStyle(
@@ -394,40 +362,7 @@ class AddressShowMob extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leadingWidth: 48,
-        title: Row(
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, '/');
-              },
-              child: Text(
-                "DELTA",
-                style: GoogleFonts.oswald(
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 45,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "\n NATIONAL",
-              style: GoogleFonts.oswald(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar:appbar(context, Colors.white),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
@@ -546,14 +481,14 @@ class AddressShowMob extends StatelessWidget {
                                     fontSize: 18, fontWeight: FontWeight.w400),
                               ),
                               trailing: Text(
-                                '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                '\SAR${cartProvider.getTotalPrice().toStringAsFixed(2)}',
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                             ),
                             ListTile(
                               title: Text('VAT (${vatRate}%)'),
-                              trailing: Text('\$${vat.toStringAsFixed(2)}'),
+                              trailing: Text('\SAR${vat.toStringAsFixed(2)}'),
                             ),
                             const Divider(
                               height:
@@ -573,7 +508,7 @@ class AddressShowMob extends StatelessWidget {
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                               trailing: Text(
-                                '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),

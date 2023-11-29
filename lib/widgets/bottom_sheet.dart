@@ -95,25 +95,31 @@ class deskBottomSheett extends StatelessWidget {
                         ),
                       )),
                   Row(
-                    children: [
-                      Text("DELTA",style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 45,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
+                    children: [ 
+Image.asset(
+                                  'assets/image/black beckround remove delta.png',
+                                  width: 170,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                ),                      // Text("DELTA",style: GoogleFonts.oswald(
+                      //           textStyle: TextStyle(
+                      //             color: Colors.white,
+                      //             fontSize: 45,
+                      //             fontWeight: FontWeight.w700,
+                      //           ),
+                      //         ),),
              
-                      Text(
-                        "\nNATIONAL",
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
+                      // Text(
+                      //   "\nNATIONAL",
+                      //   style: GoogleFonts.oswald(
+                      //     textStyle: TextStyle(
+                      //       color: Color.fromARGB(255, 251, 236, 221),
+                      //       fontSize: 20,
+                      //       fontWeight: FontWeight.w700,
+                      //     ),
+                      //   ),
+                      // ),
+                     
                     ],
                   ),
                   Text(

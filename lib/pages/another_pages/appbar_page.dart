@@ -14,8 +14,10 @@ import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/search_Bar.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../login_and_signing/loginpage.dart';
 import '../../main.dart';
@@ -112,30 +114,56 @@ class DesktopAppBar extends StatelessWidget {
                         // Navigate to the named route '/your_destination_screen'
                         Navigator.pushNamed(context, '/');
                       },
-                      child: Text(
-                        'DELTA',
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 45,
-                            fontWeight: FontWeight.w700,
+                      child: Row(
+                        children: [
+//                           GradientText(
+//     'T D T',
+//     style:GoogleFonts.oswald(
+//       textStyle:
+//      TextStyle(
+//         fontSize: 43.0,
+//         fontWeight: FontWeight.w600
+//     ),),
+//     colors: [
+//         Color.fromARGB(255, 33, 123, 143),
+//         const Color.fromARGB(255, 250, 250, 250),
+
+//     ],
+// ),
+
+                          GradientText(
+                            'TDT',
+                            style: GoogleFonts.blackOpsOne(
+                              textStyle: TextStyle(
+                                  fontSize: 43.0, fontWeight: FontWeight.w900),
+                            ),
+                            colors: [
+                              Color.fromARGB(255, 246, 242, 242),
+                              Color.fromARGB(255, 166, 182, 198),
+                            ],
                           ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "NATIONAL",
-                      style: GoogleFonts.oswald(
-                        textStyle: const TextStyle(
-                          color: Color.fromARGB(255, 251, 236, 221),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
 
+                          Text(
+                            'TRANS DELTA TRADING',
+                            style: GoogleFonts.leagueSpartan(
+                                textStyle: TextStyle(
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white),
+                                height: 2,
+                                wordSpacing: 0.5),
+                          ),
+                        ],
+                      ),
+
+                      //  child:   Image.asset(
+                      //               'assets/image/TDT.png',
+                      //               // // width: 180,
+                      //               // height: 20,
+                      //               fit: BoxFit.fill,
+                      //             )
+                    ),
                     SizedBox(width: MediaQuery.of(context).size.width / 15),
-
                     Expanded(child: searchBox(context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
@@ -150,9 +178,10 @@ class DesktopAppBar extends StatelessWidget {
                               );
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 194, 192,
-                                      192)), // Change the color to your desired color
+                              foregroundColor: MaterialStateProperty.all<
+                                  Color>(const Color
+                                      .fromARGB(255, 194, 192,
+                                  192)), // Change the color to your desired color
                             ),
                             child: Text('SignUp/SignIn'),
                           )
@@ -262,7 +291,7 @@ class DesktopAppBar extends StatelessWidget {
                             style: TextStyle(color: Colors.white),
                           ),
                           child: Icon(
-                            Icons.shopping_cart,
+                            Icons.shopping_bag_outlined,
                             color: Colors.white,
                           )),
                     ),
@@ -593,7 +622,7 @@ class MobileAppBar extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   child: Icon(
-                    Icons.shopping_cart,
+                    Icons.shopping_bag_outlined,
                     color: Colors.white,
                   ),
                 ),
