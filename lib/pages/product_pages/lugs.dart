@@ -114,6 +114,7 @@ class LugsPage extends StatelessWidget {
                           width: _width / 4,
                           decoration: BoxDecoration(
                             color: Colors.white,
+                            
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromARGB(255, 229, 229, 229)
