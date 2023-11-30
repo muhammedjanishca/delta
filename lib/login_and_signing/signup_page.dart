@@ -474,7 +474,7 @@ class DeskSignUp extends StatelessWidget {
                                                                     onPressed:
                                                                         () async {
                                                                       if (mobileNumTextController.text ==
-                                                                              "+91" ||
+                                                                              "+966" ||
                                                                           mobileNumTextController
                                                                               .text
                                                                               .isEmpty) {
@@ -1435,7 +1435,7 @@ class MobileSignup extends StatelessWidget {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final nameTextController = TextEditingController();
-  final mobileNumTextController = TextEditingController(text: "+91");
+  final mobileNumTextController = TextEditingController(text: "+966");
   final otpTextController = TextEditingController();
 
   String? verificationId;
