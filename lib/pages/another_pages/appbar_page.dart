@@ -418,6 +418,7 @@ Widget custmobileDrawer(BuildContext context) {
           // Set the background color of the Drawer to black
           ),
       child: Drawer(
+        
         child: ListView(
           children: [
             SizedBox(
@@ -594,7 +595,7 @@ class MobileAppBar extends StatelessWidget {
                         foregroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromARGB(255, 194, 192, 192)),
                       ),
-                      child: Text('SignUp/SignIn'),
+                      child: Text('SignUp/SignIn',style: TextStyle(color: Colors.black),),
                     )
                   : SizedBox(),
               GestureDetector(
@@ -614,16 +615,16 @@ class MobileAppBar extends StatelessWidget {
                   ),
                   child: Icon(
                             Icons.shopping_bag_outlined,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
             ],
           ),
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: Color.fromARGB(255, 206, 205, 202),
         ),
         Container(
-          color: Deltacolor,
+           color: Color.fromRGBO(249, 156, 6, 1.0),
           padding: EdgeInsets.only(bottom: 5, top: 5, left: 55, right: 10),
           height: 49,
           width: double.infinity,
