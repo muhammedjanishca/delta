@@ -96,9 +96,10 @@ class DesktopAppBar extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                                  color: const Color.fromARGB(255, 169, 167, 162),
+                                 color: Color.fromARGB(255, 206, 205, 202),
 
                 // color: const Color.fromARGB(255, 0, 0, 0),
+                //color: Color.fromARGB(255, 206, 205, 202),janish
                 height: 64,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
@@ -160,9 +161,9 @@ class DesktopAppBar extends StatelessWidget {
                             child: Text('SignUp/SignIn',
                             style: GoogleFonts.barlow(
                               textStyle: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w700
+                                fontWeight: FontWeight.w500
                             ),),
                             //  Text(
               //   "Trans Delta Trading",
@@ -257,8 +258,8 @@ class DesktopAppBar extends StatelessWidget {
                         });
                       },
                       child: Icon(
-                        Icons.person,
-                        color: Colors.white,
+                        Icons.person_2_outlined,
+                        color: Colors.black,
                       ),
                     ),
 
@@ -282,7 +283,7 @@ class DesktopAppBar extends StatelessWidget {
                           ),
                           child: Icon(
                             Icons.shopping_bag_outlined,
-                            color: Colors.white,
+                            color: Colors.black,
                           )),
                     ),
                     SizedBox(
@@ -300,7 +301,7 @@ class DesktopAppBar extends StatelessWidget {
                 height: 41,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                color: Color.fromARGB(255, 238, 131, 38),
+                color: Color.fromRGBO(249, 156, 6, 1.0),
                // color: Deltacolor,
                 ),
                 child: Row(
