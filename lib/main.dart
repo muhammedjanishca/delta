@@ -77,7 +77,6 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
         ChangeNotifierProvider(create: (context) => ColorChangingProvider()),
         ChangeNotifierProvider(create: (context) => SelectedPriceProvider()),
-
       ],
       child: MaterialApp(
         //this use using for handle null data
@@ -100,7 +99,8 @@ class _MyAppState extends State<MyApp> {
             error = Scaffold(body: Center(child: CircularProgressIndicator()));
           }
           ErrorWidget.builder = (errorDetails) {
-            return Text(errorDetails.toString());
+            return Center(child: CircularProgressIndicator());
+            // Text(errorDetails.toString());
           };
           if (widget != null) return widget;
           throw ('widget is null');

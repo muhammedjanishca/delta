@@ -159,7 +159,7 @@ class _DeskCartState extends State<DeskCart> {
                                               ),
                                         Text(
                                             // toStringAsFixed(2)
-                                            'Price: \$${item['price'].toStringAsFixed(2)}'),
+                                            'Price: \SAR${item['price'].toStringAsFixed(2)}'),
                                         Row(
                                           children: [
                                             Text(
@@ -308,14 +308,14 @@ class _DeskCartState extends State<DeskCart> {
                                     fontSize: 18, fontWeight: FontWeight.w400),
                               ),
                               trailing: Text(
-                                '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                '\SAR${cartProvider.getTotalPrice().toStringAsFixed(2)}',
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                             ),
                             ListTile(
                               title: Text('VAT (${vatRate}%)'),
-                              trailing: Text('\$${vat.toStringAsFixed(2)}'),
+                              trailing: Text('\SAR${vat.toStringAsFixed(2)}'),
                             ),
                             const Divider(
                               height:
@@ -335,7 +335,7 @@ class _DeskCartState extends State<DeskCart> {
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
                               trailing: Text(
-                                '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
@@ -533,7 +533,7 @@ class _MobilecartState extends State<Mobilecart> {
                                               ),
                                         Text(
                                             // toStringAsFixed(2)
-                                            'Price: \$${item['price'].toStringAsFixed(2)}'),
+                                            'Price: \SAR${item['price'].toStringAsFixed(2)}'),
                                         Row(
                                           children: [
                                             Text(
@@ -686,14 +686,14 @@ class _MobilecartState extends State<Mobilecart> {
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
                             trailing: Text(
-                              '\$${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                              '\SAR${cartProvider.getTotalPrice().toStringAsFixed(2)}',
                               style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                           ),
                           ListTile(
                             title: Text('VAT (${vatRate}%)'),
-                            trailing: Text('\$${vat.toStringAsFixed(2)}'),
+                            trailing: Text('\SAR${vat.toStringAsFixed(2)}'),
                           ),
                           const Divider(
                             height:
@@ -713,7 +713,7 @@ class _MobilecartState extends State<Mobilecart> {
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                             trailing: Text(
-                              '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                              '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
                               style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),

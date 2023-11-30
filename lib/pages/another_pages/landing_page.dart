@@ -97,44 +97,24 @@ class DesktopLanding extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             color: Colors.black),
                       ),
-                      ElevatedButton(
-                        // onPressed: (){
-                        //    Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(builder: (context) =>const TextTheAddress()),
-                        //     );
-                        // },
-                        onPressed: () async {
-                          context
-                              .read<AddressProvider>()
-                              .isUserDataAvailable(context);
-                        },
-                        //     onPressed: () async {
-                        //        bool isDataAvailable = await
-                        //  context.read<address_provider>().
-                        //       isUserDataAvailable(context);
-                        //       if (isDataAvailable) {
-                        //            Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(builder: (context) =>TextTheAddress()),
-                        //         );
-                        //       } else {
-                        //       Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(builder: (context) => AddressShowPage ()),
-                        //         );
-                        //       }
-                        //     },
-                        child: Text(
-                          'CHECKOUT',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 54, 98, 98)),
-                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
-                        ),
-                      ),
+                      // ElevatedButton(
+                        
+                      //   onPressed: () async {
+                      //     context
+                      //         .read<AddressProvider>()
+                      //         .isUserDataAvailable(context);
+                      //   },
+                       
+                      //   child: Text(
+                      //     'CHECKOUT',
+                      //     style: TextStyle(color: Colors.white),
+                      //   ),
+                      //   style: ButtonStyle(
+                      //     backgroundColor: MaterialStateProperty.all(
+                      //         const Color.fromARGB(255, 238, 131, 38)),
+                      //     minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 320,
                       ),
@@ -150,7 +130,7 @@ class DesktopLanding extends StatelessWidget {
               top: 30,
               child: Container(
                 width: 450,
-                height: 900,
+                height: 850,
                 child: Swiper(
                   itemWidth: 400,
                   itemHeight: 360,
@@ -165,10 +145,10 @@ class DesktopLanding extends StatelessWidget {
                         children: [
                           Image.asset(imagepath[index]),
                           Text(headingss[index],
-                              style: GoogleFonts.abrilFatface(
+                              style: GoogleFonts.barlow(
                                 textStyle: TextStyle(
                                     color:
-                                        const Color.fromARGB(255, 54, 98, 98),
+                                        const Color.fromARGB(255, 238, 131, 38),
                                     fontSize: 20,
                                     fontWeight: FontWeight.w700),
                               )),
@@ -216,10 +196,15 @@ class DesktopLanding extends StatelessWidget {
                           )
                         ],
                       ))),
+                        
               Expanded(
                   child: Container(
                 color: Colors.white,
-                child: Image.network("https://www.lkea.in/assets/images/about/2.jpg"),
+                child: Image.network("https://www.lkea.in/assets/images/about/2.jpg",
+                // width: 170,
+                                  // height: 60,
+                                  // fit: BoxFit.cover,
+                ),
               ))
             ],
           ),
@@ -352,7 +337,7 @@ class MobileLanding extends StatelessWidget {
               top: 230,
               child: Container(
                 width: 450,
-                height: 900,
+                height: 880,
                 // color: Colors.white,
                 // color: Colors.transparent,
                 child: Swiper(
@@ -369,10 +354,10 @@ class MobileLanding extends StatelessWidget {
                         children: [
                           Image.asset(imagepath[index]),
                           Text(headingss[index],
-                              style: GoogleFonts.abrilFatface(
+                              style: GoogleFonts.barlow(
                                 textStyle: TextStyle(
                                     color:
-                                        const Color.fromARGB(255, 54, 98, 98),
+                                        const Color.fromARGB(255, 238, 131, 38),
                                     fontSize: 20,
                                     fontWeight: FontWeight.w700),
                               )),
@@ -451,6 +436,7 @@ class MobileLanding extends StatelessWidget {
               ],
             )),
             Container(
+              width: double.infinity,
               color: Colors.white,
               child: Image.network("https://www.lkea.in/assets/images/about/2.jpg"),
             ),

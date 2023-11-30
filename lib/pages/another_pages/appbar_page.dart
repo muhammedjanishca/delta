@@ -14,8 +14,10 @@ import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/search_Bar.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../login_and_signing/loginpage.dart';
 import '../../main.dart';
@@ -94,7 +96,9 @@ class DesktopAppBar extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                color: Colors.black,
+                                  color: const Color.fromARGB(255, 169, 167, 162),
+
+                // color: const Color.fromARGB(255, 0, 0, 0),
                 height: 64,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
@@ -112,30 +116,30 @@ class DesktopAppBar extends StatelessWidget {
                         // Navigate to the named route '/your_destination_screen'
                         Navigator.pushNamed(context, '/');
                       },
-                      child: Text(
-                        'DELTA',
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 45,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "TRADING",
-                      style: GoogleFonts.oswald(
-                        textStyle: const TextStyle(
-                          color: Color.fromARGB(255, 251, 236, 221),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-
+                     
+                      child: Image.asset(
+                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                                  width: 170,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                ),   
+              //         Row(
+              //           children: [
+              //              Text(
+              //   "Trans Delta Trading",
+              //   style: GoogleFonts.dosis(
+              //     textStyle: TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.w400,
+              //     ),
+              //   ),
+              // ),
+            //              
+                //  ],
+                //       ),
+                         ),
                     SizedBox(width: MediaQuery.of(context).size.width / 15),
-
                     Expanded(child: searchBox(context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
 
@@ -151,11 +155,26 @@ class DesktopAppBar extends StatelessWidget {
                             },
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 194, 192,
-                                      192)), // Change the color to your desired color
+                                  Colors.white), // Change the color to your desired color
                             ),
-                            child: Text('SignUp/SignIn'),
-                          )
+                            child: Text('SignUp/SignIn',
+                            style: GoogleFonts.barlow(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700
+                            ),),
+                            //  Text(
+              //   "Trans Delta Trading",
+              //   style: GoogleFonts.dosis(
+              //     textStyle: TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.w400,
+              //     ),
+              //   ),
+              // ),
+                             ) )
                         : SizedBox(),
 
                     // user != null
@@ -262,7 +281,7 @@ class DesktopAppBar extends StatelessWidget {
                             style: TextStyle(color: Colors.white),
                           ),
                           child: Icon(
-                            Icons.shopping_cart,
+                            Icons.shopping_bag_outlined,
                             color: Colors.white,
                           )),
                     ),
@@ -281,7 +300,8 @@ class DesktopAppBar extends StatelessWidget {
                 height: 41,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Deltacolor,
+                color: Color.fromARGB(255, 238, 131, 38),
+               // color: Deltacolor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -290,6 +310,7 @@ class DesktopAppBar extends StatelessWidget {
                     _buildPopupMenuButton(
                       context,
                       'Cable Terminal Ends',
+                      
                       ['Lugs', 'Connectors'],
                       (selectedDataType) async {
                         if (selectedDataType == 'Lugs') {
@@ -346,11 +367,24 @@ class DesktopAppBar extends StatelessWidget {
       offset: const Offset(0, 30),
       child: Row(
         children: [
+          //  Text(
+              //   "Trans Delta Trading",
+              //   style: GoogleFonts.dosis(
+              //     textStyle: TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.w400,
+              //     ),
+              //   ),
+              // ),
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.barlow (
+ textStyle: TextStyle(
               color: Colors.white,
-            ),
+              fontSize: 15,
+              fontWeight: FontWeight.w500
+            ),)
           ),
           Icon(
             Icons.arrow_drop_down,
@@ -538,27 +572,12 @@ class MobileAppBar extends StatelessWidget {
                   // Navigate to the named route '/your_destination_screen'
                   Navigator.pushNamed(context, '/');
                 },
-                child: Text(
-                  'DELTA',
-                  style: GoogleFonts.oswald(
-                    textStyle: TextStyle(
-                      color: Color.fromARGB(255, 251, 236, 221),
-                      fontSize: 35,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                "NATIONAL",
-                style: GoogleFonts.oswald(
-                  textStyle: const TextStyle(
-                    color: Color.fromARGB(255, 251, 236, 221),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
+                child: Image.asset(
+                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                                  width: 170,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                )),
               Spacer(),
               user == null
                   ? TextButton(
@@ -593,7 +612,7 @@ class MobileAppBar extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   child: Icon(
-                    Icons.shopping_cart,
+                            Icons.shopping_bag_outlined,
                     color: Colors.white,
                   ),
                 ),

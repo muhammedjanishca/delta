@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/quatation.dart';
@@ -54,40 +55,8 @@ class QuotationDeskPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 232, 230, 230),
-        elevation: 0,
-        leadingWidth: 48,
-        title: Row(
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, '/');
-              },
-              child: Text(
-                "DELTA",
-                style: GoogleFonts.oswald(
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 35,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "\n NATIONAL",
-              style: GoogleFonts.oswald(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar:
+          custSmallAppBar(context, const Color.fromARGB(255, 232, 230, 230)),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -260,11 +229,11 @@ class QuotationDeskPage extends StatelessWidget {
                           DataCell(_buildTableCell('unit')),
                           DataCell(
                             _buildTableCell(
-                                '\$${jsonDecode(cartItems[i])['price']}',
+                                '\SAR${jsonDecode(cartItems[i])['price']}',
                                 fontWeight: FontWeight.bold),
                           ),
                           DataCell(_buildTableCell(
-                              '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
+                              '\SAR${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
                         ],
                       ),
                   ],
@@ -332,7 +301,7 @@ class QuotationDeskPage extends StatelessWidget {
                             _buildTableCell(' Net before VAT',
                                 fontWeight: FontWeight.bold),
                             _buildTableCell(
-                                '\$${totalPrice.toStringAsFixed(2)}',
+                                '\SAR${totalPrice.toStringAsFixed(2)}',
                                 fontWeight: FontWeight.bold)
                           ],
                         ),
@@ -347,7 +316,7 @@ class QuotationDeskPage extends StatelessWidget {
                             _buildTableCell('VAT ',
                                 fontWeight: FontWeight.bold),
                             _buildTableCell(
-                                '              \$${vat.toStringAsFixed(2)}',
+                                '              \SAR${vat.toStringAsFixed(2)}',
                                 fontWeight: FontWeight.bold)
                           ],
                         ),
@@ -359,7 +328,7 @@ class QuotationDeskPage extends StatelessWidget {
                               _buildTableCell('Total Amount',
                                   fontWeight: FontWeight.bold),
                               _buildTableCell(
-                                  '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                  '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
                                   fontWeight: FontWeight.bold)
                             ],
                           ),
@@ -409,40 +378,7 @@ class QuotationMobilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 232, 230, 230),
-        elevation: 0,
-        leadingWidth: 48,
-        title: Row(
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, '/');
-              },
-              child: Text(
-                "DELTA",
-                style: GoogleFonts.oswald(
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 35,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "\n NATIONAL",
-              style: GoogleFonts.oswald(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar:custSmallAppBar(context, Colors.white),
       body: SingleChildScrollView(
        
           child: Column(
@@ -478,12 +414,11 @@ class QuotationMobilePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
-       onPressed: ()  {
-    context
-        .read<AddressProvider>()
-        .get_current_address(cartItems, context);
-},
-
+        onPressed: () {
+          context
+              .read<AddressProvider>()
+              .get_current_address(cartItems, context);
+        },
         child: const Icon(Icons.print),
       ),
     );
@@ -603,11 +538,11 @@ class QuotationMobilePage extends StatelessWidget {
                           DataCell(_buildTableCell('unit')),
                           DataCell(
                             _buildTableCell(
-                                '\$${jsonDecode(cartItems[i])['price']}',
+                                '\SAR${jsonDecode(cartItems[i])['price']}',
                                 fontWeight: FontWeight.bold),
                           ),
                           DataCell(_buildTableCell(
-                              '\$${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
+                              '\SAR${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}')),
                         ],
                       ),
                   ],
@@ -675,7 +610,7 @@ class QuotationMobilePage extends StatelessWidget {
                             _buildTableCell(' Net before VAT',
                                 fontWeight: FontWeight.bold),
                             _buildTableCell(
-                                '\$${totalPrice.toStringAsFixed(2)}',
+                                '\SAR${totalPrice.toStringAsFixed(2)}',
                                 fontWeight: FontWeight.bold)
                           ],
                         ),
@@ -690,7 +625,7 @@ class QuotationMobilePage extends StatelessWidget {
                             _buildTableCell('VAT ',
                                 fontWeight: FontWeight.bold),
                             _buildTableCell(
-                                '              \$${vat.toStringAsFixed(2)}',
+                                '              \SAR${vat.toStringAsFixed(2)}',
                                 fontWeight: FontWeight.bold)
                           ],
                         ),
@@ -702,7 +637,7 @@ class QuotationMobilePage extends StatelessWidget {
                               _buildTableCell('Total Amount',
                                   fontWeight: FontWeight.bold),
                               _buildTableCell(
-                                  '\$${totalPriceWithVAT.toStringAsFixed(2)}',
+                                  '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
                                   fontWeight: FontWeight.bold)
                             ],
                           ),

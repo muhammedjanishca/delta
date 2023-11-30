@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_hex/widgets/jr_appbar.dart';
+import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/responsive/signup.dart';
@@ -33,7 +33,7 @@ class DeskSignUp extends StatelessWidget {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final nameTextController = TextEditingController();
-  final mobileNumTextController = TextEditingController(text: "+91");
+  final mobileNumTextController = TextEditingController(text: "+966");
   final otpTextController = TextEditingController();
 
   String? verificationId;
@@ -61,40 +61,7 @@ class DeskSignUp extends StatelessWidget {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leadingWidth: 48,
-            title: Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                  child: Text(
-                    "DELTA",
-                    style: GoogleFonts.oswald(
-                      textStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 45,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-                Text(
-                  "\n NATIONAL",
-                  style: GoogleFonts.oswald(
-                    textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        appBar: custSmallAppBar(context,Colors.white),
           body: Container(
               width: double.infinity,
               color: Colors.white,
@@ -1479,38 +1446,7 @@ class MobileSignup extends StatelessWidget {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 48,
-         title:Row(
-           children: [
-             InkWell(
-              onTap: (){
-                  Navigator.pushNamed(context, '/');
-              },
-               child: Text("DELTA",style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
-             ),
-
-               Text("\n NATIONAL",style: GoogleFonts.oswald(
-                              textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),),
-             
- 
-           ],
-
-         ),
-        ),
+        appBar:custSmallAppBar(context, Colors.white),
         body: SingleChildScrollView(
           child: SizedBox(
             child: Padding(
@@ -1838,7 +1774,7 @@ class MobileSignup extends StatelessWidget {
                                                   onPressed: () async {
                                                     if (mobileNumTextController
                                                                 .text ==
-                                                            "+91" ||
+                                                            "+966" ||
                                                         mobileNumTextController
                                                             .text.isEmpty) {
                                                       value.changeShowMobError();

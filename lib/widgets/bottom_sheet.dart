@@ -95,29 +95,30 @@ class deskBottomSheett extends StatelessWidget {
                         ),
                       )),
                   Row(
-                    children: [
-                      Text("DELTA",style: GoogleFonts.oswald(
+                    children: [ 
+                                                   Text("Trans Delta Trading",style: GoogleFonts.barlow(
                                 textStyle: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 45,
+                                  fontSize: 40,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),),
              
-                      Text(
-                        "\nNATIONAL",
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
+                      // Text(
+                      //   "\nNATIONAL",
+                      //   style: GoogleFonts.oswald(
+                      //     textStyle: TextStyle(
+                      //       color: Color.fromARGB(255, 251, 236, 221),
+                      //       fontSize: 20,
+                      //       fontWeight: FontWeight.w700,
+                      //     ),
+                      //   ),
+                      // ),
+                     
                     ],
                   ),
                   Text(
-                    'TRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES',
+                    'TRADING, CONTRACTING, ELECRICAL MATERIALS & MECHANICAL SUPPLIES',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
@@ -341,28 +342,15 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                       )),
                   Row(
                     children: [
-                         Text("DELTA",style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 45,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
-             
-                      Text(
-                        "\nNATIONAL",
-                        style: GoogleFonts.oswald(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 251, 236, 221),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ],
+                         Image.asset(
+                                  'assets/image/Yellow and Brown Modern Apparel Logo (9).png',
+                                  // width: 170,
+                                  // height: 75,
+                                  // fit: BoxFit.cover,
+                                ),           ],
                   ),
                   Text(
-                    'TRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES\n\n\n\n',
+                    'TRADING, CONTRACTING, ELECRICAL MATERIALS & MECHANICAL SUPPLIES\n\n\n\n',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,

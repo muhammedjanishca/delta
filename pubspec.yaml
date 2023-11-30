@@ -71,6 +71,8 @@ dependencies:
   firebase_storage: ^11.5.2
   flutter_glow: ^0.3.0
   obs: ^0.0.1
+  flutter_gradient_colors: ^2.1.1
+  simple_gradient_text: ^1.2.4
 
 dev_dependencies:
   flutter_test:

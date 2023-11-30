@@ -1,4 +1,5 @@
 import 'package:firebase_hex/login_and_signing/authentication.dart';
+import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
@@ -14,7 +15,7 @@ class MailVerificationPgae extends StatelessWidget {
   final String otpId;
   MailVerificationPgae(
       {super.key,
-      required this.name, 
+      required this.name,
       required this.email,
       required this.password,
       required this.otpId});
@@ -28,40 +29,8 @@ class MailVerificationPgae extends StatelessWidget {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 48,
-         title:Row(
-           children: [
-             InkWell(
-              onTap: (){
-                  Navigator.pushNamed(context, '/');
-              },
-               child: Text("DELTA",style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 45,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
-             ),
-
-               Text("\n NATIONAL",style: GoogleFonts.oswald(
-                              textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),),
-             
- 
-           ],
-
-         ),
-        ),
-        body:
-         Padding(
+        appBar: custSmallAppBar(context, Colors.white),
+        body: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -119,9 +88,9 @@ class MailVerificationPgae extends StatelessWidget {
                   child: TextButton(
                     onPressed: () async {
                       if (otpController != null) {
-                        String isOtpCorrect = await emailOtpAuth.verifyOtp(
-                            otpId, otpController);
-                      
+                        String isOtpCorrect =
+                            await emailOtpAuth.verifyOtp(otpId, otpController);
+
                         if (isOtpCorrect == "success") {
                           value.changeIsLoading();
                           await AuthenticationHelper()
@@ -156,8 +125,8 @@ class MailVerificationPgae extends StatelessWidget {
                     style: ButtonStyle(
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0))),
-                        backgroundColor:
-                            MaterialStatePropertyAll(Color.fromARGB(255, 33, 124, 159))),
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 33, 124, 159))),
                   ),
                 ),
               ),
