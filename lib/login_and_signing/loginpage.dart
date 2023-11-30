@@ -19,7 +19,14 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return AlertDialog(
-        title: Text('Login Page'),
+        title: Center(
+          child: Image.asset(
+                                    'assets/image/Yellow and Brown Modern Apparel Logo (9).png',
+                                    width: 170,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+        ),
         content: Container(
           height: 400,
           width: 500,
@@ -83,7 +90,7 @@ class LoginPage extends StatelessWidget {
                         if (emailTextController.text.isEmpty ||
                             passwordTextController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
+                               SnackBar(
                                   content: Text("All fields are required")));
                         } else {
                           value.changeIsLoading();

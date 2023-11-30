@@ -12,27 +12,33 @@ AppBar custSmallAppBar(BuildContext context, janish) {
           onTap: () {
             Navigator.pushNamed(context, '/');
           },
-          child: Text(
-            "DELTA",
-            style: GoogleFonts.oswald(
-              textStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 45,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        Text(
-          "TRADING",
-          style: GoogleFonts.oswald(
-            textStyle: const TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
+          child: Image.asset(
+                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                                  width: 170,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                )),
+        // Text(
+        //     "DELTA",
+        //     style: GoogleFonts.oswald(
+        //       textStyle: TextStyle(
+        //         color: Colors.black,
+        //         fontSize: 45,
+        //         fontWeight: FontWeight.w700,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // Text(
+        //   "TRADING",
+        //   style: GoogleFonts.oswald(
+        //     textStyle: const TextStyle(
+        //       color: Colors.black,
+        //       fontSize: 20,
+        //       fontWeight: FontWeight.w700,
+        //     ),
+        //   ),
+        // ),
       ],
     ),
   );

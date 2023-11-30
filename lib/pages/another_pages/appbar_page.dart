@@ -96,7 +96,9 @@ class DesktopAppBar extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                color: Colors.black,
+                                  color: const Color.fromARGB(255, 169, 167, 162),
+
+                // color: const Color.fromARGB(255, 0, 0, 0),
                 height: 64,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
@@ -115,32 +117,28 @@ class DesktopAppBar extends StatelessWidget {
                         Navigator.pushNamed(context, '/');
                       },
                      
-                      child:Row(
-                        children: [
-                           Text(
-                "DELTA",
-                style: GoogleFonts.oswald(
-                  textStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 45,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-                         Text(
-              "TRADING",
-              style: GoogleFonts.oswald(
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-           
-
-                        ],
-                      ),   ),
+                      child: Image.asset(
+                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                                  width: 170,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                ),   
+              //         Row(
+              //           children: [
+              //              Text(
+              //   "Trans Delta Trading",
+              //   style: GoogleFonts.dosis(
+              //     textStyle: TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.w400,
+              //     ),
+              //   ),
+              // ),
+            //              
+                //  ],
+                //       ),
+                         ),
                     SizedBox(width: MediaQuery.of(context).size.width / 15),
                     Expanded(child: searchBox(context)),
                     SizedBox(width: MediaQuery.of(context).size.width / 70),
@@ -157,11 +155,26 @@ class DesktopAppBar extends StatelessWidget {
                             },
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 194, 192,
-                                      192)), // Change the color to your desired color
+                                  Colors.white), // Change the color to your desired color
                             ),
-                            child: Text('SignUp/SignIn'),
-                          )
+                            child: Text('SignUp/SignIn',
+                            style: GoogleFonts.barlow(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700
+                            ),),
+                            //  Text(
+              //   "Trans Delta Trading",
+              //   style: GoogleFonts.dosis(
+              //     textStyle: TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.w400,
+              //     ),
+              //   ),
+              // ),
+                             ) )
                         : SizedBox(),
 
                     // user != null
@@ -287,7 +300,8 @@ class DesktopAppBar extends StatelessWidget {
                 height: 41,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Deltacolor,
+                color: Color.fromARGB(255, 238, 131, 38),
+               // color: Deltacolor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -296,6 +310,7 @@ class DesktopAppBar extends StatelessWidget {
                     _buildPopupMenuButton(
                       context,
                       'Cable Terminal Ends',
+                      
                       ['Lugs', 'Connectors'],
                       (selectedDataType) async {
                         if (selectedDataType == 'Lugs') {
@@ -352,11 +367,24 @@ class DesktopAppBar extends StatelessWidget {
       offset: const Offset(0, 30),
       child: Row(
         children: [
+          //  Text(
+              //   "Trans Delta Trading",
+              //   style: GoogleFonts.dosis(
+              //     textStyle: TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 28,
+              //       fontWeight: FontWeight.w400,
+              //     ),
+              //   ),
+              // ),
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.barlow (
+ textStyle: TextStyle(
               color: Colors.white,
-            ),
+              fontSize: 15,
+              fontWeight: FontWeight.w500
+            ),)
           ),
           Icon(
             Icons.arrow_drop_down,
@@ -544,27 +572,12 @@ class MobileAppBar extends StatelessWidget {
                   // Navigate to the named route '/your_destination_screen'
                   Navigator.pushNamed(context, '/');
                 },
-                child: Text(
-                  'DELTA',
-                  style: GoogleFonts.oswald(
-                    textStyle: TextStyle(
-                      color: Color.fromARGB(255, 251, 236, 221),
-                      fontSize: 35,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                "TRADING",
-                style: GoogleFonts.oswald(
-                  textStyle: const TextStyle(
-                    color: Color.fromARGB(255, 251, 236, 221),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
+                child: Image.asset(
+                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                                  width: 170,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                )),
               Spacer(),
               user == null
                   ? TextButton(

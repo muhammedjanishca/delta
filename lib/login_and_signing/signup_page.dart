@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/pages/another_pages/IRSH.dart';
-import 'package:firebase_hex/widgets/jr_appbar.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
 import 'package:firebase_hex/responsive/signup.dart';
@@ -34,7 +33,7 @@ class DeskSignUp extends StatelessWidget {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final nameTextController = TextEditingController();
-  final mobileNumTextController = TextEditingController(text: "+91");
+  final mobileNumTextController = TextEditingController(text: "+966");
   final otpTextController = TextEditingController();
 
   String? verificationId;
@@ -1775,7 +1774,7 @@ class MobileSignup extends StatelessWidget {
                                                   onPressed: () async {
                                                     if (mobileNumTextController
                                                                 .text ==
-                                                            "+91" ||
+                                                            "+966" ||
                                                         mobileNumTextController
                                                             .text.isEmpty) {
                                                       value.changeShowMobError();

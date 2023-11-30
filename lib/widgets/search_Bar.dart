@@ -15,8 +15,7 @@ Widget searchBox(BuildContext context) {
     // width: MediaQuery.of(context).size.width/2,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(4),
-      color: Color.fromARGB(255, 229, 226, 226), // Background color is white
-    ),
+color: Colors.white    ),
     child: Row(
       children: [
         Expanded(
