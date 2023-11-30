@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
+import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/quatation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -127,7 +128,7 @@ class QuotationDeskPage extends StatelessWidget {
             children: [
               Container(
                 width: 800,
-                color: const Color.fromARGB(255, 212, 211, 211),
+                color: const Color.fromARGB(255, 192, 173, 114),
                 child: DataTable(
                   columnSpacing: 10.0,
                   dividerThickness: 2,
@@ -379,22 +380,18 @@ class QuotationMobilePage extends StatelessWidget {
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
       appBar:custSmallAppBar(context, Colors.white),
       body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            width: 800,
-            // width: MediaQuery.of(context).size.width/2,
-            color: Colors.white,
-            child: Column(
+       
+          child: Column(
+            
               children: [
                 Container(
                   color: Colors.white,
                   height: MediaQuery.of(context).size.height * 0.2,
                   child: MyClipPath(),
                 ),
-                Container(
-                  color: Colors.amber,
-                  child: _buildQuotationTable(),
-                ),
+                
+                   _buildQuotationTable(),
+              
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -403,8 +400,8 @@ class QuotationMobilePage extends StatelessWidget {
                         const Color.fromARGB(255, 76, 138, 131),
                         const Color.fromARGB(255, 76, 138, 131)
                       ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                     ),
                   ),
                   height: MediaQuery.of(context).size.height * 0.1,
@@ -412,8 +409,8 @@ class QuotationMobilePage extends StatelessWidget {
                 )
               ],
             ),
-          ),
-        ),
+          
+        
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
@@ -429,13 +426,18 @@ class QuotationMobilePage extends StatelessWidget {
 
   Widget _buildQuotationTable() {
     return Row(
+     
       children: [
         Container(
+          // color: Colors.amber,
+          width: 500,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                width: 800,
-                color: const Color.fromARGB(255, 212, 211, 211),
+                width: 500,
+                color: Color.fromARGB(255, 12, 141, 153),
                 child: DataTable(
                   columnSpacing: 10.0,
                   dividerThickness: 2,
@@ -655,6 +657,7 @@ class QuotationMobilePage extends StatelessWidget {
   Widget _buildTableCell(String text,
       {FontWeight fontWeight = FontWeight.normal}) {
     return Container(
+      
       padding: const EdgeInsets.all(8),
       alignment: Alignment.center,
       child: Text(
