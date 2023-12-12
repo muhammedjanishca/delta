@@ -15,21 +15,18 @@ import 'package:provider/provider.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../model.dart';
+import '../../provider/Text_color.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsOfGlands extends StatefulWidget {
-
+class ProductDetailsOfGlands extends StatelessWidget {
   ProductDetailsOfGlands({super.key});
 
-  @override
-  State<ProductDetailsOfGlands> createState() => _ProductDetailsOfGlandsState();
-}
-
-class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
   String? textpass;
+
   bool check_pr_code = false;
+
   String? thumbnail;
 
   @override
@@ -56,7 +53,8 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
-
+    final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
@@ -131,14 +129,12 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                     children: [
                                       Container(
                                         color: Colors.white,
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            5,
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            2,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                5,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
                                         child: Image.network(
                                             // thumbnail!,
                                             selectedThumbnailProvider
@@ -159,8 +155,7 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                               },
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(
-                                                        8.0),
+                                                    const EdgeInsets.all(8.0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
@@ -216,17 +211,15 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
 
                                       Divider(),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
 
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
 
                                       Row(
@@ -243,15 +236,13 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
 
                                               child: const Text(
                                                 'selected Product code&Price:  ',
-                                                overflow:
-                                                    TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 14.0,
                                                   fontFamily: 'Roboto',
                                                   color: Color.fromARGB(
                                                       255, 143, 143, 143),
-                                                  fontWeight:
-                                                      FontWeight.bold,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
@@ -259,25 +250,21 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                           ValueListenableBuilder<String>(
                                             valueListenable:
                                                 selectedPriceNotifier,
-                                            builder: (context,
-                                                selectedPrice, child) {
+                                            builder: (context, selectedPrice,
+                                                child) {
                                               return Container(
                                                 width: 110,
-                                                padding:
-                                                    EdgeInsets.all(8.0),
+                                                padding: EdgeInsets.all(8.0),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          5),
+                                                      BorderRadius.circular(5),
                                                   border: Border.all(
-                                                    color: const Color
-                                                        .fromARGB(
+                                                    color: const Color.fromARGB(
                                                         255, 126, 125, 125),
                                                     width: 1.0,
                                                   ),
                                                 ),
-                                                child: selectedPrice ==
-                                                        " null"
+                                                child: selectedPrice == " null"
                                                     ? Text(
                                                         'product available based on request')
                                                     : Text(selectedPrice),
@@ -294,10 +281,9 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                               onPressed: () {
                                                 showModalBottomSheet(
                                                     context: context,
-                                                    isScrollControlled:
-                                                        true,
-                                                    builder: (BuildContext
-                                                        context) {
+                                                    isScrollControlled: true,
+                                                    builder:
+                                                        (BuildContext context) {
                                                       return SingleChildScrollView(
                                                           child: Stack(
                                                         children: [
@@ -307,10 +293,8 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                                                     .size
                                                                     .height /
                                                                 1,
-                                                            color: Colors
-                                                                .white,
-                                                            child: pdf !=
-                                                                    null
+                                                            color: Colors.white,
+                                                            child: pdf != null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -321,12 +305,10 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                                                 16, // Adjust the top position as needed
                                                             right:
                                                                 16, // Adjust the left position as needed
-                                                            child:
-                                                                IconButton(
+                                                            child: IconButton(
                                                               icon: Icon(Icons
                                                                   .close), // You can use any icon you like
-                                                              onPressed:
-                                                                  () {
+                                                              onPressed: () {
                                                                 Navigator.pop(
                                                                     context);
                                                                 // Add your close button action here
@@ -348,10 +330,9 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                         ],
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            20,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                20,
                                       ),
                                       Row(
                                         crossAxisAlignment:
@@ -371,8 +352,7 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                               width: 140,
                                               // height: 43,
                                               child: TextFormField(
-                                                controller:
-                                                    quantityController,
+                                                controller: quantityController,
                                                 keyboardType:
                                                     TextInputType.number,
                                                 decoration: InputDecoration(
@@ -397,7 +377,6 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                               ),
                                             ),
                                           ),
-                                         
                                         ],
                                       ),
                                       Column(
@@ -422,23 +401,20 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                                   //         .value =
                                                   //     ' ${codeAndPrice.price}';
                                                   // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                                  selectedPriceNotifier
-                                                          .value =
+                                                  selectedPriceNotifier.value =
                                                       '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
-                                                      AutovalidateMode
-                                                          .always,
+                                                      AutovalidateMode.always,
                                                   child: Container(
                                                     width: 100,
                                                     padding: EdgeInsets.all(
                                                         8.0), // Adjust the padding as needed
-                                                    decoration:
-                                                        BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(5),
+                                                          BorderRadius.circular(
+                                                              5),
                                                       border: Border.all(
                                                         color: codeAndPrice
                                                                     .price ==
@@ -472,10 +448,9 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
@@ -525,10 +500,9 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                     ],
                                   ),
@@ -603,8 +577,8 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                         },
                         child: const Text('ADD TO CART'),
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(const Color.fromARGB(255, 54, 98, 98)),
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color.fromARGB(255, 54, 98, 98)),
                           minimumSize: MaterialStateProperty.all(Size(150, 50)),
                         ),
                       )),
@@ -714,11 +688,10 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                             MediaQuery.of(context).size.width /
                                                 5,
                                         child: Image.network(
-                                          // thumbnail!,
-                                          selectedThumbnailProvider
-                                                  .selectedThumbnail ??
-                                              ''
-                                        ),
+                                            // thumbnail!,
+                                            selectedThumbnailProvider
+                                                    .selectedThumbnail ??
+                                                ''),
                                       ), // Display the selected thumbnail here
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
@@ -740,8 +713,8 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                                     border: Border.all(
                                                       color: imageUrl ==
                                                               // imageUrl
-                                                          selectedThumbnailProvider
-                                                              .selectedThumbnail
+                                                              selectedThumbnailProvider
+                                                                  .selectedThumbnail
                                                           ? Colors
                                                               .blue // Highlight the selected image
                                                           : Colors
@@ -790,6 +763,7 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                               ),
                                             ),
                                           ),
+                                        
                                           ValueListenableBuilder<String>(
                                             valueListenable:
                                                 selectedPriceNotifier,
@@ -860,41 +834,52 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                                   price![index];
                                               return InkWell(
                                                 onTap: () {
-                                                
-                                                  selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
+                                                  selectedPriceNotifieru
+                                                      .setSelectedPrice(
+                                                    '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                  );
+                                                  selectedPriceNotifieru
+                                                      .setProductCodeSelected(
+                                                          true);
                                                 },
+                                                // onTap: () {
+
+                                                //   selectedPriceNotifier.value =
+                                                //       '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
+                                                // },
                                                 child: Form(
                                                   autovalidateMode:
                                                       AutovalidateMode.always,
                                                   child: Container(
                                                     width: 100,
-                                                    padding: EdgeInsets.all(
-                                                        8.0), // Adjust the padding as needed
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color: codeAndPrice
                                                                     .price ==
                                                                 null
-                                                            ? Colors
-                                                                .red // Set border color to red when selectedPrice is null
+                                                            ? Colors.red
                                                             : codeAndPrice
                                                                         .productCode ==
                                                                     selectedCodeProvider
                                                                         .selectedProductCode
-                                                                ? Colors
-                                                                    .blue // Set border color to blue for selected container
-                                                                : Colors
-                                                                    .black, // Set border color to black for non-selected containers
-                                                        width:
-                                                            1.0, // Set your desired border width
+                                                                ? Colors.blue
+                                                                : Colors.black,
+                                                        width: 1.0,
                                                       ),
+                                                      // Add the color property for the inner part of the container
+                                                      color: codeAndPrice
+                                                                  .productCode ==
+                                                              selectedCodeProvider
+                                                                  .selectedProductCode
+                                                          ? Color.fromARGB(255,70,126,171) // Set the color for the selected container
+                                                          : Color.fromARGB(255,255,255,255), // Set the color for non-selected containers
                                                     ),
                                                     child: Text(
                                                       '${codeAndPrice.productCode}',
                                                       style: TextStyle(
-                                                        color: Colors
-                                                            .black, // Set your desired text color
+                                                        color: Colors.black,
                                                       ),
                                                     ),
                                                   ),
@@ -903,6 +888,10 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                             }),
                                           ),
                                         ],
+                                      ),
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /15,
                                       )
                                     ],
                                   ),
@@ -1023,12 +1012,14 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                                     if (FirebaseAuth.instance
                                                             .currentUser !=
                                                         null) {
-                                                      final selectedPrice =
-                                                          selectedPriceNotifier
-                                                              .value;
+                                                      if (selectedPriceNotifieru
+                                                          .isProductCodeSelected) {
+                                                        final selectedPrice =
+                                                            selectedPriceNotifieru
+                                                                .selectedPrice;
 
-                                                      // Check if selectedPrice is empty or null, and provide a default value if needed
-                                                      
+                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
+
                                                         final productCode =
                                                             selectedPrice
                                                                 .split(': ')[0];
@@ -1068,8 +1059,26 @@ class _ProductDetailsOfGlandsState extends State<ProductDetailsOfGlands> {
                                                             .showSnackBar(SnackBar(
                                                                 content: Text(
                                                                     'Added to cart')));
-                                                     
+                                                        selectedPriceNotifieru
+                                                            .setProductCodeSelected(
+                                                                false);
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              'Select the product code'),
+                                                        ));
+                                                      }
                                                     } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Text(
+                                                            'Select the product code'),
+                                                      ));
                                                       // Handle the case where the user is not signed in
                                                       showDialog(
                                                         context: context,

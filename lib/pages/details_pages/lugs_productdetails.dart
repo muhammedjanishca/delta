@@ -732,7 +732,7 @@ class _ProductDetailsoflugsState extends State<ProductDetailsoflugs> {
                                               },
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(8.0),
+                                                     EdgeInsets.all(8.0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(

@@ -7,15 +7,14 @@ import 'package:provider/provider.dart';
 
 Widget searchBox(BuildContext context) {
   final productProvider = Provider.of<ProductProvider>(context, listen: false);
-     final selectedThumbnailProvider =
-        Provider.of<SelectedThumbnailProvider>(context);
+  final selectedThumbnailProvider =
+      Provider.of<SelectedThumbnailProvider>(context);
 
   return Container(
     height: MediaQuery.of(context).size.height / 18,
     // width: MediaQuery.of(context).size.width/2,
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(4),
-color: Colors.white    ),
+        borderRadius: BorderRadius.circular(4), color: Colors.white),
     child: Row(
       children: [
         Expanded(
@@ -56,10 +55,14 @@ color: Colors.white    ),
             onSuggestionSelected: (suggestion) {
               final productName = suggestion['product_name'];
               final type = suggestion['type'];
-              final productNameWithUnderscores = productName.replaceAll(" ", "_");
-              selectedThumbnailProvider.setSelectedThumbnail("",index: null);
-              
-              navigateToProductDetailsFromSearch(context, productNameWithUnderscores, type);
+              final productNameWithUnderscores =
+                  productName.replaceAll(" ", "_");
+              // final thumbnail = suggestion["thumbnail"];
+               
+              selectedThumbnailProvider.setSelectedThumbnail("", index: null);
+
+              navigateToProductDetailsFromSearch(
+                  context, productNameWithUnderscores, type);
             },
           ),
         ),

@@ -342,12 +342,13 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                       )),
                   Row(
                     children: [
-                         Image.asset(
-                                  'assets/image/Yellow and Brown Modern Apparel Logo (9).png',
-                                  // width: 170,
-                                  // height: 75,
-                                  // fit: BoxFit.cover,
-                                ),           ],
+                           Text("Trans Delta Trading",style: GoogleFonts.barlow(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:30,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),),         ],
                   ),
                   Text(
                     'TRADING, CONTRACTING, ELECRICAL MATERIALS & MECHANICAL SUPPLIES\n\n\n\n',

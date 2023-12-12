@@ -226,45 +226,53 @@ class _DeskCartState extends State<DeskCart> {
                                                 Icons.delete_rounded,
                                                 color: Colors.black,
                                               ),
-                                              onPressed: () async {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: const Text(
-                                                          'Confirm Removal'),
-                                                      content: const Text(
-                                                          'Are you sure you want to remove this product?'),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          child:
-                                                              const Text('No'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the dialog
-                                                          },
-                                                        ),
-                                                        TextButton(
-                                                          child:
-                                                              const Text('Yes'),
-                                                          onPressed: () {
+                                               onPressed: () {
                                                             cartProvider
                                                                 .removeFromCart(
                                                                     index,
                                                                     cartItems[
                                                                         'cartItems']);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the dialog
+                                                           
                                                           },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                              // onPressed: () async {
+                                              //   showDialog(
+                                              //     context: context,
+                                              //     builder:
+                                              //         (BuildContext context) {
+                                              //       return AlertDialog(
+                                              //         title: const Text(
+                                              //             'Confirm Removal'),
+                                              //         content: const Text(
+                                              //             'Are you sure you want to remove this product?'),
+                                              //         actions: <Widget>[
+                                              //           TextButton(
+                                              //             child:
+                                              //                 const Text('No'),
+                                              //             onPressed: () {
+                                              //               Navigator.of(
+                                              //                       context)
+                                              //                   .pop(); // Close the dialog
+                                              //             },
+                                              //           ),
+                                              //           TextButton(
+                                              //             child:
+                                              //                 const Text('Yes'),
+                                              //             onPressed: () {
+                                              //               cartProvider
+                                              //                   .removeFromCart(
+                                              //                       index,
+                                              //                       cartItems[
+                                              //                           'cartItems']);
+                                              //               Navigator.of(
+                                              //                       context)
+                                              //                   .pop(); // Close the dialog
+                                              //             },
+                                              //           ),
+                                              //         ],
+                                              //       );
+                                              //     },
+                                              //   );
+                                              // },
                                             ),
                                           ],
                                         )
@@ -600,45 +608,52 @@ class _MobilecartState extends State<Mobilecart> {
                                                 Icons.delete_rounded,
                                                 color: Colors.black,
                                               ),
-                                              onPressed: () async {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: const Text(
-                                                          'Confirm Removal'),
-                                                      content: const Text(
-                                                          'Are you sure you want to remove this product?'),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          child:
-                                                              const Text('No'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the dialog
-                                                          },
-                                                        ),
-                                                        TextButton(
-                                                          child:
-                                                              const Text('Yes'),
-                                                          onPressed: () {
+                                               onPressed: () {
                                                             cartProvider
                                                                 .removeFromCart(
                                                                     index,
                                                                     cartItems[
                                                                         'cartItems']);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the dialog
                                                           },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                              // onPressed: () async {
+                                              //   showDialog(
+                                              //     context: context,
+                                              //     builder:
+                                              //         (BuildContext context) {
+                                              //       return AlertDialog(
+                                              //         title: const Text(
+                                              //             'Confirm Removal'),
+                                              //         content: const Text(
+                                              //             'Are you sure you want to remove this product?'),
+                                              //         actions: <Widget>[
+                                              //           TextButton(
+                                              //             child:
+                                              //                 const Text('No'),
+                                              //             onPressed: () {
+                                              //               Navigator.of(
+                                              //                       context)
+                                              //                   .pop(); // Close the dialog
+                                              //             },
+                                              //           ),
+                                              //           TextButton(
+                                              //             child:
+                                              //                 const Text('Yes'),
+                                              //             onPressed: () {
+                                              //               cartProvider
+                                              //                   .removeFromCart(
+                                              //                       index,
+                                              //                       cartItems[
+                                              //                           'cartItems']);
+                                              //               Navigator.of(
+                                              //                       context)
+                                              //                   .pop(); // Close the dialog
+                                              //             },
+                                              //           ),
+                                              //         ],
+                                              //       );
+                                              //     },
+                                              //   );
+                                              // },
                                             ),
                                           ],
                                         )
