@@ -73,18 +73,6 @@ class DataProvider extends ChangeNotifier {
     }
   }
 
-  // final String lugsApiUrl =
-  //     'http://newdelta.ap-south-1.elasticbeanstalk.com/lugs';
-  // final String connectorsApiUrl =
-  //     'http://newdelta.ap-south-1.elasticbeanstalk.com/connectors';
-  // // final String glandsApiUrl =
-  // //     'http://newdelta.ap-south-1.elasticbeanstalk.com/glands';
-  // final String accessoriesApiUrl =
-  //     'http://newdelta.ap-south-1.elasticbeanstalk.com/accessories';
-  // final String crimpingtoolsApiUrl =
-  //     'http://newdelta.ap-south-1.elasticbeanstalk.com/crimpingtools';
-  // ... Define URLs for other data types
-
 //for set up the product type for the product details
   Future<ProduceNewModal> setTypeOfProducts(type) async {
     // print("fdghjk");
@@ -114,27 +102,7 @@ class DataProvider extends ChangeNotifier {
     }
   }
 
-  // late Future lugsdata = getProduct(lugsApiUrl);
-  // late Future connectorsData = getProduct(connectorsApiUrl);
-  // Future<dynamic> fetchConnectorsData() async {
-  //   final connectorsData = await _fetchDataFromApi(connectorsApiUrl);
-  //   return connectorsData;
-  // }
-  // late Future glandData = getProduct(glandsApiUrl);
-  // Future<dynamic> fetchGlandsData() async {
-  //   final glandData = await _fetchDataFromApi(glandsApiUrl);
-  //   return glandData;
-  // }
-  // late Future accessoriesData = getProduct(accessoriesApiUrl);
-  // Future<dynamic> fetchAccssoriesData() async {
-  //   final accessoriesData = await _fetchDataFromApi(accessoriesApiUrl);
-  //   return accessoriesData;
-  // }
-  // late Future crimpingtoolData = getProduct(crimpingtoolsApiUrl);
-  // Future<dynamic> fetchCrimpingtoolData() async {
-  //   final crimpingtoolData = await _fetchDataFromApi(crimpingtoolsApiUrl);
-  //   return crimpingtoolData;
-  // }
+  
 
   int currentUser = 1;
 
@@ -144,50 +112,3 @@ class DataProvider extends ChangeNotifier {
   }
   // ... Define fetch methods for other data types
 }
-
-// Future<ProduceNewModal> _fetchglandsApiUrl() async {
-//   final response = await http
-//       .get(Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/glands'));
-//   if (response.statusCode == 200) {
-//     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
-//     return pro;
-//   } else {
-//     throw Exception('Failed to load data');
-//   }
-// }
-
-// Future<ProduceNewModal> _fetchaccessoriesApiUrl() async {
-//   final response = await http.get(
-//       Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/accessories'));
-
-//   if (response.statusCode == 200) {
-//     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
-//     return pro;
-//   } else {
-//     throw Exception('Failed to load data');
-//   }
-// }
-
-// Future<ProduceNewModal> _fetchconnectersApiUrl() async {
-//   final response = await http.get(
-//       Uri.parse('http://newdelta.ap-south-1.elasticbeanstalk.com/connectors'));
-
-//   if (response.statusCode == 200) {
-//     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
-//     return pro;
-//   } else {
-//     throw Exception('Failed to load data');
-//   }
-// }
-
-// Future<ProduceNewModal> _fetchcrimpingtoolApiUrl() async {
-//   final response = await http.get(Uri.parse(
-//       'http://newdelta.ap-south-1.elasticbeanstalk.com/crimpingtools'));
-
-//   if (response.statusCode == 200) {
-//     ProduceNewModal pro = ProduceNewModal.fromJson(json.decode(response.body));
-//     return pro;
-//   } else {
-//     throw Exception('Failed to load data');
-//   }
-// }

@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/pages/address.dart/color_change_provider.dart';
+import 'package:firebase_hex/pages/details_pages/crimping_tool.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/another_pages/appbar_page.dart';
 import 'package:firebase_hex/pages/another_pages/cart.dart';
@@ -159,8 +160,6 @@ class _MyAppState extends State<MyApp> {
                   settings: setting,
                 );
               case "productdetailsaccessories":
-                // print(elements);
-                // print("accessories");
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -169,9 +168,16 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-              case "productdetailscrimpingtools":
-                // print(elements);
-                // print("crimpingtools");
+                case "productdetailscrimpingtools":
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(
+                      body: ProductDetailsOfTools(),
+                    );
+                  },
+                  settings: setting,
+                );
+              case "nopdf":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -239,6 +245,10 @@ void navigateToProductDetailsOfAccessories(
 }
 
 void noPdfProductPage(BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/nopdf/$productname');
+}
+void navigateToProductDetailsOfTools(BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
 }

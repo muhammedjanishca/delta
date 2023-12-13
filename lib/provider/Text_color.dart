@@ -29,4 +29,9 @@ class SelectedPriceNotifier extends ChangeNotifier {
     _isProductCodeSelected = isSelected;
     notifyListeners();
   }
+   void resetSelectedPrice() {
+    _selectedPrice = '';
+    _isProductCodeSelected = false;
+    notifyListeners();
+  }
 }

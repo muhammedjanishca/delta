@@ -9,7 +9,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "https://www.transdeltatrading.com/$1",
+        "destination": "https://www.transdeltatrading.com/#/",
         "type": 301
       }
     ]

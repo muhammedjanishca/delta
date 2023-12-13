@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/widgets/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
@@ -22,6 +23,8 @@ class ConnectersPage extends StatelessWidget {
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
+         final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
         final ImageHoverProvider =
         Provider.of<ImageHoveroProvider>(context);
 
@@ -102,6 +105,7 @@ class ConnectersPage extends StatelessWidget {
                           selectedThumbnailProvider.setSelectedThumbnail(
                             productData.thumbnail ?? "",index: index
                           );
+  selectedPriceNotifieru.resetSelectedPrice();
 
                           navigateToProductDetailsOfConnectors(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
                         },

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
+import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
@@ -43,7 +44,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
       product_name = setting_list[2].replaceAll('_', " ");
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
-
+ final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
@@ -89,12 +91,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                 pdf = snapshot
                     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
               } else {
-                print(product_name);
-                print("khgg");
 
                 snapshot.data!.data.firstWhere((element) {
                   if (element.productName == product_name) {
-                    print("2121");
                     textpass = element.productName;
                     thumbnail = element.thumbnail;
                     description = element.description;
@@ -250,34 +249,19 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          ValueListenableBuilder<String>(
-                                            valueListenable:
-                                                selectedPriceNotifier,
-                                            builder: (context,
-                                                selectedPrice, child) {
-                                              return Container(
-                                                width: 110,
-                                                padding:
-                                                    EdgeInsets.all(8.0),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5),
-                                                  border: Border.all(
-                                                    color: const Color
-                                                        .fromARGB(
-                                                        255, 126, 125, 125),
-                                                    width: 1.0,
-                                                  ),
-                                                ),
-                                                child: selectedPrice ==
-                                                        " null"
-                                                    ? Text(
-                                                        'product available based on request')
-                                                    : Text(selectedPrice),
-                                              );
-                                            },
+                                          Container(
+                                          width: 130,
+                                          padding: EdgeInsets.all(8.0),
+                                          decoration: BoxDecoration(border: Border.all(
+                                            color: Colors.black,
+                                            width: 1.0),
+                                          color:  Color.fromARGB(255, 255, 255, 255),
                                           ),
+                                          child: Consumer<SelectedPriceNotifier>(builder: (context,selectedPriceNotifieru, _){
+                                            return Text("${selectedPriceNotifieru.selectedPrice}",
+                                            style: TextStyle(color: Colors.black),);
+                                          }),
+                                        ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -412,13 +396,13 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   price![index];
                                               return InkWell(
                                                 onTap: () {
-                                                  // selectedPriceNotifier
-                                                  //         .value =
-                                                  //     ' ${codeAndPrice.price}';
-                                                  // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                                  selectedPriceNotifier
-                                                          .value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'product available based on request'}';
+                                                  selectedPriceNotifieru
+                                                      .setSelectedPrice(
+                                                    '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                  );
+                                                  selectedPriceNotifieru
+                                                      .setProductCodeSelected(
+                                                          true);
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
@@ -551,42 +535,90 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          if (FirebaseAuth.instance.currentUser != null) {
-                            // signed in
-                            final selectedPrice = selectedPriceNotifier.value;
-                            final productCode = selectedPrice.split(': ')[0];
-                            final price =
-                                double.parse(selectedPrice.split(': ')[1]);
+                    onPressed: () {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      if (selectedPriceNotifieru
+                                                          .isProductCodeSelected) {
+                                                        final selectedPrice =
+                                                            selectedPriceNotifieru
+                                                                .selectedPrice;
 
-                            final quantity =
-                                int.tryParse(quantityController.text) ?? 0;
-                            final imageUrl = thumbnail;
-                            final productName = textpass;
-                            final cartProvider = Provider.of<CartProvider>(
-                                context,
-                                listen: false);
+                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
 
-                            cartProvider.addToCart(productCode:productCode,
-                                                            price:price,
-                                                            quantity:quantity,
-                                                            imageUrl:imageUrl ?? '',
-                                                            productName:productName ?? '');
+                                                        final productCode =
+                                                            selectedPrice
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
+                                                        final quantity =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        final imageUrl =
+                                                            thumbnail;
+                                                        final productName =
+                                                            textpass;
+                                                        final cartProvider =
+                                                            Provider.of<
+                                                                    CartProvider>(
+                                                                context,
+                                                                listen: false);
+                                                        cartProvider.addToCart(
+                                                            productCode:
+                                                                productCode,
+                                                            price: price,
+                                                            quantity: quantity,
+                                                            imageUrl:
+                                                                imageUrl ?? '',
+                                                            productName:
+                                                                productName ??
+                                                                    '');
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Added to cart")));
-                          } else {
-                            // signed out
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return LoginPage(); // Your custom dialog widget
-                              },
-                            );
-                          }
-                        }
-                      },
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
+                                                        selectedPriceNotifieru
+                                                            .setProductCodeSelected(
+                                                                false);
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              'Select the product code'),
+                                                        ));
+                                                      }
+                                                    } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Text(
+                                                            'Select the product code'),
+                                                      ));
+                                                      // Handle the case where the user is not signed in
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
+                                                    }
+                                                  }
+                                                },
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
@@ -801,40 +833,19 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          ValueListenableBuilder<String>(
-                                            valueListenable:
-                                                selectedPriceNotifier,
-                                            builder: (context, selectedPrice,
-                                                child) {
-                                              // String lastPrice =
-                                              //     selectedPrice.substring(
-                                              //         selectedPrice.length - 4);
-                                              // print(lastPrice);
-                                              // print(
-                                              //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-                                              return Container(
-                                                width: 110,
-                                                padding: EdgeInsets.all(8.0),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Colors.black,
-                                                    width: 1.0,
-                                                  ),
-                                                ),
-                                                // child: selectedPrice != null
-                                                //     ? Text(selectedPrice)
-                                                //     : Text('NO Price'),
-                                                child:
-                                                    // lastPrice == "null"
-                                                    //     ? const Text('product available based on request')
-                                                    //     :
-                                                    selectedPrice == " null"
-                                                        ? Text(
-                                                            'Product available based on Request')
-                                                        : Text(selectedPrice),
-                                              );
-                                            },
+                                          Container(
+                                          width: 130,
+                                          padding: EdgeInsets.all(8.0),
+                                          decoration: BoxDecoration(border: Border.all(
+                                            color: Colors.black,
+                                            width: 1.0),
+                                          color:  Color.fromARGB(255, 255, 255, 255),
                                           ),
+                                          child: Consumer<SelectedPriceNotifier>(builder: (context,selectedPriceNotifieru, _){
+                                            return Text("${selectedPriceNotifieru.selectedPrice}",
+                                            style: TextStyle(color: Colors.black),);
+                                          }),
+                                        ),
                                           Gap(95),
                                           TextButton(
                                               onPressed: () => SideSheet.right(
@@ -884,13 +895,13 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   price![index];
                                               return InkWell(
                                                 onTap: () {
-                                                  // String noprice = '0';
-                                                  // codeAndPrice.price != null
-                                                  //     ? codeAndPrice.price
-                                                  //     : noprice;
-                                                  // When a container is tapped, update the selectedPrice using ValueNotifier.
-                                                  selectedPriceNotifier.value =
-                                                      '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}';
+                                                  selectedPriceNotifieru
+                                                      .setSelectedPrice(
+                                                    '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                  );
+                                                  selectedPriceNotifieru
+                                                      .setProductCodeSelected(
+                                                          true);
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
@@ -1076,68 +1087,89 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       5,
                                                   child: ElevatedButton(
                                                     onPressed: () {
-                                                      if (_formKey.currentState!
-                                                          .validate()) {
-                                                        if (FirebaseAuth
-                                                                .instance
-                                                                .currentUser !=
-                                                            null) {
-                                                          // signed in
-                                                          final selectedPrice =
-                                                              selectedPriceNotifier
-                                                                  .value;
-                                                          final productCode =
-                                                              selectedPrice
-                                                                  .split(
-                                                                      ': ')[0];
-                                                          final price = double
-                                                              .parse(selectedPrice
-                                                                  .split(
-                                                                      ': ')[1]);
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      if (selectedPriceNotifieru
+                                                          .isProductCodeSelected) {
+                                                        final selectedPrice =
+                                                            selectedPriceNotifieru
+                                                                .selectedPrice;
 
-                                                          final quantity =
-                                                              int.tryParse(
-                                                                      quantityController
-                                                                          .text) ??
-                                                                  0;
-                                                          final imageUrl =
-                                                              // selectedThumbnailProvider
-                                                              //         .selectedThumbnail ??
-                                                              thumbnail;
-                                                          final productName =
-                                                              textpass;
-                                                          final cartProvider =
-                                                              Provider.of<
-                                                                      CartProvider>(
-                                                                  context,
-                                                                  listen:
-                                                                      false);
-                                                          cartProvider
-                                                              .addToCart(
-                                                                  productCode:productCode,
-                                                            price:price,
-                                                            quantity:quantity,
-                                                            imageUrl:imageUrl ?? '',
-                                                            productName:productName ?? '');
+                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
 
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(SnackBar(
-                                                                  content: Text(
-                                                                      "Added to cart")));
-                                                        } else {
-                                                          // signed out
-                                                          showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return LoginPage(); // Your custom dialog widget
-                                                            },
-                                                          );
-                                                        }
+                                                        final productCode =
+                                                            selectedPrice
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
+                                                        final quantity =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        final imageUrl =
+                                                            thumbnail;
+                                                        final productName =
+                                                            textpass;
+                                                        final cartProvider =
+                                                            Provider.of<
+                                                                    CartProvider>(
+                                                                context,
+                                                                listen: false);
+                                                        cartProvider.addToCart(
+                                                            productCode:
+                                                                productCode,
+                                                            price: price,
+                                                            quantity: quantity,
+                                                            imageUrl:
+                                                                imageUrl ?? '',
+                                                            productName:
+                                                                productName ??
+                                                                    '');
+
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
+                                                        selectedPriceNotifieru
+                                                            .setProductCodeSelected(
+                                                                false);
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              'Select the product code'),
+                                                        ));
                                                       }
-                                                    },
+                                                    } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Text(
+                                                            'Select the product code'),
+                                                      ));
+                                                      // Handle the case where the user is not signed in
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
+                                                    }
+                                                  }
+                                                },
                                                     child: const Text(
                                                         'ADD TO CART'),
                                                     style: ButtonStyle(
@@ -1199,17 +1231,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      // Container(
-                                      //   child: ListView.builder(
-                                      //       itemBuilder: (context, index) {
-                                      //     return Container(
-                                      //       child: pdf != null
-                                      //           ? SfPdfViewer.network(pdf)
-                                      //           : Nopdf(),
-                                      //     );
-                                      //   }),
-                                      // )
-                                      // Tab 2 content goes here
+                                      
                                       SingleChildScrollView(
                                           child: Container(
                                               height: 1500,
@@ -1218,15 +1240,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               child: pdf != null
                                                   ? SfPdfViewer.network(pdf!)
                                                   : Nopdf()))
-                                      // PDFView(
-                                      //   filePath:
-                                      //             pdf, // Replace 'pdf' with the actual PDF file path or URL
-                                      //         // height: 300,   // Set the desired height for the PDF viewer
-                                      //         // width: 300,    // Set the desired width for the PDF viewer
-                                      //       ),
-
-                                      //       ),
-                                      // ),
+                                      
                                     ],
                                   ),
                                 ),

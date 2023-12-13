@@ -9,6 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
+import '../../provider/Text_color.dart';
 import '../../provider/thumbnail.dart';
 
 class GlandPage extends StatelessWidget {
@@ -24,6 +25,8 @@ class GlandPage extends StatelessWidget {
         Provider.of<SelectedThumbnailProvider>(context);
          final selectedKiduProvider =
         Provider.of<SelectedKiduProvider>(context);
+        final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
  final ImageHoverProvider =
         Provider.of<ImageHoveroProvider>(context);
 
@@ -105,7 +108,7 @@ class GlandPage extends StatelessWidget {
                           selectedThumbnailProvider.setSelectedThumbnail(
                               productData.thumbnail ?? "",
                               index: index);
-
+  selectedPriceNotifieru.resetSelectedPrice();
                           navigateToProductDetailsOfGlands(context, index,
                               productname: snapshot
                                   .data!.data[index].productName!

@@ -93,6 +93,20 @@ class Nopdf extends StatelessWidget {
 
               return DefaultTabController(
                 length: 2,
+                // child: Container(
+                //   color: Colors.white,
+                //   child: Column(children: [
+                //     Container(
+                //       height: MediaQuery.of(context).size.height/3.5,
+                //       child: Text(""),
+                //        ),
+                //      Container(
+                //       height: MediaQuery.of(context).size.height/3.5,
+                //       color: Color.fromARGB(255, 244, 220, 155),
+                      
+                //     )
+                //   ],),
+                // ),
                 child: SingleChildScrollView(
                   child: Container(
                     // height: MediaQuery.of(context).size.height * 1.3,
@@ -304,85 +318,85 @@ class Nopdf extends StatelessWidget {
             }
           },
         ),
-        // bottomNavigationBar: BottomAppBar(
-        //   child: Container(
-        //     color: Colors.black,
-        //     child: Row(
-        //       children: [
-        //         Expanded(
-        //           child: Container(
-        //             height: 50,
-        //             decoration: BoxDecoration(
-        //               color: Colors.amber,
-        //             ),
-        //             child: ElevatedButton(
-        //               onPressed: () {
-        //                 if (_formKey.currentState!.validate()) {
-        //                   if (FirebaseAuth.instance.currentUser != null) {
-        //                     final price = double.parse(priceofproduct!);
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            color: Colors.black,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            final price = double.parse(priceofproduct!);
 
-        //                     final quantity =
-        //                         int.tryParse(quantityController.text) ?? 0;
+                            final quantity =
+                                int.tryParse(quantityController.text) ?? 0;
 
-        //                     final imageUrl =
-        //                         // selectedThumbnailProvider
-        //                         //         .selectedThumbnail ??
-        //                         thumbnail;
-        //                     final productName = textpass;
+                            final imageUrl =
+                                // selectedThumbnailProvider
+                                //         .selectedThumbnail ??
+                                thumbnail;
+                            final productName = textpass;
 
-        //                     final cartProvider = Provider.of<CartProvider>(
-        //                         context,
-        //                         listen: false);
-        //                     cartProvider.addToCart(
-        //                         // productCode:productCode,
-        //                         price: price,
-        //                         quantity: quantity,
-        //                         imageUrl: imageUrl ?? '',
-        //                         productName: productName ?? '');
+                            final cartProvider = Provider.of<CartProvider>(
+                                context,
+                                listen: false);
+                            cartProvider.addToCart(
+                                // productCode:productCode,
+                                price: price,
+                                quantity: quantity,
+                                imageUrl: imageUrl ?? '',
+                                productName: productName ?? '');
 
-        //                     ScaffoldMessenger.of(context).showSnackBar(
-        //                         SnackBar(content: Text("Added to cart")));
-        //                   } else {
-        //                     // signed out
-        //                     showDialog(
-        //                       context: context,
-        //                       builder: (BuildContext context) {
-        //                         return LoginPage(); // Your custom dialog widget
-        //                       },
-        //                     );
-        //                   }
-        //                 }
-        //               },
-        //               child: const Text('ADD TO CART'),
-        //               style: ButtonStyle(
-        //                 backgroundColor: MaterialStateProperty.all(
-        //                     const Color.fromARGB(255, 54, 98, 98)),
-        //                 minimumSize: MaterialStateProperty.all(Size(150, 50)),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //         Expanded(
-        //           child: Container(
-        //             height: 50,
-        //             decoration: BoxDecoration(
-        //               color: Colors.black,
-        //             ),
-        //             child: TextButton(
-        //               onPressed: () {
-        //                 Navigator.pushNamed(context, '/cart');
-        //               },
-        //               child: Text(
-        //                 'GO TO CART',
-        //                 style: TextStyle(color: Colors.white),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Added to cart")));
+                          } else {
+                            // signed out
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LoginPage(); // Your custom dialog widget
+                              },
+                            );
+                          }
+                        }
+                      },
+                      child: const Text('ADD TO CART'),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(249, 156, 6, 1.0)),
+                        minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                      child: Text(
+                        'GO TO CART',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       desktopProductPage: FutureBuilder(
         future: context.read<DataProvider>().setTypeOfProducts(typeOfProduct),

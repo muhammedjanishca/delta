@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,8 @@ class LugsPage extends StatelessWidget {
         Provider.of<SelectedThumbnailProvider>(context);
         final ImageHoverProvider =
         Provider.of<ImageHoveroProvider>(context);
+         final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
@@ -103,6 +106,7 @@ class LugsPage extends StatelessWidget {
                           selectedThumbnailProvider.setSelectedThumbnail(
                               productData.thumbnail ?? "",
                               index: index);
+  selectedPriceNotifieru.resetSelectedPrice();
 
                           navigateToProductDetailsofLugs(context, index,
                               productname: snapshot

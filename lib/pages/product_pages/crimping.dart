@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/widgets/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
@@ -24,6 +25,8 @@ class CrimpingToolPage extends StatelessWidget {
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
+         final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
     final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
@@ -101,7 +104,9 @@ class CrimpingToolPage extends StatelessWidget {
                           selectedThumbnailProvider.setSelectedThumbnail(
                               productData.thumbnail ?? "",
                               index: index);
-                          noPdfProductPage(context, index,
+                                selectedPriceNotifieru.resetSelectedPrice();
+
+                         navigateToProductDetailsOfTools(context, index,
                               productname: snapshot
                                   .data!.data[index].productName!
                                   .replaceAll(" ", "_"));
