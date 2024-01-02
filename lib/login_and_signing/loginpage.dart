@@ -100,6 +100,8 @@ class LoginPage extends StatelessWidget {
                               context);
                           value.changeIsLoading();
                         }
+                         Navigator.pushNamed(
+                                                            context, '/');
                       },
                       child: value.isLoading
                           ? SizedBox(
@@ -130,8 +132,8 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 19.0),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pop(); // Dismiss the current alert dialog
+                      Navigator.pushNamed(
+                            context, '/');
 
                       showDialog(
                         context: context,

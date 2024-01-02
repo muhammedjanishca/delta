@@ -5,12 +5,33 @@ import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final List<String> sliderGlands = [
-  'https://www.cubanolugs.com/image/1.jpg',
-  // 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fknowhow.distrelec.com%2Frnd%2Fthe-ultimate-guide-to-cable-glands-installation-types-and-maintenance%2F&psig=AOvVaw13uhZYypELABSBvMnfth5-&ust=1700547650553000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPicw-X30YIDFQAAAAAdAAAAABAK'
-  'https://etechcomponents.com/wp-content/uploads/2018/06/new-pic1.jpg',
-  'https://www.metalcablegland.com/wp-content/uploads/2019/03/double-compression-cable-gland-parts.png',
-  'https://etechcomponents.com/wp-content/uploads/2018/06/new-pic1.jpg',
+ 'assets/image/connectors 3 (1).jpg',
+ 'assets/image/glands 4.png',
+ 'assets/image/glands 2.png'
 ];
+final List<String> sliderLugs = [
+ 'assets/image/lugs 3 (1).jpg',
+ 'assets/image/lugs 6 (1).jpg',
+ 'assets/image/lugs 4.jpg'
+];
+final List<String> sliderAccessories = [
+ 'assets/image/accessories 3.jpg',
+ 'assets/image/accessories 2.jpg',
+ 'assets/image/accessories 1.jpg' 
+];
+final List<String> sliderConnectors = [
+ 'assets/image/connectors 4.jpg',
+ 'assets/image/connectors 2.jpg',
+ 'assets/image/connectors 3.jpg' 
+];
+final List<String> sliderTools = [
+  'assets/image/crimping tools 3.jpg',
+  'assets/image/crimping tools 4.jpg',
+  'assets/image/crimping tools 2.jpg'
+];
+
+
+
 
 
 CarouselSlider custCarosal(BuildContext context, List<String> janish, index) {
@@ -31,30 +52,11 @@ CarouselSlider custCarosal(BuildContext context, List<String> janish, index) {
                 // height: 500,
               ),
             ),
-            // SizedBox(
-            // width: MediaQuery.of(context).size.width / 1.2,
-            // Column(
-            // children: [
-            //   Text(
-            //     sliderHeadings[index],
-            //     style: GoogleFonts.inter(
-            //         fontSize: 32, fontWeight: FontWeight.w700),
-            //     textAlign: TextAlign.center,
-            //   ),
-            //   Text(sliderDescription[index],
-            //       style: GoogleFonts.inter(
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.w500,
-            //           color: Colors.grey),
-            //       textAlign: TextAlign.center),
-            // ],
-            // ),
-            // )
+           
           ],
         );
       },
-      // DefaultTransform(),
-      // BackgroundToForegroundTransform(),
+      
       slideTransform: DefaultTransform(),
       slideIndicator: CircularSlideIndicator(
         indicatorRadius: 0,

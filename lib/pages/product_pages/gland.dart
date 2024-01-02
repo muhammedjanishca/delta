@@ -6,6 +6,7 @@ import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
@@ -19,16 +20,14 @@ class GlandPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    final selectedThumbnailProvider =
-        Provider.of<SelectedThumbnailProvider>(context);
-         final selectedKiduProvider =
-        Provider.of<SelectedKiduProvider>(context);
-        final selectedPriceNotifieru =
-        Provider.of<SelectedPriceNotifier>(context, listen: false);
- final ImageHoverProvider =
-        Provider.of<ImageHoveroProvider>(context);
+    double thumbnailSize = screenSize.width * 0.11; 
+    final selectedThumbnailProvider = Provider.of<SelectedThumbnailProvider>(context);
+    final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
+    final selectedPriceNotifieru = Provider.of<SelectedPriceNotifier>(context, listen: false);
+    final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
@@ -36,10 +35,8 @@ class GlandPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: SpinKitCubeGrid(
-                size:140,
-                color:Deltacolor
-              ));
+                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+              );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -77,7 +74,7 @@ class GlandPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: Deltacolor,
+                             color: Color.fromRGBO(249, 156, 6, 1.0),
                           ),
                         )
                       ],
@@ -108,7 +105,7 @@ class GlandPage extends StatelessWidget {
                           selectedThumbnailProvider.setSelectedThumbnail(
                               productData.thumbnail ?? "",
                               index: index);
-  selectedPriceNotifieru.resetSelectedPrice();
+                          selectedPriceNotifieru.resetSelectedPrice();
                           navigateToProductDetailsOfGlands(context, index,
                               productname: snapshot
                                   .data!.data[index].productName!
@@ -171,20 +168,18 @@ class GlandPage extends StatelessWidget {
                                   // ),
                                     Image.network(
                                         productData.thumbnail ?? "",
-                                        height: 150,
-                                        width:MediaQuery.of(context).size.width /5,
+                                        width: thumbnailSize,
+                                      height: thumbnailSize,
                                       ),
-                                  SizedBox(
-                                    height: 8,
-                                    width:
-                                        MediaQuery.of(context).size.width / 4,
-                                  ),
-                                  Text(
-                                    productData.productName ?? "",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
+                                 
+                                   Text(
+                                      productData.productName ?? "",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: MediaQuery.of(context).size.height/45,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
                                 ],
                               ),
                               // Asset image as foreground decoration

@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/address.dart/addresShow.dart';
+import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -61,7 +62,6 @@ class _TextAddressState extends State<TextAddress> {
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisAlignment: mai,
                     children: [
                       SizedBox(
                           height: 40,
@@ -188,7 +188,8 @@ class _TextAddressState extends State<TextAddress> {
                         ),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              Color.fromRGBO(249, 156, 6, 1.0),),
+                            Color.fromRGBO(249, 156, 6, 1.0),
+                          ),
                           minimumSize:
                               MaterialStateProperty.all(Size(1500, 50)),
                         ),
@@ -313,7 +314,7 @@ class _TextAddressState extends State<TextAddress> {
                                   line2AddController.text;
                               addressDetails['City'] = cityController.text;
                               addressDetails['Location'] = selectedLocation;
-              
+
                               var details = await FirebaseFirestore.instance
                                   .collection("users")
                                   .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -321,7 +322,7 @@ class _TextAddressState extends State<TextAddress> {
                               fetchedAddressDetails = details["address"];
                               fetchedAddressDetails
                                   .add(jsonEncode(addressDetails));
-              
+
                               await FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -334,8 +335,10 @@ class _TextAddressState extends State<TextAddress> {
                           ),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                 Color.fromRGBO(249, 156, 6, 1.0),),
-                            minimumSize: MaterialStateProperty.all(Size(500, 50)),
+                              Color.fromRGBO(249, 156, 6, 1.0),
+                            ),
+                            minimumSize:
+                                MaterialStateProperty.all(Size(500, 50)),
                           ),
                         ),
                       ],

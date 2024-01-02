@@ -6,27 +6,28 @@ import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
 import '../../provider/data_provider.dart';
 import '../../provider/thumbnail.dart';
 
-
 class AccessoriesPage extends StatelessWidget {
   AccessoriesPage({super.key});
 
-     int selectedImageIndex = -1; 
- // Initialize with an invalid index
+  int selectedImageIndex = -1;
+  // Initialize with an invalid index
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
+        var screenSize = MediaQuery.of(context).size;
+ double thumbnailSize = screenSize.width * 0.11; 
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
-        final ImageHoverProvider =
-        Provider.of<ImageHoveroProvider>(context);
-         final selectedPriceNotifieru =
+    final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
+    final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
 
     return Consumer(builder: (context, provider, child) {
@@ -35,10 +36,13 @@ class AccessoriesPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: SpinKitCubeGrid(
-                size:140,
-                color:Deltacolor
-              ));
+                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+
+            //     SpinKitCubeGrid(
+            //   size: 140,
+            //   color: Color.fromRGBO(249, 156, 6, 1.0),
+            // )
+            );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -51,7 +55,7 @@ class AccessoriesPage extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width / 4,
                   height: MediaQuery.of(context).size.height / 2.5,
-                  child: custCarosal(context, sliderGlands, Index),
+                  child: custCarosal(context, sliderAccessories, Index),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 4,
@@ -76,7 +80,7 @@ class AccessoriesPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: Deltacolor,
+                            color: Color.fromRGBO(249, 156, 6, 1.0),
                           ),
                         )
                       ],
@@ -84,8 +88,10 @@ class AccessoriesPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding:
-                     EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,),
+                  padding: EdgeInsets.symmetric(
+                    horizontal:
+                        MediaQuery.of(context).size.width >= 600 ? 30 : 10,
+                  ),
                   child: GridView.builder(
                     physics: ScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -102,13 +108,15 @@ class AccessoriesPage extends StatelessWidget {
 
                       return GestureDetector(
                         onTap: () {
-                          
                           selectedThumbnailProvider.setSelectedThumbnail(
-                            productData.thumbnail ?? "",index: index
-                          );
-  selectedPriceNotifieru.resetSelectedPrice();
+                              productData.thumbnail ?? "",
+                              index: index);
+                          selectedPriceNotifieru.resetSelectedPrice();
 
-                          navigateToProductDetailsOfAccessories(context,index,productname: snapshot.data!.data[index].productName!.replaceAll(" ", "_"));
+                          navigateToProductDetailsOfAccessories(context, index,
+                              productname: snapshot
+                                  .data!.data[index].productName!
+                                  .replaceAll(" ", "_"));
                         },
                         child: Container(
                           //  height: 200,
@@ -119,21 +127,25 @@ class AccessoriesPage extends StatelessWidget {
                               BoxShadow(
                                 color: Color.fromARGB(255, 229, 229, 229)
                                     .withOpacity(
-                                        0.5), // Set the shadow color here
+                                        0.5), 
                                 spreadRadius:
-                                    5, // Set the spread radius of the shadow
+                                    5, 
                                 blurRadius:
-                                    7, // Set the blur radius of the shadow
+                                    7, 
                                 offset: Offset(
-                                    0, 3), // Set the offset of the shadow
+                                    0, 3),
                               ),
                             ],
                           ),
                           padding: EdgeInsets.all(
-                             MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           margin: EdgeInsets.all(
-                            MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           child: Stack(
                             alignment: Alignment.center,
@@ -161,22 +173,24 @@ class AccessoriesPage extends StatelessWidget {
                                   //     ),
                                   //   ),
                                   // ),
-                                    Image.network(
-                                        productData.thumbnail ?? "",
-                                        height: 150,
-                                        width:MediaQuery.of(context).size.width /5,
-                                      ),
-                                  SizedBox(
-                                    height: 8,
-                                    width:
-                                        MediaQuery.of(context).size.width / 4,
+                                  Image.network(
+                                    productData.thumbnail ?? "",
+                                    width: thumbnailSize,
+                                      height: thumbnailSize,
                                   ),
+                                  // SizedBox(
+                                  //   height: 8,
+                                  //   width:
+                                  //       MediaQuery.of(context).size.width / 4,
+                                  // ),
                                   Text(
-                                    productData.productName ?? "",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
+                                      productData.productName ?? "",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: MediaQuery.of(context).size.height/45,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
                                 ],
                               ),
                               // Asset image as foreground decoration

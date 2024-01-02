@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/res_cartpage.dart';
@@ -95,7 +96,7 @@ class _DeskCartState extends State<DeskCart> {
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
-                                  color: Deltacolor),
+                                  color: Color.fromRGBO(249, 156, 6, 1.0),),
                             )
                           ],
                         ),
@@ -109,7 +110,7 @@ class _DeskCartState extends State<DeskCart> {
                           itemBuilder: (context, index) {
                             final item =
                                 jsonDecode(cartItems["cartItems"][index]);
-
+      
                             // final item = cartProvider.cartItems[index];
                             return ListTile(
                               title: Row(
@@ -220,7 +221,7 @@ class _DeskCartState extends State<DeskCart> {
                                                 }),
                                             // Divider(),
                                             // Text("|"),
-
+      
                                             IconButton(
                                               icon: const Icon(
                                                 Icons.delete_rounded,
@@ -356,7 +357,7 @@ class _DeskCartState extends State<DeskCart> {
                               thickness:
                                   1, // Specify the thickness of the divider line
                             ),
-
+      
                             const SizedBox(
                               height: 40,
                             ),
@@ -476,7 +477,7 @@ class _MobilecartState extends State<Mobilecart> {
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
-                                color: Deltacolor),
+                                color:   Color.fromRGBO(249, 156, 6, 1.0),),
                           )
                         ],
                       ),
@@ -489,12 +490,12 @@ class _MobilecartState extends State<Mobilecart> {
                         itemBuilder: (context, index) {
                           final item =
                               jsonDecode(cartItems["cartItems"][index]);
-
+      
                           // final item = cartProvider.cartItems[index];
                           return GestureDetector(
                             onTap: () {
                               // if(index)
-                              //Navigator.of(context).push(mater)
+                              // Navigator.of(context).push(mater)
                             },
                             child: ListTile(
                               title: Row(
@@ -602,7 +603,7 @@ class _MobilecartState extends State<Mobilecart> {
                                                 }),
                                             // Divider(),
                                             // Text("|"),
-
+      
                                             IconButton(
                                               icon: const Icon(
                                                 Icons.delete_rounded,
@@ -670,7 +671,7 @@ class _MobilecartState extends State<Mobilecart> {
                   ],
                 ),
               ),
-
+      
               // flex: 2,
               SizedBox(
                 height: MediaQuery.of(context).size.height / 2,
@@ -750,7 +751,7 @@ class _MobilecartState extends State<Mobilecart> {
                   ],
                 ),
               ),
-
+      
               Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   // height: MediaQuery.of(context).size.height / 1,
@@ -790,7 +791,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               height: 50,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
-                color: Deltacolor,
+                color: Color.fromRGBO(249, 156, 6, 1.0),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(
                       20), // Adjust the top-left radius as needed
@@ -838,8 +839,7 @@ class MobileBottomNavigationBaru extends StatelessWidget {
               height: 50,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
-                color: Deltacolor,
-                borderRadius: const BorderRadius.only(
+ color: Color.fromRGBO(249, 156, 6, 1.0),                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(
                       20), // Adjust the top-left radius as needed
                   topRight: Radius.circular(

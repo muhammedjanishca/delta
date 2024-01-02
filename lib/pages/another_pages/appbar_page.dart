@@ -6,6 +6,7 @@ import 'package:firebase_hex/pages/product_pages/connecters.dart';
 import 'package:firebase_hex/pages/product_pages/crimping.dart';
 import 'package:firebase_hex/pages/product_pages/gland.dart';
 import 'package:firebase_hex/pages/product_pages/lugs.dart';
+import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
@@ -89,267 +90,270 @@ class DesktopAppBar extends StatelessWidget {
     }
     return ChangeNotifierProvider(
       create: (context) => DataProvider(),
-      child: PreferredSize(
-        preferredSize: Size.fromHeight(105),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Container(
-                                 color: Color.fromARGB(255, 206, 205, 202),
-
-                // color: const Color.fromARGB(255, 0, 0, 0),
-                //color: Color.fromARGB(255, 206, 205, 202),janish
-                height: 64,
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width <=
-                              950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
-                          ? MediaQuery.of(context).size.width /
-                              30 // If the screen width is less than 600, set width to half of the screen width
-                          : MediaQuery.of(context).size.width /
-                              8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
-                    ),
-                    InkWell(
-                      onTap: () {
-                        // Navigate to the named route '/your_destination_screen'
-                        Navigator.pushNamed(context, '/');
-                      },
-                     
-                      child: Image.asset(
-                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
-                                  width: 170,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                ),   
-              //         Row(
-              //           children: [
-              //              Text(
-              //   "Trans Delta Trading",
-              //   style: GoogleFonts.dosis(
-              //     textStyle: TextStyle(
-              //       color: Colors.white,
-              //       fontSize: 28,
-              //       fontWeight: FontWeight.w400,
-              //     ),
-              //   ),
-              // ),
-            //              
-                //  ],
-                //       ),
-                         ),
-                    SizedBox(width: MediaQuery.of(context).size.width / 15),
-                    Expanded(child: searchBox(context)),
-                    SizedBox(width: MediaQuery.of(context).size.width / 70),
-
-                    user == null
-                        ? TextButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                            },
-                            style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white), // Change the color to your desired color
-                            ),
-                            child: Text('SignUp/SignIn',
-                            style: GoogleFonts.barlow(
-                              textStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500
-                            ),),
-                            //  Text(
-              //   "Trans Delta Trading",
-              //   style: GoogleFonts.dosis(
-              //     textStyle: TextStyle(
-              //       color: Colors.white,
-              //       fontSize: 28,
-              //       fontWeight: FontWeight.w400,
-              //     ),
-              //   ),
-              // ),
-                             ) )
-                        : SizedBox(),
-
-                    // user != null
-                    //     ? TextButton(
-                    //         onPressed: () {
-                    //           FirebaseAuth.instance.signOut();
-                    //         },
-                    //         child: Text('logout'))
-                    //     : SizedBox(),
-                    SizedBox(width: MediaQuery.of(context).size.width / 70),
-
-                    InkWell(
-                      onTap: () {
-                        // Show the PopupMenu when the icon is clicked
-                        showMenu(
-                          context: context,
-                          position: RelativeRect.fromLTRB(
-                            200,
-                            60,
-                            180,
-                            0,
-                          ), // Adjust the position as needed
-                          items: [
-                            PopupMenuItem<String>(
-                              value: 'Account',
-                              child: Text('Account'),
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'Login',
-                              child: Text('Login'),
-                            ),
-                            PopupMenuItem<String>(
-                              child: user != null
-                                  ? TextButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: Text(
-                                                  "Are you sure to logout?"),
-                                              // content: Text("This is my message."),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Text('Cancel')),
-                                                TextButton(
-                                                    onPressed: () {
-                                                      FirebaseAuth.instance
-                                                          .signOut();
-                                                      // Navigator.pop(context);
-
-                                                      Navigator.pushNamed(
-                                                          context, '/');
-                                                    },
-                                                    child: Text('Yes'))
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        // FirebaseAuth.instance.signOut();
-                                      },
-                                      child: Text(
-                                        'Logout',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ))
-                                  : SizedBox(),
-                            ),
-                          ],
-                        ).then((value) {
-                          // Handle the selected menu item when the menu is dismissed
-                          if (value != null) {
-                            _handlePopupSelection(value);
-                          }
-                        });
-                      },
-                      child: Icon(
-                        Icons.person_2_outlined,
-                        color: Colors.black,
+      child: SafeArea(
+        child: PreferredSize(
+          preferredSize: Size.fromHeight(105),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Container(
+                  color: Color.fromARGB(255, 206, 205, 202),
+      
+                  // color: const Color.fromARGB(255, 0, 0, 0),
+                  //color: Color.fromARGB(255, 206, 205, 202),janish
+                  height: 64,
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width <=
+                                950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                            ? MediaQuery.of(context).size.width /
+                                30 // If the screen width is less than 600, set width to half of the screen width
+                            : MediaQuery.of(context).size.width /
+                                8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
                       ),
-                    ),
-
-                    SizedBox(width: MediaQuery.of(context).size.width / 70),
-
-                    GestureDetector(
-                      onTap: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
-                      child: badges.Badge(
-                          badgeContent: Text(
-                            cartCount.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          child: Icon(
-                            Icons.shopping_bag_outlined,
-                            color: Colors.black,
-                          )),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width <=
-                              950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
-                          ? MediaQuery.of(context).size.width /
-                              30 // If the screen width is less than 600, set width to half of the screen width
-                          : MediaQuery.of(context).size.width /
-                              8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
-                    ),
-                  ],
+                      InkWell(
+                        onTap: () {
+                          // Navigate to the named route '/your_destination_screen'
+                          Navigator.pushNamed(context, '/');
+                        },
+      
+                        child: Image.asset(
+                          'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                          width: 170,
+                          height: 60,
+                          fit: BoxFit.cover,
+                        ),
+                        //         Row(
+                        //           children: [
+                        //              Text(
+                        //   "Trans Delta Trading",
+                        //   style: GoogleFonts.dosis(
+                        //     textStyle: TextStyle(
+                        //       color: Colors.white,
+                        //       fontSize: 28,
+                        //       fontWeight: FontWeight.w400,
+                        //     ),
+                        //   ),
+                        // ),
+                        //
+                        //  ],
+                        //       ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width / 15),
+                      Expanded(child: searchBox(context)),
+                      SizedBox(width: MediaQuery.of(context).size.width / 70),
+      
+                      user == null
+                          ? TextButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return LoginPage(); // Your custom dialog widget
+                                  },
+                                );
+                              },
+                              style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all<Color>(
+                                    Colors
+                                        .white), // Change the color to your desired color
+                              ),
+                              child: Text(
+                                'SignUp/SignIn',
+                                style: GoogleFonts.barlow(
+                                  textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                //  Text(
+                                //   "Trans Delta Trading",
+                                //   style: GoogleFonts.dosis(
+                                //     textStyle: TextStyle(
+                                //       color: Colors.white,
+                                //       fontSize: 28,
+                                //       fontWeight: FontWeight.w400,
+                                //     ),
+                                //   ),
+                                // ),
+                              ))
+                          : SizedBox(),
+      
+                      // user != null
+                      //     ? TextButton(
+                      //         onPressed: () {
+                      //           FirebaseAuth.instance.signOut();
+                      //         },
+                      //         child: Text('logout'))
+                      //     : SizedBox(),
+                      SizedBox(width: MediaQuery.of(context).size.width / 70),
+      
+                      InkWell(
+                        onTap: () {
+                          // Show the PopupMenu when the icon is clicked
+                          showMenu(
+                            context: context,
+                            position: RelativeRect.fromLTRB(
+                              200,
+                              60,
+                              180,
+                              0,
+                            ), // Adjust the position as needed
+                            items: [
+                              PopupMenuItem<String>(
+                                value: 'Account',
+                                child: Text('Account'),
+                              ),
+                              PopupMenuItem<String>(
+                                value: 'Login',
+                                child: Text('Login'),
+                              ),
+                              PopupMenuItem<String>(
+                                child: user != null
+                                    ? TextButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    "Are you sure to logout?"),
+                                                // content: Text("This is my message."),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text('Cancel')),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        FirebaseAuth.instance
+                                                            .signOut();
+                                                        // Navigator.pop(context);
+      
+                                                        Navigator.pushNamed(
+                                                            context, '/');
+                                                      },
+                                                      child: Text('Yes'))
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          // FirebaseAuth.instance.signOut();
+                                        },
+                                        child: Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ))
+                                    : SizedBox(),
+                              ),
+                            ],
+                          ).then((value) {
+                            // Handle the selected menu item when the menu is dismissed
+                            if (value != null) {
+                              _handlePopupSelection(value);
+                            }
+                          });
+                        },
+                        child: Icon(
+                          Icons.person_2_outlined,
+                          color: Colors.black,
+                        ),
+                      ),
+      
+                      SizedBox(width: MediaQuery.of(context).size.width / 70),
+      
+                      GestureDetector(
+                        onTap: () {
+                          user != null
+                              ? Navigator.pushNamed(context, '/cart')
+                              : showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return LoginPage(); // Your custom dialog widget
+                                  },
+                                );
+                        },
+                        child: badges.Badge(
+                            badgeContent: Text(
+                              cartCount.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            child: Icon(
+                              Icons.shopping_bag_outlined,
+                              color: Colors.black,
+                            )),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width <=
+                                950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                            ? MediaQuery.of(context).size.width /
+                                30 // If the screen width is less than 600, set width to half of the screen width
+                            : MediaQuery.of(context).size.width /
+                                8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                height: 41,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                color: Color.fromRGBO(249, 156, 6, 1.0),
-               // color: Deltacolor,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(width: 50),
-                    _buildPopupMenuButton(
-                      context,
-                      'Cable Terminal Ends',
-                      
-                      ['Lugs', 'Connectors'],
-                      (selectedDataType) async {
-                        if (selectedDataType == 'Lugs') {
-                          Navigator.pushNamed(context, '/Lugs');
-                        } else if (selectedDataType == 'Connectors') {
-                          Navigator.pushNamed(context, '/Connectors');
-                        }
-                        // Add similar conditions for other data types
-                      },
-                    ),
-                    _buildPopupMenuButton(
-                      context,
-                      'Brass Cable Gland Kits & Accessories',
-                      ['Glands', 'Accessories'],
-                      (selectedDataType) async {
-                        if (selectedDataType == 'Glands') {
-                          Navigator.pushNamed(context, '/Glands');
-                        } else if (selectedDataType == 'Accessories') {
-                          Navigator.pushNamed(context, '/Accessories');
-                        }
-                        // Add similar conditions for other data types
-                      },
-                    ),
-                    _buildPopupMenuButton(
-                      context,
-                      'Crimping Tool',
-                      ['Crimping Tool'],
-                      (selectedDataType) async {
-                        if (selectedDataType == 'Crimping Tool') {
-                          Navigator.pushNamed(context, '/CrimpingTools');
-                        }
-                      },
-                    ),
-                    SizedBox(width: 50),
-                  ],
-                ),
-              )
-            ],
+                Container(
+                  height: 41,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(249, 156, 6, 1.0),
+                    // color: Deltacolor,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(width: 50),
+                      _buildPopupMenuButton(
+                        context,
+                        'Cable Terminal Ends',
+                        ['Lugs', 'Connectors'],
+                        (selectedDataType) async {
+                          if (selectedDataType == 'Lugs') {
+                            Navigator.pushNamed(context, '/Lugs');
+                          } else if (selectedDataType == 'Connectors') {
+                            Navigator.pushNamed(context, '/Connectors');
+                          }
+                          // Add similar conditions for other data types
+                        },
+                      ),
+                      _buildPopupMenuButton(
+                        context,
+                        'Brass Cable Gland Kits & Accessories',
+                        ['Glands', 'Accessories'],
+                        (selectedDataType) async {
+                          if (selectedDataType == 'Glands') {
+                            Navigator.pushNamed(context, '/Glands');
+                          } else if (selectedDataType == 'Accessories') {
+                            Navigator.pushNamed(context, '/Accessories');
+                          }
+                          // Add similar conditions for other data types
+                        },
+                      ),
+                      _buildPopupMenuButton(
+                        context,
+                        'Crimping Tool',
+                        ['Crimping Tool'],
+                        (selectedDataType) async {
+                          if (selectedDataType == 'Crimping Tool') {
+                            Navigator.pushNamed(context, '/CrimpingTools');
+                          }
+                        },
+                      ),
+                      SizedBox(width: 50),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -369,24 +373,22 @@ class DesktopAppBar extends StatelessWidget {
       child: Row(
         children: [
           //  Text(
-              //   "Trans Delta Trading",
-              //   style: GoogleFonts.dosis(
-              //     textStyle: TextStyle(
-              //       color: Colors.white,
-              //       fontSize: 28,
-              //       fontWeight: FontWeight.w400,
-              //     ),
-              //   ),
-              // ),
-          Text(
-            title,
-            style: GoogleFonts.barlow (
- textStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w500
-            ),)
-          ),
+          //   "Trans Delta Trading",
+          //   style: GoogleFonts.dosis(
+          //     textStyle: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 28,
+          //       fontWeight: FontWeight.w400,
+          //     ),
+          //   ),
+          // ),
+          Text(title,
+              style: GoogleFonts.barlow(
+                textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500),
+              )),
           Icon(
             Icons.arrow_drop_down,
             color: Colors.white,
@@ -418,7 +420,6 @@ Widget custmobileDrawer(BuildContext context) {
           // Set the background color of the Drawer to black
           ),
       child: Drawer(
-        
         child: ListView(
           children: [
             SizedBox(
@@ -437,7 +438,7 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
-                  hoverColor: Deltacolor,
+                  hoverColor:Color.fromRGBO(249, 156, 6, 1.0),
                   title: Text(
                     'Lugs',
                     style: TextStyle(color: Colors.white),
@@ -446,12 +447,14 @@ Widget custmobileDrawer(BuildContext context) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AppBarMain(body: LugsPage()),
+                          builder: (context) => AppBarMain(body: RefreshIndicator(
+                            onRefresh: refresh,
+                            child: LugsPage())),
                         ));
                   },
                 ),
                 ListTile(
-                  hoverColor: Deltacolor,
+                  hoverColor:Color.fromRGBO(249, 156, 6, 1.0),
                   title: Text(
                     'Connectors',
                     style: TextStyle(color: Colors.white),
@@ -461,7 +464,9 @@ Widget custmobileDrawer(BuildContext context) {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              AppBarMain(body: ConnectersPage()),
+                              AppBarMain(body: RefreshIndicator(
+                                onRefresh: refresh,
+                                child: ConnectersPage())),
                         ));
                   },
                 ),
@@ -481,7 +486,7 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
-                  hoverColor: Deltacolor,
+                  hoverColor:Color.fromRGBO(249, 156, 6, 1.0),
                   title: Text(
                     'Glands',
                     style: TextStyle(color: Colors.white),
@@ -490,12 +495,14 @@ Widget custmobileDrawer(BuildContext context) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AppBarMain(body: GlandPage()),
+                          builder: (context) => AppBarMain(body: RefreshIndicator(
+                            onRefresh: refresh,
+                            child: GlandPage())),
                         ));
                   },
                 ),
                 ListTile(
-                  hoverColor: Deltacolor,
+                  hoverColor:Color.fromRGBO(249, 156, 6, 1.0),
                   title: Text(
                     'Accessories',
                     style: TextStyle(color: Colors.white),
@@ -505,7 +512,9 @@ Widget custmobileDrawer(BuildContext context) {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              AppBarMain(body: AccessoriesPage()),
+                              AppBarMain(body: RefreshIndicator(
+                                onRefresh: refresh,
+                                child: AccessoriesPage())),
                         ));
                   },
                 ),
@@ -524,7 +533,7 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
-                  hoverColor: Deltacolor,
+                  hoverColor:Color.fromRGBO(249, 156, 6, 1.0),
                   title: Text(
                     'Crimping Tool',
                     style: TextStyle(color: Colors.white),
@@ -534,7 +543,9 @@ Widget custmobileDrawer(BuildContext context) {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              AppBarMain(body: CrimpingToolPage()),
+                              AppBarMain(body: RefreshIndicator(
+                                onRefresh: refresh,
+                                child: CrimpingToolPage())),
                         ));
                   },
                 ),
@@ -566,65 +577,70 @@ class MobileAppBar extends StatelessWidget {
 
     return Column(
       children: [
-        AppBar(
-          title: Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  // Navigate to the named route '/your_destination_screen'
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Image.asset(
-                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
-                                  width: 170,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                )),
-              Spacer(),
-              user == null
-                  ? TextButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return LoginPage(); // Your custom dialog widget
-                          },
-                        );
-                      },
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(255, 194, 192, 192)),
+        SafeArea(
+          child: AppBar(
+            title: Row(
+              children: [
+                InkWell(
+                    onTap: () {
+                      // Navigate to the named route '/your_destination_screen'
+                      Navigator.pushNamed(context, '/');
+                    },
+                    child: Image.asset(
+                      'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                      width: 170,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    )),
+                Spacer(),
+                user == null
+                    ? TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return LoginPage(); // Your custom dialog widget
+                            },
+                          );
+                        },
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 194, 192, 192)),
+                        ),
+                        child: Text(
+                          'SignUp/SignIn',
+                          style: TextStyle(color: Colors.black,fontSize: 11),
+                        ),
+                      )
+                    : SizedBox(),
+                GestureDetector(
+                  onTap: () {
+                    user != null
+                        ? Navigator.pushNamed(context, '/cart')
+                        : showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return LoginPage(); // Your custom dialog widget
+                            },
+                          );
+                  },
+                  child: badges.Badge(
+                      badgeContent: Text(
+                        cartCount.toString(),
+                        style: TextStyle(color: Colors.white),
                       ),
-                      child: Text('SignUp/SignIn',style: TextStyle(color: Colors.black),),
-                    )
-                  : SizedBox(),
-              GestureDetector(
-                onTap: () {
-                  user != null
-                      ? Navigator.pushNamed(context, '/cart')
-                      : Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpPage(),
-                          ));
-                },
-                child: badges.Badge(
-                  badgeContent: Text(
-                    cartCount.toString(),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  child: Icon(
-                            Icons.shopping_bag_outlined,
-                    color: Colors.black,
-                  ),
+                      child: Icon(
+                        Icons.shopping_bag_outlined,
+                        color: Colors.black,
+                      )),
                 ),
-              ),
-            ],
+              ],
+            ),
+            backgroundColor: Color.fromARGB(255, 206, 205, 202),
           ),
-          backgroundColor: Color.fromARGB(255, 206, 205, 202),
         ),
         Container(
-           color: Color.fromRGBO(249, 156, 6, 1.0),
+          color: Color.fromRGBO(249, 156, 6, 1.0),
           padding: EdgeInsets.only(bottom: 5, top: 5, left: 55, right: 10),
           height: 49,
           width: double.infinity,
@@ -634,7 +650,6 @@ class MobileAppBar extends StatelessWidget {
     );
   }
 }
-
 
 // Widget productList(BuildContext context) {
 //   final productProvider = Provider.of<ProductProvider>(context, listen: false);

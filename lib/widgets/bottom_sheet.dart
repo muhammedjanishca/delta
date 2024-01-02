@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:firebase_hex/widgets/animation_button.dart';
 import 'package:firebase_hex/widgets/customtextfield.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../login_and_signing/authentication.dart';
@@ -64,12 +64,12 @@ class deskBottomSheett extends StatelessWidget {
 
       if (response.statusCode == 200) {
         // Email sent successfully
-        print(name);
-        print(email);
-        print(company);
-        print(phone);
-        print(message);
-        print('Your mail is sent!');
+        // print(name);
+        // print(email);
+        // print(company);
+        // print(phone);
+        // print(message);
+        // print('Your mail is sent!');
       } else {
         print('Oops... ${response.body}');
       }
@@ -94,29 +94,20 @@ class deskBottomSheett extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       )),
-                  Row(
-                    children: [ 
-                                                   Text("Trans Delta Trading",style: GoogleFonts.barlow(
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),),
+                  
+                             FittedBox(
+                               child: Container(
+                                 child: Text("Trans Delta Trading",style: GoogleFonts.barlow(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),),
+                               ),
+                             ),
              
-                      // Text(
-                      //   "\nNATIONAL",
-                      //   style: GoogleFonts.oswald(
-                      //     textStyle: TextStyle(
-                      //       color: Color.fromARGB(255, 251, 236, 221),
-                      //       fontSize: 20,
-                      //       fontWeight: FontWeight.w700,
-                      //     ),
-                      //   ),
-                      // ),
-                     
-                    ],
-                  ),
+                    
                   Text(
                     'TRADING, CONTRACTING, ELECRICAL MATERIALS & MECHANICAL SUPPLIES',
                     style: TextStyle(
@@ -253,15 +244,46 @@ class deskBottomSheett extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                // All text fields are valid, you can perform your action here
                                 sendEmail(
                                     nameController.text,
                                     emailController.text,
                                     companyNameController.text,
                                     phoneNumberController.text,
                                     messageController.text);
+
+                                showDialog(
+                                  barrierColor: Colors.black.withOpacity(0.1),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      elevation: 0,
+                                      backgroundColor: Colors.transparent,
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        height: 300,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              color: Colors.transparent,
+                                              height: 150,
+                                              child: Lottie.asset(
+                                                  "assets/image/Animation - 1703239746007.json"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+
+                                Future.delayed(Duration(seconds: 2), () {
+                                  Navigator.of(context).pop();
+                                });
                               }
                             },
+
                             child: Text(
                               'SUBMIT',
                               style: TextStyle(color: Colors.black),
@@ -273,7 +295,6 @@ class deskBottomSheett extends StatelessWidget {
                                   MaterialStateProperty.all(Size(150, 50)),
                             ),
                           ),
-                          // GlowingButton()
                         ],
                       ),
                     )
@@ -320,6 +341,47 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
 
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
+     Future<void> sendEmail(String name, String email, String company,
+        String phone, String message) async {
+      final apiUrl = 'https://api.emailjs.com/api/v1.0/email/send';
+
+      // Replace these values with your actual service, template, and user IDs
+      final serviceId = 'service_54jno8o';
+      final templateId = 'template_leg6o7l';
+      final userId = 'pyy8mA7J7LWSzgAMF';
+
+      final data = {
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'name': name,
+          'email': email,
+          'company': company,
+          'phone': phone,
+          'message': message,
+        },
+      };
+
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(data),
+      );
+
+      if (response.statusCode == 200) {
+        // Email sent successfully
+        // print(name);
+        // print(email);
+        // print(company);
+        // print(phone);
+        // print(message);
+        // print('Your mail is sent!');
+      } else {
+        print('Oops... ${response.body}');
+      }
+    }
+
 
     return Container(
       color: Colors.black,
@@ -357,57 +419,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         fontWeight: FontWeight.w400,
                         fontSize: 15),
                   ),
-                  // Text(
-                  //   'DELTA NATIONALS Baladiya St,\nAlanwar Center P.O.Box: 101447, jiddah 21311\nTel: 0126652671, jiddah -Soudi Arabia\nE-mail : sales@deltanationals.com',
-                  //   style: TextStyle(fontSize: 15, color: Colors.white),
-                  // ),
-                  // SizedBox(
-                  //   height: MediaQuery.of(context).size.height / 20,
-                  // ),
-                  // Text(
-                  //   'Contact Us\n',
-                  //   style: TextStyle(
-                  //       color: Colors.white,
-                  //       fontWeight: FontWeight.bold,
-                  //       fontSize: 20),
-                  // ),
-                  // user != null
-                  //   ? TextButton(
-                  //       onPressed: () {
-                  //         showDialog(
-                  //           context: context,
-                  //           builder: (context) {
-                  //             return AlertDialog(
-                  //               title: Text("Are you sure to logout?"),
-                  //               // content: Text("This is my message."),
-                  //               actions: [
-                  //                 TextButton(
-                  //                     onPressed: () {
-                  //                       Navigator.pop(context);
-                  //                     },
-                  //                     child: Text('Cancel')),
-                  //                 TextButton(
-                  //                     onPressed: () {
-                  //                       FirebaseAuth.instance.signOut();
-                  //                       // Navigator.pop(context);
-
-                  //                       Navigator.pushNamed(context, '/');
-                  //                     },
-                  //                     child: Text('Yes'))
-                  //               ],
-                  //             );
-                  //           },
-                  //         );
-                  //         // FirebaseAuth.instance.signOut();
-                  //       },
-                  //       child: Text(
-                  //         'Logout',
-                  //         style: TextStyle(
-                  //             fontSize: 15,
-                  //             fontWeight: FontWeight.bold,
-                  //             color: Colors.white),
-                  //       ))
-                  //   : SizedBox(),
+                 
                 ],
               ),
             ),
@@ -554,16 +566,46 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // All text fields are valid, you can perform your action here
-                          // sendEmail(
-                          //     nameController.text,
-                          //     emailController.text,
-                          //     companyNameController.text,
-                          //     phoneNumberController.text,
-                          //     messageController.text);
-                        }
+                              if (_formKey.currentState!.validate()) {
+                                sendEmail(
+                                    nameController.text,
+                                    emailController.text,
+                                    companyNameController.text,
+                                    phoneNumberController.text,
+                                    messageController.text);
+                                showDialog(
+                                  barrierColor: Colors.black.withOpacity(0.1),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      elevation: 0,
+                                      backgroundColor: Colors.transparent,
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        height: 300,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              color: Colors.transparent,
+                                              height: 150,
+                                              child: Lottie.asset(
+                                                  "assets/image/Animation - 1703239746007.json"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+
+                                Future.delayed(Duration(seconds: 2), () {
+                                  Navigator.of(context).pop();
+                                });
+                              }
                             },
+
                             child: Text(
                               'SUBMIT',
                               style: TextStyle(color: Colors.black),

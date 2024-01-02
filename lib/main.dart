@@ -29,6 +29,7 @@ import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/fetch_invoice.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -62,15 +63,14 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(
-            create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
         ChangeNotifierProvider(create: (context) => SelectedPriceNotifier()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
-        // ChangeNotifierProvider(create: (context) => TextProvider()),
+     // ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
         ChangeNotifierProvider(create: (context) => ImageSelection()),
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
@@ -80,6 +80,10 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedPriceProvider()),
       ],
       child: MaterialApp(
+        title: "TRANS DELTA TRADING",
+        theme: ThemeData(
+          primaryColor: const Color.fromARGB(255, 206, 205, 202)
+        ),
         //this use using for handle null data
         builder: (context, widget) {
           Widget error = Container(
@@ -91,16 +95,17 @@ class _MyAppState extends State<MyApp> {
                     height: 100,
                     width: 100,
                     child: Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.greenAccent,
-                      ),
+                                        child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+
                     )),
               ));
           if (widget is Scaffold || widget is Navigator) {
-            error = Scaffold(body: Center(child: CircularProgressIndicator()));
+            error = Scaffold(body: Center(                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+));
           }
           ErrorWidget.builder = (errorDetails) {
-            return Center(child: CircularProgressIndicator());
+            return Center(                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+);
             // Text(errorDetails.toString());
           };
           if (widget != null) return widget;
@@ -109,7 +114,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => AppBarMain(body: LandinPage()),
-
+      
           '/cart': (context) => AppBarMain(
                 body: CartPage(),
               ),
@@ -192,31 +197,14 @@ class _MyAppState extends State<MyApp> {
           }
           return null;
         },
-
-        // onGenerateRoute: (RouteSettings setting) {
-        //   List<String> elements = setting.name!.split('/');
-        //   if (elements[0] == '') {
-        //     if (elements[1] == "productdetailsofglands") {
-        //       print(elements);
-        //       print("hjk");
-        //       var index = elements[1];
-        //       return MaterialPageRoute(builder: (BuildContext context) {
-        //         return AppBarMain(
-        //           body: ProductDetailsOfGlands(
-        //           ),
-        //         );
-        //       },
-        //       settings: setting
-        //       );
-        //     }
-        //   }
-        //   return null;
-        // },
+      
       ),
     );
   }
 }
-
+void navigateToPage(BuildContext context, String route) {
+  Navigator.pushNamed(context, route);
+}
 void navigateToProductDetailsofLugs(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
