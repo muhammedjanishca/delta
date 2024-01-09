@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/pages/address.dart/color_change_provider.dart';
+import 'package:firebase_hex/pages/another_pages/paralex.dart';
 import 'package:firebase_hex/pages/details_pages/crimping_tool.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/another_pages/appbar_page.dart';
@@ -70,7 +71,6 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedPriceNotifier()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
-     // ChangeNotifierProvider(create: (context) => TextProvider()),
         ChangeNotifierProvider(create: (context) => ImageHoveroProvider()),
         ChangeNotifierProvider(create: (context) => ImageSelection()),
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
@@ -81,9 +81,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         title: "TRANS DELTA TRADING",
-        theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 206, 205, 202)
-        ),
+        theme: ThemeData(primaryColor: const Color.fromARGB(255, 206, 205, 202)),
         //this use using for handle null data
         builder: (context, widget) {
           Widget error = Container(
@@ -95,17 +93,17 @@ class _MyAppState extends State<MyApp> {
                     height: 100,
                     width: 100,
                     child: Center(
-                                        child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-
-                    )),
+                        child:
+                            Lottie.asset("assets/image/BKVtkcmqbx (1).json"))),
               ));
           if (widget is Scaffold || widget is Navigator) {
-            error = Scaffold(body: Center(                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-));
+            error = Scaffold(
+                body: Center(
+                    child: Lottie.asset("assets/image/BKVtkcmqbx (1).json")));
           }
           ErrorWidget.builder = (errorDetails) {
-            return Center(                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-);
+            return Center(
+                child: Lottie.asset("assets/image/BKVtkcmqbx (1).json"));
             // Text(errorDetails.toString());
           };
           if (widget != null) return widget;
@@ -113,8 +111,8 @@ class _MyAppState extends State<MyApp> {
         },
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => AppBarMain(body: LandinPage()),
-      
+          '/': (context) => AppBarMain(body: DesktopLanding()),
+
           '/cart': (context) => AppBarMain(
                 body: CartPage(),
               ),
@@ -173,7 +171,7 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-                case "productdetailscrimpingtools":
+              case "productdetailscrimpingtools":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -197,14 +195,15 @@ class _MyAppState extends State<MyApp> {
           }
           return null;
         },
-      
       ),
     );
   }
 }
+
 void navigateToPage(BuildContext context, String route) {
   Navigator.pushNamed(context, route);
 }
+
 void navigateToProductDetailsofLugs(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
@@ -236,7 +235,9 @@ void noPdfProductPage(BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/nopdf/$productname');
 }
-void navigateToProductDetailsOfTools(BuildContext context, int selectedProductIndex,
+
+void navigateToProductDetailsOfTools(
+    BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailscrimpingtools/$productname');
 }

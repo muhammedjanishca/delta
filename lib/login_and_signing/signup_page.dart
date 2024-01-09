@@ -44,21 +44,7 @@ class DeskSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
-    // final List<String> images = [
-    //   'assets/image/Illustration1.png',
-    //   'assets/image/Illustration2.png',
-    //   'assets/image/Illustration3.png',
-    // ];
-    // final List<String> imagecap1 = [
-    //   'Gain total control \nof your money',
-    //   'Know where your \nmoney goes',
-    //   'Planning ahead'
-    // ];
-    // final List<String> imagecap2 = [
-    //   'Become your own money manager \nand make every cent count',
-    //   'Track your transaction easily,\nwith categories and financial report',
-    //   'Setup your budget for each category \nso you in control'
-    // ];
+   
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return Scaffold(
           backgroundColor: Colors.white,
@@ -309,7 +295,7 @@ class DeskSignUp extends StatelessWidget {
                                                     BorderRadius.circular(1))),
                                         backgroundColor:
                                             MaterialStatePropertyAll(
-                                          Color.fromARGB(255, 76, 138, 131),
+                                         Color.fromRGBO(249, 156, 6, 1.0),
                                         )),
                                   ),
                                 ),
@@ -1036,7 +1022,7 @@ class MobileSignup extends StatelessWidget {
                             shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(1))),
                             backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 76, 138, 131),
+                              Color.fromRGBO(249, 156, 6, 1.0),
                             )),
                       ),
                     ),

@@ -33,8 +33,59 @@ class LoginPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                 SizedBox(
+                                  // width: MediaQuery.of(context).size.width / 1.1,
+                                  height: 50,
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      value.changeIsLoadingGIn();
+                                      await value.signInWithGoogle(context);
+                                      value.changeIsLoadingGIn();
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: value.isLoadingGIn
+                                          ? [
+                                              SizedBox(
+                                                  width: 25,
+                                                  height: 25,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Color.fromARGB(
+                                                        255, 76, 138, 131),
+                                                    strokeWidth: 2,
+                                                  ))
+                                            ]
+                                          : [
+                                              Image.asset(
+                                                  'assets/image/google.png'),
+                                              Text(
+                                                " Sign Up with Google",
+                                                style: GoogleFonts.inter(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ],
+                                    ),
+                                    style: ButtonStyle(
+                                        shape: MaterialStatePropertyAll(
+                                            RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                    width: 0.50,
+                                                    color: Colors.black26),
+                                                borderRadius:
+                                                    BorderRadius.circular(1))),
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                Colors.white)),
+                                  ),
+                                ),
+                                Text("or"),
                 Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
+                  padding: const EdgeInsets.only(top:10.0),
                   child: TextFormField(
                     controller: emailTextController,
                     decoration: InputDecoration(
@@ -145,8 +196,7 @@ class LoginPage extends StatelessWidget {
                     child: Text(
                       "Forgot Password?",
                       style: GoogleFonts.inter(
-                        color: Color.fromARGB(255, 76, 138, 131),
-                        fontSize: 18,
+                        color: Color.fromRGBO(249, 156, 6, 1.0),                        fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -174,7 +224,7 @@ class LoginPage extends StatelessWidget {
                           child: Text(
                             "Sign Up",
                             style: GoogleFonts.inter(
-                              color: Color.fromARGB(255, 76, 138, 131),
+                              color:  Color.fromRGBO(249, 156, 6, 1.0),
                               fontSize: 16,
                               //  decoration: TextDecoration.underline,
                               fontWeight: FontWeight.w500,

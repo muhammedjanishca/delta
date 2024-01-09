@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../../enquiry.dart';
+
 class QuotationPage extends StatelessWidget {
   QuotationPage(
       {required this.cartItems,
@@ -94,30 +96,96 @@ class QuotationDeskPage extends StatelessWidget {
           ),
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Color.fromARGB(255, 76, 138, 131),
+      //   onPressed: () async {
+      //     context
+      //         .read<AddressProvider>()
+      //         .get_current_address(cartItems, context);
+      //     // Call your backend API to increment the invoice number
+      //     final response = await http.post(
+      //       Uri.parse('https://deltabackend.com/invoice_number'),
+      //     );
+
+      //     if (response.statusCode == 200) {
+      //       // If the increment was successful, perform other actions
+      //       // You can also update the UI or display a message here
+      //       print('Invoice number incremented successfully');
+      //     } else {
+      //       // Handle errors appropriately
+      //       print('Failed to increment invoice number');
+      //     }
+
+      //     // Perform other actions if needed
+      //   },
+      //   child: const Icon(Icons.print),
+      // ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 76, 138, 131),
-        onPressed: () async {
-          context
+  backgroundColor: Color.fromARGB(255, 76, 138, 131),
+  onPressed: () async {
+      context
               .read<AddressProvider>()
               .get_current_address(cartItems, context);
-          // Call your backend API to increment the invoice number
-          final response = await http.post(
-            Uri.parse('https://deltabackend.com/invoice_number'),
+    // Call your backend API to increment the invoice number
+    final response = await http.post(
+      Uri.parse('https://deltabackend.com/invoice_number'),
+    );
+
+    if (response.statusCode == 200) {
+      // If the increment was successful, show an alert dialog with Yes and No options
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Some Product Might not have prices it is better to enquire the details about products more...'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Add your actions when 'Yes' is pressed
+                  Navigator.of(context).pop();
+                },
+                child: Text('No'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return EnquireBox();
+                          },
+                        );
+                      },
+                child: Text('Enquire Now'),
+              ),
+            ],
           );
-
-          if (response.statusCode == 200) {
-            // If the increment was successful, perform other actions
-            // You can also update the UI or display a message here
-            print('Invoice number incremented successfully');
-          } else {
-            // Handle errors appropriately
-            print('Failed to increment invoice number');
-          }
-
-          // Perform other actions if needed
         },
-        child: const Icon(Icons.print),
-      ),
+      );
+    } else {
+      // Handle errors and show an error alert dialog with OK button
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Failed to increment invoice number.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the alert dialog
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  },
+  child: const Icon(Icons.print),
+),
     );
   }
 

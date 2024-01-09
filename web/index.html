@@ -12,7 +12,7 @@
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
-    This is a placeholder for base href that will be replaced by the value of
+    This is a plactieholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
   <base href="$FLUTTER_BASE_HREF">
@@ -20,7 +20,7 @@
   ">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Welcome to Trans Delta Trading - Your Premier Destination for Quality Electrical Components!">
+  <meta name="TRANS DELTA TRADING" content="Welcome to Trans Delta Trading - Your Premier Destination for Quality Electrical Components!">
   <meta name="keywords" content="cable lugs, cable connectors, cable termination, electrical connectors, wire lugs, crimping tools, copper lugs, aluminum lugs,
   compression lugs, insulated connectors, high voltage lugs, industrial cable accessories, cable gland installation, cable gland types,
   waterproof cable glands, brass cable glands, panel mount connectors, sealed cable connectors, IP68 cable glands, cable lug assortment,
@@ -124,7 +124,7 @@
 </head>
 
 <body>
-  <style>
+  <!-- <style>
     body{
       background-color: #0a0a0a;
       height: 100vh;
@@ -140,7 +140,7 @@
       justify-content: center;
       transition: opacity .4s ease-out;
     }
-  </style>
+  </style> -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
 <script type="text/javascript">
    pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.min.js";
@@ -169,16 +169,17 @@ function delay(time) {
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function (engineInitializer) {
-          engineInitializer.initializeEngine().then(async function (appRunner) {
-            loaderContent.style.opacity = "0";
-            await delay(400);
-            await appRunner.runApp();
+          engineInitializer.initializeEngine().then(function (appRunner) {
+            // loaderContent.style.opacity = "0";
+            // await delay(400);
+            // await 
+            appRunner.runApp();
           });
         }
       });
     });
   </script>
-  <div class="main-content" id="loader-content">
+  <!-- <div class="main-content" id="loader-content">
     <div class="loader">
       <span></span>
       <span></span>
@@ -186,7 +187,6 @@ function delay(time) {
       <span></span>
     </div>
     <img src="main-icon.png.png" alt="My App Logo">
-  </div>
+  </div> -->
 </body>
-
 </html>

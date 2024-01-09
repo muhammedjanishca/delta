@@ -10,19 +10,20 @@ final List<String> sliderGlands = [
  'assets/image/glands 2.png'
 ];
 final List<String> sliderLugs = [
- 'assets/image/lugs 3 (1).jpg',
- 'assets/image/lugs 6 (1).jpg',
- 'assets/image/lugs 4.jpg'
-];
+  'assets/image/lugs 1.jpg'
+  'assets/image/lugs 3 (1).jpg'
+  'assets/image/lugs 6 (1).jpg'
+ ];
 final List<String> sliderAccessories = [
  'assets/image/accessories 3.jpg',
  'assets/image/accessories 2.jpg',
  'assets/image/accessories 1.jpg' 
 ];
 final List<String> sliderConnectors = [
- 'assets/image/connectors 4.jpg',
- 'assets/image/connectors 2.jpg',
- 'assets/image/connectors 3.jpg' 
+  'assets/image/connectors 3 (1).jpg'
+  'assets/image/connectors 2.jpg'
+  'assets/image/Cable connectors.jpg'
+ 
 ];
 final List<String> sliderTools = [
   'assets/image/crimping tools 3.jpg',

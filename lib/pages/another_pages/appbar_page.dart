@@ -1,6 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/main.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/product_pages/connecters.dart';
 import 'package:firebase_hex/pages/product_pages/crimping.dart';
@@ -9,21 +7,14 @@ import 'package:firebase_hex/pages/product_pages/lugs.dart';
 import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
-import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
-import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/search_Bar.dart';
-import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../login_and_signing/loginpage.dart';
-import '../../main.dart';
 import '../../widgets/whatsApp.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:badges/badges.dart' as badges;
 
 void _handlePopupSelection(String choice) {
