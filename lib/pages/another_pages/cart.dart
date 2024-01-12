@@ -413,7 +413,8 @@ class _DeskCartState extends State<DeskCart> {
             ),
             Container(
                 color: const Color.fromARGB(255, 255, 255, 255),
-                height: MediaQuery.of(context).size.height / 1.5,
+                width: double.infinity,
+                // height: MediaQuery.of(context).size.height / 1.5,
                 child: MediaQuery.of(context).size.width >= 700
                     ? const deskBottomSheett()
                     : const mobiledeskBottomSheett())

@@ -209,9 +209,9 @@ class CrimpingToolPage extends StatelessWidget {
                 ),
                 Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  height: MediaQuery.of(context).size.width >= 700
-                      ? MediaQuery.of(context).size.height / 1.5
-                      : 950,
+                  // height: MediaQuery.of(context).size.width >= 700
+                  //     ? MediaQuery.of(context).size.height / 1.5
+                  //     : 950,
                   child: MediaQuery.of(context).size.width >= 700
                       ? deskBottomSheett()
                       : mobiledeskBottomSheett(),

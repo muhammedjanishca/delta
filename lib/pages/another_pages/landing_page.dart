@@ -118,7 +118,8 @@ class _DesktopLandingState extends State<DesktopLanding> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 130,),
+                                height: 130,
+                              ),
                               // Gap(45),
                               Text(
                                 "EXPERIENCE THE NEW",
@@ -136,7 +137,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                   ),
                                 ),
                               ),
-                               Text(
+                              Text(
                                 "DELTA PREMIUM PRODUCTS",
                                 style: GoogleFonts.abrilFatface(
                                   textStyle: TextStyle(
@@ -160,94 +161,94 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                   color: Colors.white,
                                 ),
                               ),
-                            Container(
-                              height: height/3.5,
-                              width: width/2,
-                              // color: Colors.white,
-                              child:
-                              //  AnimatedTextKit( 
-                              //               animatedTexts: [ 
-                              //                 RotateAnimatedText('AWESOME', 
-                              //                     textStyle: TextStyle( 
-                              //                         fontSize: 30, 
-                              //                         color: Colors.white, 
-                              //                         backgroundColor: Colors.blue)), 
-                              //                 RotateAnimatedText('OPTIMISTIC', 
-                              //                     textStyle: TextStyle( 
-                              //                         letterSpacing: 3, 
-                              //                         fontSize: 30, 
-                              //                         fontWeight: FontWeight.bold, 
-                              //                         color: Colors.orange)), 
-                              //                 RotateAnimatedText( 
-                              //                   'DIFFERENT', 
-                              //                   textStyle: TextStyle( 
-                              //                     fontSize: 30, 
-                              //                     decoration: TextDecoration.underline, 
-                              //                   ), 
-                              //                 ), 
-                              //               ], 
-                              //               isRepeatingAnimation: true, 
-                              //               totalRepeatCount: 10, 
-                              //               pause: Duration(milliseconds: 1000), 
-                              //             ),
-                              Center( 
-                child: AnimatedTextKit( 
-                  totalRepeatCount: 40, 
-                  animatedTexts: [ 
-                    
-                      RotateAnimatedText('Trans Delta Trading'.toUpperCase(), 
-                                                  textStyle: TextStyle( 
-                                                      letterSpacing: 3, 
-                                                      fontSize: 30, 
-                                                      fontWeight: FontWeight.bold, 
-                                                      color: Colors.orange)), 
-                    FadeAnimatedText( 
-                      'Powering Progress: Your Source for Premium Electrical Solutions', 
-                      textStyle: const TextStyle( 
-                          // backgroundColor: Colors.green, 
-                          color: Color.fromARGB(255, 243, 149, 35), 
-                          fontSize: 25.0, 
-                          fontWeight: FontWeight.bold), 
-                    ), 
-                    ScaleAnimatedText( 
-                      'We are introducing our products', 
-                      duration: Duration(milliseconds: 4000), 
-                      textStyle: 
-                          const TextStyle(color: Colors.white, fontSize: 50.0), 
-                    ), 
-                  ], 
-                ), 
-              ),
-                            ),
-                              SizedBox(
-                                  height:
-                                      20),
-                      //                        InkWell(
-                      //   onTap: () {
-                      //     // Navigate to the Contact Us page
-                      //     Navigator.pushNamed(context, '/Lugs');
-                      //   },
-                      //   child: Container(
-                      //     padding: EdgeInsets.all(16),
-                      //     decoration: BoxDecoration(
-                      //       color: Colors.blue, // Customize the color
-                      //       borderRadius: BorderRadius.circular(8),
-                      //     ),
-                      //     child: Text(
-                      //       "Contact Us",
-                      //       style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontSize: 16,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
+                              Container(
+                                height: height / 3.5,
+                                width: width / 2,
+                                // color: Colors.white,
+                                child:
+                                    //  AnimatedTextKit(
+                                    //               animatedTexts: [
+                                    //                 RotateAnimatedText('AWESOME',
+                                    //                     textStyle: TextStyle(
+                                    //                         fontSize: 30,
+                                    //                         color: Colors.white,
+                                    //                         backgroundColor: Colors.blue)),
+                                    //                 RotateAnimatedText('OPTIMISTIC',
+                                    //                     textStyle: TextStyle(
+                                    //                         letterSpacing: 3,
+                                    //                         fontSize: 30,
+                                    //                         fontWeight: FontWeight.bold,
+                                    //                         color: Colors.orange)),
+                                    //                 RotateAnimatedText(
+                                    //                   'DIFFERENT',
+                                    //                   textStyle: TextStyle(
+                                    //                     fontSize: 30,
+                                    //                     decoration: TextDecoration.underline,
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //               isRepeatingAnimation: true,
+                                    //               totalRepeatCount: 10,
+                                    //               pause: Duration(milliseconds: 1000),
+                                    //             ),
+                                    Center(
+                                  child: AnimatedTextKit(
+                                    totalRepeatCount: 40,
+                                    animatedTexts: [
+                                      RotateAnimatedText(
+                                          'Trans Delta Trading'.toUpperCase(),
+                                          textStyle: const TextStyle(
+                                              letterSpacing: 3,
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.orange)),
+                                      FadeAnimatedText(
+                                        'Powering Progress: Your Source for Premium Electrical Solutions',
+                                        textStyle: const TextStyle(
+                                            // backgroundColor: Colors.green,
+                                            color: Color.fromARGB(
+                                                255, 243, 149, 35),
+                                            fontSize: 25.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      ScaleAnimatedText(
+                                        'We are introducing our products',
+                                        duration: Duration(milliseconds: 4000),
+                                        textStyle: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 50.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              //                        InkWell(
+                              //   onTap: () {
+                              //     // Navigate to the Contact Us page
+                              //     Navigator.pushNamed(context, '/Lugs');
+                              //   },
+                              //   child: Container(
+                              //     padding: EdgeInsets.all(16),
+                              //     decoration: BoxDecoration(
+                              //       color: Colors.blue, // Customize the color
+                              //       borderRadius: BorderRadius.circular(8),
+                              //     ),
+                              //     child: Text(
+                              //       "Contact Us",
+                              //       style: TextStyle(
+                              //         color: Colors.white,
+                              //         fontSize: 16,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ),
                   SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
@@ -275,9 +276,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-              
-              
-              
+
                               // sdfg
                               Gap(35),
                               Row(
@@ -627,12 +626,9 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                 ),
                               ),
                               Container(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
-                                  height:
-                                      MediaQuery.of(context).size.height / 1.5,
-                                  child:
-                                      MediaQuery.of(context).size.width >= 700
+                                 
+                                  width: double.infinity,
+                                  child: MediaQuery.of(context).size.width >= 700
                                           ? deskBottomSheett()
                                           : mobiledeskBottomSheett())
                             ],
@@ -936,9 +932,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                     "https://www.lkea.in/assets/images/about/2.jpg"),
               ),
               Container(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  height: 1000,
-                  // height: MediaQuery.of(context).size.height/1,
+                  width: double.infinity,
                   child: MediaQuery.of(context).size.width >= 700
                       ? deskBottomSheett()
                       : mobiledeskBottomSheett())
@@ -978,20 +972,7 @@ class NoScrollGlow extends ScrollBehavior {
   }
 }
 
-const kHeroImage = 'assets/image/landingpage.png';
+const kHeroImage = 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/landingpage.png';
 
-List imagepath = [
-  'assets/image/brass-cable-glands-1.jpg',
-  'assets/image/cable-terminal-ends-1.png',
-  'assets/image/crimping-tools.png',
-];
-final List<String> headingss = [
-  '\nCable Terminal Ends',
-  '\nBrass Cable Gland Kits',
-  '\nCrimping Tools'
-];
-final List<String> descriptionn = [
-  '\nHEX is a manufacturer ofhigh-quality\ncable terminalends & accessories.',
-  '\nHEX is renowned for its superiorquality\nof brass cable gland kitsin the global market.',
-  '\nHEX provides a wide range ofcrimping\ntools for use with otherproducts.'
-];
+
+

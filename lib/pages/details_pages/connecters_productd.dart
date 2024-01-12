@@ -639,9 +639,18 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/cart');
-                      },
+                       onPressed: () {
+                                            user != null
+                                                ? Navigator.pushNamed(
+                                                    context, '/cart')
+                                                : showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return LoginPage(); // Your custom dialog widget
+                                                    },
+                                                  );
+                                          },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),

@@ -2,15 +2,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
-import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
-import 'package:firebase_hex/provider/user_input_provider.dart';
-import 'package:firebase_hex/pages/another_pages/quotationPage.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
-import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
@@ -514,131 +509,131 @@ class ProductDetailsOfTools extends StatelessWidget {
             }
           },
         ),
-        // bottomNavigationBar: BottomAppBar(
-        //   child: Container(
-        //     color: Colors.black,
-        //     child: Row(
-        //       children: [
-        //         Expanded(
-        //           child: Container(
-        //               height: 50,
-        //               decoration: BoxDecoration(
-        //                 color: Colors.amber,
-        //               ),
-        //               child: ElevatedButton(
-        //                  onPressed: () {
-        //                                           if (_formKey.currentState!
-        //                                               .validate()) {
-        //                                             if (FirebaseAuth.instance
-        //                                                     .currentUser !=
-        //                                                 null) {
-        //                                               if (selectedPriceNotifieru
-        //                                                   .isProductCodeSelected) {
-        //                                                 final selectedPrice =
-        //                                                     selectedPriceNotifieru
-        //                                                         .selectedPrice;
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            color: Colors.black,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                      ),
+                      child: ElevatedButton(
+                         onPressed: () {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    if (FirebaseAuth.instance
+                                                            .currentUser !=
+                                                        null) {
+                                                      if (selectedPriceNotifieru
+                                                          .isProductCodeSelected) {
+                                                        final selectedPrice =
+                                                            selectedPriceNotifieru
+                                                                .selectedPrice;
 
-        //                                                 // Check if selectedPrice is empty or null, and provide a default value if needed
+                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
 
-        //                                                 final productCode =
-        //                                                     selectedPrice
-        //                                                         .split(': ')[0];
-        //                                                 final price = double.tryParse(
-        //                                                         selectedPrice
-        //                                                                 .split(
-        //                                                                     ': ')[
-        //                                                             1]) ??
-        //                                                     0;
-        //                                                 final quantity =
-        //                                                     int.tryParse(
-        //                                                             quantityController
-        //                                                                 .text) ??
-        //                                                         0;
-        //                                                 final imageUrl =
-        //                                                     thumbnail;
-        //                                                 final productName =
-        //                                                     textpass;
-        //                                                 final cartProvider =
-        //                                                     Provider.of<
-        //                                                             CartProvider>(
-        //                                                         context,
-        //                                                         listen: false);
-        //                                                 cartProvider.addToCart(
-        //                                                     productCode:
-        //                                                         productCode,
-        //                                                     price: price,
-        //                                                     quantity: quantity,
-        //                                                     imageUrl:
-        //                                                         imageUrl ?? '',
-        //                                                     productName:
-        //                                                         productName ??
-        //                                                             '');
+                                                        final productCode =
+                                                            selectedPrice
+                                                                .split(': ')[0];
+                                                        final price = double.tryParse(
+                                                                selectedPrice
+                                                                        .split(
+                                                                            ': ')[
+                                                                    1]) ??
+                                                            0;
+                                                        final quantity =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        final imageUrl =
+                                                            thumbnail;
+                                                        final productName =
+                                                            textpass;
+                                                        final cartProvider =
+                                                            Provider.of<
+                                                                    CartProvider>(
+                                                                context,
+                                                                listen: false);
+                                                        cartProvider.addToCart( 
+                                                            productCode:
+                                                                productCode,
+                                                            price: price,
+                                                            quantity: quantity,
+                                                            imageUrl:
+                                                                imageUrl ?? '',
+                                                            productName:
+                                                                productName ??
+                                                                    '');
 
-        //                                                 ScaffoldMessenger.of(
-        //                                                         context)
-        //                                                     .showSnackBar(SnackBar(
-        //                                                         content: Text(
-        //                                                             'Added to cart')));
-        //                                                 selectedPriceNotifieru
-        //                                                     .setProductCodeSelected(
-        //                                                         false);
-        //                                               } else {
-        //                                                 ScaffoldMessenger.of(
-        //                                                         context)
-        //                                                     .showSnackBar(
-        //                                                         SnackBar(
-        //                                                   content: Text(
-        //                                                       'Select the product code'),
-        //                                                 ));
-        //                                               }
-        //                                             } else {
-        //                                               ScaffoldMessenger.of(
-        //                                                       context)
-        //                                                   .showSnackBar(
-        //                                                       SnackBar(
-        //                                                 content: Text(
-        //                                                     'Select the product code'),
-        //                                               ));
-        //                                               // Handle the case where the user is not signed in
-        //                                               showDialog(
-        //                                                 context: context,
-        //                                                 builder: (BuildContext
-        //                                                     context) {
-        //                                                   return LoginPage(); // Your custom dialog widget
-        //                                                 },
-        //                                               );
-        //                                             }
-        //                                           }
-        //                                         },
-        //                 child: const Text('ADD TO CART'),
-        //                 style: ButtonStyle(
-        //                   backgroundColor: MaterialStateProperty.all(
-        //                     Color.fromRGBO(249, 156, 6, 1.0),),
-        //                   minimumSize: MaterialStateProperty.all(Size(150, 50)),
-        //                 ),
-        //               )),
-        //         ),
-        //         Expanded(
-        //           child: Container(
-        //             height: 50,
-        //             decoration: BoxDecoration(
-        //               color: Colors.black,
-        //             ),
-        //             child: TextButton(
-        //               onPressed: () {
-        //                 Navigator.pushNamed(context, '/cart');
-        //               },
-        //               child: Text(
-        //                 'GO TO CART',
-        //                 style: TextStyle(color: Colors.white),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Added to cart')));
+                                                        selectedPriceNotifieru
+                                                            .setProductCodeSelected(
+                                                                false);
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              'Select the product code'),
+                                                        ));
+                                                      }
+                                                    } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Text(
+                                                            'Select the product code'),
+                                                      ));
+                                                      // Handle the case where the user is not signed in
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return LoginPage(); // Your custom dialog widget
+                                                        },
+                                                      );
+                                                    }
+                                                  }
+                                                },
+                        child: const Text('ADD TO CART'),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(249, 156, 6, 1.0),),
+                          minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                        ),
+                      )),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                      child: Text(
+                        'GO TO CART',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
 
 //-----------desktop--------------------------------------------------------
