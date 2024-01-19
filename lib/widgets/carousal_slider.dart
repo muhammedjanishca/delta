@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
-import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final List<String> sliderGlands = [
  'assets/image/connectors 3 (1).jpg',
@@ -58,7 +55,7 @@ CarouselSlider custCarosal(BuildContext context, List<String> janish, index) {
         );
       },
       
-      slideTransform: DefaultTransform(),
+      slideTransform: const DefaultTransform(),
       slideIndicator: CircularSlideIndicator(
         indicatorRadius: 0,
         currentIndicatorColor: Colors.transparent,

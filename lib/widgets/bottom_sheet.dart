@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../login_and_signing/authentication.dart';
+import '../pages/another_pages/contact_us.dart';
 
 class BottomSheet extends StatelessWidget {
   const BottomSheet({super.key});
@@ -148,6 +149,20 @@ class deskBottomSheett extends StatelessWidget {
                           );
                         },
                         child: Text("Tel # +91 483-3589627",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ))),
+                               Gap(10),
+                             TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ContactUsPage()),
+                          );
+                        },
+                        child: Text("evolvedmillennials@gmail.com",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -569,7 +584,19 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
-                          )))
+                          ))), TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ContactUsPage()),
+                          );
+                        },
+                        child: Text("evolvedmillennials@gmail.com",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            )))
                 ],
               ),
             ),
@@ -601,9 +628,9 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                           child: ListTile(
                             title: Text('Name',
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.white)),
+                                    fontSize: 15, color: Colors.white,)),
                             subtitle: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white,fontSize: 13),
                               controller: nameController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -654,7 +681,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                       borderSide: BorderSide(
                                           color: Colors.white, width: 2)),
                                   hintText: '  Company Name',
-                                  hintStyle: TextStyle(color: Colors.white)),
+                                  hintStyle: TextStyle(color: Colors.white,fontSize: 13)),
                             ),
                           ),
                         ),
@@ -692,6 +719,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                 hintText: '  Email',
                                 hintStyle: TextStyle(
                                   color: Colors.white,
+                                  fontSize: 13
                                 ),
                               ),
                             ),
@@ -727,7 +755,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                       borderSide: BorderSide(
                                           color: Colors.white, width: 2)),
                                   hintText: '  +966501234567',
-                                  hintStyle: TextStyle(color: Colors.white)),
+                                  hintStyle: TextStyle(color: Colors.white,fontSize: 13)),
                             ),
                           ),
                         ),

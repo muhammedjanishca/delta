@@ -280,12 +280,12 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 );
                                               }),
                                             ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                            ),
+                                            // SizedBox(
+                                            //   width: MediaQuery.of(context)
+                                            //           .size
+                                            //           .width /
+                                            //       25,
+                                            // ),
                                             TextButton(
                                                 onPressed: () {
                                                   showModalBottomSheet(
@@ -969,7 +969,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           ),
                                                         ),
                                                         Container(
-                                                          width: 130,
+                                                          width: 140,
                                                           padding:
                                                               EdgeInsets.all(
                                                                   8.0),
@@ -1004,35 +1004,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-
-                                              // Gap(95),
-                                              TextButton(
-                                                  onPressed: () => SideSheet.right(
-                                                      body: Container(
-                                                          height: 1500,
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              230, 233, 235),
-                                                          child: pdf != null
-                                                              ? SfPdfViewer
-                                                                  .network(pdf!)
-                                                              : Nopdf()),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
-                                                      context: context),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.edit_document),
-                                                      Text(
-                                                        "Size Chart",
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                  )),
-                                              Gap(20)
                                             ],
                                           ),
                                           FittedBox(
@@ -1093,87 +1064,92 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             ),
                                           ),
                                           Gap(25),
-                                          Text(
-                                            'Product codes'.toUpperCase(),
-                                            style: GoogleFonts.quicksand(
-                                              color: Color.fromARGB(
-                                                  255, 156, 155, 155),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Gap(15),
-                                              // SizedBox(
-                                              //   height: 30,
-                                              // ),
-                                              Wrap(
-                                                spacing:
-                                                    8.0, // Adjust the spacing between buttons as needed
-                                                runSpacing:
-                                                    8.0, // Adjust the spacing between rows as needed
-                                                children: List<Widget>.generate(
-                                                    price!.length, (index) {
-                                                  final codeAndPrice =
-                                                      price![index];
-                                                  return InkWell(
-                                                    onTap: () {
-                                                      selectedPriceNotifieru
-                                                          .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
-                                                      );
-                                                      selectedPriceNotifieru
-                                                          .setProductCodeSelected(
-                                                              true);
-                                                    },
-                                                    child: Form(
-                                                      autovalidateMode:
-                                                          AutovalidateMode
-                                                              .always,
-                                                      child: Container(
-                                                        width: 100,
-                                                        padding: EdgeInsets.all(
-                                                            8.0), // Adjust the padding as needed
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          border: Border.all(
-                                                            color: codeAndPrice
-                                                                        .price ==
-                                                                    null
-                                                                ? Colors
-                                                                    .red // Set border color to red when selectedPrice is null
-                                                                : codeAndPrice
-                                                                            .productCode ==
-                                                                        selectedCodeProvider
-                                                                            .selectedProductCode
-                                                                    ? Colors
-                                                                        .blue // Set border color to blue for selected container
-                                                                    : Colors
-                                                                        .black, // Set border color to black for non-selected containers
-                                                            width:
-                                                                1.0, // Set your desired border width
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          '${codeAndPrice.productCode}',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .black, // Set your desired text color
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }),
+                                              Text(
+                                                'Product codes'.toUpperCase(),
+                                                style: GoogleFonts.quicksand(
+                                                  color: Color.fromARGB(
+                                                      255, 156, 155, 155),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
+                                              
+                                              Padding(
+                                                padding: const EdgeInsets.only(right:50.0),
+                                                child:TextButton(
+                                                  onPressed: () => SideSheet.right(
+                                                      body: Container(
+                                                          height: 1500,
+                                                          color: const Color
+                                                                  .fromARGB(255,
+                                                              230, 233, 235),
+                                                          child: pdf != null
+                                                              ? SfPdfViewer
+                                                                  .network(pdf!)
+                                                              : Nopdf()),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4,
+                                                      context: context),
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(Icons.edit_document),
+                                                      Text(
+                                                        "Size Chart",
+                                                        style: TextStyle(),
+                                                      )
+                                                    ],
+                                                  )),
+                                              ),
+                                            
                                             ],
                                           ),
+                                          Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    const Gap(15),
+    Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
+      children: List<Widget>.generate(price!.length, (index) {
+        final codeAndPrice = price![index];
+        return InkWell(
+          onTap: () {
+            selectedPriceNotifieru.setSelectedPrice(
+              '${codeAndPrice.productCode}: SAR ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+            );
+            selectedPriceNotifieru.setProductCodeSelected(true);
+          },
+          child: Material(
+            borderRadius: BorderRadius.circular(4),
+            color: codeAndPrice.price == null
+                ? Colors.red // Set background color to red when selectedPrice is null
+                : codeAndPrice.productCode ==
+                        selectedCodeProvider.selectedProductCode
+                    ? Colors.blue // Set background color to blue for selected container
+                    : Colors.black, // Set background color to black for non-selected containers
+            child: Container(
+              width: 100,
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                '${codeAndPrice.productCode}',
+                style: TextStyle(
+                  color: Colors.white, // Set your desired text color
+                ),
+              ),
+            ),
+          ),
+        );
+      }),
+    ),
+  ],
+),
+
                                           Gap(25),
                                           Text(
                                             'description'.toUpperCase(),

@@ -2,14 +2,14 @@ import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/main.dart';
-import 'package:firebase_hex/pages/another_pages/contact_us.dart';
-import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import '../../main.dart';
+import '../../widgets/bottom_sheet.dart';
 
 class DesktopLanding extends StatefulWidget {
   @override
@@ -82,8 +82,10 @@ class _DesktopLandingState extends State<DesktopLanding> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final nameStyle = Theme.of(context).textTheme.displayMedium;
-    final descriptionStyle = Theme.of(context).textTheme.headlineMedium;
+    // final nameStyle = Theme.of(context).textTheme.displayMedium;
+     double screenWidth = MediaQuery.of(context).size.width;
+
+    // final descriptionStyle = Theme.of(context).textTheme.headlineMedium;
     return LayoutBuilder(builder: (context, Constraints) {
       if (Constraints.maxWidth > 850) {
         return Material(
@@ -99,32 +101,33 @@ class _DesktopLandingState extends State<DesktopLanding> {
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
                       image: kHeroImage,
-                      height: height,
-                      width: width,
+                      // height: height,
+                      // width: width,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
                   Positioned(
                     top: -.25 * offset,
                     child: SizedBox(
+                      // color: Colors.yellow,
                       height: 600,
                       width: width,
                       child: Align(
-                        alignment: Alignment(0, 0),
+                        alignment: const Alignment(0, 0),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 130,
                               ),
                               // Gap(45),
                               Text(
                                 "EXPERIENCE THE NEW",
                                 style: GoogleFonts.abrilFatface(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 35,
                                     shadows: <Shadow>[
@@ -140,7 +143,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                               Text(
                                 "DELTA PREMIUM PRODUCTS",
                                 style: GoogleFonts.abrilFatface(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 35,
                                     shadows: <Shadow>[
@@ -153,7 +156,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                   ),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 "\nTested Products | Efficient Service | Trusted Brand\n",
                                 style: TextStyle(
                                   fontSize: 20,
@@ -213,7 +216,8 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                       ),
                                       ScaleAnimatedText(
                                         'We are introducing our products',
-                                        duration: Duration(milliseconds: 4000),
+                                        duration:
+                                            const Duration(milliseconds: 4000),
                                         textStyle: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 50.0),
@@ -222,7 +226,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               //                        InkWell(
                               //   onTap: () {
                               //     // Navigate to the Contact Us page
@@ -259,18 +263,19 @@ class _DesktopLandingState extends State<DesktopLanding> {
                           color: Colors.white,
                           child: Column(
                             children: [
-                              Gap(45),
+                              const Gap(45),
                               Text(
                                 'What are we offering'.toUpperCase(),
                                 style: GoogleFonts.quicksand(
-                                  color: Color.fromARGB(255, 156, 155, 155),
+                                  color:
+                                      const Color.fromARGB(255, 156, 155, 155),
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 'Our Products'.toUpperCase(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 4, 4, 4),
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -278,7 +283,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                               ),
 
                               // sdfg
-                              Gap(35),
+                              const Gap(35),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -296,7 +301,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                     .size
                                                     .width /
                                                 2.8,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10)),
                                               gradient: LinearGradient(
@@ -327,7 +332,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                   Text(
                                                     'Cable Terminal Ends'
                                                         .toUpperCase(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Color.fromRGBO(
@@ -335,12 +340,12 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                       fontSize: 20,
                                                     ),
                                                   ),
-                                                  Text(
+                                                  const Text(
                                                     "\nHEX is renowned for its superior quality\nof brass cable gland kits in the global market.",
                                                     style:
                                                         TextStyle(fontSize: 16),
                                                   ),
-                                                  Gap(15),
+                                                  const Gap(15),
                                                   if (isHovered)
                                                     Row(
                                                       children: [
@@ -350,7 +355,18 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                 context,
                                                                 '/Connectors');
                                                           },
-                                                          child: Text(
+                                                          style: ButtonStyle(
+                                                            backgroundColor:
+                                                                MaterialStateProperty
+                                                                    .all(Colors
+                                                                        .white),
+                                                            minimumSize:
+                                                                MaterialStateProperty
+                                                                    .all(const Size(
+                                                                        120,
+                                                                        50)),
+                                                          ),
+                                                          child: const Text(
                                                             'CONNECTORS',
                                                             style: TextStyle(
                                                                 color: Color
@@ -361,26 +377,16 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                         1.0),
                                                                 fontSize: 14),
                                                           ),
-                                                          style: ButtonStyle(
-                                                            backgroundColor:
-                                                                MaterialStateProperty
-                                                                    .all(Colors
-                                                                        .white),
-                                                            minimumSize:
-                                                                MaterialStateProperty
-                                                                    .all(Size(
-                                                                        120,
-                                                                        50)),
-                                                          ),
                                                         ),
-                                                        SizedBox(width: 10),
+                                                        const SizedBox(
+                                                            width: 10),
                                                         ElevatedButton(
                                                           onPressed: () {
                                                             Navigator.pushNamed(
                                                                 context,
                                                                 '/Lugs');
                                                           },
-                                                          child: Text(
+                                                          child: const Text(
                                                             'LUGS',
                                                             style: TextStyle(
                                                                 color: Colors
@@ -391,7 +397,8 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                             backgroundColor:
                                                                 MaterialStateProperty
                                                                     .all(
-                                                              Color.fromRGBO(
+                                                              const Color
+                                                                      .fromRGBO(
                                                                   249,
                                                                   156,
                                                                   6,
@@ -399,7 +406,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                             ),
                                                             minimumSize:
                                                                 MaterialStateProperty
-                                                                    .all(Size(
+                                                                    .all(const Size(
                                                                         120,
                                                                         50)),
                                                           ),
@@ -436,7 +443,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                       ],
                                     ),
                                   ),
-                                  Gap(10),
+                                  const Gap(10),
                                   MouseRegion(
                                     onEnter: (_) =>
                                         setState(() => iHovered = true),
@@ -450,7 +457,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                   .size
                                                   .width /
                                               2.8,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10)),
                                             gradient: LinearGradient(
@@ -479,7 +486,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                   Text(
                                                     "Brass Cable Gland Kits"
                                                         .toUpperCase(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Color.fromRGBO(
@@ -487,12 +494,12 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                       fontSize: 20,
                                                     ),
                                                   ),
-                                                  Text(
+                                                  const Text(
                                                     '\nHEX is a manufacturer of high-quality\ncable terminal ends & accessories.',
                                                     style:
                                                         TextStyle(fontSize: 16),
                                                   ),
-                                                  Gap(15),
+                                                  const Gap(15),
                                                   if (iHovered)
                                                     Row(
                                                       children: [
@@ -502,7 +509,18 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                 context,
                                                                 '/Accessories');
                                                           },
-                                                          child: Text(
+                                                          style: ButtonStyle(
+                                                            backgroundColor:
+                                                                MaterialStateProperty
+                                                                    .all(Colors
+                                                                        .white),
+                                                            minimumSize:
+                                                                MaterialStateProperty
+                                                                    .all(const Size(
+                                                                        120,
+                                                                        50)),
+                                                          ),
+                                                          child: const Text(
                                                             'ACCESSORIES',
                                                             style: TextStyle(
                                                                 color: Color
@@ -513,26 +531,16 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                         1.0),
                                                                 fontSize: 14),
                                                           ),
-                                                          style: ButtonStyle(
-                                                            backgroundColor:
-                                                                MaterialStateProperty
-                                                                    .all(Colors
-                                                                        .white),
-                                                            minimumSize:
-                                                                MaterialStateProperty
-                                                                    .all(Size(
-                                                                        120,
-                                                                        50)),
-                                                          ),
                                                         ),
-                                                        SizedBox(width: 10),
+                                                        const SizedBox(
+                                                            width: 10),
                                                         ElevatedButton(
                                                           onPressed: () {
                                                             Navigator.pushNamed(
                                                                 context,
                                                                 '/Glands');
                                                           },
-                                                          child: Text(
+                                                          child: const Text(
                                                             'GLANDS',
                                                             style: TextStyle(
                                                                 color: Colors
@@ -543,7 +551,8 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                             backgroundColor:
                                                                 MaterialStateProperty
                                                                     .all(
-                                                              Color.fromRGBO(
+                                                              const Color
+                                                                      .fromRGBO(
                                                                   249,
                                                                   156,
                                                                   6,
@@ -551,7 +560,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                             ),
                                                             minimumSize:
                                                                 MaterialStateProperty
-                                                                    .all(Size(
+                                                                    .all(const Size(
                                                                         120,
                                                                         50)),
                                                           ),
@@ -603,7 +612,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                               children: [
                                                 Image.asset(
                                                     'assets/image/hex-logo-new.png'),
-                                                Text(
+                                                const Text(
                                                   "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
                                                   style: TextStyle(
                                                       fontSize: 25,
@@ -626,11 +635,11 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                 ),
                               ),
                               Container(
-                                 
                                   width: double.infinity,
-                                  child: MediaQuery.of(context).size.width >= 700
-                                          ? deskBottomSheett()
-                                          : mobiledeskBottomSheett())
+                                  child:
+                                      MediaQuery.of(context).size.width >= 700
+                                          ? const deskBottomSheett()
+                                          : const mobiledeskBottomSheett())
                             ],
                           ),
                         )
@@ -643,276 +652,244 @@ class _DesktopLandingState extends State<DesktopLanding> {
           ),
         );
       } else {
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    child: Image.network(
-                      'https://knowhow.distrelec.com/wp-content/uploads/2021/11/iStock-1477511739.jpg',
-                      // 'https://i0.wp.com/www.compliancesigns.com/blog/wp-content/uploads/2023/05/5-Electrical-Safety-Tips.jpg?fit=1200%2C630&ssl=1',
-                      // 'https://electrek.co/wp-content/uploads/sites/3/2021/05/bird-three-header-scooter.jpg?quality=82&strip=all',
-                      width: 200,
-                      height: 200,
-                      // color: Colors.amber,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0.0),
-
-                      // blur(sigmaX:.0,sigmaY:0.0),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 45, top: 45),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "EXPERIENCE THE NEW\nDELTA PREMIUM PRODUCTS",
-                              style: GoogleFonts.abrilFatface(
-                                textStyle: TextStyle(
-                                    color: Colors.black,
-                                    // color: Color.fromARGB(255, 54, 98, 98),
-                                    fontSize: 35,
-                                    shadows: <Shadow>[
-                                      Shadow(
-                                        offset: Offset(2.0, 2.0),
-                                        blurRadius: 3.0,
-                                        color: const Color.fromARGB(
-                                                255, 13, 13, 13)
-                                            .withOpacity(0.5),
-                                      )
-                                    ]),
+        return Material(
+          color: Colors.black,
+            child: NotificationListener<ScrollNotification>(
+          onNotification: updateOffsetAccordingToScroll,
+          child: ScrollConfiguration(
+              behavior: NoScrollGlow(),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                      top: -.25 * offset,
+                      child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: kHeroImage,
+                        fit: BoxFit.fitWidth,
+                      )),
+                  Positioned(
+                    top: -.25 * offset,
+                    child: SizedBox(
+                      // color: Colors.yellow,
+                      height: 600,
+                      width: width,
+                      child: Align(
+                        alignment: const Alignment(0, 0),
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 40),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                               SizedBox(
+                                height:MediaQuery.of(context).size.height*0.10,
                               ),
-                            ),
-                            Text(
-                              "\nTested Products || Efficient Service || Trusted Brand\n",
-                              style: TextStyle(
+                              // Gap(45),
+                              Text(
+                                "EXPERIENCE THE NEW DELTA PREMIUM PRODUCTS",
+                                style: GoogleFonts.abrilFatface(
+                                  textStyle: const TextStyle(
+                                    color: Colors.white,
+                                      fontSize:25,
+                                    // shadows: <Shadow>[
+                                      // Shadow(
+                                      //   offset: Offset(2.0, 2.0),
+                                      //   blurRadius: 3.0,
+                                      //   color: Colors.grey.withOpacity(0.5),
+                                      // )
+                                    // ],
+                                  ),
+                                ),
+                              ),
+                              // Text(
+                              //   "DELTA PREMIUM PRODUCTS",
+                              //   style: GoogleFonts.abrilFatface(
+                              //     textStyle: const TextStyle(
+                              //       color: Colors.white,
+                              //       fontSize: 25,
+                              //       shadows: <Shadow>[
+                              //         // Shadow(
+                              //         //   offset: Offset(2.0, 2.0),
+                              //         //   blurRadius: 3.0,
+                              //         //   color: Colors.grey.withOpacity(0.5),
+                              //         // )
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
+                              const Text(
+                                "\nTested Products | Efficient Service | Trusted Brand\n",
+                                style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.black),
-                            ),
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ContactUsPage()),
-                                    );
-                                  },
-                                  child: FittedBox(
-                                    child: Container(
-                                      child: Center(
-                                          child: Text(
-                                        "ABOUT US",
-                                        style: GoogleFonts.firaSans(
-                                            fontWeight: FontWeight.w600),
-                                      )),
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              18,
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromRGBO(
-                                            249, 156, 6, 1.0),
-                                        // borderRadius: BorderRadius.circular(20),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.white,
-                                              offset: Offset(8, 8),
-                                              blurRadius: 1),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Gap(15),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ContactUsPage()),
-                                    );
-                                  },
-                                  child: FittedBox(
-                                    child: Container(
-                                      child: Center(
-                                          child: Text(
-                                        "CONTACT US",
-                                        style: GoogleFonts.firaSans(
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromRGBO(
-                                                249, 156, 6, 1.0)),
-                                      )),
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              18,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        // borderRadius: BorderRadius.circular(20),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color.fromRGBO(
-                                                  249, 156, 6, 1.0),
-                                              // blurRadius: 4,
-                                              offset: Offset(8, 8),
-                                              blurRadius: 1),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            // ElevatedButton(
-                            //   onPressed: () {
-                            //     Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => const Card()),
-                            //     );
-                            //   },
-                            //   child: Text(
-                            //     'CHECKOUT',
-                            //     style: TextStyle(color: Colors.white),
-                            //   ),
-                            //   style: ButtonStyle(
-                            //     backgroundColor: MaterialStateProperty.all(
-                            //         const Color.fromARGB(255, 54, 98, 98)),
-                            //     minimumSize: MaterialStateProperty.all(Size(150, 50)),
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: 320,
-                            // ),
-                            // SizedBox(
-                            //   height: 280,
-                            // ),
-                          ],
-                        ),
-                      )),
-                ],
-              ),
-              Container(
-                width: double.infinity,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Industrial Cable Management System for your Electrical Projects!',
-                          style: GoogleFonts.abel(
-                              textStyle: const TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold)),
-                        ),
-                        Gap(10),
-                        Text(
-                          '     Delta Cable Management Systems are designed to efficiently organize and secure electrical and electronic cables in various settings, be it a facility, residence, or office. Industrial cable wholesale sellers in Saudi Arabia prioritize crafting cables that promote tidy workspaces, minimize trip hazards, prevent short circuits, and ultimately elevate electrical safety and functionality within your environment',
-                          style: GoogleFonts.abel(
-                              fontSize: 20, fontWeight: FontWeight.w300),
-                        ),
-                      ]),
-                ),
-              ),
-              Gap(20),
-              Container(
-                  width: double.infinity,
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'What are we offering'.toUpperCase(),
-                        style: GoogleFonts.quicksand(
-                          color: Color.fromARGB(255, 156, 155, 155),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'Our Products'.toUpperCase(),
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 4, 4, 4),
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  )),
-              Gap(10),
-              Container(
-                height: 450,
-                child: PageView.builder(
-                  controller: pageController,
-                  itemCount: imageUrls.length,
-                  itemBuilder: (context, index) {
-                    debugPrint("{-pageOffSet.abs() + index}");
-                    return GestureDetector(
-                      onTap: () {
-                        _navigateToPage(context, index);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: SizedBox(
-                                height: 350,
-                                child: Image.asset(
-                                  imageUrls[index],
-                                  fit: BoxFit.cover,
-                                  alignment:
-                                      Alignment(-pageOffSet.abs() + index, 0),
+                                  color: Colors.white,
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              bottom: 20,
-                              child: Padding(
-                                padding: EdgeInsets.all(15),
-                                child: Text(
-                                  textindex[index],
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 137, 137, 137),
+                              SizedBox(
+                                height: height / 3.5,
+                                width: width / 1,
+                                // color: Colors.white,
+                                child:
+                                    //  AnimatedTextKit(
+                                    //               animatedTexts: [
+                                    //                 RotateAnimatedText('AWESOME',
+                                    //                     textStyle: TextStyle(
+                                    //                         fontSize: 30,
+                                    //                         color: Colors.white,
+                                    //                         backgroundColor: Colors.blue)),
+                                    //                 RotateAnimatedText('OPTIMISTIC',
+                                    //                     textStyle: TextStyle(
+                                    //                         letterSpacing: 3,
+                                    //                         fontSize: 30,
+                                    //                         fontWeight: FontWeight.bold,
+                                    //                         color: Colors.orange)),
+                                    //                 RotateAnimatedText(
+                                    //                   'DIFFERENT',
+                                    //                   textStyle: TextStyle(
+                                    //                     fontSize: 30,
+                                    //                     decoration: TextDecoration.underline,
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //               isRepeatingAnimation: true,
+                                    //               totalRepeatCount: 10,
+                                    //               pause: Duration(milliseconds: 1000),
+                                    //             ),
+                                    Center(
+                                  child: AnimatedTextKit(
+                                    totalRepeatCount: 40,
+                                    animatedTexts: [
+                                      RotateAnimatedText(
+                                          'Trans Delta Trading'.toUpperCase(),
+                                          textStyle: const TextStyle(
+                                              letterSpacing: 3,
+                                              // fontSize: 30,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.orange)),
+                                      FadeAnimatedText(
+                                        'Powering Progress: Your Source for Premium Electrical Solutions',
+                                        textStyle: const TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 243, 149, 35),
+                                            // fontSize: 25.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      ScaleAnimatedText(
+                                        'We are introducing our products',
+                                        duration:
+                                            const Duration(milliseconds: 4000),
+                                        textStyle: const TextStyle(
+                                            color: Colors.white,
+                                            // fontSize: 50.0
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              // const SizedBox(height: 20),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: height),
+                        Container(
+                            width: width,
+                            color: Colors.white,
+                            child: Column(
+                              // crossAxisAlignment: CrossAxisAlignment.center,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Gap(35),
+                                Text(
+                                  'What are we offering'.toUpperCase(),
+                                  style: GoogleFonts.quicksand(
+                                    color: const Color.fromARGB(
+                                        255, 156, 155, 155),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Our Products'.toUpperCase(),
+                                  style: const TextStyle(
+                                    color: Color.fromARGB(255, 4, 4, 4),
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Container(
+                                Gap(35),
+                                SizedBox(
+                                  height: 450,
+                                  child: PageView.builder(
+                                    controller: pageController,
+                                    itemCount: imageUrls.length,
+                                    itemBuilder: (context, index) {
+                                      debugPrint("{-pageOffSet.abs() + index}");
+                                      return GestureDetector(
+                                        onTap: () {
+                                          _navigateToPage(context, index);
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                child: SizedBox(
+                                                  height: 350,
+                                                  child: Image.asset(
+                                                    imageUrls[index],
+                                                    fit: BoxFit.cover,
+                                                    alignment: Alignment(
+                                                        -pageOffSet.abs() +
+                                                            index,
+                                                        0),
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                bottom: 20,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(15),
+                                                  child: Text(
+                                                    textindex[index],
+                                                    style: const TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 137, 137, 137),
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )),
+                         Container(
                   color: Colors.white,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Gap(15),
+                      const Gap(15),
                       Image.asset('assets/image/hex-logo-new.png'),
-                      Gap(15),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
+                      const Gap(15),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 15),
                         child: Text(
                           "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
                           style: TextStyle(
@@ -934,11 +911,15 @@ class _DesktopLandingState extends State<DesktopLanding> {
               Container(
                   width: double.infinity,
                   child: MediaQuery.of(context).size.width >= 700
-                      ? deskBottomSheett()
-                      : mobiledeskBottomSheett())
-            ],
-          ),
-        );
+                      ? const deskBottomSheett()
+                      : const mobiledeskBottomSheett())
+                      ],
+                    ),
+                  )
+                ],
+              )),
+        ));
+       
       }
     });
   }
@@ -950,7 +931,6 @@ class _DesktopLandingState extends State<DesktopLanding> {
 }
 
 Future<bool> checkIfDataExists() async {
-  // Replace 'users' with your actual collection name
   QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
       .instance
       .collection('users')
@@ -972,7 +952,5 @@ class NoScrollGlow extends ScrollBehavior {
   }
 }
 
-const kHeroImage = 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/landingpage.png';
-
-
-
+const kHeroImage =
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/landingpage.png';

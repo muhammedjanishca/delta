@@ -986,34 +986,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 ),
                                               ),
 
-                                              // Gap(95),
-                                              TextButton(
-                                                  onPressed: () => SideSheet.right(
-                                                      body: Container(
-                                                          height: 1500,
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              230, 233, 235),
-                                                          child: pdf != null
-                                                              ? SfPdfViewer
-                                                                  .network(pdf!)
-                                                              : Nopdf()),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
-                                                      context: context),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.edit_document),
-                                                      Text(
-                                                        "Size Chart",
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                  )),
-                                              Gap(20)
+                                             
                                             ],
                                           ),
                                           FittedBox(
@@ -1074,14 +1047,50 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                             ),
                                           ),
                                           Gap(25),
-                                          Text(
-                                            'Product codes'.toUpperCase(),
-                                            style: GoogleFonts.quicksand(
-                                              color: Color.fromARGB(
-                                                  255, 156, 155, 155),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Product codes'.toUpperCase(),
+                                                style: GoogleFonts.quicksand(
+                                                  color: Color.fromARGB(
+                                                      255, 156, 155, 155),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              
+                                              Padding(
+                                                padding: const EdgeInsets.only(right:50.0),
+                                                child:TextButton(
+                                                  onPressed: () => SideSheet.right(
+                                                      body: Container(
+                                                          height: 1500,
+                                                          color: const Color
+                                                                  .fromARGB(255,
+                                                              230, 233, 235),
+                                                          child: pdf != null
+                                                              ? SfPdfViewer
+                                                                  .network(pdf!)
+                                                              : Nopdf()),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4,
+                                                      context: context),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.edit_document),
+                                                      Text(
+                                                        "Size Chart",
+                                                        style: TextStyle(),
+                                                      )
+                                                    ],
+                                                  )),
+                                              ),
+                                            
+                                            ],
                                           ),
                                           Column(
                                             crossAxisAlignment:
