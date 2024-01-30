@@ -329,16 +329,29 @@ class DesktopAppBar extends StatelessWidget {
                           // Add similar conditions for other data types
                         },
                       ),
-                      _buildPopupMenuButton(
+                       _buildPopupMenuButton(
                         context,
-                        'Crimping Tool',
-                        ['Crimping Tool'],
+                        'Brass Cable Gland Kits & Accessories',
+                        ['Crimping Tool', 'conduits'],
                         (selectedDataType) async {
                           if (selectedDataType == 'Crimping Tool') {
                             Navigator.pushNamed(context, '/CrimpingTools');
+                          } else if (selectedDataType == 'conduits') {
+                            Navigator.pushNamed(context, '/conduits');
                           }
+                          // Add similar conditions for other data types
                         },
                       ),
+                      // _buildPopupMenuButton(
+                      //   context,
+                      //   'Crimping Tool',
+                      //   ['Crimping Tool'],
+                      //   (selectedDataType) async {
+                      //     if (selectedDataType == 'Crimping Tool') {
+                      //       Navigator.pushNamed(context, '/CrimpingTools');
+                      //     }
+                      //   },
+                      // ),
                       SizedBox(width: 50),
                     ],
                   ),
@@ -565,7 +578,7 @@ class MobileAppBar extends StatelessWidget {
       cartCount =
           Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
     }
-
+// hyjyfjf
     return Column(
       children: [
         SafeArea(

@@ -601,66 +601,68 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                 height: MediaQuery.of(context).size.height/6,
                                 width: MediaQuery.of(context).size.width,
                              ),
-                              Container(
-                                color: const Color.fromARGB(255, 236, 242, 242),
-                                height: MediaQuery.of(context).size.height/1.1,
-                                width: MediaQuery.of(context).size.width,
-                                child: Row(
-                                  children: [
-                                   MouseRegion(
-                                    onEnter: (_) =>
-                                        setState(() => issHovered = true),
-                                    onExit: (_) =>
-                                        setState(() => issHovered = false),
-                                    
-                                      child: Stack(
-                                        children:[ 
-                                         FittedBox(
-                                           child: SizedBox( 
-                                           height: MediaQuery.of(context).size.height/1.1,
-                                           width:  MediaQuery.of(context).size.width/2,
-                                           child: Image.asset('assets/image/glands 4.png',
-                                           fit: BoxFit.fill)),
-                                         ),
-                                         if(issHovered)
-                                         FittedBox(
-                                           child: SizedBox( 
-                                           height: MediaQuery.of(context).size.height/1.1,
-                                           width:  MediaQuery.of(context).size.width/2,
-                                           child: Image.asset('assets/image/glands 2.png',
-                                           fit: BoxFit.fill)),
-                                         ),
-                                         ]
+                              FittedBox(
+                                child: Container(
+                                  color: const Color.fromARGB(255, 236, 242, 242),
+                                  height: MediaQuery.of(context).size.height/1.1,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                     MouseRegion(
+                                      onEnter: (_) =>
+                                          setState(() => issHovered = true),
+                                      onExit: (_) =>
+                                          setState(() => issHovered = false),
+                                      
+                                        child: Stack(
+                                          children:[ 
+                                           FittedBox(
+                                             child: SizedBox( 
+                                             height: MediaQuery.of(context).size.height/1.1,
+                                             width:  MediaQuery.of(context).size.width/2,
+                                             child: Image.asset('assets/image/glands 4.png',
+                                             fit: BoxFit.fill)),
+                                           ),
+                                           if(issHovered)
+                                           FittedBox(
+                                             child: SizedBox( 
+                                             height: MediaQuery.of(context).size.height/1.1,
+                                             width:  MediaQuery.of(context).size.width/2,
+                                             child: Image.asset('assets/image/glands 2.png',
+                                             fit: BoxFit.fill)),
+                                           ),
+                                           ]
+                                        ),
                                       ),
-                                    ),
-                                    Container(
-                                      child:  Row(
-                                        children: [
-                                          Gap(75),
-                                          Container(
-                                            height: MediaQuery.of(context).size.height/3,
-                                            width: 10,
-                                            color: Colors.yellow,),
-                                             Gap(15),
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Where the',
-                                              style: GoogleFonts.workSans(fontSize: 45,color: Color.fromARGB(255, 30, 30, 30),fontWeight: FontWeight.w500),),
-                                              Text('world of', style: GoogleFonts.workSans(fontSize: 45,color: Color.fromARGB(255, 51, 51, 51),fontWeight: FontWeight.w500),),
-
-                                              Text('construction',style: GoogleFonts.workSans(fontSize: 45,color: const Color.fromARGB(255, 129, 129, 129),fontWeight: FontWeight.w500),),
-
-                                              Text('gets together',style: GoogleFonts.workSans(fontSize: 45,color: const Color.fromARGB(255, 184, 183, 183),fontWeight: FontWeight.w500),),
-
-                                              
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                      Container(
+                                        child:  Row(
+                                          children: [
+                                            Gap(75),
+                                            Container(
+                                              height: MediaQuery.of(context).size.height/3,
+                                              width: 10,
+                                              color: Colors.yellow,),
+                                               Gap(15),
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Where the',
+                                                style: GoogleFonts.workSans(fontSize: 45,color: Color.fromARGB(255, 30, 30, 30),fontWeight: FontWeight.w500),),
+                                                Text('world of', style: GoogleFonts.workSans(fontSize: 45,color: Color.fromARGB(255, 51, 51, 51),fontWeight: FontWeight.w500),),
+                              
+                                                Text('construction',style: GoogleFonts.workSans(fontSize: 45,color: const Color.fromARGB(255, 129, 129, 129),fontWeight: FontWeight.w500),),
+                              
+                                                Text('gets together',style: GoogleFonts.workSans(fontSize: 45,color: const Color.fromARGB(255, 184, 183, 183),fontWeight: FontWeight.w500),),
+                              
+                                                
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               SizedBox(

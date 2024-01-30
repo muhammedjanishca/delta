@@ -10,6 +10,8 @@ class DataProvider extends ChangeNotifier {
   late var newaccessories = fetchaccessoriesApiUrl();
   late var newconnecters = fetchconnectersApiUrl();
   late var newcrimpingtool = fetchcrimpingtoolApiUrl();
+  late var newconduits = fetchconduitsApiUrl();
+
 
   Future<ProduceNewModal> fetchLugsData() async {
     final response = await http
@@ -36,6 +38,7 @@ class DataProvider extends ChangeNotifier {
       throw Exception('Failed to load data');
     }
   }
+
   Future<ProduceNewModal> fetchconnectersApiUrl() async {
     final response = await http
         .get(Uri.parse('https://deltabackend.com/connectors'));
@@ -63,6 +66,18 @@ class DataProvider extends ChangeNotifier {
    Future<ProduceNewModal> fetchcrimpingtoolApiUrl() async {
     final response = await http
         .get(Uri.parse('https://deltabackend.com/crimpingtools'));
+
+    if (response.statusCode == 200) {
+      ProduceNewModal pro =
+          ProduceNewModal.fromJson(json.decode(response.body));
+      return pro;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+   Future<ProduceNewModal> fetchconduitsApiUrl() async {
+    final response = await http
+        .get(Uri.parse('https://deltabackend.com/conduits'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =

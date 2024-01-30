@@ -9,6 +9,7 @@ import 'package:firebase_hex/pages/details_pages/crimping_tool.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/another_pages/appbar_page.dart';
 import 'package:firebase_hex/pages/another_pages/cart.dart';
+import 'package:firebase_hex/pages/product_pages/conduite.dart';
 import 'package:firebase_hex/pages/product_pages/connecters.dart';
 import 'package:firebase_hex/pages/product_pages/crimping.dart';
 import 'package:firebase_hex/pages/product_pages/gland.dart';
@@ -32,6 +33,8 @@ import 'package:firebase_hex/widgets/fetch_invoice.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+
+import 'pages/details_pages/conduits_details_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -130,6 +133,9 @@ class _MyAppState extends State<MyApp> {
           '/CrimpingTools': (context) => AppBarMain(
                 body: CrimpingToolPage(),
               ),
+               '/conduits': (context) => AppBarMain(
+                body: ConduitesPage(),
+              ),
           // '/sighn':(context) => SignUpPage()
         },
         initialRoute: '/',
@@ -180,6 +186,13 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
+                 case "productdetailsconduits":
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(body: ProductDetailsOfConduits());
+                  },
+                  settings: setting,
+                );
               case "nopdf":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
@@ -218,7 +231,14 @@ void navigateToProductDetailsOfConnectors(
     '/productdetailsconnectors/$productname',
   );
 }
-
+void navigateToProductDetailsOfConduits(
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(
+    context,
+    '/productdetailsconduits/$productname',
+  );
+}
 void navigateToProductDetailsOfGlands(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
@@ -264,6 +284,9 @@ void navigateToProductDetailsFromSearch(
       break;
     case 'tools':
       endpoint = '/productdetailscrimpingtools/$productname';
+      break;
+       case 'CSS':
+      endpoint = '/productdetailsconduits/$productname';
       break;
     default:
       return;
