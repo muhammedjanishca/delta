@@ -30,7 +30,7 @@ class LugsPage extends StatelessWidget {
     final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
 
-    return Container(
+    return SizedBox(
       child: Consumer(builder: (context, provider, child) {
         return FutureBuilder<ProduceNewModal>(
           future: context.read<DataProvider>().newlugs,
@@ -52,7 +52,7 @@ class LugsPage extends StatelessWidget {
     
               return ListView(
                 children: [
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width / 4,
                     height: MediaQuery.of(context).size.height / 2.5,
                     child: custCarosal(context, sliderLugs, Index),
@@ -66,16 +66,16 @@ class LugsPage extends StatelessWidget {
                         children: [
                           TextButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               "HOME>>",
                               style: TextStyle(
-                                color: const Color.fromARGB(255, 54, 98, 98),
+                                color:  Color.fromARGB(255, 54, 98, 98),
                                 fontSize: 17,
                                 fontWeight: FontWeight.w300,
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             "LUGS",
                             style: TextStyle(
                               fontSize: 20,
@@ -90,7 +90,7 @@ class LugsPage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal:
-                          MediaQuery.of(context).size.width >= 600 ? 30 : 10,
+                          MediaQuery.of(context).size.width >= 600 ? 90 : 10,
                     ),
                     child: GridView.builder(
                       physics: ScrollPhysics(),
@@ -118,22 +118,25 @@ class LugsPage extends StatelessWidget {
                                     .data!.data[index].productName!
                                     .replaceAll(" ", "_"));
                           },
+                          // child: Container(
+                          //   color: Colors.amber,
+                          // ),
                           child: Container(
                             //  height: 200,
-                            width: _width / 4,
+                            width: _width / 6,
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(7),
+                              color:  Colors.white,
+                              borderRadius: BorderRadius.circular(5),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromARGB(255, 229, 229, 229)
+                                  color: const Color.fromARGB(255, 238, 238, 238)
                                       .withOpacity(
                                           0.5), // Set the shadow color here
                                   spreadRadius:
                                       5, // Set the spread radius of the shadow
                                   blurRadius:
                                       7, // Set the blur radius of the shadow
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 3), // Set the offset of the shadow
                                 ),
                               ],

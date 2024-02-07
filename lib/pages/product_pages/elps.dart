@@ -1,46 +1,42 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/widgets/carousal_slider.dart';
+import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
-import '../../provider/data_provider.dart';
+import '../../provider/Text_color.dart';
 import '../../provider/thumbnail.dart';
 
-class AccessoriesPage extends StatelessWidget {
-  AccessoriesPage({super.key});
+class Elps extends StatelessWidget {
+  Elps({super.key});
 
-  int selectedImageIndex = -1;
-  // Initialize with an invalid index
+  // int selectedImageIndex = -1;
+
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-        var screenSize = MediaQuery.of(context).size;
- double thumbnailSize = screenSize.width * 0.11; 
-    final selectedThumbnailProvider =
-        Provider.of<SelectedThumbnailProvider>(context);
+    double thumbnailSize = screenSize.width * 0.11; 
+    final selectedThumbnailProvider = Provider.of<SelectedThumbnailProvider>(context);
+    final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
+    final selectedPriceNotifieru = Provider.of<SelectedPriceNotifier>(context, listen: false);
     final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
-    final selectedPriceNotifieru =
-        Provider.of<SelectedPriceNotifier>(context, listen: false);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
-        future: context.read<DataProvider>().newaccessories,
+        future: context.read<DataProvider>().newElps,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
                 child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-
-            //     SpinKitCubeGrid(
-            //   size: 140,
-            //   color: Color.fromRGBO(249, 156, 6, 1.0),
-            // )
-            );
+              );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -53,7 +49,7 @@ class AccessoriesPage extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width / 4,
                   height: MediaQuery.of(context).size.height / 2.5,
-                  child: custCarosal(context, sliderAccessories, Index),
+                  child: custCarosal(context, sliderGlands, Index),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 4,
@@ -74,11 +70,11 @@ class AccessoriesPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "ACCESSORIES",
+                          "ELPS",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: Color.fromRGBO(249, 156, 6, 1.0),
+                             color: Color.fromRGBO(249, 156, 6, 1.0),
                           ),
                         )
                       ],
@@ -110,8 +106,7 @@ class AccessoriesPage extends StatelessWidget {
                               productData.thumbnail ?? "",
                               index: index);
                           selectedPriceNotifieru.resetSelectedPrice();
-
-                          navigateToProductDetailsOfAccessories(context, index,
+                          navigateToProductDetailsofElps(context, index,
                               productname: snapshot
                                   .data!.data[index].productName!
                                   .replaceAll(" ", "_"));
@@ -125,13 +120,13 @@ class AccessoriesPage extends StatelessWidget {
                               BoxShadow(
                                 color: Color.fromARGB(255, 229, 229, 229)
                                     .withOpacity(
-                                        0.5), 
+                                        0.5), // Set the shadow color here
                                 spreadRadius:
-                                    5, 
+                                    5, // Set the spread radius of the shadow
                                 blurRadius:
-                                    7, 
+                                    7, // Set the blur radius of the shadow
                                 offset: Offset(
-                                    0, 3),
+                                    0, 3), // Set the offset of the shadow
                               ),
                             ],
                           ),
@@ -171,17 +166,13 @@ class AccessoriesPage extends StatelessWidget {
                                   //     ),
                                   //   ),
                                   // ),
-                                  Image.network(
-                                    productData.thumbnail ?? "",
-                                    width: thumbnailSize,
+                                    Image.network(
+                                        productData.thumbnail ?? "",
+                                        width: thumbnailSize,
                                       height: thumbnailSize,
-                                  ),
-                                  // SizedBox(
-                                  //   height: 8,
-                                  //   width:
-                                  //       MediaQuery.of(context).size.width / 4,
-                                  // ),
-                                  Text(
+                                      ),
+                                 
+                                   Text(
                                       productData.productName ?? "",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -211,6 +202,7 @@ class AccessoriesPage extends StatelessWidget {
                 ),
                 Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
+                  // width: double.infinity,
                   // height: MediaQuery.of(context).size.width >= 700
                   //     ? MediaQuery.of(context).size.height / 1.5
                   //     : 950,

@@ -11,11 +11,49 @@ class DataProvider extends ChangeNotifier {
   late var newconnecters = fetchconnectersApiUrl();
   late var newcrimpingtool = fetchcrimpingtoolApiUrl();
   late var newconduits = fetchconduitsApiUrl();
+  late var newelpsAccessories = fetchElpsAssessoriesData();
+  late var newElps = fetchElpsData();
+  late var newSsctm = fetchSsctmData();
 
+Future<ProduceNewModal> fetchElpsData() async {
+    final response = await http
+        .get(Uri.parse('https://deltabackend.com/elps'));
 
+    if (response.statusCode == 200) {
+      ProduceNewModal pro =
+          ProduceNewModal.fromJson(json.decode(response.body));
+      return pro;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+  Future<ProduceNewModal> fetchSsctmData() async {
+    final response = await http
+        .get(Uri.parse('https://deltabackend.com/ssctm'));
+
+    if (response.statusCode == 200) {
+      ProduceNewModal pro =
+          ProduceNewModal.fromJson(json.decode(response.body));
+      return pro;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
   Future<ProduceNewModal> fetchLugsData() async {
     final response = await http
         .get(Uri.parse('https://deltabackend.com/lugs'));
+
+    if (response.statusCode == 200) {
+      ProduceNewModal pro =
+          ProduceNewModal.fromJson(json.decode(response.body));
+      return pro;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+   Future<ProduceNewModal> fetchElpsAssessoriesData() async {
+    final response = await http
+        .get(Uri.parse('https://deltabackend.com/elps-accessories'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =

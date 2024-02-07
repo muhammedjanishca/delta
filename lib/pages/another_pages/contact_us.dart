@@ -86,11 +86,13 @@ class ContactUsPage extends StatelessWidget {
             children: [
               Text(
                 "Get in touch",
-                style: GoogleFonts.almarai(
+                style: GoogleFonts.poppins(
+                  color: Colors.black87,
                     fontSize: 40, fontWeight: FontWeight.w900),
               ),
               Text(
-                "Ready to help your company scale faster? Let's chat about how we can help",
+                "We are here to help!", style: GoogleFonts.poppins(
+                    ),
               ),
               SizedBox(height: 20),
               Center(
@@ -170,11 +172,12 @@ class ContactUsPage extends StatelessWidget {
                           Gap(25),
                           Text(
                             "Message us",
-                            style: GoogleFonts.almarai(
+                            style: GoogleFonts.poppins(
                                 fontSize: 25, fontWeight: FontWeight.w900),
                           ),
                           Text(
-                            "We'll get back to you within 24 hours",
+                            "We'll get back to you within 24 hours", style: GoogleFonts.poppins(
+     ),
                           ),
                           Gap(25),
                           Row(

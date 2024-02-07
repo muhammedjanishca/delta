@@ -76,7 +76,7 @@ class ConduitesPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "CONNECTERS",
+                          "CONDUITES",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,

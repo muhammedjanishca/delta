@@ -5,6 +5,9 @@ import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/pages/address.dart/color_change_provider.dart';
 import 'package:firebase_hex/pages/another_pages/paralex.dart';
+import 'package:firebase_hex/pages/details_pages/ELPS_Accessories_details.dart';
+import 'package:firebase_hex/pages/details_pages/ELPS_details.dart';
+import 'package:firebase_hex/pages/details_pages/Ssctm_details.dart';
 import 'package:firebase_hex/pages/details_pages/crimping_tool.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/another_pages/appbar_page.dart';
@@ -12,6 +15,8 @@ import 'package:firebase_hex/pages/another_pages/cart.dart';
 import 'package:firebase_hex/pages/product_pages/conduite.dart';
 import 'package:firebase_hex/pages/product_pages/connecters.dart';
 import 'package:firebase_hex/pages/product_pages/crimping.dart';
+import 'package:firebase_hex/pages/product_pages/elps.dart';
+import 'package:firebase_hex/pages/product_pages/elps_accessories.dart';
 import 'package:firebase_hex/pages/product_pages/gland.dart';
 import 'package:firebase_hex/pages/another_pages/landing_page.dart';
 import 'package:firebase_hex/pages/product_pages/lugs.dart';
@@ -20,6 +25,7 @@ import 'package:firebase_hex/pages/details_pages/connecters_productd.dart';
 import 'package:firebase_hex/pages/details_pages/gland_productdetails.dart';
 import 'package:firebase_hex/pages/details_pages/lugs_productdetails.dart';
 import 'package:firebase_hex/pages/details_pages/nonpdf_product.dart';
+import 'package:firebase_hex/pages/product_pages/ssctm.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
@@ -125,15 +131,25 @@ class _MyAppState extends State<MyApp> {
           '/Glands': (context) => AppBarMain(
                 body: GlandPage(),
               ),
+              '/Stainless Steel Cable Ties & Markers': (context) => AppBarMain(
+                body: SsctmProduct(),
+              ),
+              '/earthing-lightning-protection-systems/earthing-lightning-protection/': (context) => AppBarMain(
+                body: Elps(),
+              ),
+              
           '/signup/signin': (context) => SignUpPage(),
           '/Accessories': (context) => AppBarMain(
                 body: AccessoriesPage(),
+              ),
+               '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/': (context) => AppBarMain(
+                body: ElpsAccessories(),
               ),
           '/Connectors': (context) => AppBarMain(body: ConnectersPage()),
           '/CrimpingTools': (context) => AppBarMain(
                 body: CrimpingToolPage(),
               ),
-               '/conduits': (context) => AppBarMain(
+               '/cable-support-systems/': (context) => AppBarMain(
                 body: ConduitesPage(),
               ),
           // '/sighn':(context) => SignUpPage()
@@ -193,6 +209,27 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
+                 case "productdetailscELPSAccessories":
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(body: ProductDetailsOfELPSAccessories());
+                  },
+                  settings: setting,
+                );
+                case "productdetailsElps":
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(body: ProductDetailsOfElps());
+                  },
+                  settings: setting,
+                );
+                case "productdetailsSsctm":
+                return MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AppBarMain(body: SsctmProduct());
+                  },
+                  settings: setting,
+                );
               case "nopdf":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
@@ -222,7 +259,16 @@ void navigateToProductDetailsofLugs(
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailslugs/$productname');
 }
-
+void navigateToProductDetailsofSsctm(
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/productdetailsSsctm/$productname');
+}
+void navigateToProductDetailsofElps(
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/productdetailsElps/$productname');
+}
 void navigateToProductDetailsOfConnectors(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
@@ -238,6 +284,11 @@ void navigateToProductDetailsOfConduits(
     context,
     '/productdetailsconduits/$productname',
   );
+}
+void navigateToProductDetailsofELPS(
+    BuildContext context, int selectedProductIndex,
+    {String? productname}) {
+  Navigator.pushNamed(context, '/productdetailscELPSAccessories/$productname');
 }
 void navigateToProductDetailsOfGlands(
     BuildContext context, int selectedProductIndex,
