@@ -148,7 +148,7 @@ class deskBottomSheett extends StatelessWidget {
                                 builder: (context) => ContactUsPage()),
                           );
                         },
-                        child: Text("Tel # +91 483-3589627",
+                        child: Text("Tel : +966 55 543 2866",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -162,7 +162,7 @@ class deskBottomSheett extends StatelessWidget {
                                 builder: (context) => ContactUsPage()),
                           );
                         },
-                        child: Text("evolvedmillennials@gmail.com",
+                        child: Text("sales@transdeltatrading.com",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -321,7 +321,7 @@ class deskBottomSheett extends StatelessWidget {
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.white, width: 2)),
-                                    hintText: '  +966501234567',
+                                    hintText: '  Phone',
                                     hintStyle: TextStyle(color: Colors.white)),
                               ),
                             ),
