@@ -125,10 +125,10 @@ class _MyAppState extends State<MyApp> {
           '/cart': (context) => AppBarMain(
                 body: CartPage(),
               ),
-          '/Lugs': (context) => AppBarMain(
+          '/cable-terminal-ends/lugs/': (context) => AppBarMain(
                 body: LugsPage(),
               ),
-          '/Glands': (context) => AppBarMain(
+          '/brass-cable-gland-kits-accessories/brass-cable-glands/': (context) => AppBarMain(
                 body: GlandPage(),
               ),
               '/Stainless Steel Cable Ties & Markers': (context) => AppBarMain(
@@ -145,7 +145,7 @@ class _MyAppState extends State<MyApp> {
                '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/': (context) => AppBarMain(
                 body: ElpsAccessories(),
               ),
-          '/Connectors': (context) => AppBarMain(body: ConnectersPage()),
+          '/cable-terminal-ends/connectors/': (context) => AppBarMain(body: ConnectersPage()),
           '/CrimpingTools': (context) => AppBarMain(
                 body: CrimpingToolPage(),
               ),

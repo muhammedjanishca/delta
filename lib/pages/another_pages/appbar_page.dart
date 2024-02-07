@@ -186,13 +186,13 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
               PlutoMenuItem(
                 title: 'Lugs',
                 onTap: () {
-                  Navigator.pushNamed(context, '/Lugs');
+                  Navigator.pushNamed(context, '/cable-terminal-ends/lugs/');
                 },
               ),
               PlutoMenuItem(
                 title: 'Connectors',
                 onTap: () {
-                  Navigator.pushNamed(context, '/Connectors');
+                  Navigator.pushNamed(context, '/cable-terminal-ends/connectors/');
                 },
               ),
             ],
@@ -205,7 +205,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
               PlutoMenuItem(
                 title: 'Glands',
                 onTap: () {
-                  Navigator.pushNamed(context, '/Glands');
+                  Navigator.pushNamed(context, '/brass-cable-gland-kits-accessories/brass-cable-glands/');
                 },
               ),
               PlutoMenuItem(
