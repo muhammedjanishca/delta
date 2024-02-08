@@ -36,7 +36,7 @@ class Nopdf extends StatelessWidget {
     var setting_list = selectedProductIndex.split('/');
     typeOfProduct = setting_list[1].substring(14).toString();
     String product_name = setting_list[2].replaceAll('_', " ");
-     final selectedPriceNotifieru =
+    final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
@@ -46,17 +46,17 @@ class Nopdf extends StatelessWidget {
           future: context.read<DataProvider>().setTypeOfProducts(typeOfProduct),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
-        
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                                   child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child: Lottie.asset(
+                      "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
               String? description = "";
               List<String>? image = [];
-        
+
               if (selectedThumbnailProvider.selectedIndex != null) {
                 textpass = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].productName;
@@ -93,7 +93,7 @@ class Nopdf extends StatelessWidget {
                   }
                 });
               }
-        
+
               return DefaultTabController(
                 length: 2,
                 child: Container(
@@ -110,7 +110,7 @@ class Nopdf extends StatelessWidget {
                             scrollDirection: Axis.vertical,
                             child: Container(
                               // height: double.infinity,
-                               height: MediaQuery.of(context).size.height,
+                              height: MediaQuery.of(context).size.height,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 245, 229, 166),
@@ -188,17 +188,17 @@ class Nopdf extends StatelessWidget {
                                             null) {
                                           final price =
                                               double.parse(priceofproduct!);
-        
+
                                           final quantity = int.tryParse(
                                                   quantityController.text) ??
                                               0;
-        
+
                                           final imageUrl =
                                               // selectedThumbnailProvider
                                               //         .selectedThumbnail ??
                                               thumbnail;
                                           final productName = textpass;
-        
+
                                           final cartProvider =
                                               Provider.of<CartProvider>(context,
                                                   listen: false);
@@ -208,7 +208,7 @@ class Nopdf extends StatelessWidget {
                                               quantity: quantity,
                                               imageUrl: imageUrl ?? '',
                                               productName: productName ?? '');
-        
+
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
                                                   content:
@@ -314,7 +314,7 @@ class Nopdf extends StatelessWidget {
                 //                             ),
                 //                           ),
                 //                 //--------Product Price-----------
-        
+
                 //                   SizedBox(
                 //                             height: 30,
                 //                           ),
@@ -328,7 +328,7 @@ class Nopdf extends StatelessWidget {
                 //         fontSize: 22),
                 //   ),
                 // ),
-        
+
                 //                           Divider(),
                 //                            SizedBox(
                 //                             height: MediaQuery.of(context)
@@ -371,10 +371,10 @@ class Nopdf extends StatelessWidget {
                 //                                   ),
                 //                                 ),
                 //                               ),
-        
+
                 //                           Flexible(
                 //                       child: Container(
-        
+
                 //                           child: priceofproduct == null
                 //                               ? Text(
                 //                                   'Product Price : 0.00',
@@ -429,7 +429,7 @@ class Nopdf extends StatelessWidget {
                 // ),
                 //           ),
                 //         ),
-        
+
                 //       ],
                 //     ),
                 //   ),
@@ -525,8 +525,8 @@ class Nopdf extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child: Lottie.asset(
+                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -587,236 +587,220 @@ class Nopdf extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Expanded(
-                            flex: 2,
-                            
-                            child: Container(
-                              // height: MediaQuery.of(context).size.height/1,
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        // height: MediaQuery.of(context).size.height/1,
 
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    // height: do
-                                    // color: const Color.fromARGB(255, 138, 129, 101),
-                                    width: MediaQuery.of(context).size.width / 1,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              SingleChildScrollView(
-                                                scrollDirection: Axis.vertical,
-                                                child: Column(
-                                                  children:
-                                                      image!.map((imageUrl) {
-                                                    return GestureDetector(
-                                                      onTap: () {
-                                                        // When an image is clicked, set it as the selected thumbnail.
-                                                        // selectedKiduProvider
-                                                        //     .setSelectedKidu(imageUrl ??
-                                                        //         "data:image/jpeg;base64,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");
-                                                        selectedThumbnailProvider
-                                                            .setSelectedThumbnail(
-                                                                imageUrl ??
-                                                                    "data:image/jpeg;base64,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");
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.all(8.0),
-                                                        child: FittedBox(
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                color: imageUrl ==
-                                                                        // imageUrl
-                                                                        // selectedKiduProvider
-                                                                        //     .selectedKidu
-                                                                        selectedThumbnailProvider
-                                                                            .selectedThumbnail
-                                                                    ? Colors
-                                                                        .blue // Highlight the selected image
-                                                                    : Colors
-                                                                        .black, // Border color for non-selected images
-                                                                width:
-                                                                    1.0, // Border width
-                                                              ),
-                                                            ),
-                                                            child: Image.network(
-                                                              imageUrl ??
-                                                                  "data:image/jpeg;base64,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",
-                                                              width:
-                                                                  70, // Set the desired width for each image
-                                                              height:
-                                                                  70, // Set the desired height for each image
-                                                              fit: BoxFit
-                                                                  .cover, // You can adjust the fit as needed
-                                                            ),
-                                                          ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              // height: do
+                              // color: const Color.fromARGB(255, 138, 129, 101),
+                              width: MediaQuery.of(context).size.width / 1,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 20),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.vertical,
+                                          child: Column(
+                                            children: image!.map((imageUrl) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  // When an image is clicked, set it as the selected thumbnail.
+                                                  // selectedKiduProvider
+                                                  //     .setSelectedKidu(imageUrl ??
+                                                  //         "data:image/jpeg;base64,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");
+                                                  selectedThumbnailProvider
+                                                      .setSelectedThumbnail(
+                                                          imageUrl ??
+                                                              "data:image/jpeg;base64,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");
+                                                },
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: FittedBox(
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: imageUrl ==
+                                                                  // imageUrl
+                                                                  // selectedKiduProvider
+                                                                  //     .selectedKidu
+                                                                  selectedThumbnailProvider
+                                                                      .selectedThumbnail
+                                                              ? Colors
+                                                                  .blue // Highlight the selected image
+                                                              : Colors
+                                                                  .black, // Border color for non-selected images
+                                                          width:
+                                                              1.0, // Border width
                                                         ),
                                                       ),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                              FittedBox(
-                                                child: Container(
-                                                  color: Colors.white,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height /
-                                                      1.7,
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  child: Image.network(
-                                                      // thumbnail!,
-                                                      // selectedKiduProvider.selectedKidu ??
-                                                      //     ''
-                                                      selectedThumbnailProvider
-                                                              .selectedThumbnail ??
-                                                          ''),
-                                                ),
-                                              ), ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  FittedBox(
-                                    child: Container(
-                                      // color: Colors.amber,
-                                      height:
-                                          MediaQuery.of(context).size.height / 4,
-                                                              
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                          onPressed: () {
-                                                    if (_formKey.currentState!
-                                                        .validate()) {
-                                                      if (FirebaseAuth.instance
-                                                              .currentUser !=
-                                                          null) {
-                                                        // signed in
-                                                        // final selectedPrice =
-                                                        //     selectedPriceNotifier
-                                                        //         .value;
-                                                              
-                                                        final price = double.parse(
-                                                            priceofproduct!);
-                                                              
-                                                        final quantity = int.tryParse(
-                                                                quantityController
-                                                                    .text) ??
-                                                            0;
-                                                              
-                                                        final imageUrl =
-                                                            // selectedThumbnailProvider
-                                                            //         .selectedThumbnail ??
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                              
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                              
-                                                        // print(
-                                                        //     'ooooooooooooooooooooo   $textpass');
-                                                        print(price);
-                                                        print(productName);
-                                                        cartProvider.addToCart(
-                                                            // productCode:'null',
-                                                            // productCode: '',
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            imageUrl:
-                                                                imageUrl ?? '',
-                                                            productName:
-                                                                productName ?? '');
-                                                              
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          SnackBar(
-                                                              content: Text(
-                                                                  "Added to cart")),
-                                                        );
-                                                        print(priceofproduct);
-                                                      } else {
-                                                        // signed out
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return LoginPage(); // Your custom dialog widget
-                                                          },
-                                                        );
-                                                      }
-                                                    }
-                                                  },
-                                            child: Text('ADD TO CART'),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                Color.fromRGBO(249, 156, 6, 1.0),
-                                              ),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(180, 60)),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              user != null
-                                                  ? Navigator.pushNamed(
-                                                      context, '/cart')
-                                                  : showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (BuildContext context) {
-                                                        return LoginPage(); // Your custom dialog widget
-                                                      },
-                                                    );
-                                            },
-                                            child: const Text(
-                                              'GO TO CART',
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.black
-                                                      // Color.fromRGBO(249, 188, 6, 1),
+                                                      child: Image.network(
+                                                        imageUrl ??
+                                                            "data:image/jpeg;base64,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",
+                                                        width:
+                                                            70, // Set the desired width for each image
+                                                        height:
+                                                            70, // Set the desired height for each image
+                                                        fit: BoxFit
+                                                            .cover, // You can adjust the fit as needed
                                                       ),
-                                              minimumSize:
-                                                  MaterialStateProperty.all(
-                                                      Size(180, 60)),
-                                            ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }).toList(),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        FittedBox(
+                                          child: Container(
+                                            color: Colors.white,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                1.7,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            child: Image.network(
+                                                // thumbnail!,
+                                                // selectedKiduProvider.selectedKidu ??
+                                                //     ''
+                                                selectedThumbnailProvider
+                                                        .selectedThumbnail ??
+                                                    ''),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  )
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                         
+                            FittedBox(
+                              child: Container(
+                                // color: Colors.amber,
+                                height: MediaQuery.of(context).size.height / 4,
+
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          if (FirebaseAuth
+                                                  .instance.currentUser !=
+                                              null) {
+                                            // signed in
+                                            // final selectedPrice =
+                                            //     selectedPriceNotifier
+                                            //         .value;
+
+                                            final price =
+                                                double.parse(priceofproduct!);
+
+                                            final quantity = int.tryParse(
+                                                    quantityController.text) ??
+                                                0;
+
+                                            final imageUrl =
+                                                // selectedThumbnailProvider
+                                                //         .selectedThumbnail ??
+                                                thumbnail;
+                                            final productName = textpass;
+
+                                            final cartProvider =
+                                                Provider.of<CartProvider>(
+                                                    context,
+                                                    listen: false);
+
+                                            // print(
+                                            //     'ooooooooooooooooooooo   $textpass');
+                                            print(price);
+                                            print(productName);
+                                            cartProvider.addToCart(
+                                                // productCode:'null',
+                                                // productCode: '',
+                                                price: price,
+                                                quantity: quantity,
+                                                imageUrl: imageUrl ?? '',
+                                                productName: productName ?? '');
+
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                  content:
+                                                      Text("Added to cart")),
+                                            );
+                                            print(priceofproduct);
+                                          } else {
+                                            // signed out
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return LoginPage(); // Your custom dialog widget
+                                              },
+                                            );
+                                          }
+                                        }
+                                      },
+                                      child: Text('ADD TO CART'),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                          Color.fromRGBO(249, 156, 6, 1.0),
+                                        ),
+                                        minimumSize: MaterialStateProperty.all(
+                                            Size(180, 60)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        user != null
+                                            ? Navigator.pushNamed(
+                                                context, '/cart')
+                                            : showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return LoginPage(); // Your custom dialog widget
+                                                },
+                                              );
+                                      },
+                                      child: const Text(
+                                        'GO TO CART',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.black
+                                                // Color.fromRGBO(249, 188, 6, 1),
+                                                ),
+                                        minimumSize: MaterialStateProperty.all(
+                                            Size(180, 60)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                     Expanded(
                       flex: 3,
                       child: Column(
@@ -843,17 +827,16 @@ class Nopdf extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                                        'Enter The Quantity',
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
-                                                        style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Roboto',
-                                                          color: Color(0xFF212121),
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                      Gap(30),
+                                            'Enter The Quantity',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontFamily: 'Roboto',
+                                              color: Color(0xFF212121),
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Gap(30),
                                           Form(
                                             key: _formKey,
                                             child: Container(
@@ -889,29 +872,40 @@ class Nopdf extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: description!
-                                            .toUpperCase()
                                             .split('\n')
                                             .map((line) {
+                                          // Capitalize only the first letter of each word
+                                          String capitalizedLine =
+                                              line.split(' ').map((word) {
+                                            if (word.isNotEmpty) {
+                                              return word[0].toUpperCase() +
+                                                  word
+                                                      .substring(1)
+                                                      .toLowerCase();
+                                            } else {
+                                              return '';
+                                            }
+                                          }).join(' ');
+
                                           return Row(
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .start, // Align items at the start of each row
                                             children: [
                                               Icon(Icons.star,
-                                                  size:
-                                                      10, // Adjust the size as needed
-                                                  color: Colors
-                                                      .black // Adjust the color as needed
-                                                  ),
+                                                  size: 25,
+                                                  color: Colors.black),
                                               SizedBox(
-                                                width:
-                                                    8, // Add some space between the circle icon and text
-                                              ),
+                                                  width:
+                                                      10), // Add space between icon and text
                                               Flexible(
                                                 child: Text(
-                                                  line,
+                                                  capitalizedLine
+                                                      .trim(), // Trim any leading/trailing whitespace
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                   ),
-                                                  overflow: TextOverflow
-                                                      .visible, // Handle text overflow
+                                                  overflow:
+                                                      TextOverflow.visible,
                                                 ),
                                               ),
                                             ],
@@ -921,8 +915,8 @@ class Nopdf extends StatelessWidget {
 
                                       // SizedBox(height: 8.0),
                                       SizedBox(height: 20.0),
-                                      // 
-                                                   ],
+                                      //
+                                    ],
                                   ),
                                 ),
                                 // Tab 2 content goes here

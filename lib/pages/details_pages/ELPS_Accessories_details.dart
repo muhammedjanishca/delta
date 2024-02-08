@@ -48,7 +48,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
       product_name = setting_list[2].replaceAll('_', " ");
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
- final selectedPriceNotifieru =
+    final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
@@ -60,11 +60,11 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
           future: context.read<DataProvider>().fetchElpsAssessoriesData(),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
-        
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                                   child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child: Lottie.asset(
+                      "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -73,7 +73,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
               String? priceofproduct = "";
               List<String>? image = [];
               String? pdf = "";
-        
+
               if (selectedThumbnailProvider.selectedIndex != null) {
                 // print("kjh");
                 textpass = snapshot.data!
@@ -95,7 +95,6 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                 pdf = snapshot
                     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
               } else {
-        
                 snapshot.data!.data.firstWhere((element) {
                   if (element.productName == product_name) {
                     textpass = element.productName;
@@ -128,14 +127,12 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                     children: [
                                       Container(
                                         color: Colors.white,
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            5,
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            2,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                5,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
                                         child: Image.network(
                                             // thumbnail!,
                                             selectedThumbnailProvider
@@ -156,8 +153,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                               },
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(
-                                                        8.0),
+                                                    const EdgeInsets.all(8.0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
@@ -196,7 +192,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                         ),
                                       ),
                                       //--------Product Price-----------
-        
+
                                       SizedBox(
                                         height: 30,
                                       ),
@@ -210,22 +206,20 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                               fontSize: 22),
                                         ),
                                       ),
-        
+
                                       Divider(),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
-        
+
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
-        
+
                                       Row(
                                         children: [
                                           SizedBox(
@@ -237,35 +231,42 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                           Flexible(
                                             child: Container(
                                               // color: Colors.amber,
-        
+
                                               child: const Text(
                                                 'selected Product code&Price:  ',
-                                                overflow:
-                                                    TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 14.0,
                                                   fontFamily: 'Roboto',
                                                   color: Color.fromARGB(
                                                       255, 143, 143, 143),
-                                                  fontWeight:
-                                                      FontWeight.bold,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
                                           ),
                                           Container(
-                                          width: 130,
-                                          padding: EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(border: Border.all(
-                                            color: Colors.black,
-                                            width: 1.0),
-                                          color:  Color.fromARGB(255, 255, 255, 255),
+                                            width: 130,
+                                            padding: EdgeInsets.all(8.0),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1.0),
+                                              color: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                            ),
+                                            child:
+                                                Consumer<SelectedPriceNotifier>(
+                                                    builder: (context,
+                                                        selectedPriceNotifieru,
+                                                        _) {
+                                              return Text(
+                                                "${selectedPriceNotifieru.selectedPrice}",
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              );
+                                            }),
                                           ),
-                                          child: Consumer<SelectedPriceNotifier>(builder: (context,selectedPriceNotifieru, _){
-                                            return Text("${selectedPriceNotifieru.selectedPrice}",
-                                            style: TextStyle(color: Colors.black),);
-                                          }),
-                                        ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -276,10 +277,9 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                               onPressed: () {
                                                 showModalBottomSheet(
                                                     context: context,
-                                                    isScrollControlled:
-                                                        true,
-                                                    builder: (BuildContext
-                                                        context) {
+                                                    isScrollControlled: true,
+                                                    builder:
+                                                        (BuildContext context) {
                                                       return SingleChildScrollView(
                                                           child: Stack(
                                                         children: [
@@ -289,10 +289,8 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                                     .size
                                                                     .height /
                                                                 1,
-                                                            color: Colors
-                                                                .white,
-                                                            child: pdf !=
-                                                                    null
+                                                            color: Colors.white,
+                                                            child: pdf != null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -303,12 +301,10 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                                 16, // Adjust the top position as needed
                                                             right:
                                                                 16, // Adjust the left position as needed
-                                                            child:
-                                                                IconButton(
+                                                            child: IconButton(
                                                               icon: Icon(Icons
                                                                   .close), // You can use any icon you like
-                                                              onPressed:
-                                                                  () {
+                                                              onPressed: () {
                                                                 Navigator.pop(
                                                                     context);
                                                                 // Add your close button action here
@@ -330,10 +326,9 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            20,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                20,
                                       ),
                                       Row(
                                         crossAxisAlignment:
@@ -353,8 +348,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                               width: 140,
                                               // height: 43,
                                               child: TextFormField(
-                                                controller:
-                                                    quantityController,
+                                                controller: quantityController,
                                                 keyboardType:
                                                     TextInputType.number,
                                                 decoration: InputDecoration(
@@ -379,7 +373,6 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                         
                                         ],
                                       ),
                                       Column(
@@ -410,17 +403,15 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
-                                                      AutovalidateMode
-                                                          .always,
+                                                      AutovalidateMode.always,
                                                   child: Container(
                                                     width: 100,
                                                     padding: EdgeInsets.all(
                                                         8.0), // Adjust the padding as needed
-                                                    decoration:
-                                                        BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(5),
+                                                          BorderRadius.circular(
+                                                              5),
                                                       border: Border.all(
                                                         color: codeAndPrice
                                                                     .price ==
@@ -454,10 +445,9 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
@@ -507,10 +497,9 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                     ],
                                   ),
@@ -539,90 +528,57 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     child: ElevatedButton(
-                    onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    if (FirebaseAuth.instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      if (selectedPriceNotifieru
-                                                          .isProductCodeSelected) {
-                                                        final selectedPrice =
-                                                            selectedPriceNotifieru
-                                                                .selectedPrice;
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            if (selectedPriceNotifieru.isProductCodeSelected) {
+                              final selectedPrice =
+                                  selectedPriceNotifieru.selectedPrice;
 
-                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
+                              // Check if selectedPrice is empty or null, and provide a default value if needed
 
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
-                                                        final price = double.tryParse(
-                                                                selectedPrice
-                                                                        .split(
-                                                                            ': ')[
-                                                                    1]) ??
-                                                            0;
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                        cartProvider.addToCart(
-                                                            productCode:
-                                                                productCode,
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            imageUrl:
-                                                                imageUrl ?? '',
-                                                            productName:
-                                                                productName ??
-                                                                    '');
+                              final productCode = selectedPrice.split(': ')[0];
+                              final price = double.tryParse(
+                                      selectedPrice.split(': ')[1]) ??
+                                  0;
+                              final quantity =
+                                  int.tryParse(quantityController.text) ?? 0;
+                              final imageUrl = thumbnail;
+                              final productName = textpass;
+                              final cartProvider = Provider.of<CartProvider>(
+                                  context,
+                                  listen: false);
+                              cartProvider.addToCart(
+                                  productCode: productCode,
+                                  price: price,
+                                  quantity: quantity,
+                                  imageUrl: imageUrl ?? '',
+                                  productName: productName ?? '');
 
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Added to cart')));
-                                                        selectedPriceNotifieru
-                                                            .setProductCodeSelected(
-                                                                false);
-                                                      } else {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                          content: Text(
-                                                              'Select the product code'),
-                                                        ));
-                                                      }
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content: Text(
-                                                            'Select the product code'),
-                                                      ));
-                                                      // Handle the case where the user is not signed in
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  }
-                                                },
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Added to cart')));
+                              selectedPriceNotifieru
+                                  .setProductCodeSelected(false);
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Select the product code'),
+                              ));
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Select the product code'),
+                            ));
+                            // Handle the case where the user is not signed in
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LoginPage(); // Your custom dialog widget
+                              },
+                            );
+                          }
+                        }
+                      },
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
@@ -639,18 +595,16 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: TextButton(
-                       onPressed: () {
-                                            user != null
-                                                ? Navigator.pushNamed(
-                                                    context, '/cart')
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
-                                          },
+                      onPressed: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
@@ -673,8 +627,8 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child: Lottie.asset(
+                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -830,7 +784,8 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                   selectedThumbnailProvider
                                                           .selectedThumbnail ??
                                                       ''),
-                                            ), ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -841,11 +796,12 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                     // color: Colors.amber,
                                     height:
                                         MediaQuery.of(context).size.height / 4,
-                                
+
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         ElevatedButton(
                                           onPressed: () {
@@ -863,8 +819,8 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                       selectedPrice
                                                           .split(': ')[0];
                                                   final price = double.tryParse(
-                                                          selectedPrice
-                                                              .split(': ')[1]) ??
+                                                          selectedPrice.split(
+                                                              ': ')[1]) ??
                                                       0;
                                                   final quantity = int.tryParse(
                                                           quantityController
@@ -883,7 +839,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                       imageUrl: imageUrl ?? '',
                                                       productName:
                                                           productName ?? '');
-                                
+
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(
                                                           content: Text(
@@ -944,7 +900,8 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                           },
                                           child: const Text(
                                             'GO TO CART',
-                                            style: TextStyle(color: Colors.white),
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -964,7 +921,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                               ],
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
@@ -1049,7 +1006,6 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-
                                             ],
                                           ),
                                           FittedBox(
@@ -1111,7 +1067,8 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                           ),
                                           Gap(25),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 'Product codes'.toUpperCase(),
@@ -1122,37 +1079,39 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              
                                               Padding(
-                                                padding: const EdgeInsets.only(right:50.0),
-                                                child:TextButton(
-                                                  onPressed: () => SideSheet.right(
-                                                      body: Container(
-                                                          height: 1500,
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              230, 233, 235),
-                                                          child: pdf != null
-                                                              ? SfPdfViewer
-                                                                  .network(pdf!)
-                                                              : Nopdf()),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
-                                                      context: context),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.edit_document),
-                                                      Text(
-                                                        "Size Chart",
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                  )),
+                                                padding: const EdgeInsets.only(
+                                                    right: 50.0),
+                                                child: TextButton(
+                                                    onPressed: () => SideSheet.right(
+                                                        body: Container(
+                                                            height: 1500,
+                                                            color: const Color
+                                                                .fromARGB(255,
+                                                                230, 233, 235),
+                                                            child: pdf !=
+                                                                    null
+                                                                ? SfPdfViewer
+                                                                    .network(
+                                                                        pdf!)
+                                                                : Nopdf()),
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                        context: context),
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(Icons
+                                                            .edit_document),
+                                                        Text(
+                                                          "Size Chart",
+                                                          style: TextStyle(),
+                                                        )
+                                                      ],
+                                                    )),
                                               ),
-                                            
                                             ],
                                           ),
                                           Column(
@@ -1242,26 +1201,41 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: description!
-                                                .toUpperCase()
                                                 .split('\n')
                                                 .map((line) {
+                                              // Capitalize only the first letter of each word
+                                              String capitalizedLine =
+                                                  line.split(' ').map((word) {
+                                                if (word.isNotEmpty) {
+                                                  return word[0].toUpperCase() +
+                                                      word
+                                                          .substring(1)
+                                                          .toLowerCase();
+                                                } else {
+                                                  return '';
+                                                }
+                                              }).join(' ');
+
                                               return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start, // Align items at the start of each row
                                                 children: [
                                                   Icon(Icons.star,
-                                                      size:
-                                                          10, // Adjust the size as needed
-                                                      color: Colors
-                                                          .black // Adjust the color as needed
-                                                      ),
-                                                  Gap(10),
+                                                      size: 25,
+                                                      color: Colors.black),
+                                                  SizedBox(
+                                                      width:
+                                                          10), // Add space between icon and text
                                                   Flexible(
                                                     child: Text(
-                                                      line,
+                                                      capitalizedLine
+                                                          .trim(), // Trim any leading/trailing whitespace
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
-                                                      overflow: TextOverflow
-                                                          .visible, // Handle text overflow
+                                                      overflow:
+                                                          TextOverflow.visible,
                                                     ),
                                                   ),
                                                 ],

@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
@@ -46,7 +45,6 @@ class ProductDetailsOfTools extends StatelessWidget {
       }
     } else
       product_name = setting_list[2].replaceAll('_', " ");
-   
 
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
@@ -63,11 +61,11 @@ class ProductDetailsOfTools extends StatelessWidget {
           future: context.read<DataProvider>().fetchcrimpingtoolApiUrl(),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
-        
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                                   child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child: Lottie.asset(
+                      "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -75,7 +73,7 @@ class ProductDetailsOfTools extends StatelessWidget {
               List<CodesAndPrice>? price = [];
               List<String>? image = [];
               String? pdf;
-        
+
               if (selectedThumbnailProvider.selectedIndex != null) {
                 textpass = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].productName;
@@ -107,7 +105,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                   }
                 });
               }
-        
+
               return pdf != null
                   ? DefaultTabController(
                       length: 2,
@@ -130,7 +128,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 5,
-                                                width: double.infinity,
+                                        width: double.infinity,
                                         // width:
                                         //     MediaQuery.of(context).size.width /
                                         //         2,
@@ -193,7 +191,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                         ),
                                       ),
                                       //--------Product Price-----------
-        
+
                                       SizedBox(
                                         height: 30,
                                       ),
@@ -207,20 +205,20 @@ class ProductDetailsOfTools extends StatelessWidget {
                                               fontSize: 22),
                                         ),
                                       ),
-        
+
                                       Divider(),
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 30,
                                       ),
-        
+
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 30,
                                       ),
-        
+
                                       Row(
                                         children: [
                                           SizedBox(
@@ -232,7 +230,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                           Flexible(
                                             child: Container(
                                               // color: Colors.amber,
-        
+
                                               child: const Text(
                                                 'selected Product code&Price:  ',
                                                 overflow: TextOverflow.ellipsis,
@@ -246,20 +244,28 @@ class ProductDetailsOfTools extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                         
                                           Container(
-                                          width: 130,
-                                          padding: EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(border: Border.all(
-                                            color: Colors.black,
-                                            width: 1.0),
-                                          color:  Color.fromARGB(255, 255, 255, 255),
+                                            width: 130,
+                                            padding: EdgeInsets.all(8.0),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1.0),
+                                              color: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                            ),
+                                            child:
+                                                Consumer<SelectedPriceNotifier>(
+                                                    builder: (context,
+                                                        selectedPriceNotifieru,
+                                                        _) {
+                                              return Text(
+                                                "${selectedPriceNotifieru.selectedPrice}",
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              );
+                                            }),
                                           ),
-                                          child: Consumer<SelectedPriceNotifier>(builder: (context,selectedPriceNotifieru, _){
-                                            return Text("${selectedPriceNotifieru.selectedPrice}",
-                                            style: TextStyle(color: Colors.black),);
-                                          }),
-                                        ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -521,94 +527,65 @@ class ProductDetailsOfTools extends StatelessWidget {
                         color: Colors.amber,
                       ),
                       child: ElevatedButton(
-                         onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    if (FirebaseAuth.instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      if (selectedPriceNotifieru
-                                                          .isProductCodeSelected) {
-                                                        final selectedPrice =
-                                                            selectedPriceNotifieru
-                                                                .selectedPrice;
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (FirebaseAuth.instance.currentUser != null) {
+                              if (selectedPriceNotifieru
+                                  .isProductCodeSelected) {
+                                final selectedPrice =
+                                    selectedPriceNotifieru.selectedPrice;
 
-                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
+                                // Check if selectedPrice is empty or null, and provide a default value if needed
 
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
-                                                        final price = double.tryParse(
-                                                                selectedPrice
-                                                                        .split(
-                                                                            ': ')[
-                                                                    1]) ??
-                                                            0;
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                        cartProvider.addToCart( 
-                                                            productCode:
-                                                                productCode,
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            imageUrl:
-                                                                imageUrl ?? '',
-                                                            productName:
-                                                                productName ??
-                                                                    '');
+                                final productCode =
+                                    selectedPrice.split(': ')[0];
+                                final price = double.tryParse(
+                                        selectedPrice.split(': ')[1]) ??
+                                    0;
+                                final quantity =
+                                    int.tryParse(quantityController.text) ?? 0;
+                                final imageUrl = thumbnail;
+                                final productName = textpass;
+                                final cartProvider = Provider.of<CartProvider>(
+                                    context,
+                                    listen: false);
+                                cartProvider.addToCart(
+                                    productCode: productCode,
+                                    price: price,
+                                    quantity: quantity,
+                                    imageUrl: imageUrl ?? '',
+                                    productName: productName ?? '');
 
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Added to cart')));
-                                                        selectedPriceNotifieru
-                                                            .setProductCodeSelected(
-                                                                false);
-                                                      } else {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                          content: Text(
-                                                              'Select the product code'),
-                                                        ));
-                                                      }
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content: Text(
-                                                            'Select the product code'),
-                                                      ));
-                                                      // Handle the case where the user is not signed in
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  }
-                                                },
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Added to cart')));
+                                selectedPriceNotifieru
+                                    .setProductCodeSelected(false);
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text('Select the product code'),
+                                ));
+                              }
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Select the product code'),
+                              ));
+                              // Handle the case where the user is not signed in
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                            }
+                          }
+                        },
                         child: const Text('ADD TO CART'),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                            Color.fromRGBO(249, 156, 6, 1.0),),
+                            Color.fromRGBO(249, 156, 6, 1.0),
+                          ),
                           minimumSize: MaterialStateProperty.all(Size(150, 50)),
                         ),
                       )),
@@ -638,16 +615,16 @@ class ProductDetailsOfTools extends StatelessWidget {
 
 //-----------desktop--------------------------------------------------------
 
-      desktopProductPage:
-       FutureBuilder(
+      desktopProductPage: FutureBuilder(
         future: context.read<DataProvider>().fetchcrimpingtoolApiUrl(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             print("hgfghfhfgu");
-            return Center(                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+            return Center(
+                child: Lottie.asset(
+                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -786,7 +763,8 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                   selectedThumbnailProvider
                                                           .selectedThumbnail ??
                                                       ''),
-                                            ), ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -922,7 +900,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding:  EdgeInsets.only(right: 35),
+                                padding: EdgeInsets.only(right: 35),
                                 child: Column(
                                   children: [
                                     Container(
@@ -931,7 +909,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                         Gap(30),
+                                          Gap(30),
                                           Text(
                                             textpass ?? "",
                                             style: TextStyle(
@@ -948,50 +926,54 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                       // color: Colors.amber,
                                                       child: Text(
                                                         'Selected Product Code & Price:  ',
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           fontFamily: 'Roboto',
-                                                          color: Color(0xFF212121),
-                                                          fontWeight: FontWeight.bold,
+                                                          color:
+                                                              Color(0xFF212121),
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
                                                     ),
-                                                     Container(
-                                                width: 130,
-                                                padding: EdgeInsets.all(8.0),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black,
-                                                      width: 1.0),
-                                                  color: Color.fromARGB(
-                                                      255, 255, 255, 255),
-                                                ),
-                                                child: Consumer<
-                                                        SelectedPriceNotifier>(
-                                                    builder: (context,
-                                                        selectedPriceNotifieru,
-                                                        _) {
-                                                  return Text(
-                                                    "${selectedPriceNotifieru.selectedPrice}",
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                  );
-                                                }),
-                                                                                          ),
+                                                    Container(
+                                                      width: 130,
+                                                      padding:
+                                                          EdgeInsets.all(8.0),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.black,
+                                                            width: 1.0),
+                                                        color: Color.fromARGB(
+                                                            255, 255, 255, 255),
+                                                      ),
+                                                      child: Consumer<
+                                                              SelectedPriceNotifier>(
+                                                          builder: (context,
+                                                              selectedPriceNotifieru,
+                                                              _) {
+                                                        return Text(
+                                                          "${selectedPriceNotifieru.selectedPrice}",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black),
+                                                        );
+                                                      }),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
-                                             
+
                                               // Gap(95),
                                               TextButton(
                                                   onPressed: () => SideSheet.right(
                                                       body: Container(
                                                           height: 1500,
                                                           color: const Color
-                                                                  .fromARGB(
-                                                              255, 230, 233, 235),
+                                                              .fromARGB(255,
+                                                              230, 233, 235),
                                                           child: pdf != null
                                                               ? SfPdfViewer
                                                                   .network(pdf!)
@@ -1011,57 +993,56 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                       )
                                                     ],
                                                   )),
-                                                  Gap(20)
+                                              Gap(20)
                                             ],
                                           ),
-                                         Row(
-                                           children: [
-                                           Text(
-                                                        'Enter The Quantity',
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
-                                                        style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Roboto',
-                                                          color: Color(0xFF212121),
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                      Gap(30),
-                                                       Form(
-                                                         key: _formKey,
-                                                         child: Container(
-                                                           // height:
-                                                           // MediaQuery.of(context).size.height/18,
-                                                           width: 150,
-                                                           //  MediaQuery.of(context).size.width/10,
-                                                           child: TextFormField(
-                                                             controller:
-                                                                 quantityController,
-                                                             keyboardType:
-                                                                 TextInputType.number,
-                                                             decoration: InputDecoration(
-                                                              //  border:
-                                                              //      OutlineInputBorder(),
-                                                               hintText:
-                                                                   '000',
-                                                             ),
-                                                             validator: (value) {
-                                                               if (value!.isEmpty) {
-                                                                 return 'Enter the quantity';
-                                                               }
-                                                               int? quantity =
-                                                                   int.tryParse(value);
-                                                               if (quantity == null ||
-                                                                   quantity <= 0) {
-                                                                 return 'Quantity must be a positive number';
-                                                               }
-                                                               return null; // Return null if the input is valid
-                                                             },
-                                                           ),
-                                                         ),
-                                                       ),
-                                         ],),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Enter The Quantity',
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontFamily: 'Roboto',
+                                                  color: Color(0xFF212121),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Gap(30),
+                                              Form(
+                                                key: _formKey,
+                                                child: Container(
+                                                  // height:
+                                                  // MediaQuery.of(context).size.height/18,
+                                                  width: 150,
+                                                  //  MediaQuery.of(context).size.width/10,
+                                                  child: TextFormField(
+                                                    controller:
+                                                        quantityController,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                      //  border:
+                                                      //      OutlineInputBorder(),
+                                                      hintText: '000',
+                                                    ),
+                                                    validator: (value) {
+                                                      if (value!.isEmpty) {
+                                                        return 'Enter the quantity';
+                                                      }
+                                                      int? quantity =
+                                                          int.tryParse(value);
+                                                      if (quantity == null ||
+                                                          quantity <= 0) {
+                                                        return 'Quantity must be a positive number';
+                                                      }
+                                                      return null; // Return null if the input is valid
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -1090,15 +1071,17 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                     },
                                                     child: Form(
                                                       autovalidateMode:
-                                                          AutovalidateMode.always,
+                                                          AutovalidateMode
+                                                              .always,
                                                       child: Container(
                                                         width: 100,
                                                         padding: EdgeInsets.all(
                                                             8.0), // Adjust the padding as needed
-                                                        decoration: BoxDecoration(
-                                                           borderRadius:
-                                                            BorderRadius
-                                                                .circular(4),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
                                                           border: Border.all(
                                                             color: codeAndPrice
                                                                         .price ==
@@ -1136,26 +1119,41 @@ class ProductDetailsOfTools extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: description!
-                                                .toUpperCase()
                                                 .split('\n')
                                                 .map((line) {
+                                              // Capitalize only the first letter of each word
+                                              String capitalizedLine =
+                                                  line.split(' ').map((word) {
+                                                if (word.isNotEmpty) {
+                                                  return word[0].toUpperCase() +
+                                                      word
+                                                          .substring(1)
+                                                          .toLowerCase();
+                                                } else {
+                                                  return '';
+                                                }
+                                              }).join(' ');
+
                                               return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start, // Align items at the start of each row
                                                 children: [
                                                   Icon(Icons.star,
-                                                      size:
-                                                          10, // Adjust the size as needed
-                                                      color: Colors
-                                                          .black // Adjust the color as needed
-                                                      ),
-                                                 Gap(10),
+                                                      size: 25,
+                                                      color: Colors.black),
+                                                  SizedBox(
+                                                      width:
+                                                          10), // Add space between icon and text
                                                   Flexible(
                                                     child: Text(
-                                                      line,
+                                                      capitalizedLine
+                                                          .trim(), // Trim any leading/trailing whitespace
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
-                                                      overflow: TextOverflow
-                                                          .visible, // Handle text overflow
+                                                      overflow:
+                                                          TextOverflow.visible,
                                                     ),
                                                   ),
                                                 ],
@@ -1163,7 +1161,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                             }).toList(),
                                           ),
                                           Gap(30)
-                                            ],
+                                        ],
                                       ),
                                     ),
                                   ],

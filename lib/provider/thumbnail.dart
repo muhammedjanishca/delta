@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 class SelectedThumbnailProvider extends ChangeNotifier {
   String? _selectedThumbnail;
   int? selectedIndex;
-
+ String _selectedThumbnails = "";
   String? get selectedThumbnail => _selectedThumbnail;
 
   void setSelectedThumbnail(
@@ -13,6 +13,11 @@ class SelectedThumbnailProvider extends ChangeNotifier {
     selectedIndex = index;
     notifyListeners();
   }
+ void setSelectedThumbnails(String imageUrl) {
+    _selectedThumbnails = imageUrl;
+    notifyListeners();
+  }
+
 }
 class SelectedKiduProvider extends ChangeNotifier {
   String? _selectedKidu;

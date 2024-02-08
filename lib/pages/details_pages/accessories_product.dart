@@ -48,7 +48,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
       product_name = setting_list[2].replaceAll('_', " ");
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
- final selectedPriceNotifieru =
+    final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
@@ -60,11 +60,11 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           future: context.read<DataProvider>().fetchaccessoriesApiUrl(),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
-        
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                                   child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child: Lottie.asset(
+                      "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -73,7 +73,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
               String? priceofproduct = "";
               List<String>? image = [];
               String? pdf = "";
-        
+
               if (selectedThumbnailProvider.selectedIndex != null) {
                 // print("kjh");
                 textpass = snapshot.data!
@@ -95,7 +95,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                 pdf = snapshot
                     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
               } else {
-        
                 snapshot.data!.data.firstWhere((element) {
                   if (element.productName == product_name) {
                     textpass = element.productName;
@@ -128,14 +127,12 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                     children: [
                                       Container(
                                         color: Colors.white,
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            5,
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            2,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                5,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
                                         child: Image.network(
                                             // thumbnail!,
                                             selectedThumbnailProvider
@@ -156,8 +153,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               },
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(
-                                                        8.0),
+                                                    const EdgeInsets.all(8.0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
@@ -196,7 +192,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                         ),
                                       ),
                                       //--------Product Price-----------
-        
+
                                       SizedBox(
                                         height: 30,
                                       ),
@@ -210,22 +206,20 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               fontSize: 22),
                                         ),
                                       ),
-        
+
                                       Divider(),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
-        
+
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
-        
+
                                       Row(
                                         children: [
                                           SizedBox(
@@ -237,35 +231,42 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           Flexible(
                                             child: Container(
                                               // color: Colors.amber,
-        
+
                                               child: const Text(
                                                 'selected Product code&Price:  ',
-                                                overflow:
-                                                    TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 14.0,
                                                   fontFamily: 'Roboto',
                                                   color: Color.fromARGB(
                                                       255, 143, 143, 143),
-                                                  fontWeight:
-                                                      FontWeight.bold,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
                                           ),
                                           Container(
-                                          width: 130,
-                                          padding: EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(border: Border.all(
-                                            color: Colors.black,
-                                            width: 1.0),
-                                          color:  Color.fromARGB(255, 255, 255, 255),
+                                            width: 130,
+                                            padding: EdgeInsets.all(8.0),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1.0),
+                                              color: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                            ),
+                                            child:
+                                                Consumer<SelectedPriceNotifier>(
+                                                    builder: (context,
+                                                        selectedPriceNotifieru,
+                                                        _) {
+                                              return Text(
+                                                "${selectedPriceNotifieru.selectedPrice}",
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              );
+                                            }),
                                           ),
-                                          child: Consumer<SelectedPriceNotifier>(builder: (context,selectedPriceNotifieru, _){
-                                            return Text("${selectedPriceNotifieru.selectedPrice}",
-                                            style: TextStyle(color: Colors.black),);
-                                          }),
-                                        ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -276,10 +277,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               onPressed: () {
                                                 showModalBottomSheet(
                                                     context: context,
-                                                    isScrollControlled:
-                                                        true,
-                                                    builder: (BuildContext
-                                                        context) {
+                                                    isScrollControlled: true,
+                                                    builder:
+                                                        (BuildContext context) {
                                                       return SingleChildScrollView(
                                                           child: Stack(
                                                         children: [
@@ -289,10 +289,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                     .size
                                                                     .height /
                                                                 1,
-                                                            color: Colors
-                                                                .white,
-                                                            child: pdf !=
-                                                                    null
+                                                            color: Colors.white,
+                                                            child: pdf != null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -303,12 +301,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                 16, // Adjust the top position as needed
                                                             right:
                                                                 16, // Adjust the left position as needed
-                                                            child:
-                                                                IconButton(
+                                                            child: IconButton(
                                                               icon: Icon(Icons
                                                                   .close), // You can use any icon you like
-                                                              onPressed:
-                                                                  () {
+                                                              onPressed: () {
                                                                 Navigator.pop(
                                                                     context);
                                                                 // Add your close button action here
@@ -330,10 +326,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            20,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                20,
                                       ),
                                       Row(
                                         crossAxisAlignment:
@@ -353,8 +348,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               width: 140,
                                               // height: 43,
                                               child: TextFormField(
-                                                controller:
-                                                    quantityController,
+                                                controller: quantityController,
                                                 keyboardType:
                                                     TextInputType.number,
                                                 decoration: InputDecoration(
@@ -379,7 +373,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                         
                                         ],
                                       ),
                                       Column(
@@ -410,17 +403,15 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
-                                                      AutovalidateMode
-                                                          .always,
+                                                      AutovalidateMode.always,
                                                   child: Container(
                                                     width: 100,
                                                     padding: EdgeInsets.all(
                                                         8.0), // Adjust the padding as needed
-                                                    decoration:
-                                                        BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(5),
+                                                          BorderRadius.circular(
+                                                              5),
                                                       border: Border.all(
                                                         color: codeAndPrice
                                                                     .price ==
@@ -454,10 +445,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
@@ -507,10 +497,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                     ],
                                   ),
@@ -539,90 +528,57 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     child: ElevatedButton(
-                    onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    if (FirebaseAuth.instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      if (selectedPriceNotifieru
-                                                          .isProductCodeSelected) {
-                                                        final selectedPrice =
-                                                            selectedPriceNotifieru
-                                                                .selectedPrice;
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            if (selectedPriceNotifieru.isProductCodeSelected) {
+                              final selectedPrice =
+                                  selectedPriceNotifieru.selectedPrice;
 
-                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
+                              // Check if selectedPrice is empty or null, and provide a default value if needed
 
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
-                                                        final price = double.tryParse(
-                                                                selectedPrice
-                                                                        .split(
-                                                                            ': ')[
-                                                                    1]) ??
-                                                            0;
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                        cartProvider.addToCart(
-                                                            productCode:
-                                                                productCode,
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            imageUrl:
-                                                                imageUrl ?? '',
-                                                            productName:
-                                                                productName ??
-                                                                    '');
+                              final productCode = selectedPrice.split(': ')[0];
+                              final price = double.tryParse(
+                                      selectedPrice.split(': ')[1]) ??
+                                  0;
+                              final quantity =
+                                  int.tryParse(quantityController.text) ?? 0;
+                              final imageUrl = thumbnail;
+                              final productName = textpass;
+                              final cartProvider = Provider.of<CartProvider>(
+                                  context,
+                                  listen: false);
+                              cartProvider.addToCart(
+                                  productCode: productCode,
+                                  price: price,
+                                  quantity: quantity,
+                                  imageUrl: imageUrl ?? '',
+                                  productName: productName ?? '');
 
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Added to cart')));
-                                                        selectedPriceNotifieru
-                                                            .setProductCodeSelected(
-                                                                false);
-                                                      } else {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                          content: Text(
-                                                              'Select the product code'),
-                                                        ));
-                                                      }
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content: Text(
-                                                            'Select the product code'),
-                                                      ));
-                                                      // Handle the case where the user is not signed in
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  }
-                                                },
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Added to cart')));
+                              selectedPriceNotifieru
+                                  .setProductCodeSelected(false);
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Select the product code'),
+                              ));
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Select the product code'),
+                            ));
+                            // Handle the case where the user is not signed in
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LoginPage(); // Your custom dialog widget
+                              },
+                            );
+                          }
+                        }
+                      },
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
@@ -639,18 +595,16 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: TextButton(
-                       onPressed: () {
-                                            user != null
-                                                ? Navigator.pushNamed(
-                                                    context, '/cart')
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
-                                          },
+                      onPressed: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
@@ -673,8 +627,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child: Lottie.asset(
+                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -770,11 +724,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       // When an image is clicked, set it as the selected thumbnail.
                                                       // selectedKiduProvider
                                                       //     .setSelectedKidu(imageUrl ??
-                                                      //         "data:image/jpeg;base64,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");
+                                                      //         "");
                                                       selectedThumbnailProvider
                                                           .setSelectedThumbnail(
-                                                              imageUrl ??
-                                                                  "data:image/jpeg;base64,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");
+                                                              imageUrl ?? "");
                                                     },
                                                     child: Padding(
                                                       padding:
@@ -798,8 +751,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                           ),
                                                         ),
                                                         child: Image.network(
-                                                          imageUrl ??
-                                                              "data:image/jpeg;base64,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",
+                                                          imageUrl ?? "",
                                                           width:
                                                               70, // Set the desired width for each image
                                                           height:
@@ -830,7 +782,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   selectedThumbnailProvider
                                                           .selectedThumbnail ??
                                                       ''),
-                                            ), ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -841,11 +794,12 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                     // color: Colors.amber,
                                     height:
                                         MediaQuery.of(context).size.height / 4,
-                                
+
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         ElevatedButton(
                                           onPressed: () {
@@ -863,8 +817,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       selectedPrice
                                                           .split(': ')[0];
                                                   final price = double.tryParse(
-                                                          selectedPrice
-                                                              .split(': ')[1]) ??
+                                                          selectedPrice.split(
+                                                              ': ')[1]) ??
                                                       0;
                                                   final quantity = int.tryParse(
                                                           quantityController
@@ -883,7 +837,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       imageUrl: imageUrl ?? '',
                                                       productName:
                                                           productName ?? '');
-                                
+
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(
                                                           content: Text(
@@ -944,7 +898,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           },
                                           child: const Text(
                                             'GO TO CART',
-                                            style: TextStyle(color: Colors.white),
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -964,7 +919,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                               ],
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
@@ -1049,7 +1004,6 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-
                                             ],
                                           ),
                                           FittedBox(
@@ -1111,7 +1065,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           ),
                                           Gap(25),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 'Product codes'.toUpperCase(),
@@ -1122,37 +1077,39 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              
                                               Padding(
-                                                padding: const EdgeInsets.only(right:50.0),
-                                                child:TextButton(
-                                                  onPressed: () => SideSheet.right(
-                                                      body: Container(
-                                                          height: 1500,
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              230, 233, 235),
-                                                          child: pdf != null
-                                                              ? SfPdfViewer
-                                                                  .network(pdf!)
-                                                              : Nopdf()),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
-                                                      context: context),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.edit_document),
-                                                      Text(
-                                                        "Size Chart",
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                  )),
+                                                padding: const EdgeInsets.only(
+                                                    right: 50.0),
+                                                child: TextButton(
+                                                    onPressed: () => SideSheet.right(
+                                                        body: Container(
+                                                            height: 1500,
+                                                            color: const Color
+                                                                .fromARGB(255,
+                                                                230, 233, 235),
+                                                            child: pdf !=
+                                                                    null
+                                                                ? SfPdfViewer
+                                                                    .network(
+                                                                        pdf!)
+                                                                : Nopdf()),
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                        context: context),
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(Icons
+                                                            .edit_document),
+                                                        Text(
+                                                          "Size Chart",
+                                                          style: TextStyle(),
+                                                        )
+                                                      ],
+                                                    )),
                                               ),
-                                            
                                             ],
                                           ),
                                           Column(
@@ -1242,26 +1199,41 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: description!
-                                                .toUpperCase()
                                                 .split('\n')
                                                 .map((line) {
+                                              // Capitalize only the first letter of each word
+                                              String capitalizedLine =
+                                                  line.split(' ').map((word) {
+                                                if (word.isNotEmpty) {
+                                                  return word[0].toUpperCase() +
+                                                      word
+                                                          .substring(1)
+                                                          .toLowerCase();
+                                                } else {
+                                                  return '';
+                                                }
+                                              }).join(' ');
+
                                               return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start, // Align items at the start of each row
                                                 children: [
                                                   Icon(Icons.star,
-                                                      size:
-                                                          10, // Adjust the size as needed
-                                                      color: Colors
-                                                          .black // Adjust the color as needed
-                                                      ),
-                                                  Gap(10),
+                                                      size: 25,
+                                                      color: Colors.black),
+                                                  SizedBox(
+                                                      width:
+                                                          10), // Add space between icon and text
                                                   Flexible(
                                                     child: Text(
-                                                      line,
+                                                      capitalizedLine
+                                                          .trim(), // Trim any leading/trailing whitespace
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
-                                                      overflow: TextOverflow
-                                                          .visible, // Handle text overflow
+                                                      overflow:
+                                                          TextOverflow.visible,
                                                     ),
                                                   ),
                                                 ],

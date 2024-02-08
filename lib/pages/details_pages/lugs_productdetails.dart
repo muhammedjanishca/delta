@@ -613,18 +613,16 @@ class ProductDetailsoflugs extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: TextButton(
-                       onPressed: () {
-                                            user != null
-                                                ? Navigator.pushNamed(
-                                                    context, '/cart')
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
-                                          },
+                      onPressed: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
@@ -1065,7 +1063,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ),
                                           Gap(25),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 'Product codes'.toUpperCase(),
@@ -1076,80 +1075,98 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              
                                               Padding(
-                                                padding: const EdgeInsets.only(right:50.0),
-                                                child:TextButton(
-                                                  onPressed: () => SideSheet.right(
-                                                      body: Container(
-                                                          height: 1500,
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              230, 233, 235),
-                                                          child: pdf != null
-                                                              ? SfPdfViewer
-                                                                  .network(pdf!)
-                                                              : Nopdf()),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
-                                                      context: context),
-                                                  child: const Row(
-                                                    children: [
-                                                      Icon(Icons.edit_document),
-                                                      Text(
-                                                        "Size Chart",
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                  )),
+                                                padding: const EdgeInsets.only(
+                                                    right: 50.0),
+                                                child: TextButton(
+                                                    onPressed: () => SideSheet.right(
+                                                        body: Container(
+                                                            height: 1500,
+                                                            color: const Color
+                                                                .fromARGB(255,
+                                                                230, 233, 235),
+                                                            child: pdf !=
+                                                                    null
+                                                                ? SfPdfViewer
+                                                                    .network(
+                                                                        pdf!)
+                                                                : Nopdf()),
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                        context: context),
+                                                    child: const Row(
+                                                      children: [
+                                                        Icon(Icons
+                                                            .edit_document),
+                                                        Text(
+                                                          "Size Chart",
+                                                          style: TextStyle(),
+                                                        )
+                                                      ],
+                                                    )),
                                               ),
-                                            
                                             ],
                                           ),
                                           Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-    const Gap(15),
-    Wrap(
-      spacing: 8.0,
-      runSpacing: 8.0,
-      children: List<Widget>.generate(price!.length, (index) {
-        final codeAndPrice = price![index];
-        return InkWell(
-          onTap: () {
-            selectedPriceNotifieru.setSelectedPrice(
-              '${codeAndPrice.productCode}: SAR ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
-            );
-            selectedPriceNotifieru.setProductCodeSelected(true);
-          },
-          child: Material(
-            borderRadius: BorderRadius.circular(4),
-            color: codeAndPrice.price == null
-                ? Colors.red // Set background color to red when selectedPrice is null
-                : codeAndPrice.productCode ==
-                        selectedCodeProvider.selectedProductCode
-                    ? Colors.blue // Set background color to blue for selected container
-                    : Colors.black, // Set background color to black for non-selected containers
-            child: Container(
-              width: 100,
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                '${codeAndPrice.productCode}',
-                style: TextStyle(
-                  color: Colors.white, // Set your desired text color
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    ),
-  ],
-),
-
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Gap(15),
+                                              Wrap(
+                                                spacing: 8.0,
+                                                runSpacing: 8.0,
+                                                children: List<Widget>.generate(
+                                                    price!.length, (index) {
+                                                  final codeAndPrice =
+                                                      price![index];
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      selectedPriceNotifieru
+                                                          .setSelectedPrice(
+                                                        '${codeAndPrice.productCode}: SAR ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                      );
+                                                      selectedPriceNotifieru
+                                                          .setProductCodeSelected(
+                                                              true);
+                                                    },
+                                                    child: Material(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                      color: codeAndPrice
+                                                                  .price ==
+                                                              null
+                                                          ? Colors
+                                                              .red // Set background color to red when selectedPrice is null
+                                                          : codeAndPrice
+                                                                      .productCode ==
+                                                                  selectedCodeProvider
+                                                                      .selectedProductCode
+                                                              ? Colors
+                                                                  .blue // Set background color to blue for selected container
+                                                              : Colors
+                                                                  .black, // Set background color to black for non-selected containers
+                                                      child: Container(
+                                                        width: 100,
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: Text(
+                                                          '${codeAndPrice.productCode}',
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .white, // Set your desired text color
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ],
+                                          ),
                                           Gap(25),
                                           Text(
                                             'description'.toUpperCase(),
@@ -1165,26 +1182,41 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: description!
-                                                .toUpperCase()
                                                 .split('\n')
                                                 .map((line) {
+                                              // Capitalize only the first letter of each word
+                                              String capitalizedLine =
+                                                  line.split(' ').map((word) {
+                                                if (word.isNotEmpty) {
+                                                  return word[0].toUpperCase() +
+                                                      word
+                                                          .substring(1)
+                                                          .toLowerCase();
+                                                } else {
+                                                  return '';
+                                                }
+                                              }).join(' ');
+
                                               return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start, // Align items at the start of each row
                                                 children: [
                                                   Icon(Icons.star,
-                                                      size:
-                                                          10, // Adjust the size as needed
-                                                      color: Colors
-                                                          .black // Adjust the color as needed
-                                                      ),
-                                                  Gap(10),
+                                                      size: 25,
+                                                      color: Colors.black),
+                                                  SizedBox(
+                                                      width:
+                                                          10), // Add space between icon and text
                                                   Flexible(
                                                     child: Text(
-                                                      line,
+                                                      capitalizedLine
+                                                          .trim(), // Trim any leading/trailing whitespace
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
-                                                      overflow: TextOverflow
-                                                          .visible, // Handle text overflow
+                                                      overflow:
+                                                          TextOverflow.visible,
                                                     ),
                                                   ),
                                                 ],
