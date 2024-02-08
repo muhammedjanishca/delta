@@ -14,7 +14,23 @@ class DataProvider extends ChangeNotifier {
   late var newelpsAccessories = fetchElpsAssessoriesData();
   late var newElps = fetchElpsData();
   late var newSsctm = fetchSsctmData();
+  late var newCjtkc = fetchCjtkcData();
+  late var newSbcpa = fetchsbcpaData();
+  late var news = fetchCjtkcData();
 
+
+Future<ProduceNewModal> fetchsbcpaData() async {
+    final response = await http
+        .get(Uri.parse('https://deltabackend.com/sb_cpa'));
+
+    if (response.statusCode == 200) {
+      ProduceNewModal pro =
+          ProduceNewModal.fromJson(json.decode(response.body));
+      return pro;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 Future<ProduceNewModal> fetchElpsData() async {
     final response = await http
         .get(Uri.parse('https://deltabackend.com/elps'));
@@ -27,6 +43,31 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
+  Future<ProduceNewModal> fetchCjtkcData() async {
+    final response = await http
+        .get(Uri.parse('https://deltabackend.com/cj_tkc'));
+
+    if (response.statusCode == 200) {
+      ProduceNewModal pro =
+          ProduceNewModal.fromJson(json.decode(response.body));
+      return pro;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+  // Future<ProduceNewModal> fetchsbcpaData() async {
+  //   final response = await http
+  //       .get(Uri.parse('https://deltabackend.com/sb_cpa'));
+
+  //   if (response.statusCode == 200) {
+  //     ProduceNewModal pro =
+  //         ProduceNewModal.fromJson(json.decode(response.body));
+  //     return pro;
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
+
   Future<ProduceNewModal> fetchSsctmData() async {
     final response = await http
         .get(Uri.parse('https://deltabackend.com/ssctm'));

@@ -13,8 +13,8 @@ import '../../model.dart';
 import '../../provider/Text_color.dart';
 import '../../provider/thumbnail.dart';
 
-class Elps extends StatelessWidget {
-  Elps({super.key});
+class SbcpaProduct extends StatelessWidget {
+  SbcpaProduct({super.key});
 
   // int selectedImageIndex = -1;
 
@@ -31,7 +31,7 @@ class Elps extends StatelessWidget {
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
-        future: context.read<DataProvider>().newElps,
+        future: context.read<DataProvider>().newSbcpa,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -70,7 +70,7 @@ class Elps extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "ELPS",
+                          "Sbcpa",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
@@ -106,7 +106,7 @@ class Elps extends StatelessWidget {
                               productData.thumbnail ?? "",
                               index: index);
                           selectedPriceNotifieru.resetSelectedPrice();
-                          navigateToProductDetailsofELPS(context, index,
+                          navigateToProductDetailsofsbcpa(context, index,
                               productname: snapshot
                                   .data!.data[index].productName!
                                   .replaceAll(" ", "_"));

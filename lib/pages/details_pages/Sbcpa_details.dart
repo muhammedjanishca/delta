@@ -18,12 +18,12 @@ import '../../login_and_signing/authentication.dart';
 import '../../model.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsOfELPSAccessories extends StatelessWidget {
+class ProductDetailsOfSbcpa extends StatelessWidget {
   // ProductDetailsOfAccessories({selectedProductIndex)}
   //  final int selectedProductIndex ;
   final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
 
-  ProductDetailsOfELPSAccessories({super.key});
+  ProductDetailsOfSbcpa({super.key});
   String? textpass;
   String? thumbnail;
   @override
@@ -57,7 +57,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
 
       mobileProductPage: Scaffold(
         body: FutureBuilder(
-          future: context.read<DataProvider>().fetchElpsAssessoriesData(),
+          future: context.read<DataProvider>().fetchsbcpaData(),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
         
@@ -667,7 +667,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
 //-----------desktop--------------------------------------------------------
 
       desktopProductPage: FutureBuilder(
-        future: context.read<DataProvider>().fetchElpsAssessoriesData(),
+        future: context.read<DataProvider>().fetchsbcpaData(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
           // print("jhjhh");

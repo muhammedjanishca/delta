@@ -522,7 +522,7 @@ class SsctmProductDetails extends StatelessWidget {
                       ),
                     )
                   : Nopdf(
-                      typeOfProduct: 'accessories',
+                      typeOfProduct: 'ssctm',
                     );
             }
           },
@@ -1282,7 +1282,7 @@ class SsctmProductDetails extends StatelessWidget {
                     ),
                   )
                 : Nopdf(
-                    typeOfProduct: 'accessories',
+                    typeOfProduct: 'ssctm',
                   );
           }
         },
