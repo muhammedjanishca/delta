@@ -293,7 +293,11 @@ class _MyAppState extends State<MyApp> {
 void navigateToPage(BuildContext context, String route) {
   Navigator.pushNamed(context, route);
 }
-
+// void navigateToProductDetailsofSbcpa(
+//     BuildContext context, int selectedProductIndex,
+//     {String? productname}) {
+//   Navigator.pushNamed(context, '/productdetailssbcpa/$productname');
+// }
 void navigateToProductDetailsofsbcpa(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {

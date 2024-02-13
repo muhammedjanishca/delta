@@ -181,7 +181,9 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Cable Terminal Ends',
             // icon: Icons.group,
-            onTap: () {},
+            onTap: () {
+              
+            },
             children: [
               PlutoMenuItem(
                 title: 'Lugs',
@@ -308,237 +310,242 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                FittedBox(
-                  child: Container(
-                    color: Colors.white,
-                
-                    // color: const Color.fromARGB(255, 0, 0, 0),
-                    //color: Color.fromARGB(255, 206, 205, 202),janish
-                    height: 89,
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width <=
-                                  950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
-                              ? MediaQuery.of(context).size.width /
-                                  30 // If the screen width is less than 600, set width to half of the screen width
-                              : MediaQuery.of(context).size.width /
-                                  8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                Container(
+                  color: Colors.white,
+
+                  // color: const Color.fromARGB(255, 0, 0, 0),
+                  //color: Color.fromARGB(255, 206, 205, 202),janish
+                  height: 89,
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width <=
+                                950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                            ? MediaQuery.of(context).size.width /
+                                30 // If the screen width is less than 600, set width to half of the screen width
+                            : MediaQuery.of(context).size.width /
+                                8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // Navigate to the named route '/your_destination_screen'
+                          Navigator.pushNamed(context, '/');
+                        },
+                        child: Image.asset(
+                          'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                          width: 170,
+                          height: 60,
+                          fit: BoxFit.cover,
                         ),
-                        InkWell(
-                          onTap: () {
-                            // Navigate to the named route '/your_destination_screen'
-                            Navigator.pushNamed(context, '/');
-                          },
-                          child: Image.asset(
-                            'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
-                            width: 170,
-                            height: 60,
-                            fit: BoxFit.cover,
+                      ),
+
+                     SizedBox(
+                        width: MediaQuery.of(context).size.width <=
+                                950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                            ? MediaQuery.of(context).size.width /
+                                30 // If the screen width is less than 600, set width to half of the screen width
+                            : MediaQuery.of(context).size.width /
+                                8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                      ),
+                      Row(
+                        children: [
+                          MouseRegion(
+                            onEnter: incrementEnter,
+                            onHover: updateLocation,
+                            onExit: incrementExit,
+                            child: InkWell(
+                              child: Text(
+                                'Home',
+                                style: GoogleFonts.poppins(color: textColor),
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/');
+                              },
+                            ),
                           ),
-                        ),
-                
-                        SizedBox(width: MediaQuery.of(context).size.width / 5.5),
-                        // Expanded(child: searchBox(context)),
-                        Row(
-                          children: [
-                            MouseRegion(
-                              onEnter: incrementEnter,
-                              onHover: updateLocation,
-                              onExit: incrementExit,
-                              child: InkWell(
-                                child: Text(
-                                  'Home',
-                                  style: GoogleFonts.poppins(color: textColor),
-                                ),
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/');
-                                },
+                          Gap(35),
+                          MouseRegion(
+                            onEnter: incrementEnterr,
+                            onHover: updateLocationn,
+                            onExit: incrementExitt,
+                            child: InkWell(
+                              child: Text(
+                                'About Us',
+                                style: GoogleFonts.poppins(color: textColorr),
                               ),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/');
+                              },
                             ),
-                            Gap(35),
-                            MouseRegion(
-                              onEnter: incrementEnterr,
-                              onHover: updateLocationn,
-                              onExit: incrementExitt,
-                              child: InkWell(
-                                child: Text(
-                                  'About Us',
-                                  style: GoogleFonts.poppins(color: textColorr),
-                                ),
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/');
-                                },
+                          ),
+                          Gap(35),
+                          MouseRegion(
+                            onEnter: incrementEnterrr,
+                            onHover: updateLocationnn,
+                            onExit: incrementExittt,
+                            child: InkWell(
+                              child: Text(
+                                'Contact Us',
+                                style: GoogleFonts.poppins(color: textColorrr),
                               ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ContactUsPage()),
+                                );
+                              },
                             ),
-                            Gap(35),
-                            MouseRegion(
-                              onEnter: incrementEnterrr,
-                              onHover: updateLocationnn,
-                              onExit: incrementExittt,
-                              child: InkWell(
-                                child: Text(
-                                  'Contact Us',
-                                  style: GoogleFonts.poppins(color: textColorrr),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ContactUsPage()),
-                                  );
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                
-                        SizedBox(width: MediaQuery.of(context).size.width / 6.5),
-                
-                        user == null
-                            ? InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return LoginPage();
-                                      });
-                                },
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.person_outline,
-                                      color: Colors.black26,
-                                    ),
-                                    Gap(10),
-                                    Text("Login",
-                                        style: GoogleFonts.poppins(
-                                          textStyle: const TextStyle(
-                                            color: Colors.black,
-                                            // fontSize: 16,
-                                          ),
-                                        )),
-                
-                                    // TextButton(
-                                    //     onPressed: () {
-                                    // showDialog(
-                                    //   context: context,
-                                    //   builder: (BuildContext context) {
-                                    //     return LoginPage(); // Your custom dialog widget
-                                    //         },
-                                    //       );
-                                    //     },
-                                    //     style: ButtonStyle(
-                                    //       foregroundColor:
-                                    //           MaterialStateProperty.all<Color>(Colors
-                                    //               .white), // Change the color to your desired color
-                                    //     ),
-                                    //     child: Text(
-                                    //       'Login',
-                                    // style: GoogleFonts.poppins(
-                                    //   textStyle: const TextStyle(
-                                    //       color: Colors.black,
-                                    //       // fontSize: 16,
-                                    //       ),
-                                    //       ),
-                                    //     )),
-                                  ],
-                                ),
-                              )
-                            : TextButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text("Are you sure to logout?"),
-                                        // content: Text("This is my message."),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Cancel')),
-                                          TextButton(
-                                              onPressed: () {
-                                                FirebaseAuth.instance.signOut();
-                                                // Navigator.pop(context);
-                
-                                                Navigator.pushNamed(context, '/');
-                                              },
-                                              child: Text('Yes'))
-                                        ],
-                                      );
-                                    },
-                                  );
-                                  // FirebaseAuth.instance.signOut();
-                                },
-                                child: Text(
-                                  'Logout',
-                                  style: GoogleFonts.poppins(color: Colors.black),
-                                )),
-                        Gap(15),
-                
-                        Container(
-                          height: 13,
-                          width: .5,
-                          color: Colors.black,
-                        ),
-                
-                        // user != null
-                        //     ? TextButton(
-                        //         onPressed: () {
-                        //           FirebaseAuth.instance.signOut();
-                        //         },
-                        //         child: Text('logout'))
-                        //     : SizedBox(),
-                        Gap(15),
-                        InkWell(
-                          onTap: () {
-                            user != null
-                                ? Navigator.pushNamed(context, '/cart')
-                                : showDialog(
+                          )
+                        ],
+                      ),
+
+                      SizedBox(width: MediaQuery.of(context).size.width / 5),
+
+                      user == null
+                          ? InkWell(
+                              onTap: () {
+                                showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return LoginPage(); // Your custom dialog widget
-                                    },
-                                  );
-                          },
-                          child: Row(
-                            children: [
-                              badges.Badge(
-                                  badgeContent: Text(
-                                    cartCount.toString(),
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  child: Icon(
-                                    Icons.shopping_cart_outlined,
+                                      return LoginPage();
+                                    });
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.person_outline,
                                     color: Colors.black26,
-                                  )),
-                              Gap(10),
-                              Text("My cart",
-                                  style: GoogleFonts.poppins(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      // fontSize: 16,
-                                    ),
-                                  )),
-                            ],
-                          ),
+                                  ),
+                                  Gap(10),
+                                  Text("Login",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          // fontSize: 16,
+                                        ),
+                                      )),
+
+                                  // TextButton(
+                                  //     onPressed: () {
+                                  // showDialog(
+                                  //   context: context,
+                                  //   builder: (BuildContext context) {
+                                  //     return LoginPage(); // Your custom dialog widget
+                                  //         },
+                                  //       );
+                                  //     },
+                                  //     style: ButtonStyle(
+                                  //       foregroundColor:
+                                  //           MaterialStateProperty.all<Color>(Colors
+                                  //               .white), // Change the color to your desired color
+                                  //     ),
+                                  //     child: Text(
+                                  //       'Login',
+                                  // style: GoogleFonts.poppins(
+                                  //   textStyle: const TextStyle(
+                                  //       color: Colors.black,
+                                  //       // fontSize: 16,
+                                  //       ),
+                                  //       ),
+                                  //     )),
+                                ],
+                              ),
+                            )
+                          : TextButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Are you sure to logout?"),
+                                      // content: Text("This is my message."),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('Cancel')),
+                                        TextButton(
+                                            onPressed: () {
+                                              FirebaseAuth.instance.signOut();
+                                              // Navigator.pop(context);
+
+                                              Navigator.pushNamed(context, '/');
+                                            },
+                                            child: Text('Yes'))
+                                      ],
+                                    );
+                                  },
+                                );
+                                // FirebaseAuth.instance.signOut();
+                              },
+                              child: Text(
+                                'Logout',
+                                style: GoogleFonts.poppins(color: Colors.black),
+                              )),
+                      Gap(15),
+
+                      Container(
+                        height: 13,
+                        width: .5,
+                        color: Colors.black,
+                      ),
+
+                      // user != null
+                      //     ? TextButton(
+                      //         onPressed: () {
+                      //           FirebaseAuth.instance.signOut();
+                      //         },
+                      //         child: Text('logout'))
+                      //     : SizedBox(),
+                      Gap(15),
+                      InkWell(
+                        onTap: () {
+                          user != null
+                              ? Navigator.pushNamed(context, '/cart')
+                              : showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return LoginPage(); // Your custom dialog widget
+                                  },
+                                );
+                        },
+                        child: Row(
+                          children: [
+                            badges.Badge(
+                                badgeContent: Text(
+                                  cartCount.toString(),
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                child: Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: Colors.black26,
+                                )),
+                            Gap(10),
+                            Text("My cart",
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    // fontSize: 16,
+                                  ),
+                                )),
+                          ],
                         ),
-                       
-                
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width <=
-                                  800 // You can adjust the threshold value (600 in this example) based on your preferred screen size
-                              ? MediaQuery.of(context).size.width /
-                                  20 // If the screen width is less than 600, set width to half of the screen width
-                              : MediaQuery.of(context).size.width /
-                                  35, // If the screen width is 600 or greater, set width to 1/8 of the screen width
-                        ),
-                      ],
-                    ),
+                      ),
+                     
+                      // SizedBox(width: MediaQuery.of(context).size.width / 70),
+
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width <=
+                                950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                            ? MediaQuery.of(context).size.width /
+                                30 // If the screen width is less than 600, set width to half of the screen width
+                            : MediaQuery.of(context).size.width /
+                                8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                      ),
+                    ],
                   ),
                 ),
                 Container(

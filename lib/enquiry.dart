@@ -8,6 +8,8 @@ import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/widgets/whatsApp.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +38,7 @@ class _EnquireBoxState extends State<EnquireBox> {
   final companyNameContoller = TextEditingController();
   final messageController = TextEditingController();
   // bool isLoading = false;
-html.File? pickedFile;
+  html.File? pickedFile;
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
@@ -142,21 +144,20 @@ html.File? pickedFile;
                         },
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.attach_file,
-                              color: Colors.black,
-                              size: 24,
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width / 60),
-                            Text(
-                              "Attach Quotation",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                            //   Icon(
+                            //     Icons.attach_file,
+                            //     color: Colors.black,
+                            //     size: 24,
+                            //   ),
+                            //  Gap(10),
+                            //   Text(
+                            //     "Attach Quotation",
+                            //     style: GoogleFonts.poppins(
+                            //       color: Colors.black,
+                            //       fontSize: 18,
+                            //       fontWeight: FontWeight.w600,
+                            //     ),
+                            //   ),
                           ],
                         ),
                       ),
@@ -179,7 +180,7 @@ html.File? pickedFile;
                               Colors.white, // Customize the color as needed
                           onDeleted: () {
                             setState(() {
-                              selectedFileName=null;
+                              selectedFileName = null;
                               // Reset any other related data or UI elements
                             });
                           },
@@ -189,85 +190,243 @@ html.File? pickedFile;
                   ],
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.width / 40,
+                  height: MediaQuery.of(context).size.height / 80,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    height: 56,
+                // Container(
+                //   width: MediaQuery.of(context).size.width / 1,
+                //   height: 80,
+                //   child: Row(
+                //     children: [
+                //        Icon(
+                //           Icons.attach_file,
+                //           color: Colors.black,
+                //           size: 24,
+                //         ),
+                //         const Gap(10),
+                //         Text(
+                //           "Attach Quotation",
+                //           style: GoogleFonts.poppins(
+                //             color: Colors.black,
+                //             fontSize: 18,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //         ),
+                //          ElevatedButton(
+                //           onPressed: () async {
+                //             if (emailTextController.text.isEmpty ||
+                //                 companyNameContoller.text.isEmpty) {
+                //               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                //                   content: Text(
+                //                       "Company Name and Email is Required ")));
+                //             } else {
+                //               value.changeIsLoading();
+                //               // await pickFileWeb(
+                //               //     callback: updateSelectedFileName);
+                //               // Make sure selectedFileName is updated before uploading
+                //               await uploadData();
+                //               value.changeIsLoading();
+                //             }
+                //           },
+                //           child: Text(
+                //             'SUBMIT',
+                //             style: TextStyle(color: Colors.white),
+                //           ),
+                //           style: ButtonStyle(
+                //             backgroundColor:
+                //                 MaterialStateProperty.all(Colors.black),
+                //             minimumSize:
+                //                 MaterialStateProperty.all(const Size(300, 50)),
+                //           ),
+                //         ),
+                //          FloatingActionButton(
+                //             onPressed: () {
+                //               whatsapp.launchWhatsApp();
+                //             },
+                //             tooltip: 'Open WhatsApp',
+                //             child: FaIcon(FontAwesomeIcons.whatsapp),
+                //             backgroundColor: Color.fromARGB(255, 16, 229, 23)),
+                //                     ],),
+                // ),
+                SizedBox(
+                  height: 55,
+                  width: double.infinity,
+                  // color: Colors.amber,
+                  child: FittedBox(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 30,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 19.0),
+                          child: InkWell(
+                            onTap: () async {
+                              if (kIsWeb) {
+                                // Web platform
+                                await pickFileWeb(callback: updateSelectedFileName);
+                              } else {
+                                // Other platforms
+                                await pickFile(callback: updateSelectedFileName);
+                              }
+                            },
+                            child: const Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.attach_file,
+                                  color: Colors.black,
+                                  size: 24,
+                                ),
+                               Gap(10),
+                                Text(
+                                  "Attach Quotation",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 25,
+                        ),
+                        if (selectedFileName != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Chip(
+                              label: Text(
+                                selectedFileName!,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              backgroundColor:
+                                  Colors.white, // Customize the color as needed
+                              onDeleted: () {
+                                setState(() {
+                                  selectedFileName=null;
+                                  // Reset any other related data or UI elements
+                                });
+                              },
+                              deleteIcon: Icon(Icons.close),
+                            ),
+                          ),
+                      
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 5.5,
                         ),
-                        TextButton(
-                            onPressed: () async {
-                              if (emailTextController.text.isEmpty ||
-                                  companyNameContoller.text.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                        "Company Name and Email is Required ")));
-                              } else {
-                                value.changeIsLoading();
-                                // await pickFileWeb(
-                                //     callback: updateSelectedFileName);
-                                // Make sure selectedFileName is updated before uploading
-                                await uploadData();
-                                value.changeIsLoading();
-                              }
-                            },
-                            child: value.isLoading
-                                ? SizedBox(
-                                    width: 25,
-                                    height: 25,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.black,
-                                      strokeWidth: 2,
-                                    ))
-                                : Text(
-                                    "Submit",
-                                    style: GoogleFonts.inter(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.black))),
-                              minimumSize: MaterialStateProperty.all<Size>(
-                                Size(MediaQuery.of(context).size.width / 2.5,
-                                    MediaQuery.of(context).size.width / 8),
-                              ),
-                            )),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 17,
-                        ),
                         ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.black))),
-                              minimumSize: MaterialStateProperty.all<Size>(
-                                Size(MediaQuery.of(context).size.width / 9,
-                                    MediaQuery.of(context).size.width / 8),
-                              ),
-                            ),
+                          onPressed: () async {
+                            if (emailTextController.text.isEmpty ||
+                                companyNameContoller.text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      "Company Name and Email is Required ")));
+                            } else {
+                              value.changeIsLoading();
+                              // await pickFileWeb(
+                              //     callback: updateSelectedFileName);
+                              // Make sure selectedFileName is updated before uploading
+                              await uploadData();
+                              value.changeIsLoading();
+                            }
+                          },
+                          child: Text(
+                            'SUBMIT',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.black),
+                            minimumSize:
+                                MaterialStateProperty.all(const Size(300, 50)),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 7.5,
+                        ),
+                        // TextButton(
+                        //     onPressed: () async {
+                        //       if (emailTextController.text.isEmpty ||
+                        //           companyNameContoller.text.isEmpty) {
+                        //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        //             content: Text(
+                        //                 "Company Name and Email is Required ")));
+                        //       } else {
+                        //         value.changeIsLoading();
+                        //         // await pickFileWeb(
+                        //         //     callback: updateSelectedFileName);
+                        //         // Make sure selectedFileName is updated before uploading
+                        //         await uploadData();y
+                        //         value.changeIsLoading();
+                        //       }
+                        //     },
+                        //     child: value.isLoading
+                        //         ? SizedBox(
+                        //             width: 25,
+                        //             height: 25,
+                        //             child: CircularProgressIndicator(
+                        //               color: Colors.black,
+                        //               strokeWidth: 2,
+                        //             ))
+                        //         : Text(
+                        //             "Submit",
+                        //             style: GoogleFonts.inter(
+                        //               color: Colors.black,
+                        //               fontSize: 18,
+                        //               fontWeight: FontWeight.w500,
+                        //             ),
+                        //           ),
+                        //     style: ButtonStyle(
+                        //       shape: MaterialStateProperty.all<
+                        //               RoundedRectangleBorder>(
+                        //           RoundedRectangleBorder(
+                        //               borderRadius: BorderRadius.circular(18.0),
+                        //               side: BorderSide(color: Colors.black))),
+                        //       minimumSize: MaterialStateProperty.all<Size>(
+                        //         Size(MediaQuery.of(context).size.width / 2.5,
+                        //             MediaQuery.of(context).size.width / 8),
+                        //       ),
+                        //     )),
+                       
+                        FloatingActionButton(
                             onPressed: () {
                               whatsapp.launchWhatsApp();
                             },
-                            child: Text(
-                              'WhatsApp Us',
-                              style: TextStyle(color: Colors.black),
-                            ))
+                            tooltip: 'Open WhatsApp',
+                            child: FaIcon(FontAwesomeIcons.whatsapp),
+                            backgroundColor: Color.fromARGB(255, 16, 229, 23)),
+                             SizedBox(
+                          width: MediaQuery.of(context).size.width / 7.5,
+                        ),
+                        // ElevatedButton(
+                        //     style: ButtonStyle(
+                        //       backgroundColor: MaterialStateProperty.all<Color>(
+                        //           Colors.green),
+                        //       shape: MaterialStateProperty.all<
+                        //               RoundedRectangleBorder>(
+                        //           RoundedRectangleBorder(
+                        //               borderRadius: BorderRadius.circular(18.0),
+                        //               side: BorderSide(color: Colors.black))),
+                        //       minimumSize: MaterialStateProperty.all<Size>(
+                        //         Size(MediaQuery.of(context).size.width / 9,
+                        //             MediaQuery.of(context).size.width / 8),
+                        //       ),
+                        //     ),
+                        //     onPressed: () {
+                        //       whatsapp.launchWhatsApp();
+                        //     },
+                        //     child: Text(
+                        //       'WhatsApp Us',
+                        //       style: TextStyle(color: Colors.black),
+                        //     ))
                       ],
                     ),
                   ),
@@ -297,51 +456,50 @@ html.File? pickedFile;
     }
   }
 
-Future<List<int>> _readFileAsBytes(html.File file) async {
-  final reader = html.FileReader();
-  final completer = Completer<List<int>>();
+  Future<List<int>> _readFileAsBytes(html.File file) async {
+    final reader = html.FileReader();
+    final completer = Completer<List<int>>();
 
-  reader.onLoadEnd.listen((_) {
-    // Extract base64 data from the data URL
-    final dataUrl = reader.result as String;
-    final base64Data = dataUrl.split(',').last;
-    
-    // Decode base64 to bytes
-    final List<int> fileBytes = base64.decode(base64Data);
+    reader.onLoadEnd.listen((_) {
+      // Extract base64 data from the data URL
+      final dataUrl = reader.result as String;
+      final base64Data = dataUrl.split(',').last;
 
-    completer.complete(fileBytes);
-  });
+      // Decode base64 to bytes
+      final List<int> fileBytes = base64.decode(base64Data);
 
-  reader.onError.listen((dynamic error) {
-    completer.completeError('Error reading file: $error');
-  });
-
-  reader.readAsDataUrl(file);
-  await completer.future;
-
-  return completer.future;
-}
-
-
-Future<void> pickFileWeb({required Function(String?) callback}) async {
-  final html.FileUploadInputElement input = html.FileUploadInputElement()
-    ..accept = 'application/pdf'; // Set the accept attribute for PDF files
-  input.click();
-  await input.onChange.first;
-  pickedFile = input.files!.first; // Store the picked file
-  final file = pickedFile;
-
-  if (file != null) {
-    setState(() {
-      selectedFileName = file.name;
+      completer.complete(fileBytes);
     });
 
-    // Read file content as Uint8List
-    final List<int> fileBytes = await _readFileAsBytes(file);
-    print('File Bytes Length: ${fileBytes.length}');
-    callback(file.name);
+    reader.onError.listen((dynamic error) {
+      completer.completeError('Error reading file: $error');
+    });
+
+    reader.readAsDataUrl(file);
+    await completer.future;
+
+    return completer.future;
   }
-}
+
+  Future<void> pickFileWeb({required Function(String?) callback}) async {
+    final html.FileUploadInputElement input = html.FileUploadInputElement()
+      ..accept = 'application/pdf'; // Set the accept attribute for PDF files
+    input.click();
+    await input.onChange.first;
+    pickedFile = input.files!.first; // Store the picked file
+    final file = pickedFile;
+
+    if (file != null) {
+      setState(() {
+        selectedFileName = file.name;
+      });
+
+      // Read file content as Uint8List
+      final List<int> fileBytes = await _readFileAsBytes(file);
+      print('File Bytes Length: ${fileBytes.length}');
+      callback(file.name);
+    }
+  }
 
   Future<void> uploadData() async {
     try {
@@ -353,9 +511,9 @@ Future<void> pickFileWeb({required Function(String?) callback}) async {
       }
       final html.File file = pickedFile!;
 
-    // Read file content as Uint8List
-    final List<int> fileBytes = await _readFileAsBytes(file);
-    print('File Bytes Length in API: ${fileBytes.length}');
+      // Read file content as Uint8List
+      final List<int> fileBytes = await _readFileAsBytes(file);
+      print('File Bytes Length in API: ${fileBytes.length}');
       FormData formData = FormData.fromMap({
         'email': emailTextController.text,
         'phone': phoneController.text,

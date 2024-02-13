@@ -770,7 +770,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height /
-                                                  1.7,
+                                                  1.8,
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
@@ -919,7 +919,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Expanded(
+                         Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
@@ -935,9 +935,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                           Gap(30),
                                           Text(
                                             textpass ?? "",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 30),
+                                            style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 26),
                                           ),
                                           Gap(25),
                                           Row(
@@ -952,52 +952,104 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                         Container(
                                                           // color: Colors.amber,
                                                           child: Text(
-                                                            'Selected Product Code & Price:  ',
+                                                            'Product Code & Price:  ',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
-                                                            style: TextStyle(
+                                                            style: GoogleFonts
+                                                                .poppins(
                                                               fontSize: 16.0,
-                                                              fontFamily:
-                                                                  'Roboto',
                                                               color: Color(
                                                                   0xFF212121),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
-                                                          width: 130,
+                                                          height: 60,
                                                           padding:
                                                               EdgeInsets.all(
                                                                   8.0),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
+                                                          child: Consumer<
+                                                              SelectedPriceNotifier>(
+                                                            builder: (context,
+                                                                selectedPriceNotifieru,
+                                                                _) {
+                                                              String priceText =
+                                                                  selectedPriceNotifieru
+                                                                      .selectedPrice;
+                                                              String prefix =
+                                                                  ":";
+                                                              TextStyle
+                                                                  prefixStyle =
+                                                                  TextStyle(
                                                                 color: Colors
                                                                     .black,
-                                                                width: 1.0),
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    255,
-                                                                    255,
-                                                                    255),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14,
+                                                              );
+                                                              TextStyle
+                                                                  suffixStyle =
+                                                                  TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14,
+                                                              );
+
+                                                              int prefixIndex =
+                                                                  priceText
+                                                                      .indexOf(
+                                                                          prefix);
+                                                              if (prefixIndex ==
+                                                                  -1) {
+                                                                // If "SAR" is not found in the text, apply the default style to the whole text
+                                                                return Center(
+                                                                  child: Text(
+                                                                    priceText,
+                                                                    style:
+                                                                        prefixStyle,
+                                                                  ),
+                                                                );
+                                                              } else {
+                                                                // If "SAR" is found, split the text and apply styles accordingly
+                                                                String
+                                                                    prefixPart =
+                                                                    priceText.substring(
+                                                                        0,
+                                                                        prefixIndex +
+                                                                            prefix.length);
+                                                                String
+                                                                    suffixPart =
+                                                                    priceText.substring(
+                                                                        prefixIndex +
+                                                                            prefix.length);
+                                                                return Center(
+                                                                  child:
+                                                                      RichText(
+                                                                    text:
+                                                                        TextSpan(
+                                                                      children: [
+                                                                        TextSpan(
+                                                                            text:
+                                                                                prefixPart,
+                                                                            style:
+                                                                                prefixStyle),
+                                                                        TextSpan(
+                                                                            text:
+                                                                                suffixPart,
+                                                                            style:
+                                                                                suffixStyle),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
+                                                            },
                                                           ),
-                                                          child: Consumer<
-                                                                  SelectedPriceNotifier>(
-                                                              builder: (context,
-                                                                  selectedPriceNotifieru,
-                                                                  _) {
-                                                            return Text(
-                                                              "${selectedPriceNotifieru.selectedPrice}",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black),
-                                                            );
-                                                          }),
                                                         ),
                                                       ],
                                                     ),
@@ -1007,22 +1059,20 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             ],
                                           ),
                                           FittedBox(
-                                            child: Container(
+                                            child: SizedBox(
                                               child: Row(
                                                 children: [
                                                   Text(
                                                     'Enter The Quantity',
                                                     overflow:
                                                         TextOverflow.ellipsis,
-                                                    style: TextStyle(
+                                                    style: GoogleFonts.poppins(
                                                       fontSize: 16.0,
-                                                      fontFamily: 'Roboto',
-                                                      color: Color(0xFF212121),
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      color: const Color(
+                                                          0xFF212121),
                                                     ),
                                                   ),
-                                                  Gap(100),
+                                                  Gap(45),
                                                   Form(
                                                     key: _formKey,
                                                     child: Container(
@@ -1085,10 +1135,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                         body: Container(
                                                             height: 1500,
                                                             color: const Color
-                                                                .fromARGB(255,
+                                                                    .fromARGB(255,
                                                                 230, 233, 235),
-                                                            child: pdf !=
-                                                                    null
+                                                            child: pdf != null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -1099,7 +1148,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                 .width *
                                                             0.4,
                                                         context: context),
-                                                    child: Row(
+                                                    child: const Row(
                                                       children: [
                                                         Icon(Icons
                                                             .edit_document),
@@ -1116,15 +1165,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Gap(15),
-                                              // SizedBox(
-                                              //   height: 30,
-                                              // ),
+                                              const Gap(15),
                                               Wrap(
-                                                spacing:
-                                                    8.0, // Adjust the spacing between buttons as needed
-                                                runSpacing:
-                                                    8.0, // Adjust the spacing between rows as needed
+                                                spacing: 8.0,
+                                                runSpacing: 8.0,
                                                 children: List<Widget>.generate(
                                                     price!.length, (index) {
                                                   final codeAndPrice =
@@ -1157,15 +1201,13 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                         .price ==
                                                                     null
                                                                 ? Colors
-                                                                    .red // Set border color to red when selectedPrice is null
-                                                                : codeAndPrice
-                                                                            .productCode ==
-                                                                        selectedCodeProvider
-                                                                            .selectedProductCode
-                                                                    ? Colors
-                                                                        .blue // Set border color to blue for selected container
-                                                                    : Colors
-                                                                        .black, // Set border color to black for non-selected containers
+                                                                    .black // Set border color to red when selectedPrice is null
+                                                                : Colors.green
+                                                                    .shade200,
+                                                            // ? Colors
+                                                            //     .blue // Set border color to blue for selected container
+                                                            // : Colors
+                                                            //     .black, // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),
@@ -1180,6 +1222,41 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       ),
                                                     ),
                                                   );
+                                                  // return InkWell(
+                                                  //   onTap: () {
+                                                  //     selectedPriceNotifieru
+                                                  //         .setSelectedPrice(
+                                                  //       '${codeAndPrice.productCode}: SAR ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                  //     );
+                                                  //     selectedPriceNotifieru
+                                                  //         .setProductCodeSelected(
+                                                  //             true);
+                                                  //   },
+                                                  //   child: Material(
+                                                  //     borderRadius:
+                                                  //         BorderRadius.circular(
+                                                  //             4),
+                                                  //     color: codeAndPrice
+                                                  //                 .price ==
+                                                  //             null
+                                                  //         ? Colors
+                                                  //             .black // Set background color to red when selectedPrice is null
+                                                  //         :Colors.green.shade300,
+                                                  //            // Set background color to black for non-selected containers
+                                                  //     child: Container(
+                                                  //       width: 100,
+                                                  //       padding:
+                                                  //           EdgeInsets.all(8.0),
+                                                  //       child: Text(
+                                                  //         '${codeAndPrice.productCode}',
+                                                  //         style: TextStyle(
+                                                  //           color: Colors
+                                                  //               .white, // Set your desired text color
+                                                  //         ),
+                                                  //       ),
+                                                  //     ),
+                                                  //   ),
+                                                  // );
                                                 }),
                                               ),
                                             ],
@@ -1220,8 +1297,13 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                         .start, // Align items at the start of each row
                                                 children: [
                                                   Icon(Icons.star,
-                                                      size: 25,
-                                                      color: Colors.black),
+                                                      size: 20,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              103,
+                                                              103,
+                                                              103)),
                                                   SizedBox(
                                                       width:
                                                           10), // Add space between icon and text

@@ -55,8 +55,7 @@ class _DeskCartState extends State<DeskCart> {
     double subtotal = cartProvider.getTotalPrice();
     double vatRate = 15.0;
     double vat = cartProvider.calculateVAT(subtotal, vatRate);
-    double totalPriceWithVAT =
-        cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
+    double totalPriceWithVAT = cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -383,7 +382,7 @@ class _DeskCartState extends State<DeskCart> {
                               //               )));
                               // },
                               child: const Text(
-                                'GANERATE QUATATION',
+                                'GENERATE QUOTATION',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ButtonStyle(

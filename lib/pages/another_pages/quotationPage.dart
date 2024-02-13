@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/another_pages/IRSH.dart';
-import 'package:firebase_hex/provider/Refresh.dart';
+import 'dart:convert';
 import 'package:firebase_hex/provider/address_provider.dart';
-import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/quatation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -14,11 +11,12 @@ import 'package:http/http.dart' as http;
 import '../../enquiry.dart';
 
 class QuotationPage extends StatelessWidget {
-  QuotationPage(
-      {required this.cartItems,
-      required this.totalPrice,
-      required this.vat,
-      required this.totalPriceWithVAT});
+  QuotationPage({
+        required this.cartItems,
+        required this.totalPrice,
+        required this.vat,
+        required this.totalPriceWithVAT
+        });
   final double totalPrice;
   final cartItems;
   final totalPriceWithVAT;

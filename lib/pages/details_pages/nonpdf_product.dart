@@ -79,7 +79,7 @@ class Nopdf extends StatelessWidget {
               } else {
                 snapshot.data!.data.firstWhere((element) {
                   if (element.productName == product_name) {
-                    print("2121");
+                    // print("2121");
                     textpass = element.productName;
                     thumbnail = element.thumbnail;
                     description = element.description;
@@ -314,7 +314,6 @@ class Nopdf extends StatelessWidget {
                 //                             ),
                 //                           ),
                 //                 //--------Product Price-----------
-
                 //                   SizedBox(
                 //                             height: 30,
                 //                           ),
@@ -328,7 +327,6 @@ class Nopdf extends StatelessWidget {
                 //         fontSize: 22),
                 //   ),
                 // ),
-
                 //                           Divider(),
                 //                            SizedBox(
                 //                             height: MediaQuery.of(context)
@@ -371,10 +369,8 @@ class Nopdf extends StatelessWidget {
                 //                                   ),
                 //                                 ),
                 //                               ),
-
                 //                           Flexible(
                 //                       child: Container(
-
                 //                           child: priceofproduct == null
                 //                               ? Text(
                 //                                   'Product Price : 0.00',
@@ -429,7 +425,6 @@ class Nopdf extends StatelessWidget {
                 // ),
                 //           ),
                 //         ),
-
                 //       ],
                 //     ),
                 //   ),
@@ -454,16 +449,13 @@ class Nopdf extends StatelessWidget {
         //                 if (_formKey.currentState!.validate()) {
         //                   if (FirebaseAuth.instance.currentUser != null) {
         //                     final price = double.parse(priceofproduct!);
-
         //                     final quantity =
         //                         int.tryParse(quantityController.text) ?? 0;
-
         //                     final imageUrl =
         //                         // selectedThumbnailProvider
         //                         //         .selectedThumbnail ??
         //                         thumbnail;
         //                     final productName = textpass;
-
         //                     final cartProvider = Provider.of<CartProvider>(
         //                         context,
         //                         listen: false);
@@ -473,7 +465,6 @@ class Nopdf extends StatelessWidget {
         //                         quantity: quantity,
         //                         imageUrl: imageUrl ?? '',
         //                         productName: productName ?? '');
-
         //                     ScaffoldMessenger.of(context).showSnackBar(
         //                         SnackBar(content: Text("Added to cart")));
         //                   } else {
@@ -559,12 +550,12 @@ class Nopdf extends StatelessWidget {
               // pdf = snapshot
               //     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
-              print(product_name);
-              print("khgg");
+              // print(product_name);
+              // print("khgg");
 
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
-                  print("2121");
+                  // print("2121");
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
@@ -665,7 +656,7 @@ class Nopdf extends StatelessWidget {
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height /
-                                                1.7,
+                                                1.8,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
@@ -725,8 +716,8 @@ class Nopdf extends StatelessWidget {
 
                                             // print(
                                             //     'ooooooooooooooooooooo   $textpass');
-                                            print(price);
-                                            print(productName);
+                                            // print(price);
+                                            // print(productName);
                                             cartProvider.addToCart(
                                                 // productCode:'null',
                                                 // productCode: '',
@@ -741,7 +732,7 @@ class Nopdf extends StatelessWidget {
                                                   content:
                                                       Text("Added to cart")),
                                             );
-                                            print(priceofproduct);
+                                            // print(priceofproduct);
                                           } else {
                                             // signed out
                                             showDialog(

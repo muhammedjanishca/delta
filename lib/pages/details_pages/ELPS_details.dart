@@ -772,7 +772,7 @@ class ProductDetailsOfElps extends StatelessWidget {
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height /
-                                                  1.7,
+                                                  1.8,
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
