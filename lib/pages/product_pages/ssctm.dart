@@ -49,7 +49,7 @@ class SsctmProduct extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width / 4,
                   height: MediaQuery.of(context).size.height / 2.5,
-                  child: custCarosal(context, sliderGlands, Index),
+                  child: custCarosal(context, sliderTools, Index),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 4,

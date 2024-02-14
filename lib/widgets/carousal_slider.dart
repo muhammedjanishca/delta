@@ -15,21 +15,21 @@ final List<String> sliderLugs = [
  ];
 
 final List<String> sliderAccessories = [
- 'assets/image/accessories 3.jpg',
- 'assets/image/accessories 2.jpg',
- 'assets/image/accessories 1.jpg' 
+ 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/crimping+tools+2.jpg',
+ 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/lugs+3+(1).jpg',
+ 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/glands+1.png' 
 ];
 
 final List<String> sliderConnectors = [
-  'assets/image/connectors 3 (1).jpg'
-  'assets/image/connectors 2.jpg'
-  'assets/image/Cable connectors.jpg' 
+  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/crimping+tools+2.jpg'
+  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/lugs.jpg'
+  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/lugs1.jpg' 
 ];
 
 final List<String> sliderTools = [
-  'assets/image/crimping tools 3.jpg',
-  'assets/image/crimping tools 4.jpg',
-  'assets/image/crimping tools 2.jpg'
+  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/connectors+2.jpg',
+  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/connectors+3+(1).jpg',
+  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/glands+1.png'
 ];
 
 CarouselSlider custCarosal(BuildContext context, List<String> janish, index) {

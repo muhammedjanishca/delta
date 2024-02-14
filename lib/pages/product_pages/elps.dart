@@ -106,7 +106,7 @@ class Elps extends StatelessWidget {
                               productData.thumbnail ?? "",
                               index: index);
                           selectedPriceNotifieru.resetSelectedPrice();
-                          navigateToProductDetailsofELPS(context, index,
+                          navigateToProductDetailsofElps(context, index,
                               productname: snapshot
                                   .data!.data[index].productName!
                                   .replaceAll(" ", "_"));
