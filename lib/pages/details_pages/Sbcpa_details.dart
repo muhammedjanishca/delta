@@ -422,22 +422,20 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                           BorderRadius
                                                               .circular(5),
                                                       border: Border.all(
-                                                        color: codeAndPrice
-                                                                    .price ==
-                                                                null
-                                                            ? Colors
-                                                                .red // Set border color to red when selectedPrice is null
-                                                            : codeAndPrice
-                                                                        .productCode ==
-                                                                    selectedCodeProvider
-                                                                        .selectedProductCode
+                                                            color: codeAndPrice
+                                                                        .price ==
+                                                                    null
                                                                 ? Colors
-                                                                    .blue // Set border color to blue for selected container
-                                                                : Colors
-                                                                    .black, // Set border color to black for non-selected containers
-                                                        width:
-                                                            1.0, // Set your desired border width
-                                                      ),
+                                                                    .black // Set border color to red when selectedPrice is null
+                                                                : Colors.greenAccent.shade700
+                                                                    ,
+                                                            // ? Colors
+                                                            //     .blue // Set border color to blue for selected container
+                                                            // : Colors
+                                                            //     .black, // Set border color to black for non-selected containers
+                                                            width:
+                                                                1.0, // Set your desired border width
+                                                          ),
                                                     ),
                                                     child: Text(
                                                       '${codeAndPrice.productCode}',
@@ -997,7 +995,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                         Container(
                                                           // color: Colors.amber,
                                                           child: Text(
-                                                            'Selected Product Code & Price:  ',
+                                                            'Product Code & Price:  ',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -1200,15 +1198,13 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                                         .price ==
                                                                     null
                                                                 ? Colors
-                                                                    .red // Set border color to red when selectedPrice is null
-                                                                : codeAndPrice
-                                                                            .productCode ==
-                                                                        selectedCodeProvider
-                                                                            .selectedProductCode
-                                                                    ? Colors
-                                                                        .blue // Set border color to blue for selected container
-                                                                    : Colors
-                                                                        .black, // Set border color to black for non-selected containers
+                                                                    .black // Set border color to red when selectedPrice is null
+                                                                : Colors.greenAccent.shade700
+                                                                    ,
+                                                            // ? Colors
+                                                            //     .blue // Set border color to blue for selected container
+                                                            // : Colors
+                                                            //     .black, // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),
