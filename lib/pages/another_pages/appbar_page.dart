@@ -256,7 +256,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Stainless Steel Cable Ties & Markers',
             onTap: () {
-              Navigator.pushNamed(context, '/stainless-steel-cable-ties-markers/');
+              Navigator.pushNamed(context, '/Stainless Steel Cable Ties & Markers');
 
             },
             // children: [
