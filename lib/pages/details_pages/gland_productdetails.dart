@@ -403,7 +403,7 @@ String formattedText = capitalize(text);
                                               onTap: () {
                                                 selectedPriceNotifieru
                                                     .setSelectedPrice(
-                                                  '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
                                                 );
                                                 selectedPriceNotifieru
                                                     .setProductCodeSelected(
@@ -1172,7 +1172,7 @@ String formattedText = capitalize(text);
                                                     onTap: () {
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}: ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(

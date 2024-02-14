@@ -340,7 +340,7 @@ void navigateToProductDetailsOfConduits(
     '/productdetailsconduits/$productname',
   );
 }
-void navigateToProductDetailsofELPS(
+void navigateToProductDetailsofELPSAccessories(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailscELPSAccessories/$productname');
