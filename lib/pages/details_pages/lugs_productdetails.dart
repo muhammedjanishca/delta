@@ -245,7 +245,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 // color: Colors.amber,
 
                                                 child: const Text(
-                                                  'selected Product code&Price:  ',
+                                                  'Product code & Price:  ',
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -433,15 +433,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                       .price ==
                                                                   null
                                                               ? Colors
-                                                                  .red // Set border color to red when selectedPrice is null
-                                                              : codeAndPrice
-                                                                          .productCode ==
-                                                                      selectedCodeProvider
-                                                                          .selectedProductCode
-                                                                  ? Colors
-                                                                      .blue // Set border color to blue for selected container
-                                                                  : Colors
-                                                                      .black, // Set border color to black for non-selected containers
+                                                                  .green // Set border color to red when selectedPrice is null
+                                                              : Colors.black,
                                                           width:
                                                               1.0, // Set your desired border width
                                                         ),
@@ -950,7 +943,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                         Container(
                                                           // color: Colors.amber,
                                                           child: Text(
-                                                            'Product Code & Price:  ',
+                                                            'Product Code & Price: ',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -1200,8 +1193,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                     null
                                                                 ? Colors
                                                                     .black // Set border color to red when selectedPrice is null
-                                                                : Colors.green
-                                                                    .shade200,
+                                                                : Colors.greenAccent.shade700
+                                                                    ,
                                                             // ? Colors
                                                             //     .blue // Set border color to blue for selected container
                                                             // : Colors

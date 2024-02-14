@@ -1225,14 +1225,14 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(4),
-                                                          border: Border.all(
+                                                          border:Border.all(
                                                             color: codeAndPrice
                                                                         .price ==
                                                                     null
                                                                 ? Colors
                                                                     .black // Set border color to red when selectedPrice is null
-                                                                : Colors.green
-                                                                    .shade200,
+                                                                : Colors.greenAccent.shade700
+                                                                    ,
                                                             // ? Colors
                                                             //     .blue // Set border color to blue for selected container
                                                             // : Colors

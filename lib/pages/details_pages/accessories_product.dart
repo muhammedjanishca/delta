@@ -919,7 +919,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                               ],
                             ),
                           ),
-                         Expanded(
+                          Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
@@ -1135,9 +1135,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                         body: Container(
                                                             height: 1500,
                                                             color: const Color
-                                                                    .fromARGB(255,
+                                                                .fromARGB(255,
                                                                 230, 233, 235),
-                                                            child: pdf != null
+                                                            child: pdf !=
+                                                                    null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -1202,8 +1203,9 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                                     null
                                                                 ? Colors
                                                                     .black // Set border color to red when selectedPrice is null
-                                                                : Colors.green
-                                                                    .shade200,
+                                                                : Colors
+                                                                    .greenAccent
+                                                                    .shade700,
                                                             // ? Colors
                                                             //     .blue // Set border color to blue for selected container
                                                             // : Colors

@@ -1087,15 +1087,13 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                                         .price ==
                                                                     null
                                                                 ? Colors
-                                                                    .red // Set border color to red when selectedPrice is null
-                                                                : codeAndPrice
-                                                                            .productCode ==
-                                                                        selectedCodeProvider
-                                                                            .selectedProductCode
-                                                                    ? Colors
-                                                                        .blue // Set border color to blue for selected container
-                                                                    : Colors
-                                                                        .black, // Set border color to black for non-selected containers
+                                                                    .black // Set border color to red when selectedPrice is null
+                                                                : Colors.greenAccent.shade700
+                                                                    ,
+                                                            // ? Colors
+                                                            //     .blue // Set border color to blue for selected container
+                                                            // : Colors
+                                                            //     .black, // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),

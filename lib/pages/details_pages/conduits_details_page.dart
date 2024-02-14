@@ -1181,8 +1181,8 @@ class ProductDetailsOfConduits extends StatelessWidget {
                                                                     null
                                                                 ? Colors
                                                                     .black // Set border color to red when selectedPrice is null
-                                                                : Colors.green
-                                                                    .shade200,
+                                                                : Colors.greenAccent.shade700
+                                                                    ,
                                                             // ? Colors
                                                             //     .blue // Set border color to blue for selected container
                                                             // : Colors
