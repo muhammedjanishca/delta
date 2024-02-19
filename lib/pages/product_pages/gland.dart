@@ -6,6 +6,7 @@ import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
@@ -74,8 +75,7 @@ class GlandPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                             color: Color.fromRGBO(249, 156, 6, 1.0),
-                          ),
+color: colorProductName                          ),
                         )
                       ],
                     ),
@@ -174,8 +174,8 @@ class GlandPage extends StatelessWidget {
                                  
                                    Text(
                                       productData.productName ?? "",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                      style: GoogleFonts.poppins(
+                                        // fontWeight: FontWeight.bold,
                                         fontSize: MediaQuery.of(context).size.height/45,
                                       ),
                                       textAlign: TextAlign.center,

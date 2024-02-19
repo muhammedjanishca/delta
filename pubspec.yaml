@@ -83,6 +83,7 @@ dependencies:
   file_selector: ^1.0.1
   animated_text_kit: ^4.2.2
   pluto_menu_bar: ^3.0.1
+  responsive_framework: ^1.1.1
 
 dev_dependencies:
   flutter_test:

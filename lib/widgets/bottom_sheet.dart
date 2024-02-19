@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:firebase_hex/pages/another_pages/contact_us.dart';
 import 'package:firebase_hex/widgets/customtextfield.dart';
 import 'package:firebase_hex/responsive/bottomsheet.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -70,7 +71,7 @@ class deskBottomSheett extends StatelessWidget {
     return FittedBox(
       child: Container(
         // width: double.infinity,
-        color: Colors.black,
+        color:colorTwo,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -507,7 +508,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
     }
 
     return Container(
-      color: Colors.black,
+      color: colorTwo,
       child: Column(
         children: [
           SizedBox(

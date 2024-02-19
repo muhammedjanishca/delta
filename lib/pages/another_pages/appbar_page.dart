@@ -9,6 +9,7 @@ import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/responsive/appbar.dart';
 import 'package:firebase_hex/widgets/search_Bar.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gap/gap.dart';
@@ -181,9 +182,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Cable Terminal Ends',
             // icon: Icons.group,
-            onTap: () {
-              
-            },
+            onTap: () {},
             children: [
               PlutoMenuItem(
                 title: 'Lugs',
@@ -194,7 +193,8 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
               PlutoMenuItem(
                 title: 'Connectors',
                 onTap: () {
-                  Navigator.pushNamed(context, '/cable-terminal-ends/connectors/');
+                  Navigator.pushNamed(
+                      context, '/cable-terminal-ends/connectors/');
                 },
               ),
             ],
@@ -207,13 +207,15 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
               PlutoMenuItem(
                 title: 'Glands',
                 onTap: () {
-                  Navigator.pushNamed(context, '/brass-cable-gland-kits-accessories/brass-cable-glands/');
+                  Navigator.pushNamed(context,
+                      '/brass-cable-gland-kits-accessories/brass-cable-glands/');
                 },
               ),
               PlutoMenuItem(
                 title: 'Accessories',
                 onTap: () {
-                  Navigator.pushNamed(context, '/brass-cable-gland-kits-accessories/brass-cable-gland-accessories/');
+                  Navigator.pushNamed(context,
+                      '/brass-cable-gland-kits-accessories/brass-cable-gland-accessories/');
                 },
               ),
             ],
@@ -227,21 +229,21 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Earthing & Lightning Protection Systems',
             // icon: Icons.group,
-            onTap: () {
-            },
+            onTap: () {},
 
             children: [
               PlutoMenuItem(
                 title: 'Earthing & Lightning Protection',
                 onTap: () {
-              Navigator.pushNamed(context, '/earthing-lightning-protection-systems/earthing-lightning-protection/');
+                  Navigator.pushNamed(context,
+                      '/earthing-lightning-protection-systems/earthing-lightning-protection/');
                 },
               ),
               PlutoMenuItem(
                 title: 'ELPS - Accessories',
                 onTap: () {
-                  Navigator.pushNamed(context, '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/');
-
+                  Navigator.pushNamed(context,
+                      '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/');
                 },
               ),
             ],
@@ -249,15 +251,15 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Switch Board / Control Panel Accessories',
             onTap: () {
-              Navigator.pushNamed(context, '/switch-board-control-panel-accessories/');
-
+              Navigator.pushNamed(
+                  context, '/switch-board-control-panel-accessories/');
             },
           ),
           PlutoMenuItem(
             title: 'Stainless Steel Cable Ties & Markers',
             onTap: () {
-              Navigator.pushNamed(context, '/Stainless Steel Cable Ties & Markers');
-
+              Navigator.pushNamed(
+                  context, '/Stainless Steel Cable Ties & Markers');
             },
             // children: [
             //   PlutoMenuItem(
@@ -279,8 +281,8 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Cable Jointing & Termination Kit Components',
             onTap: () {
-             Navigator.pushNamed(context, '/cable-jointing-and-termination-kit-components/');
-
+              Navigator.pushNamed(
+                  context, '/cable-jointing-and-termination-kit-components/');
             },
           ),
         ],
@@ -290,6 +292,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);
     final selectedThumbnailProvider =
@@ -311,7 +314,9 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
             child: Column(
               children: [
                 Container(
-                  color: Colors.white,
+                  color: colorOne,
+                  // rgb(242, 239, 228)
+                  // color: const Color.fromARGB(255, 70, 62, 62),
 
                   // color: const Color.fromARGB(255, 0, 0, 0),
                   //color: Color.fromARGB(255, 206, 205, 202),janish
@@ -332,73 +337,85 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                           // Navigate to the named route '/your_destination_screen'
                           Navigator.pushNamed(context, '/');
                         },
-                        child: Image.asset(
-                          'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
-                          width: 170,
+                        child:
+                         Image.network(
+                          "https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png",
+                          width: 290,
                           height: 60,
                           fit: BoxFit.cover,
                         ),
+                        // child: Image.asset(
+                        //   'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                        //   width: 170,
+                        //   height: 60,
+                        //   fit: BoxFit.cover,
+                        // ),
                       ),
 
-                     SizedBox(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width <=
-                                950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                                1500 // You can adjust the threshold value (600 in this example) based on your preferred screen size
                             ? MediaQuery.of(context).size.width /
-                                30 // If the screen width is less than 600, set width to half of the screen width
+                                80 // If the screen width is less than 600, set width to half of the screen width
                             : MediaQuery.of(context).size.width /
-                                8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                                10, // If the screen width is 600 or greater, set width to 1/8 of the screen width
                       ),
-                      Row(
-                        children: [
-                          MouseRegion(
-                            onEnter: incrementEnter,
-                            onHover: updateLocation,
-                            onExit: incrementExit,
-                            child: InkWell(
-                              child: Text(
-                                'Home',
-                                style: GoogleFonts.poppins(color: textColor),
+                      Container(
+                        width: MediaQuery.of(context).size.height/3,
+                        child: FittedBox(
+                          child: Row(
+                            children: [
+                              MouseRegion(
+                                onEnter: incrementEnter,
+                                onHover: updateLocation,
+                                onExit: incrementExit,
+                                child: InkWell(
+                                  child: Text(
+                                    'Home',
+                                    style: GoogleFonts.poppins(color: textColor),
+                                  ),
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/');
+                                  },
+                                ),
                               ),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/');
-                              },
-                            ),
+                              Gap(35),
+                              MouseRegion(
+                                onEnter: incrementEnterr,
+                                onHover: updateLocationn,
+                                onExit: incrementExitt,
+                                child: InkWell(
+                                  child: Text(
+                                    'About Us',
+                                    style: GoogleFonts.poppins(color: textColorr),
+                                  ),
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/');
+                                  },
+                                ),
+                              ),
+                              Gap(35),
+                              MouseRegion(
+                                onEnter: incrementEnterrr,
+                                onHover: updateLocationnn,
+                                onExit: incrementExittt,
+                                child: InkWell(
+                                  child: Text(
+                                    'Contact Us',
+                                    style: GoogleFonts.poppins(color: textColorrr),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ContactUsPage()),
+                                    );
+                                  },
+                                ),
+                              )
+                            ],
                           ),
-                          Gap(35),
-                          MouseRegion(
-                            onEnter: incrementEnterr,
-                            onHover: updateLocationn,
-                            onExit: incrementExitt,
-                            child: InkWell(
-                              child: Text(
-                                'About Us',
-                                style: GoogleFonts.poppins(color: textColorr),
-                              ),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/');
-                              },
-                            ),
-                          ),
-                          Gap(35),
-                          MouseRegion(
-                            onEnter: incrementEnterrr,
-                            onHover: updateLocationnn,
-                            onExit: incrementExittt,
-                            child: InkWell(
-                              child: Text(
-                                'Contact Us',
-                                style: GoogleFonts.poppins(color: textColorrr),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ContactUsPage()),
-                                );
-                              },
-                            ),
-                          )
-                        ],
+                        ),
                       ),
 
                       SizedBox(width: MediaQuery.of(context).size.width / 5),
@@ -534,16 +551,16 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                           ],
                         ),
                       ),
-                     
+
                       // SizedBox(width: MediaQuery.of(context).size.width / 70),
 
                       SizedBox(
                         width: MediaQuery.of(context).size.width <=
-                                950 // You can adjust the threshold value (600 in this example) based on your preferred screen size
+                                1550 // You can adjust the threshold value (600 in this example) based on your preferred screen size
                             ? MediaQuery.of(context).size.width /
-                                30 // If the screen width is less than 600, set width to half of the screen width
+                                58 // If the screen width is less than 600, set width to half of the screen width
                             : MediaQuery.of(context).size.width /
-                                8, // If the screen width is 600 or greater, set width to 1/8 of the screen width
+                                10, // If the screen width is 600 or greater, set width to 1/8 of the screen width
                       ),
                     ],
                   ),
@@ -552,7 +569,8 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                   height: 45,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(233, 119, 19, 0.922),
+                    color: colorTwo
+                    //  Color.fromRGBO(233, 119, 19, 0.922),
                     // color: Deltacolor,
                   ),
                   child: Row(
@@ -576,14 +594,13 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                         ),
                       ),
                       SizedBox(
-                      width: MediaQuery.of(context).size.width / 9.4,
-
+                        width: MediaQuery.of(context).size.width / 9.4,
                       ),
-                      
+
                       SizedBox(
                         height: 37,
                         width: MediaQuery.of(context).size.width / 3,
-                        child:searchBox(context),
+                        child: searchBox(context),
                         //  SearchBar(
                         //   hintText: 'Search here ...',
                         // ),
@@ -642,7 +659,6 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                       //             context, productNameWithUnderscores, type);
                       //       },
                       //     ))
-                    
                     ],
                   ),
 
