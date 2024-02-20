@@ -816,7 +816,7 @@ Widget custmobileDrawer(BuildContext context) {
                   },
                 ),
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  hoverColor: colorTwo,
                   title: Text(
                     'Connectors',
                     style: TextStyle(color: Colors.white),
@@ -947,11 +947,15 @@ class MobileAppBar extends StatelessWidget {
                       // Navigate to the named route '/your_destination_screen'
                       Navigator.pushNamed(context, '/');
                     },
-                    child: Image.asset(
-                      'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
+                    child: Container(
+                      height: 100,
                       width: 170,
-                      height: 60,
-                      fit: BoxFit.cover,
+                      child: Image.network(
+                        "https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png",
+                        // width: 30,
+                        // height: 10,
+                        // fit: BoxFit.cover,
+                      ),
                     )),
                 Spacer(),
                 user == null
@@ -997,11 +1001,11 @@ class MobileAppBar extends StatelessWidget {
                 ),
               ],
             ),
-            backgroundColor: Color.fromARGB(255, 206, 205, 202),
+            backgroundColor:colorOne
           ),
         ),
         Container(
-          color: Color.fromRGBO(249, 156, 6, 1.0),
+          color: colorTwo,
           padding: EdgeInsets.only(bottom: 5, top: 5, left: 55, right: 10),
           height: 49,
           width: double.infinity,
