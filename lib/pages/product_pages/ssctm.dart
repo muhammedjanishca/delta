@@ -6,6 +6,7 @@ import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
@@ -62,19 +63,19 @@ class SsctmProduct extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             "HOME>>",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 54, 98, 98),
+                            style: GoogleFonts.roboto(
+                              color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
                         Text(
-                          "ELPS Accessories",
-                          style: TextStyle(
+                          "Stainless Steel Cable Ties & Markers",
+                          style: GoogleFonts.poppins(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                             color: Color.fromRGBO(249, 156, 6, 1.0),
+                             color:colorProductName
                           ),
                         )
                       ],
@@ -166,20 +167,22 @@ class SsctmProduct extends StatelessWidget {
                                   //     ),
                                   //   ),
                                   // ),
-                                    Image.network(
-                                        productData.thumbnail ?? "",
-                                        width: thumbnailSize,
-                                      height: thumbnailSize,
-                                      ),
-                                 
-                                   Text(
-                                      productData.productName ?? "",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: MediaQuery.of(context).size.height/45,
-                                      ),
-                                      textAlign: TextAlign.center,
+                                  Image.network(
+                                    productData.thumbnail ?? "",
+                                    width: thumbnailSize,
+                                    height: thumbnailSize,
+                                  ),
+
+                                  Text(
+                                    productData.productName ?? "",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                               // Asset image as foreground decoration

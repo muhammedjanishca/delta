@@ -853,7 +853,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -880,10 +880,9 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child:  Text(
                                             'GO TO CART',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:

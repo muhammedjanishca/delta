@@ -7,6 +7,7 @@ import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:side_sheet/side_sheet.dart';
@@ -848,7 +849,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                             }
                                           }
                                         },
-                                        child: Text('ADD TO CART'),
+                                        child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
@@ -875,10 +876,9 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                   },
                                                 );
                                         },
-                                        child: const Text(
+                                        child:  Text(
                                           'GO TO CART',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+ style: GoogleFonts.poppins(color: Colors.white),                                        ),
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
@@ -912,9 +912,9 @@ class ProductDetailsOfTools extends StatelessWidget {
                                           Gap(30),
                                           Text(
                                             textpass ?? "",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 30),
+                                            style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 26),
                                           ),
                                           Gap(25),
                                           Row(

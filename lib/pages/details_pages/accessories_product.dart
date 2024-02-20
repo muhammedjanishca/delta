@@ -869,7 +869,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART',style:GoogleFonts.poppins(),),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -896,10 +896,10 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child: Text(
                                             'GO TO CART',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:

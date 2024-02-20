@@ -1310,5 +1310,5 @@ class NoScrollGlow extends ScrollBehavior {
 }
 
 const kHeroImage =
-    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/image+(1).png';
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/image+(2).png';
  

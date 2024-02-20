@@ -864,7 +864,8 @@ String formattedText = capitalize(text);
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART',
+                                           style: GoogleFonts.poppins(color: Colors.white)),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -891,10 +892,9 @@ String formattedText = capitalize(text);
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child:  Text(
                                             'GO TO CART',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -1172,7 +1172,7 @@ String formattedText = capitalize(text);
                                                     onTap: () {
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
@@ -1195,14 +1195,14 @@ String formattedText = capitalize(text);
                                                             color: codeAndPrice
                                                                         .price ==
                                                                     null
-                                                                ? Colors
-                                                                    .black // Set border color to red when selectedPrice is null
-                                                                : Colors.greenAccent.shade700
-                                                                    ,
-                                                            // ? Colors
-                                                            //     .blue // Set border color to blue for selected container
-                                                            // : Colors
-                                                            //     .black, // Set border color to black for non-selected containers
+                                                                ? Colors.black
+                                                          : codeAndPrice
+                                                                      .productCode ==
+                                                                  selectedCodeProvider
+                                                                      .selectedProductCode
+                                                              ? Colors
+                                                                  .blue // Set border color to blue for selected container
+                                                               : Colors.greenAccent.shade700, // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),

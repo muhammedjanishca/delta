@@ -671,8 +671,8 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                                  child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+            child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+                          ); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -718,7 +718,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
               //   );
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
-                  print("2121");
+                  // print("2121");
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
@@ -733,7 +733,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
             }
 
             return pdf != null
-                ? DefaultTabController(
+               ? DefaultTabController(
                     length: 2,
                     child: Container(
                       color: Colors.white,
@@ -746,7 +746,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                SizedBox(
                                   // height: do
                                   // color: const Color.fromARGB(255, 138, 129, 101),
                                   width: MediaQuery.of(context).size.width / 1,
@@ -813,14 +813,8 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                             ),
                                             Container(
                                               color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
+                                              height: MediaQuery.of(context) .size.height /1.8,
+                                              width: MediaQuery.of(context) .size.width /4,
                                               child: Image.network(
                                                   // thumbnail!,
                                                   // selectedKiduProvider.selectedKidu ??
@@ -828,22 +822,21 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                   selectedThumbnailProvider
                                                           .selectedThumbnail ??
                                                       ''),
-                                            ), ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
                                 FittedBox(
-                                  child: Container(
+                                  child: SizedBox(
                                     // color: Colors.amber,
-                                    height:
-                                        MediaQuery.of(context).size.height / 4,
-                                
+                                    height: MediaQuery.of(context).size.height / 4,
                                     child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+MainAxisAlignment.center,
                                       children: [
                                         ElevatedButton(
                                           onPressed: () {
@@ -861,8 +854,8 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                       selectedPrice
                                                           .split(': ')[0];
                                                   final price = double.tryParse(
-                                                          selectedPrice
-                                                              .split(': ')[1]) ??
+                                                          selectedPrice.split(
+                                                              ': ')[1]) ??
                                                       0;
                                                   final quantity = int.tryParse(
                                                           quantityController
@@ -881,7 +874,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                       imageUrl: imageUrl ?? '',
                                                       productName:
                                                           productName ?? '');
-                                
+
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(
                                                           content: Text(
@@ -913,7 +906,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -940,9 +933,9 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child:  Text(
                                             'GO TO CART',
-                                            style: TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -962,7 +955,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                               ],
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
@@ -978,9 +971,9 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                           Gap(30),
                                           Text(
                                             textpass ?? "",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 30),
+                                            style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 26),
                                           ),
                                           Gap(25),
                                           Row(
@@ -995,78 +988,127 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                         Container(
                                                           // color: Colors.amber,
                                                           child: Text(
-                                                            'Product Code & Price:  ',
+                                                            'Product Code & Price: ',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
-                                                            style: TextStyle(
+                                                            style: GoogleFonts
+                                                                .poppins(
                                                               fontSize: 16.0,
-                                                              fontFamily:
-                                                                  'Roboto',
                                                               color: Color(
                                                                   0xFF212121),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
-                                                          width: 130,
+                                                          height: 60,
                                                           padding:
                                                               EdgeInsets.all(
                                                                   8.0),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
+                                                          child: Consumer<
+                                                              SelectedPriceNotifier>(
+                                                            builder: (context,
+                                                                selectedPriceNotifieru,
+                                                                _) {
+                                                              String priceText =
+                                                                  selectedPriceNotifieru
+                                                                      .selectedPrice;
+                                                              String prefix =
+                                                                  ":";
+                                                              TextStyle
+                                                                  prefixStyle =
+                                                                  TextStyle(
                                                                 color: Colors
                                                                     .black,
-                                                                width: 1.0),
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    255,
-                                                                    255,
-                                                                    255),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14,
+                                                              );
+                                                              TextStyle
+                                                                  suffixStyle =
+                                                                  TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14,
+                                                              );
+
+                                                              int prefixIndex =
+                                                                  priceText
+                                                                      .indexOf(
+                                                                          prefix);
+                                                              if (prefixIndex ==
+                                                                  -1) {
+                                                                // If "SAR" is not found in the text, apply the default style to the whole text
+                                                                return Center(
+                                                                  child: Text(
+                                                                    priceText,
+                                                                    style:
+                                                                        prefixStyle,
+                                                                  ),
+                                                                );
+                                                              } else {
+                                                                // If "SAR" is found, split the text and apply styles accordingly
+                                                                String
+                                                                    prefixPart =
+                                                                    priceText.substring(
+                                                                        0,
+                                                                        prefixIndex +
+                                                                            prefix.length);
+                                                                String
+                                                                    suffixPart =
+                                                                    priceText.substring(
+                                                                        prefixIndex +
+                                                                            prefix.length);
+                                                                return Center(
+                                                                  child:
+                                                                      RichText(
+                                                                    text:
+                                                                        TextSpan(
+                                                                      children: [
+                                                                        TextSpan(
+                                                                            text:
+                                                                                prefixPart,
+                                                                            style:
+                                                                                prefixStyle),
+                                                                        TextSpan(
+                                                                            text:
+                                                                                suffixPart,
+                                                                            style:
+                                                                                suffixStyle),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
+                                                            },
                                                           ),
-                                                          child: Consumer<
-                                                                  SelectedPriceNotifier>(
-                                                              builder: (context,
-                                                                  selectedPriceNotifieru,
-                                                                  _) {
-                                                            return Text(
-                                                              "${selectedPriceNotifieru.selectedPrice}",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black),
-                                                            );
-                                                          }),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
                                                 ),
                                               ),
-
                                             ],
                                           ),
                                           FittedBox(
-                                            child: Container(
+                                            child: SizedBox(
                                               child: Row(
                                                 children: [
                                                   Text(
                                                     'Enter The Quantity',
                                                     overflow:
                                                         TextOverflow.ellipsis,
-                                                    style: TextStyle(
+                                                    style: GoogleFonts.poppins(
                                                       fontSize: 16.0,
-                                                      fontFamily: 'Roboto',
-                                                      color: Color(0xFF212121),
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      color: const Color(
+                                                          0xFF212121),
                                                     ),
                                                   ),
-                                                  Gap(100),
+                                                  Gap(45),
                                                   Form(
                                                     key: _formKey,
                                                     child: Container(
@@ -1109,7 +1151,8 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                           ),
                                           Gap(25),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 'Product codes'.toUpperCase(),
@@ -1120,47 +1163,45 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              
                                               Padding(
-                                                padding: const EdgeInsets.only(right:50.0),
-                                                child:TextButton(
-                                                  onPressed: () => SideSheet.right(
-                                                      body: Container(
-                                                          height: 1500,
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              230, 233, 235),
-                                                          child: pdf != null
-                                                              ? SfPdfViewer
-                                                                  .network(pdf!)
-                                                              : Nopdf()),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
-                                                      context: context),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.edit_document),
-                                                      Text(
-                                                        "Size Chart",
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                  )),
+                                                padding: const EdgeInsets.only(
+                                                    right: 50.0),
+                                                child: TextButton(
+                                                    onPressed: () => SideSheet.right(
+                                                        body: Container(
+                                                            height: 1500,
+                                                            color: const Color
+                                                                    .fromARGB(255,
+                                                                230, 233, 235),
+                                                            child: pdf != null
+                                                                ? SfPdfViewer
+                                                                    .network(
+                                                                        pdf!)
+                                                                : Nopdf()),
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                        context: context),
+                                                    child: const Row(
+                                                      children: [
+                                                        Icon(Icons
+                                                            .edit_document),
+                                                        Text(
+                                                          "Size Chart",
+                                                          style: TextStyle(),
+                                                        )
+                                                      ],
+                                                    )),
                                               ),
-                                            
                                             ],
                                           ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Gap(15),
-                                              // SizedBox(
-                                              //   height: 30,
-                                              // ),
+                                              const Gap(15),
                                               Wrap(
                                                 spacing:
                                                     8.0, // Adjust the spacing between buttons as needed
@@ -1174,7 +1215,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                     onTap: () {
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode} : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
@@ -1197,14 +1238,15 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                             color: codeAndPrice
                                                                         .price ==
                                                                     null
-                                                                ? Colors
-                                                                    .black // Set border color to red when selectedPrice is null
-                                                                : Colors.greenAccent.shade700
-                                                                    ,
-                                                            // ? Colors
-                                                            //     .blue // Set border color to blue for selected container
-                                                            // : Colors
-                                                            //     .black, // Set border color to black for non-selected containers
+                                                                ? Colors.black
+                                                                : codeAndPrice
+                                                                      .productCode ==
+                                                                  selectedCodeProvider
+                                                                      .selectedProductCode
+                                                              ? Colors
+                                                                  .blue // Set border color to blue for selected container
+                                                               : Colors.greenAccent.shade700,
+                                                                        // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),
@@ -1238,26 +1280,46 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: description!
-                                                .toUpperCase()
                                                 .split('\n')
                                                 .map((line) {
+                                              // Capitalize only the first letter of each word
+                                              String capitalizedLine =
+                                                  line.split(' ').map((word) {
+                                                if (word.isNotEmpty) {
+                                                  return word[0].toUpperCase() +
+                                                      word
+                                                          .substring(1)
+                                                          .toLowerCase();
+                                                } else {
+                                                  return '';
+                                                }
+                                              }).join(' ');
+
                                               return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start, // Align items at the start of each row
                                                 children: [
                                                   Icon(Icons.star,
-                                                      size:
-                                                          10, // Adjust the size as needed
-                                                      color: Colors
-                                                          .black // Adjust the color as needed
-                                                      ),
-                                                  Gap(10),
+                                                      size: 20,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              103,
+                                                              103,
+                                                              103)),
+                                                  SizedBox(
+                                                      width:
+                                                          10), // Add space between icon and text
                                                   Flexible(
                                                     child: Text(
-                                                      line,
+                                                      capitalizedLine
+                                                          .trim(), // Trim any leading/trailing whitespace
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
-                                                      overflow: TextOverflow
-                                                          .visible, // Handle text overflow
+                                                      overflow:
+                                                          TextOverflow.visible,
                                                     ),
                                                   ),
                                                 ],

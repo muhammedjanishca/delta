@@ -792,7 +792,7 @@ class SsctmProductDetails extends StatelessWidget {
                                   ),
                                 ),
                                 FittedBox(
-                                  child: Container(
+                                  child: SizedBox(
                                     // color: Colors.amber,
                                     height:
                                         MediaQuery.of(context).size.height / 4,
@@ -871,7 +871,7 @@ class SsctmProductDetails extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -898,10 +898,9 @@ class SsctmProductDetails extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child:  Text(
                                             'GO TO CART',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:

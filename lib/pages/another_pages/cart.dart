@@ -159,7 +159,7 @@ class _DeskCartState extends State<DeskCart> {
                                               ),
                                         Text(
                                             // toStringAsFixed(2)
-                                            'Price: \SAR${item['price'].toStringAsFixed(2)}'),
+                                            'Price: \SAR ${item['price'].toStringAsFixed(2)}'),
                                         Row(
                                           children: [
                                             Text(

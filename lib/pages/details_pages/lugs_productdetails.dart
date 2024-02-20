@@ -691,7 +691,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                SizedBox(
                                   // height: do
                                   // color: const Color.fromARGB(255, 138, 129, 101),
                                   width: MediaQuery.of(context).size.width / 1,
@@ -710,7 +710,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     image!.map((imageUrl) {
                                                   return GestureDetector(
                                                     onTap: () {
-                                                      // When an image is clicked, set it as the selected thumbnail.
                                                       // selectedKiduProvider
                                                       //     .setSelectedKidu(imageUrl ??
                                                       //         "data:image/jpeg;base64,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");
@@ -767,12 +766,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       .width /
                                                   4,
                                               child: Image.network(
-                                                  // thumbnail!,
-                                                  // selectedKiduProvider.selectedKidu ??
-                                                  //     ''
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      ''),
+                                                  thumbnail!,
+                                                  ),
                                             ),
                                           ],
                                         ),
@@ -860,7 +855,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -887,10 +882,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child:  Text(
                                             'GO TO CART',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -1158,8 +1152,10 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             children: [
                                               const Gap(15),
                                               Wrap(
-                                                spacing: 8.0,
-                                                runSpacing: 8.0,
+                                                spacing:
+                                                    8.0, // Adjust the spacing between buttons as needed
+                                                runSpacing:
+                                                    8.0, // Adjust the spacing between rows as needed
                                                 children: List<Widget>.generate(
                                                     price!.length, (index) {
                                                   final codeAndPrice =
@@ -1168,7 +1164,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     onTap: () {
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode} : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
@@ -1191,14 +1187,15 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             color: codeAndPrice
                                                                         .price ==
                                                                     null
-                                                                ? Colors
-                                                                    .black // Set border color to red when selectedPrice is null
-                                                                : Colors.greenAccent.shade700
-                                                                    ,
-                                                            // ? Colors
-                                                            //     .blue // Set border color to blue for selected container
-                                                            // : Colors
-                                                            //     .black, // Set border color to black for non-selected containers
+                                                                ? Colors.black
+                                                                : codeAndPrice
+                                                                      .productCode ==
+                                                                  selectedCodeProvider
+                                                                      .selectedProductCode
+                                                              ? Colors
+                                                                  .blue // Set border color to blue for selected container
+                                                               : Colors.greenAccent.shade700,
+                                                                        // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),
@@ -1213,41 +1210,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       ),
                                                     ),
                                                   );
-                                                  // return InkWell(
-                                                  //   onTap: () {
-                                                  //     selectedPriceNotifieru
-                                                  //         .setSelectedPrice(
-                                                  //       '${codeAndPrice.productCode}: SAR ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
-                                                  //     );
-                                                  //     selectedPriceNotifieru
-                                                  //         .setProductCodeSelected(
-                                                  //             true);
-                                                  //   },
-                                                  //   child: Material(
-                                                  //     borderRadius:
-                                                  //         BorderRadius.circular(
-                                                  //             4),
-                                                  //     color: codeAndPrice
-                                                  //                 .price ==
-                                                  //             null
-                                                  //         ? Colors
-                                                  //             .black // Set background color to red when selectedPrice is null
-                                                  //         :Colors.green.shade300,
-                                                  //            // Set background color to black for non-selected containers
-                                                  //     child: Container(
-                                                  //       width: 100,
-                                                  //       padding:
-                                                  //           EdgeInsets.all(8.0),
-                                                  //       child: Text(
-                                                  //         '${codeAndPrice.productCode}',
-                                                  //         style: TextStyle(
-                                                  //           color: Colors
-                                                  //               .white, // Set your desired text color
-                                                  //         ),
-                                                  //       ),
-                                                  //     ),
-                                                  //   ),
-                                                  // );
                                                 }),
                                               ),
                                             ],
@@ -1287,14 +1249,10 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     CrossAxisAlignment
                                                         .start, // Align items at the start of each row
                                                 children: [
-                                                  Icon(Icons.star,
+                                                  const Icon(Icons.star,
                                                       size: 20,
                                                       color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              103,
-                                                              103,
-                                                              103)),
+                                                          Color.fromARGB(255,103,103,103)),
                                                   SizedBox(
                                                       width:
                                                           10), // Add space between icon and text
@@ -1326,9 +1284,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                       ),
                     ),
                   )
-                : Nopdf(
-                    typeOfProduct: 'lugs',
-                  );
+                : Nopdf(typeOfProduct: 'lugs');
           }
         },
       ),

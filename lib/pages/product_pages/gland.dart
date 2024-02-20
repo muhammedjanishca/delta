@@ -24,10 +24,12 @@ class GlandPage extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    double thumbnailSize = screenSize.width * 0.11; 
-    final selectedThumbnailProvider = Provider.of<SelectedThumbnailProvider>(context);
+    double thumbnailSize = screenSize.width * 0.11;
+    final selectedThumbnailProvider =
+        Provider.of<SelectedThumbnailProvider>(context);
     final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
-    final selectedPriceNotifieru = Provider.of<SelectedPriceNotifier>(context, listen: false);
+    final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
     final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
@@ -36,8 +38,7 @@ class GlandPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-              );
+                child: Lottie.asset("assets/image/BKVtkcmqbx (1).json"));
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -63,19 +64,19 @@ class GlandPage extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             "HOME>>",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 54, 98, 98),
+                            style: GoogleFonts.roboto(
+                              color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
                         Text(
-                          "GLANDS",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-color: colorProductName                          ),
+                          "Glands",
+                          style: GoogleFonts.roboto(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: colorProductName),
                         )
                       ],
                     ),
@@ -166,20 +167,22 @@ color: colorProductName                          ),
                                   //     ),
                                   //   ),
                                   // ),
-                                    Image.network(
-                                        productData.thumbnail ?? "",
-                                        width: thumbnailSize,
-                                      height: thumbnailSize,
-                                      ),
-                                 
-                                   Text(
-                                      productData.productName ?? "",
-                                      style: GoogleFonts.poppins(
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: MediaQuery.of(context).size.height/45,
-                                      ),
-                                      textAlign: TextAlign.center,
+                                  Image.network(
+                                    productData.thumbnail ?? "",
+                                    width: thumbnailSize,
+                                    height: thumbnailSize,
+                                  ),
+
+                                  Text(
+                                    productData.productName ?? "",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                               // Asset image as foreground decoration

@@ -64,7 +64,7 @@ class DeskSignUp extends StatelessWidget {
                     children: [
                       Text(
                         '\nAlready have an account? ',
-                        style: GoogleFonts.inter(
+                        style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                         ),
@@ -295,7 +295,7 @@ class DeskSignUp extends StatelessWidget {
                                                     BorderRadius.circular(1))),
                                         backgroundColor:
                                             MaterialStatePropertyAll(
-                                         Color.fromRGBO(249, 156, 6, 1.0),
+                                         colorTwo
                                         )),
                                   ),
                                 ),
@@ -660,7 +660,7 @@ class DeskSignUp extends StatelessWidget {
                                                                               1))),
                                                               backgroundColor:
                                                                   MaterialStatePropertyAll(
-                                                                      Color.fromARGB(255, 22, 145, 156))),
+                                                                     colorTwo)),
                                                         ),
                                                       ),
                                                     ),
@@ -934,28 +934,30 @@ class MobileSignup extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 45,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                            focusColor: Color.fromARGB(255, 76, 138, 131),
-                            overlayColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 76, 138, 131),
+                    FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Checkbox(
+                              focusColor: Color.fromARGB(255, 76, 138, 131),
+                              overlayColor: MaterialStatePropertyAll(
+                                Color.fromARGB(255, 76, 138, 131),
+                              ),
+                              value: value.isChecked,
+                              onChanged: (value1) {
+                                value.changeIsChecked();
+                              }),
+                          Text(
+                            "By signing up, you agree to the Terms of Service and Privacy Policy",
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.inter(
+                              fontSize: 12,
+                              // fontWeight: FontWeight.w500,
+                              // height: 1.29,
                             ),
-                            value: value.isChecked,
-                            onChanged: (value1) {
-                              value.changeIsChecked();
-                            }),
-                        Text(
-                          "By signing up, you agree to the Terms of Service and Privacy Policy",
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.inter(
-                            fontSize: 12,
-                            // fontWeight: FontWeight.w500,
-                            // height: 1.29,
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 45,
@@ -1022,7 +1024,7 @@ class MobileSignup extends StatelessWidget {
                             shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(1))),
                             backgroundColor: MaterialStatePropertyAll(
-                              Color.fromRGBO(249, 156, 6, 1.0),
+                              colorTwo
                             )),
                       ),
                     ),
