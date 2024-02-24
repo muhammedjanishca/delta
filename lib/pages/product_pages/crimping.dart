@@ -36,7 +36,7 @@ class CrimpingToolPage extends StatelessWidget {
         future: context.read<DataProvider>().newcrimpingtool,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+            return Center(child: lottieSuccess()
  
             // SpinKitCubeGrid(size: 140, 
             // color: Color.fromRGBO(249, 156, 6, 1.0),)

@@ -309,7 +309,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
       child: SafeArea(
         child: PreferredSize(
           preferredSize: Size.fromHeight(105),
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
@@ -940,66 +940,70 @@ class MobileAppBar extends StatelessWidget {
       children: [
         SafeArea(
           child: AppBar(
-            title: Row(
-              children: [
-                InkWell(
-                    onTap: () {
-                      // Navigate to the named route '/your_destination_screen'
-                      Navigator.pushNamed(context, '/');
-                    },
-                    child: Container(
-                      height: 100,
-                      width: 170,
-                      child: Image.network(
-                        "https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png",
-                        // width: 30,
-                        // height: 10,
-                        // fit: BoxFit.cover,
-                      ),
-                    )),
-                Spacer(),
-                user == null
-                    ? TextButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return LoginPage(); // Your custom dialog widget
-                            },
-                          );
-                        },
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(255, 194, 192, 192)),
+            title: Container(
+              color: Colors.yellow,
+              height: 100,
+              child: Row(
+                children: [
+                  InkWell(
+                      onTap: () {
+                        // Navigate to the named route '/your_destination_screen'
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: SizedBox(
+                        height: 100,
+                        width: 170,
+                        child: Image.network(
+                          "https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png",
+                          // width: 30,
+                          // height: 10,
+                          // fit: BoxFit.cover,
                         ),
-                        child: Text(
-                          'SignUp/SignIn',
-                          style: TextStyle(color: Colors.black, fontSize: 11),
-                        ),
-                      )
-                    : SizedBox(),
-                GestureDetector(
-                  onTap: () {
-                    user != null
-                        ? Navigator.pushNamed(context, '/cart')
-                        : showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return LoginPage(); // Your custom dialog widget
-                            },
-                          );
-                  },
-                  child: badges.Badge(
-                      badgeContent: Text(
-                        cartCount.toString(),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      child: Icon(
-                        Icons.shopping_bag_outlined,
-                        color: Colors.black,
                       )),
-                ),
-              ],
+                  Spacer(),
+                  user == null
+                      ? TextButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LoginPage(); // Your custom dialog widget
+                              },
+                            );
+                          },
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                                const Color.fromARGB(255, 194, 192, 192)),
+                          ),
+                          child: Text(
+                            'SignUp/SignIn',
+                            style: TextStyle(color: Colors.black, fontSize: 11),
+                          ),
+                        )
+                      : SizedBox(),
+                  GestureDetector(
+                    onTap: () {
+                      user != null
+                          ? Navigator.pushNamed(context, '/cart')
+                          : showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LoginPage(); // Your custom dialog widget
+                              },
+                            );
+                    },
+                    child: badges.Badge(
+                        badgeContent: Text(
+                          cartCount.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        child: Icon(
+                          Icons.shopping_bag_outlined,
+                          color: Colors.black,
+                        )),
+                  ),
+                ],
+              ),
             ),
             backgroundColor:colorOne
           ),

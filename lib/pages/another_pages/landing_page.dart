@@ -297,14 +297,14 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                   letterSpacing: 3,
                                                   fontSize: 80,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(255, 217, 220, 60),
+                                                  color:const Color.fromARGB(255, 217, 220, 60),
                                                   )),
                                           RotateAnimatedText(
                                             'efficient\n service'.toUpperCase(),
                                             textStyle:  GoogleFonts.poppins(
                                                 fontSize: 80.0,
                                                 fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(255, 217, 220, 60),
+                                                  color:const Color.fromARGB(255, 217, 220, 60),
 
                                                 ),
                                           ),
@@ -315,7 +315,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                             textStyle:  GoogleFonts.poppins(
                                                 fontSize: 80.0,
                                                 fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(255, 217, 220, 60),
+                                                  color:const Color.fromARGB(255, 217, 220, 60),
 
                                                 ),
                                           ),

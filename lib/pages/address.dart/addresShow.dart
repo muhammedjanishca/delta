@@ -7,6 +7,7 @@ import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/res_address_show.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,9 +26,42 @@ class AddressShowPage extends StatelessWidget {
 
 enum SingingCharacter { option1, option2 }
 
-class AddressShow extends StatelessWidget {
+class AddressShow extends StatefulWidget {
   AddressShow({super.key});
 
+  @override
+
+  
+  State<AddressShow> createState() => _AddressShowState();
+}
+
+class _AddressShowState extends State<AddressShow> {
+
+  double x = 0.0;
+  double y = 0.0;
+  Color textColor = Colors.black;
+   int enterCounter = 0;
+  int exitCounter = 0;
+   void incrementEnter(PointerEvent details) {
+    setState(() {
+      enterCounter++;
+    });
+  }
+
+  void incrementExit(PointerEvent details) {
+    setState(() {
+      textColor = Colors.black;
+      exitCounter++;
+    });
+  }
+
+  void updateLocation(PointerEvent details) {
+    setState(() {
+      textColor = Color.fromARGB(255, 237, 84, 74);
+      x = details.position.dx;
+      y = details.position.dy;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
@@ -68,7 +102,7 @@ class AddressShow extends StatelessWidget {
                                     //   child:  isNotFirstItem =Index !=0,
                                     // ),
                                     // const Gap(150),
-                                    Icon(Icons.add),
+                                    Icon(Icons.add,color: const Color.fromARGB(31, 136, 136, 136),),
                                     TextButton(
                                         onPressed: () => SideSheet.right(
                                             body: TextAddress(),
@@ -80,7 +114,7 @@ class AddressShow extends StatelessWidget {
                                             context: context),
                                         child: Text(
                                           "ADD ADDRESS",
-                                          style: TextStyle(color: Colors.black),
+                                          style: GoogleFonts.poppins(color: Colors.black),
                                         ))
                                   ],
                                 ),
@@ -108,10 +142,12 @@ class AddressShow extends StatelessWidget {
                                                   context, index);
                                         },
                                         child: Container(
-                                          color: isSelected
-                                              ?  Color.fromRGBO(249, 156, 6, 1.0)// Set the color for selected state
-                                              : Color.fromARGB(
-                                                  255, 211, 215, 216),
+                                        
+                                                  decoration: BoxDecoration(
+                                                      color: isSelected
+                                              ?  colorOne
+                                              : Color.fromARGB(255, 234, 234, 234),
+                                                    border: Border.all(width: 1,color: Colors.black12)),
                                           // Set the color for unselected state
                                           child: ListTile(
                                             selectedTileColor: Colors.black,
@@ -124,8 +160,8 @@ class AddressShow extends StatelessWidget {
                                                       .read<AddressProvider>()
                                                       .deleteAddress(index);
                                                 } else {
-                                                  print(
-                                                      'Cannot delete the address with index 0.');
+                                                  // print(
+                                                  //     'Cannot delete the address with index 0.');
                                                 }
                                               },
                                             ),
@@ -168,31 +204,31 @@ class AddressShow extends StatelessWidget {
                                 // SizedBox(
                                 //   height: MediaQuery.of(context).size.height / 6,
                                 // ),
-                                const Text(
+                                 Text(
                                   'Summary\n',
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                       fontSize: 23,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 // SizedBox(height: 47),
                                 ListTile(
-                                  title: const Text(
+                                  title:  Text(
                                     'Subtotal',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400),
                                   ),
                                   trailing: Text(
-                                    '\SAR${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                                    style: const TextStyle(
+                                    '\SAR ${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                    style:  GoogleFonts.poppins(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
                                 ListTile(
-                                  title: Text('VAT (${vatRate}%)'),
+                                  title: Text('VAT (${vatRate}%)',style: GoogleFonts.poppins(fontSize: 14),),
                                   trailing:
-                                      Text('\SAR${vat.toStringAsFixed(2)}'),
+                                      Text('\SAR ${vat.toStringAsFixed(2)}',style: GoogleFonts.poppins(),),
                                 ),
                                 const Divider(
                                   height:
@@ -206,15 +242,15 @@ class AddressShow extends StatelessWidget {
                                   height: 10,
                                 ),
                                 ListTile(
-                                  title: const Text(
+                                  title:  Text(
                                     'Total Price (with VAT)',
-                                    style: TextStyle(
-                                        fontSize: 18,
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w500),
                                   ),
                                   trailing: Text(
-                                    '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
-                                    style: const TextStyle(
+                                    '\SAR ${totalPriceWithVAT.toStringAsFixed(2)}',
+                                    style:GoogleFonts.poppins(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -230,39 +266,45 @@ class AddressShow extends StatelessWidget {
                                 const SizedBox(
                                   height: 40,
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => QuotationPage(
-                                                  totalPrice: cartProvider
-                                                      .getTotalPrice(),
-                                                  cartItems:
-                                                      cartItems["cartItems"],
-                                                  totalPriceWithVAT:
-                                                      cartProvider
-                                                          .getTotalPriceWithVAT(
-                                                              subtotal,
-                                                              vatRate),
-                                                  vat:
-                                                      cartProvider.calculateVAT(
-                                                          subtotal, vatRate),
-                                                )));
-                                  },
-                                  child: const Text(
-                                    'GENERATE QUATATION',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  style: ButtonStyle(
-                                    shape: MaterialStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15))),
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.black),
-                                    minimumSize: MaterialStateProperty.all(
-                                        const Size(150, 55)),
+                                MouseRegion(
+                                onEnter: incrementEnter,
+                                onHover: updateLocation,
+                                onExit: incrementExit,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => QuotationPage(
+                                                    totalPrice: cartProvider
+                                                        .getTotalPrice(),
+                                                    cartItems:
+                                                        cartItems["cartItems"],
+                                                    totalPriceWithVAT:
+                                                        cartProvider
+                                                            .getTotalPriceWithVAT(
+                                                                subtotal,
+                                                                vatRate),
+                                                    vat:
+                                                        cartProvider.calculateVAT(
+                                                            subtotal, vatRate),
+                                                  )));
+                                    },
+                                    child: 
+                                     Text(
+                                      'GENERATE QUATATION',
+                                      style: GoogleFonts.roboto(color: Colors.white),
+                                    ),
+                                    style: ButtonStyle(
+                                      shape: MaterialStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15))),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(textColor),
+                                      minimumSize: MaterialStateProperty.all(
+                                          const Size(150, 55)),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
@@ -300,43 +342,38 @@ String _selectedLocation = 'Please choose a location';
 AddressData(data) {
   final item = data;
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         "${item['Company Name']}",
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
-            // You can also specify other text styles here, e.g., fontSize, color, etc.
+        style: GoogleFonts.poppins(
             ),
       ),
       Text(
         "${item['Contact Number']}",
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
-            // You can also specify other text styles here, e.g., fontSize, color, etc.
+       style: GoogleFonts.poppins(
             ),
       ),
       Text(
         "${item['Street Address']}",
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
-            // You can also specify other text styles here, e.g., fontSize, color, etc.
+        style: GoogleFonts.poppins(
             ),
       ),
       Text(
         "${item['Street Address line 2']}",
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
-            // You can also specify other text styles here, e.g., fontSize, color, etc.
+        style: GoogleFonts.poppins(
             ),
       ),
       Text(
         "${item['Location']}",
         // "${item['vat']} ,  " "${item['state']}",
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
-            // You can also specify other text styles here, e.g., fontSize, color, etc.
+       style: GoogleFonts.poppins(
             ),
       ),
       Text(
         "${item['City']}",
         // "${item['vat']} ,  " "${item['state']}",
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18
-            // You can also specify other text styles here, e.g., fontSize, color, etc.
+        style: GoogleFonts.poppins(
             ),
       ),
     ],
@@ -413,8 +450,7 @@ class AddressShowMob extends StatelessWidget {
                           },
                           child: Container(
                             color: isSelected
-                                ? Color.fromARGB(255, 25, 149,
-                                    187) // Set the color for selected state
+                                ? colorOne // Set the color for selected state
                                 : Color.fromARGB(255, 211, 215,
                                     216), // Set the color for unselected state
                             // child: ListTile(

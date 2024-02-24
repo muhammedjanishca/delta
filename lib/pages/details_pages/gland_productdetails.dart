@@ -85,8 +85,7 @@ String formattedText = capitalize(text);
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                  child: Lottie.asset(
-                      "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -140,22 +139,17 @@ String formattedText = capitalize(text);
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      color: Colors.white,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              5,
-                                      width: double.infinity,
-                                      // width:
-                                      //     MediaQuery.of(context).size.width /
-                                      //         2,
-                                      child: Image.network(
-                                          // thumbnail!,
-                                          selectedThumbnailProvider
-                                                  .selectedThumbnail ??
-                                              ''),
-                                    ), // Display the selected thumbnail here
-                                    SingleChildScrollView(
+                                     Container(
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+),
+ SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         children: image!.map((imageUrl) {
@@ -637,8 +631,7 @@ String formattedText = capitalize(text);
           if (snapshot.connectionState == ConnectionState.waiting) {
             // print("hgfghfhfgu");
             return Center(
-                child: Lottie.asset(
-                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -761,23 +754,15 @@ String formattedText = capitalize(text);
                                               ),
                                             ),
                                             Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: Image.network(
-                                                  // thumbnail!,
-                                                  // selectedKiduProvider.selectedKidu ??
-                                                  //     ''
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      ''),
-                                            ),
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+),
                                           ],
                                         ),
                                       ],

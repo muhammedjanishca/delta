@@ -38,7 +38,7 @@ class ConnectersPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+                child: lottieSuccess()
               // child:SpinKitCubeGrid(
               //   size:140,
               //   color: Color.fromRGBO(249, 156, 6, 1.0),

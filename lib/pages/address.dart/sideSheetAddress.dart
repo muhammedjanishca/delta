@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/address.dart/addresShow.dart';
 import 'package:firebase_hex/provider/Refresh.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -63,6 +64,7 @@ class _TextAddressState extends State<TextAddress> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Gap(40),
                       SizedBox(
                           height: 40,
                           child: Padding(
@@ -188,7 +190,7 @@ class _TextAddressState extends State<TextAddress> {
                         ),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                            Color.fromRGBO(249, 156, 6, 1.0),
+                            colorTwo
                           ),
                           minimumSize:
                               MaterialStateProperty.all(Size(1500, 50)),
@@ -335,7 +337,7 @@ class _TextAddressState extends State<TextAddress> {
                           ),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                              Color.fromRGBO(249, 156, 6, 1.0),
+                              colorTwo
                             ),
                             minimumSize:
                                 MaterialStateProperty.all(Size(500, 50)),

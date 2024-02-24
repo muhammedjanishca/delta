@@ -36,7 +36,7 @@ class CjtkcPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+                child: lottieSuccess()
               );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');

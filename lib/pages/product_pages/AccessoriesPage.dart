@@ -36,7 +36,7 @@ class AccessoriesPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+                child: lottieSuccess()
 
             //     SpinKitCubeGrid(
             //   size: 140,
