@@ -12,12 +12,16 @@ AppBar custSmallAppBar(BuildContext context, janish) {
           onTap: () {
             Navigator.pushNamed(context, '/');
           },
-          child: Image.asset(
-                                  'assets/image/Yellow and Brown Modern Apparel Logo (6).png',
-                                  width: 170,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                )),
+          child: Container(
+            width: MediaQuery.of(context).size.width/5,
+            // height: ,
+            child: Image.network(
+                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png',
+                                    // width: 300,
+                                    // height: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+          )),
         // Text(
         //     "DELTA",
         //     style: GoogleFonts.oswald(

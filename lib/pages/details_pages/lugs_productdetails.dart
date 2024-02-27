@@ -6,9 +6,11 @@ import 'package:firebase_hex/model.dart';
 import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
+import 'package:firebase_hex/provider/container_clr.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +32,8 @@ class ProductDetailsoflugs extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController quantityController = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final selectedContainerColorNotifier =
+        Provider.of<SelectedContainerColorNotifier>(context);
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
     final selectedThumbnailProvider =
@@ -68,8 +72,8 @@ class ProductDetailsoflugs extends StatelessWidget {
 
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
-                    child: Lottie.asset(
-                        "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                    child:
+                        lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
@@ -134,21 +138,15 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Container(
-                                          color: Colors.white,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              5,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2,
-                                          child: Image.network(
-                                              // thumbnail!,
-                                              selectedThumbnailProvider
-                                                      .selectedThumbnail ??
-                                                  ''),
-                                        ), // Display the selected thumbnail here
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), 
+),
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
@@ -531,7 +529,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   onTap: () {
                                                     selectedPriceNotifieru
                                                         .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'based on Request'}',
+                                                      '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
                                                     );
                                                     selectedPriceNotifieru
                                                         .setProductCodeSelected(
@@ -754,8 +752,8 @@ class ProductDetailsoflugs extends StatelessWidget {
           snapshot.data!.data.length;
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child: Lottie.asset(
-                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child:
+                    lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -811,7 +809,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                SizedBox(
                                   // height: do
                                   // color: const Color.fromARGB(255, 138, 129, 101),
                                   width: MediaQuery.of(context).size.width / 1,
@@ -819,7 +817,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                     padding: EdgeInsets.only(left: 20),
                                     child: Column(
                                       children: [
-                                        Row(
+                                         Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
@@ -877,23 +875,16 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: Image.network(
-                                                  // thumbnail!,
-                                                  // selectedKiduProvider.selectedKidu ??
-                                                  //     ''
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      ''),
-                                            ),
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+),
+
                                           ],
                                         ),
                                       ],
@@ -980,7 +971,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text(
+                                            'ADD TO CART',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
+                                          ),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -1007,10 +1002,10 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child: Text(
                                             'GO TO CART',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -1288,7 +1283,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     onTap: () {
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
@@ -1311,14 +1306,16 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             color: codeAndPrice
                                                                         .price ==
                                                                     null
-                                                                ? Colors
-                                                                    .black // Set border color to red when selectedPrice is null
-                                                                : Colors.greenAccent.shade700
-                                                                    ,
-                                                            // ? Colors
-                                                            //     .blue // Set border color to blue for selected container
-                                                            // : Colors
-                                                            //     .black, // Set border color to black for non-selected containers
+                                                                ? Colors.black
+                                                                : codeAndPrice
+                                                                            .productCode ==
+                                                                        selectedCodeProvider
+                                                                            .selectedProductCode
+                                                                    ? Colors
+                                                                        .blue // Set border color to blue for selected container
+                                                                    : Colors
+                                                                        .greenAccent
+                                                                        .shade700, // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),
@@ -1407,14 +1404,10 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     CrossAxisAlignment
                                                         .start, // Align items at the start of each row
                                                 children: [
-                                                  Icon(Icons.star,
+                                                  const Icon(Icons.star,
                                                       size: 20,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              103,
-                                                              103,
-                                                              103)),
+                                                      color: Color.fromARGB(
+                                                          255, 103, 103, 103)),
                                                   SizedBox(
                                                       width:
                                                           10), // Add space between icon and text
@@ -1446,9 +1439,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                       ),
                     ),
                   )
-                : Nopdf(
-                    typeOfProduct: 'lugs',
-                  );
+                : Nopdf(typeOfProduct: 'lugs');
           }
         },
       ),

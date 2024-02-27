@@ -85,8 +85,7 @@ String formattedText = capitalize(text);
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                  child: Lottie.asset(
-                      "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -140,22 +139,17 @@ String formattedText = capitalize(text);
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      color: Colors.white,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              5,
-                                      width: double.infinity,
-                                      // width:
-                                      //     MediaQuery.of(context).size.width /
-                                      //         2,
-                                      child: Image.network(
-                                          // thumbnail!,
-                                          selectedThumbnailProvider
-                                                  .selectedThumbnail ??
-                                              ''),
-                                    ), // Display the selected thumbnail here
-                                    SingleChildScrollView(
+                                     Container(
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+),
+ SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         children: image!.map((imageUrl) {
@@ -737,8 +731,7 @@ String formattedText = capitalize(text);
           if (snapshot.connectionState == ConnectionState.waiting) {
             // print("hgfghfhfgu");
             return Center(
-                child: Lottie.asset(
-                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -861,23 +854,15 @@ String formattedText = capitalize(text);
                                               ),
                                             ),
                                             Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: Image.network(
-                                                  // thumbnail!,
-                                                  // selectedKiduProvider.selectedKidu ??
-                                                  //     ''
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      ''),
-                                            ),
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+),
                                           ],
                                         ),
                                       ],
@@ -964,7 +949,8 @@ String formattedText = capitalize(text);
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART',
+                                           style: GoogleFonts.poppins(color: Colors.white)),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -991,10 +977,9 @@ String formattedText = capitalize(text);
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child:  Text(
                                             'GO TO CART',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -1272,7 +1257,7 @@ String formattedText = capitalize(text);
                                                     onTap: () {
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
@@ -1295,17 +1280,14 @@ String formattedText = capitalize(text);
                                                             color: codeAndPrice
                                                                         .price ==
                                                                     null
-                                                                ? Colors
-                                                                    .black // Set border color to red when selectedPrice is null
-                                                                 : codeAndPrice
+                                                                ? Colors.black
+                                                          : codeAndPrice
                                                                       .productCode ==
                                                                   selectedCodeProvider
                                                                       .selectedProductCode
-                                                                    
-                                                            ? Colors
-                                                                .blue // Set border color to blue for selected container
-                                                            : Colors
-                                                                .black, // Set border color to black for non-selected containers
+                                                              ? Colors
+                                                                  .blue // Set border color to blue for selected container
+                                                               : Colors.greenAccent.shade700, // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),

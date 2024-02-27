@@ -6,6 +6,7 @@ import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
@@ -23,10 +24,12 @@ class Elps extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    double thumbnailSize = screenSize.width * 0.11; 
-    final selectedThumbnailProvider = Provider.of<SelectedThumbnailProvider>(context);
+    double thumbnailSize = screenSize.width * 0.11;
+    final selectedThumbnailProvider =
+        Provider.of<SelectedThumbnailProvider>(context);
     final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
-    final selectedPriceNotifieru = Provider.of<SelectedPriceNotifier>(context, listen: false);
+    final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
     final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
@@ -35,8 +38,7 @@ class Elps extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
-              );
+                child:  lottieSuccess());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -62,19 +64,19 @@ class Elps extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             "HOME>>",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 54, 98, 98),
+                            style: GoogleFonts.roboto(
+                              color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
                         Text(
-                          "ELPS",
-                          style: TextStyle(
+                          "Earthing & Lightning Protection",
+                          style: GoogleFonts.roboto(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                             color: Color.fromRGBO(249, 156, 6, 1.0),
+                            color:colorProductName
                           ),
                         )
                       ],
@@ -166,20 +168,22 @@ class Elps extends StatelessWidget {
                                   //     ),
                                   //   ),
                                   // ),
-                                    Image.network(
-                                        productData.thumbnail ?? "",
-                                        width: thumbnailSize,
-                                      height: thumbnailSize,
-                                      ),
-                                 
-                                   Text(
-                                      productData.productName ?? "",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: MediaQuery.of(context).size.height/45,
-                                      ),
-                                      textAlign: TextAlign.center,
+                                  Image.network(
+                                    productData.thumbnail ?? "",
+                                    width: thumbnailSize,
+                                    height: thumbnailSize,
+                                  ),
+
+                                  Text(
+                                    productData.productName ?? "",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                               // Asset image as foreground decoration

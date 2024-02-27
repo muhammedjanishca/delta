@@ -395,8 +395,7 @@ class deskBottomSheett extends StatelessWidget {
                                           Container(
                                             color: Colors.transparent,
                                             height: 150,
-                                            child: Lottie.asset(
-                                                "assets/image/Animation - 1703239746007.json"),
+                                            child: lottieSuccess()
                                           ),
                                         ],
                                       ),
@@ -826,8 +825,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                         Container(
                                           color: Colors.transparent,
                                           height: 150,
-                                          child: Lottie.asset(
-                                              "assets/image/Animation - 1703239746007.json"),
+                                          child: lottieSuccess()
                                         ),
                                       ],
                                     ),

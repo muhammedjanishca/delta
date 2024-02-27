@@ -6,6 +6,7 @@ import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/res_cartpage.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../provider/cart_provider.dart';
@@ -32,8 +33,32 @@ class DeskCart extends StatefulWidget {
 }
 
 class _DeskCartState extends State<DeskCart> {
-  // int cartCount = 0;
   int addresscount = 0;
+  Color textColor = Colors.black;
+   int enterCounter = 0;
+  int exitCounter = 0;
+  double x = 0.0;
+  double y = 0.0;
+   void incrementEnter(PointerEvent details) {
+    setState(() {
+      enterCounter++;
+    });
+  }
+
+  void incrementExit(PointerEvent details) {
+    setState(() {
+      textColor = Colors.black;
+      exitCounter++;
+    });
+  }
+
+  void updateLocation(PointerEvent details) {
+    setState(() {
+      textColor = Color.fromARGB(255, 237, 84, 74);
+      x = details.position.dx;
+      y = details.position.dy;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     var userr = Provider.of<AuthenticationHelper>(context).getCurrentUser();
@@ -95,7 +120,7 @@ class _DeskCartState extends State<DeskCart> {
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
-                                  color: Color.fromRGBO(249, 156, 6, 1.0),),
+                                  color: colorProductName),
                             )
                           ],
                         ),
@@ -159,7 +184,7 @@ class _DeskCartState extends State<DeskCart> {
                                               ),
                                         Text(
                                             // toStringAsFixed(2)
-                                            'Price: \SAR${item['price'].toStringAsFixed(2)}'),
+                                            'Price: \SAR ${item['price'].toStringAsFixed(2)}'),
                                         Row(
                                           children: [
                                             Text(
@@ -296,112 +321,108 @@ class _DeskCartState extends State<DeskCart> {
                         width: MediaQuery.of(context).size.width / 50,
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            // SizedBox(
-                            //   height: MediaQuery.of(context).size.height / 6,
-                            // ),
-                            const Text(
-                              'Summary\n',
-                              style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.w500),
-                            ),
-                            // SizedBox(height: 47),
-                            ListTile(
-                              title: const Text(
-                                'Subtotal',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w400),
-                              ),
-                              trailing: Text(
-                                '\SAR${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            ListTile(
-                              title: Text('VAT (${vatRate}%)'),
-                              trailing: Text('\SAR${vat.toStringAsFixed(2)}'),
-                            ),
-                            const Divider(
-                              height:
-                                  1, // Adjust the height of the divider as needed
-                              color: Color.fromARGB(255, 147, 146,
-                                  146), // Choose the color of the divider
-                              thickness:
-                                  1, // Specify the thickness of the divider line
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            ListTile(
-                              title: const Text(
-                                'Total Price (with VAT)',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                              trailing: Text(
-                                '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            const Divider(
-                              height:
-                                  1, // Adjust the height of the divider as needed
-                              color: Color.fromARGB(255, 147, 146,
-                                  146), // Choose the color of the divider
-                              thickness:
-                                  1, // Specify the thickness of the divider line
-                            ),
-      
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            ElevatedButton(
-                               onPressed: () async {
+                            width: MediaQuery.of(context).size.width / 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                // SizedBox(
+                                //   height: MediaQuery.of(context).size.height / 6,
+                                // ),
+                                 Text(
+                                  'Summary\n',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                // SizedBox(height: 47),
+                                ListTile(
+                                  title:  Text(
+                                    'Subtotal',
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  trailing: Text(
+                                    '\SAR ${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                                    style:  GoogleFonts.poppins(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                ListTile(
+                                  title: Text('VAT (${vatRate}%)',style: GoogleFonts.poppins(fontSize: 14),),
+                                  trailing:
+                                      Text('\SAR ${vat.toStringAsFixed(2)}',style: GoogleFonts.poppins(),),
+                                ),
+                                const Divider(
+                                  height:
+                                      1, // Adjust the height of the divider as needed
+                                  color: Color.fromARGB(255, 147, 146,
+                                      146), // Choose the color of the divider
+                                  thickness:
+                                      1, // Specify the thickness of the divider line
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ListTile(
+                                  title:  Text(
+                                    'Total Price (with VAT)',
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  trailing: Text(
+                                    '\SAR ${totalPriceWithVAT.toStringAsFixed(2)}',
+                                    style:GoogleFonts.poppins(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Divider(
+                                  height:
+                                      1, // Adjust the height of the divider as needed
+                                  color: Color.fromARGB(255, 147, 146,
+                                      146), // Choose the color of the divider
+                                  thickness:
+                                      1, // Specify the thickness of the divider line
+                                ),
+                                const SizedBox(
+                                  height: 40,
+                                ),
+                                MouseRegion(
+                                    onEnter: incrementEnter,
+                                onHover: updateLocation,
+                                onExit: incrementExit,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
                           context
                               .read<AddressProvider>()
                               .isUserDataAvailable(context);
                         },
-                              // onPressed: () {
-                              //   Navigator.push(
-                              //       context,
-                              //       MaterialPageRoute(
-                              //           builder: (context) => QuotationPage(
-                              //                 totalPrice:
-                              //                     cartProvider.getTotalPrice(),
-                              //                 cartItems: cartItems["cartItems"],
-                              //                 totalPriceWithVAT: cartProvider
-                              //                     .getTotalPriceWithVAT(
-                              //                         subtotal, vatRate),
-                              //                 vat: cartProvider.calculateVAT(
-                              //                     subtotal, vatRate),
-                              //               )));
-                              // },
-                              child: const Text(
-                                'GENERATE QUOTATION',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: ButtonStyle(
-                                shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15))),
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.black),
-                                minimumSize: MaterialStateProperty.all(
-                                    const Size(150, 55)),
-                              ),
+                                    child: 
+                                     Text(
+                                      'GENERATE QUATATION',
+                                      style: GoogleFonts.roboto(color: Colors.white),
+                                    ),
+                                    style: ButtonStyle(
+                                      shape: MaterialStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15))),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(textColor),
+                                      minimumSize: MaterialStateProperty.all(
+                                          const Size(150, 55)),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 40,
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              width: 40,
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 22,
                       ),

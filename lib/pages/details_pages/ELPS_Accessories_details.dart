@@ -16,6 +16,7 @@ import 'package:side_sheet/side_sheet.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../model.dart';
+import '../../widgets/style.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsOfELPSAccessories extends StatelessWidget {
@@ -63,8 +64,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                  child: Lottie.asset(
-                      "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -125,20 +125,16 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        color: Colors.white,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                5,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        child: Image.network(
-                                            // thumbnail!,
-                                            selectedThumbnailProvider
-                                                    .selectedThumbnail ??
-                                                ''),
-                                      ), // Display the selected thumbnail here
+                                       Container(
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+),
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
@@ -627,8 +623,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child: Lottie.asset(
-                    "assets/image/BKVtkcmqbx (1).json")); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -768,23 +763,15 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: Image.network(
-                                                  // thumbnail!,
-                                                  // selectedKiduProvider.selectedKidu ??
-                                                  //     ''
-                                                  selectedThumbnailProvider
-                                                          .selectedThumbnail ??
-                                                      ''),
-                                            ),
+  color: Colors.white,
+  height: MediaQuery.of(context).size.height / 1.8,
+  width: MediaQuery.of(context).size.width / 4,
+  child: selectedThumbnailProvider.selectedThumbnail != null
+      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
+      : thumbnail != null
+          ? Image.network(thumbnail!)
+          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+),
                                           ],
                                         ),
                                       ],
@@ -871,7 +858,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART'),
+                                          child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -898,10 +885,9 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child: const Text(
+                                          child:  Text(
                                             'GO TO CART',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: GoogleFonts.poppins(color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -937,9 +923,9 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                           Gap(30),
                                           Text(
                                             textpass ?? "",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 30),
+                                             style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 26),
                                           ),
                                           Gap(25),
                                           Row(

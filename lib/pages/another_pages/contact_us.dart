@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:quickalert/quickalert.dart';
 
+import '../../widgets/style.dart';
+
 class ContactUsPage extends StatelessWidget {
   ContactUsPage({Key? key});
 
@@ -351,8 +353,7 @@ class ContactUsPage extends StatelessWidget {
                                             Container(
                                               color: Colors.transparent,
                                               height: 150,
-                                              child: Lottie.asset(
-                                                  "assets/image/Animation - 1703239746007.json"),
+                                              child: lottieSuccess()
                                             ),
                                           ],
                                         ),
@@ -579,8 +580,7 @@ class ContactUsPage extends StatelessWidget {
                                             Container(
                                               color: Colors.transparent,
                                               height: 150,
-                                              child: Lottie.asset(
-                                                  "assets/image/Animation - 1703239746007.json"),
+                                              child:lottieSuccess()
                                             ),
                                           ],
                                         ),

@@ -7,6 +7,7 @@ import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
@@ -37,7 +38,7 @@ class ConnectersPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+                child: lottieSuccess()
               // child:SpinKitCubeGrid(
               //   size:140,
               //   color: Color.fromRGBO(249, 156, 6, 1.0),
@@ -68,19 +69,19 @@ class ConnectersPage extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             "HOME>>",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 54, 98, 98),
+                            style: GoogleFonts.roboto(
+                              color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
                         Text(
-                          "CONNECTERS",
-                          style: TextStyle(
+                          "Connecters",
+                          style: GoogleFonts.roboto(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                             color: Color.fromRGBO(249, 156, 6, 1.0),
+                            color: colorProductName
                           ),
                         )
                       ],
@@ -134,10 +135,14 @@ class ConnectersPage extends StatelessWidget {
                             ],
                           ),
                           padding: EdgeInsets.all(
-                             MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           margin: EdgeInsets.all(
-                            MediaQuery.of(context).size.width >= 700 ? 15.0 : 5.0,
+                            MediaQuery.of(context).size.width >= 700
+                                ? 15.0
+                                : 5.0,
                           ),
                           child: Stack(
                             alignment: Alignment.center,
@@ -165,24 +170,22 @@ class ConnectersPage extends StatelessWidget {
                                   //     ),
                                   //   ),
                                   // ),
-                                    Image.network(
-                                        productData.thumbnail ?? "",
-                                        width: thumbnailSize,
-                                      height: thumbnailSize,
-                                      ),
-                                  // SizedBox(
-                                  //   height: 8,
-                                  //   width:
-                                  //       MediaQuery.of(context).size.width / 4,
-                                  // ),
+                                  Image.network(
+                                    productData.thumbnail ?? "",
+                                    width: thumbnailSize,
+                                    height: thumbnailSize,
+                                  ),
+
                                   Text(
-                                      productData.productName ?? "",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: MediaQuery.of(context).size.height/45,
-                                      ),
-                                      textAlign: TextAlign.center,
+                                    productData.productName ?? "",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                               // Asset image as foreground decoration

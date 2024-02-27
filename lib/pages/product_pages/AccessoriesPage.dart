@@ -3,7 +3,9 @@ import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/widgets/carousal_slider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
@@ -34,7 +36,7 @@ class AccessoriesPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child:Lottie.asset("assets/image/BKVtkcmqbx (1).json")
+                child: lottieSuccess()
 
             //     SpinKitCubeGrid(
             //   size: 140,
@@ -66,19 +68,19 @@ class AccessoriesPage extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             "HOME>>",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 54, 98, 98),
+                            style: GoogleFonts.roboto(
+                              color: Colors.black,
                               fontSize: 17,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
                         Text(
-                          "ACCESSORIES",
-                          style: TextStyle(
+                          "Accessories",
+                          style: GoogleFonts.roboto(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: Color.fromRGBO(249, 156, 6, 1.0),
+                            color:colorProductName
                           ),
                         )
                       ],
@@ -125,13 +127,13 @@ class AccessoriesPage extends StatelessWidget {
                               BoxShadow(
                                 color: Color.fromARGB(255, 229, 229, 229)
                                     .withOpacity(
-                                        0.5), 
+                                        0.5), // Set the shadow color here
                                 spreadRadius:
-                                    5, 
+                                    5, // Set the spread radius of the shadow
                                 blurRadius:
-                                    7, 
+                                    7, // Set the blur radius of the shadow
                                 offset: Offset(
-                                    0, 3),
+                                    0, 3), // Set the offset of the shadow
                               ),
                             ],
                           ),
@@ -174,21 +176,19 @@ class AccessoriesPage extends StatelessWidget {
                                   Image.network(
                                     productData.thumbnail ?? "",
                                     width: thumbnailSize,
-                                      height: thumbnailSize,
+                                    height: thumbnailSize,
                                   ),
-                                  // SizedBox(
-                                  //   height: 8,
-                                  //   width:
-                                  //       MediaQuery.of(context).size.width / 4,
-                                  // ),
+
                                   Text(
-                                      productData.productName ?? "",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: MediaQuery.of(context).size.height/45,
-                                      ),
-                                      textAlign: TextAlign.center,
+                                    productData.productName ?? "",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              45,
                                     ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                               // Asset image as foreground decoration

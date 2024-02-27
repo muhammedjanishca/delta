@@ -33,6 +33,7 @@ import 'package:firebase_hex/pages/product_pages/ssctm.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
+import 'package:firebase_hex/provider/container_clr.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/provider/pdf_provider.dart';
@@ -40,6 +41,7 @@ import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/fetch_invoice.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -91,6 +93,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
         ChangeNotifierProvider(create: (context) => ColorChangingProvider()),
         ChangeNotifierProvider(create: (context) => SelectedPriceProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedContainerColorNotifier()),
       ],
       child: MaterialApp(
         title: "TRANS DELTA TRADING",
@@ -107,16 +110,16 @@ class _MyAppState extends State<MyApp> {
                     width: 100,
                     child: Center(
                         child:
-                            Lottie.asset("assets/image/BKVtkcmqbx (1).json"))),
+                            lottieSuccess())),
               ));
           if (widget is Scaffold || widget is Navigator) {
             error = Scaffold(
                 body: Center(
-                    child: Lottie.asset("assets/image/BKVtkcmqbx (1).json")));
+                    child:  lottieSuccess()));
           }
           ErrorWidget.builder = (errorDetails) {
             return Center(
-                child: Lottie.asset("assets/image/BKVtkcmqbx (1).json"));
+                child: lottieSuccess());
             // Text(errorDetails.toString());
           };
           if (widget != null) return widget;
@@ -371,6 +374,7 @@ void navigateToProductDetailsOfTools(
 void navigateToProductDetailsFromSearch(
   BuildContext context,
   String productname,
+  // String thumbnail,
   String type,
 ) {
   String endpoint = "";
