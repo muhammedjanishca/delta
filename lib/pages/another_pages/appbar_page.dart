@@ -778,11 +778,14 @@ Widget custmobileDrawer(BuildContext context) {
   return ChangeNotifierProvider(
     create: (context) => DataProvider(),
     child: Theme(
-      data: ThemeData(canvasColor: Colors.black
+      data: ThemeData(
+        canvasColor: Colors.black,
           // Set the background color of the Drawer to black
           ),
       child: Drawer(
+        
         child: ListView(
+          
           children: [
             SizedBox(
               height: 50,
@@ -1006,7 +1009,7 @@ class MobileAppBar extends StatelessWidget {
         ),
         Container(
           color: colorTwo,
-          padding: EdgeInsets.only(bottom: 5, top: 5, left: 55, right: 10),
+          padding: EdgeInsets.only(bottom: 10, top: 10, left: 145, right: 10),
           height: 49,
           width: double.infinity,
           child: searchBox(context),
