@@ -21,13 +21,6 @@ class LoginPage extends StatelessWidget {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return AlertDialog(
         title: Center(
-<<<<<<< HEAD
-          child: Image.asset(
-            'assets/image/Yellow and Brown Modern Apparel Logo (9).png',
-            width: 170,
-            height: 60,
-            fit: BoxFit.cover,
-=======
           child: SizedBox(
             width: 50,
             height: 50,
@@ -37,7 +30,6 @@ class LoginPage extends StatelessWidget {
                                       // height: 10,
                                       fit: BoxFit.cover,
                                     ),
->>>>>>> 085ea971cb9c9cb0bbbb4588802666f0af49579b
           ),
         ),
         content: Container(
@@ -198,11 +190,7 @@ class LoginPage extends StatelessWidget {
                     child: Text(
                       "Forgot Password?",
                       style: GoogleFonts.inter(
-<<<<<<< HEAD
-                        color: Color.fromRGBO(249, 156, 6, 1.0),
-=======
                         color: colorTwo,
->>>>>>> 085ea971cb9c9cb0bbbb4588802666f0af49579b
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
@@ -211,32 +199,6 @@ class LoginPage extends StatelessWidget {
                 ),
                 Padding(
                     padding: const EdgeInsets.only(top: 19.0),
-<<<<<<< HEAD
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Dont'? have an account yet? ",
-                          style: GoogleFonts.inter(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpPage()));
-                          },
-                          child: Text(
-                            "Sign Up",
-                            style: GoogleFonts.inter(
-                              color: Color.fromRGBO(249, 156, 6, 1.0),
-                              fontSize: 16,
-                              //  decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w500,
-=======
                     child: FittedBox(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -246,7 +208,6 @@ class LoginPage extends StatelessWidget {
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
->>>>>>> 085ea971cb9c9cb0bbbb4588802666f0af49579b
                             ),
                           ),
                           InkWell(

@@ -1,9 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/pages/details_pages/ELPS_Accessories_details.dart';
+import 'package:firebase_hex/pages/details_pages/Ssctm_details.dart';
+import 'package:firebase_hex/pages/details_pages/accessories_product.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
+import 'package:firebase_hex/pages/product_pages/Cjtkc.dart';
+import 'package:firebase_hex/pages/product_pages/Sbcpa.dart';
+import 'package:firebase_hex/pages/product_pages/conduite.dart';
 import 'package:firebase_hex/pages/product_pages/connecters.dart';
 import 'package:firebase_hex/pages/product_pages/crimping.dart';
+import 'package:firebase_hex/pages/product_pages/elps.dart';
+import 'package:firebase_hex/pages/product_pages/elps_accessories.dart';
 import 'package:firebase_hex/pages/product_pages/gland.dart';
 import 'package:firebase_hex/pages/product_pages/lugs.dart';
+import 'package:firebase_hex/pages/product_pages/ssctm.dart';
 import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
@@ -233,7 +242,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
 
             children: [
               PlutoMenuItem(
-                title: 'Earthing & Lightning Protection',
+                title: 'Earthing & Lightning Protection ',
                 onTap: () {
                   Navigator.pushNamed(context,
                       '/earthing-lightning-protection-systems/earthing-lightning-protection/');
@@ -915,6 +924,179 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
               ],
             ),
+             Divider(),
+            ExpansionTile(
+              // collapsedBackgroundColor: janishcolor,
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
+              title: Text(
+                'Earthing & Lightning Protection Systems',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  title: Text(
+                   'Earthing & Lightning Protection',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(
+                              body: RefreshIndicator(
+                                  onRefresh: refresh, child: Elps())),
+                        ));
+                  },
+                ),
+                ListTile(
+                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  title: Text(
+                    'ELPS - Accessories',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(
+                              body: RefreshIndicator(
+                                  onRefresh: refresh,
+                                  child: ElpsAccessories())),
+                        ));
+                  },
+                ),
+              ],
+            ),
+            Divider(),
+            ExpansionTile(
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
+              title: Text(
+                'Switch Board / Control Panel Accessories',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  title: Text(
+                     'Switch Board / Control Panel Accessories',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(
+                              body: RefreshIndicator(
+                                  onRefresh: refresh,
+                                  child: SbcpaProduct())),
+                        ));
+                  },
+                ),
+              ],
+            ),
+            Divider(),
+            ExpansionTile(
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
+              title: Text(
+               'Stainless Steel Cable Ties & Markers',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  title: Text(
+                  'Stainless Steel Cable Ties & Markers',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(
+                              body: RefreshIndicator(
+                                  onRefresh: refresh,
+                                  child: SsctmProduct())),
+                        ));
+                  },
+                ),
+              ],
+            ),
+            Divider(),
+            ExpansionTile(
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
+              title: Text(
+            'Cable Support Systems',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  title: Text(
+                     'Cable Support Systems',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(
+                              body: RefreshIndicator(
+                                  onRefresh: refresh,
+                                  child: ConduitesPage())),
+                        ));
+                  },
+                ),
+              ],
+            ),
+            Divider(),
+            ExpansionTile(
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
+              title: Text(
+                'Cable Jointing & Termination Kit Components',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 17), // Set the text color to white
+              ),
+              children: [
+                ListTile(
+                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  title: Text(
+                    'Cable Jointing & Termination Kit Components',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppBarMain(
+                              body: RefreshIndicator(
+                                  onRefresh: refresh,
+                                  child: CjtkcPage())),
+                        ));
+                  },
+                ),
+              ],
+            ),
+
           ],
         ),
       ),
@@ -944,7 +1126,7 @@ class MobileAppBar extends StatelessWidget {
         SafeArea(
           child: AppBar(
             title: Container(
-              color: Colors.yellow,
+              color: colorOne,
               height: 100,
               child: Row(
                 children: [
