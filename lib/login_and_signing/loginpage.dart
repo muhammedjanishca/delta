@@ -38,59 +38,51 @@ class LoginPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                 SizedBox(
-                                  // width: MediaQuery.of(context).size.width / 1.1,
-                                  height: 50,
-                                  child: TextButton(
-                                    onPressed: () async {
-                                      value.changeIsLoadingGIn();
-                                      await value.signInWithGoogle(context);
-                                      value.changeIsLoadingGIn();
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: value.isLoadingGIn
-                                          ? [
-                                              SizedBox(
-                                                  width: 25,
-                                                  height: 25,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: Color.fromARGB(
-                                                        255, 76, 138, 131),
-                                                    strokeWidth: 2,
-                                                  ))
-                                            ]
-                                          : [
-                                              Image.asset(
-                                                  'assets/image/google.png'),
-                                              Text(
-                                                " Sign Up with Google",
-                                                style: GoogleFonts.inter(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
-                                    ),
-                                    style: ButtonStyle(
-                                        shape: MaterialStatePropertyAll(
-                                            RoundedRectangleBorder(
-                                                side: BorderSide(
-                                                    width: 0.50,
-                                                    color: Colors.black26),
-                                                borderRadius:
-                                                    BorderRadius.circular(1))),
-                                        backgroundColor:
-                                            MaterialStatePropertyAll(
-                                                Colors.white)),
-                                  ),
+                SizedBox(
+                  // width: MediaQuery.of(context).size.width / 1.1,
+                  height: 50,
+                  child: TextButton(
+                    onPressed: () async {
+                      value.changeIsLoadingGIn();
+                      await value.signInWithGoogle(context);
+                      value.changeIsLoadingGIn();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: value.isLoadingGIn
+                          ? [
+                              SizedBox(
+                                  width: 25,
+                                  height: 25,
+                                  child: CircularProgressIndicator(
+                                    color: Color.fromARGB(255, 76, 138, 131),
+                                    strokeWidth: 2,
+                                  ))
+                            ]
+                          : [
+                              Image.asset('assets/image/google.png'),
+                              Text(
+                                " Sign Up with Google",
+                                style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                                Text("or"),
+                              ),
+                            ],
+                    ),
+                    style: ButtonStyle(
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            side:
+                                BorderSide(width: 0.50, color: Colors.black26),
+                            borderRadius: BorderRadius.circular(1))),
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.white)),
+                  ),
+                ),
+                Text("or"),
                 Padding(
-                  padding: const EdgeInsets.only(top:10.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: TextFormField(
                     controller: emailTextController,
                     decoration: InputDecoration(
@@ -145,9 +137,8 @@ class LoginPage extends StatelessWidget {
                       onPressed: () async {
                         if (emailTextController.text.isEmpty ||
                             passwordTextController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                               SnackBar(
-                                  content: Text("All fields are required")));
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("All fields are required")));
                         } else {
                           value.changeIsLoading();
                           await AuthenticationHelper().logIn(
@@ -156,8 +147,7 @@ class LoginPage extends StatelessWidget {
                               context);
                           value.changeIsLoading();
                         }
-                         Navigator.pushNamed(
-                                                            context, '/');
+                        Navigator.pushNamed(context, '/');
                       },
                       child: value.isLoading
                           ? SizedBox(
@@ -188,8 +178,7 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 19.0),
                   child: InkWell(
                     onTap: () {
-                      Navigator.pushNamed(
-                            context, '/');
+                      Navigator.pushNamed(context, '/');
 
                       showDialog(
                         context: context,
