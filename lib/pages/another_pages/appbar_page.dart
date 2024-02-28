@@ -178,21 +178,28 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
       PlutoMenuItem(
         title: '   ALL CATEGORIES                          ',
         icon: Icons.menu,
+        onTap: () {
+          // Navigator.popUntil(context, ModalRoute.withName('/')); // Close all routes until root
+//  Navigator.pop(context);
+        },
         children: [
           PlutoMenuItem(
             title: 'Cable Terminal Ends',
-            // icon: Icons.group,
             onTap: () {},
             children: [
               PlutoMenuItem(
                 title: 'Lugs',
                 onTap: () {
+                  Navigator.popUntil(context,
+                      ModalRoute.withName('/')); // Close all routes until root
                   Navigator.pushNamed(context, '/cable-terminal-ends/lugs/');
                 },
               ),
               PlutoMenuItem(
                 title: 'Connectors',
                 onTap: () {
+                  Navigator.popUntil(context,
+                      ModalRoute.withName('/')); // Close all routes until root
                   Navigator.pushNamed(
                       context, '/cable-terminal-ends/connectors/');
                 },
@@ -207,6 +214,8 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
               PlutoMenuItem(
                 title: 'Glands',
                 onTap: () {
+                  Navigator.popUntil(context,
+                      ModalRoute.withName('/')); // Close all routes until root
                   Navigator.pushNamed(context,
                       '/brass-cable-gland-kits-accessories/brass-cable-glands/');
                 },
@@ -214,6 +223,9 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
               PlutoMenuItem(
                 title: 'Accessories',
                 onTap: () {
+                  Navigator.popUntil(context,
+                      ModalRoute.withName('/')); // Close all routes until root
+
                   Navigator.pushNamed(context,
                       '/brass-cable-gland-kits-accessories/brass-cable-gland-accessories/');
                 },
@@ -223,6 +235,9 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Crimping Tools',
             onTap: () {
+              Navigator.popUntil(context,
+                  ModalRoute.withName('/')); // Close all routes until root
+
               Navigator.pushNamed(context, '/crimping-tools/');
             },
           ),
@@ -235,13 +250,19 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
               PlutoMenuItem(
                 title: 'Earthing & Lightning Protection',
                 onTap: () {
+                  Navigator.popUntil(context,
+                      ModalRoute.withName('/')); // Close all routes until root
+
                   Navigator.pushNamed(context,
                       '/earthing-lightning-protection-systems/earthing-lightning-protection/');
                 },
               ),
               PlutoMenuItem(
-                title: 'ELPS - Accessories',
+                title: 'Earthing & Lightning Protection - Accessories',
                 onTap: () {
+                  Navigator.popUntil(context,
+                      ModalRoute.withName('/')); // Close all routes until root
+
                   Navigator.pushNamed(context,
                       '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/');
                 },
@@ -251,6 +272,9 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Switch Board / Control Panel Accessories',
             onTap: () {
+              Navigator.popUntil(context,
+                  ModalRoute.withName('/')); // Close all routes until root
+
               Navigator.pushNamed(
                   context, '/switch-board-control-panel-accessories/');
             },
@@ -258,6 +282,9 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Stainless Steel Cable Ties & Markers',
             onTap: () {
+              Navigator.popUntil(context,
+                  ModalRoute.withName('/')); // Close all routes until root
+
               Navigator.pushNamed(
                   context, '/Stainless Steel Cable Ties & Markers');
             },
@@ -275,12 +302,18 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
           PlutoMenuItem(
             title: 'Cable Support Systems',
             onTap: () {
+              Navigator.popUntil(context,
+                  ModalRoute.withName('/')); // Close all routes until root
+
               Navigator.pushNamed(context, '/cable-support-systems/');
             },
           ),
           PlutoMenuItem(
             title: 'Cable Jointing & Termination Kit Components',
             onTap: () {
+              Navigator.popUntil(context,
+                  ModalRoute.withName('/')); // Close all routes until root
+
               Navigator.pushNamed(
                   context, '/cable-jointing-and-termination-kit-components/');
             },
@@ -292,7 +325,6 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);
     final selectedThumbnailProvider =
@@ -337,8 +369,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                           // Navigate to the named route '/your_destination_screen'
                           Navigator.pushNamed(context, '/');
                         },
-                        child:
-                         Image.network(
+                        child: Image.network(
                           "https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png",
                           width: 290,
                           height: 60,
@@ -361,7 +392,7 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                                 10, // If the screen width is 600 or greater, set width to 1/8 of the screen width
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.height/3,
+                        width: MediaQuery.of(context).size.height / 3,
                         child: FittedBox(
                           child: Row(
                             children: [
@@ -372,7 +403,8 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                                 child: InkWell(
                                   child: Text(
                                     'Home',
-                                    style: GoogleFonts.poppins(color: textColor),
+                                    style:
+                                        GoogleFonts.poppins(color: textColor),
                                   ),
                                   onTap: () {
                                     Navigator.pushNamed(context, '/');
@@ -387,7 +419,8 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                                 child: InkWell(
                                   child: Text(
                                     'About Us',
-                                    style: GoogleFonts.poppins(color: textColorr),
+                                    style:
+                                        GoogleFonts.poppins(color: textColorr),
                                   ),
                                   onTap: () {
                                     Navigator.pushNamed(context, '/');
@@ -402,13 +435,15 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                                 child: InkWell(
                                   child: Text(
                                     'Contact Us',
-                                    style: GoogleFonts.poppins(color: textColorrr),
+                                    style:
+                                        GoogleFonts.poppins(color: textColorrr),
                                   ),
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ContactUsPage()),
+                                          builder: (context) =>
+                                              ContactUsPage()),
                                     );
                                   },
                                 ),
@@ -568,11 +603,10 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
                 Container(
                   height: 45,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: colorTwo
-                    //  Color.fromRGBO(233, 119, 19, 0.922),
-                    // color: Deltacolor,
-                  ),
+                  decoration: BoxDecoration(color: colorTwo
+                      //  Color.fromRGBO(233, 119, 19, 0.922),
+                      // color: Deltacolor,
+                      ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -782,11 +816,10 @@ Widget custmobileDrawer(BuildContext context) {
           // Set the background color of the Drawer to black
           ),
       child: Drawer(
+        backgroundColor: colorOne,
         child: ListView(
           children: [
-            SizedBox(
-              height: 50,
-            ),
+            Gap(25),
             ExpansionTile(
               // collapsedBackgroundColor: janishcolor,
               iconColor: Colors.white,
@@ -800,7 +833,7 @@ Widget custmobileDrawer(BuildContext context) {
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  hoverColor: colorTwo,
                   title: Text(
                     'Lugs',
                     style: TextStyle(color: Colors.white),
@@ -940,9 +973,11 @@ class MobileAppBar extends StatelessWidget {
       children: [
         SafeArea(
           child: AppBar(
+             elevation: 10,
+            backgroundColor: colorTwo,
             title: Container(
-              color: Colors.yellow,
-              height: 100,
+              // color: Colors.yellow,
+              // height: 100,
               child: Row(
                 children: [
                   InkWell(
@@ -954,7 +989,7 @@ class MobileAppBar extends StatelessWidget {
                         height: 100,
                         width: 170,
                         child: Image.network(
-                          "https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png",
+                          "https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-04.png",
                           // width: 30,
                           // height: 10,
                           // fit: BoxFit.cover,
@@ -975,12 +1010,53 @@ class MobileAppBar extends StatelessWidget {
                             foregroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromARGB(255, 194, 192, 192)),
                           ),
-                          child: Text(
-                            'SignUp/SignIn',
-                            style: TextStyle(color: Colors.black, fontSize: 11),
-                          ),
+                          child:  Text("Login",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          // fontSize: 16,
+                                        ),
+                                      )),
                         )
-                      : SizedBox(),
+                      :TextButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Are you sure to logout?"),
+                                      // content: Text("This is my message."),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('Cancel')),
+                                        TextButton(
+                                            onPressed: () {
+                                              FirebaseAuth.instance.signOut();
+                                              // Navigator.pop(context);
+
+                                              Navigator.pushNamed(context, '/');
+                                            },
+                                            child: Text('Yes'))
+                                      ],
+                                    );
+                                  },
+                                );
+                                // FirebaseAuth.instance.signOut();
+                              },
+                              child: Text(
+                                'Logout',
+                                style: GoogleFonts.poppins(color: Colors.white),
+                              )),
+                              Gap(2),
+                               Container(
+                        height: 13,
+                        width: .5,
+                        color: Colors.white,
+                      ),
+                       Gap(12),
                   GestureDetector(
                     onTap: () {
                       user != null
@@ -998,22 +1074,30 @@ class MobileAppBar extends StatelessWidget {
                           style: TextStyle(color: Colors.white),
                         ),
                         child: Icon(
-                          Icons.shopping_bag_outlined,
-                          color: Colors.black,
+                          Icons.shopping_cart_outlined,
+                          color: Colors.white,
                         )),
                   ),
                 ],
               ),
             ),
-            backgroundColor:colorOne
           ),
         ),
         Container(
           color: colorTwo,
-          padding: EdgeInsets.only(bottom: 5, top: 5, left: 55, right: 10),
-          height: 49,
+          height: 78,
           width: double.infinity,
-          child: searchBox(context),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: 50,
+                child: searchBox(context),
+                ),
+                // Gap(25)
+            ],
+          ),
         ),
       ],
     );

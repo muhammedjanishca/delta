@@ -1,6 +1,7 @@
 import 'package:firebase_hex/main.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/search_api.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +15,7 @@ Widget searchBox(BuildContext context) {
     height: MediaQuery.of(context).size.height / 18,
     decoration: BoxDecoration(
       
-        borderRadius: BorderRadius.circular(4), color: Color.fromARGB(255, 242, 240, 240),),
+        borderRadius: BorderRadius.circular(4), color: colorOne,),
     child: Row(
       children: [
         Expanded(
@@ -57,12 +58,12 @@ Widget searchBox(BuildContext context) {
               final type = suggestion['type'];
               final productNameWithUnderscores =
                   productName.replaceAll(" ", "_");
-              // final thumbnail = suggestion["thumbnail"];
+              final thumbnail = suggestion["thumbnail"];
                
               selectedThumbnailProvider.setSelectedThumbnail("", index: null);
         
               navigateToProductDetailsFromSearch(
-                  context, productNameWithUnderscores, type);
+                  context, productNameWithUnderscores, type,thumbnail);
             },
           ),
         ),

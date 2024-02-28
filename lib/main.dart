@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         title: "TRANS DELTA TRADING",
-        theme: ThemeData(primaryColor: const Color.fromARGB(255, 206, 205, 202)),
+        theme: ThemeData(primaryColor: colorOne),
         //this use using for handle null data
         builder: (context, widget) {
           Widget error = Container(
@@ -374,7 +374,7 @@ void navigateToProductDetailsOfTools(
 void navigateToProductDetailsFromSearch(
   BuildContext context,
   String productname,
-  // String thumbnail,
+  String thumbnail,
   String type,
 ) {
   String endpoint = "";

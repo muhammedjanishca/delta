@@ -35,18 +35,31 @@ class _DesktopLandingState extends State<DesktopLanding> {
 
   List<String> imageUrls = [
     // 'assets/image/lugs 4.jpg',
-    'assets/image/landing.jpg',
+    // 'assets/image/landing.jpg',
     'assets/image/glands 4.png',
-    'assets/image/crimping tools 3.jpg',
+    'assets/image/Al.-Compression-Cable-Lugs-As-Per-Din-46329-New-1-300x262.jpg',
+    'assets/image/crimping tools 5.jpg',
     'assets/image/accessories 3.jpg',
-    'assets/image/connectors 2.jpg'
+    'assets/image/x-mm-wheel-connector-dc-gear-motor-hex-coupling-for-robot-robotics-with-screws-1_2048x2048.webp',
+        // 'assets/image/glands 4.png',
+
+    // 'assets/image/crimping tools 3.jpg',
+    // 'assets/image/accessories 3.jpg',
+    // 'assets/image/connectors 2.jpg'
   ];
   List<String> textindex = [
-    'LUGS',
-    'GALNDS',
-    'CRIMPING TOOL',
-    'ACCESSORIES',
-    'CONNECTERS',
+    'Glands',
+    'Lugs',
+    'Crimping Tool',
+    'Accessories',
+    'Connecters',
+  ];
+  List<String> descriptionCarosal = [
+    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
+    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
+    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
+    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
+    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
   ];
 
   @override
@@ -86,7 +99,6 @@ class _DesktopLandingState extends State<DesktopLanding> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -114,8 +126,8 @@ class _DesktopLandingState extends State<DesktopLanding> {
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
                       image: kHeroImage,
-                      // height: height,
-                      // width: width,
+                      height: height,
+                      width: width,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -212,7 +224,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                   //     ),
                   //   ),
                   // ),
-                 
+
                   SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
@@ -223,7 +235,8 @@ class _DesktopLandingState extends State<DesktopLanding> {
                             children: [
                               SizedBox(
                                 // color: Colors.amber,
-                                height: MediaQuery.of(context).size.height / 9.7,
+                                height:
+                                    MediaQuery.of(context).size.height / 9.7,
                               ),
                               Row(
                                 // crossAxisAlignment: CrossAxisAlignment.center,
@@ -240,7 +253,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                       ),
                                     ),
                                   ),
-                                   Text(
+                                  Text(
                                     "The New",
                                     // "EXPERIENCE THE NEW",
                                     style: GoogleFonts.poppins(
@@ -254,8 +267,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                 ],
                               ),
                               Row(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
-
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     // "DELTA PREMIUM PRODUCTS",
@@ -268,7 +280,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                       ),
                                     ),
                                   ),
-                                   Text(
+                                  Text(
                                     // "DELTA PREMIUM PRODUCTS",
                                     "Premium Products.",
                                     style: GoogleFonts.poppins(
@@ -281,48 +293,49 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                   ),
                                 ],
                               ),
-                               SizedBox(
+                              SizedBox(
                                 // color: Colors.blue,
-                                    height: height /2,
-                                    width: width / 1,
-                                    // color: Colors.white,
-                                    child: Center(
-                                      child: AnimatedTextKit(
-                                        totalRepeatCount: 40,
-                                        animatedTexts: [
-                                          RotateAnimatedText(
-                                              '   tested\nproducts'.toUpperCase(),
-                                                  // .toUpperCase(),
-                                              textStyle:  GoogleFonts.poppins(
-                                                  letterSpacing: 3,
-                                                  fontSize: 80,
-                                                  fontWeight: FontWeight.bold,
-                                                  color:const Color.fromARGB(255, 217, 220, 60),
-                                                  )),
-                                          RotateAnimatedText(
-                                            'efficient\n service'.toUpperCase(),
-                                            textStyle:  GoogleFonts.poppins(
-                                                fontSize: 80.0,
-                                                fontWeight: FontWeight.bold,
-                                                  color:const Color.fromARGB(255, 217, 220, 60),
-
-                                                ),
-                                          ),
-                                          RotateAnimatedText(
-                                            'trusted\n  brand'.toUpperCase(),
-                                            duration: const Duration(
-                                                milliseconds: 4000),
-                                            textStyle:  GoogleFonts.poppins(
-                                                fontSize: 80.0,
-                                                fontWeight: FontWeight.bold,
-                                                  color:const Color.fromARGB(255, 217, 220, 60),
-
-                                                ),
-                                          ),
-                                        ],
+                                height: height / 2,
+                                width: width / 1,
+                                // color: Colors.white,
+                                child: Center(
+                                  child: AnimatedTextKit(
+                                    totalRepeatCount: 40,
+                                    animatedTexts: [
+                                      RotateAnimatedText(
+                                          '   tested\nproducts'.toUpperCase(),
+                                          // .toUpperCase(),
+                                          textStyle: GoogleFonts.poppins(
+                                            letterSpacing: 3,
+                                            fontSize: 80,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color.fromARGB(
+                                                255, 217, 220, 60),
+                                          )),
+                                      RotateAnimatedText(
+                                        'efficient\n service'.toUpperCase(),
+                                        textStyle: GoogleFonts.poppins(
+                                          fontSize: 80.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromARGB(
+                                              255, 217, 220, 60),
+                                        ),
                                       ),
-                                    ),
+                                      RotateAnimatedText(
+                                        'trusted\n  brand'.toUpperCase(),
+                                        duration:
+                                            const Duration(milliseconds: 4000),
+                                        textStyle: GoogleFonts.poppins(
+                                          fontSize: 80.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromARGB(
+                                              255, 217, 220, 60),
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                ),
+                              ),
                               const Gap(10),
                               // SizedBox(
                               //     width: MediaQuery.of(context).size.width / 3,
@@ -406,7 +419,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                               ),
                               Text(
                                 'Our Products'.toUpperCase(),
-                                style:  GoogleFonts.poppins(
+                                style: GoogleFonts.poppins(
                                   color: Color.fromARGB(255, 4, 4, 4),
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -455,7 +468,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                           top: 100,
                                           left: 20,
                                           child: FittedBox(
-                                            child: Container(
+                                            child: SizedBox(
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -463,17 +476,17 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                   Text(
                                                     'Cable Terminal Ends'
                                                         .toUpperCase(),
-                                                    style:  TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color:colorTwo,
+                                                      color: colorTwo,
                                                       fontSize: 20,
                                                     ),
                                                   ),
-                                                   Text(
+                                                  Text(
                                                     "\nHEX is renowned for its superior quality\nof brass cable gland kits in the global market.",
-                                                    style:
-                                                        GoogleFonts.poppins(fontSize: 16),
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 16),
                                                   ),
                                                   const Gap(15),
                                                   if (isHovered)
@@ -496,7 +509,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                         120,
                                                                         50)),
                                                           ),
-                                                          child:  Text(
+                                                          child: Text(
                                                             'CONNECTORS',
                                                             style: TextStyle(
                                                                 color: colorTwo,
@@ -522,8 +535,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                             backgroundColor:
                                                                 MaterialStateProperty
                                                                     .all(
-                                                        colorTwo
-                                                            ),
+                                                                        colorTwo),
                                                             minimumSize:
                                                                 MaterialStateProperty
                                                                     .all(const Size(
@@ -606,10 +618,10 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                   Text(
                                                     "Brass Cable Gland Kits"
                                                         .toUpperCase(),
-                                                    style:  TextStyle(
+                                                    style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color:colorTwo,
+                                                      color: colorTwo,
                                                       fontSize: 20,
                                                     ),
                                                   ),
@@ -639,10 +651,10 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                         120,
                                                                         50)),
                                                           ),
-                                                          child:  Text(
+                                                          child: Text(
                                                             'ACCESSORIES',
                                                             style: TextStyle(
-                                                                color:colorTwo,
+                                                                color: colorTwo,
                                                                 fontSize: 14),
                                                           ),
                                                         ),
@@ -665,8 +677,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                             backgroundColor:
                                                                 MaterialStateProperty
                                                                     .all(
-                                                              colorTwo
-                                                            ),
+                                                                        colorTwo),
                                                             minimumSize:
                                                                 MaterialStateProperty
                                                                     .all(const Size(
@@ -710,21 +721,35 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                 height: MediaQuery.of(context).size.height / 6,
                                 width: MediaQuery.of(context).size.width,
                               ),
-                              FittedBox(
-                                child: Container(
-                                  color:
-                                      const Color.fromARGB(255, 236, 242, 242),
-                                  height:
-                                      MediaQuery.of(context).size.height / 1.1,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Row(
-                                    children: [
-                                      MouseRegion(
-                                        onEnter: (_) =>
-                                            setState(() => issHovered = true),
-                                        onExit: (_) =>
-                                            setState(() => issHovered = false),
-                                        child: Stack(children: [
+                              Container(
+                                color: const Color.fromARGB(255, 236, 242, 242),
+                                height:
+                                    MediaQuery.of(context).size.height / 1.1,
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    MouseRegion(
+                                      onEnter: (_) =>
+                                          setState(() => issHovered = true),
+                                      onExit: (_) =>
+                                          setState(() => issHovered = false),
+                                      child: Stack(children: [
+                                        FittedBox(
+                                          child: SizedBox(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  1.1,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2,
+                                              child: Image.asset(
+                                                  'assets/image/glands 4.png',
+                                                  fit: BoxFit.fill)),
+                                        ),
+                                        if (issHovered)
                                           FittedBox(
                                             child: SizedBox(
                                                 height: MediaQuery.of(context)
@@ -736,96 +761,72 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                         .width /
                                                     2,
                                                 child: Image.asset(
-                                                    'assets/image/glands 4.png',
+                                                    'assets/image/glands 2.png',
                                                     fit: BoxFit.fill)),
                                           ),
-                                          if (issHovered)
-                                            FittedBox(
-                                              child: SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height /
-                                                      1.1,
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2,
-                                                  child: Image.asset(
-                                                      'assets/image/glands 2.png',
-                                                      fit: BoxFit.fill)),
-                                            ),
-                                        ]),
+                                      ]),
+                                    ),
+                                    SizedBox(
+                                      child: Row(
+                                        children: [
+                                          Gap(75),
+                                          Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                3,
+                                            width: 10,
+                                            color: Colors.yellow,
+                                          ),
+                                          Gap(15),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Where the',
+                                                style: GoogleFonts.workSans(
+                                                    fontSize: 45,
+                                                    color: Color.fromARGB(
+                                                        255, 30, 30, 30),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text(
+                                                'world of',
+                                                style: GoogleFonts.workSans(
+                                                    fontSize: 45,
+                                                    color: Color.fromARGB(
+                                                        255, 51, 51, 51),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text(
+                                                'construction',
+                                                style: GoogleFonts.workSans(
+                                                    fontSize: 45,
+                                                    color: const Color.fromARGB(
+                                                        255, 129, 129, 129),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text(
+                                                'gets together',
+                                                style: GoogleFonts.workSans(
+                                                    fontSize: 45,
+                                                    color: const Color.fromARGB(
+                                                        255, 184, 183, 183),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                      Container(
-                                        child: Row(
-                                          children: [
-                                            Gap(75),
-                                            Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  3,
-                                              width: 10,
-                                              color: Colors.yellow,
-                                            ),
-                                            Gap(15),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Where the',
-                                                  style: GoogleFonts.workSans(
-                                                      fontSize: 45,
-                                                      color: Color.fromARGB(
-                                                          255, 30, 30, 30),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  'world of',
-                                                  style: GoogleFonts.workSans(
-                                                      fontSize: 45,
-                                                      color: Color.fromARGB(
-                                                          255, 51, 51, 51),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  'construction',
-                                                  style: GoogleFonts.workSans(
-                                                      fontSize: 45,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              129,
-                                                              129,
-                                                              129),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  'gets together',
-                                                  style: GoogleFonts.workSans(
-                                                      fontSize: 45,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              184,
-                                                              183,
-                                                              183),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
                               ),
                               SizedBox(
@@ -892,392 +893,537 @@ class _DesktopLandingState extends State<DesktopLanding> {
           ),
         );
       } else {
-        return Material(
-            color: Colors.black,
-            child: NotificationListener<ScrollNotification>(
-              onNotification: updateOffsetAccordingToScroll,
-              child: ScrollConfiguration(
-                  behavior: NoScrollGlow(),
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                          top: -.25 * offset,
-                          child: FadeInImage.memoryNetwork(
-                            placeholder: kTransparentImage,
-                            image: kHeroImage,
-                            fit: BoxFit.fitWidth,
-                          )),
-                      // Positioned(
-                      //   top: -.25 * offset,
-                      //   child: SizedBox(
-                      //     // color: Colors.yellow,
-                      //     height: 600,
-                      //     width: width,
-                      //     child: Align(
-                      //       alignment: const Alignment(0, 0),
-                      //       child: Padding(
-                      //         padding: EdgeInsets.symmetric(horizontal: 40),
-                      //         child: Column(
-                      //           mainAxisAlignment: MainAxisAlignment.center,
-                      //           crossAxisAlignment: CrossAxisAlignment.center,
-                      //           children: [
-                      //             SizedBox(
-                      //               height: MediaQuery.of(context).size.height *
-                      //                   0.10,
-                      //             ),
-                      //             // Gap(45),
-                      //             Text(
-                      //               "EXPERIENCE THE NEW DELTA PREMIUM PRODUCTS",
-                      //               style: GoogleFonts.abrilFatface(
-                      //                 textStyle: const TextStyle(
-                      //                   color: Colors.white,
-                      //                   fontSize: 25,
-                      //                   // shadows: <Shadow>[
-                      //                   // Shadow(
-                      //                   //   offset: Offset(2.0, 2.0),
-                      //                   //   blurRadius: 3.0,
-                      //                   //   color: Colors.grey.withOpacity(0.5),
-                      //                   // )
-                      //                   // ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             // Text(
-                      //             //   "DELTA PREMIUM PRODUCTS",
-                      //             //   style: GoogleFonts.abrilFatface(
-                      //             //     textStyle: const TextStyle(
-                      //             //       color: Colors.white,
-                      //             //       fontSize: 25,
-                      //             //       shadows: <Shadow>[
-                      //             //         // Shadow(
-                      //             //         //   offset: Offset(2.0, 2.0),
-                      //             //         //   blurRadius: 3.0,
-                      //             //         //   color: Colors.grey.withOpacity(0.5),
-                      //             //         // )
-                      //             //       ],
-                      //             //     ),
-                      //             //   ),
-                      //             // ),
-                      //             const Text(
-                      //               "\nTested Products | Efficient Service | Trusted Brand\n",
-                      //               style: TextStyle(
-                      //                 fontSize: 20,
-                      //                 fontWeight: FontWeight.w400,
-                      //                 color: Colors.white,
-                      //               ),
-                      //             ),
-                      //             SizedBox(
-                      //               height: height / 3.5,
-                      //               width: width / 1,
-                      //               // color: Colors.white,
-                      //               child:
-                      //                   //  AnimatedTextKit(
-                      //                   //               animatedTexts: [
-                      //                   //                 RotateAnimatedText('AWESOME',
-                      //                   //                     textStyle: TextStyle(
-                      //                   //                         fontSize: 30,
-                      //                   //                         color: Colors.white,
-                      //                   //                         backgroundColor: Colors.blue)),
-                      //                   //                 RotateAnimatedText('OPTIMISTIC',
-                      //                   //                     textStyle: TextStyle(
-                      //                   //                         letterSpacing: 3,
-                      //                   //                         fontSize: 30,
-                      //                   //                         fontWeight: FontWeight.bold,
-                      //                   //                         color: Colors.orange)),
-                      //                   //                 RotateAnimatedText(
-                      //                   //                   'DIFFERENT',
-                      //                   //                   textStyle: TextStyle(
-                      //                   //                     fontSize: 30,
-                      //                   //                     decoration: TextDecoration.underline,
-                      //                   //                   ),
-                      //                   //                 ),
-                      //                   //               ],
-                      //                   //               isRepeatingAnimation: true,
-                      //                   //               totalRepeatCount: 10,
-                      //                   //               pause: Duration(milliseconds: 1000),
-                      //                   //             ),
-                      //                   Center(
-                      //                 child: AnimatedTextKit(
-                      //                   totalRepeatCount: 40,
-                      //                   animatedTexts: [
-                      //                     RotateAnimatedText(
-                      //                         'Trans Delta Trading'
-                      //                             .toUpperCase(),
-                      //                         textStyle: const TextStyle(
-                      //                             letterSpacing: 3,
-                      //                             // fontSize: 30,
-                      //                             fontWeight: FontWeight.bold,
-                      //                             color: Colors.orange)),
-                      //                     FadeAnimatedText(
-                      //                       'Powering Progress: Your Source for Premium Electrical Solutions',
-                      //                       textStyle: const TextStyle(
-                      //                           color: Color.fromARGB(
-                      //                               255, 243, 149, 35),
-                      //                           // fontSize: 25.0,
-                      //                           fontWeight: FontWeight.bold),
-                      //                     ),
-                      //                     ScaleAnimatedText(
-                      //                       'We are introducing our products',
-                      //                       duration: const Duration(
-                      //                           milliseconds: 4000),
-                      //                       textStyle: const TextStyle(
-                      //                         color: Colors.white,
-                      //                         // fontSize: 50.0
-                      //                       ),
-                      //                     ),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             // const SizedBox(height: 20),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                          color: Colors.transparent,
-                          height: height,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 5.7,
-                              ),
-                              Text(
-                                "Experience the new",
-                                // "EXPERIENCE THE NEW",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                // "DELTA PREMIUM PRODUCTS",
-                                "Delta premium products",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                "\nTested Products | Efficient Service | Trusted Brand",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Gap(10),
-                              SizedBox(
-                                  width: MediaQuery.of(context).size.width / 1.5,
-                                  child:
-                                      TypeAheadFormField<Map<String, dynamic>>(
-                                    textFieldConfiguration:
-                                        TextFieldConfiguration(
-                                      decoration: InputDecoration(
-                                          hintText: 'Search here...',
-                                          hintStyle: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 16,
+        return SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Stack(
+                  children:[ SizedBox(
+                    height: MediaQuery.of(context).size.height / 2,
+                    child: Image.network(
+                      'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/image+(2).png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    child: Column(
+                      children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/17,
+                      ),
+                        Row(
+                                    // crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Experience ",
+                                        // "EXPERIENCE THE NEW",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 21,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          fillColor: Color.fromARGB(
-                                              255, 249, 250, 210),
-                                          filled: true,
-                                          prefixIcon: Icon(
-                                            Icons.search,
-                                            color: Color.fromARGB(
-                                                221, 101, 101, 101),
-                                          ),
-                                          suffixIcon: ElevatedButton(
-                                              onPressed: () {},
-                                              child: Text("Search"))),
-                                    ),
-                                    suggestionsCallback: (query) async {
-                                      // Only call the fetchData() method if the search query is not empty.
-                                      if (query.isNotEmpty) {
-                                        return await productProvider
-                                            .fetchData(query);
-                                      } else {
-                                        return [];
-                                      }
-                                    },
-                                    itemBuilder: (context, suggestion) {
-                                      return SizedBox(
-                                        child: ListTile(
-                                          leading: CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                suggestion['thumbnail']),
-                                          ),
-                                          title:
-                                              Text(suggestion['product_name']),
                                         ),
-                                      );
-                                    },
-                                    onSuggestionSelected: (suggestion) {
-                                      final productName =
-                                          suggestion['product_name'];
-                                      final type = suggestion['type'];
-                                      final productNameWithUnderscores =
-                                          productName.replaceAll(" ", "_");
-                                      // final thumbnail = suggestion["thumbnail"];
-
-                                      selectedThumbnailProvider
-                                          .setSelectedThumbnail("",
-                                              index: null);
-
-                                      navigateToProductDetailsFromSearch(
-                                          context,
-                                          productNameWithUnderscores,
-                                          type);
-                                    },
-                                  ))
-                            ],
+                                      ),
+                                      Text(
+                                        "The New",
+                                        // "EXPERIENCE THE NEW",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 21,
+                                            // fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                   Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    // "DELTA PREMIUM PRODUCTS",
+                                    "Delta ",
+                                    style: GoogleFonts.poppins(
+                                      textStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21,
+                                        // fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    // "DELTA PREMIUM PRODUCTS",
+                                    "Premium Products.",
+                                    style: GoogleFonts.poppins(
+                                      textStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                               SizedBox(
+                                // color: Colors.blue,
+                                height: height / 3,
+                                width: width / 1,
+                                // color: Colors.white,
+                                child: Center(
+                                  child: AnimatedTextKit(
+                                    totalRepeatCount: 50,
+                                    animatedTexts: [
+                                      RotateAnimatedText(
+                                          '   tested\nproducts'.toUpperCase(),
+                                          // .toUpperCase(),
+                                          textStyle: GoogleFonts.poppins(
+                                            letterSpacing: 3,
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color.fromARGB(
+                                                255, 217, 220, 60),
+                                          )),
+                                      RotateAnimatedText(
+                                        'efficient\n service'.toUpperCase(),
+                                        textStyle: GoogleFonts.poppins(
+                                          fontSize: 40.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromARGB(
+                                              255, 217, 220, 60),
+                                        ),
+                                      ),
+                                      RotateAnimatedText(
+                                        'trusted\n  brand'.toUpperCase(),
+                                        duration:
+                                            const Duration(milliseconds: 4000),
+                                        textStyle: GoogleFonts.poppins(
+                                          fontSize: 40.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromARGB(
+                                              255, 217, 220, 60),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                      ],
+                    ),
+                               ),
+                              
+                  ],
+                  
+                ),
+                Container(
+                    width: width,
+                    height: height/1.1,
+                    color: colorOne,
+                    child: Column(
+                      children: [
+                        Gap(35),
+                        Text(
+                          'What are we offering'.toUpperCase(),
+                          style: GoogleFonts.quicksand(
+                            color:colorTwo,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
                           ),
                         ),
-                            Container(
-                                width: width,
-                                color: Colors.white,
-                                child: Column(
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Gap(35),
-                                    Text(
-                                      'What are we offering'.toUpperCase(),
-                                      style: GoogleFonts.quicksand(
-                                        color: const Color.fromARGB(
-                                            255, 156, 155, 155),
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                      
+                        Gap(25),
+                        Container(
+                          color: colorOne,
+                          height: 450,
+                          child: PageView.builder(
+                            controller: pageController,
+                            itemCount: imageUrls.length,
+                            itemBuilder: (context, index) {
+                              debugPrint("{-pageOffSet.abs() + index}");
+                              return GestureDetector(
+                                onTap: () {
+                                  _navigateToPage(context, index);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: SizedBox(
+                                          height: 350,
+                                          child: Image.asset(
+                                            imageUrls[index],
+                                            fit: BoxFit.cover,
+                                            alignment: Alignment(
+                                                -pageOffSet.abs() + index, 0),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'Our Products'.toUpperCase(),
-                                      style: const TextStyle(
-                                        color: Color.fromARGB(255, 4, 4, 4),
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Gap(35),
-                                    SizedBox(
-                                      height: 450,
-                                      child: PageView.builder(
-                                        controller: pageController,
-                                        itemCount: imageUrls.length,
-                                        itemBuilder: (context, index) {
-                                          debugPrint(
-                                              "{-pageOffSet.abs() + index}");
-                                          return GestureDetector(
-                                            onTap: () {
-                                              _navigateToPage(context, index);
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(6.0),
-                                              child: Stack(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    child: SizedBox(
-                                                      height: 350,
-                                                      child: Image.asset(
-                                                        imageUrls[index],
-                                                        fit: BoxFit.cover,
-                                                        alignment: Alignment(
-                                                            -pageOffSet.abs() +
-                                                                index,
-                                                            0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    bottom: 20,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              15),
-                                                      child: Text(
-                                                        textindex[index],
-                                                        style: const TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              137,
-                                                              137,
-                                                              137),
-                                                          fontSize: 22,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                      Positioned(
+                                        bottom: 40,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15),
+                                          child: Text(
+                                            textindex[index],
+                                            style:  GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                          );
-                                        },
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )),
-                            Container(
-                                color: Colors.white,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Gap(15),
-                                    Image.asset(
-                                        'assets/image/hex-logo-new.png'),
-                                    const Gap(15),
-                                    const Padding(
-                                      padding: EdgeInsets.only(left: 15),
-                                      child: Text(
-                                        "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w700),
+                                       Positioned(
+                                        bottom: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15),
+                                          child: Text(
+                                                descriptionCarosal[index],
+                                                style: GoogleFonts.poppins(),
+                                              )
+                                        ),
                                       ),
-                                    )
-                                    // Text(
-                                    //   "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
-                                    //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
-                                    // )
-                                  ],
-                                )),
-                            Container(
-                                width: double.infinity,
-                                color: Colors.white,
-                                child: Image.network(
-                                    "https://www.lkea.in/assets/images/about/2.jpg")),
-                            Container(
-                                width: double.infinity,
-                                child: MediaQuery.of(context).size.width >= 700
-                                    ? const deskBottomSheett()
-                                    : const mobiledeskBottomSheett())
-                          ],
+                                      
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
+                      ],
                       )
-                    ],
-                  )),
-            ));
+                    ),
+                    Container(
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Gap(15),
+                                Image.asset('assets/image/hex-logo-new.png',
+                                width: 100,
+                                height: 100,),
+                                const Gap(25),
+                                 Text(
+                                   'Renowed Manufactures Of',
+                                   // "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
+                                   style: GoogleFonts.raleway(
+                                       fontSize: 25,
+                                       fontWeight: FontWeight.w500),
+                                 ),
+                                 Text(
+                                   'World Class Electrical',
+                                   // "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
+                                   style: GoogleFonts.raleway(
+                                       fontSize: 25,
+                                       fontWeight: FontWeight.w500),
+                                 ),
+                                 Text(
+                                   'And Brass Components',
+                                   // "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
+                                   style: GoogleFonts.raleway(
+                                       fontSize: 25,
+                                       fontWeight: FontWeight.w500),
+                                 )
+                                // Text(
+                                //   "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                                //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                                // )
+                              ],
+                            )),
+                        Container(
+                            width: double.infinity,
+                            color: Colors.white,
+                            child: Image.network(
+                                "https://www.lkea.in/assets/images/about/2.jpg")),
+                        Container(
+                            width: double.infinity,
+                            child: MediaQuery.of(context).size.width >= 700
+                                ? const deskBottomSheett()
+                                : const mobiledeskBottomSheett())
+              ],
+            ),
+          ),
+        );
       }
+      //    Material(
+      //       // color: Colors.black,
+      //       child: NotificationListener<ScrollNotification>(
+      //     onNotification: updateOffsetAccordingToScroll,
+      //     child: ScrollConfiguration(
+      //         behavior: NoScrollGlow(),
+      //         child: Stack(
+      //           children: <Widget>[
+      //             Positioned(
+      //                 bottom:200,
+      //                 child: FadeInImage.memoryNetwork(
+      //                   placeholder: kTransparentImage,
+      //                   image: kHeroImage,
+      //                          height: height,
+      //                   width: width,
+      //                   fit: BoxFit.fitWidth,
+      //                 )),
+      //             // Positioned(
+      //             //   top: -.25 * offset,
+      //             //   child: SizedBox(
+      //             //     // color: Colors.yellow,
+      //             //     height: 600,
+      //             //     width: width,
+      //             //     child: Align(
+      //             //       alignment: const Alignment(0, 0),
+      //             //       child: Padding(
+      //             //         padding: EdgeInsets.symmetric(horizontal: 40),
+      //             //         child: Column(
+      //             //           mainAxisAlignment: MainAxisAlignment.center,
+      //             //           crossAxisAlignment: CrossAxisAlignment.center,
+      //             //           children: [
+      //             //             SizedBox(
+      //             //               height: MediaQuery.of(context).size.height *
+      //             //                   0.10,
+      //             //             ),
+      //             //             // Gap(45),
+      //             //             Text(
+      //             //               "EXPERIENCE THE NEW DELTA PREMIUM PRODUCTS",
+      //             //               style: GoogleFonts.abrilFatface(
+      //             //                 textStyle: const TextStyle(
+      //             //                   color: Colors.white,
+      //             //                   fontSize: 25,
+      //             //                   // shadows: <Shadow>[
+      //             //                   // Shadow(
+      //             //                   //   offset: Offset(2.0, 2.0),
+      //             //                   //   blurRadius: 3.0,
+      //             //                   //   color: Colors.grey.withOpacity(0.5),
+      //             //                   // )
+      //             //                   // ],
+      //             //                 ),
+      //             //               ),
+      //             //             ),
+      //             //             // Text(
+      //             //             //   "DELTA PREMIUM PRODUCTS",
+      //             //             //   style: GoogleFonts.abrilFatface(
+      //             //             //     textStyle: const TextStyle(
+      //             //             //       color: Colors.white,
+      //             //             //       fontSize: 25,
+      //             //             //       shadows: <Shadow>[
+      //             //             //         // Shadow(
+      //             //             //         //   offset: Offset(2.0, 2.0),
+      //             //             //         //   blurRadius: 3.0,
+      //             //             //         //   color: Colors.grey.withOpacity(0.5),
+      //             //             //         // )
+      //             //             //       ],
+      //             //             //     ),
+      //             //             //   ),
+      //             //             // ),
+      //             //             const Text(
+      //             //               "\nTested Products | Efficient Service | Trusted Brand\n",
+      //             //               style: TextStyle(
+      //             //                 fontSize: 20,
+      //             //                 fontWeight: FontWeight.w400,
+      //             //                 color: Colors.white,
+      //             //               ),
+      //             //             ),
+      //             //             SizedBox(
+      //             //               height: height / 3.5,
+      //             //               width: width / 1,
+      //             //               // color: Colors.white,
+      //             //               child:
+      //             //                   //  AnimatedTextKit(
+      //             //                   //               animatedTexts: [
+      //             //                   //                 RotateAnimatedText('AWESOME',
+      //             //                   //                     textStyle: TextStyle(
+      //             //                   //                         fontSize: 30,
+      //             //                   //                         color: Colors.white,
+      //             //                   //                         backgroundColor: Colors.blue)),
+      //             //                   //                 RotateAnimatedText('OPTIMISTIC',
+      //             //                   //                     textStyle: TextStyle(
+      //             //                   //                         letterSpacing: 3,
+      //             //                   //                         fontSize: 30,
+      //             //                   //                         fontWeight: FontWeight.bold,
+      //             //                   //                         color: Colors.orange)),
+      //             //                   //                 RotateAnimatedText(
+      //             //                   //                   'DIFFERENT',
+      //             //                   //                   textStyle: TextStyle(
+      //             //                   //                     fontSize: 30,
+      //             //                   //                     decoration: TextDecoration.underline,
+      //             //                   //                   ),
+      //             //                   //                 ),
+      //             //                   //               ],
+      //             //                   //               isRepeatingAnimation: true,
+      //             //                   //               totalRepeatCount: 10,
+      //             //                   //               pause: Duration(milliseconds: 1000),
+      //             //                   //             ),
+      //             //                   Center(
+      //             //                 child: AnimatedTextKit(
+      //             //                   totalRepeatCount: 40,
+      //             //                   animatedTexts: [
+      //             //                     RotateAnimatedText(
+      //             //                         'Trans Delta Trading'
+      //             //                             .toUpperCase(),
+      //             //                         textStyle: const TextStyle(
+      //             //                             letterSpacing: 3,
+      //             //                             // fontSize: 30,
+      //             //                             fontWeight: FontWeight.bold,
+      //             //                             color: Colors.orange)),
+      //             //                     FadeAnimatedText(
+      //             //                       'Powering Progress: Your Source for Premium Electrical Solutions',
+      //             //                       textStyle: const TextStyle(
+      //             //                           color: Color.fromARGB(
+      //             //                               255, 243, 149, 35),
+      //             //                           // fontSize: 25.0,
+      //             //                           fontWeight: FontWeight.bold),
+      //             //                     ),
+      //             //                     ScaleAnimatedText(
+      //             //                       'We are introducing our products',
+      //             //                       duration: const Duration(
+      //             //                           milliseconds: 4000),
+      //             //                       textStyle: const TextStyle(
+      //             //                         color: Colors.white,
+      //             //                         // fontSize: 50.0
+      //             //                       ),
+      //             //                     ),
+      //             //                   ],
+      //             //                 ),
+      //             //               ),
+      //             //             ),
+      //             //             // const SizedBox(height: 20),
+      //             //           ],
+      //             //         ),
+      //             //       ),
+      //             //     ),
+      //             //   ),
+      //             // ),
+      //             SingleChildScrollView(
+      //               child: Column(
+      //                 children: [
+      //                   Container(
+      //                     color: Colors.transparent,
+      //                     height: 500
+      //                   ),
+      // Container(
+      //     width: width,
+      //     color: Colors.white,
+      //     child: Column(
+      //       children: [
+      //         Gap(35),
+      //         Text(
+      //           'What are we offering'.toUpperCase(),
+      //           style: GoogleFonts.quicksand(
+      //             color: const Color.fromARGB(
+      //                 255, 156, 155, 155),
+      //             fontSize: 18,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //         Text(
+      //           'Our Products'.toUpperCase(),
+      //           style: const TextStyle(
+      //             color: Color.fromARGB(255, 4, 4, 4),
+      //             fontSize: 22,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //         Gap(35),
+      //         SizedBox(
+      //           height: 450,
+      //           child: PageView.builder(
+      //             controller: pageController,
+      //             itemCount: imageUrls.length,
+      //             itemBuilder: (context, index) {
+      //               debugPrint("{-pageOffSet.abs() + index}");
+      //               return GestureDetector(
+      //                 onTap: () {
+      //                   _navigateToPage(context, index);
+      //                 },
+      //                 child: Padding(
+      //                   padding: const EdgeInsets.all(6.0),
+      //                   child: Stack(
+      //                     children: [
+      //                       ClipRRect(
+      //                         borderRadius:
+      //                             BorderRadius.circular(30),
+      //                         child: SizedBox(
+      //                           height: 350,
+      //                           child: Image.asset(
+      //                             imageUrls[index],
+      //                             fit: BoxFit.cover,
+      //                             alignment: Alignment(
+      //                                 -pageOffSet.abs() +
+      //                                     index,
+      //                                 0),
+      //                           ),
+      //                         ),
+      //                       ),
+      //                       Positioned(
+      //                         bottom: 20,
+      //                         child: Padding(
+      //                           padding:
+      //                               const EdgeInsets.all(15),
+      //                           child: Text(
+      //                             textindex[index],
+      //                             style: const TextStyle(
+      //                               color: Color.fromARGB(
+      //                                   255, 137, 137, 137),
+      //                               fontSize: 22,
+      //                               fontWeight:
+      //                                   FontWeight.bold,
+      //                             ),
+      //                           ),
+      //                         ),
+      //                       ),
+      //                     ],
+      //                   ),
+      //                 ),
+      //               );
+      //             },
+      //           ),
+      //         ),
+      //       ],
+      //     )),
+                        // Container(
+                        //     color: Colors.white,
+                        //     child: Column(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         const Gap(15),
+                        //         Image.asset('assets/image/hex-logo-new.png'),
+                        //         const Gap(15),
+                        //         const Padding(
+                        //           padding: EdgeInsets.only(left: 15),
+                        //           child: Text(
+                        //             "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
+                        //             style: TextStyle(
+                        //                 fontSize: 25,
+                        //                 fontWeight: FontWeight.w700),
+                        //           ),
+                        //         )
+                        //         // Text(
+                        //         //   "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
+                        //         //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                        //         // )
+                        //       ],
+                        //     )),
+                        // Container(
+                        //     width: double.infinity,
+                        //     color: Colors.white,
+                        //     child: Image.network(
+                        //         "https://www.lkea.in/assets/images/about/2.jpg")),
+                        // Container(
+                        //     width: double.infinity,
+                        //     child: MediaQuery.of(context).size.width >= 700
+                        //         ? const deskBottomSheett()
+                        //         : const mobiledeskBottomSheett())
+      //                 ],
+      //               ),
+      //             )
+      //           ],
+      //         )),
+      //   ));
+      // }
     });
   }
 
@@ -1311,4 +1457,3 @@ class NoScrollGlow extends ScrollBehavior {
 
 const kHeroImage =
     'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/image+(2).png';
- 
