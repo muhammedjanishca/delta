@@ -580,7 +580,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                               builder: (context) => ContactUsPage()),
                         );
                       },
-                      child: Text("Tel # +91 483-3589627",
+                      child: Text("Tel +966 55 543 2866",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -592,7 +592,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                 builder: (context) => ContactUsPage()),
                           );
                         },
-                        child: Text("evolvedmillennials@gmail.com",
+                        child: Text("sales@transdeltatrading.com",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -754,7 +754,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.white, width: 2)),
-                                  hintText: '  +966501234567',
+                                  hintText: '  +966 55 543 2866',
                                   hintStyle: TextStyle(color: Colors.white,fontSize: 13)),
                             ),
                           ),
