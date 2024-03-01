@@ -36,7 +36,7 @@ class PdfService {
     //Dispose the document.
     document.dispose();
     //Save and launch the file.
-    await saveAndLaunchFile(bytes, 'Invoice.pdf');
+    await saveAndLaunchFile(bytes, 'Enquiry.pdf');
   }
 }
 
@@ -114,8 +114,7 @@ PdfLayoutResult drawFooter(
   for (int i = 0; i < document.pages.count; i++) {
     if (i == document.pages.count - 1) {
       return PdfTextElement(
-              text: '''Abdullah Shaher Alsulami Est.\r\n\r\nTRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES,
-          TX 78721\r\n\r\nAny Questions? sales@deltanationals.com''',
+              text: '''Abdullah Shaher Alsulami Est.\r\n\r\nTRADING & CONTRACTING, ELECTRICAL & MECHANICAL SUPPLIES, TX 78721\r\n\rAny Questions? sales@transdeltatrading.com''',
               font: PdfStandardFont(PdfFontFamily.timesRoman, 11))
           .draw(page: document.pages[i], bounds: Rect.fromLTWH(20, 670, 0, 0))!;
     }

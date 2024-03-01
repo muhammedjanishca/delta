@@ -138,15 +138,25 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), 
-),
+                                          color: Colors.white,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              1.8,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          child: selectedThumbnailProvider
+                                                      .selectedThumbnail !=
+                                                  null
+                                              ? Image.network(
+                                                  selectedThumbnailProvider
+                                                      .selectedThumbnail!)
+                                              : thumbnail != null
+                                                  ? Image.network(thumbnail!)
+                                                  : SizedBox(),
+                                        ),
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
@@ -817,7 +827,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                     padding: EdgeInsets.only(left: 20),
                                     child: Column(
                                       children: [
-                                         Row(
+                                        Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
@@ -875,16 +885,26 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
-
+                                              color: Colors.white,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  1.8,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              child: selectedThumbnailProvider
+                                                          .selectedThumbnail !=
+                                                      null
+                                                  ? Image.network(
+                                                      selectedThumbnailProvider
+                                                          .selectedThumbnail!)
+                                                  : thumbnail != null
+                                                      ? Image.network(
+                                                          thumbnail!)
+                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -1283,7 +1303,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     onTap: () {
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
