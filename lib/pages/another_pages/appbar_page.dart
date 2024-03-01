@@ -820,31 +820,42 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
 Widget custmobileDrawer(BuildContext context) {
   return ChangeNotifierProvider(
     create: (context) => DataProvider(),
+    
     child: Theme(
       data: ThemeData(
+      
         canvasColor: Colors.black,
+        iconTheme: IconThemeData(color: Colors.red),
           // Set the background color of the Drawer to black
           ),
       child: Drawer(
         backgroundColor: colorTwo,
         child: ListView(
-          
+          // Text("Login",
+          //                             style: GoogleFonts.poppins(
+          //                               textStyle: const TextStyle(
+          //                                 color: Colors.black,
+          //                                 // fontSize: 16,
+          //                               ),
+          //                             )),
           children: [
             Gap(25),
             ExpansionTile(
-              // collapsedBackgroundColor: janishcolor,
+              // collapsedBackgroundColor: Colors.amber,
+
               iconColor: Colors.white,
               collapsedIconColor: Colors.white,
               title: Text(
                 'Cable Terminal Ends',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: colorTwo,
+                  
+                  hoverColor: colorOne,
                   title: Text(
                     'Lugs',
                     style: TextStyle(color: Colors.white),
@@ -884,10 +895,10 @@ Widget custmobileDrawer(BuildContext context) {
               collapsedIconColor: Colors.white,
               title: Text(
                 'Brass Cable Gland Kits & Accessories',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
@@ -931,10 +942,10 @@ Widget custmobileDrawer(BuildContext context) {
               collapsedIconColor: Colors.white,
               title: Text(
                 'Crimping Tool',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
@@ -963,10 +974,10 @@ Widget custmobileDrawer(BuildContext context) {
               collapsedIconColor: Colors.white,
               title: Text(
                 'Earthing & Lightning Protection Systems',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
@@ -1010,10 +1021,10 @@ Widget custmobileDrawer(BuildContext context) {
               collapsedIconColor: Colors.white,
               title: Text(
                 'Switch Board / Control Panel Accessories',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
@@ -1041,10 +1052,10 @@ Widget custmobileDrawer(BuildContext context) {
               collapsedIconColor: Colors.white,
               title: Text(
                'Stainless Steel Cable Ties & Markers',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
@@ -1072,10 +1083,10 @@ Widget custmobileDrawer(BuildContext context) {
               collapsedIconColor: Colors.white,
               title: Text(
             'Cable Support Systems',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
@@ -1103,10 +1114,10 @@ Widget custmobileDrawer(BuildContext context) {
               collapsedIconColor: Colors.white,
               title: Text(
                 'Cable Jointing & Termination Kit Components',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.poppins(
+                    // fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 17), // Set the text color to white
+                    fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(

@@ -416,7 +416,7 @@ class AddressShowMob extends StatelessWidget {
                     //   child:  isNotFirstItem =Index !=0,
                     // ),
                     // const Gap(150),
-                    Icon(Icons.add),
+                                    Icon(Icons.add,),
                     TextButton(
                         onPressed: () => SideSheet.right(
                             body: TextAddress(),
@@ -449,10 +449,15 @@ class AddressShowMob extends StatelessWidget {
                                 .UpdateSelectindex(context, index);
                           },
                           child: Container(
-                            color: isSelected
+                            decoration: BoxDecoration(
+                              color: isSelected
                                 ? colorOne // Set the color for selected state
-                                : Color.fromARGB(255, 211, 215,
-                                    216), // Set the color for unselected state
+                                : Color.fromARGB(255, 211, 215, 216), 
+                                 border: Border.all(width: 1,color: Colors.black12)
+
+                            ),
+                            
+                                    // Set the color for unselected state
                             // child: ListTile(
                             //   selectedTileColor: Colors.black,
                             //   title: AddressData(addressData),
