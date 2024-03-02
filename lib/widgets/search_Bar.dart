@@ -15,7 +15,7 @@ Widget searchBox(BuildContext context) {
     height: MediaQuery.of(context).size.height / 18,
     decoration: BoxDecoration(
       
-        borderRadius: BorderRadius.circular(4), color: colorOne,),
+        borderRadius: BorderRadius.circular(4), color: colorOne),
     child: Row(
       children: [
         Expanded(
@@ -58,12 +58,12 @@ Widget searchBox(BuildContext context) {
               final type = suggestion['type'];
               final productNameWithUnderscores =
                   productName.replaceAll(" ", "_");
-              final thumbnail = suggestion["thumbnail"];
+              // final thumbnail = suggestion["thumbnail"];
                
               selectedThumbnailProvider.setSelectedThumbnail("", index: null);
         
               navigateToProductDetailsFromSearch(
-                  context, productNameWithUnderscores, type,thumbnail);
+                  context, productNameWithUnderscores, type);
             },
           ),
         ),

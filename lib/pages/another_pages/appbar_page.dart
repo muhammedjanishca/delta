@@ -1168,7 +1168,7 @@ class MobileAppBar extends StatelessWidget {
       children: [
         SafeArea(
           child: AppBar(
-             elevation: 10,
+             elevation: 0,
             backgroundColor: colorTwo,
             title: Container(
               // color: Colors.yellow,

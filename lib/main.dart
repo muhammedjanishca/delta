@@ -374,7 +374,6 @@ void navigateToProductDetailsOfTools(
 void navigateToProductDetailsFromSearch(
   BuildContext context,
   String productname,
-  String thumbnail,
   String type,
 ) {
   String endpoint = "";
