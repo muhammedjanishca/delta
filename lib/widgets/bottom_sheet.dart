@@ -580,11 +580,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                               builder: (context) => ContactUsPage()),
                         );
                       },
-<<<<<<< HEAD
-                      child: Text("Tel : +966 55 543 2866",
-=======
                       child: Text("Tel +966 55 543 2866",
->>>>>>> bc37a8aab664b24358b63c8775e59939d0e8456a
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,

@@ -146,7 +146,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              4,
+                                              1.9,
                                           child: selectedThumbnailProvider
                                                       .selectedThumbnail !=
                                                   null
@@ -756,6 +756,9 @@ class ProductDetailsoflugs extends StatelessWidget {
           ),
         ),
       ),
+
+      //-----------desktop--------------------------------------------------------
+
       desktopProductPage: FutureBuilder(
         future: context.read<DataProvider>().fetchLugsData(),
         builder: (context, snapshot) {

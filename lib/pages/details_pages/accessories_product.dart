@@ -127,8 +127,8 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                     children: [
                                        Container(
   color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
+  height: MediaQuery.of(context).size.height / 3.3,
+  width: MediaQuery.of(context).size.width / 1.9,
   child: selectedThumbnailProvider.selectedThumbnail != null
       ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
       : thumbnail != null
@@ -391,7 +391,7 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                 onTap: () {
                                                   selectedPriceNotifieru
                                                       .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'based on Request'}',
                                                   );
                                                   selectedPriceNotifieru
                                                       .setProductCodeSelected(

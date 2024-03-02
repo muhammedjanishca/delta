@@ -145,8 +145,8 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                       height:
                                           MediaQuery.of(context).size.height /
                                               3.3,
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.9,
                                       child: selectedThumbnailProvider
                                                   .selectedThumbnail !=
                                               null
@@ -1219,10 +1219,9 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                         body: Container(
                                                             height: 1500,
                                                             color: const Color
-                                                                .fromARGB(255,
+                                                                    .fromARGB(255,
                                                                 230, 233, 235),
-                                                            child: pdf !=
-                                                                    null
+                                                            child: pdf != null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)

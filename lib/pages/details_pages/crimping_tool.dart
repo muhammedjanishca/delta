@@ -66,7 +66,8 @@ class ProductDetailsOfTools extends StatelessWidget {
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                  child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child:
+                      lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -124,16 +125,24 @@ class ProductDetailsOfTools extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                       Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
+                                      Container(
+                                        color: Colors.white,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                3.3,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.9,
+                                        child: selectedThumbnailProvider
+                                                    .selectedThumbnail !=
+                                                null
+                                            ? Image.network(
+                                                selectedThumbnailProvider
+                                                    .selectedThumbnail!)
+                                            : thumbnail != null
+                                                ? Image.network(thumbnail!)
+                                                : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                      ),
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
@@ -390,7 +399,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                 onTap: () {
                                                   selectedPriceNotifieru
                                                       .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                    '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
                                                   );
                                                   selectedPriceNotifieru
                                                       .setProductCodeSelected(
@@ -619,7 +628,8 @@ class ProductDetailsOfTools extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             print("hgfghfhfgu");
             return Center(
-                child:  lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child:
+                    lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -742,15 +752,26 @@ class ProductDetailsOfTools extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
+                                              color: Colors.white,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  1.8,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              child: selectedThumbnailProvider
+                                                          .selectedThumbnail !=
+                                                      null
+                                                  ? Image.network(
+                                                      selectedThumbnailProvider
+                                                          .selectedThumbnail!)
+                                                  : thumbnail != null
+                                                      ? Image.network(
+                                                          thumbnail!)
+                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -835,7 +856,11 @@ class ProductDetailsOfTools extends StatelessWidget {
                                             }
                                           }
                                         },
-                                        child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
+                                        child: Text(
+                                          'ADD TO CART',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white),
+                                        ),
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
@@ -862,9 +887,11 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                   },
                                                 );
                                         },
-                                        child:  Text(
+                                        child: Text(
                                           'GO TO CART',
- style: GoogleFonts.poppins(color: Colors.white),                                        ),
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white),
+                                        ),
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
@@ -958,7 +985,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                       body: Container(
                                                           height: 1500,
                                                           color: const Color
-                                                              .fromARGB(255,
+                                                                  .fromARGB(255,
                                                               230, 233, 235),
                                                           child: pdf != null
                                                               ? SfPdfViewer
@@ -1074,8 +1101,9 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                                     null
                                                                 ? Colors
                                                                     .black // Set border color to red when selectedPrice is null
-                                                                : Colors.greenAccent.shade700
-                                                                    ,
+                                                                : Colors
+                                                                    .greenAccent
+                                                                    .shade700,
                                                             // ? Colors
                                                             //     .blue // Set border color to blue for selected container
                                                             // : Colors

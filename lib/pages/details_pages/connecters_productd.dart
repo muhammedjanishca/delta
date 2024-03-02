@@ -133,7 +133,7 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                 3.3,
                                         width:
                                             MediaQuery.of(context).size.width /
-                                                4,
+                                                1.9,
                                         child: selectedThumbnailProvider
                                                     .selectedThumbnail !=
                                                 null
