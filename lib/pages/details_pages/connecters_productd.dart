@@ -66,7 +66,8 @@ class ProductDetailsOfConnectors extends StatelessWidget {
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                  child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child:
+                      lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -126,15 +127,23 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
+                                        color: Colors.white,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                3.3,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        child: selectedThumbnailProvider
+                                                    .selectedThumbnail !=
+                                                null
+                                            ? Image.network(
+                                                selectedThumbnailProvider
+                                                    .selectedThumbnail!)
+                                            : thumbnail != null
+                                                ? Image.network(thumbnail!)
+                                                : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                      ),
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
@@ -329,7 +338,6 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                     .width /
                                                 25,
                                           ),
-                                          
                                         ],
                                       ),
                                       SizedBox(
@@ -448,8 +456,13 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                               },
                                               child: Row(
                                                 children: [
-                                                  Icon(Icons.edit_document,color: colorTwo),
-                                                  Text("size chart",style: TextStyle(color: Colors.black),)
+                                                  Icon(Icons.edit_document,
+                                                      color: colorTwo),
+                                                  Text(
+                                                    "size chart",
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  )
                                                 ],
                                               )
                                               //  Text("size chart")
@@ -710,7 +723,8 @@ class ProductDetailsOfConnectors extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // print("hgfghfhfgu");
             return Center(
-                child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child:
+                    lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -833,15 +847,26 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
+                                              color: Colors.white,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  1.8,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              child: selectedThumbnailProvider
+                                                          .selectedThumbnail !=
+                                                      null
+                                                  ? Image.network(
+                                                      selectedThumbnailProvider
+                                                          .selectedThumbnail!)
+                                                  : thumbnail != null
+                                                      ? Image.network(
+                                                          thumbnail!)
+                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -928,7 +953,11 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
+                                          child: Text(
+                                            'ADD TO CART',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
+                                          ),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -955,9 +984,10 @@ class ProductDetailsOfConnectors extends StatelessWidget {
                                                     },
                                                   );
                                           },
-                                          child:  Text(
+                                          child: Text(
                                             'GO TO CART',
-                                            style: GoogleFonts.poppins(color: Colors.white),
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:

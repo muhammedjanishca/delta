@@ -49,7 +49,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
       product_name = setting_list[2].replaceAll('_', " ");
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
     var user = Provider.of<AuthenticationHelper>(context).user;
- final selectedPriceNotifieru =
+    final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
@@ -61,11 +61,11 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
           future: context.read<DataProvider>().fetchsbcpaData(),
           builder: (context, snapshot) {
             snapshot.data!.data.length;
-        
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                                   child:lottieSuccess()
-); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child:
+                      lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -74,7 +74,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
               String? priceofproduct = "";
               List<String>? image = [];
               String? pdf = "";
-        
+
               if (selectedThumbnailProvider.selectedIndex != null) {
                 // print("kjh");
                 textpass = snapshot.data!
@@ -96,7 +96,6 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                 pdf = snapshot
                     .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
               } else {
-        
                 snapshot.data!.data.firstWhere((element) {
                   if (element.productName == product_name) {
                     textpass = element.productName;
@@ -128,15 +127,23 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
+                                        color: Colors.white,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                3.3,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        child: selectedThumbnailProvider
+                                                    .selectedThumbnail !=
+                                                null
+                                            ? Image.network(
+                                                selectedThumbnailProvider
+                                                    .selectedThumbnail!)
+                                            : thumbnail != null
+                                                ? Image.network(thumbnail!)
+                                                : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                      ),
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
@@ -151,8 +158,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                               },
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(
-                                                        8.0),
+                                                    const EdgeInsets.all(8.0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
@@ -191,7 +197,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                         ),
                                       ),
                                       //--------Product Price-----------
-        
+
                                       SizedBox(
                                         height: 30,
                                       ),
@@ -205,22 +211,20 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                               fontSize: 22),
                                         ),
                                       ),
-        
+
                                       Divider(),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
-        
+
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            30,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
                                       ),
-        
+
                                       Row(
                                         children: [
                                           SizedBox(
@@ -232,35 +236,42 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                           Flexible(
                                             child: Container(
                                               // color: Colors.amber,
-        
+
                                               child: const Text(
                                                 'selected Product code&Price:  ',
-                                                overflow:
-                                                    TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 14.0,
                                                   fontFamily: 'Roboto',
                                                   color: Color.fromARGB(
                                                       255, 143, 143, 143),
-                                                  fontWeight:
-                                                      FontWeight.bold,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
                                           ),
                                           Container(
-                                          width: 130,
-                                          padding: EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(border: Border.all(
-                                            color: Colors.black,
-                                            width: 1.0),
-                                          color:  Color.fromARGB(255, 255, 255, 255),
+                                            width: 130,
+                                            padding: EdgeInsets.all(8.0),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1.0),
+                                              color: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                            ),
+                                            child:
+                                                Consumer<SelectedPriceNotifier>(
+                                                    builder: (context,
+                                                        selectedPriceNotifieru,
+                                                        _) {
+                                              return Text(
+                                                "${selectedPriceNotifieru.selectedPrice}",
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              );
+                                            }),
                                           ),
-                                          child: Consumer<SelectedPriceNotifier>(builder: (context,selectedPriceNotifieru, _){
-                                            return Text("${selectedPriceNotifieru.selectedPrice}",
-                                            style: TextStyle(color: Colors.black),);
-                                          }),
-                                        ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -271,10 +282,9 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                               onPressed: () {
                                                 showModalBottomSheet(
                                                     context: context,
-                                                    isScrollControlled:
-                                                        true,
-                                                    builder: (BuildContext
-                                                        context) {
+                                                    isScrollControlled: true,
+                                                    builder:
+                                                        (BuildContext context) {
                                                       return SingleChildScrollView(
                                                           child: Stack(
                                                         children: [
@@ -284,10 +294,8 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                                     .size
                                                                     .height /
                                                                 1,
-                                                            color: Colors
-                                                                .white,
-                                                            child: pdf !=
-                                                                    null
+                                                            color: Colors.white,
+                                                            child: pdf != null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -298,12 +306,10 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                                 16, // Adjust the top position as needed
                                                             right:
                                                                 16, // Adjust the left position as needed
-                                                            child:
-                                                                IconButton(
+                                                            child: IconButton(
                                                               icon: Icon(Icons
                                                                   .close), // You can use any icon you like
-                                                              onPressed:
-                                                                  () {
+                                                              onPressed: () {
                                                                 Navigator.pop(
                                                                     context);
                                                                 // Add your close button action here
@@ -325,10 +331,9 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            20,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                20,
                                       ),
                                       Row(
                                         crossAxisAlignment:
@@ -348,8 +353,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                               width: 140,
                                               // height: 43,
                                               child: TextFormField(
-                                                controller:
-                                                    quantityController,
+                                                controller: quantityController,
                                                 keyboardType:
                                                     TextInputType.number,
                                                 decoration: InputDecoration(
@@ -374,7 +378,6 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                         
                                         ],
                                       ),
                                       Column(
@@ -397,7 +400,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                 onTap: () {
                                                   selectedPriceNotifieru
                                                       .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                    '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
                                                   );
                                                   selectedPriceNotifieru
                                                       .setProductCodeSelected(
@@ -405,32 +408,30 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                 },
                                                 child: Form(
                                                   autovalidateMode:
-                                                      AutovalidateMode
-                                                          .always,
+                                                      AutovalidateMode.always,
                                                   child: Container(
                                                     width: 100,
                                                     padding: EdgeInsets.all(
                                                         8.0), // Adjust the padding as needed
-                                                    decoration:
-                                                        BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(5),
+                                                          BorderRadius.circular(
+                                                              5),
                                                       border: Border.all(
-                                                            color: codeAndPrice
-                                                                        .price ==
-                                                                    null
-                                                                ? Colors
-                                                                    .black // Set border color to red when selectedPrice is null
-                                                                : Colors.greenAccent.shade700
-                                                                    ,
-                                                            // ? Colors
-                                                            //     .blue // Set border color to blue for selected container
-                                                            // : Colors
-                                                            //     .black, // Set border color to black for non-selected containers
-                                                            width:
-                                                                1.0, // Set your desired border width
-                                                          ),
+                                                        color: codeAndPrice
+                                                                    .price ==
+                                                                null
+                                                            ? Colors
+                                                                .black // Set border color to red when selectedPrice is null
+                                                            : Colors.greenAccent
+                                                                .shade700,
+                                                        // ? Colors
+                                                        //     .blue // Set border color to blue for selected container
+                                                        // : Colors
+                                                        //     .black, // Set border color to black for non-selected containers
+                                                        width:
+                                                            1.0, // Set your desired border width
+                                                      ),
                                                     ),
                                                     child: Text(
                                                       '${codeAndPrice.productCode}',
@@ -447,10 +448,9 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
@@ -500,10 +500,9 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                     ],
                                   ),
@@ -532,90 +531,57 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     child: ElevatedButton(
-                    onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    if (FirebaseAuth.instance
-                                                            .currentUser !=
-                                                        null) {
-                                                      if (selectedPriceNotifieru
-                                                          .isProductCodeSelected) {
-                                                        final selectedPrice =
-                                                            selectedPriceNotifieru
-                                                                .selectedPrice;
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            if (selectedPriceNotifieru.isProductCodeSelected) {
+                              final selectedPrice =
+                                  selectedPriceNotifieru.selectedPrice;
 
-                                                        // Check if selectedPrice is empty or null, and provide a default value if needed
+                              // Check if selectedPrice is empty or null, and provide a default value if needed
 
-                                                        final productCode =
-                                                            selectedPrice
-                                                                .split(': ')[0];
-                                                        final price = double.tryParse(
-                                                                selectedPrice
-                                                                        .split(
-                                                                            ': ')[
-                                                                    1]) ??
-                                                            0;
-                                                        final quantity =
-                                                            int.tryParse(
-                                                                    quantityController
-                                                                        .text) ??
-                                                                0;
-                                                        final imageUrl =
-                                                            thumbnail;
-                                                        final productName =
-                                                            textpass;
-                                                        final cartProvider =
-                                                            Provider.of<
-                                                                    CartProvider>(
-                                                                context,
-                                                                listen: false);
-                                                        cartProvider.addToCart(
-                                                            productCode:
-                                                                productCode,
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            imageUrl:
-                                                                imageUrl ?? '',
-                                                            productName:
-                                                                productName ??
-                                                                    '');
+                              final productCode = selectedPrice.split(': ')[0];
+                              final price = double.tryParse(
+                                      selectedPrice.split(': ')[1]) ??
+                                  0;
+                              final quantity =
+                                  int.tryParse(quantityController.text) ?? 0;
+                              final imageUrl = thumbnail;
+                              final productName = textpass;
+                              final cartProvider = Provider.of<CartProvider>(
+                                  context,
+                                  listen: false);
+                              cartProvider.addToCart(
+                                  productCode: productCode,
+                                  price: price,
+                                  quantity: quantity,
+                                  imageUrl: imageUrl ?? '',
+                                  productName: productName ?? '');
 
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Added to cart')));
-                                                        selectedPriceNotifieru
-                                                            .setProductCodeSelected(
-                                                                false);
-                                                      } else {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                          content: Text(
-                                                              'Select the product code'),
-                                                        ));
-                                                      }
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content: Text(
-                                                            'Select the product code'),
-                                                      ));
-                                                      // Handle the case where the user is not signed in
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return LoginPage(); // Your custom dialog widget
-                                                        },
-                                                      );
-                                                    }
-                                                  }
-                                                },
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Added to cart')));
+                              selectedPriceNotifieru
+                                  .setProductCodeSelected(false);
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Select the product code'),
+                              ));
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Select the product code'),
+                            ));
+                            // Handle the case where the user is not signed in
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LoginPage(); // Your custom dialog widget
+                              },
+                            );
+                          }
+                        }
+                      },
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
@@ -632,18 +598,16 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: TextButton(
-                       onPressed: () {
-                                            user != null
-                                                ? Navigator.pushNamed(
-                                                    context, '/cart')
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
-                                          },
+                      onPressed: () {
+                        user != null
+                            ? Navigator.pushNamed(context, '/cart')
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LoginPage(); // Your custom dialog widget
+                                },
+                              );
+                      },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
@@ -666,8 +630,8 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
           // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-            child: lottieSuccess()
-                          ); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child:
+                    lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -728,7 +692,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
             }
 
             return pdf != null
-               ? DefaultTabController(
+                ? DefaultTabController(
                     length: 2,
                     child: Container(
                       color: Colors.white,
@@ -807,15 +771,26 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
+                                              color: Colors.white,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  1.8,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              child: selectedThumbnailProvider
+                                                          .selectedThumbnail !=
+                                                      null
+                                                  ? Image.network(
+                                                      selectedThumbnailProvider
+                                                          .selectedThumbnail!)
+                                                  : thumbnail != null
+                                                      ? Image.network(
+                                                          thumbnail!)
+                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -825,11 +800,13 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                 FittedBox(
                                   child: SizedBox(
                                     // color: Colors.amber,
-                                    height: MediaQuery.of(context).size.height / 4,
+                                    height:
+                                        MediaQuery.of(context).size.height / 4,
                                     child: Row(
-                                      crossAxisAlignment:CrossAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       mainAxisAlignment:
-MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         ElevatedButton(
                                           onPressed: () {
@@ -899,7 +876,11 @@ MainAxisAlignment.center,
                                               }
                                             }
                                           },
-                                          child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
+                                          child: Text(
+                                            'ADD TO CART',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
+                                          ),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -926,9 +907,10 @@ MainAxisAlignment.center,
                                                     },
                                                   );
                                           },
-                                          child:  Text(
+                                          child: Text(
                                             'GO TO CART',
-                                            style: GoogleFonts.poppins(color: Colors.white),
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -1164,9 +1146,10 @@ MainAxisAlignment.center,
                                                         body: Container(
                                                             height: 1500,
                                                             color: const Color
-                                                                    .fromARGB(255,
+                                                                .fromARGB(255,
                                                                 230, 233, 235),
-                                                            child: pdf != null
+                                                            child: pdf !=
+                                                                    null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -1233,13 +1216,15 @@ MainAxisAlignment.center,
                                                                     null
                                                                 ? Colors.black
                                                                 : codeAndPrice
-                                                                      .productCode ==
-                                                                  selectedCodeProvider
-                                                                      .selectedProductCode
-                                                              ? Colors
-                                                                  .blue // Set border color to blue for selected container
-                                                               : Colors.greenAccent.shade700,
-                                                                        // Set border color to black for non-selected containers
+                                                                            .productCode ==
+                                                                        selectedCodeProvider
+                                                                            .selectedProductCode
+                                                                    ? Colors
+                                                                        .blue // Set border color to blue for selected container
+                                                                    : Colors
+                                                                        .greenAccent
+                                                                        .shade700,
+                                                            // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),

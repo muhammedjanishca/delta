@@ -35,21 +35,21 @@ class ProductDetailsOfGlands extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController quantityController = TextEditingController();
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-String capitalize(String s) {
-  if (s.isEmpty) {
-    return s;
-  }
-  return s.toLowerCase().split(' ').map((word) {
-    if (word.isEmpty) {
-      return word;
+    String capitalize(String s) {
+      if (s.isEmpty) {
+        return s;
+      }
+      return s.toLowerCase().split(' ').map((word) {
+        if (word.isEmpty) {
+          return word;
+        }
+        return word[0].toUpperCase() + word.substring(1);
+      }).join(' ');
     }
-    return word[0].toUpperCase() + word.substring(1);
-  }).join(' ');
-}
 
 // Usage
-String text = "hELLO wORLD";
-String formattedText = capitalize(text);
+    String text = "hELLO wORLD";
+    String formattedText = capitalize(text);
 // print(formattedText); // Output: Hello World
 
     String selectedProductIndex =
@@ -85,7 +85,8 @@ String formattedText = capitalize(text);
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                  child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
+                  child:
+                      lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
@@ -139,17 +140,24 @@ String formattedText = capitalize(text);
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                     Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
- SingleChildScrollView(
+                                    Container(
+                                      color: Colors.white,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              3.3,
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      child: selectedThumbnailProvider
+                                                  .selectedThumbnail !=
+                                              null
+                                          ? Image.network(
+                                              selectedThumbnailProvider
+                                                  .selectedThumbnail!)
+                                          : thumbnail != null
+                                              ? Image.network(thumbnail!)
+                                              : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                    ),
+                                    SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         children: image!.map((imageUrl) {
@@ -234,125 +242,111 @@ String formattedText = capitalize(text);
                                                   .width /
                                               15,
                                         ),
-                                       Flexible(
-                                                child: FittedBox(
-                                                  child: Container(
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          // color: Colors.amber,
-                                                          child: Text(
-                                                            'Product Code & Price:  ',
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              fontSize: 14.0,
-                                                              color: Color(
-                                                                  0xFF212121),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 60,
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Consumer<
-                                                              SelectedPriceNotifier>(
-                                                            builder: (context,
-                                                                selectedPriceNotifieru,
-                                                                _) {
-                                                              String priceText =
-                                                                  selectedPriceNotifieru
-                                                                      .selectedPrice;
-                                                              String prefix =
-                                                                  ":";
-                                                              TextStyle
-                                                                  prefixStyle =
-                                                                  TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 14,
-                                                              );
-                                                              TextStyle
-                                                                  suffixStyle =
-                                                                  TextStyle(
-                                                                color:
-                                                                    Colors.red,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 14,
-                                                              );
-
-                                                              int prefixIndex =
-                                                                  priceText
-                                                                      .indexOf(
-                                                                          prefix);
-                                                              if (prefixIndex ==
-                                                                  -1) {
-                                                                // If "SAR" is not found in the text, apply the default style to the whole text
-                                                                return Center(
-                                                                  child: Text(
-                                                                    priceText,
-                                                                    style:
-                                                                        prefixStyle,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                // If "SAR" is found, split the text and apply styles accordingly
-                                                                String
-                                                                    prefixPart =
-                                                                    priceText.substring(
-                                                                        0,
-                                                                        prefixIndex +
-                                                                            prefix.length);
-                                                                String
-                                                                    suffixPart =
-                                                                    priceText.substring(
-                                                                        prefixIndex +
-                                                                            prefix.length);
-                                                                return Center(
-                                                                  child:
-                                                                      RichText(
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        TextSpan(
-                                                                            text:
-                                                                                prefixPart,
-                                                                            style:
-                                                                                prefixStyle),
-                                                                        TextSpan(
-                                                                            text:
-                                                                                suffixPart,
-                                                                            style:
-                                                                                suffixStyle),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
+                                        Flexible(
+                                          child: FittedBox(
+                                            child: Container(
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    // color: Colors.amber,
+                                                    child: Text(
+                                                      'Product Code & Price:  ',
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 14.0,
+                                                        color:
+                                                            Color(0xFF212121),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
+                                                  Container(
+                                                    height: 60,
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Consumer<
+                                                        SelectedPriceNotifier>(
+                                                      builder: (context,
+                                                          selectedPriceNotifieru,
+                                                          _) {
+                                                        String priceText =
+                                                            selectedPriceNotifieru
+                                                                .selectedPrice;
+                                                        String prefix = ":";
+                                                        TextStyle prefixStyle =
+                                                            TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 14,
+                                                        );
+                                                        TextStyle suffixStyle =
+                                                            TextStyle(
+                                                          color: Colors.red,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 14,
+                                                        );
+
+                                                        int prefixIndex =
+                                                            priceText.indexOf(
+                                                                prefix);
+                                                        if (prefixIndex == -1) {
+                                                          // If "SAR" is not found in the text, apply the default style to the whole text
+                                                          return Center(
+                                                            child: Text(
+                                                              priceText,
+                                                              style:
+                                                                  prefixStyle,
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          // If "SAR" is found, split the text and apply styles accordingly
+                                                          String prefixPart =
+                                                              priceText.substring(
+                                                                  0,
+                                                                  prefixIndex +
+                                                                      prefix
+                                                                          .length);
+                                                          String suffixPart =
+                                                              priceText.substring(
+                                                                  prefixIndex +
+                                                                      prefix
+                                                                          .length);
+                                                          return Center(
+                                                            child: RichText(
+                                                              text: TextSpan(
+                                                                children: [
+                                                                  TextSpan(
+                                                                      text:
+                                                                          prefixPart,
+                                                                      style:
+                                                                          prefixStyle),
+                                                                  TextSpan(
+                                                                      text:
+                                                                          suffixPart,
+                                                                      style:
+                                                                          suffixStyle),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
+                                            ),
+                                          ),
+                                        ),
                                         SizedBox(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
                                               25,
                                         ),
-                                       
                                       ],
                                     ),
                                     SizedBox(
@@ -371,63 +365,59 @@ String formattedText = capitalize(text);
                                                   .width /
                                               13,
                                         ),
-                                        
-                                          FittedBox(
-                                            child: SizedBox(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Enter The Quantity',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 14.0,
-                                                      color: const Color(
-                                                          0xFF212121),
-                                                    ),
+                                        FittedBox(
+                                          child: SizedBox(
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  'Enter The Quantity',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 14.0,
+                                                    color:
+                                                        const Color(0xFF212121),
                                                   ),
-                                                  Gap(15),
-                                                  Form(
-                                                    key: _formKey,
-                                                    child: Container(
-                                                      // height:
-                                                      // MediaQuery.of(context).size.height/18,
-                                                      width: 70,
-                                                      //  MediaQuery.of(context).size.width/10,
-                                                      child: TextFormField(
-                                                        controller:
-                                                            quantityController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          //  border:
-                                                          //      OutlineInputBorder(),
-                                                          hintText: '    000',
-                                                        ),
-                                                        validator: (value) {
-                                                          if (value!.isEmpty) {
-                                                            return 'Enter the quantity';
-                                                          }
-                                                          int? quantity =
-                                                              int.tryParse(
-                                                                  value);
-                                                          if (quantity ==
-                                                                  null ||
-                                                              quantity <= 0) {
-                                                            return 'Quantity must be a positive number';
-                                                          }
-                                                          return null; // Return null if the input is valid
-                                                        },
+                                                ),
+                                                Gap(15),
+                                                Form(
+                                                  key: _formKey,
+                                                  child: Container(
+                                                    // height:
+                                                    // MediaQuery.of(context).size.height/18,
+                                                    width: 70,
+                                                    //  MediaQuery.of(context).size.width/10,
+                                                    child: TextFormField(
+                                                      controller:
+                                                          quantityController,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        //  border:
+                                                        //      OutlineInputBorder(),
+                                                        hintText: '    000',
                                                       ),
+                                                      validator: (value) {
+                                                        if (value!.isEmpty) {
+                                                          return 'Enter the quantity';
+                                                        }
+                                                        int? quantity =
+                                                            int.tryParse(value);
+                                                        if (quantity == null ||
+                                                            quantity <= 0) {
+                                                          return 'Quantity must be a positive number';
+                                                        }
+                                                        return null; // Return null if the input is valid
+                                                      },
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                         TextButton(
+                                        ),
+                                        TextButton(
                                             onPressed: () {
                                               showModalBottomSheet(
                                                   context: context,
@@ -497,7 +487,7 @@ String formattedText = capitalize(text);
                                               onTap: () {
                                                 selectedPriceNotifieru
                                                     .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'based on Request'}',
+                                                  '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'based on Request'}',
                                                 );
                                                 selectedPriceNotifieru
                                                     .setProductCodeSelected(
@@ -731,7 +721,8 @@ String formattedText = capitalize(text);
           if (snapshot.connectionState == ConnectionState.waiting) {
             // print("hgfghfhfgu");
             return Center(
-                child: lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
+                child:
+                    lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -854,15 +845,26 @@ String formattedText = capitalize(text);
                                               ),
                                             ),
                                             Container(
-  color: Colors.white,
-  height: MediaQuery.of(context).size.height / 1.8,
-  width: MediaQuery.of(context).size.width / 4,
-  child: selectedThumbnailProvider.selectedThumbnail != null
-      ? Image.network(selectedThumbnailProvider.selectedThumbnail!)
-      : thumbnail != null
-          ? Image.network(thumbnail!)
-          : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-),
+                                              color: Colors.white,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  1.8,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              child: selectedThumbnailProvider
+                                                          .selectedThumbnail !=
+                                                      null
+                                                  ? Image.network(
+                                                      selectedThumbnailProvider
+                                                          .selectedThumbnail!)
+                                                  : thumbnail != null
+                                                      ? Image.network(
+                                                          thumbnail!)
+                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -950,7 +952,8 @@ String formattedText = capitalize(text);
                                             }
                                           },
                                           child: Text('ADD TO CART',
-                                           style: GoogleFonts.poppins(color: Colors.white)),
+                                              style: GoogleFonts.poppins(
+                                                  color: Colors.white)),
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -977,9 +980,10 @@ String formattedText = capitalize(text);
                                                     },
                                                   );
                                           },
-                                          child:  Text(
+                                          child: Text(
                                             'GO TO CART',
-                                            style: GoogleFonts.poppins(color: Colors.white),
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -999,7 +1003,7 @@ String formattedText = capitalize(text);
                               ],
                             ),
                           ),
-                         Expanded(
+                          Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
@@ -1215,9 +1219,10 @@ String formattedText = capitalize(text);
                                                         body: Container(
                                                             height: 1500,
                                                             color: const Color
-                                                                    .fromARGB(255,
+                                                                .fromARGB(255,
                                                                 230, 233, 235),
-                                                            child: pdf != null
+                                                            child: pdf !=
+                                                                    null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -1276,18 +1281,20 @@ String formattedText = capitalize(text);
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(4),
-                                                          border:Border.all(
+                                                          border: Border.all(
                                                             color: codeAndPrice
                                                                         .price ==
                                                                     null
                                                                 ? Colors.black
-                                                          : codeAndPrice
-                                                                      .productCode ==
-                                                                  selectedCodeProvider
-                                                                      .selectedProductCode
-                                                              ? Colors
-                                                                  .blue // Set border color to blue for selected container
-                                                               : Colors.greenAccent.shade700, // Set border color to black for non-selected containers
+                                                                : codeAndPrice
+                                                                            .productCode ==
+                                                                        selectedCodeProvider
+                                                                            .selectedProductCode
+                                                                    ? Colors
+                                                                        .blue // Set border color to blue for selected container
+                                                                    : Colors
+                                                                        .greenAccent
+                                                                        .shade700, // Set border color to black for non-selected containers
                                                             width:
                                                                 1.0, // Set your desired border width
                                                           ),

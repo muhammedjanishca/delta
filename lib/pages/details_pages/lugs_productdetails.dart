@@ -142,7 +142,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height /
-                                              1.8,
+                                              3.3,
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /

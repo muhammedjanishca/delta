@@ -130,7 +130,7 @@ class ProductDetailsOfELPSAccessories extends StatelessWidget {
                                         color: Colors.white,
                                         height:
                                             MediaQuery.of(context).size.height /
-                                                1.8,
+                                                3.3,
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 4,
