@@ -467,75 +467,108 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                             //  Text("size chart")
                                             ),
                                       ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Wrap(
-                                          spacing:
-                                              8.0, // Adjust the spacing between buttons as needed
-                                          runSpacing:
-                                              8.0, // Adjust the spacing between rows as needed
-                                          children: List<Widget>.generate(
-                                              price.length, (index) {
-                                            final codeAndPrice = price![index];
-                                            return InkWell(
-                                              onTap: () {
-                                                selectedPriceNotifieru
-                                                    .setSelectedPrice(
-                                                  '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'based on Request'}',
+                                    ),Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Wrap(
+                                              spacing:
+                                                  8.0, // Adjust the spacing between buttons as needed
+                                              runSpacing:
+                                                  8.0, // Adjust the spacing between rows as needed
+                                              children: List<Widget>.generate(
+                                                  price.length, (index) {
+                                                     context
+                                                      .read<DataProvider>()
+                                                      .addColor(price!.length);
+                                                final codeAndPrice =
+                                                    price[index];
+                                                return InkWell(
+                                                  onTap: () {
+                                                     context
+                                                          .read<DataProvider>()
+                                                          .addColor(
+                                                              price!.length);
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .changeTappedColor(
+                                                              index);
+                                                    selectedPriceNotifieru
+                                                        .setSelectedPrice(
+                                                     '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'based on Request'}',
+                                                    );
+                                                    selectedPriceNotifieru
+                                                        .setProductCodeSelected(
+                                                            true);
+                                                  },
+                                                  child:  Form(
+                                                      autovalidateMode:
+                                                          AutovalidateMode
+                                                              .always,
+                                                      child: Consumer<
+                                                              DataProvider>(
+                                                          builder: (context,
+                                                              dataProvider,
+                                                              child) {
+                                                        return Container(
+                                                          width: 100,
+                                                          padding: const EdgeInsets
+                                                              .all(
+                                                              8.0), // Adjust the padding as needed
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: dataProvider
+                                                                            .colors[
+                                                                        index] ==
+                                                                    Color(
+                                                                        0xffffffff)
+                                                                ? Colors.white
+                                                                : Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        18,
+                                                                        110,
+                                                                        203),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            border: Border.all(
+                                                              color: codeAndPrice
+                                                                          .price ==
+                                                                      null
+                                                                  ? Colors.black
+                                                                  : codeAndPrice
+                                                                              .productCode ==
+                                                                          selectedCodeProvider
+                                                                              .selectedProductCode
+                                                                      ? Colors
+                                                                          .blue // Set border color to blue for selected container
+                                                                      : Colors
+                                                                          .greenAccent
+                                                                          .shade700, // Set border color to black for non-selected containers
+                                                              width:
+                                                                  1.0, // Set your desired border width
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            '${codeAndPrice.productCode}',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black, // Set your desired text color
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                                    ),
                                                 );
-                                                selectedPriceNotifieru
-                                                    .setProductCodeSelected(
-                                                        true);
-                                              },
-                                              child: Form(
-                                                autovalidateMode:
-                                                    AutovalidateMode.always,
-                                                child: Container(
-                                                  width: 100,
-                                                  padding: EdgeInsets.all(
-                                                      8.0), // Adjust the padding as needed
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                      color: codeAndPrice
-                                                                  .price ==
-                                                              null
-                                                          ? Colors
-                                                              .red // Set border color to red when selectedPrice is null
-                                                          : codeAndPrice
-                                                                      .productCode ==
-                                                                  selectedCodeProvider
-                                                                      .selectedProductCode
-                                                              ? Colors
-                                                                  .blue // Set border color to blue for selected container
-                                                              : Colors
-                                                                  .black, // Set border color to black for non-selected containers
-                                                      width:
-                                                          1.0, // Set your desired border width
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    '${codeAndPrice.productCode}',
-                                                    style: TextStyle(
-                                                      color: Colors
-                                                          .black, // Set your desired text color
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }),
+                                              }),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
                                     SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height /
@@ -1245,7 +1278,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          Column(
+Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
@@ -1254,14 +1287,26 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                 spacing: 8.0,
                                                 runSpacing: 8.0,
                                                 children: List<Widget>.generate(
-                                                    price!.length, (index) {
+                                                    price.length, (index) {
+                                                  context
+                                                      .read<DataProvider>()
+                                                      .addColor(price!.length);
                                                   final codeAndPrice =
-                                                      price![index];
+                                                      price[index];
                                                   return InkWell(
                                                     onTap: () {
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .addColor(
+                                                              price!.length);
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .changeTappedColor(
+                                                              index);
+
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
@@ -1271,41 +1316,61 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                       autovalidateMode:
                                                           AutovalidateMode
                                                               .always,
-                                                      child: Container(
-                                                        width: 100,
-                                                        padding: EdgeInsets.all(
-                                                            8.0), // Adjust the padding as needed
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          border: Border.all(
-                                                            color: codeAndPrice
-                                                                        .price ==
-                                                                    null
-                                                                ? Colors.black
-                                                                : codeAndPrice
-                                                                            .productCode ==
-                                                                        selectedCodeProvider
-                                                                            .selectedProductCode
-                                                                    ? Colors
-                                                                        .blue // Set border color to blue for selected container
-                                                                    : Colors
-                                                                        .greenAccent
-                                                                        .shade700, // Set border color to black for non-selected containers
-                                                            width:
-                                                                1.0, // Set your desired border width
+                                                      child: Consumer<
+                                                              DataProvider>(
+                                                          builder: (context,
+                                                              dataProvider,
+                                                              child) {
+                                                        return Container(
+                                                          width: 100,
+                                                          padding: const EdgeInsets
+                                                              .all(
+                                                              8.0), // Adjust the padding as needed
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: dataProvider
+                                                                            .colors[
+                                                                        index] ==
+                                                                    Color(
+                                                                        0xffffffff)
+                                                                ? Colors.white
+                                                                : Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        18,
+                                                                        110,
+                                                                        203),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            border: Border.all(
+                                                              color: codeAndPrice
+                                                                          .price ==
+                                                                      null
+                                                                  ? Colors.black
+                                                                  : codeAndPrice
+                                                                              .productCode ==
+                                                                          selectedCodeProvider
+                                                                              .selectedProductCode
+                                                                      ? Colors
+                                                                          .blue // Set border color to blue for selected container
+                                                                      : Colors
+                                                                          .greenAccent
+                                                                          .shade700, // Set border color to black for non-selected containers
+                                                              width:
+                                                                  1.0, // Set your desired border width
+                                                            ),
                                                           ),
-                                                        ),
-                                                        child: Text(
-                                                          '${codeAndPrice.productCode}',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .black, // Set your desired text color
+                                                          child: Text(
+                                                            '${codeAndPrice.productCode}',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black, // Set your desired text color
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ),
+                                                        );
+                                                      }),
                                                     ),
                                                   );
                                                   // return InkWell(

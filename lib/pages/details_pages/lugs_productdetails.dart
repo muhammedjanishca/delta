@@ -248,119 +248,114 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       .width /
                                                   15,
                                             ),
-                                            
-                                              Flexible(
-                                                child: FittedBox(
-                                                  child: Container(
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          // color: Colors.amber,
-                                                          child: Text(
-                                                            'Product Code & Price: ',
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              fontSize: 12.0,
-                                                              color: Color(
-                                                                  0xFF212121),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 60,
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Consumer<
-                                                              SelectedPriceNotifier>(
-                                                            builder: (context,
-                                                                selectedPriceNotifieru,
-                                                                _) {
-                                                              String priceText =
-                                                                  selectedPriceNotifieru
-                                                                      .selectedPrice;
-                                                              String prefix =
-                                                                  ":";
-                                                              TextStyle
-                                                                  prefixStyle =
-                                                                  TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 14,
-                                                              );
-                                                              TextStyle
-                                                                  suffixStyle =
-                                                                  TextStyle(
-                                                                color:
-                                                                    Colors.red,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 14,
-                                                              );
 
-                                                              int prefixIndex =
-                                                                  priceText
-                                                                      .indexOf(
-                                                                          prefix);
-                                                              if (prefixIndex ==
-                                                                  -1) {
-                                                                // If "SAR" is not found in the text, apply the default style to the whole text
-                                                                return Center(
-                                                                  child: Text(
-                                                                    priceText,
-                                                                    style:
-                                                                        prefixStyle,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                // If "SAR" is found, split the text and apply styles accordingly
-                                                                String
-                                                                    prefixPart =
-                                                                    priceText.substring(
-                                                                        0,
-                                                                        prefixIndex +
-                                                                            prefix.length);
-                                                                String
-                                                                    suffixPart =
-                                                                    priceText.substring(
-                                                                        prefixIndex +
-                                                                            prefix.length);
-                                                                return Center(
-                                                                  child:
-                                                                      RichText(
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        TextSpan(
-                                                                            text:
-                                                                                prefixPart,
-                                                                            style:
-                                                                                prefixStyle),
-                                                                        TextSpan(
-                                                                            text:
-                                                                                suffixPart,
-                                                                            style:
-                                                                                suffixStyle),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                            },
+                                            Flexible(
+                                              child: FittedBox(
+                                                child: Container(
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        // color: Colors.amber,
+                                                        child: Text(
+                                                          'Product Code & Price: ',
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            fontSize: 12.0,
+                                                            color: Color(
+                                                                0xFF212121),
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                      Container(
+                                                        height: 60,
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: Consumer<
+                                                            SelectedPriceNotifier>(
+                                                          builder: (context,
+                                                              selectedPriceNotifieru,
+                                                              _) {
+                                                            String priceText =
+                                                                selectedPriceNotifieru
+                                                                    .selectedPrice;
+                                                            String prefix = ":";
+                                                            TextStyle
+                                                                prefixStyle =
+                                                                TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 14,
+                                                            );
+                                                            TextStyle
+                                                                suffixStyle =
+                                                                TextStyle(
+                                                              color: Colors.red,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 14,
+                                                            );
+
+                                                            int prefixIndex =
+                                                                priceText
+                                                                    .indexOf(
+                                                                        prefix);
+                                                            if (prefixIndex ==
+                                                                -1) {
+                                                              // If "SAR" is not found in the text, apply the default style to the whole text
+                                                              return Center(
+                                                                child: Text(
+                                                                  priceText,
+                                                                  style:
+                                                                      prefixStyle,
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              // If "SAR" is found, split the text and apply styles accordingly
+                                                              String prefixPart =
+                                                                  priceText.substring(
+                                                                      0,
+                                                                      prefixIndex +
+                                                                          prefix
+                                                                              .length);
+                                                              String suffixPart =
+                                                                  priceText.substring(
+                                                                      prefixIndex +
+                                                                          prefix
+                                                                              .length);
+                                                              return Center(
+                                                                child: RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    children: [
+                                                                      TextSpan(
+                                                                          text:
+                                                                              prefixPart,
+                                                                          style:
+                                                                              prefixStyle),
+                                                                      TextSpan(
+                                                                          text:
+                                                                              suffixPart,
+                                                                          style:
+                                                                              suffixStyle),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
+                                            ),
                                             // Container(
                                             //   width: 130,
                                             //   padding: EdgeInsets.all(8.0),
@@ -389,7 +384,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             //           .width /
                                             //       25,
                                             // ),
-                                            
                                           ],
                                         ),
                                         SizedBox(
@@ -409,61 +403,65 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       .size
                                                       .width /
                                                   13,
-                                            ),FittedBox(
-                                            child: SizedBox(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Enter The Quantity',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 14.0,
-                                                      color: const Color(
-                                                          0xFF212121),
-                                                    ),
-                                                  ),
-                                                  Gap(15),
-                                                  Form(
-                                                    key: _formKey,
-                                                    child: Container(
-                                                      // height:
-                                                      // MediaQuery.of(context).size.height/18,
-                                                      width: 70,
-                                                      //  MediaQuery.of(context).size.width/10,
-                                                      child: TextFormField(
-                                                        controller:
-                                                            quantityController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          //  border:
-                                                          //      OutlineInputBorder(),
-                                                          hintText: '     000',
-                                                        ),
-                                                        validator: (value) {
-                                                          if (value!.isEmpty) {
-                                                            return 'Enter the quantity';
-                                                          }
-                                                          int? quantity =
-                                                              int.tryParse(
-                                                                  value);
-                                                          if (quantity ==
-                                                                  null ||
-                                                              quantity <= 0) {
-                                                            return 'Quantity must be a positive number';
-                                                          }
-                                                          return null; // Return null if the input is valid
-                                                        },
+                                            ),
+                                            FittedBox(
+                                              child: SizedBox(
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      'Enter The Quantity',
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 14.0,
+                                                        color: const Color(
+                                                            0xFF212121),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                    Gap(15),
+                                                    Form(
+                                                      key: _formKey,
+                                                      child: Container(
+                                                        // height:
+                                                        // MediaQuery.of(context).size.height/18,
+                                                        width: 70,
+                                                        //  MediaQuery.of(context).size.width/10,
+                                                        child: TextFormField(
+                                                          controller:
+                                                              quantityController,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            //  border:
+                                                            //      OutlineInputBorder(),
+                                                            hintText:
+                                                                '     000',
+                                                          ),
+                                                          validator: (value) {
+                                                            if (value!
+                                                                .isEmpty) {
+                                                              return 'Enter the quantity';
+                                                            }
+                                                            int? quantity =
+                                                                int.tryParse(
+                                                                    value);
+                                                            if (quantity ==
+                                                                    null ||
+                                                                quantity <= 0) {
+                                                              return 'Quantity must be a positive number';
+                                                            }
+                                                            return null; // Return null if the input is valid
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
                                             TextButton(
                                                 onPressed: () {
                                                   showModalBottomSheet(
@@ -515,8 +513,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 )
                                                 //  Text("size chart")
                                                 ),
-
-
                                           ],
                                         ),
                                         Column(
@@ -533,49 +529,89 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   8.0, // Adjust the spacing between rows as needed
                                               children: List<Widget>.generate(
                                                   price.length, (index) {
+                                                     context
+                                                      .read<DataProvider>()
+                                                      .addColor(price!.length);
                                                 final codeAndPrice =
-                                                    price![index];
+                                                    price[index];
                                                 return InkWell(
                                                   onTap: () {
+                                                     context
+                                                          .read<DataProvider>()
+                                                          .addColor(
+                                                              price!.length);
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .changeTappedColor(
+                                                              index);
                                                     selectedPriceNotifieru
                                                         .setSelectedPrice(
-                                                      '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'based on Request'}',
+                                                     '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'based on Request'}',
                                                     );
                                                     selectedPriceNotifieru
                                                         .setProductCodeSelected(
                                                             true);
                                                   },
-                                                  child: Form(
-                                                    autovalidateMode:
-                                                        AutovalidateMode.always,
-                                                    child: Container(
-                                                      width: 100,
-                                                      padding: EdgeInsets.all(
-                                                          8.0), // Adjust the padding as needed
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                          color: codeAndPrice
-                                                                      .price ==
-                                                                  null
-                                                              ? Colors
-                                                                  .green // Set border color to red when selectedPrice is null
-                                                              : Colors.black,
-                                                          width:
-                                                              1.0, // Set your desired border width
-                                                        ),
-                                                      ),
-                                                      child: Text(
-                                                        '${codeAndPrice.productCode}',
-                                                        style: TextStyle(
-                                                          color: Colors
-                                                              .black, // Set your desired text color
-                                                        ),
-                                                      ),
+                                                  child:  Form(
+                                                      autovalidateMode:
+                                                          AutovalidateMode
+                                                              .always,
+                                                      child: Consumer<
+                                                              DataProvider>(
+                                                          builder: (context,
+                                                              dataProvider,
+                                                              child) {
+                                                        return Container(
+                                                          width: 100,
+                                                          padding: const EdgeInsets
+                                                              .all(
+                                                              8.0), // Adjust the padding as needed
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: dataProvider
+                                                                            .colors[
+                                                                        index] ==
+                                                                    Color(
+                                                                        0xffffffff)
+                                                                ? Colors.white
+                                                                : Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        18,
+                                                                        110,
+                                                                        203),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            border: Border.all(
+                                                              color: codeAndPrice
+                                                                          .price ==
+                                                                      null
+                                                                  ? Colors.black
+                                                                  : codeAndPrice
+                                                                              .productCode ==
+                                                                          selectedCodeProvider
+                                                                              .selectedProductCode
+                                                                      ? Colors
+                                                                          .blue // Set border color to blue for selected container
+                                                                      : Colors
+                                                                          .greenAccent
+                                                                          .shade700, // Set border color to black for non-selected containers
+                                                              width:
+                                                                  1.0, // Set your desired border width
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            '${codeAndPrice.productCode}',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black, // Set your desired text color
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
                                                     ),
-                                                  ),
                                                 );
                                               }),
                                             ),
@@ -1250,7 +1286,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               Text(
                                                 'Product codes'.toUpperCase(),
                                                 style: GoogleFonts.quicksand(
-                                                  color: Color.fromARGB(
+                                                  color: const Color.fromARGB(
                                                       255, 156, 155, 155),
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
@@ -1264,9 +1300,10 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                         body: Container(
                                                             height: 1500,
                                                             color: const Color
-                                                                    .fromARGB(255,
+                                                                .fromARGB(255,
                                                                 230, 233, 235),
-                                                            child: pdf != null
+                                                            child: pdf !=
+                                                                    null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -1290,7 +1327,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          Column(
+                                      Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
@@ -1299,11 +1336,23 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 spacing: 8.0,
                                                 runSpacing: 8.0,
                                                 children: List<Widget>.generate(
-                                                    price!.length, (index) {
+                                                    price.length, (index) {
+                                                  context
+                                                      .read<DataProvider>()
+                                                      .addColor(price!.length);
                                                   final codeAndPrice =
-                                                      price![index];
+                                                      price[index];
                                                   return InkWell(
                                                     onTap: () {
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .addColor(
+                                                              price!.length);
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .changeTappedColor(
+                                                              index);
+
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
                                                         '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
@@ -1316,41 +1365,56 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       autovalidateMode:
                                                           AutovalidateMode
                                                               .always,
-                                                      child: Container(
-                                                        width: 100,
-                                                        padding: EdgeInsets.all(
-                                                            8.0), // Adjust the padding as needed
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          border: Border.all(
-                                                            color: codeAndPrice
-                                                                        .price ==
-                                                                    null
-                                                                ? Colors.black
-                                                                : codeAndPrice
-                                                                            .productCode ==
-                                                                        selectedCodeProvider
-                                                                            .selectedProductCode
-                                                                    ? Colors
-                                                                        .blue // Set border color to blue for selected container
-                                                                    : Colors
-                                                                        .greenAccent
-                                                                        .shade700, // Set border color to black for non-selected containers
-                                                            width:
-                                                                1.0, // Set your desired border width
+                                                      child: Consumer<
+                                                              DataProvider>(
+                                                          builder: (context,
+                                                              dataProvider,
+                                                              child) {
+                                                        return Container(
+                                                          width: 100,
+                                                          padding: const EdgeInsets
+                                                              .all(
+                                                              8.0), // Adjust the padding as needed
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: dataProvider
+                                                                            .colors[
+                                                                        index] ==
+                                                                    Color(
+                                                                        0xffffffff)
+                                                                ? Colors.white
+                                                                : Color.fromARGB(255, 108, 173, 237),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            border: Border.all(
+                                                              color: codeAndPrice
+                                                                          .price ==
+                                                                      null
+                                                                  ? Colors.black
+                                                                  : codeAndPrice
+                                                                              .productCode ==
+                                                                          selectedCodeProvider
+                                                                              .selectedProductCode
+                                                                      ? Colors
+                                                                          .blue // Set border color to blue for selected container
+                                                                      : Colors
+                                                                          .greenAccent
+                                                                          .shade700, // Set border color to black for non-selected containers
+                                                              width:
+                                                                  1.0, // Set your desired border width
+                                                            ),
                                                           ),
-                                                        ),
-                                                        child: Text(
-                                                          '${codeAndPrice.productCode}',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .black, // Set your desired text color
+                                                          child: Text(
+                                                            '${codeAndPrice.productCode}',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black, // Set your desired text color
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ),
+                                                        );
+                                                      }),
                                                     ),
                                                   );
                                                   // return InkWell(
