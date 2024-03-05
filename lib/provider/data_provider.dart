@@ -17,11 +17,22 @@ class DataProvider extends ChangeNotifier {
   late var newCjtkc = fetchCjtkcData();
   late var newSbcpa = fetchsbcpaData();
   late var news = fetchCjtkcData();
+  
+  Color addedColor = Colors.white;
+  Color changedColor = Colors.blue;
+  List<Color> colors = [];
+  addColor(int length) {
+    colors.clear();
+    colors = List.generate(length, (index) => addedColor);
+  }
+  changeTappedColor(int index) {
+    colors[index] = changedColor;
+    notifyListeners();
+  }
 
-
-Future<ProduceNewModal> fetchsbcpaData() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/sb_cpa'));
+  Future<ProduceNewModal> fetchsbcpaData() async {
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/sb_cpa'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -31,9 +42,9 @@ Future<ProduceNewModal> fetchsbcpaData() async {
       throw Exception('Failed to load data');
     }
   }
-Future<ProduceNewModal> fetchElpsData() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/elps'));
+
+  Future<ProduceNewModal> fetchElpsData() async {
+    final response = await http.get(Uri.parse('https://deltabackend.com/elps'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -43,9 +54,10 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
+
   Future<ProduceNewModal> fetchCjtkcData() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/cj_tkc'));
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/cj_tkc'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -69,8 +81,8 @@ Future<ProduceNewModal> fetchElpsData() async {
   // }
 
   Future<ProduceNewModal> fetchSsctmData() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/ssctm'));
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/ssctm'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -80,9 +92,9 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
+
   Future<ProduceNewModal> fetchLugsData() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/lugs'));
+    final response = await http.get(Uri.parse('https://deltabackend.com/lugs'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -92,9 +104,10 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
-   Future<ProduceNewModal> fetchElpsAssessoriesData() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/elps-accessories'));
+
+  Future<ProduceNewModal> fetchElpsAssessoriesData() async {
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/elps-accessories'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -104,10 +117,10 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
-  
-   Future<ProduceNewModal> fetchglandsApiUrl() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/glands'));
+
+  Future<ProduceNewModal> fetchglandsApiUrl() async {
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/glands'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -119,8 +132,8 @@ Future<ProduceNewModal> fetchElpsData() async {
   }
 
   Future<ProduceNewModal> fetchconnectersApiUrl() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/connectors'));
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/connectors'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -130,9 +143,10 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
-   Future<ProduceNewModal> fetchaccessoriesApiUrl() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/accessories'));
+
+  Future<ProduceNewModal> fetchaccessoriesApiUrl() async {
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/accessories'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -142,9 +156,10 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
-   Future<ProduceNewModal> fetchcrimpingtoolApiUrl() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/crimpingtools'));
+
+  Future<ProduceNewModal> fetchcrimpingtoolApiUrl() async {
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/crimpingtools'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -154,9 +169,10 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
-   Future<ProduceNewModal> fetchconduitsApiUrl() async {
-    final response = await http
-        .get(Uri.parse('https://deltabackend.com/conduits'));
+
+  Future<ProduceNewModal> fetchconduitsApiUrl() async {
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/conduits'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -171,8 +187,8 @@ Future<ProduceNewModal> fetchElpsData() async {
   Future<ProduceNewModal> setTypeOfProducts(type) async {
     // print("fdghjk");
     // print(type);
-    final response = await http.get(
-        Uri.parse('https://deltabackend.com/$type'));
+    final response =
+        await http.get(Uri.parse('https://deltabackend.com/$type'));
 
     if (response.statusCode == 200) {
       // print(response.body);
@@ -195,8 +211,6 @@ Future<ProduceNewModal> fetchElpsData() async {
       throw Exception('Failed to load data');
     }
   }
-
-  
 
   int currentUser = 1;
 
