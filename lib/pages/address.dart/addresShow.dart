@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_hex/pages/address.dart/Edit_Address.dart';
 import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
 import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:firebase_hex/pages/another_pages/cart.dart';
@@ -30,19 +31,16 @@ class AddressShow extends StatefulWidget {
   AddressShow({super.key});
 
   @override
-
-  
   State<AddressShow> createState() => _AddressShowState();
 }
 
 class _AddressShowState extends State<AddressShow> {
-
   double x = 0.0;
   double y = 0.0;
   Color textColor = Colors.black;
-   int enterCounter = 0;
+  int enterCounter = 0;
   int exitCounter = 0;
-   void incrementEnter(PointerEvent details) {
+  void incrementEnter(PointerEvent details) {
     setState(() {
       enterCounter++;
     });
@@ -62,6 +60,7 @@ class _AddressShowState extends State<AddressShow> {
       y = details.position.dy;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
@@ -102,7 +101,11 @@ class _AddressShowState extends State<AddressShow> {
                                     //   child:  isNotFirstItem =Index !=0,
                                     // ),
                                     // const Gap(150),
-                                    Icon(Icons.add,color: const Color.fromARGB(31, 136, 136, 136),),
+                                    Icon(
+                                      Icons.add,
+                                      color: const Color.fromARGB(
+                                          31, 136, 136, 136),
+                                    ),
                                     TextButton(
                                         onPressed: () => SideSheet.right(
                                             body: TextAddress(),
@@ -114,7 +117,8 @@ class _AddressShowState extends State<AddressShow> {
                                             context: context),
                                         child: Text(
                                           "ADD ADDRESS",
-                                          style: GoogleFonts.poppins(color: Colors.black),
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.black),
                                         ))
                                   ],
                                 ),
@@ -130,7 +134,7 @@ class _AddressShowState extends State<AddressShow> {
                                             .watch<AddressProvider>()
                                             .selectIndex ==
                                         index;
-        
+
                                     return Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4.0),
@@ -142,28 +146,50 @@ class _AddressShowState extends State<AddressShow> {
                                                   context, index);
                                         },
                                         child: Container(
-                                        
-                                                  decoration: BoxDecoration(
-                                                      color: isSelected
-                                              ?  colorOne
-                                              : Color.fromARGB(255, 234, 234, 234),
-                                                    border: Border.all(width: 1,color: Colors.black12)),
+                                          decoration: BoxDecoration(
+                                              color: isSelected
+                                                  ? Color.fromARGB(
+                                                      255, 226, 149, 149)
+                                                  : Color.fromARGB(
+                                                      255, 255, 254, 254),
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: Colors.black12)),
                                           // Set the color for unselected state
                                           child: ListTile(
                                             selectedTileColor: Colors.black,
                                             title: AddressData(addressData),
-                                            trailing: IconButton(
-                                              icon: Icon(Icons.close),
-                                              onPressed: () {
-                                                if (index != 0) {
-                                                  context
-                                                      .read<AddressProvider>()
-                                                      .deleteAddress(index);
-                                                } else {
-                                                  // print(
-                                                  //     'Cannot delete the address with index 0.');
-                                                }
-                                              },
+                                            trailing: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                if (isSelected)
+                                                  IconButton(
+                                                    icon: Icon(Icons.edit),
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                EditAddress(
+                                                                    addressData:
+                                                                        addressData, index:index,)),
+                                                      );
+                                                    },
+                                                  ),
+                                                IconButton(
+                                                  icon: Icon(Icons.close),
+                                                  onPressed: () {
+                                                    if (index != 0) {
+                                                      context
+                                                          .read<
+                                                              AddressProvider>()
+                                                          .deleteAddress(index);
+                                                    } else {
+                                                      // print('Cannot delete the address with index 0.');
+                                                    }
+                                                  },
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -204,7 +230,7 @@ class _AddressShowState extends State<AddressShow> {
                                 // SizedBox(
                                 //   height: MediaQuery.of(context).size.height / 6,
                                 // ),
-                                 Text(
+                                Text(
                                   'Summary\n',
                                   style: GoogleFonts.roboto(
                                       fontSize: 23,
@@ -212,7 +238,7 @@ class _AddressShowState extends State<AddressShow> {
                                 ),
                                 // SizedBox(height: 47),
                                 ListTile(
-                                  title:  Text(
+                                  title: Text(
                                     'Subtotal',
                                     style: GoogleFonts.poppins(
                                         fontSize: 18,
@@ -220,15 +246,20 @@ class _AddressShowState extends State<AddressShow> {
                                   ),
                                   trailing: Text(
                                     '\SAR ${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                                    style:  GoogleFonts.poppins(
+                                    style: GoogleFonts.poppins(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
                                 ListTile(
-                                  title: Text('VAT (${vatRate}%)',style: GoogleFonts.poppins(fontSize: 14),),
-                                  trailing:
-                                      Text('\SAR ${vat.toStringAsFixed(2)}',style: GoogleFonts.poppins(),),
+                                  title: Text(
+                                    'VAT (${vatRate}%)',
+                                    style: GoogleFonts.poppins(fontSize: 14),
+                                  ),
+                                  trailing: Text(
+                                    '\SAR ${vat.toStringAsFixed(2)}',
+                                    style: GoogleFonts.poppins(),
+                                  ),
                                 ),
                                 const Divider(
                                   height:
@@ -242,7 +273,7 @@ class _AddressShowState extends State<AddressShow> {
                                   height: 10,
                                 ),
                                 ListTile(
-                                  title:  Text(
+                                  title: Text(
                                     'Total Price (with VAT)',
                                     style: GoogleFonts.poppins(
                                         fontSize: 16,
@@ -250,7 +281,7 @@ class _AddressShowState extends State<AddressShow> {
                                   ),
                                   trailing: Text(
                                     '\SAR ${totalPriceWithVAT.toStringAsFixed(2)}',
-                                    style:GoogleFonts.poppins(
+                                    style: GoogleFonts.poppins(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -267,15 +298,16 @@ class _AddressShowState extends State<AddressShow> {
                                   height: 40,
                                 ),
                                 MouseRegion(
-                                onEnter: incrementEnter,
-                                onHover: updateLocation,
-                                onExit: incrementExit,
+                                  onEnter: incrementEnter,
+                                  onHover: updateLocation,
+                                  onExit: incrementExit,
                                   child: ElevatedButton(
                                     onPressed: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => QuotationPage(
+                                              builder: (context) =>
+                                                  QuotationPage(
                                                     totalPrice: cartProvider
                                                         .getTotalPrice(),
                                                     cartItems:
@@ -285,15 +317,15 @@ class _AddressShowState extends State<AddressShow> {
                                                             .getTotalPriceWithVAT(
                                                                 subtotal,
                                                                 vatRate),
-                                                    vat:
-                                                        cartProvider.calculateVAT(
+                                                    vat: cartProvider
+                                                        .calculateVAT(
                                                             subtotal, vatRate),
                                                   )));
                                     },
-                                    child: 
-                                     Text(
+                                    child: Text(
                                       'GENERATE QUATATION',
-                                      style: GoogleFonts.roboto(color: Colors.white),
+                                      style: GoogleFonts.roboto(
+                                          color: Colors.white),
                                     ),
                                     style: ButtonStyle(
                                       shape: MaterialStatePropertyAll(
@@ -346,35 +378,29 @@ AddressData(data) {
     children: [
       Text(
         "${item['Company Name']}",
-        style: GoogleFonts.poppins(
-            ),
+        style: GoogleFonts.poppins(),
       ),
       Text(
         "${item['Contact Number']}",
-       style: GoogleFonts.poppins(
-            ),
+        style: GoogleFonts.poppins(),
       ),
       Text(
         "${item['Street Address']}",
-        style: GoogleFonts.poppins(
-            ),
+        style: GoogleFonts.poppins(),
       ),
       Text(
         "${item['Street Address line 2']}",
-        style: GoogleFonts.poppins(
-            ),
+        style: GoogleFonts.poppins(),
       ),
       Text(
         "${item['Location']}",
         // "${item['vat']} ,  " "${item['state']}",
-       style: GoogleFonts.poppins(
-            ),
+        style: GoogleFonts.poppins(),
       ),
       Text(
         "${item['City']}",
         // "${item['vat']} ,  " "${item['state']}",
-        style: GoogleFonts.poppins(
-            ),
+        style: GoogleFonts.poppins(),
       ),
     ],
   );
@@ -416,7 +442,9 @@ class AddressShowMob extends StatelessWidget {
                     //   child:  isNotFirstItem =Index !=0,
                     // ),
                     // const Gap(150),
-                                    Icon(Icons.add,),
+                    Icon(
+                      Icons.add,
+                    ),
                     TextButton(
                         onPressed: () => SideSheet.right(
                             body: TextAddress(),
@@ -439,7 +467,7 @@ class AddressShowMob extends StatelessWidget {
                       var addressData = jsonDecode(cartItems["address"][index]);
                       bool isSelected =
                           context.watch<AddressProvider>().selectIndex == index;
-      
+
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
                         child: GestureDetector(
@@ -450,14 +478,13 @@ class AddressShowMob extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: isSelected
-                                ? colorOne // Set the color for selected state
-                                : Color.fromARGB(255, 211, 215, 216), 
-                                 border: Border.all(width: 1,color: Colors.black12)
+                                color: isSelected
+                                    ? colorOne // Set the color for selected state
+                                    : Color.fromARGB(255, 211, 215, 216),
+                                border: Border.all(
+                                    width: 1, color: Colors.black12)),
 
-                            ),
-                            
-                                    // Set the color for unselected state
+                            // Set the color for unselected state
                             // child: ListTile(
                             //   selectedTileColor: Colors.black,
                             //   title: AddressData(addressData),

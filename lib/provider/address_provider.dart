@@ -92,4 +92,15 @@ class AddressProvider with ChangeNotifier {
     selectIndex = id;
     notifyListeners();
   }
+  
+  Future<void> updateAddress(int index, Map<String, dynamic> updatedAddress) async {
+    arrayFromFirestore[index] = jsonEncode(updatedAddress);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_auth.currentUser!.uid)
+        .update({'address': arrayFromFirestore});
+
+    notifyListeners();
+  }
 }
