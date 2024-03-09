@@ -397,44 +397,62 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                       .setProductCodeSelected(
                                                           true);
                                                 },
-                                                child: Form(
-                                                  autovalidateMode:
-                                                      AutovalidateMode.always,
-                                                  child: Container(
-                                                    width: 100,
-                                                    padding: EdgeInsets.all(
-                                                        8.0), // Adjust the padding as needed
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      border: Border.all(
-                                                        color: codeAndPrice
-                                                                    .price ==
-                                                                null
-                                                            ? Colors
-                                                                .red // Set border color to red when selectedPrice is null
-                                                            : codeAndPrice
-                                                                        .productCode ==
-                                                                    selectedCodeProvider
-                                                                        .selectedProductCode
-                                                                ? Colors
-                                                                    .blue // Set border color to blue for selected container
-                                                                : Colors
-                                                                    .black, // Set border color to black for non-selected containers
-                                                        width:
-                                                            1.0, // Set your desired border width
-                                                      ),
+                                                 child:  Form(
+                                                      autovalidateMode:
+                                                          AutovalidateMode
+                                                              .always,
+                                                      child: Consumer<
+                                                              DataProvider>(
+                                                          builder: (context,
+                                                              dataProvider,
+                                                              child) {
+                                                        return Container(
+                                                          width: 100,
+                                                          padding: const EdgeInsets
+                                                              .all(
+                                                              8.0), // Adjust the padding as needed
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: dataProvider
+                                                                            .colors[
+                                                                        index] ==
+                                                                    Color(
+                                                                        0xffffffff)
+                                                                ? Colors.white
+                                                                : pickedColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            border: Border.all(
+                                                              color: codeAndPrice
+                                                                          .price ==
+                                                                      null
+                                                                  ? Colors.black
+                                                                  : codeAndPrice
+                                                                              .productCode ==
+                                                                          selectedCodeProvider
+                                                                              .selectedProductCode
+                                                                      ? Colors
+                                                                          .blue // Set border color to blue for selected container
+                                                                      : Colors
+                                                                          .greenAccent
+                                                                          .shade700, // Set border color to black for non-selected containers
+                                                              width:
+                                                                  1.0, // Set your desired border width
+                                                            ),
+                                                          ),
+                                                           child: Text(
+                                                            '${codeAndPrice.productCode}',
+                                                            style: TextStyle(
+                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
+                                                              ?Colors.black
+                                                              : Colors.white
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
                                                     ),
-                                                    child: Text(
-                                                      '${codeAndPrice.productCode}',
-                                                      style: TextStyle(
-                                                        color: Colors
-                                                            .black, // Set your desired text color
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
                                               );
                                             }),
                                           ),
@@ -1171,44 +1189,61 @@ class ProductDetailsOfAccessories extends StatelessWidget {
                                                           .setProductCodeSelected(
                                                               true);
                                                     },
-                                                    child: Form(
+                                                      child:  Form(
                                                       autovalidateMode:
                                                           AutovalidateMode
                                                               .always,
-                                                      child: Container(
-                                                        width: 100,
-                                                        padding: EdgeInsets.all(
-                                                            8.0), // Adjust the padding as needed
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                          border: Border.all(
-                                                            color: codeAndPrice
-                                                                        .price ==
-                                                                    null
-                                                                ? Colors
-                                                                    .black // Set border color to red when selectedPrice is null
-                                                                : Colors
-                                                                    .greenAccent
-                                                                    .shade700,
-                                                            // ? Colors
-                                                            //     .blue // Set border color to blue for selected container
-                                                            // : Colors
-                                                            //     .black, // Set border color to black for non-selected containers
-                                                            width:
-                                                                1.0, // Set your desired border width
+                                                      child: Consumer<
+                                                              DataProvider>(
+                                                          builder: (context,
+                                                              dataProvider,
+                                                              child) {
+                                                        return Container(
+                                                          width: 100,
+                                                          padding: const EdgeInsets
+                                                              .all(
+                                                              8.0), // Adjust the padding as needed
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: dataProvider
+                                                                            .colors[
+                                                                        index] ==
+                                                                    Color(
+                                                                        0xffffffff)
+                                                                ? Colors.white
+                                                                : pickedColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                            border: Border.all(
+                                                              color: codeAndPrice
+                                                                          .price ==
+                                                                      null
+                                                                  ? Colors.black
+                                                                  : codeAndPrice
+                                                                              .productCode ==
+                                                                          selectedCodeProvider
+                                                                              .selectedProductCode
+                                                                      ? Colors
+                                                                          .blue // Set border color to blue for selected container
+                                                                      : Colors
+                                                                          .greenAccent
+                                                                          .shade700, // Set border color to black for non-selected containers
+                                                              width:
+                                                                  1.0, // Set your desired border width
+                                                            ),
                                                           ),
-                                                        ),
-                                                        child: Text(
-                                                          '${codeAndPrice.productCode}',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .black, // Set your desired text color
+                                                          child: Text(
+                                                            '${codeAndPrice.productCode}',
+                                                            style: TextStyle(
+                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
+                                                              ?Colors.black
+                                                              : Colors.white
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ),
+                                                        );
+                                                      }),
                                                     ),
                                                   );
                                                   // return InkWell(

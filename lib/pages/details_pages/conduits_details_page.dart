@@ -558,12 +558,7 @@ class ProductDetailsOfConduits extends StatelessWidget {
                                                                     Color(
                                                                         0xffffffff)
                                                                 ? Colors.white
-                                                                : Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        18,
-                                                                        110,
-                                                                        203),
+                                                                : pickedColor,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -589,8 +584,9 @@ class ProductDetailsOfConduits extends StatelessWidget {
                                                           child: Text(
                                                             '${codeAndPrice.productCode}',
                                                             style: TextStyle(
-                                                              color: Colors
-                                                                  .black, // Set your desired text color
+                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
+                                                              ?Colors.black
+                                                              : Colors.white
                                                             ),
                                                           ),
                                                         );
@@ -1369,12 +1365,7 @@ class ProductDetailsOfConduits extends StatelessWidget {
                                                                     Color(
                                                                         0xffffffff)
                                                                 ? Colors.white
-                                                                : Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        18,
-                                                                        110,
-                                                                        203),
+                                                                : pickedColor,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -1400,8 +1391,9 @@ class ProductDetailsOfConduits extends StatelessWidget {
                                                           child: Text(
                                                             '${codeAndPrice.productCode}',
                                                             style: TextStyle(
-                                                              color: Colors
-                                                                  .black, // Set your desired text color
+                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
+                                                              ?Colors.black
+                                                              : Colors.white
                                                             ),
                                                           ),
                                                         );

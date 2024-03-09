@@ -562,15 +562,9 @@ class ProductDetailsOfElps extends StatelessWidget {
                                                             color: dataProvider
                                                                             .colors[
                                                                         index] ==
-                                                                    Color(
-                                                                        0xffffffff)
+                                                                    Color(0xffffffff)
                                                                 ? Colors.white
-                                                                : Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        18,
-                                                                        110,
-                                                                        203),
+                                                                : pickedColor,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -593,11 +587,12 @@ class ProductDetailsOfElps extends StatelessWidget {
                                                                   1.0, // Set your desired border width
                                                             ),
                                                           ),
-                                                          child: Text(
+                                                           child: Text(
                                                             '${codeAndPrice.productCode}',
                                                             style: TextStyle(
-                                                              color: Colors
-                                                                  .black, // Set your desired text color
+                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
+                                                              ?Colors.black
+                                                              : Colors.white
                                                             ),
                                                           ),
                                                         );
@@ -1391,12 +1386,7 @@ class ProductDetailsOfElps extends StatelessWidget {
                                                                     Color(
                                                                         0xffffffff)
                                                                 ? Colors.white
-                                                                : Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        18,
-                                                                        110,
-                                                                        203),
+                                                                : pickedColor,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -1419,11 +1409,12 @@ class ProductDetailsOfElps extends StatelessWidget {
                                                                   1.0, // Set your desired border width
                                                             ),
                                                           ),
-                                                          child: Text(
+                                                           child: Text(
                                                             '${codeAndPrice.productCode}',
                                                             style: TextStyle(
-                                                              color: Colors
-                                                                  .black, // Set your desired text color
+                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
+                                                              ?Colors.black
+                                                              : Colors.white
                                                             ),
                                                           ),
                                                         );
