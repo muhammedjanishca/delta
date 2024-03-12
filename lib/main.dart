@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> {
           '/': (context) => AppBarMain(body: DesktopLanding()),
 
           '/cart': (context) => AppBarMain(
-                body: CartPage(),
+                body: const CartPage(),
               ),
           '/cable-terminal-ends/lugs/': (context) => AppBarMain(
                 body: LugsPage(),

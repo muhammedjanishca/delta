@@ -2,6 +2,7 @@ import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'dart:convert';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/responsive/quatation.dart';
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,12 +12,11 @@ import 'package:http/http.dart' as http;
 import '../../enquiry.dart';
 
 class QuotationPage extends StatelessWidget {
-  QuotationPage({
-        required this.cartItems,
-        required this.totalPrice,
-        required this.vat,
-        required this.totalPriceWithVAT
-        });
+  QuotationPage(
+      {required this.cartItems,
+      required this.totalPrice,
+      required this.vat,
+      required this.totalPriceWithVAT});
   final double totalPrice;
   final cartItems;
   final totalPriceWithVAT;
@@ -74,21 +74,6 @@ class QuotationDeskPage extends StatelessWidget {
                 Container(
                   child: _buildQuotationTable(),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.white,
-                        const Color.fromARGB(255, 76, 138, 131),
-                        const Color.fromARGB(255, 76, 138, 131)
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  child: MyClipPat(),
-                )
               ],
             ),
           ),
@@ -104,7 +89,6 @@ class QuotationDeskPage extends StatelessWidget {
       //     final response = await http.post(
       //       Uri.parse('https://deltabackend.com/invoice_number'),
       //     );
-
       //     if (response.statusCode == 200) {
       //       // If the increment was successful, perform other actions
       //       // You can also update the UI or display a message here
@@ -113,41 +97,41 @@ class QuotationDeskPage extends StatelessWidget {
       //       // Handle errors appropriately
       //       print('Failed to increment invoice number');
       //     }
-
       //     // Perform other actions if needed
       //   },
       //   child: const Icon(Icons.print),
       // ),
       floatingActionButton: FloatingActionButton(
-  backgroundColor: Color.fromARGB(255, 76, 138, 131),
-  onPressed: () async {
-      context
+        backgroundColor: Color.fromARGB(255, 76, 138, 131),
+        onPressed: () async {
+          context
               .read<AddressProvider>()
               .get_current_address(cartItems, context);
-    // Call your backend API to increment the invoice number
-    final response = await http.post(
-      Uri.parse('https://deltabackend.com/invoice_number'),
-    );
+          // Call your backend API to increment the invoice number
+          final response = await http.post(
+            Uri.parse('https://deltabackend.com/invoice_number'),
+          );
 
-    if (response.statusCode == 200) {
-      // If the increment was successful, show an alert dialog with Yes and No options
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Success'),
-            content: Text('Some Product Might not have prices it is better to enquire the details about products more...'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Add your actions when 'Yes' is pressed
-                  Navigator.of(context).pop();
-                },
-                child: Text('No'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
+          if (response.statusCode == 200) {
+            // If the increment was successful, show an alert dialog with Yes and No options
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Success'),
+                  content: Text(
+                      'Some Product Might not have prices it is better to enquire the details about products more...'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        // Add your actions when 'Yes' is pressed
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('No'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -155,35 +139,35 @@ class QuotationDeskPage extends StatelessWidget {
                           },
                         );
                       },
-                child: Text('Enquire Now'),
-              ),
-            ],
-          );
+                      child: Text('Enquire Now'),
+                    ),
+                  ],
+                );
+              },
+            );
+          } else {
+            // Handle errors and show an error alert dialog with OK button
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Error'),
+                  content: Text('Failed to increment invoice number.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the alert dialog
+                      },
+                      child: Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         },
-      );
-    } else {
-      // Handle errors and show an error alert dialog with OK button
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to increment invoice number.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the alert dialog
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  },
-  child: const Icon(Icons.print),
-),
+        child: const Icon(Icons.print),
+      ),
     );
   }
 
@@ -195,86 +179,52 @@ class QuotationDeskPage extends StatelessWidget {
             children: [
               Container(
                 width: 800,
-                color: const Color.fromARGB(255, 192, 173, 114),
+                // color: const Color.fromARGB(255, 192, 173, 114),
                 child: DataTable(
+                  headingTextStyle:
+                      GoogleFonts.poppins(color: Colors.black, fontSize: 14),
                   columnSpacing: 10.0,
-                  dividerThickness: 2,
-                  headingRowColor: MaterialStateColor.resolveWith(
-                    (states) => Color.fromARGB(255, 91, 166, 157),
-                  ),
+                  dividerThickness: 0.5,
+                  headingRowColor:
+                      MaterialStateColor.resolveWith((states) => colorOne),
                   dataRowMaxHeight: 60,
                   headingRowHeight: 60,
-                  horizontalMargin: 10,
-                  columns: [
+                  horizontalMargin: 0,
+                  columns: const [
+                    DataColumn(label: Text(" SI.NO"), tooltip: '   i + 1'),
                     DataColumn(
                       label: Text(
-                        '                               DESCRIPTION',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color:
-                                Colors.white // Adjust the font size as needed
-                            // You can also apply other text styles like fontWeight, color, etc. here
-                            ),
+                        '                        Description',
                       ),
                       tooltip: 'PRODUCT DESCRIPTION',
                     ),
                     DataColumn(
                       label: Text(
-                        'CODE',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color:
-                                Colors.white // Adjust the font size as needed
-                            // You can also apply other text styles like fontWeight, color, etc. here
-                            ),
+                        '     Code',
                       ),
-                      tooltip: 'Product Description',
+                      tooltip: 'Product Code',
                     ),
                     DataColumn(
                       label: Text(
-                        'QTY',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color:
-                                Colors.white // Adjust the font size as needed
-                            // You can also apply other text styles like fontWeight, color, etc. here
-                            ),
+                        ' Qty',
                       ),
                       tooltip: 'Product Quantity',
                     ),
                     DataColumn(
                       label: Text(
-                        'UNIT',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color:
-                                Colors.white // Adjust the font size as needed
-                            // You can also apply other text styles like fontWeight, color, etc. here
-                            ),
+                        '  Unit',
                       ),
                       tooltip: 'Unit',
                     ),
                     DataColumn(
                       label: Text(
-                        'PRICE',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color:
-                                Colors.white // Adjust the font size as needed
-                            // You can also apply other text styles like fontWeight, color, etc. here
-                            ),
+                        '    Price',
                       ),
                       tooltip: 'Price per Unit',
                     ),
                     DataColumn(
                       label: Text(
-                        'AMOUNT',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color:
-                                Colors.white // Adjust the font size as needed
-                            // You can also apply other text styles like fontWeight, color, etc. here
-                            ),
+                        '  Amount',
                       ),
                       tooltip: 'Total Amount',
                     ),
@@ -285,18 +235,17 @@ class QuotationDeskPage extends StatelessWidget {
                         color: MaterialStateColor.resolveWith((states) =>
                             i % 2 == 0 ? Colors.white : Colors.transparent),
                         cells: [
-                          // DataCell(_buildTableCell('${i + 1}')),
+                          DataCell(_buildTableCell('${i + 1}')),
                           DataCell(_buildTableCell(
                               jsonDecode(cartItems[i])['productName'])),
                           DataCell(_buildTableCell(
                               jsonDecode(cartItems[i])['productCode'])),
-
                           DataCell(_buildTableCell(
                               '${jsonDecode(cartItems[i])['quantity']}')),
                           DataCell(_buildTableCell('unit')),
                           DataCell(
                             _buildTableCell(
-                                '\SAR${jsonDecode(cartItems[i])['price']}',
+                                '\SAR  ${jsonDecode(cartItems[i])['price']}',
                                 fontWeight: FontWeight.bold),
                           ),
                           DataCell(_buildTableCell(
@@ -320,43 +269,44 @@ class QuotationDeskPage extends StatelessWidget {
                     height: 10,
                   ),
                   SizedBox(
-                    // color: const Color.fromARGB(255, 128, 118, 91),
+                    //   // color: const Color.fromARGB(255, 128, 118, 91),
                     width: 500,
                     height: 200,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // _buildTableCell("janish"),
-                        Text(
-                          "TERM AND CONDITIONS",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 15),
-                        ),
-                        Gap(5),
-                        Text(
-                          "Payment	      : 30 Dyas",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14),
-                        ),
-                        Text(
-                          "Delivery	       : 03 Days",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14),
-                        ),
-                        Text(
-                          "Validity		        : 07 Days",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14),
-                        ),
-                        Text(
-                          "We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14),
-                        )
-                      ],
-                    ),
                   ),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       // _buildTableCell("janish"),
+                  //       Text(
+                  //         "TERM AND CONDITIONS",
+                  //         style: TextStyle(
+                  //             fontWeight: FontWeight.w500, fontSize: 15),
+                  //       ),
+                  //       Gap(5),
+                  //       Text(
+                  //         "Payment	      : 30 Dyas",
+                  //         style: TextStyle(
+                  //             fontWeight: FontWeight.w300, fontSize: 14),
+                  //       ),
+                  //       Text(
+                  //         "Delivery	       : 03 Days",
+                  //         style: TextStyle(
+                  //             fontWeight: FontWeight.w300, fontSize: 14),
+                  //       ),
+                  //       Text(
+                  //         "Validity		        : 07 Days",
+                  //         style: TextStyle(
+                  //             fontWeight: FontWeight.w300, fontSize: 14),
+                  //       ),
+                  //       Text(
+                  //         "We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
+                  //         style: TextStyle(
+                  //             fontWeight: FontWeight.w300, fontSize: 14),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(
                     width: 264,
                     height: 200,
@@ -366,10 +316,10 @@ class QuotationDeskPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             _buildTableCell(' Net before VAT',
-                                fontWeight: FontWeight.bold),
+                               ),
                             _buildTableCell(
-                                '\SAR${totalPrice.toStringAsFixed(2)}',
-                                fontWeight: FontWeight.bold)
+                                '\SAR ${totalPrice.toStringAsFixed(2)}',
+                              )
                           ],
                         ),
                         Divider(
@@ -381,10 +331,10 @@ class QuotationDeskPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             _buildTableCell('VAT ',
-                                fontWeight: FontWeight.bold),
+                                ),
                             _buildTableCell(
-                                '              \SAR${vat.toStringAsFixed(2)}',
-                                fontWeight: FontWeight.bold)
+                                '              \SAR ${vat.toStringAsFixed(2)}',
+                               )
                           ],
                         ),
                         Container(
@@ -416,11 +366,12 @@ class QuotationDeskPage extends StatelessWidget {
       {FontWeight fontWeight = FontWeight.normal}) {
     return Container(
       padding: const EdgeInsets.all(8),
-      alignment: Alignment.center,
+      alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.poppins(
           fontWeight: fontWeight,
+          fontSize: 14,
         ),
         textAlign: TextAlign.center,
       ),
@@ -445,39 +396,33 @@ class QuotationMobilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
-      appBar:custSmallAppBar(context, Colors.white),
+      appBar: custSmallAppBar(context, Colors.white),
       body: SingleChildScrollView(
-       
-          child: Column(
-            
-              children: [
-                Container(
-                  color: Colors.white,
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  child: MyClipPath(),
-                ),
-                
-                   _buildQuotationTable(),
-              
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.white,
-                        const Color.fromARGB(255, 76, 138, 131),
-                        const Color.fromARGB(255, 76, 138, 131)
-                      ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                    ),
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  child: MyClipPat(),
-                )
-              ],
+        child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: MyClipPath(),
             ),
-          
-        
+            _buildQuotationTable(),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.white,
+                    const Color.fromARGB(255, 76, 138, 131),
+                    const Color.fromARGB(255, 76, 138, 131)
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              height: MediaQuery.of(context).size.height * 0.1,
+              // child: MyClipPat(),
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 76, 138, 131),
@@ -493,7 +438,6 @@ class QuotationMobilePage extends StatelessWidget {
 
   Widget _buildQuotationTable() {
     return Row(
-     
       children: [
         Container(
           // color: Colors.amber,
@@ -724,7 +668,6 @@ class QuotationMobilePage extends StatelessWidget {
   Widget _buildTableCell(String text,
       {FontWeight fontWeight = FontWeight.normal}) {
     return Container(
-      
       padding: const EdgeInsets.all(8),
       alignment: Alignment.center,
       child: Text(
@@ -739,102 +682,37 @@ class QuotationMobilePage extends StatelessWidget {
 }
 
 class MyClipPath extends StatelessWidget {
-  final Color backgroundColor = Color.fromARGB(255, 76, 138, 131);
+  // final Color backgroundColor = Color.fromARGB(255, 76, 138, 131);
   @override
   Widget build(BuildContext context) {
     return ClipPath(
-      clipper: BottomWaveClipper(),
+      // clipper: BottomWaveClipper(),
       child: Container(
         height: 150,
         width: double.infinity,
-        color: backgroundColor,
-        child: Row(
+        // color: ,
+       child: Padding(
+         padding:  EdgeInsets.all(8.0),
+         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Gap(15),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Gap(10),
+            Text('Quotes Details',style: GoogleFonts.poppins(fontWeight: FontWeight.w600),),
+            Divider(thickness: 0.5,
+            color: const Color.fromARGB(255, 104, 104, 104),),
+            Text('Requested Customer Details',style: GoogleFonts.poppins(),),
+            Gap(10),
+            Row(
               children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Abdullah Shaher Alsulami Est.",
-                    style: GoogleFonts.oswald(
-                      textStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    )),
-                // Gap(1),
-                Row(
-                  children: [
-                    Text(
-                      "DELTA",
-                      style: GoogleFonts.oswald(
-                        textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 35,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "\nNATIONAL",
-                      style: GoogleFonts.oswald(
-                        textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'TRADING & CONTRACTING, ELECRICAL & MAECHANICAL SUPPLIES',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 10),
-                ),
+              // Text('Name : ',style: GoogleFonts.poppins(),),
+
               ],
-            ),
+            )
+            // Text('Quotes Details',style: GoogleFonts.poppins(),),
+
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class BottomWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = new Path();
-    path.lineTo(0.0, size.height - 40);
-    path.quadraticBezierTo(
-        size.width / 4, size.height - 80, size.width / 2, size.height - 40);
-    path.quadraticBezierTo(size.width - (size.width / 4), size.height,
-        size.width, size.height - 40);
-    path.lineTo(size.width, 0.0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
-}
-
-class MyClipPat extends StatelessWidget {
-  final Color backgroundColor = Colors.white;
-  @override
-  Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: BottomWaveClipper(),
-      child: Container(
-        color: backgroundColor,
-        // child: Text("cvbnm"),
+         ),
+       ),
       ),
     );
   }

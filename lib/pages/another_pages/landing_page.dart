@@ -487,7 +487,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                     4.5,
                                                 child: FittedBox(
                                                   child: Padding(
-                                                    padding: EdgeInsets.only(
+                                                    padding: const EdgeInsets.only(
                                                         left: 15, right: 10),
                                                     child: Column(
                                                       crossAxisAlignment:
@@ -510,7 +510,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                               .poppins(
                                                                   fontSize: 16),
                                                         ),
-                                                        Gap(15),
+                                                        const Gap(15),
                                                         if (isHovered)
                                                           Row(
                                                             children: [
@@ -548,7 +548,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                       context,
                                                                       '/cable-terminal-ends/lugs/');
                                                                 },
-                                                                child: Text(
+                                                                child: const Text(
                                                                   'LUGS',
                                                                   style: TextStyle(
                                                                       color: Colors
@@ -608,7 +608,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                         ),
                                       ),
                                     ),
-                                    Gap(15),
+                                    const Gap(15),
                                     MouseRegion(
                                       onEnter: (_) =>
                                           setState(() => iHovered = true),
@@ -651,7 +651,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                     4.5,
                                                 child: FittedBox(
                                                   child: Padding(
-                                                    padding: EdgeInsets.only(
+                                                    padding: const EdgeInsets.only(
                                                         left: 15, right: 10),
                                                     child: Column(
                                                       crossAxisAlignment:
@@ -674,7 +674,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                               .poppins(
                                                                   fontSize: 16),
                                                         ),
-                                                        Gap(15),
+                                                        const Gap(15),
                                                         if (iHovered)
                                                           Row(
                                                             children: [
@@ -688,7 +688,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                     ButtonStyle(
                                                                   backgroundColor:
                                                                       MaterialStateProperty.all(
-                                                                          Color(
+                                                                          const Color(
                                                                               0xFFFFFFFF)),
                                                                   minimumSize: MaterialStateProperty.all(
                                                                       const Size(
@@ -776,11 +776,12 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                   ],
                                 ),
                               ),
+                              // gap
                               Padding(
                                 padding: const EdgeInsets.only(left: 50),
                                 child: Container(
                                   color: Colors.white,
-                                  height: height / 1.4,
+                                  height: height / 1.2,
                                   width: width,
                                   child:  Center(
                                     child: SingleChildScrollView(
@@ -798,71 +799,107 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                       '/brass-cable-gland-kits-accessories/brass-cable-glands/');
                                                                 },
                                             title:
-                                                "Releasable Type Stainless Steel Cable Ties",
+                                                "PVC Coated Galvanised Flexible Conduit",
+                                                subtitle: "Cable Support Systems",
                                             imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/cable+ties+edited.png',
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(1).png',
                                                
                                           )
                                           ),
-                                          Gap(10),
-                                          FittedBox(
+                                          const Gap(10),
+                                           FittedBox(
                                               child: ProductContainer(
+                                                onPressed: (){
+ Navigator.pushNamed(
+                                                                      context,
+                                                                      '/cable-jointing-and-termination-kit-components/');
+                                                                  },
                                             title:
-                                                'Cable Jointing & Termination Kit Components',
+                                                'hose clamps',
+                                                subtitle: "Cable Jointing & Termination Kit Components",
                                             imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/Cable+Jointing+%26+Termination+Kit+Components+1.jpg',
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(5).png',
                                           )),
-                                          Gap(10),
-                                          FittedBox(
+                                          const Gap(10),
+                                           FittedBox(
                                               child: ProductContainer(
-                                            title: 'Cable Support Systems',
+                                                 onPressed: (){
+                                                   Navigator.pushNamed(
+                                                                      context,
+                                                                      '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/');
+                                                               
+                                                },
+                                            title: 'double plate "u" clamp',
+                                            subtitle: "earthing & lightning protection accessories",
                                             imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/Cable+Support+Systems.png',
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(7).png',
                                           )),
-                                          Gap(10),
-                                          FittedBox(
+                                          const Gap(10),
+                                           FittedBox(
                                               child: ProductContainer(
+                                                 onPressed: (){
+                                                   Navigator.pushNamed(
+                                                                      context,
+                                                                      '/crimping-tools/');
+                                                               
+                                                },
                                             title:
-                                                'Earthing & Lightning Protection',
+                                                'crimping tool',
+                                                subtitle: "view more crimping tools",
                                             imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/Earthing+and+Lightning+Protection.png',
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(2).png',
+                                          )),
+                                          const Gap(10),
+                                           FittedBox(
+                                              child: ProductContainer(
+                                                onPressed: (){
+                                                   Navigator.pushNamed(
+                                                                      context,
+                                                                      '/Stainless Steel Cable Ties & Markers');
+                                                               
+                                                },
+                                            title:
+                                                'roller ball type stainless steel cable ties',
+                                                subtitle: "Stainless steel cable ties & markers",
+                                            imagePath:
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(6).png',
+                                          )),
+                                          const Gap(10),
+                                           FittedBox(
+                                              child: ProductContainer(
+                                                 onPressed: (){
+                                                   Navigator.pushNamed(
+                                                                      context,
+                                                                      '/switch-board-control-panel-accessories/');
+                                                               
+                                                },
+                                            title:
+                                                'insulated bus bar system for mcb',
+                                                subtitle: "Switch Board Control Panel Accessories",
+                                            imagePath:
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(4).png',
                                           )),
                                           Gap(10),
                                           FittedBox(
                                               child: ProductContainer(
-                                            title:
-                                                'Earthing & Lightning Protection - Accessories ',
+                                                 onPressed: (){
+                                                   Navigator.pushNamed(
+                                                                      context,
+                                                                      '/earthing-lightning-protection-systems/earthing-lightning-protection/');
+                                                               
+                                                },
+                                            title: 'Copper Bonded Grounding Rods',
+                                            subtitle: "Earthing & Lightning Protection",
                                             imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/Elps-Accessories.png',
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(8).png',
                                           )),
-                                          Gap(10),
-                                          FittedBox(
-                                              child: ProductContainer(
-                                            title:
-                                                'Switch Board Control Panel Accessories',
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/Switch+Board+Control+Panel+Accessories+1.jpg',
-                                          )),
-                                          // FittedBox(
-                                          //     child: ProductContainer(
-                                          //   title: 'G',
-                                          //   imagePath:
-                                          //       'assets/image/glands 4.png',
-                                          // )),
-                                          // Gap(10),
-                                          // FittedBox(
-                                          //     child: ProductContainer(
-                                          //   title: 'H',
-                                          //   imagePath:
-                                          //       'assets/image/glands 2.png',
-                                          // )),
                                         ],
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-
+Gap(65),
                               Container(
                                 color: const Color.fromARGB(255, 236, 242, 242),
                                 height:
@@ -911,7 +948,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                     SizedBox(
                                       child: Row(
                                         children: [
-                                          Gap(75),
+                                          const Gap(75),
                                           Container(
                                             height: MediaQuery.of(context)
                                                     .size
@@ -920,7 +957,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                             width: 10,
                                             color: Colors.yellow,
                                           ),
-                                          Gap(15),
+                                          const Gap(15),
                                           Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -931,7 +968,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                 'Where the',
                                                 style: GoogleFonts.workSans(
                                                     fontSize: 45,
-                                                    color: Color.fromARGB(
+                                                    color: const Color.fromARGB(
                                                         255, 30, 30, 30),
                                                     fontWeight:
                                                         FontWeight.w500),
@@ -940,7 +977,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                 'world of',
                                                 style: GoogleFonts.workSans(
                                                     fontSize: 45,
-                                                    color: Color.fromARGB(
+                                                    color: const Color.fromARGB(
                                                         255, 51, 51, 51),
                                                     fontWeight:
                                                         FontWeight.w500),
@@ -986,7 +1023,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                               children: [
                                                 Image.asset(
                                                     'assets/image/hex-logo-new.png'),
-                                                Gap(35),
+                                                const Gap(35),
                                                 Padding(
                                                   padding: const EdgeInsets
                                                           .symmetric(
@@ -1164,7 +1201,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                     color: colorOne,
                     child: Column(
                       children: [
-                        Gap(35),
+                        const Gap(35),
                         Text(
                           'What are we offering'.toUpperCase(),
                           style: GoogleFonts.quicksand(
@@ -1174,7 +1211,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                             decoration: TextDecoration.underline,
                           ),
                         ),
-                        Gap(25),
+                        const Gap(25),
                         Container(
                           color: colorOne,
                           height: 450,
@@ -1598,12 +1635,14 @@ const kHeroImage =
 
 class ProductContainer extends StatelessWidget {
   final String title;
+  final String subtitle;
   final String imagePath;
    final VoidCallback? onPressed;
 
 
   const ProductContainer({
     required this.title,
+    required this.subtitle,
     required this.imagePath,
     this.onPressed,
   });
@@ -1616,7 +1655,7 @@ class ProductContainer extends StatelessWidget {
       height: height / 1.6,
       width: width / 3.5,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: colorOne),
+          borderRadius: BorderRadius.circular(15), color: colorOne),
       child: Stack(children: [
         SizedBox(
             child: Image.network(
@@ -1625,23 +1664,33 @@ class ProductContainer extends StatelessWidget {
           width: width,
           fit: BoxFit.cover,
         )),
+        // Positioned(
+        //   top: 10,
+        //   left: 10,
+        //   child: Image.asset(
+        //     'assets/image/hex_logo.png',
+        //     width: 25,
+        //     height: 25,
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
         Positioned(
-          top: 10,
-          left: 10,
-          child: Image.asset(
-            'assets/image/hex_logo.png',
-            width: 25,
-            height: 25,
-            fit: BoxFit.cover,
-          ),
-        ),
-        Positioned(
-            bottom: 70,
+            bottom: 90,
             left: 15,
             child: Text(
               title.toUpperCase(),
+              style: GoogleFonts.oswald(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            )),
+            Positioned(
+            bottom: 70,
+            left: 15,
+            child: Text(
+              subtitle.toUpperCase(),
               style: GoogleFonts.poppins(
-                  fontSize: 16,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             )),
@@ -1652,10 +1701,10 @@ class ProductContainer extends StatelessWidget {
             onPressed: onPressed,
             child: Text(
               'Qute'.toUpperCase(),
-              style: GoogleFonts.pacifico(color: Colors.white, fontSize: 15),
+              style: GoogleFonts.roboto(color: Colors.black, fontSize: 15),
             ),
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.black),
+              backgroundColor: MaterialStateProperty.all(Colors.white),
               minimumSize: MaterialStateProperty.all(const Size(120, 50)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
