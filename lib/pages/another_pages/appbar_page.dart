@@ -194,7 +194,14 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
         children: [
           PlutoMenuItem(
             title: 'Cable Terminal Ends',
-            onTap: () {},
+            onTap: () {
+                Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ContactUsPage()),
+                                    );
+            },
             children: [
               PlutoMenuItem(
                 title: 'Lugs',

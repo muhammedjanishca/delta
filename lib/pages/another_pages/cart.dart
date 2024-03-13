@@ -6,6 +6,7 @@ import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/res_cartpage.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../login_and_signing/authentication.dart';
@@ -117,7 +118,7 @@ class _DeskCartState extends State<DeskCart> {
                                 )),
                             Text(
                               "CART",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                   color: colorProductName),
@@ -170,25 +171,28 @@ class _DeskCartState extends State<DeskCart> {
                                       children: [
                                         Text(
                                           '${item["productName"]}',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                          style:  GoogleFonts.poppins(
+                                              ),
                                         ),
+                                        Gap(5),
                                         item["productName"] ==
                                                 item['productCode']
                                             ? const SizedBox()
                                             : Text(
-                                                '${item['productCode']}',
-                                                style: const TextStyle(
+                                                '${item['productCode']} ${item['price'].toStringAsFixed(2)}',
+                                                style:  GoogleFonts.poppins(
                                                     fontWeight:
-                                                        FontWeight.bold),
+                                                        FontWeight.w600),
                                               ),
-                                        Text(
-                                            // toStringAsFixed(2)
-                                            'Price: \SAR ${item['price'].toStringAsFixed(2)}'),
+                                        // Text(
+                                        //     // toStringAsFixed(2)
+                                        //     'Price  :  \SAR ${item['price'].toStringAsFixed(2)}',
+                                        //     style: GoogleFonts.poppins(),),
                                         Row(
                                           children: [
                                             Text(
-                                                'Quantity:${item['quantity']}'),
+                                                'Quantity : ${item['quantity']}',
+                                                style: GoogleFonts.poppins(),),
                                             IconButton(
                                                 icon: const Icon(
                                                   Icons.edit,
