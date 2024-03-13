@@ -4,7 +4,6 @@ import 'package:firebase_hex/pages/address.dart/sideSheetAddress.dart';
 import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:firebase_hex/pages/another_pages/cart.dart';
 import 'package:firebase_hex/pages/another_pages/quotationPage.dart';
-import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/responsive/res_address_show.dart';
@@ -35,6 +34,7 @@ class AddressShow extends StatefulWidget {
 }
 
 class _AddressShowState extends State<AddressShow> {
+  
   double x = 0.0;
   double y = 0.0;
   Color textColor = Colors.black;
@@ -163,18 +163,27 @@ class _AddressShowState extends State<AddressShow> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 if (isSelected)
-                                                  IconButton(
-                                                    icon: Icon(Icons.edit),
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                EditAddress(
-                                                                    addressData:
-                                                                        addressData, index:index,)),
-                                                      );
-                                                    },
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        SideSheet.right(
+                                                            body: EditAddress(
+                                                              addressData:
+                                                                  addressData,
+                                                              index: index,
+                                                            ),
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.3,
+                                                            context: context),
+                                                    child: Text(
+                                                      "Edit",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  Colors.black),
+                                                    ),
                                                   ),
                                                 IconButton(
                                                   icon: Icon(Icons.close),
