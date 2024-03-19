@@ -24,6 +24,7 @@ class _TextAddressState extends State<TextAddress> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final ctctController = TextEditingController();
+  final emailController = TextEditingController();
   final line1AddController = TextEditingController();
   final line2AddController = TextEditingController();
   final cityController = TextEditingController();
@@ -93,9 +94,22 @@ class _TextAddressState extends State<TextAddress> {
                       TextFieldAddress("Contact Number", TextInputType.phone,
                           ctctController, context, (value) {
                         if (value == null || value.isEmpty) {
-                          return '*This field cannot be empty';
-                        }
-                        return null;
+                                  return 'This field cannot be empty';
+                                }
+                                if (!isValidPhoneNumber(value)) {
+                                  return 'Please enter the valid phone number';
+                                }
+                                return null;
+                      }),
+                      TextFieldAddress("Email", TextInputType.text,
+                          emailController, context, (value) {
+                        if (value == null || value.isEmpty) {
+                                  return 'This field cannot be empty';
+                                }
+                                if (!isValidEmail(value)) {
+                                  return 'Please enter the valid email Id';
+                                }
+                                return null;
                       }),
                       Gap(25),
                       Row(
@@ -163,6 +177,8 @@ class _TextAddressState extends State<TextAddress> {
                                 nameController.text;
                             addressDetails['Contact Number'] =
                                 ctctController.text;
+                                addressDetails['Email'] =
+                                emailController.text;
                             addressDetails['Street Address'] =
                                 line1AddController.text;
                             addressDetails['Street Address line 2'] =
@@ -238,12 +254,25 @@ class _TextAddressState extends State<TextAddress> {
                           return null;
                         }),
                         TextFieldAddress("Contact Number", TextInputType.phone,
-                            ctctController, context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
+                          ctctController, context, (value) {
+                        if (value == null || value.isEmpty) {
+                                  return 'This field cannot be empty';
+                                }
+                                if (!isValidPhoneNumber(value)) {
+                                  return 'Please enter the valid phone number';
+                                }
+                                return null;
+                      }),
+                      TextFieldAddress("Email", TextInputType.text,
+                          emailController, context, (value) {
+                        if (value == null || value.isEmpty) {
+                                  return 'This field cannot be empty';
+                                }
+                                if (!isValidEmail(value)) {
+                                  return 'Please enter the valid email Id';
+                                }
+                                return null;
+                      }),
                         Gap(25),
                         Row(
                           children: [
@@ -310,6 +339,8 @@ class _TextAddressState extends State<TextAddress> {
                                   nameController.text;
                               addressDetails['Contact Number'] =
                                   ctctController.text;
+                                   addressDetails['Email'] =
+                                  emailController.text;
                               addressDetails['Street Address'] =
                                   line1AddController.text;
                               addressDetails['Street Address line 2'] =
@@ -353,6 +384,15 @@ class _TextAddressState extends State<TextAddress> {
         }
         )
         );
+  }
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  bool isValidPhoneNumber(String phoneNumber) {
+    final phoneRegex = RegExp(r'^\d{10}$');
+    return phoneRegex.hasMatch(phoneNumber);
   }
 }
 // String _selectedLocation = 'Please choose a location';
