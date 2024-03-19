@@ -1133,92 +1133,34 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                           ),
                                                         ),
                                                         Container(
-                                                          height: 60,
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Consumer<
-                                                              SelectedPriceNotifier>(
-                                                            builder: (context,
-                                                                selectedPriceNotifieru,
-                                                                _) {
-                                                              String priceText =
-                                                                  selectedPriceNotifieru
-                                                                      .selectedPrice;
-                                                              String prefix =
-                                                                  ":";
-                                                              TextStyle
-                                                                  prefixStyle =
-                                                                  TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 14,
-                                                              );
-                                                              TextStyle
-                                                                  suffixStyle =
-                                                                  TextStyle(
-                                                                color:
-                                                                    Colors.red,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 14,
-                                                              );
+  height: 60,
+  padding: EdgeInsets.all(8.0),
+  child: Consumer<SelectedPriceNotifier>(
+    builder: (context, selectedPriceNotifieru, _) {
+      // Assuming selectedPriceNotifieru.selectedPrice is something like "ProductCode: 100 SAR"
+      String priceText = selectedPriceNotifieru.selectedPrice;
+      // Splitting the string to isolate "SAR" and make it red
+      List<String> parts = priceText.split('SAR');
+      String beforeSAR = (parts.length > 0) ? parts[0] : '';
+      String sarText = (parts.length > 1) ? 'SAR' + parts[1] : '';
 
-                                                              int prefixIndex =
-                                                                  priceText
-                                                                      .indexOf(
-                                                                          prefix);
-                                                              if (prefixIndex ==
-                                                                  -1) {
-                                                                // If "SAR" is not found in the text, apply the default style to the whole text
-                                                                return Center(
-                                                                  child: Text(
-                                                                    priceText,
-                                                                    style:
-                                                                        prefixStyle,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                // If "SAR" is found, split the text and apply styles accordingly
-                                                                String
-                                                                    prefixPart =
-                                                                    priceText.substring(
-                                                                        0,
-                                                                        prefixIndex +
-                                                                            prefix.length);
-                                                                String
-                                                                    suffixPart =
-                                                                    priceText.substring(
-                                                                        prefixIndex +
-                                                                            prefix.length);
-                                                                return Center(
-                                                                  child:
-                                                                      RichText(
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        TextSpan(
-                                                                            text:
-                                                                                prefixPart,
-                                                                            style:
-                                                                                prefixStyle),
-                                                                        TextSpan(
-                                                                            text:
-                                                                                suffixPart,
-                                                                            style:
-                                                                                suffixStyle),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                            },
-                                                          ),
-                                                        ),
+      return Center(
+        child: RichText(
+          text: TextSpan(
+            style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 12, 127, 39)), // Default style
+            children: <TextSpan>[
+              TextSpan(text: beforeSAR), // Text before SAR
+              TextSpan(
+                text: sarText,
+                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold), // SAR text style
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  ),
+),
                                                       ],
                                                     ),
                                                   ),
