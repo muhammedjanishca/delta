@@ -873,6 +873,10 @@ class MobileBottomNavigationBaru extends StatelessWidget {
               ),
               child: TextButton(
               onPressed: () {
+                
+  // Retrieve the selected address
+  final addressProvider = Provider.of<AddressProvider>(context, listen: false);
+  var selectedAddress = jsonDecode(addressProvider.arrayFromFirestore[addressProvider.selectIndex]);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -888,7 +892,7 @@ class MobileBottomNavigationBaru extends StatelessWidget {
                                                               vatRate),
                                                   vat:
                                                       cartProvider.calculateVAT(
-                                                          subtotal, vatRate),
+                                                          subtotal, vatRate), selectedAddress: selectedAddress,
                                                 )));
                                   },
                 child: const Text(

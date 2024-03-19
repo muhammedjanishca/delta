@@ -12,15 +12,20 @@ import 'package:http/http.dart' as http;
 import '../../enquiry.dart';
 
 class QuotationPage extends StatelessWidget {
-  QuotationPage(
-      {required this.cartItems,
-      required this.totalPrice,
-      required this.vat,
-      required this.totalPriceWithVAT});
   final double totalPrice;
-  final cartItems;
-  final totalPriceWithVAT;
-  final vat;
+  final dynamic cartItems; // Make sure this type matches what you're passing
+  final double totalPriceWithVAT;
+  final double vat;
+  final Map<String, dynamic> selectedAddress; // Now properly declared
+
+  QuotationPage({
+    required this.cartItems,
+    required this.totalPrice,
+    required this.vat,
+    required this.totalPriceWithVAT,
+    required this.selectedAddress, // Added to constructor
+  });
+
   @override
   Widget build(BuildContext context) {
     return ResQuotation(
@@ -29,31 +34,44 @@ class QuotationPage extends StatelessWidget {
         totalPrice: totalPrice,
         totalPriceWithVAT: totalPriceWithVAT,
         vat: vat,
+        selectedAddress: selectedAddress, // Pass the selected address
       ),
       deskQuatation: QuotationDeskPage(
-          cartItems: cartItems,
-          totalPrice: totalPrice,
-          totalPriceWithVAT: totalPriceWithVAT,
-          vat: vat),
+        cartItems: cartItems,
+        totalPrice: totalPrice,
+        totalPriceWithVAT: totalPriceWithVAT,
+        vat: vat,
+        selectedAddress: selectedAddress, // Pass the selected address
+      ),
     );
   }
 }
 
 class QuotationDeskPage extends StatelessWidget {
-  // final List<User> cartItems;
   final double totalPrice;
-  final cartItems;
-  final totalPriceWithVAT;
-  final vat; // Update the type if needed
+  final dynamic cartItems;
+  final double totalPriceWithVAT;
+  final double vat;
+  final Map<String, dynamic> selectedAddress; // Declare the selectedAddress
 
-  QuotationDeskPage(
-      {required this.cartItems,
-      required this.totalPrice,
-      required this.vat,
-      required this.totalPriceWithVAT});
+  QuotationDeskPage({
+    required this.cartItems,
+    required this.totalPrice,
+    required this.vat,
+    required this.totalPriceWithVAT,
+    required this.selectedAddress, // Include selectedAddress in the constructor
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Use selectedAddress to display address details
+    final companyName = selectedAddress['Company Name'];
+    final contactNumber = selectedAddress['Contact Number'];
+    final streetAddress = selectedAddress['Street Address'];
+    final streetAddressline2 = selectedAddress['Street Address line 2'];
+    final location = selectedAddress['Location'];
+    final city = selectedAddress['City'];
+    // Continue with other address fields as needed
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
       appBar:
@@ -65,12 +83,29 @@ class QuotationDeskPage extends StatelessWidget {
             // width: MediaQuery.of(context).size.width/2,
             color: Colors.white,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  color: Colors.white,
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  child: MyClipPath(),
-                ),
+                    color: Colors.white,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: Column(
+                      children: [
+                        // Display address information
+                        Text(
+                          '    $companyName',
+                          style: GoogleFonts.poppins(),
+                        ),
+                        Text('    $contactNumber', style: GoogleFonts.poppins(),),
+                        Text('    $streetAddress', style: GoogleFonts.poppins(),),
+                        Text('    $streetAddressline2', style: GoogleFonts.poppins(),),
+                        Text('    $location', style: GoogleFonts.poppins(),),
+                        Text('    $city', style: GoogleFonts.poppins(),),
+                        // Continue displaying other address details as needed
+                        // Your existing code to display the rest of the quotation page
+                      ],
+                    )
+                    // MyClipPath(),
+                    ),
                 Container(
                   child: _buildQuotationTable(),
                 ),
@@ -315,11 +350,12 @@ class QuotationDeskPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildTableCell(' Net before VAT',
-                               ),
                             _buildTableCell(
-                                '\SAR ${totalPrice.toStringAsFixed(2)}',
-                              )
+                              ' Net before VAT',
+                            ),
+                            _buildTableCell(
+                              '\SAR ${totalPrice.toStringAsFixed(2)}',
+                            )
                           ],
                         ),
                         Divider(
@@ -330,11 +366,12 @@ class QuotationDeskPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildTableCell('VAT ',
-                                ),
                             _buildTableCell(
-                                '              \SAR ${vat.toStringAsFixed(2)}',
-                               )
+                              'VAT ',
+                            ),
+                            _buildTableCell(
+                              '              \SAR ${vat.toStringAsFixed(2)}',
+                            )
                           ],
                         ),
                         Container(
@@ -390,7 +427,8 @@ class QuotationMobilePage extends StatelessWidget {
       {required this.cartItems,
       required this.totalPrice,
       required this.vat,
-      required this.totalPriceWithVAT});
+      required this.totalPriceWithVAT,
+      required Map<String, dynamic> selectedAddress});
 
   @override
   Widget build(BuildContext context) {
@@ -691,28 +729,34 @@ class MyClipPath extends StatelessWidget {
         height: 150,
         width: double.infinity,
         // color: ,
-       child: Padding(
-         padding:  EdgeInsets.all(8.0),
-         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(10),
-            Text('Quotes Details',style: GoogleFonts.poppins(fontWeight: FontWeight.w600),),
-            Divider(thickness: 0.5,
-            color: const Color.fromARGB(255, 104, 104, 104),),
-            Text('Requested Customer Details',style: GoogleFonts.poppins(),),
-            Gap(10),
-            Row(
-              children: [
-              // Text('Name : ',style: GoogleFonts.poppins(),),
-
-              ],
-            )
-            // Text('Quotes Details',style: GoogleFonts.poppins(),),
-
-          ],
-         ),
-       ),
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(10),
+              Text(
+                'Quotes Details',
+                style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+              ),
+              Divider(
+                thickness: 0.5,
+                color: const Color.fromARGB(255, 104, 104, 104),
+              ),
+              Text(
+                'Requested Customer Details',
+                style: GoogleFonts.poppins(),
+              ),
+              Gap(10),
+              Row(
+                children: [
+                  // Text('Name : ',style: GoogleFonts.poppins(),),
+                ],
+              )
+              // Text('Quotes Details',style: GoogleFonts.poppins(),),
+            ],
+          ),
+        ),
       ),
     );
   }

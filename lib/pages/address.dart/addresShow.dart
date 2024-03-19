@@ -34,7 +34,6 @@ class AddressShow extends StatefulWidget {
 }
 
 class _AddressShowState extends State<AddressShow> {
-  
   double x = 0.0;
   double y = 0.0;
   Color textColor = Colors.black;
@@ -312,7 +311,15 @@ class _AddressShowState extends State<AddressShow> {
                                   onExit: incrementExit,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      
+                                      // Retrieve the selected address
+                                      final addressProvider =
+                                          Provider.of<AddressProvider>(context,
+                                              listen: false);
+                                      var selectedAddress = jsonDecode(
+                                          addressProvider.arrayFromFirestore[
+                                              addressProvider.selectIndex]);
+
+
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -330,6 +337,7 @@ class _AddressShowState extends State<AddressShow> {
                                                     vat: cartProvider
                                                         .calculateVAT(
                                                             subtotal, vatRate),
+                                                            selectedAddress: selectedAddress, // Passing the selected address
                                                   )));
                                     },
                                     child: Text(
