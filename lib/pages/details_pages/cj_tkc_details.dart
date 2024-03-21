@@ -28,7 +28,7 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
   String? thumbnail;
   @override
   Widget build(BuildContext context) {
-    TextEditingController quantityController = TextEditingController();
+    TextEditingController quantityController = TextEditingController(text: '1'); // start with initial value as 1
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
@@ -1013,61 +1013,65 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          FittedBox(
-                                            child: SizedBox(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Enter The Quantity',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 16.0,
-                                                      color: const Color(
-                                                          0xFF212121),
-                                                    ),
-                                                  ),
-                                                  Gap(45),
-                                                  Form(
-                                                    key: _formKey,
-                                                    child: Container(
-                                                      // height:
-                                                      // MediaQuery.of(context).size.height/18,
-                                                      width: 150,
-                                                      //  MediaQuery.of(context).size.width/10,
-                                                      child: TextFormField(
-                                                        controller:
-                                                            quantityController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          //  border:
-                                                          //      OutlineInputBorder(),
-                                                          hintText: '000',
-                                                        ),
-                                                        validator: (value) {
-                                                          if (value!.isEmpty) {
-                                                            return 'Enter the quantity';
-                                                          }
-                                                          int? quantity =
-                                                              int.tryParse(
-                                                                  value);
-                                                          if (quantity ==
-                                                                  null ||
-                                                              quantity <= 0) {
-                                                            return 'Quantity must be a positive number';
-                                                          }
-                                                          return null; // Return null if the input is valid
-                                                        },
+                                          Container(
+                                          width:180, // Fixed width for the text field
+                                           height: 40,
+                                          decoration: BoxDecoration(
+                                                 border: Border.all(
+                                                 color: Colors.grey, // Border color
+                                            width: 1, // Border width
+                                          ),
+                                        ),
+                                        child: FittedBox(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
+                                            // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+                                            children: <Widget>[
+                                             SizedBox(
+                                          
+                                           
+                                          child: IconButton(
+                                            onPressed: () {
+                                              int currentQty = int.tryParse(quantityController.text) ?? 0;
+                                              if (currentQty > 0) {
+                                                quantityController.text = (currentQty - 1).toString();
+                                              }
+                                            },
+                                            icon: Icon(Icons.remove),
+                                          ),
+                                          ),
+                                              // Gap(5), // Provide some horizontal space between the button and the text field
+                                              Form(
+                                                key: _formKey,
+                                                child: SizedBox(
+                                                  width: 60, // Fixed width for the text field
+                                                  height: 40,
+                                                  child: TextFormField(
+                                                    textAlign: TextAlign.center, // Center the text inside the text field
+                                                    controller: quantityController,
+                                                    keyboardType: TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
                                                       ),
                                                     ),
                                                   ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
+                                              // Gap(5),
+                                              SizedBox(
+                                           child: IconButton(
+                                                  onPressed: (){
+                                                      int currentQty = int.tryParse(quantityController.text) ?? 0;
+                                                  quantityController.text = (currentQty + 1).toString();
+                                                  }, 
+                                                  icon:Icon(Icons.add),
+                                              )),
+                                            ],
                                           ),
+                                        ),
+                                        ),
                                           Gap(25),
                                           Row(
                                             mainAxisAlignment:

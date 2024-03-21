@@ -18,12 +18,14 @@ class EditAddress extends StatefulWidget {
 
 class _EditAddressState extends State<EditAddress> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late TextEditingController _emailController;
   late TextEditingController _nameController;
   late TextEditingController _ctctController;
   late TextEditingController _line1AddController;
   late TextEditingController _line2AddController;
   late TextEditingController _cityController;
-  late String? _selectedLocation; // Changed from TextEditingController to String
+  late String?
+      _selectedLocation; // Changed from TextEditingController to String
   List<String> _locations = [
     'Riyadh (Ar-Riyad)',
     'Makkah (Makkah Al-Mukarramah)',
@@ -34,17 +36,18 @@ class _EditAddressState extends State<EditAddress> {
     'Hail',
     'Tabuk',
     'Najran',
+    
     'Jazan',
     'Northern Borders (Al-Hudud ash Shamaliyah)',
     'Al Jawf',
     'Baha',
   ]; // Option 2
 
-
   Future<void> _saveAddress() async {
     Map<String, dynamic> updatedAddress = {
       'Company Name': _nameController.text,
       'Contact Number': _ctctController.text,
+      'Email':_emailController.text,
       'Street Address': _line1AddController.text,
       'Street Address line 2': _line2AddController.text,
       'City': _cityController.text,
@@ -60,6 +63,8 @@ class _EditAddressState extends State<EditAddress> {
   @override
   void initState() {
     super.initState();
+    _emailController = TextEditingController(text: widget.addressData['Email']);
+
     _nameController =
         TextEditingController(text: widget.addressData['Company Name']);
     _ctctController =
@@ -74,6 +79,7 @@ class _EditAddressState extends State<EditAddress> {
 
   @override
   void dispose() {
+    _emailController.dispose();
     _nameController.dispose();
     _ctctController.dispose();
     _line1AddController.dispose();
@@ -90,32 +96,32 @@ class _EditAddressState extends State<EditAddress> {
       body: Center(
         child: Form(
           key: _formKey,
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width / 2,
             child: Padding(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Gap(40),
-                      SizedBox(
-                          height: 40,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Text("ADD ADDRESS"),
-                          )),
-                      Divider(),
-                      Gap(10),
-                      Row(
-                        children: [
-                          Icon(Icons.phone),
-                          Text(
-                            "Contact Details",
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
+                  Gap(40),
+                  const SizedBox(
+                      height: 40,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 15),
+                        child: Text("ADD ADDRESS"),
+                      )),
+                  Divider(),
+                  Gap(10),
+                  const Row(
+                    children: [
+                      Icon(Icons.phone),
+                      Text(
+                        "Contact Details",
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
                   TextFieldAddress("Company Name", TextInputType.text,
                       _nameController, context, (value) {
                     if (value == null || value.isEmpty) {
@@ -126,7 +132,21 @@ class _EditAddressState extends State<EditAddress> {
                   TextFieldAddress("Contact Number", TextInputType.phone,
                       _ctctController, context, (value) {
                     if (value == null || value.isEmpty) {
-                      return '*This field cannot be empty';
+                      return 'This field cannot be empty';
+                    }
+                    if (!isValidPhoneNumber(value)) {
+                      return 'Please enter the valid phone number';
+                    }
+                    return null;
+                  }),
+                  TextFieldAddress(
+                      "Email", TextInputType.text, _emailController, context,
+                      (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field cannot be empty';
+                    }
+                    if (!isValidEmail(value)) {
+                      return 'Please enter the valid email Id';
                     }
                     return null;
                   }),
@@ -144,26 +164,27 @@ class _EditAddressState extends State<EditAddress> {
                     }
                     return null;
                   }),
-                    Gap(10),
-                     DropdownButton(
-                        hint: Text(
-                            'Please choose a location'), // Not necessary for Option 1
-                        value: _selectedLocation,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedLocation = newValue;
-                          });
-                        },
-                        items: _locations.map((location) {
-                          return DropdownMenuItem(
-                            child: new Text(location),
-                            value: location,
-                          );
-                        }).toList(),
-                      ),
-                      Gap(10),
-                       TextFieldAddress("City", TextInputType.text,
-                     _cityController, context, (value) {
+                  Gap(10),
+                  DropdownButton(
+                    hint: Text(
+                        'Please choose a location'), // Not necessary for Option 1
+                    value: _selectedLocation,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _selectedLocation = newValue;
+                      });
+                    },
+                    items: _locations.map((location) {
+                      return DropdownMenuItem(
+                        child: new Text(location),
+                        value: location,
+                      );
+                    }).toList(),
+                  ),
+                  Gap(10),
+                  TextFieldAddress(
+                      "City", TextInputType.text, _cityController, context,
+                      (value) {
                     if (value == null || value.isEmpty) {
                       return '*This field cannot be empty';
                     }
@@ -173,18 +194,14 @@ class _EditAddressState extends State<EditAddress> {
                   ElevatedButton(
                     onPressed:
                         _saveAddress, // Call the method to save the address
-                     child: Text(
-                          'Save Address',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            colorTwo
-                          ),
-                          minimumSize:
-                              MaterialStateProperty.all(Size(1500, 50)),
-                        ),
-
+                    child: Text(
+                      'Save Address',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(colorTwo),
+                      minimumSize: MaterialStateProperty.all(Size(1500, 50)),
+                    ),
                   ),
 
                   // DropdownButton and other fields...
@@ -195,5 +212,15 @@ class _EditAddressState extends State<EditAddress> {
         ),
       ),
     );
+  }
+
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  bool isValidPhoneNumber(String phoneNumber) {
+    final phoneRegex = RegExp(r'^\d{10}$');
+    return phoneRegex.hasMatch(phoneNumber);
   }
 }

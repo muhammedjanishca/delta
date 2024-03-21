@@ -71,6 +71,7 @@ class QuotationDeskPage extends StatelessWidget {
     final streetAddressline2 = selectedAddress['Street Address line 2'];
     final location = selectedAddress['Location'];
     final city = selectedAddress['City'];
+    final email = selectedAddress['Email'];
     // Continue with other address fields as needed
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 232, 230, 230),
@@ -88,36 +89,81 @@ class QuotationDeskPage extends StatelessWidget {
                 Container(
                     color: Colors.white,
                     height: MediaQuery.of(context).size.height * 0.2,
-                    child: Column(
-                      children: [
-                        // Display address information
-                        Text(
-                          '    $companyName',
-                          style: GoogleFonts.poppins(),
-                        ),
-                        Text(
-                          '    $contactNumber',
-                          style: GoogleFonts.poppins(),
-                        ),
-                        Text(
-                          '    $streetAddress',
-                          style: GoogleFonts.poppins(),
-                        ),
-                        Text(
-                          '    $streetAddressline2',
-                          style: GoogleFonts.poppins(),
-                        ),
-                        Text(
-                          '    $location',
-                          style: GoogleFonts.poppins(),
-                        ),
-                        Text(
-                          '    $city',
-                          style: GoogleFonts.poppins(),
-                        ),
-                        // Continue displaying other address details as needed
-                        // Your existing code to display the rest of the quotation page
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Quotes Details',
+                            style: GoogleFonts.poppins(),
+                          ),
+                          Divider(
+                            color: Colors.black54,
+                            thickness: 0.5,
+                          ),
+                          Text(
+                            'Requested Customer Details',
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,),
+                          ),
+                          Gap(10),
+                          // Display address information
+                          SizedBox(
+                            // color: colorTwo,
+                            child:  Row(
+                              children: [
+                                Expanded(
+                                  child:Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+ Text(
+                            'Company Name : $companyName',
+                            style: GoogleFonts.poppins(),
+                          ),
+                           Text(
+                            'e-mail : $email',
+                            style: GoogleFonts.poppins(),
+                          ),
+                          
+                                    ],
+                                  ) ),
+                                  Expanded(
+                                  child:Column(
+                                                                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                                    children: [
+                                       Text(
+                            'Mobile : $contactNumber',
+                            style: GoogleFonts.poppins(),
+                          ),
+                            Text(
+                            'Location : $location',
+                            style: GoogleFonts.poppins(),
+                          ),          
+                          // Text(
+                          //   '$streetAddress',
+                          //   style: GoogleFonts.poppins(),
+                          // ),
+                                    ],
+                                  ) )
+                              ],
+                            ),
+                          ),
+                         
+                         
+                         
+                          
+                          
+                          // Text(
+                          //   '$city',
+                          //   style: GoogleFonts.poppins(),
+                          // ),
+                          // Continue displaying other address details as needed
+                          // Your existing code to display the rest of the quotation page
+                        ],
+                      ),
                     )
                     // MyClipPath(),
                     ),

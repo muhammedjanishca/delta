@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/pages/address.dart/color_change_provider.dart';
-import 'package:firebase_hex/pages/another_pages/paralex.dart';
 import 'package:firebase_hex/pages/details_pages/ELPS_Accessories_details.dart';
 import 'package:firebase_hex/pages/details_pages/ELPS_details.dart';
 import 'package:firebase_hex/pages/details_pages/Sbcpa_details.dart';
@@ -40,10 +37,8 @@ import 'package:firebase_hex/provider/pdf_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/search_api.dart';
-import 'package:firebase_hex/widgets/fetch_invoice.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/details_pages/conduits_details_page.dart';
@@ -100,22 +95,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(primaryColor: colorOne),
         //this use using for handle null data
         builder: (context, widget) {
-          Widget error = Container(
-              height: MediaQuery.of(context).size.height,
-              width: double.infinity,
-              color: Colors.white,
-              child: Center(
-                child: SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: Center(
-                        child:
-                            lottieSuccess())),
-              ));
           if (widget is Scaffold || widget is Navigator) {
-            error = Scaffold(
-                body: Center(
-                    child:  lottieSuccess()));
           }
           ErrorWidget.builder = (errorDetails) {
             return Center(
