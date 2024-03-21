@@ -524,16 +524,16 @@ class _MobilecartState extends State<Mobilecart> {
                                                   item['productCode']
                                               ? const SizedBox()
                                               : Text(
-                                                  '${item['productCode']}',
-                                                  style: GoogleFonts.poppins(
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                          Text(
-                                            // toStringAsFixed(2)
-                                            'Price: \SAR ${item['price'].toStringAsFixed(2)}',
-                                            style: GoogleFonts.poppins(),
-                                          ),
+                                                '${item['productCode']} ${item['price'].toStringAsFixed(2)}',
+                                                style: GoogleFonts.poppins(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                          // Text(
+                                          //   // toStringAsFixed(2)
+                                          //   'Price: \SAR ${item['price'].toStringAsFixed(2)}',
+                                          //   style: GoogleFonts.poppins(),
+                                          // ),
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
@@ -541,7 +541,7 @@ class _MobilecartState extends State<Mobilecart> {
                                                 child: Row(
                                                   children: [
                                                      Text(
-                                                'Quantity:${item['quantity']}',
+                                                'Quantity : ${item['quantity']}',
                                                 style: GoogleFonts.poppins(),
                                               ),
                                               TextButton(

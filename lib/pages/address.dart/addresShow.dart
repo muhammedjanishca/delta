@@ -402,6 +402,10 @@ AddressData(data) {
         "${item['Contact Number']}",
         style: GoogleFonts.poppins(),
       ),
+       Text(
+        "${item['Email']}",
+        style: GoogleFonts.poppins(),
+      ),
       Text(
         "${item['Street Address']}",
         style: GoogleFonts.poppins(),

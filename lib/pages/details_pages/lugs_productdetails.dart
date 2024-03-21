@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
-import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/model.dart';
-import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/container_clr.dart';
@@ -14,7 +12,6 @@ import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -30,7 +27,9 @@ class ProductDetailsoflugs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController quantityController = TextEditingController();
+    // TextEditingController quantityController = TextEditingController();
+    TextEditingController quantityController = TextEditingController(text: '1'); // start with initial value as 1
+
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final selectedContainerColorNotifier =
         Provider.of<SelectedContainerColorNotifier>(context);
@@ -356,34 +355,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            // Container(
-                                            //   width: 130,
-                                            //   padding: EdgeInsets.all(8.0),
-                                            //   decoration: BoxDecoration(
-                                            //     border: Border.all(
-                                            //         color: Colors.black,
-                                            //         width: 1.0),
-                                            //     color: Color.fromARGB(
-                                            //         255, 255, 255, 255),
-                                            //   ),
-                                            //   child: Consumer<
-                                            //           SelectedPriceNotifier>(
-                                            //       builder: (context,
-                                            //           selectedPriceNotifieru,
-                                            //           _) {
-                                            //     return Text(
-                                            //       "${selectedPriceNotifieru.selectedPrice}",
-                                            //       style: TextStyle(
-                                            //           color: Colors.black),
-                                            //     );
-                                            //   }),
-                                            // ),
-                                            // SizedBox(
-                                            //   width: MediaQuery.of(context)
-                                            //           .size
-                                            //           .width /
-                                            //       25,
-                                            // ),
+                                            
                                           ],
                                         ),
                                         SizedBox(
@@ -404,106 +376,177 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       .width /
                                                   13,
                                             ),
-                                            FittedBox(
-                                              child: SizedBox(
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Enter The Quantity',
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        fontSize: 14.0,
-                                                        color: const Color(
-                                                            0xFF212121),
-                                                      ),
-                                                    ),
-                                                    Gap(15),
-                                                    Form(
-                                                      key: _formKey,
-                                                      child: Container(
-                                                        // height:
-                                                        // MediaQuery.of(context).size.height/18,
-                                                        width: 70,
-                                                        //  MediaQuery.of(context).size.width/10,
-                                                        child: TextFormField(
-                                                          controller:
-                                                              quantityController,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            //  border:
-                                                            //      OutlineInputBorder(),
-                                                            hintText:
-                                                                '     000',
-                                                          ),
-                                                          validator: (value) {
-                                                            if (value!
-                                                                .isEmpty) {
-                                                              return 'Enter the quantity';
-                                                            }
-                                                            int? quantity =
-                                                                int.tryParse(
-                                                                    value);
-                                                            if (quantity ==
-                                                                    null ||
-                                                                quantity <= 0) {
-                                                              return 'Quantity must be a positive number';
-                                                            }
-                                                            return null; // Return null if the input is valid
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
+                                           Container(
+                                          width:140, // Fixed width for the text field
+                                           height: 40,
+                                          decoration: BoxDecoration(
+                                                 border: Border.all(
+                                                 color: Colors.grey, // Border color
+      width: 1, // Border width
+    ),
+  ),
+  child: FittedBox(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
+      // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+      children: <Widget>[
+       SizedBox(
+    
+   
+    child: IconButton(
+      onPressed: () {
+        int currentQty = int.tryParse(quantityController.text) ?? 0;
+        if (currentQty > 0) {
+          quantityController.text = (currentQty - 1).toString();
+        }
+      },
+      icon: Icon(Icons.remove),
+    ),
+  ),
+        // Gap(5), // Provide some horizontal space between the button and the text field
+        Form(
+          key: _formKey,
+          child: SizedBox(
+            width: 60, // Fixed width for the text field
+            height: 40,
+            child: TextFormField(
+              textAlign: TextAlign.center, // Center the text inside the text field
+              controller: quantityController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
+                ),
+              ),
+            ),
+          ),
+        ),
+        // Gap(5),
+        SizedBox(
+   child: IconButton(
+            onPressed: (){
+                int currentQty = int.tryParse(quantityController.text) ?? 0;
+            quantityController.text = (currentQty + 1).toString();
+            }, 
+            icon:Icon(Icons.add),
+        )),
+      ],
+    ),
+  ),
+),
                                             TextButton(
                                                 onPressed: () {
                                                   showModalBottomSheet(
-                                                      context: context,
-                                                      isScrollControlled: true,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return SingleChildScrollView(
-                                                            child: Stack(
-                                                          children: [
-                                                            Container(
-                                                              height: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height /
-                                                                  1,
-                                                              color:
-                                                                  Colors.white,
-                                                              child: pdf != null
-                                                                  ? SfPdfViewer
-                                                                      .network(
-                                                                          pdf!)
-                                                                  : Nopdf(),
-                                                            ),
-                                                            Positioned(
-                                                              top:
-                                                                  16, // Adjust the top position as needed
-                                                              right:
-                                                                  16, // Adjust the left position as needed
-                                                              child: IconButton(
-                                                                icon: Icon(Icons
-                                                                    .close), // You can use any icon you like
-                                                                onPressed: () {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                  // Add your close button action here
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ));
-                                                      });
+  context: context,
+  isScrollControlled: true,
+  builder: (BuildContext context) {
+    return SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height * 0.5, // Minimum height
+          maxHeight: MediaQuery.of(context).size.height * 0.9, // Maximum height, adjust as needed
+        ),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                color: Colors.white,
+                child: pdf != null ? SfPdfViewer.network(pdf!) : Nopdf(),
+              ),
+            ),
+            // Positioned(
+            //   top: 16,
+            //   right: 16,
+            //   child: IconButton(
+            //     icon: Icon(Icons.close),
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //     },
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+    );
+  },
+);
+
+//                                                   showModalBottomSheet(
+//   context: context,
+//   isScrollControlled: true,
+//   builder: (BuildContext context) {
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.vertical,
+//       child: Stack(
+//         children: [
+//           Container(
+//              height: MediaQuery.of(
+//                                                                           context)
+//                                                                       .size
+//                                                                       .height /
+//                                                                   1,
+//             color: Colors.white,
+//             child: pdf != null ? SfPdfViewer.network(pdf!) : Nopdf(),
+//           ),
+//           Positioned(
+//             top: 16, // Adjust the top position as needed
+//             right: 16, // Adjust the left position as needed
+//             child: IconButton(
+//               icon: Icon(Icons.close), // You can use any icon you like
+//               onPressed: () {
+//                 Navigator.pop(context); // Add your close button action here
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   },
+// );
+
+                                                  // showModalBottomSheet(
+                                                  //     context: context,
+                                                  //     isScrollControlled: true,
+                                                  //     builder: (BuildContext
+                                                  //         context) {
+                                                  //       return SingleChildScrollView(
+                                                  //         scrollDirection:Axis.vertical,
+                                                  //           child: Stack(
+                                                  //         children: [
+                                                  //           Container(
+                                                              // height: MediaQuery.of(
+                                                              //             context)
+                                                              //         .size
+                                                              //         .height /
+                                                              //     1,
+                                                  //             color:
+                                                  //                 Colors.white,
+                                                  //             child: pdf != null
+                                                  //                 ? SfPdfViewer
+                                                  //                     .network(
+                                                  //                         pdf!)
+                                                  //                 : Nopdf(),
+                                                  //           ),
+                                                  //           Positioned(
+                                                  //             top:
+                                                  //                 16, // Adjust the top position as needed
+                                                  //             right:
+                                                  //                 16, // Adjust the left position as needed
+                                                  //             child: IconButton(
+                                                  //               icon: Icon(Icons
+                                                  //                   .close), // You can use any icon you like
+                                                  //               onPressed: () {
+                                                  //                 Navigator.pop(
+                                                  //                     context);
+                                                  //                 // Add your close button action here
+                                                  //               },
+                                                  //             ),
+                                                  //           ),
+                                                  //         ],
+                                                  //       ));
+                                                  //     });
                                                 },
                                                 child: Row(
                                                   children: [
@@ -1162,61 +1205,66 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          FittedBox(
-                                            child: SizedBox(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Enter The Quantity',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 16.0,
-                                                      color: const Color(
-                                                          0xFF212121),
-                                                    ),
-                                                  ),
-                                                  Gap(45),
-                                                  Form(
-                                                    key: _formKey,
-                                                    child: Container(
-                                                      // height:
-                                                      // MediaQuery.of(context).size.height/18,
-                                                      width: 150,
-                                                      //  MediaQuery.of(context).size.width/10,
-                                                      child: TextFormField(
-                                                        controller:
-                                                            quantityController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          //  border:
-                                                          //      OutlineInputBorder(),
-                                                          hintText: '000',
-                                                        ),
-                                                        validator: (value) {
-                                                          if (value!.isEmpty) {
-                                                            return 'Enter the quantity';
-                                                          }
-                                                          int? quantity =
-                                                              int.tryParse(
-                                                                  value);
-                                                          if (quantity ==
-                                                                  null ||
-                                                              quantity <= 0) {
-                                                            return 'Quantity must be a positive number';
-                                                          }
-                                                          return null; // Return null if the input is valid
-                                                        },
+                                        Container(
+                                          width:180, // Fixed width for the text field
+                                           height: 40,
+                                          decoration: BoxDecoration(
+                                                 border: Border.all(
+                                                 color: Colors.grey, // Border color
+                                            width: 1, // Border width
+                                          ),
+                                        ),
+                                        child: FittedBox(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
+                                            // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+                                            children: <Widget>[
+                                             SizedBox(
+                                          
+                                           
+                                          child: IconButton(
+                                            onPressed: () {
+                                              int currentQty = int.tryParse(quantityController.text) ?? 0;
+                                              if (currentQty > 0) {
+                                                quantityController.text = (currentQty - 1).toString();
+                                              }
+                                            },
+                                            icon: Icon(Icons.remove),
+                                          ),
+                                          ),
+                                              // Gap(5), // Provide some horizontal space between the button and the text field
+                                              Form(
+                                                key: _formKey,
+                                                child: SizedBox(
+                                                  width: 60, // Fixed width for the text field
+                                                  height: 40,
+                                                  child: TextFormField(
+                                                    textAlign: TextAlign.center, // Center the text inside the text field
+                                                    controller: quantityController,
+                                                    keyboardType: TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
                                                       ),
                                                     ),
                                                   ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
+                                              // Gap(5),
+                                              SizedBox(
+                                           child: IconButton(
+                                                  onPressed: (){
+                                                      int currentQty = int.tryParse(quantityController.text) ?? 0;
+                                                  quantityController.text = (currentQty + 1).toString();
+                                                  }, 
+                                                  icon:Icon(Icons.add),
+                                              )),
+                                            ],
                                           ),
+                                        ),
+                                        ),
+
                                           Gap(25),
                                           Row(
                                             mainAxisAlignment:

@@ -56,12 +56,13 @@ Widget searchBox(BuildContext context) {
             onSuggestionSelected: (suggestion) {
               final productName = suggestion['product_name'];
               final type = suggestion['type'];
+              final thumbnailUrl = suggestion['thumbnail'];
               final productNameWithUnderscores =
                   productName.replaceAll(" ", "_");
-              // final thumbnail = suggestion["thumbnail"];
                
-              selectedThumbnailProvider.setSelectedThumbnail("", index: null);
-        
+              selectedThumbnailProvider.setSelectedThumbnails(thumbnailUrl);
+              // Provider.of<SelectedThumbnailProvider>(context, listen: false).setSelectedThumbnails(thumbnailUrl);
+
               navigateToProductDetailsFromSearch(
                   context, productNameWithUnderscores, type);
             },

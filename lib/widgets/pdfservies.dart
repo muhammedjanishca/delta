@@ -91,7 +91,7 @@ PdfLayoutResult drawHeader(PdfPage page, Size pageSize, PdfGrid grid,
 
   return PdfTextElement(
           text:
-              '${last_address['Company Name']} \n${last_address['Contact Number']}\n${last_address['Street Address']}\n${last_address['Street Address line 2']}\n${last_address['Location']}\n${last_address['City']} ',
+              'Company : ${last_address['Company Name']}\n${last_address['Street Address line 2']}\n${last_address['Location']}\n${last_address['City']} \n${last_address['Contact Number']}\n${last_address['Email']}\n${last_address['Street Address']} ',
           font: contentFont)
       .draw(
           page: page,

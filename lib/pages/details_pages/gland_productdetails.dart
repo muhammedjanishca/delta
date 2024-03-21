@@ -33,7 +33,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController quantityController = TextEditingController();
+    TextEditingController quantityController = TextEditingController(text: '1'); // start with initial value as 1
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     String capitalize(String s) {
       if (s.isEmpty) {
@@ -261,81 +261,35 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                  Container(
-                                                    height: 60,
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
-                                                    child: Consumer<
-                                                        SelectedPriceNotifier>(
-                                                      builder: (context,
-                                                          selectedPriceNotifieru,
-                                                          _) {
-                                                        String priceText =
-                                                            selectedPriceNotifieru
-                                                                .selectedPrice;
-                                                        String prefix = ":";
-                                                        TextStyle prefixStyle =
-                                                            TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 14,
-                                                        );
-                                                        TextStyle suffixStyle =
-                                                            TextStyle(
-                                                          color: Colors.red,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 14,
-                                                        );
+                                                   Container(
+  height: 60,
+  padding: EdgeInsets.all(8.0),
+  child: Consumer<SelectedPriceNotifier>(
+    builder: (context, selectedPriceNotifieru, _) {
+      // Assuming selectedPriceNotifieru.selectedPrice is something like "ProductCode: 100 SAR"
+      String priceText = selectedPriceNotifieru.selectedPrice;
+      // Splitting the string to isolate "SAR" and make it red
+      List<String> parts = priceText.split('SAR');
+      String beforeSAR = (parts.length > 0) ? parts[0] : '';
+      String sarText = (parts.length > 1) ? 'SAR' + parts[1] : '';
 
-                                                        int prefixIndex =
-                                                            priceText.indexOf(
-                                                                prefix);
-                                                        if (prefixIndex == -1) {
-                                                          // If "SAR" is not found in the text, apply the default style to the whole text
-                                                          return Center(
-                                                            child: Text(
-                                                              priceText,
-                                                              style:
-                                                                  prefixStyle,
-                                                            ),
-                                                          );
-                                                        } else {
-                                                          // If "SAR" is found, split the text and apply styles accordingly
-                                                          String prefixPart =
-                                                              priceText.substring(
-                                                                  0,
-                                                                  prefixIndex +
-                                                                      prefix
-                                                                          .length);
-                                                          String suffixPart =
-                                                              priceText.substring(
-                                                                  prefixIndex +
-                                                                      prefix
-                                                                          .length);
-                                                          return Center(
-                                                            child: RichText(
-                                                              text: TextSpan(
-                                                                children: [
-                                                                  TextSpan(
-                                                                      text:
-                                                                          prefixPart,
-                                                                      style:
-                                                                          prefixStyle),
-                                                                  TextSpan(
-                                                                      text:
-                                                                          suffixPart,
-                                                                      style:
-                                                                          suffixStyle),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                      },
-                                                    ),
-                                                  ),
+      return Center(
+        child: RichText(
+          text: TextSpan(
+            style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 12, 127, 39)), // Default style
+            children: <TextSpan>[
+              TextSpan(text: beforeSAR), // Text before SAR
+              TextSpan(
+                text: sarText,
+                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold), // SAR text style
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  ),
+),
                                                 ],
                                               ),
                                             ),
@@ -1113,61 +1067,65 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          FittedBox(
-                                            child: SizedBox(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Enter The Quantity',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 16.0,
-                                                      color: const Color(
-                                                          0xFF212121),
-                                                    ),
-                                                  ),
-                                                  Gap(45),
-                                                  Form(
-                                                    key: _formKey,
-                                                    child: Container(
-                                                      // height:
-                                                      // MediaQuery.of(context).size.height/18,
-                                                      width: 150,
-                                                      //  MediaQuery.of(context).size.width/10,
-                                                      child: TextFormField(
-                                                        controller:
-                                                            quantityController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          //  border:
-                                                          //      OutlineInputBorder(),
-                                                          hintText: '000',
-                                                        ),
-                                                        validator: (value) {
-                                                          if (value!.isEmpty) {
-                                                            return 'Enter the quantity';
-                                                          }
-                                                          int? quantity =
-                                                              int.tryParse(
-                                                                  value);
-                                                          if (quantity ==
-                                                                  null ||
-                                                              quantity <= 0) {
-                                                            return 'Quantity must be a positive number';
-                                                          }
-                                                          return null; // Return null if the input is valid
-                                                        },
+                                           Container(
+                                          width:180, // Fixed width for the text field
+                                           height: 40,
+                                          decoration: BoxDecoration(
+                                                 border: Border.all(
+                                                 color: Colors.grey, // Border color
+                                            width: 1, // Border width
+                                          ),
+                                        ),
+                                        child: FittedBox(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
+                                            // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+                                            children: <Widget>[
+                                             SizedBox(
+                                          
+                                           
+                                          child: IconButton(
+                                            onPressed: () {
+                                              int currentQty = int.tryParse(quantityController.text) ?? 0;
+                                              if (currentQty > 0) {
+                                                quantityController.text = (currentQty - 1).toString();
+                                              }
+                                            },
+                                            icon: Icon(Icons.remove),
+                                          ),
+                                          ),
+                                              // Gap(5), // Provide some horizontal space between the button and the text field
+                                              Form(
+                                                key: _formKey,
+                                                child: SizedBox(
+                                                  width: 60, // Fixed width for the text field
+                                                  height: 40,
+                                                  child: TextFormField(
+                                                    textAlign: TextAlign.center, // Center the text inside the text field
+                                                    controller: quantityController,
+                                                    keyboardType: TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
                                                       ),
                                                     ),
                                                   ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
+                                              // Gap(5),
+                                              SizedBox(
+                                           child: IconButton(
+                                                  onPressed: (){
+                                                      int currentQty = int.tryParse(quantityController.text) ?? 0;
+                                                  quantityController.text = (currentQty + 1).toString();
+                                                  }, 
+                                                  icon:Icon(Icons.add),
+                                              )),
+                                            ],
                                           ),
+                                        ),
+                                        ),
                                           Gap(25),
                                           Row(
                                             mainAxisAlignment:

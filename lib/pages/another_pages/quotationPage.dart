@@ -105,7 +105,8 @@ class QuotationDeskPage extends StatelessWidget {
                           Text(
                             'Requested Customer Details',
                             style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,),
                           ),
                           Gap(10),
                           // Display address information
