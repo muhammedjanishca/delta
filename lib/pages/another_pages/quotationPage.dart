@@ -31,10 +31,10 @@ class QuotationPage extends StatelessWidget {
     return ResQuotation(
       mobileQuatation: QuotationMobilePage(
         cartItems: cartItems,
-        // totalPrice: totalPrice,
-        // totalPriceWithVAT: totalPriceWithVAT,
-        // vat: vat,
-        // selectedAddress: selectedAddress, // Pass the selected address
+        totalPrice: totalPrice,
+        totalPriceWithVAT: totalPriceWithVAT,
+        vat: vat,
+        selectedAddress: selectedAddress, // Pass the selected address
       ),
       deskQuatation: QuotationDeskPage(
         cartItems: cartItems,
@@ -105,57 +105,52 @@ class QuotationDeskPage extends StatelessWidget {
                           Text(
                             'Requested Customer Details',
                             style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                decoration: TextDecoration.underline,),
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                           Gap(10),
                           // Display address information
                           SizedBox(
                             // color: colorTwo,
-                            child:  Row(
+                            child: Row(
                               children: [
                                 Expanded(
-                                  child:Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
- Text(
-                            'Company Name : $companyName',
-                            style: GoogleFonts.poppins(),
-                          ),
-                           Text(
-                            'e-mail : $email',
-                            style: GoogleFonts.poppins(),
-                          ),
-                          
-                                    ],
-                                  ) ),
-                                  Expanded(
-                                  child:Column(
-                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-
-                                    children: [
-                                       Text(
-                            'Mobile : $contactNumber',
-                            style: GoogleFonts.poppins(),
-                          ),
-                            Text(
-                            'Location : $location',
-                            style: GoogleFonts.poppins(),
-                          ),          
-                          // Text(
-                          //   '$streetAddress',
-                          //   style: GoogleFonts.poppins(),
-                          // ),
-                                    ],
-                                  ) )
+                                    child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Company Name : $companyName',
+                                      style: GoogleFonts.poppins(),
+                                    ),
+                                    Text(
+                                      'e-mail : $email',
+                                      style: GoogleFonts.poppins(),
+                                    ),
+                                  ],
+                                )),
+                                Expanded(
+                                    child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Mobile : $contactNumber',
+                                      style: GoogleFonts.poppins(),
+                                    ),
+                                    Text(
+                                      'Location : $location',
+                                      style: GoogleFonts.poppins(),
+                                    ),
+                                    // Text(
+                                    //   '$streetAddress',
+                                    //   style: GoogleFonts.poppins(),
+                                    // ),
+                                  ],
+                                ))
                               ],
                             ),
                           ),
-                         
-                         
-                         
-                          
-                          
+
                           // Text(
                           //   '$city',
                           //   style: GoogleFonts.poppins(),
@@ -356,7 +351,7 @@ class QuotationDeskPage extends StatelessWidget {
                 endIndent: 20,
                 color: const Color.fromARGB(255, 108, 106, 106),
               ),
-              //*****_______GANERATE QUATATION TOTAL AMOUNT CONTAINER____********
+              //GANERATE QUATATION TOTAL AMOUNT CONTAINER___*******
               Row(
                 children: [
                   Container(
@@ -478,125 +473,422 @@ class QuotationDeskPage extends StatelessWidget {
 }
 
 class QuotationMobilePage extends StatelessWidget {
-  final List<dynamic> cartItems;
+  // final List<User> cartItems;
+  final double totalPrice;
+  final cartItems;
+  final totalPriceWithVAT;
+  final vat; 
+  // Update the type if needed
+    final Map<String, dynamic> selectedAddress; // Declare the selectedAddress
 
-  // Constructor requires cartItems
-  QuotationMobilePage({required this.cartItems});
+
+  QuotationMobilePage( {
+     
+        required this.cartItems,
+      required this.totalPrice,
+      required this.vat,
+      required this.totalPriceWithVAT,
+          required this.selectedAddress, // Include selectedAddress in the constructor
+
+      });
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: SizedBox(
+      final companyName = selectedAddress['Company Name'];
+    final contactNumber = selectedAddress['Contact Number'];
+    final streetAddress = selectedAddress['Street Address'];
+    final streetAddressline2 = selectedAddress['Street Address line 2'];
+    final location = selectedAddress['Location'];
+    final city = selectedAddress['City'];
+    final email = selectedAddress['Email'];
+    // Continue with other address fields as needed
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 232, 230, 230),
+      appBar: custSmallAppBar(context, Colors.white),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+                    color: Colors.white,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Quotes Details',
+                            style: GoogleFonts.poppins(),
+                          ),
+                          Divider(
+                            color: Colors.black54,
+                            thickness: 0.5,
+                          ),
+                          Text(
+                            'Requested Customer Details',
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          Gap(4),
+                          // Display address information
+                          SizedBox(
+                            // color: colorTwo,
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                Text(
+                                  'Company Name : $companyName',
+                                  style: GoogleFonts.poppins(fontSize: 11),
+                                ),
+                                Text(
+                                  'e-mail : $email',
+                                  style: GoogleFonts.poppins(fontSize: 11),
+                                ),
+                                  ],
+                                ),
+                                Text(
+                                  'Mobile : $contactNumber',
+                                  style: GoogleFonts.poppins(fontSize: 11),
+                                ),
+                                Text(
+                                  'Location : $location',
+                                  style: GoogleFonts.poppins(fontSize: 11),
+                                )
+                              ],
+                            ),
+                          ),
 
-
-        
-        width: screenWidth * 0.6, // Adjust the width based on the screen size
-        child: DataTable(
-          columnSpacing: .0, // Adjust based on your preference
-          columns: [
-            DataColumn(
-                label: Container(
-                    width: 70,
-                    child:
-                        Text('Description', style: TextStyle(fontSize: 12)))),
-            DataColumn(
-                label: Container(
-                    width: 50,
-                    child: Text('Code', style: TextStyle(fontSize: 12)))),
-            DataColumn(
-                label: Container(
-                    width: 60,
-                    child: Text('Quantity', style: TextStyle(fontSize: 12)))),
-            DataColumn(
-                label: Container(
-                    width: 50,
-                    child: Text('Unit', style: TextStyle(fontSize: 12)))),
-            DataColumn(
-                label: Container(
-                    width: 60,
-                    child: Text('Price', style: TextStyle(fontSize: 12)))),
-            DataColumn(
-                label: Container(
-                    width: 60,
-                    child: Text('Amount', style: TextStyle(fontSize: 12)))),
-          ],
-
-          rows: List.generate(cartItems.length, (index) {
-            var item = jsonDecode(cartItems[index]);
-            return DataRow(cells: [
-              DataCell(
-                Container(
-                  width: 90,
-                  // Adjust the width as needed
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical:
-                            .7), // Adjust vertical padding to control row height
-                    child: Text(
-                      jsonDecode(cartItems[index])['productName'],
-                      style: TextStyle(fontSize: 9),
-                      softWrap: true,
-                      overflow: TextOverflow.clip,
+                          // Text(
+                          //   '$city',
+                          //   style: GoogleFonts.poppins(),
+                          // ),
+                          // Continue displaying other address details as needed
+                          // Your existing code to display the rest of the quotation page
+                        ],
+                      ),
+                    )
+                    // MyClipPath(),
                     ),
-                  ),
-                ),
-              ),
-              DataCell(
-                Container(
-                  width: 60,
-                  // Adjust the width as needed
-                  child: Text(
-                    jsonDecode(cartItems[index])['productCode'],
-                    style: TextStyle(fontSize: 9),
-                    softWrap: true,
-                    overflow: TextOverflow.clip,
-                  ),
-                ),
-              ),
-              DataCell(
-                Container(width: 60,child: Text('${item['quantity']}', style: TextStyle(fontSize: 10))),
-              ),
-              DataCell(
-                Container(   width: 40,
-                  child: Text('unit',
-                      style: TextStyle(
-                          fontSize:
-                              10)),
-                ), // Assuming 'unit' is a placeholder for now
-              ),
-              DataCell(
-                Container(width: 40,
-                  child: Text('\SAR${item['price']}', style: TextStyle(fontSize: 10))),
-              ),
-              DataCell(
-                Container(width: 60,
-                  child: Text(
-                      '\SAR${(item['price'] * item['quantity']).toStringAsFixed(2)}',
-                      style: TextStyle(fontSize: 10)),
-                ),
-              ),
-            ]);
-          }),
+            Container(
+              color: Colors.white,
+            ),
+            _buildQuotationTable(context),
+          ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 76, 138, 131),
+        onPressed: () {
+          context
+              .read<AddressProvider>()
+              .get_current_address(cartItems, context);
+        },
+        child: const Icon(Icons.print),
       ),
     );
   }
-}
 
-Widget _buildTableCell(String text,
-    {FontWeight fontWeight = FontWeight.bold, double fontSize = 10}) {
-  return Flexible(
-    child: Text(
-      text,
-      style: TextStyle(
-        fontWeight: fontWeight,
-        fontSize: fontSize,
+  Widget _buildQuotationTable(context) {
+    return Row(
+      children: [
+        SingleChildScrollView(
+          child: Container(
+            // color: Colors.amber,
+            width: 500,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 400,
+                  // color: Color.fromARGB(255, 12, 141, 153),
+                  child: Transform.scale(
+                    scale: .99, // Adjust the scale factor to suit your needs
+
+                    child: DataTable(
+                      columnSpacing: 10,
+                      dividerThickness: 2,
+                      headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 91, 166, 157),
+                      ),
+                      dataRowMaxHeight: 60,
+                      headingRowHeight: 60,
+                      horizontalMargin: 10,
+                      columns: [
+                        DataColumn(
+                          label: Container(
+                            alignment: Alignment
+                                .centerLeft, // Align text to the left
+                            child: Text(
+                              'DESCRIPTION',
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          tooltip: 'PRODUCT DESCRIPTION',
+                        ),
+                        DataColumn(
+                          label: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'CODE',
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          tooltip: 'Product Description',
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'QTY',
+                            style: TextStyle(
+                                fontSize: 11,
+                                color: Colors
+                                    .white // Adjust the font size as needed
+                                // You can also apply other text styles like fontWeight, color, etc. here
+                                ),
+                          ),
+                          tooltip: 'Product Quantity',
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'UNIT',
+                            style: TextStyle(
+                                fontSize: 11,
+                                color: Colors
+                                    .white // Adjust the font size as needed
+                                // You can also apply other text styles like fontWeight, color, etc. here
+                                ),
+                          ),
+                          tooltip: 'Unit',
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'PRICE',
+                            style: TextStyle(
+                                fontSize: 11,
+                                color: Colors
+                                    .white // Adjust the font size as needed
+                                // You can also apply other text styles like fontWeight, color, etc. here
+                                ),
+                          ),
+                          tooltip: 'Price per Unit',
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'AMOUNT',
+                            style: TextStyle(
+                                fontSize: 11,
+                                color: Colors
+                                    .white // Adjust the font size as needed
+                                // You can also apply other text styles like fontWeight, color, etc. here
+                                ),
+                          ),
+                          tooltip: 'Total Amount',
+                        ),
+                      ],
+                      rows: [
+                        for (var i = 0; i < cartItems.length; i++)
+                          DataRow(
+                              color: MaterialStateColor.resolveWith(
+                                  (states) => i % 2 == 0
+                                      ? Colors.white
+                                      : Colors.transparent),
+                              cells: [
+                                // DataCell(_buildTableCell('${i + 1}')),
+                                DataCell(
+                                  RichText(
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: jsonDecode(
+                                              cartItems[i])['productName'],
+                                          style: TextStyle(fontSize: 11),
+                                        ), // Adjust font size as needed )),
+                                        // Add more TextSpans for additional content or line breaks
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                DataCell(
+                                  RichText(
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: jsonDecode(
+                                              cartItems[i])['productCode'],
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                DataCell(_buildTableCell(
+                                  '${jsonDecode(cartItems[i])['quantity']}',
+                                  style: TextStyle(
+                                      fontSize:
+                                          10.0), // Example: Smaller text for quantity
+                                )),
+                                DataCell(_buildTableCell('unit',
+                                    style: TextStyle(fontSize: 10.0))),
+                                DataCell(_buildTableCell(
+                                  '${jsonDecode(cartItems[i])['price']}',
+                                  style: TextStyle(
+                                      fontSize:
+                                          9.0), // Example: Bold and green for price
+                                )),
+                                DataCell(_buildTableCell(
+                                  '${(jsonDecode(cartItems[i])['price'] * jsonDecode(cartItems[i])['quantity']).toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                      fontSize:
+                                          8), // Example: Italic for total amount
+                                )),
+                              ]),
+                      ],
+                    ),
+                  ),
+                ),
+                Divider(
+                  indent: 10,
+                  endIndent: 20,
+                  color: const Color.fromARGB(255, 108, 106, 106),
+                ),
+                //GANERATE QUATATION TOTAL AMOUNT CONTAINER___*******
+                Column(
+                  children: [
+                    SizedBox(
+                      // color: Color.fromARGB(255, 0, 0, 0),
+                      width: 20,
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment
+                          .centerLeft, // Aligns the SizedBox to the right
+
+                      child: SizedBox(
+                        width: 270,
+                        height: 270,
+                        child: Column(
+                          children: [
+                            Container(
+                              // color: Colors.amber,
+                              padding: const EdgeInsets.all(
+                                  8), // Add padding inside the container
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween, // Adjust to spaceBetween for equal spacing
+                                children: [
+                                  _buildTableCell(
+                                    'Net before VAT',
+                                    fontWeight: FontWeight.bold,
+                                    style: TextStyle(
+                                        fontSize: 14), // Specify a font size
+                                  ),
+                                  _buildTableCell(
+                                    '\SAR${totalPrice.toStringAsFixed(2)}',
+                                    fontWeight: FontWeight.bold,
+                                    style: TextStyle(
+                                        fontSize:
+                                            14), // Keep font size consistent
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              indent: 20,
+                              endIndent: 20,
+                              color: Color.fromARGB(255, 123, 87, 87),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween, // Adjust to spaceBetween
+                              children: [
+                                _buildTableCell(
+                                  'VAT',
+                                  fontWeight: FontWeight.bold,
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                _buildTableCell(
+                                  '\SAR${vat.toStringAsFixed(2)}',
+                                  fontWeight: FontWeight.bold,
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              color: Colors.amber,
+                              padding: const EdgeInsets.all(
+                                  8), // Same padding as the first container
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween, // Keep consistent with above
+                                children: [
+                                  _buildTableCell(
+                                    'Total Amount',
+                                    fontWeight: FontWeight.bold,
+                                    style: TextStyle(
+                                        fontSize: 14), // Consistent style
+                                  ),
+                                  _buildTableCell(
+                                    '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
+                                    fontWeight: FontWeight.bold,
+                                    style: TextStyle(
+                                        fontSize: 14), // Consistent style
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                                    )                    ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTableCell(String text,
+      {FontWeight fontWeight = FontWeight.normal,
+      double fontSize = 14.0,
+      required TextStyle style}) {
+    // Function to insert new lines after every second word
+    String formatText(String text) {
+      var words = text.split(' ');
+      String formattedText = '';
+      for (int i = 0; i < words.length; i++) {
+        formattedText += words[i];
+        if (i % 2 == 1 && i != words.length - 1) {
+          formattedText += '\n'; // Add a new line after every second word
+        } else if (i < words.length - 1) {
+          formattedText += ' '; // Add a space if not the end of the text
+        }
+      }
+      return formattedText;
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(8),
+      alignment: Alignment.center,
+      child: Text(
+        formatText(text), // Use the formatted text here
+        style: TextStyle(
+          fontWeight: fontWeight,
+          fontSize: fontSize,
+        ),
+        textAlign: TextAlign.left,
       ),
-      softWrap: true, // Allows the text to wrap within the cell
-      overflow: TextOverflow
-          .visible, // Prevents text from being hidden if it's longer than the cell width
-    ),
-  );
+    );
+  }
 }

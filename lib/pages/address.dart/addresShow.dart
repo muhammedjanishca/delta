@@ -165,7 +165,7 @@ class _AddressShowState extends State<AddressShow> {
                                                   TextButton(
                                                     onPressed: () =>
                                                         SideSheet.right(
-                                                            body: EditAddress(
+                                                            body: EditAddressdesk(
                                                               addressData:
                                                                   addressData,
                                                               index: index,
@@ -523,19 +523,47 @@ class AddressShowMob extends StatelessWidget {
                             child: ListTile(
                               selectedTileColor: Colors.black,
                               title: AddressData(addressData),
-                              trailing: IconButton(
-                                icon: Icon(Icons.close),
-                                onPressed: () {
-                                  if (index != 0) {
-                                    context
-                                        .read<AddressProvider>()
-                                        .deleteAddress(index);
-                                  } else {
-                                    print(
-                                        'Cannot delete the address with index 0.');
-                                  }
-                                },
-                              ),
+                              trailing: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                if (isSelected)
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        SideSheet.right(
+                                                            body: EditAddressdesk(
+                                                              addressData:
+                                                                  addressData,
+                                                              index: index,
+                                                            ),
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.6,
+                                                            context: context),
+                                                    child: Text(
+                                                      "Edit",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  Colors.black),
+                                                    ),
+                                                  ),
+                                                IconButton(
+                                                  icon: Icon(Icons.close),
+                                                  onPressed: () {
+                                                    if (index != 0) {
+                                                      context
+                                                          .read<
+                                                              AddressProvider>()
+                                                          .deleteAddress(index);
+                                                    } else {
+                                                      // print('Cannot delete the address with index 0.');
+                                                    }
+                                                  },
+                                                ),
+                                              ],
+                                            ),
                             ),
                           ),
                         ),

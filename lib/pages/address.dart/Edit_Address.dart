@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
-class EditAddress extends StatefulWidget {
+class EditAddressdesk extends StatefulWidget {
   final Map<String, dynamic> addressData;
   final int index;
-  const EditAddress({Key? key, required this.addressData, required this.index})
+  const EditAddressdesk({Key? key, required this.addressData, required this.index})
       : super(key: key);
 
   @override
   _EditAddressState createState() => _EditAddressState();
 }
 
-class _EditAddressState extends State<EditAddress> {
+class _EditAddressState extends State<EditAddressdesk> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController _emailController;
   late TextEditingController _nameController;
