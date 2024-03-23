@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../../widgets/details_widget.dart';
 import 'nonpdf_product.dart';
 
 class ProductDetailsoflugs extends StatelessWidget {
@@ -28,7 +29,8 @@ class ProductDetailsoflugs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TextEditingController quantityController = TextEditingController();
-    TextEditingController quantityController = TextEditingController(text: '1'); // start with initial value as 1
+    TextEditingController quantityController =
+        TextEditingController(text: '1'); // start with initial value as 1
 
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final selectedContainerColorNotifier =
@@ -121,22 +123,22 @@ class ProductDetailsoflugs extends StatelessWidget {
                     ? DefaultTabController(
                         length: 2,
                         child: SingleChildScrollView(
-                          child: Container(
+                          child: SizedBox(
                             // height: MediaQuery.of(context).size.height * 1.3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                
+                                SizedBox(
                                   // height: do
                                   // height: MediaQuery.of(context).size.height /0.1,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 0, right: 0, top: 25),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      backButton(context),
+                                      Center(
+                                        child: Container(
                                           color: Colors.white,
                                           height: MediaQuery.of(context)
                                                   .size
@@ -156,7 +158,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   ? Image.network(thumbnail!)
                                                   : SizedBox(),
                                         ),
-                                        SingleChildScrollView(
+                                      ),
+                                      Center(
+                                        child: SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
                                             children: image!.map((imageUrl) {
@@ -208,46 +212,35 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             }).toList(),
                                           ),
                                         ),
-                                        //--------Product Price-----------
+                                      ),
+                                      //--------Product Price-----------
 
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 15, left: 15),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Center(
+                                        child: SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.3,
                                           child: Text(
                                             textpass ?? "",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 22),
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15,
+                                            ),
+                                            textAlign: TextAlign.center,
                                           ),
                                         ),
+                                      ),
 
-                                        Divider(),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              30,
-                                        ),
-
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              30,
-                                        ),
-
-                                        Row(
+                                      Divider(),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  15,
-                                            ),
-
                                             Flexible(
                                               child: FittedBox(
                                                 child: Container(
@@ -261,7 +254,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                               .ellipsis,
                                                           style: GoogleFonts
                                                               .poppins(
-                                                            fontSize: 12.0,
+                                                            // fontSize: 12.0,
                                                             color: Color(
                                                                 0xFF212121),
                                                           ),
@@ -299,7 +292,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                       .bold,
                                                               fontSize: 14,
                                                             );
-
+                                      
                                                             int prefixIndex =
                                                                 priceText
                                                                     .indexOf(
@@ -355,210 +348,185 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            
                                           ],
                                         ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              20,
-                                        ),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                      ),
+                                     
+                                      SizedBox(
+                                        width: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            20,
+                                      ),
+                                      SizedBox(
+                                        child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                              MainAxisAlignment.spaceAround,
                                           children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  13,
-                                            ),
-                                           Container(
-                                          width:140, // Fixed width for the text field
-                                           height: 40,
-                                          decoration: BoxDecoration(
-                                                 border: Border.all(
-                                                 color: Colors.grey, // Border color
-      width: 1, // Border width
-    ),
-  ),
-  child: FittedBox(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
-      // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
-      children: <Widget>[
-       SizedBox(
-    
-   
-    child: IconButton(
-      onPressed: () {
-        int currentQty = int.tryParse(quantityController.text) ?? 0;
-        if (currentQty > 0) {
-          quantityController.text = (currentQty - 1).toString();
-        }
-      },
-      icon: Icon(Icons.remove),
-    ),
-  ),
-        // Gap(5), // Provide some horizontal space between the button and the text field
-        Form(
-          key: _formKey,
-          child: SizedBox(
-            width: 60, // Fixed width for the text field
-            height: 40,
-            child: TextFormField(
-              textAlign: TextAlign.center, // Center the text inside the text field
-              controller: quantityController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
-                ),
-              ),
-            ),
-          ),
-        ),
-        // Gap(5),
-        SizedBox(
-   child: IconButton(
-            onPressed: (){
-                int currentQty = int.tryParse(quantityController.text) ?? 0;
-            quantityController.text = (currentQty + 1).toString();
-            }, 
-            icon:Icon(Icons.add),
-        )),
-      ],
-    ),
-  ),
-),
-                                            TextButton(
-                                                onPressed: () {
-                                                  showModalBottomSheet(
-  context: context,
-  isScrollControlled: true,
-  builder: (BuildContext context) {
-    return SingleChildScrollView(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: MediaQuery.of(context).size.height * 0.5, // Minimum height
-          maxHeight: MediaQuery.of(context).size.height * 0.9, // Maximum height, adjust as needed
-        ),
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Container(
-                color: Colors.white,
-                child: pdf != null ? SfPdfViewer.network(pdf!) : Nopdf(),
-              ),
-            ),
-            // Positioned(
-            //   top: 16,
-            //   right: 16,
-            //   child: IconButton(
-            //     icon: Icon(Icons.close),
-            //     onPressed: () {
-            //       Navigator.pop(context);
-            //     },
-            //   ),
-            // ),
-          ],
-        ),
-      ),
-    );
-  },
-);
-
-//                                                   showModalBottomSheet(
-//   context: context,
-//   isScrollControlled: true,
-//   builder: (BuildContext context) {
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.vertical,
-//       child: Stack(
-//         children: [
-//           Container(
-//              height: MediaQuery.of(
-//                                                                           context)
-//                                                                       .size
-//                                                                       .height /
-//                                                                   1,
-//             color: Colors.white,
-//             child: pdf != null ? SfPdfViewer.network(pdf!) : Nopdf(),
-//           ),
-//           Positioned(
-//             top: 16, // Adjust the top position as needed
-//             right: 16, // Adjust the left position as needed
-//             child: IconButton(
-//               icon: Icon(Icons.close), // You can use any icon you like
-//               onPressed: () {
-//                 Navigator.pop(context); // Add your close button action here
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   },
-// );
-
-                                                  // showModalBottomSheet(
-                                                  //     context: context,
-                                                  //     isScrollControlled: true,
-                                                  //     builder: (BuildContext
-                                                  //         context) {
-                                                  //       return SingleChildScrollView(
-                                                  //         scrollDirection:Axis.vertical,
-                                                  //           child: Stack(
-                                                  //         children: [
-                                                  //           Container(
-                                                              // height: MediaQuery.of(
-                                                              //             context)
-                                                              //         .size
-                                                              //         .height /
-                                                              //     1,
-                                                  //             color:
-                                                  //                 Colors.white,
-                                                  //             child: pdf != null
-                                                  //                 ? SfPdfViewer
-                                                  //                     .network(
-                                                  //                         pdf!)
-                                                  //                 : Nopdf(),
-                                                  //           ),
-                                                  //           Positioned(
-                                                  //             top:
-                                                  //                 16, // Adjust the top position as needed
-                                                  //             right:
-                                                  //                 16, // Adjust the left position as needed
-                                                  //             child: IconButton(
-                                                  //               icon: Icon(Icons
-                                                  //                   .close), // You can use any icon you like
-                                                  //               onPressed: () {
-                                                  //                 Navigator.pop(
-                                                  //                     context);
-                                                  //                 // Add your close button action here
-                                                  //               },
-                                                  //             ),
-                                                  //           ),
-                                                  //         ],
-                                                  //       ));
-                                                  //     });
-                                                },
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.edit_document),
-                                                    Text("size chart")
-                                                  ],
-                                                )
-                                                //  Text("size chart")
+                                            Container(
+                                              width:
+                                                  140, // Fixed width for the text field
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors
+                                                      .grey, // Border color
+                                                  width: 1, // Border width
                                                 ),
+                                              ),
+                                              child: FittedBox(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .center, // Center row contents horizontally
+                                                  // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      child: IconButton(
+                                                        onPressed: () {
+                                                          int currentQty =
+                                                              int.tryParse(
+                                                                      quantityController
+                                                                          .text) ??
+                                                                  0;
+                                                          if (currentQty >
+                                                              0) {
+                                                            quantityController
+                                                                    .text =
+                                                                (currentQty -
+                                                                        1)
+                                                                    .toString();
+                                                          }
+                                                        },
+                                                        icon: Icon(
+                                                            Icons.remove),
+                                                      ),
+                                                    ),
+                                                    // Gap(5), // Provide some horizontal space between the button and the text field
+                                                    Form(
+                                                      key: _formKey,
+                                                      child: SizedBox(
+                                                        width:
+                                                            60, // Fixed width for the text field
+                                                        height: 40,
+                                                        child: TextFormField(
+                                                          textAlign: TextAlign
+                                                              .center, // Center the text inside the text field
+                                                          controller:
+                                                              quantityController,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            contentPadding:
+                                                                EdgeInsets.symmetric(
+                                                                    vertical:
+                                                                        8.0), // Center the placeholder vertically
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0), // Add rounded corners to the text field
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    // Gap(5),
+                                                    SizedBox(
+                                                        child: IconButton(
+                                                      onPressed: () {
+                                                        int currentQty =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        quantityController
+                                                                .text =
+                                                            (currentQty + 1)
+                                                                .toString();
+                                                      },
+                                                      icon: Icon(Icons.add),
+                                                    )),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              child: TextButton(
+                                                  onPressed: () {
+                                                    showModalBottomSheet(
+                                                      useSafeArea: true,
+                                                      context: context,
+                                                      isScrollControlled:
+                                                          true,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          child: Stack(
+                                                            children: [
+                                                              SingleChildScrollView(
+                                                                scrollDirection:
+                                                                    Axis.vertical,
+                                                                child:
+                                                                    Container(
+                                                                  // width: MediaQuery.of(context).size.width/1.5,
+                                                                  height: MediaQuery.of(context)
+                                                                          .size
+                                                                          .height /
+                                                                      1,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  child: pdf !=
+                                                                          null
+                                                                      ? SfPdfViewer.network(
+                                                                          pdf!)
+                                                                      : Nopdf(),
+                                                                ),
+                                                              ),
+                                                              Positioned(
+                                                                top:
+                                                                    16, // Adjust the top position as needed
+                                                                right:
+                                                                    16, // Adjust the left position as needed
+                                                                child:
+                                                                    IconButton(
+                                                                  icon: Icon(Icons
+                                                                      .close), // You can use any icon you like
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context); // Add your close button action here
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons
+                                                          .edit_document),
+                                                      Text("size chart")
+                                                    ],
+                                                  )
+                                                  //  Text("size chart")
+                                                  ),
+                                            )
                                           ],
                                         ),
-                                        Column(
+                                      ),
+                                       
+
+                                      Center(
+                                        child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
@@ -572,150 +540,173 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   8.0, // Adjust the spacing between rows as needed
                                               children: List<Widget>.generate(
                                                   price.length, (index) {
-                                                     context
-                                                      .read<DataProvider>()
-                                                      .addColor(price!.length);
+                                                context
+                                                    .read<DataProvider>()
+                                                    .addColor(price!.length);
                                                 final codeAndPrice =
                                                     price[index];
                                                 return InkWell(
                                                   onTap: () {
-                                                     context
-                                                          .read<DataProvider>()
-                                                          .addColor(
-                                                              price!.length);
-                                                      context
-                                                          .read<DataProvider>()
-                                                          .changeTappedColor(
-                                                              index);
+                                                    context
+                                                        .read<DataProvider>()
+                                                        .addColor(
+                                                            price!.length);
+                                                    context
+                                                        .read<DataProvider>()
+                                                        .changeTappedColor(
+                                                            index);
                                                     selectedPriceNotifieru
                                                         .setSelectedPrice(
-                                                     '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'based on Request'}',
+                                                      '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'based on Request'}',
                                                     );
                                                     selectedPriceNotifieru
                                                         .setProductCodeSelected(
                                                             true);
                                                   },
-                                                  child:  Form(
-                                                      autovalidateMode:
-                                                          AutovalidateMode
-                                                              .always,
-                                                      child: Consumer<
-                                                              DataProvider>(
-                                                          builder: (context,
-                                                              dataProvider,
-                                                              child) {
-                                                        return Container(
-                                                          width: 100,
-                                                          padding: const EdgeInsets
-                                                              .all(
-                                                              8.0), // Adjust the padding as needed
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: dataProvider
-                                                                            .colors[
-                                                                        index] ==
-                                                                    Color(
-                                                                        0xffffffff)
-                                                                ? Colors.white
-                                                                : pickedColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4),
-                                                            border: Border.all(
-                                                              color: codeAndPrice
-                                                                          .price ==
-                                                                      null
+                                                  child: Form(
+                                                    autovalidateMode:
+                                                        AutovalidateMode.always,
+                                                    child:
+                                                        Consumer<DataProvider>(
+                                                            builder: (context,
+                                                                dataProvider,
+                                                                child) {
+                                                      return Container(
+                                                        width: 100,
+                                                        padding: const EdgeInsets
+                                                                .all(
+                                                            8.0), // Adjust the padding as needed
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: dataProvider
+                                                                          .colors[
+                                                                      index] ==
+                                                                  Color(
+                                                                      0xffffffff)
+                                                              ? Colors.white
+                                                              : pickedColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                          border: Border.all(
+                                                            color: codeAndPrice
+                                                                        .price ==
+                                                                    null
+                                                                ? Colors.black
+                                                                : codeAndPrice
+                                                                            .productCode ==
+                                                                        selectedCodeProvider
+                                                                            .selectedProductCode
+                                                                    ? Colors
+                                                                        .blue // Set border color to blue for selected container
+                                                                    : Colors
+                                                                        .greenAccent
+                                                                        .shade700, // Set border color to black for non-selected containers
+                                                            width:
+                                                                1.0, // Set your desired border width
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          '${codeAndPrice.productCode}',
+                                                          style: TextStyle(
+                                                              color: dataProvider
+                                                                              .colors[
+                                                                          index] ==
+                                                                      Color(
+                                                                          0xffffffff)
                                                                   ? Colors.black
-                                                                  : codeAndPrice
-                                                                              .productCode ==
-                                                                          selectedCodeProvider
-                                                                              .selectedProductCode
-                                                                      ? Colors
-                                                                          .blue // Set border color to blue for selected container
-                                                                      : Colors
-                                                                          .greenAccent
-                                                                          .shade700, // Set border color to black for non-selected containers
-                                                              width:
-                                                                  1.0, // Set your desired border width
-                                                            ),
-                                                          ),
-                                                           child: Text(
-                                                            '${codeAndPrice.productCode}',
-                                                            style: TextStyle(
-                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
-                                                              ?Colors.black
-                                                              : Colors.white
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }),
-                                                    ),
+                                                                  : Colors
+                                                                      .white),
+                                                        ),
+                                                      );
+                                                    }),
+                                                  ),
                                                 );
                                               }),
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              20,
-                                        ),
-                                        Container(
-                                          alignment: Alignment.bottomLeft,
-                                          child: Text(
-                                            "    DESCRIPTION :\n",
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                      ),
+                                      SizedBox(
+                                        height: MediaQuery.of(context)
+                                                .size
+                                                .height /
+                                            20,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Text(
+                                          '    description'.toUpperCase(),
+                                          style: GoogleFonts.quicksand(
+                                            color: Color.fromARGB(
+                                                255, 156, 155, 155),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 13),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: description!
-                                                .toUpperCase()
-                                                .split('\n')
-                                                .map((line) {
-                                              return Row(
-                                                children: [
-                                                  Icon(Icons.star,
-                                                      size: 10,
-                                                      color: Colors
-                                                          .black // Adjust the color as needed
-                                                      ),
-                                                  SizedBox(
+                                      ),
+                                      Gap(10),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 13),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: description!
+                                              .split('\n')
+                                              .map((line) {
+                                            // Capitalize only the first letter of each word
+                                            String capitalizedLine =
+                                                line.split(' ').map((word) {
+                                              if (word.isNotEmpty) {
+                                                return word[0].toUpperCase() +
+                                                    word
+                                                        .substring(1)
+                                                        .toLowerCase();
+                                              } else {
+                                                return '';
+                                              }
+                                            }).join(' ');
+
+                                            return Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start, // Align items at the start of each row
+                                              children: [
+                                                Icon(Icons.star,
+                                                    size: 20,
+                                                    color:
+                                                        const Color.fromARGB(
+                                                            255,
+                                                            103,
+                                                            103,
+                                                            103)),
+                                                SizedBox(
                                                     width:
-                                                        8, // Add some space between the circle icon and text
-                                                  ),
-                                                  Flexible(
-                                                    child: Text(
-                                                      line,
-                                                      style: TextStyle(
-                                                        fontSize: 16,
-                                                      ),
-                                                      overflow: TextOverflow
-                                                          .visible, // Handle text overflow
+                                                        10), // Add space between icon and text
+                                                Flexible(
+                                                  child: Text(
+                                                    capitalizedLine
+                                                        .trim(), // Trim any leading/trailing whitespace
+                                                    style: TextStyle(
+                                                      fontSize: 16,
                                                     ),
+                                                    overflow:
+                                                        TextOverflow.visible,
                                                   ),
-                                                ],
-                                              );
-                                            }).toList(),
-                                          ),
+                                                ),
+                                              ],
+                                            );
+                                          }).toList(),
                                         ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              20,
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      SizedBox(
+                                        height: MediaQuery.of(context)
+                                                .size
+                                                .height /
+                                            20,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -731,6 +722,7 @@ class ProductDetailsoflugs extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
+          
           child: Container(
             color: Colors.black,
             child: Row(
@@ -810,15 +802,17 @@ class ProductDetailsoflugs extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                            user != null
+                                                ? Navigator.pushNamed(
+                                                    context, '/cart')
+                                                : showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return LoginPage(); // Your custom dialog widget
+                                                    },
+                                                  );
+                                          },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
@@ -1168,36 +1162,70 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             ),
                                                           ),
                                                         ),
-                                                       Container(
-  height: 60,
-  padding: EdgeInsets.all(8.0),
-  child: Consumer<SelectedPriceNotifier>(
-    builder: (context, selectedPriceNotifieru, _) {
-      // Assuming selectedPriceNotifieru.selectedPrice is something like "ProductCode: 100 SAR"
-      String priceText = selectedPriceNotifieru.selectedPrice;
-      // Splitting the string to isolate "SAR" and make it red
-      List<String> parts = priceText.split('SAR');
-      String beforeSAR = (parts.length > 0) ? parts[0] : '';
-      String sarText = (parts.length > 1) ? 'SAR' + parts[1] : '';
+                                                        Container(
+                                                          height: 60,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                          child: Consumer<
+                                                              SelectedPriceNotifier>(
+                                                            builder: (context,
+                                                                selectedPriceNotifieru,
+                                                                _) {
+                                                              // Assuming selectedPriceNotifieru.selectedPrice is something like "ProductCode: 100 SAR"
+                                                              String priceText =
+                                                                  selectedPriceNotifieru
+                                                                      .selectedPrice;
+                                                              // Splitting the string to isolate "SAR" and make it red
+                                                              List<String>
+                                                                  parts =
+                                                                  priceText
+                                                                      .split(
+                                                                          'SAR');
+                                                              String beforeSAR =
+                                                                  (parts.length >
+                                                                          0)
+                                                                      ? parts[0]
+                                                                      : '';
+                                                              String sarText =
+                                                                  (parts.length >
+                                                                          1)
+                                                                      ? 'SAR' +
+                                                                          parts[
+                                                                              1]
+                                                                      : '';
 
-      return Center(
-        child: RichText(
-          text: TextSpan(
-            style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 12, 127, 39)), // Default style
-            children: <TextSpan>[
-              TextSpan(text: beforeSAR), // Text before SAR
-              TextSpan(
-                text: sarText,
-                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold), // SAR text style
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  ),
-),
-
+                                                              return Center(
+                                                                child: RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            12,
+                                                                            127,
+                                                                            39)), // Default style
+                                                                    children: <TextSpan>[
+                                                                      TextSpan(
+                                                                          text:
+                                                                              beforeSAR), // Text before SAR
+                                                                      TextSpan(
+                                                                        text:
+                                                                            sarText,
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.red,
+                                                                            fontWeight: FontWeight.bold), // SAR text style
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -1205,66 +1233,91 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                        Container(
-                                          width:180, // Fixed width for the text field
-                                           height: 40,
-                                          decoration: BoxDecoration(
-                                                 border: Border.all(
-                                                 color: Colors.grey, // Border color
-                                            width: 1, // Border width
-                                          ),
-                                        ),
-                                        child: FittedBox(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
-                                            // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
-                                            children: <Widget>[
-                                             SizedBox(
-                                          
-                                           
-                                          child: IconButton(
-                                            onPressed: () {
-                                              int currentQty = int.tryParse(quantityController.text) ?? 0;
-                                              if (currentQty > 0) {
-                                                quantityController.text = (currentQty - 1).toString();
-                                              }
-                                            },
-                                            icon: Icon(Icons.remove),
-                                          ),
-                                          ),
-                                              // Gap(5), // Provide some horizontal space between the button and the text field
-                                              Form(
-                                                key: _formKey,
-                                                child: SizedBox(
-                                                  width: 60, // Fixed width for the text field
-                                                  height: 40,
-                                                  child: TextFormField(
-                                                    textAlign: TextAlign.center, // Center the text inside the text field
-                                                    controller: quantityController,
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
+                                          Container(
+                                            width:
+                                                180, // Fixed width for the text field
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color:
+                                                    Colors.grey, // Border color
+                                                width: 1, // Border width
+                                              ),
+                                            ),
+                                            child: FittedBox(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center, // Center row contents horizontally
+                                                // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        int currentQty =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        if (currentQty > 0) {
+                                                          quantityController
+                                                                  .text =
+                                                              (currentQty - 1)
+                                                                  .toString();
+                                                        }
+                                                      },
+                                                      icon: Icon(Icons.remove),
+                                                    ),
+                                                  ),
+                                                  // Gap(5), // Provide some horizontal space between the button and the text field
+                                                  Form(
+                                                    key: _formKey,
+                                                    child: SizedBox(
+                                                      width:
+                                                          60, // Fixed width for the text field
+                                                      height: 40,
+                                                      child: TextFormField(
+                                                        textAlign: TextAlign
+                                                            .center, // Center the text inside the text field
+                                                        controller:
+                                                            quantityController,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets.symmetric(
+                                                                  vertical:
+                                                                      8.0), // Center the placeholder vertically
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        0), // Add rounded corners to the text field
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
+                                                  // Gap(5),
+                                                  SizedBox(
+                                                      child: IconButton(
+                                                    onPressed: () {
+                                                      int currentQty = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      quantityController.text =
+                                                          (currentQty + 1)
+                                                              .toString();
+                                                    },
+                                                    icon: Icon(Icons.add),
+                                                  )),
+                                                ],
                                               ),
-                                              // Gap(5),
-                                              SizedBox(
-                                           child: IconButton(
-                                                  onPressed: (){
-                                                      int currentQty = int.tryParse(quantityController.text) ?? 0;
-                                                  quantityController.text = (currentQty + 1).toString();
-                                                  }, 
-                                                  icon:Icon(Icons.add),
-                                              )),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                        ),
-
                                           Gap(25),
                                           Row(
                                             mainAxisAlignment:
@@ -1287,10 +1340,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                         body: Container(
                                                             height: 1500,
                                                             color: const Color
-                                                                .fromARGB(255,
+                                                                    .fromARGB(255,
                                                                 230, 233, 235),
-                                                            child: pdf !=
-                                                                    null
+                                                            child: pdf != null
                                                                 ? SfPdfViewer
                                                                     .network(
                                                                         pdf!)
@@ -1314,7 +1366,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                      Column(
+                                          Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
@@ -1360,7 +1412,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                         return Container(
                                                           width: 100,
                                                           padding: const EdgeInsets
-                                                              .all(
+                                                                  .all(
                                                               8.0), // Adjust the padding as needed
                                                           decoration:
                                                               BoxDecoration(
@@ -1393,13 +1445,17 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                   1.0, // Set your desired border width
                                                             ),
                                                           ),
-                                                           child: Text(
+                                                          child: Text(
                                                             '${codeAndPrice.productCode}',
                                                             style: TextStyle(
-                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
-                                                              ?Colors.black
-                                                              : Colors.white
-                                                            ),
+                                                                color: dataProvider.colors[
+                                                                            index] ==
+                                                                        Color(
+                                                                            0xffffffff)
+                                                                    ? Colors
+                                                                        .black
+                                                                    : Colors
+                                                                        .white),
                                                           ),
                                                         );
                                                       }),
