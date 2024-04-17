@@ -265,10 +265,12 @@ class _EnquireBoxState extends State<EnquireBox> {
                             onTap: () async {
                               if (kIsWeb) {
                                 // Web platform
-                                await pickFileWeb(callback: updateSelectedFileName);
+                                await pickFileWeb(
+                                    callback: updateSelectedFileName);
                               } else {
                                 // Other platforms
-                                await pickFile(callback: updateSelectedFileName);
+                                await pickFile(
+                                    callback: updateSelectedFileName);
                               }
                             },
                             child: const Row(
@@ -280,7 +282,7 @@ class _EnquireBoxState extends State<EnquireBox> {
                                   color: Colors.black,
                                   size: 24,
                                 ),
-                               Gap(10),
+                                Gap(10),
                                 Text(
                                   "Attach Quotation",
                                   style: TextStyle(
@@ -311,14 +313,14 @@ class _EnquireBoxState extends State<EnquireBox> {
                                   Colors.white, // Customize the color as needed
                               onDeleted: () {
                                 setState(() {
-                                  selectedFileName=null;
+                                  selectedFileName = null;
                                   // Reset any other related data or UI elements
                                 });
                               },
                               deleteIcon: Icon(Icons.close),
                             ),
                           ),
-                      
+
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 5.5,
                         ),
@@ -395,7 +397,7 @@ class _EnquireBoxState extends State<EnquireBox> {
                         //             MediaQuery.of(context).size.width / 8),
                         //       ),
                         //     )),
-                       
+
                         FloatingActionButton(
                             onPressed: () {
                               whatsapp.launchWhatsApp();
@@ -403,7 +405,7 @@ class _EnquireBoxState extends State<EnquireBox> {
                             tooltip: 'Open WhatsApp',
                             child: FaIcon(FontAwesomeIcons.whatsapp),
                             backgroundColor: Color.fromARGB(255, 16, 229, 23)),
-                             SizedBox(
+                        SizedBox(
                           width: MediaQuery.of(context).size.width / 7.5,
                         ),
                         // ElevatedButton(
@@ -527,7 +529,7 @@ class _EnquireBoxState extends State<EnquireBox> {
       });
 
       var response = await dio.post(
-        'https://deltabackend.com/enquiry/sendmail',
+        'https://ready.deltabackend.com/enquiry/sendmail',
         data: formData,
       );
 

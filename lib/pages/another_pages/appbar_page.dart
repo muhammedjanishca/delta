@@ -1,7 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/pages/details_pages/ELPS_Accessories_details.dart';
-import 'package:firebase_hex/pages/details_pages/Ssctm_details.dart';
-import 'package:firebase_hex/pages/details_pages/accessories_product.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/product_pages/Cjtkc.dart';
 import 'package:firebase_hex/pages/product_pages/Sbcpa.dart';
@@ -21,21 +18,15 @@ import 'package:firebase_hex/widgets/Appbar_widgets.dart';
 import 'package:firebase_hex/widgets/search_Bar.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pluto_menu_bar/pluto_menu_bar.dart';
 import 'package:provider/provider.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../login_and_signing/loginpage.dart';
-import '../../main.dart';
-import '../../provider/thumbnail.dart';
-import '../../search_api.dart';
-import '../../widgets/hover_text.dart';
 import '../../widgets/whatsApp.dart';
 import 'package:badges/badges.dart' as badges;
 
-import 'contact_us.dart';
 
 void _handlePopupSelection(String choice) {
   // Handle the selected menu item here

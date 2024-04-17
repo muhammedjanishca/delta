@@ -178,7 +178,7 @@ class QuotationDeskPage extends StatelessWidget {
       //         .get_current_address(cartItems, context);
       //     // Call your backend API to increment the invoice number
       //     final response = await http.post(
-      //       Uri.parse('https://deltabackend.com/invoice_number'),
+      //       Uri.parse('https://ready.deltabackend.com/invoice_number'),
       //     );
       //     if (response.statusCode == 200) {
       //       // If the increment was successful, perform other actions
@@ -200,7 +200,7 @@ class QuotationDeskPage extends StatelessWidget {
               .get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
-            Uri.parse('https://deltabackend.com/invoice_number'),
+            Uri.parse('https://ready.deltabackend.com/invoice_number'),
           );
 
           if (response.statusCode == 200) {
@@ -477,24 +477,21 @@ class QuotationMobilePage extends StatelessWidget {
   final double totalPrice;
   final cartItems;
   final totalPriceWithVAT;
-  final vat; 
+  final vat;
   // Update the type if needed
-    final Map<String, dynamic> selectedAddress; // Declare the selectedAddress
+  final Map<String, dynamic> selectedAddress; // Declare the selectedAddress
 
-
-  QuotationMobilePage( {
-     
-        required this.cartItems,
-      required this.totalPrice,
-      required this.vat,
-      required this.totalPriceWithVAT,
-          required this.selectedAddress, // Include selectedAddress in the constructor
-
-      });
+  QuotationMobilePage({
+    required this.cartItems,
+    required this.totalPrice,
+    required this.vat,
+    required this.totalPriceWithVAT,
+    required this.selectedAddress, // Include selectedAddress in the constructor
+  });
 
   @override
   Widget build(BuildContext context) {
-      final companyName = selectedAddress['Company Name'];
+    final companyName = selectedAddress['Company Name'];
     final contactNumber = selectedAddress['Contact Number'];
     final streetAddress = selectedAddress['Street Address'];
     final streetAddressline2 = selectedAddress['Street Address line 2'];
@@ -509,36 +506,36 @@ class QuotationMobilePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-                    color: Colors.white,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Quotes Details',
-                            style: GoogleFonts.poppins(),
-                          ),
-                          Divider(
-                            color: Colors.black54,
-                            thickness: 0.5,
-                          ),
-                          Text(
-                            'Requested Customer Details',
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                          Gap(4),
-                          // Display address information
-                          SizedBox(
-                            // color: colorTwo,
-                            child: Column(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Quotes Details',
+                        style: GoogleFonts.poppins(),
+                      ),
+                      Divider(
+                        color: Colors.black54,
+                        thickness: 0.5,
+                      ),
+                      Text(
+                        'Requested Customer Details',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                      Gap(4),
+                      // Display address information
+                      SizedBox(
+                        // color: colorTwo,
+                        child: Column(
+                          children: [
+                            Column(
                               children: [
-                                Column(
-                                  children: [
                                 Text(
                                   'Company Name : $companyName',
                                   style: GoogleFonts.poppins(fontSize: 11),
@@ -547,31 +544,31 @@ class QuotationMobilePage extends StatelessWidget {
                                   'e-mail : $email',
                                   style: GoogleFonts.poppins(fontSize: 11),
                                 ),
-                                  ],
-                                ),
-                                Text(
-                                  'Mobile : $contactNumber',
-                                  style: GoogleFonts.poppins(fontSize: 11),
-                                ),
-                                Text(
-                                  'Location : $location',
-                                  style: GoogleFonts.poppins(fontSize: 11),
-                                )
                               ],
                             ),
-                          ),
-
-                          // Text(
-                          //   '$city',
-                          //   style: GoogleFonts.poppins(),
-                          // ),
-                          // Continue displaying other address details as needed
-                          // Your existing code to display the rest of the quotation page
-                        ],
+                            Text(
+                              'Mobile : $contactNumber',
+                              style: GoogleFonts.poppins(fontSize: 11),
+                            ),
+                            Text(
+                              'Location : $location',
+                              style: GoogleFonts.poppins(fontSize: 11),
+                            )
+                          ],
+                        ),
                       ),
-                    )
-                    // MyClipPath(),
-                    ),
+
+                      // Text(
+                      //   '$city',
+                      //   style: GoogleFonts.poppins(),
+                      // ),
+                      // Continue displaying other address details as needed
+                      // Your existing code to display the rest of the quotation page
+                    ],
+                  ),
+                )
+                // MyClipPath(),
+                ),
             Container(
               color: Colors.white,
             ),
@@ -620,8 +617,8 @@ class QuotationMobilePage extends StatelessWidget {
                       columns: [
                         DataColumn(
                           label: Container(
-                            alignment: Alignment
-                                .centerLeft, // Align text to the left
+                            alignment:
+                                Alignment.centerLeft, // Align text to the left
                             child: Text(
                               'DESCRIPTION',
                               style: TextStyle(
@@ -697,8 +694,8 @@ class QuotationMobilePage extends StatelessWidget {
                       rows: [
                         for (var i = 0; i < cartItems.length; i++)
                           DataRow(
-                              color: MaterialStateColor.resolveWith(
-                                  (states) => i % 2 == 0
+                              color: MaterialStateColor.resolveWith((states) =>
+                                  i % 2 == 0
                                       ? Colors.white
                                       : Colors.transparent),
                               cells: [
@@ -848,8 +845,8 @@ class QuotationMobilePage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      
-                                    )                    ],
+                    )
+                  ],
                 )
               ],
             ),

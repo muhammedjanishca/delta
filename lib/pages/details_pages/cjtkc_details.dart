@@ -1,119 +1,128 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
-import 'package:firebase_hex/login_and_signing/signup_page.dart';
-import 'package:firebase_hex/provider/Refresh.dart';
+import 'package:firebase_hex/model.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
+import 'package:firebase_hex/provider/container_clr.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
-import 'package:firebase_hex/provider/user_input_provider.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../../model.dart';
 import '../../widgets/details_widget.dart';
 import 'nonpdf_product.dart';
 
-class ProductDetailsOfCjtkc extends StatelessWidget {
-  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+class ProductDetailsCjtkc extends StatelessWidget {
+  ProductDetailsCjtkc({super.key});
 
-  ProductDetailsOfCjtkc({super.key});
+  final ValueNotifier<String> selectedPriceNotifier = ValueNotifier<String>('');
+  bool check_pr_code = false;
   String? textpass;
   String? thumbnail;
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController quantityController = TextEditingController(text: '1'); // start with initial value as 1
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    // TextEditingController quantityController = TextEditingController();
+    TextEditingController quantityController =
+        TextEditingController(text: '1'); // start with initial value as 1
 
+    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final selectedContainerColorNotifier =
+        Provider.of<SelectedContainerColorNotifier>(context);
+    final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
+    final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
+    final selectedThumbnailProvider =
+        Provider.of<SelectedThumbnailProvider>(context);
+    final selectedPriceNotifieru =
+        Provider.of<SelectedPriceNotifier>(context, listen: false);
+    var user = Provider.of<AuthenticationHelper>(context).user;
+
+    final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
-    var setting_list = selectedProductIndex.split('/');
+    var settingList = selectedProductIndex.split('/');
 
-    String product_name = "";
-    if (setting_list.length > 2) {
-      for (int i = 2; i < setting_list.length; i++) {
-        product_name += setting_list[i].replaceAll('_', ' ');
-        if (i < setting_list.length - 1) {
-          product_name += "/";
+    String productName = "";
+    if (settingList.length > 2) {
+// product_name=(setting_list[2]+"/"+setting_list[3]).replaceAll('_', ' ');
+      for (int i = 2; i < settingList.length; i++) {
+        productName += settingList[i].replaceAll('_', ' ');
+        if (i < settingList.length - 1) {
+          productName += "/";
         }
       }
     } else
-      product_name = setting_list[2].replaceAll('_', " ");
-    // print(product_name);
-    // print('rycrg');
+      productName = settingList[2].replaceAll('_', " ");
 
-    final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
-    var user = Provider.of<AuthenticationHelper>(context).user;
-    final selectedPriceNotifieru =
-        Provider.of<SelectedPriceNotifier>(context, listen: false);
-    final selectedThumbnailProvider =
-        Provider.of<SelectedThumbnailProvider>(context);
     return ResponsiveProductPage(
-      //******************MOBILE VIEW****************************
+      //******MOBILE VIEW********
 
       mobileProductPage: Scaffold(
-        body: FutureBuilder(
-          future: context.read<DataProvider>().fetchCjtkcData(),
-          builder: (context, snapshot) {
-            snapshot.data!.data.length;
+        // backgroundColor: Colors.white,
+        body: Container(
+          child: FutureBuilder(
+            future: context.read<DataProvider>().fetchCjtkcData(),
+            builder: (context, snapshot) {
+              snapshot.data!.data.length;
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                  child:
-                      lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else {
-              String? description;
-              List<CodesAndPrice>? price = [];
-              List<String>? image = [];
-              String? pdf;
-
-              if (selectedThumbnailProvider.selectedIndex != null) {
-                textpass = snapshot.data!
-                    .data[selectedThumbnailProvider.selectedIndex!].productName;
-                thumbnail = snapshot.data!
-                    .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
-                description = snapshot.data!
-                    .data[selectedThumbnailProvider.selectedIndex!].description;
-                price = snapshot
-                    .data!
-                    .data[selectedThumbnailProvider.selectedIndex!]
-                    .codesAndPrice!;
-                image = snapshot.data!
-                    .data[selectedThumbnailProvider.selectedIndex!].images;
-                pdf = snapshot
-                    .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                    child:
+                        lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
               } else {
-                snapshot.data!.data.firstWhere((element) {
-                  if (element.productName == product_name) {
-                    // print("2121");
-                    textpass = element.productName;
-                    thumbnail = element.thumbnail;
-                    description = element.description;
-                    price?.addAll(element.codesAndPrice!.map((e) => e));
-                    image?.addAll(element.images!.map((e) => e));
-                    pdf = element.pdf;
-                    return true;
-                  } else {
-                    return false;
-                  }
-                });
-              }
+                String? description;
+                List<CodesAndPrice>? price = [];
+                List<String>? image = [];
+                String? pdf;
+                ;
+                if (selectedThumbnailProvider.selectedIndex != null) {
+                  textpass = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .productName;
+                  thumbnail = snapshot.data!
+                      .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
+                  description = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .description;
+                  price = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .codesAndPrice!;
+                  image = snapshot.data!
+                      .data[selectedThumbnailProvider.selectedIndex!].images;
+                  pdf = snapshot
+                      .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
+                } else {
+                  snapshot.data!.data.firstWhere((element) {
+                    if (element.productName == productName) {
+                      print("2121");
+                      textpass = element.productName;
+                      thumbnail = element.thumbnail;
+                      description = element.description;
+                      price?.addAll(element.codesAndPrice!.map((e) => e));
+                      image?.addAll(element.images!.map((e) => e));
+                      pdf = element.pdf;
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  });
+                }
 
-              //  String selectedPrice = '';
-
-              return pdf != null
-                  ? DefaultTabController(
-                      length: 2,
-                     child: SingleChildScrollView(
+                return pdf != null
+                    ? DefaultTabController(
+                        length: 2,
+                        child: SingleChildScrollView(
                           child: SizedBox(
                             // height: MediaQuery.of(context).size.height * 1.3,
                             child: Column(
@@ -705,13 +714,15 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                           ),
                         ),
                       )
-                  : Nopdf(
-                      typeOfProduct: 'cj_tkc',
-                    );
-            }
-          },
+                    : Nopdf(
+                        typeOfProduct: 'cj_tkc',
+                      );
+              }
+            },
+          ),
         ),
         bottomNavigationBar: BottomAppBar(
+          
           child: Container(
             color: Colors.black,
             child: Row(
@@ -777,8 +788,7 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(249, 156, 6, 1.0),
-                        ),
+                            Color.fromRGBO(249, 156, 6, 1.0)),
                         minimumSize: MaterialStateProperty.all(Size(150, 50)),
                       ),
                     ),
@@ -792,15 +802,17 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        user != null
-                            ? Navigator.pushNamed(context, '/cart')
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
-                      },
+                                            user != null
+                                                ? Navigator.pushNamed(
+                                                    context, '/cart')
+                                                : showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return LoginPage(); // Your custom dialog widget
+                                                    },
+                                                  );
+                                          },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
@@ -814,15 +826,13 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
         ),
       ),
 
-//-----------desktop--------------------------------------------------------
+      //-----------desktop--------------------------------------------------------
 
       desktopProductPage: FutureBuilder(
         future: context.read<DataProvider>().fetchCjtkcData(),
         builder: (context, snapshot) {
           snapshot.data!.data.length;
-          // print("jhjhh");
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // print("hgfghfhfgu");
             return Center(
                 child:
                     lottieSuccess()); // You can replace this with a loading indicator or any other widget while waiting for data.
@@ -853,8 +863,7 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
               snapshot.data!.data.firstWhere((element) {
-                if (element.productName == product_name) {
-                  print("2121");
+                if (element.productName == productName) {
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
@@ -1141,7 +1150,7 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                                         Container(
                                                           // color: Colors.amber,
                                                           child: Text(
-                                                            'Product Code & Price:  ',
+                                                            'Product Code & Price: ',
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -1153,35 +1162,70 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                                             ),
                                                           ),
                                                         ),
-                                                      Container(
-  height: 60,
-  padding: EdgeInsets.all(8.0),
-  child: Consumer<SelectedPriceNotifier>(
-    builder: (context, selectedPriceNotifieru, _) {
-      // Assuming selectedPriceNotifieru.selectedPrice is something like "ProductCode: 100 SAR"
-      String priceText = selectedPriceNotifieru.selectedPrice;
-      // Splitting the string to isolate "SAR" and make it red
-      List<String> parts = priceText.split('SAR');
-      String beforeSAR = (parts.length > 0) ? parts[0] : '';
-      String sarText = (parts.length > 1) ? 'SAR' + parts[1] : '';
+                                                        Container(
+                                                          height: 60,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                          child: Consumer<
+                                                              SelectedPriceNotifier>(
+                                                            builder: (context,
+                                                                selectedPriceNotifieru,
+                                                                _) {
+                                                              // Assuming selectedPriceNotifieru.selectedPrice is something like "ProductCode: 100 SAR"
+                                                              String priceText =
+                                                                  selectedPriceNotifieru
+                                                                      .selectedPrice;
+                                                              // Splitting the string to isolate "SAR" and make it red
+                                                              List<String>
+                                                                  parts =
+                                                                  priceText
+                                                                      .split(
+                                                                          'SAR');
+                                                              String beforeSAR =
+                                                                  (parts.length >
+                                                                          0)
+                                                                      ? parts[0]
+                                                                      : '';
+                                                              String sarText =
+                                                                  (parts.length >
+                                                                          1)
+                                                                      ? 'SAR' +
+                                                                          parts[
+                                                                              1]
+                                                                      : '';
 
-      return Center(
-        child: RichText(
-          text: TextSpan(
-            style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 12, 127, 39)), // Default style
-            children: <TextSpan>[
-              TextSpan(text: beforeSAR), // Text before SAR
-              TextSpan(
-                text: sarText,
-                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold), // SAR text style
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  ),
-),
+                                                              return Center(
+                                                                child: RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            12,
+                                                                            127,
+                                                                            39)), // Default style
+                                                                    children: <TextSpan>[
+                                                                      TextSpan(
+                                                                          text:
+                                                                              beforeSAR), // Text before SAR
+                                                                      TextSpan(
+                                                                        text:
+                                                                            sarText,
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.red,
+                                                                            fontWeight: FontWeight.bold), // SAR text style
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -1190,64 +1234,90 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                             ],
                                           ),
                                           Container(
-                                          width:180, // Fixed width for the text field
-                                           height: 40,
-                                          decoration: BoxDecoration(
-                                                 border: Border.all(
-                                                 color: Colors.grey, // Border color
-                                            width: 1, // Border width
-                                          ),
-                                        ),
-                                        child: FittedBox(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
-                                            // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
-                                            children: <Widget>[
-                                             SizedBox(
-                                          
-                                           
-                                          child: IconButton(
-                                            onPressed: () {
-                                              int currentQty = int.tryParse(quantityController.text) ?? 0;
-                                              if (currentQty > 0) {
-                                                quantityController.text = (currentQty - 1).toString();
-                                              }
-                                            },
-                                            icon: Icon(Icons.remove),
-                                          ),
-                                          ),
-                                              // Gap(5), // Provide some horizontal space between the button and the text field
-                                              Form(
-                                                key: _formKey,
-                                                child: SizedBox(
-                                                  width: 60, // Fixed width for the text field
-                                                  height: 40,
-                                                  child: TextFormField(
-                                                    textAlign: TextAlign.center, // Center the text inside the text field
-                                                    controller: quantityController,
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
+                                            width:
+                                                180, // Fixed width for the text field
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color:
+                                                    Colors.grey, // Border color
+                                                width: 1, // Border width
+                                              ),
+                                            ),
+                                            child: FittedBox(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center, // Center row contents horizontally
+                                                // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        int currentQty =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        if (currentQty > 0) {
+                                                          quantityController
+                                                                  .text =
+                                                              (currentQty - 1)
+                                                                  .toString();
+                                                        }
+                                                      },
+                                                      icon: Icon(Icons.remove),
+                                                    ),
+                                                  ),
+                                                  // Gap(5), // Provide some horizontal space between the button and the text field
+                                                  Form(
+                                                    key: _formKey,
+                                                    child: SizedBox(
+                                                      width:
+                                                          60, // Fixed width for the text field
+                                                      height: 40,
+                                                      child: TextFormField(
+                                                        textAlign: TextAlign
+                                                            .center, // Center the text inside the text field
+                                                        controller:
+                                                            quantityController,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets.symmetric(
+                                                                  vertical:
+                                                                      8.0), // Center the placeholder vertically
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        0), // Add rounded corners to the text field
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
+                                                  // Gap(5),
+                                                  SizedBox(
+                                                      child: IconButton(
+                                                    onPressed: () {
+                                                      int currentQty = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      quantityController.text =
+                                                          (currentQty + 1)
+                                                              .toString();
+                                                    },
+                                                    icon: Icon(Icons.add),
+                                                  )),
+                                                ],
                                               ),
-                                              // Gap(5),
-                                              SizedBox(
-                                           child: IconButton(
-                                                  onPressed: (){
-                                                      int currentQty = int.tryParse(quantityController.text) ?? 0;
-                                                  quantityController.text = (currentQty + 1).toString();
-                                                  }, 
-                                                  icon:Icon(Icons.add),
-                                              )),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                        ),
                                           Gap(25),
                                           Row(
                                             mainAxisAlignment:
@@ -1256,7 +1326,7 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                               Text(
                                                 'Product codes'.toUpperCase(),
                                                 style: GoogleFonts.quicksand(
-                                                  color: Color.fromARGB(
+                                                  color: const Color.fromARGB(
                                                       255, 156, 155, 155),
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
@@ -1305,20 +1375,32 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                                 spacing: 8.0,
                                                 runSpacing: 8.0,
                                                 children: List<Widget>.generate(
-                                                    price!.length, (index) {
+                                                    price.length, (index) {
+                                                  context
+                                                      .read<DataProvider>()
+                                                      .addColor(price!.length);
                                                   final codeAndPrice =
-                                                      price![index];
+                                                      price[index];
                                                   return InkWell(
                                                     onTap: () {
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .addColor(
+                                                              price!.length);
+                                                      context
+                                                          .read<DataProvider>()
+                                                          .changeTappedColor(
+                                                              index);
+
                                                       selectedPriceNotifieru
                                                           .setSelectedPrice(
-                                                        '${codeAndPrice.productCode}  :  ${codeAndPrice.price != null ? 'SAR  ${codeAndPrice.price}' : 'Product available based on Request'}',
+                                                        '${codeAndPrice.productCode} SAR : ${codeAndPrice.price != null ? '${codeAndPrice.price}' : 'Product available based on Request'}',
                                                       );
                                                       selectedPriceNotifieru
                                                           .setProductCodeSelected(
                                                               true);
                                                     },
-                                                     child:  Form(
+                                                    child: Form(
                                                       autovalidateMode:
                                                           AutovalidateMode
                                                               .always,
@@ -1330,7 +1412,7 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                                         return Container(
                                                           width: 100,
                                                           padding: const EdgeInsets
-                                                              .all(
+                                                                  .all(
                                                               8.0), // Adjust the padding as needed
                                                           decoration:
                                                               BoxDecoration(
@@ -1366,10 +1448,14 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                                           child: Text(
                                                             '${codeAndPrice.productCode}',
                                                             style: TextStyle(
-                                                              color:dataProvider.colors[index] ==Color(0xffffffff)
-                                                              ?Colors.black
-                                                              : Colors.white
-                                                            ),
+                                                                color: dataProvider.colors[
+                                                                            index] ==
+                                                                        Color(
+                                                                            0xffffffff)
+                                                                    ? Colors
+                                                                        .black
+                                                                    : Colors
+                                                                        .white),
                                                           ),
                                                         );
                                                       }),
@@ -1449,14 +1535,10 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                                                     CrossAxisAlignment
                                                         .start, // Align items at the start of each row
                                                 children: [
-                                                  Icon(Icons.star,
+                                                  const Icon(Icons.star,
                                                       size: 20,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              103,
-                                                              103,
-                                                              103)),
+                                                      color: Color.fromARGB(
+                                                          255, 103, 103, 103)),
                                                   SizedBox(
                                                       width:
                                                           10), // Add space between icon and text
@@ -1488,9 +1570,7 @@ class ProductDetailsOfCjtkc extends StatelessWidget {
                       ),
                     ),
                   )
-                : Nopdf(
-                    typeOfProduct: 'cj_tkc',
-                  );
+                : Nopdf(typeOfProduct: 'cj_tkc');
           }
         },
       ),

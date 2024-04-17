@@ -7,7 +7,7 @@ Widget backButton(BuildContext context) {
     },
     child: Container(
       padding: EdgeInsets.all(8.0),
-      child: Icon(Icons.arrow_back),
+      child: Icon(Icons.arrow_back_ios_outlined),
     ),
   );
 }

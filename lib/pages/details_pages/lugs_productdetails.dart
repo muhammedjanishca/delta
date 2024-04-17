@@ -46,19 +46,19 @@ class ProductDetailsoflugs extends StatelessWidget {
     final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
-    var setting_list = selectedProductIndex.split('/');
+    var settingList = selectedProductIndex.split('/');
 
-    String product_name = "";
-    if (setting_list.length > 2) {
+    String productName = "";
+    if (settingList.length > 2) {
 // product_name=(setting_list[2]+"/"+setting_list[3]).replaceAll('_', ' ');
-      for (int i = 2; i < setting_list.length; i++) {
-        product_name += setting_list[i].replaceAll('_', ' ');
-        if (i < setting_list.length - 1) {
-          product_name += "/";
+      for (int i = 2; i < settingList.length; i++) {
+        productName += settingList[i].replaceAll('_', ' ');
+        if (i < settingList.length - 1) {
+          productName += "/";
         }
       }
     } else
-      product_name = setting_list[2].replaceAll('_', " ");
+      productName = settingList[2].replaceAll('_', " ");
 
     return ResponsiveProductPage(
       //******MOBILE VIEW********
@@ -104,7 +104,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                       .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
                 } else {
                   snapshot.data!.data.firstWhere((element) {
-                    if (element.productName == product_name) {
+                    if (element.productName == productName) {
                       print("2121");
                       textpass = element.productName;
                       thumbnail = element.thumbnail;
@@ -863,7 +863,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                   .data!.data[selectedThumbnailProvider.selectedIndex!].pdf;
             } else {
               snapshot.data!.data.firstWhere((element) {
-                if (element.productName == product_name) {
+                if (element.productName == productName) {
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;

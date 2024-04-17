@@ -44,7 +44,8 @@ Widget searchBox(BuildContext context) {
               }
             },
             itemBuilder: (context, suggestion) {
-              return SizedBox(
+              return Container(
+                color: Colors.white,
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(suggestion['thumbnail']),

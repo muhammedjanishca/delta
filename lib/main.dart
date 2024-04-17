@@ -6,7 +6,7 @@ import 'package:firebase_hex/pages/details_pages/ELPS_Accessories_details.dart';
 import 'package:firebase_hex/pages/details_pages/ELPS_details.dart';
 import 'package:firebase_hex/pages/details_pages/Sbcpa_details.dart';
 import 'package:firebase_hex/pages/details_pages/Ssctm_details.dart';
-import 'package:firebase_hex/pages/details_pages/cj_tkc_details.dart';
+import 'package:firebase_hex/pages/details_pages/cjtkc_details.dart';
 import 'package:firebase_hex/pages/details_pages/crimping_tool.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/another_pages/appbar_page.dart';
@@ -74,7 +74,8 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationHelper()),
         ChangeNotifierProvider(create: (context) => DataProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedThumbnailProvider()),
+        ChangeNotifierProvider(
+            create: (context) => SelectedThumbnailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedCodeProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
         ChangeNotifierProvider(create: (context) => UserInputProvider()),
@@ -88,18 +89,17 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedKiduProvider()),
         ChangeNotifierProvider(create: (context) => ColorChangingProvider()),
         ChangeNotifierProvider(create: (context) => SelectedPriceProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedContainerColorNotifier()),
+        ChangeNotifierProvider(
+            create: (context) => SelectedContainerColorNotifier()),
       ],
       child: MaterialApp(
         title: "TRANS DELTA TRADING",
         theme: ThemeData(primaryColor: colorOne),
         //this use using for handle null data
         builder: (context, widget) {
-          if (widget is Scaffold || widget is Navigator) {
-          }
+          if (widget is Scaffold || widget is Navigator) {}
           ErrorWidget.builder = (errorDetails) {
-            return Center(
-                child: lottieSuccess());
+            return Center(child: lottieSuccess());
             // Text(errorDetails.toString());
           };
           if (widget != null) return widget;
@@ -115,37 +115,43 @@ class _MyAppState extends State<MyApp> {
           '/cable-terminal-ends/lugs/': (context) => AppBarMain(
                 body: LugsPage(),
               ),
-          '/brass-cable-gland-kits-accessories/brass-cable-glands/': (context) => AppBarMain(
-                body: GlandPage(),
-              ),
-              '/Stainless Steel Cable Ties & Markers': (context) => AppBarMain(
+          '/brass-cable-gland-kits-accessories/brass-cable-glands/':
+              (context) => AppBarMain(
+                    body: GlandPage(),
+                  ),
+          '/Stainless Steel Cable Ties & Markers': (context) => AppBarMain(
                 body: SsctmProduct(),
               ),
-              '/earthing-lightning-protection-systems/earthing-lightning-protection/': (context) => AppBarMain(
-                body: Elps(),
-              ),
-              
-               '/signup/signin': (context) => SignUpPage(),
-               '/brass-cable-gland-kits-accessories/brass-cable-gland-accessories/': (context) => AppBarMain(
-                body: AccessoriesPage(),
-              ),
-               '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/': (context) => AppBarMain(
-                body: ElpsAccessories(),
-              ),
-              '/cable-terminal-ends/connectors/': (context) => AppBarMain(body: ConnectersPage()),
-              '/crimping-tools/': (context) => AppBarMain(
+          '/earthing-lightning-protection-systems/earthing-lightning-protection/':
+              (context) => AppBarMain(
+                    body: Elps(),
+                  ),
+
+          '/signup/signin': (context) => SignUpPage(),
+          '/brass-cable-gland-kits-accessories/brass-cable-gland-accessories/':
+              (context) => AppBarMain(
+                    body: AccessoriesPage(),
+                  ),
+          '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/':
+              (context) => AppBarMain(
+                    body: ElpsAccessories(),
+                  ),
+          '/cable-terminal-ends/connectors/': (context) =>
+              AppBarMain(body: ConnectersPage()),
+          '/crimping-tools/': (context) => AppBarMain(
                 body: CrimpingToolPage(),
               ),
-              '/switch-board-control-panel-accessories/': (context) => AppBarMain(
+          '/switch-board-control-panel-accessories/': (context) => AppBarMain(
                 body: SbcpaProduct(),
               ),
-              '/cable-jointing-and-termination-kit-components/': (context) => AppBarMain(
+          '/cable-jointing-and-termination-kit-components/': (context) =>
+              AppBarMain(
                 body: CjtkcPage(),
               ),
-               '/cable-support-systems/': (context) => AppBarMain(
+          '/cable-support-systems/': (context) => AppBarMain(
                 body: ConduitesPage(),
               ),
-              'stainless-steel-cable-ties-markers/': (context) => AppBarMain(
+          'stainless-steel-cable-ties-markers/': (context) => AppBarMain(
                 body: SsctmProduct(),
               ),
           // '/sighn':(context) => SignUpPage()
@@ -180,20 +186,20 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-                // case "productdetailssbcpa":
-                // return MaterialPageRoute(
-                //   builder: (BuildContext context) {
-                //     return AppBarMain(
-                //       body: ProductDetailsOfSbcpa(),
-                //     );
-                //   },
-                //   settings: setting,
-                // );
-                case "productdetailscjtkc":
+              // case "productdetailssbcpa":
+              // return MaterialPageRoute(
+              //   builder: (BuildContext context) {
+              //     return AppBarMain(
+              //       body: ProductDetailsOfSbcpa(),
+              //     );
+              //   },
+              //   settings: setting,
+              // );
+              case "productdetailscjtkc":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
-                      body: ProductDetailsOfCjtkc(),
+                      body: ProductDetailsCjtkc(),
                     );
                   },
                   settings: setting,
@@ -216,7 +222,7 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-                 case "productdetailssbcpa":
+              case "productdetailssbcpa":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(
@@ -225,28 +231,28 @@ class _MyAppState extends State<MyApp> {
                   },
                   settings: setting,
                 );
-                 case "productdetailsconduits":
+              case "productdetailsconduits":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(body: ProductDetailsOfConduits());
                   },
                   settings: setting,
                 );
-                 case "productdetailscELPSAccessories":
+              case "productdetailscELPSAccessories":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(body: ProductDetailsOfELPSAccessories());
                   },
                   settings: setting,
                 );
-                case "productdetailsElps":
+              case "productdetailsElps":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(body: ProductDetailsOfElps());
                   },
                   settings: setting,
                 );
-                case "productdetailsSsctm":
+              case "productdetailsSsctm":
                 return MaterialPageRoute(
                   builder: (BuildContext context) {
                     return AppBarMain(body: SsctmProductDetails());
@@ -276,6 +282,7 @@ class _MyAppState extends State<MyApp> {
 void navigateToPage(BuildContext context, String route) {
   Navigator.pushNamed(context, route);
 }
+
 // void navigateToProductDetailsofSbcpa(
 //     BuildContext context, int selectedProductIndex,
 //     {String? productname}) {
@@ -286,11 +293,13 @@ void navigateToProductDetailsofsbcpa(
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailssbcpa/$productname');
 }
+
 void navigateToProductDetailsofLugs(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailslugs/$productname');
 }
+
 void navigateToProductDetailsofCjtkc(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
@@ -302,11 +311,13 @@ void navigateToProductDetailsofSsctm(
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailsSsctm/$productname');
 }
+
 void navigateToProductDetailsofElps(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailsElps/$productname');
 }
+
 void navigateToProductDetailsOfConnectors(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
@@ -315,6 +326,7 @@ void navigateToProductDetailsOfConnectors(
     '/productdetailsconnectors/$productname',
   );
 }
+
 void navigateToProductDetailsOfConduits(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
@@ -323,11 +335,13 @@ void navigateToProductDetailsOfConduits(
     '/productdetailsconduits/$productname',
   );
 }
+
 void navigateToProductDetailsofELPSAccessories(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
   Navigator.pushNamed(context, '/productdetailscELPSAccessories/$productname');
 }
+
 void navigateToProductDetailsOfGlands(
     BuildContext context, int selectedProductIndex,
     {String? productname}) {
@@ -354,6 +368,7 @@ void navigateToProductDetailsOfTools(
 void navigateToProductDetailsFromSearch(
   BuildContext context,
   String productname,
+  // String thumbnailUrl,
   String type,
 ) {
   String endpoint = "";
@@ -374,9 +389,26 @@ void navigateToProductDetailsFromSearch(
     case 'tools':
       endpoint = '/productdetailscrimpingtools/$productname';
       break;
-       case 'CSS':
+    case 'CSS':
       endpoint = '/productdetailsconduits/$productname';
       break;
+    //dfghjk
+    case 'ssctm':
+      endpoint = '/productdetailsSsctm/$productname';
+      break;
+    case 'sb_cpa':
+      endpoint = '/productdetailssbcpa/$productname';
+      break;
+    case 'elps':
+      endpoint = '/productdetailsElps/$productname';
+      break;
+    case 'ELPSA':
+      endpoint = '/productdetailscELPSAccessories/$productname';
+      break;
+    case 'cj_tkc':
+      endpoint = '/productdetailscjtkc/$productname';
+      break;
+
     default:
       return;
   }

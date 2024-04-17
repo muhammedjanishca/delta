@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Services> fetchServices() async {
-  final response =
-      await http.post(Uri.parse('https://deltabackend.com/store_invoice'));
+  final response = await http
+      .post(Uri.parse('https://ready.deltabackend.com/store_invoice'));
 
   if (response.statusCode == 200) {
     // If the server returns a 200 OK response, parse the JSON

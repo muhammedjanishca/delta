@@ -13,13 +13,11 @@ class AddressProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late List<dynamic> arrayFromFirestore;
   late String current_address;
-    
-     
-    //                                            ##  ADDRESS PAGE CONDITION (GENERATE QUOTATION, ELEVATED BUTTON IN CART.DART) ##
-    //#############################################################################################################
-    //##################################################################################################################################
-    //##################################################################################################################################
 
+  //                                            ##  ADDRESS PAGE CONDITION (GENERATE QUOTATION, ELEVATED BUTTON IN CART.DART) ##
+  //#############################################################################################################
+  //##################################################################################################################################
+  //##################################################################################################################################
 
   Future<bool> isUserDataAvailable(context) async {
     User? user = _auth.currentUser;
@@ -46,7 +44,7 @@ class AddressProvider with ChangeNotifier {
     return false;
   }
 
-  void deleteAddress(int index) async{
+  void deleteAddress(int index) async {
     arrayFromFirestore.removeAt(index);
 
     await FirebaseFirestore.instance
@@ -78,7 +76,7 @@ class AddressProvider with ChangeNotifier {
     if (current_address.isNotEmpty) {
       print('22222222222222222222222222');
       http.post(
-        Uri.parse('https://deltabackend.com/store_invoice'),
+        Uri.parse('https://ready.deltabackend.com/store_invoice'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({"u_id": '${FirebaseAuth.instance.currentUser!.uid}'}),
       );
@@ -92,8 +90,9 @@ class AddressProvider with ChangeNotifier {
     selectIndex = id;
     notifyListeners();
   }
-  
-  Future<void> updateAddress(int index, Map<String, dynamic> updatedAddress) async {
+
+  Future<void> updateAddress(
+      int index, Map<String, dynamic> updatedAddress) async {
     arrayFromFirestore[index] = jsonEncode(updatedAddress);
 
     await FirebaseFirestore.instance

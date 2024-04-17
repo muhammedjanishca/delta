@@ -36,7 +36,7 @@ class _EnquireBoxState extends State<EnquireBox> {
   final companyNameContoller = TextEditingController();
   final messageController = TextEditingController();
   // bool isLoading = false;
-html.File? pickedFile;
+  html.File? pickedFile;
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
@@ -179,7 +179,7 @@ html.File? pickedFile;
                               Colors.white, // Customize the color as needed
                           onDeleted: () {
                             setState(() {
-                              selectedFileName=null;
+                              selectedFileName = null;
                               // Reset any other related data or UI elements
                             });
                           },
@@ -297,51 +297,50 @@ html.File? pickedFile;
     }
   }
 
-Future<List<int>> _readFileAsBytes(html.File file) async {
-  final reader = html.FileReader();
-  final completer = Completer<List<int>>();
+  Future<List<int>> _readFileAsBytes(html.File file) async {
+    final reader = html.FileReader();
+    final completer = Completer<List<int>>();
 
-  reader.onLoadEnd.listen((_) {
-    // Extract base64 data from the data URL
-    final dataUrl = reader.result as String;
-    final base64Data = dataUrl.split(',').last;
-    
-    // Decode base64 to bytes
-    final List<int> fileBytes = base64.decode(base64Data);
+    reader.onLoadEnd.listen((_) {
+      // Extract base64 data from the data URL
+      final dataUrl = reader.result as String;
+      final base64Data = dataUrl.split(',').last;
 
-    completer.complete(fileBytes);
-  });
+      // Decode base64 to bytes
+      final List<int> fileBytes = base64.decode(base64Data);
 
-  reader.onError.listen((dynamic error) {
-    completer.completeError('Error reading file: $error');
-  });
-
-  reader.readAsDataUrl(file);
-  await completer.future;
-
-  return completer.future;
-}
-
-
-Future<void> pickFileWeb({required Function(String?) callback}) async {
-  final html.FileUploadInputElement input = html.FileUploadInputElement()
-    ..accept = 'application/pdf'; // Set the accept attribute for PDF files
-  input.click();
-  await input.onChange.first;
-  pickedFile = input.files!.first; // Store the picked file
-  final file = pickedFile;
-
-  if (file != null) {
-    setState(() {
-      selectedFileName = file.name;
+      completer.complete(fileBytes);
     });
 
-    // Read file content as Uint8List
-    final List<int> fileBytes = await _readFileAsBytes(file);
-    print('File Bytes Length: ${fileBytes.length}');
-    callback(file.name);
+    reader.onError.listen((dynamic error) {
+      completer.completeError('Error reading file: $error');
+    });
+
+    reader.readAsDataUrl(file);
+    await completer.future;
+
+    return completer.future;
   }
-}
+
+  Future<void> pickFileWeb({required Function(String?) callback}) async {
+    final html.FileUploadInputElement input = html.FileUploadInputElement()
+      ..accept = 'application/pdf'; // Set the accept attribute for PDF files
+    input.click();
+    await input.onChange.first;
+    pickedFile = input.files!.first; // Store the picked file
+    final file = pickedFile;
+
+    if (file != null) {
+      setState(() {
+        selectedFileName = file.name;
+      });
+
+      // Read file content as Uint8List
+      final List<int> fileBytes = await _readFileAsBytes(file);
+      print('File Bytes Length: ${fileBytes.length}');
+      callback(file.name);
+    }
+  }
 
   Future<void> uploadData() async {
     try {
@@ -353,9 +352,9 @@ Future<void> pickFileWeb({required Function(String?) callback}) async {
       }
       final html.File file = pickedFile!;
 
-    // Read file content as Uint8List
-    final List<int> fileBytes = await _readFileAsBytes(file);
-    print('File Bytes Length in API: ${fileBytes.length}');
+      // Read file content as Uint8List
+      final List<int> fileBytes = await _readFileAsBytes(file);
+      print('File Bytes Length in API: ${fileBytes.length}');
       FormData formData = FormData.fromMap({
         'email': emailTextController.text,
         'phone': phoneController.text,
@@ -369,7 +368,7 @@ Future<void> pickFileWeb({required Function(String?) callback}) async {
       });
 
       var response = await dio.post(
-        'https://deltabackend.com/enquiry/sendmail',
+        'https://ready.deltabackend.com/enquiry/sendmail',
         data: formData,
       );
 

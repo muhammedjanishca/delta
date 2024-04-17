@@ -9,7 +9,7 @@ class ProductProvider extends ChangeNotifier {
   Future<List<Map<String, dynamic>>> fetchData(String query) async {
     try {
       final response = await http.get(
-        Uri.parse('https://deltabackend.com/searching?query=$query'),
+        Uri.parse('https://ready.deltabackend.com/searching?query=$query'),
       );
 
       if (response.statusCode == 200) {
@@ -24,7 +24,7 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
-void searchProducts(String query) async {
+  void searchProducts(String query) async {
     try {
       final data = await fetchData(query);
       products = data;
@@ -34,5 +34,3 @@ void searchProducts(String query) async {
     }
   }
 }
-
-
