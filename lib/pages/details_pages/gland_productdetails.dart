@@ -25,6 +25,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
   String? textpass;
 
   bool check_pr_code = false;
+  int cartCount = 0;
 
   String? thumbnail;
 
@@ -806,7 +807,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         user != null
-                            ? Navigator.pushNamed(context, '/cart')
+                            ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
                             : showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -1076,8 +1077,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                         ElevatedButton(
                                           onPressed: () {
                                             user != null
-                                                ? Navigator.pushNamed(
-                                                    context, '/cart')
+                                                ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
                                                 : showDialog(
                                                     context: context,
                                                     builder:

@@ -24,6 +24,15 @@ class _EditAddressState extends State<EditAddressdesk> {
   late TextEditingController _line1AddController;
   late TextEditingController _line2AddController;
   late TextEditingController _cityController;
+
+  //focusnode
+  final FocusNode _dropdown = FocusNode();
+  final FocusNode _ccntact = FocusNode();
+  final FocusNode _cemail = FocusNode();
+  final FocusNode _cline1 = FocusNode();
+  final FocusNode _cline2 = FocusNode();
+  final FocusNode _city = FocusNode();
+  final FocusNode _enter = FocusNode();
   late String?
       _selectedLocation; // Changed from TextEditingController to String
   List<String> _locations = [
@@ -122,15 +131,16 @@ class _EditAddressState extends State<EditAddressdesk> {
                       )
                     ],
                   ),
-                  TextFieldAddress("Company Name", TextInputType.text,
-                      _nameController, context, (value) {
+                  TextFieldAddress(hintText: "Company Name", keyboardType: TextInputType.text,
+                     controller:  _nameController, context: context,
+                     focunodenext:_ccntact ,focunode:FocusNode() ,validator:  (value) {
                     if (value == null || value.isEmpty) {
                       return '*This field cannot be empty';
                     }
                     return null;
                   }),
-                  TextFieldAddress("Contact Number", TextInputType.phone,
-                      _ctctController, context, (value) {
+                  TextFieldAddress(hintText: "Contact Number",keyboardType:  TextInputType.phone,
+                      controller: _ctctController,context:  context,focunodenext: _cemail,focunode: _ccntact,validator:  (value) {
                     if (value == null || value.isEmpty) {
                       return 'This field cannot be empty';
                     }
@@ -140,8 +150,8 @@ class _EditAddressState extends State<EditAddressdesk> {
                     return null;
                   }),
                   TextFieldAddress(
-                      "Email", TextInputType.text, _emailController, context,
-                      (value) {
+                      hintText: "Email",focunodenext: _cline1,focunode: _cemail,keyboardType:  TextInputType.text,controller:  _emailController, context:  context,
+                      validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'This field cannot be empty';
                     }
@@ -150,15 +160,17 @@ class _EditAddressState extends State<EditAddressdesk> {
                     }
                     return null;
                   }),
-                  TextFieldAddress("Street Address", TextInputType.text,
-                      _line1AddController, context, (value) {
+                  TextFieldAddress(hintText: "Street Address",keyboardType:  TextInputType.text,
+                     controller:   _line1AddController,context:  context, focunodenext: _cline2,focunode: _cline1,validator:  (value) {
                     if (value == null || value.isEmpty) {
                       return '*This field cannot be empty';
                     }
                     return null;
                   }),
-                  TextFieldAddress("Street Address line 2", TextInputType.text,
-                      _line2AddController, context, (value) {
+                  TextFieldAddress(hintText: "Street Address line 2",
+                  keyboardType:  TextInputType.text,
+                      controller: _line2AddController,context:  context,
+                        focunodenext: _dropdown,focunode: _cline2,validator:  (value) {
                     if (value == null || value.isEmpty) {
                       return '*This field cannot be empty';
                     }
@@ -166,6 +178,7 @@ class _EditAddressState extends State<EditAddressdesk> {
                   }),
                   Gap(10),
                   DropdownButton(
+                    focusNode: _dropdown,
                     hint: Text(
                         'Please choose a location'), // Not necessary for Option 1
                     value: _selectedLocation,
@@ -173,6 +186,7 @@ class _EditAddressState extends State<EditAddressdesk> {
                       setState(() {
                         _selectedLocation = newValue;
                       });
+                      FocusScope.of(context).requestFocus(_city);
                     },
                     items: _locations.map((location) {
                       return DropdownMenuItem(
@@ -183,8 +197,10 @@ class _EditAddressState extends State<EditAddressdesk> {
                   ),
                   Gap(10),
                   TextFieldAddress(
-                      "City", TextInputType.text, _cityController, context,
-                      (value) {
+                      hintText: "City", keyboardType:  TextInputType.text,
+                      focunode: _city,focunodenext: _enter,
+                      controller:  _cityController,context:  context,
+                    validator:   (value) {
                     if (value == null || value.isEmpty) {
                       return '*This field cannot be empty';
                     }
@@ -192,7 +208,9 @@ class _EditAddressState extends State<EditAddressdesk> {
                   }),
 
                   ElevatedButton(
+                    focusNode: _enter,
                     onPressed:
+                    
                         _saveAddress, // Call the method to save the address
                     child: Text(
                       'Save Address',

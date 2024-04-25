@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/pages/address.dart/color_change_provider.dart';
+import 'package:firebase_hex/pages/another_pages/cart_empty.dart';
 import 'package:firebase_hex/pages/details_pages/ELPS_Accessories_details.dart';
 import 'package:firebase_hex/pages/details_pages/ELPS_details.dart';
 import 'package:firebase_hex/pages/details_pages/Sbcpa_details.dart';
@@ -108,6 +109,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => AppBarMain(body: DesktopLanding()),
+          '/cartempty': (context) => AppBarMain(body: CartEmptyPage()),
 
           '/cart': (context) => AppBarMain(
                 body: const CartPage(),

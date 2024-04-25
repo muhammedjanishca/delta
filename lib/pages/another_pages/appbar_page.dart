@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_hex/pages/another_pages/cart.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/product_pages/Cjtkc.dart';
 import 'package:firebase_hex/pages/product_pages/Sbcpa.dart';
@@ -157,7 +158,7 @@ double Width = screenWidth <950?MediaQuery.of(context).size.width / 4.5 :  Media
                       InkWell(
                         onTap: () {
                           user != null
-                              ? Navigator.pushNamed(context, '/cart')
+                              ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
                               : showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -726,7 +727,7 @@ class MobileAppBar extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       user != null
-                          ? Navigator.pushNamed(context, '/cart')
+                          ?(cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
                           : showDialog(
                               context: context,
                               builder: (BuildContext context) {

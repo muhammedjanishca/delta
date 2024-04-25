@@ -28,7 +28,17 @@ class _TextAddressState extends State<TextAddress> {
   final line1AddController = TextEditingController();
   final line2AddController = TextEditingController();
   final cityController = TextEditingController();
-  // final Controller = TextEditingController();
+  
+  final FocusNode _dropdown = FocusNode();
+  final FocusNode _ccntact = FocusNode();
+  final FocusNode _cemail = FocusNode();
+  final FocusNode _cline1 = FocusNode();
+  final FocusNode _cline2 = FocusNode();
+  final FocusNode _city = FocusNode();
+  final FocusNode _enter = FocusNode();
+  
+
+
   var addressDetails = {};
   var fetchedAddressDetails = [];
   TextEditingController stateController = TextEditingController();
@@ -84,32 +94,36 @@ class _TextAddressState extends State<TextAddress> {
                           )
                         ],
                       ),
-                      TextFieldAddress("Company Name", TextInputType.text,
-                          nameController, context, (value) {
+                      TextFieldAddress(hintText: "Company Name",keyboardType:  TextInputType.text,
+                         controller:  nameController,focunodenext: _ccntact,
+                         context:  context, validator: (value) {
                         if (value == null || value.isEmpty) {
                           return '*This field cannot be empty';
                         }
                         return null;
                       }),
-                      TextFieldAddress("Contact Number", TextInputType.phone,
-                          ctctController, context, (value) {
+                      TextFieldAddress(hintText: "Contact Number", keyboardType: TextInputType.phone,focunode:_ccntact ,
+                          controller: ctctController,focunodenext:_cemail , context: context, validator: (value) {
                         if (value == null || value.isEmpty) {
-                                  return 'This field cannot be empty';
-                                }
-                                if (!isValidPhoneNumber(value)) {
-                                  return 'Please enter the valid phone number';
-                                }
-                                return null;
+                          return 'This field cannot be empty';
+                        }
+                        if (!isValidPhoneNumber(value)) {
+                          return 'Please enter the valid phone number';
+                        }
+                        return null;
                       }),
-                      TextFieldAddress("Email", TextInputType.text,
-                          emailController, context, (value) {
+                      TextFieldAddress(
+                          hintText: "Email",keyboardType:  TextInputType.text,
+                          focunode:_cemail,focunodenext: _cline1,
+                          controller:emailController,context:  context,
+                         validator:  (value) {
                         if (value == null || value.isEmpty) {
-                                  return 'This field cannot be empty';
-                                }
-                                if (!isValidEmail(value)) {
-                                  return 'Please enter the valid email Id';
-                                }
-                                return null;
+                          return 'This field cannot be empty';
+                        }
+                        if (!isValidEmail(value)) {
+                          return 'Please enter the valid email Id';
+                        }
+                        return null;
                       }),
                       Gap(25),
                       Row(
@@ -122,96 +136,103 @@ class _TextAddressState extends State<TextAddress> {
                           ),
                         ],
                       ),
-                      TextFieldAddress("Street Address", TextInputType.text,
-                          line1AddController, context, (value) {
+                      TextFieldAddress(hintText: "Street Address", keyboardType: TextInputType.text,
+                          controller: line1AddController,context:  context,focunode: _cline1,focunodenext: _cline2, validator: (value) {
                         if (value == null || value.isEmpty) {
                           return '*This field cannot be empty';
                         }
                         return null;
                       }),
                       TextFieldAddress(
-                          "Street Address line 2",
-                          TextInputType.text,
-                          line2AddController,
-                          context, (value) {
+                          hintText: "Street Address line 2",
+                          keyboardType: TextInputType.text,
+                          controller: line2AddController,
+                         context:  context,focunode: _cline2,focunodenext: _dropdown,
+                         validator:  (value) {
                         if (value == null || value.isEmpty) {
                           return '*This field cannot be empty';
                         }
                         return null;
                       }),
-                      Gap(10),
-                      DropdownButton(
-                        hint: Text(
-                            'Please choose a location'), // Not necessary for Option 1
-                        value: selectedLocation,
-                        onChanged: (newValue) {
-                          setState(() {
-                            selectedLocation = newValue;
-                          });
-                        },
-                        items: _locations.map((location) {
-                          return DropdownMenuItem(
-                            child: new Text(location),
-                            value: location,
-                          );
-                        }).toList(),
-                      ),
-                      TextFieldAddress(
-                          "City", TextInputType.text, cityController, context,
-                          (value) {
-                        if (value == null || value.isEmpty) {
-                          return '*This field cannot be empty';
-                        }
-                        return null;
-                      }),
-                      Gap(25),
-                      ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddressShowPage()));
-                            // addressDetails['Name'] = nameController.text;
-                            addressDetails['Company Name'] =
-                                nameController.text;
-                            addressDetails['Contact Number'] =
-                                ctctController.text;
-                                addressDetails['Email'] =
-                                emailController.text;
-                            addressDetails['Street Address'] =
-                                line1AddController.text;
-                            addressDetails['Street Address line 2'] =
-                                line2AddController.text;
-                            addressDetails['City'] = cityController.text;
-                            addressDetails['Location'] = selectedLocation;
-
-                            var details = await FirebaseFirestore.instance
-                                .collection("users")
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .get();
-                            fetchedAddressDetails = details["address"];
-                            fetchedAddressDetails
-                                .add(jsonEncode(addressDetails));
-
-                            await FirebaseFirestore.instance
-                                .collection('users')
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .update({'address': fetchedAddressDetails});
+                        Gap(10),
+                        DropdownButton(
+                          
+                          focusNode: _dropdown,
+                          
+                          hint: Text(
+                              'Please choose a location'), // Not necessary for Option 1
+                          value: selectedLocation,
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedLocation = newValue;
+                            });
+                             FocusScope.of(context).requestFocus(_city);
+                          },
+                          items: _locations.map((location) {
+                            return DropdownMenuItem(
+                              child: new Text(location),
+                              value: location,
+                            );
+                          }).toList(),
+                        ),
+                        TextFieldAddress(hintText: 
+                            "City",keyboardType:  TextInputType.text,controller:  cityController,
+                            context:  context,focunodenext:_enter ,
+                            focunode: _city,
+                           validator:  (value) {
+                          if (value == null || value.isEmpty) {
+                            return '*This field cannot be empty';
                           }
-                        },
-                        child: Text(
-                          'ADD ADDRESS',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            colorTwo
+                          return null;
+                        }),
+                        Gap(25),
+                        ElevatedButton(
+                          focusNode: _enter,
+                          onPressed: () async {
+                             FocusScope.of(context).requestFocus();
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddressShowPage()));
+                              // addressDetails['Name'] = nameController.text;
+                              addressDetails['Company Name'] =
+                                  nameController.text;
+                              addressDetails['Contact Number'] =
+                                  ctctController.text;
+                              addressDetails['Email'] = emailController.text;
+                              addressDetails['Street Address'] =
+                                  line1AddController.text;
+                              addressDetails['Street Address line 2'] =
+                                  line2AddController.text;
+                              addressDetails['City'] = cityController.text;
+                              addressDetails['Location'] = selectedLocation;
+
+                              var details = await FirebaseFirestore.instance
+                                  .collection("users")
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .get();
+                              fetchedAddressDetails = details["address"];
+                              fetchedAddressDetails
+                                  .add(jsonEncode(addressDetails));
+
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .update({'address': fetchedAddressDetails});
+                            }
+                          },
+                          child: Text(
+                            'ADD ADDRESS',
+                            style: TextStyle(color: Colors.white),
                           ),
-                          minimumSize:
-                              MaterialStateProperty.all(Size(1500, 50)),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(colorTwo),
+                            minimumSize:
+                                MaterialStateProperty.all(Size(500, 50)),
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -246,32 +267,36 @@ class _TextAddressState extends State<TextAddress> {
                             )
                           ],
                         ),
-                        TextFieldAddress("Company Name", TextInputType.text,
-                            nameController, context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
-                        TextFieldAddress("Contact Number", TextInputType.phone,
-                          ctctController, context, (value) {
+                       TextFieldAddress(hintText: "Company Name",keyboardType:  TextInputType.text,
+                         controller:  nameController,focunodenext: _ccntact,
+                         context:  context, validator: (value) {
                         if (value == null || value.isEmpty) {
-                                  return 'This field cannot be empty';
-                                }
-                                if (!isValidPhoneNumber(value)) {
-                                  return 'Please enter the valid phone number';
-                                }
-                                return null;
+                          return '*This field cannot be empty';
+                        }
+                        return null;
                       }),
-                      TextFieldAddress("Email", TextInputType.text,
-                          emailController, context, (value) {
+                      TextFieldAddress(hintText: "Contact Number", keyboardType: TextInputType.phone,focunode:_ccntact ,
+                          controller: ctctController,focunodenext:_cemail , context: context, validator: (value) {
                         if (value == null || value.isEmpty) {
-                                  return 'This field cannot be empty';
-                                }
-                                if (!isValidEmail(value)) {
-                                  return 'Please enter the valid email Id';
-                                }
-                                return null;
+                          return 'This field cannot be empty';
+                        }
+                        if (!isValidPhoneNumber(value)) {
+                          return 'Please enter the valid phone number';
+                        }
+                        return null;
+                      }),
+                      TextFieldAddress(
+                          hintText: "Email",keyboardType:  TextInputType.text,
+                          focunode:_cemail,focunodenext: _cline1,
+                          controller:emailController,context:  context,
+                         validator:  (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'This field cannot be empty';
+                        }
+                        if (!isValidEmail(value)) {
+                          return 'Please enter the valid email Id';
+                        }
+                        return null;
                       }),
                         Gap(25),
                         Row(
@@ -284,25 +309,28 @@ class _TextAddressState extends State<TextAddress> {
                             ),
                           ],
                         ),
-                        TextFieldAddress("Street Address", TextInputType.text,
-                            line1AddController, context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
-                        TextFieldAddress(
-                            "Street Address line 2",
-                            TextInputType.text,
-                            line2AddController,
-                            context, (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*This field cannot be empty';
-                          }
-                          return null;
-                        }),
+                        TextFieldAddress(hintText: "Street Address", keyboardType: TextInputType.text,
+                          controller: line1AddController,context:  context,focunode: _cline1,focunodenext: _cline2, validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '*This field cannot be empty';
+                        }
+                        return null;
+                      }),
+                      TextFieldAddress(
+                          hintText: "Street Address line 2",
+                          keyboardType: TextInputType.text,
+                          controller: line2AddController,
+                         context:  context,focunode: _cline2,focunodenext: _dropdown,validator:  (value) {
+                        if (value == null || value.isEmpty) {
+                          return '*This field cannot be empty';
+                        }
+                        return null;
+                      }),
                         Gap(10),
                         DropdownButton(
+                          
+                          focusNode: _dropdown,
+                          
                           hint: Text(
                               'Please choose a location'), // Not necessary for Option 1
                           value: selectedLocation,
@@ -310,6 +338,7 @@ class _TextAddressState extends State<TextAddress> {
                             setState(() {
                               selectedLocation = newValue;
                             });
+                             FocusScope.of(context).requestFocus(_city);
                           },
                           items: _locations.map((location) {
                             return DropdownMenuItem(
@@ -318,9 +347,11 @@ class _TextAddressState extends State<TextAddress> {
                             );
                           }).toList(),
                         ),
-                        TextFieldAddress(
-                            "City", TextInputType.text, cityController, context,
-                            (value) {
+                        TextFieldAddress(hintText: 
+                            "City",keyboardType:  TextInputType.text,controller:  cityController,
+                            context:  context,focunodenext:_enter ,
+                            focunode: _city,
+                           validator:  (value) {
                           if (value == null || value.isEmpty) {
                             return '*This field cannot be empty';
                           }
@@ -328,7 +359,9 @@ class _TextAddressState extends State<TextAddress> {
                         }),
                         Gap(25),
                         ElevatedButton(
+                          focusNode: _enter,
                           onPressed: () async {
+                             FocusScope.of(context).requestFocus();
                             if (_formKey.currentState!.validate()) {
                               Navigator.push(
                                   context,
@@ -339,8 +372,7 @@ class _TextAddressState extends State<TextAddress> {
                                   nameController.text;
                               addressDetails['Contact Number'] =
                                   ctctController.text;
-                                   addressDetails['Email'] =
-                                  emailController.text;
+                              addressDetails['Email'] = emailController.text;
                               addressDetails['Street Address'] =
                                   line1AddController.text;
                               addressDetails['Street Address line 2'] =
@@ -367,9 +399,8 @@ class _TextAddressState extends State<TextAddress> {
                             style: TextStyle(color: Colors.white),
                           ),
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              colorTwo
-                            ),
+                            backgroundColor:
+                                MaterialStateProperty.all(colorTwo),
                             minimumSize:
                                 MaterialStateProperty.all(Size(500, 50)),
                           ),
@@ -381,10 +412,9 @@ class _TextAddressState extends State<TextAddress> {
               ),
             );
           }
-        }
-        )
-        );
+        }));
   }
+
   bool isValidEmail(String email) {
     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
     return emailRegex.hasMatch(email);
@@ -398,14 +428,20 @@ class _TextAddressState extends State<TextAddress> {
 // String _selectedLocation = 'Please choose a location';
 
 Container TextFieldAddress(
-  String hintText,
-  TextInputType keyboardType,
+  {required String hintText,
+  required TextInputType keyboardType,
   controller,
+  required FocusNode focunodenext,
+  FocusNode? focunode,
   context,
-  String? Function(String?)? validator,
+  String? Function(String?)? validator,}
 ) {
   return Container(
     child: TextFormField(
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).requestFocus(focunodenext);
+      },
+      focusNode: focunode,
       controller: controller,
       keyboardType: keyboardType,
       validator: validator, // Add the validator here

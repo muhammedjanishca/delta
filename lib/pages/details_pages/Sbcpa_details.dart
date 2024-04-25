@@ -26,6 +26,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
   ProductDetailsOfSbcpa({super.key});
   String? textpass;
   String? thumbnail;
+  int cartCount = 0;
   @override
   Widget build(BuildContext context) {
     TextEditingController quantityController = TextEditingController(text: '1'); // start with initial value as 1
@@ -791,7 +792,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         user != null
-                            ? Navigator.pushNamed(context, '/cart')
+                            ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
                             : showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -1088,8 +1089,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                         ElevatedButton(
                                           onPressed: () {
                                             user != null
-                                                ? Navigator.pushNamed(
-                                                    context, '/cart')
+                                                ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
                                                 : showDialog(
                                                     context: context,
                                                     builder:

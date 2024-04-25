@@ -22,72 +22,80 @@ class BottomSheet extends StatelessWidget {
   }
 }
 
+launchWhatsApp() async {
+  final url = 'https://wa.me/+966555432866'; // Replace with your WhatsApp URL
+
+  // ignore: deprecated_member_use
+  if (await canLaunch(url)) {
+    // ignore: deprecated_member_use
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+// linked in navigator
+
+launchLinkedIn() async {
+  final url =
+      'https://www.linkedin.com/company/transdeltatrading'; // Replace with your WhatsApp URL
+
+  // ignore: deprecated_member_use
+  if (await canLaunch(url)) {
+    // ignore: deprecated_member_use
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+// faceBook  navigator
+launchFaceBook() async {
+  final url =
+      'https://www.linkedin.com/company/transdeltatrading'; // Replace with your WhatsApp URL
+
+  // ignore: deprecated_member_use
+  if (await canLaunch(url)) {
+    // ignore: deprecated_member_use
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+// instagram  navigator
+launchInstagram() async {
+  final url =
+      'https://www.linkedin.com/company/transdeltatrading'; // Replace with your WhatsApp URL
+
+  // ignore: deprecated_member_use
+  if (await canLaunch(url)) {
+    // ignore: deprecated_member_use
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+ final FocusNode _name = FocusNode();
+    final FocusNode _comName = FocusNode();
+    final FocusNode _email = FocusNode();
+    final FocusNode _msg = FocusNode();
+    final FocusNode _phone = FocusNode();
+    final FocusNode _enter = FocusNode();
+
+    final messageController = TextEditingController();
+    final companyNameController = TextEditingController();
+    final nameController = TextEditingController();
+    final emailController = TextEditingController();
+    final phoneNumberController = TextEditingController();
 class deskBottomSheett extends StatelessWidget {
   const deskBottomSheett({super.key});
-  launchWhatsApp() async {
-    final url = 'https://wa.me/+966555432866'; // Replace with your WhatsApp URL
-
-    // ignore: deprecated_member_use
-    if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-  // linked in navigator
-
-  launchLinkedIn() async {
-    final url =
-        'https://www.linkedin.com/company/transdeltatrading'; // Replace with your WhatsApp URL
-
-    // ignore: deprecated_member_use
-    if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  // faceBook  navigator
-  launchFaceBook() async {
-    final url =
-        'https://www.linkedin.com/company/transdeltatrading'; // Replace with your WhatsApp URL
-
-    // ignore: deprecated_member_use
-    if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  // instagram  navigator
-  launchInstagram() async {
-    final url =
-        'https://www.linkedin.com/company/transdeltatrading'; // Replace with your WhatsApp URL
-
-    // ignore: deprecated_member_use
-    if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     Provider.of<AuthenticationHelper>(context).getCurrentUser();
     var user = Provider.of<AuthenticationHelper>(context).user;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final messageController = TextEditingController();
-    final companyNameController = TextEditingController();
-    final nameController = TextEditingController();
-    final emailController = TextEditingController();
-    final phoneNumberController = TextEditingController();
+  
     // bool _validate = false;
     Future<void> sendEmail(String name, String email, String company,
         String phone, String message) async {
@@ -122,11 +130,11 @@ class deskBottomSheett extends StatelessWidget {
     return FittedBox(
       child: Container(
         // height: 500,
-        color:Colors.black,
+        color: Colors.black,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width / 1.9,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -178,34 +186,34 @@ class deskBottomSheett extends StatelessWidget {
                             child: Row(
                               children: [
                                 const Gap(20),
-                                 InkWell(
-                                onTap: launchFaceBook,
-                                child: SizedBox(
-                                    width: 30,
-                                    height: 30,
-                                    child: Image.network(
-                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOXBReqjlDclmsacRsAv17iUNNaedscnr3YQ&usqp=CAU')),
-                              ),
-                              const Gap(30),
-                              InkWell(
-                                onTap: launchLinkedIn,
-                                child: Container(
-                                    color: Colors.white,
-                                    width: 30,
-                                    height: 30,
-                                    child: Image.network(
-                                        'https://www.freepnglogos.com/uploads/linkedin-logo-black-png-image-21.png')),
-                              ),
-                             const Gap(30),
-                              InkWell(
-                                onTap: launchWhatsApp,
-                                child: SizedBox(
-                                    width: 30,
-                                    height: 30,
-                                    child: Image.network(
-                                        'https://www.pagetraffic.com/blog/wp-content/uploads/2022/06/white-instagram-logo-png-transparent.png')),
-                              ),
-                              const Gap(130)
+                                InkWell(
+                                  onTap: launchFaceBook,
+                                  child: SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: Image.network(
+                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOXBReqjlDclmsacRsAv17iUNNaedscnr3YQ&usqp=CAU')),
+                                ),
+                                const Gap(30),
+                                InkWell(
+                                  onTap: launchLinkedIn,
+                                  child: Container(
+                                      color: Colors.white,
+                                      width: 30,
+                                      height: 30,
+                                      child: Image.network(
+                                          'https://www.freepnglogos.com/uploads/linkedin-logo-black-png-image-21.png')),
+                                ),
+                                const Gap(30),
+                                InkWell(
+                                  onTap: launchWhatsApp,
+                                  child: SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: Image.network(
+                                          'https://www.pagetraffic.com/blog/wp-content/uploads/2022/06/white-instagram-logo-png-transparent.png')),
+                                ),
+                                const Gap(130)
                               ],
                             ),
                           ),
@@ -224,7 +232,7 @@ class deskBottomSheett extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context)  => ContactUsPage()),
+                                    builder: (context) => ContactUsPage()),
                               );
                             },
                             child: Text("Contact Us",
@@ -232,7 +240,7 @@ class deskBottomSheett extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 16,
                                 ))),
-                       const Gap(20),
+                        const Gap(20),
                         TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -246,13 +254,14 @@ class deskBottomSheett extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 16,
                                 ))),
-                                Gap(20),
-                                 TextButton(
+                        Gap(20),
+                        TextButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => TermsAndConditionsPage()),
+                                    builder: (context) =>
+                                        TermsAndConditionsPage()),
                               );
                             },
                             child: Text("Terms & Conditions",
@@ -260,7 +269,6 @@ class deskBottomSheett extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 16,
                                 ))),
-                       
                         Gap(20),
                         TextButton(
                             onPressed: () {
@@ -303,10 +311,14 @@ class deskBottomSheett extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ListTile(
-                              title:  Text('Name',
-                                  style: GoogleFonts.poppins(
-                                       color: Colors.white)),
+                              title: Text('Name',
+                                  style:
+                                      GoogleFonts.poppins(color: Colors.white)),
                               subtitle: TextFormField(
+                                focusNode: _name,
+                                onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_comName);
+                                },
                                 style: GoogleFonts.poppins(color: Colors.white),
                                 controller: nameController,
                                 validator: (value) {
@@ -315,7 +327,7 @@ class deskBottomSheett extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                decoration:  InputDecoration(
+                                decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.white, width: 0.2)),
@@ -335,20 +347,24 @@ class deskBottomSheett extends StatelessWidget {
                           ),
                           Expanded(
                             child: ListTile(
-                              title:  Text(
+                              title: Text(
                                 'Company Name',
                                 style: GoogleFonts.poppins(color: Colors.white),
                               ),
-                              subtitle:  TextFormField(
-                                style:  GoogleFonts.poppins(color: Colors.white),
+                              subtitle: TextFormField(
+                                focusNode: _comName,
+                                style: GoogleFonts.poppins(color: Colors.white),
                                 controller: companyNameController,
+                                onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_email);
+                                },
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field cannot be empty';
                                   }
                                   return null;
                                 },
-                                decoration:  InputDecoration(
+                                decoration: InputDecoration(
                                     fillColor: Colors.yellow,
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -357,21 +373,26 @@ class deskBottomSheett extends StatelessWidget {
                                         borderSide: BorderSide(
                                             color: Colors.white, width: 0.2)),
                                     hintText: '  Company Name',
-                                    hintStyle: GoogleFonts.poppins(color: Color.fromARGB(255, 227, 226, 226),
-)),
+                                    hintStyle: GoogleFonts.poppins(
+                                      color: Color.fromARGB(255, 227, 226, 226),
+                                    )),
                               ),
                             ),
                           ),
                         ],
                       ),
                       Row(
-                        children: [
+                        children: [                       
                           Expanded(
                             child: ListTile(
                               title: Text('Email',
                                   style: GoogleFonts.poppins(
                                       fontSize: 15, color: Colors.white)),
                               subtitle: TextFormField(
+                                focusNode: _email,
+                                onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_phone);
+                                },
                                 style: GoogleFonts.poppins(color: Colors.white),
                                 controller: emailController,
                                 validator: (value) {
@@ -383,7 +404,7 @@ class deskBottomSheett extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                decoration:  InputDecoration(
+                                decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.white, width: 0.2)),
@@ -392,8 +413,7 @@ class deskBottomSheett extends StatelessWidget {
                                           color: Colors.white, width: 0.2)),
                                   hintText: '  Email',
                                   hintStyle: GoogleFonts.poppins(
-                                  color: Color.fromARGB(255, 227, 226, 226),
-
+                                    color: Color.fromARGB(255, 227, 226, 226),
                                   ),
                                 ),
                               ),
@@ -404,14 +424,18 @@ class deskBottomSheett extends StatelessWidget {
                           ),
                           Expanded(
                             child: ListTile(
-                              title:  Text(
+                              title: Text(
                                 'Phone Number',
                                 style: GoogleFonts.poppins(
                                     fontSize: 15, color: Colors.white),
                               ),
                               subtitle: TextFormField(
+                                focusNode: _phone,
                                 style: GoogleFonts.poppins(color: Colors.white),
                                 controller: phoneNumberController,
+                                onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_msg);
+                                },
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'This field cannot be empty';
@@ -424,13 +448,14 @@ class deskBottomSheett extends StatelessWidget {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Colors.white, width:0.2)),
+                                            color: Colors.white, width: 0.2)),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.white, width: 0.2)),
                                     hintText: '  Phone',
-                                    hintStyle: GoogleFonts.poppins(color: Color.fromARGB(255, 227, 226, 226),
-)),
+                                    hintStyle: GoogleFonts.poppins(
+                                      color: Color.fromARGB(255, 227, 226, 226),
+                                    )),
                               ),
                             ),
                           ),
@@ -442,17 +467,24 @@ class deskBottomSheett extends StatelessWidget {
                       ListTile(
                         title: Text(
                           'Message',
-                          style: GoogleFonts.poppins(fontSize: 15, color: Colors.white),
+                          style: GoogleFonts.poppins(
+                              fontSize: 15, color: Colors.white),
                         ),
                         subtitle: TextFormField(
+                          focusNode: _msg,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).requestFocus(_enter);
+                          },
                           controller: messageController,
                           keyboardType: TextInputType.multiline,
                           style: GoogleFonts.poppins(color: Colors.white),
                           maxLines: 5,
+                          
                           decoration: InputDecoration(
                               hintText: "Message",
-                              hintStyle: GoogleFonts.poppins(color: Color.fromARGB(255, 227, 226, 226),
-),
+                              hintStyle: GoogleFonts.poppins(
+                                color: Color.fromARGB(255, 227, 226, 226),
+                              ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Colors.white,
@@ -462,6 +494,7 @@ class deskBottomSheett extends StatelessWidget {
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Colors.white, width: 0.2))),
+                          
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return '*This field cannot be empty';
@@ -477,6 +510,7 @@ class deskBottomSheett extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 15),
                         child: ElevatedButton(
+                          focusNode: _enter,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               sendEmail(
@@ -564,11 +598,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final messageController = TextEditingController();
-    final companyNameController = TextEditingController();
-    final nameController = TextEditingController();
-    final emailController = TextEditingController();
-    final phoneNumberController = TextEditingController();
+    
 
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
@@ -625,31 +655,51 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Abdullah Shaher Alsulami Est.",
-                      style: GoogleFonts.oswald(
-                        textStyle: TextStyle(
-                          color: Color.fromARGB(255, 251, 236, 221),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )),
-                  Text(
-                    "Trans Delta Trading",
-                    style: GoogleFonts.barlow(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
+                  SizedBox(
+                    width: 180,
+                    child: Image.network(
+                        'https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-04.png'),
+                  ),
+                  Gap(10),
+                  FittedBox(
+                    child: SizedBox(
+                      // color: colorTwo,
+                      child: Row(
+                        children: [
+                          const Gap(10),
+                          InkWell(
+                            onTap: launchFaceBook,
+                            child: SizedBox(
+                                width: 25,
+                                height: 25,
+                                child: Image.network(
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOXBReqjlDclmsacRsAv17iUNNaedscnr3YQ&usqp=CAU')),
+                          ),
+                          const Gap(30),
+                          InkWell(
+                            onTap: launchLinkedIn,
+                            child: Container(
+                                color: Colors.white,
+                                width: 25,
+                                height: 25,
+                                child: Image.network(
+                                    'https://www.freepnglogos.com/uploads/linkedin-logo-black-png-image-21.png')),
+                          ),
+                          const Gap(30),
+                          InkWell(
+                            onTap: launchWhatsApp,
+                            child: SizedBox(
+                                width: 25,
+                                height: 25,
+                                child: Image.network(
+                                    'https://www.pagetraffic.com/blog/wp-content/uploads/2022/06/white-instagram-logo-png-transparent.png')),
+                          ),
+                          const Gap(130)
+                        ],
                       ),
                     ),
                   ),
-                  Text(
-                    'TRADING, CONTRACTING, ELECRICAL MATERIALS & MECHANICAL SUPPLIES',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15),
-                  ),
+
                   Gap(25),
                   TextButton(
                       onPressed: () {
@@ -660,11 +710,11 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         );
                       },
                       child: Text("Contact Us",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontSize: 16,
                           ))),
-                  Gap(10),
+                  const Gap(10),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -674,24 +724,38 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         );
                       },
                       child: Text("About Us",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontSize: 16,
                           ))),
-                  Gap(10),
+                  const Gap(10),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ContactUsPage()),
+                              builder: (context) => TermsAndConditionsPage()),
                         );
                       },
-                      child: Text("Tel +966 55 543 2866",
-                          style: TextStyle(
+                      child: Text("Terms & Conditions",
+                          style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontSize: 16,
                           ))),
+                  const Gap(10),
+                  // TextButton(
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => ContactUsPage()),
+                  //       );
+                  //     },
+                  //     child: const Text("Tel +966 55 543 2866",
+                  //         style: TextStyle(
+                  //           color: Colors.white,
+                  //           fontSize: 16,
+                  //         ))),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -701,7 +765,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         );
                       },
                       child: Text("sales@transdeltatrading.com",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontSize: 16,
                           )))
@@ -735,13 +799,17 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         Expanded(
                           child: ListTile(
                             title: Text('Name',
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 15,
                                   color: Colors.white,
                                 )),
                             subtitle: TextFormField(
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 13),
+                               focusNode:_name,
+                                onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_comName);
+                                },
+                              style: GoogleFonts.poppins(
+                                  color: Colors.white, fontSize: 13),
                               controller: nameController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -752,31 +820,35 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
+                                        color: Colors.white, width: 0.2)),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
+                                        color: Colors.white, width: 0.2)),
                                 hintText: '  Name',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
+                                hintStyle: GoogleFonts.poppins(
+                                  color: Color.fromARGB(255, 227, 226, 226),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 5,
-                        ),
+                        // SizedBox(
+                        //   width: 2,
+                        // ),
                         Expanded(
                           child: ListTile(
                             title: Text(
                               'Company Name',
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15, color: Colors.white),
                             ),
                             subtitle: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              focusNode: _comName,
+                              style: GoogleFonts.poppins(color: Colors.white),
                               controller: companyNameController,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_email);
+                                },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'This field cannot be empty';
@@ -784,19 +856,21 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                 return null; // Return null if the input is valid
                               },
                               decoration: InputDecoration(
-                                  fillColor: Colors.yellow,
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 2)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 2)),
-                                  hintText: '  Company Name',
-                                  hintStyle: TextStyle(
-                                      color: Colors.white, fontSize: 13)),
+                                fillColor: Colors.yellow,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 0.2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 0.2)),
+                                hintText: '  Company Name',
+                                hintStyle: GoogleFonts.poppins(
+                                    color: Color.fromARGB(255, 227, 226, 226),
+                                    fontSize: 12),
+                              ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                     SizedBox(
@@ -807,10 +881,14 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         Expanded(
                           child: ListTile(
                             title: Text('Email',
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                     fontSize: 15, color: Colors.white)),
                             subtitle: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              focusNode: _email,
+                              onFieldSubmitted: (value) {
+                                FocusScope.of(context).requestFocus(_phone);
+                              },
+                              style: GoogleFonts.poppins(color: Colors.white),
                               controller: emailController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -822,16 +900,16 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
-                                hintText: '  Email',
-                                hintStyle: TextStyle(
-                                    color: Colors.white, fontSize: 13),
-                              ),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.2)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.2)),
+                                  hintText: '  Email',
+                                  hintStyle: GoogleFonts.poppins(
+                                      color: Color.fromARGB(255, 227, 226, 226),
+                                      fontSize: 12)),
                             ),
                           ),
                         ),
@@ -842,12 +920,16 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                           child: ListTile(
                             title: Text(
                               'Phone Number',
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15, color: Colors.white),
                             ),
                             subtitle: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              focusNode: _phone,
+                              style: GoogleFonts.poppins(color: Colors.white),
                               controller: phoneNumberController,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_msg);
+                                },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'This field cannot be empty';
@@ -860,13 +942,13 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.white, width: 2)),
+                                          color: Colors.white, width: 0.2)),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.white, width: 2)),
+                                          color: Colors.white, width: 0.2)),
                                   hintText: '  +966 55 543 2866',
-                                  hintStyle: TextStyle(
-                                      color: Colors.white, fontSize: 13)),
+                                  hintStyle: GoogleFonts.poppins(
+                                      color: Colors.white, fontSize: 12)),
                             ),
                           ),
                         ),
@@ -878,25 +960,31 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                     ListTile(
                       title: Text(
                         'Message',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
+                        style: GoogleFonts.poppins(
+                            fontSize: 15, color: Colors.white),
                       ),
                       subtitle: TextFormField(
+                        focusNode: _msg,
                         controller: messageController,
+                         onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_enter);
+                                },
                         keyboardType: TextInputType.multiline,
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.poppins(color: Colors.white),
                         maxLines: 5,
                         decoration: InputDecoration(
                             hintText: "Message",
-                            hintStyle: TextStyle(color: Colors.white),
+                            hintStyle: GoogleFonts.poppins(
+                                color: Colors.white, fontSize: 13),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.white,
-                                width: 2.0,
+                                width: 0.2,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2))),
+                                borderSide: BorderSide(
+                                    color: Colors.white, width: 0.2))),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return '*This field cannot be empty';
@@ -911,6 +999,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: ElevatedButton(
+                        focusNode: _enter,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             sendEmail(

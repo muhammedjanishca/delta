@@ -37,11 +37,7 @@ class TermsAndConditionsPage extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 10),
-            Text('5. Intellectual Property', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text(
-              'All intellectual properties, including trademarks, designs, and patents, are owned by or licensed to us. No content from this site may be copied, reproduced, or replicated without our permission.',
-              style: TextStyle(fontSize: 16),
-            ),
+           
           ],
         ),
       ),

@@ -25,6 +25,7 @@ class ProductDetailsOfTools extends StatelessWidget {
   String? textpass;
 
   bool check_pr_code = false;
+  int cartCount = 0;
 
   String? thumbnail;
 
@@ -877,8 +878,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                                       ElevatedButton(
                                         onPressed: () {
                                           user != null
-                                              ? Navigator.pushNamed(
-                                                  context, '/cart')
+                                              ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
                                               : showDialog(
                                                   context: context,
                                                   builder:

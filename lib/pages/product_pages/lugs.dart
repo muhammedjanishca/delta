@@ -59,7 +59,7 @@ class LugsPage extends StatelessWidget {
                 //   child:Image.asset('https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/lugs+Canva.png')
                 //   //  custCarosal(context, sliderLugs, Index),
                 // ),
-                Container(
+                SizedBox(
                   child:Image.network('https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/lugs+Canva.png') ,
                 ),
                 SizedBox(

@@ -12,8 +12,10 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final emailTextController = TextEditingController();
-
   final passwordTextController = TextEditingController();
+  final FocusNode _name = FocusNode();
+  final FocusNode _password = FocusNode();
+  final FocusNode _login = FocusNode(); 
 
   // bool isLoading = false;
   @override
@@ -47,11 +49,18 @@ class LoginPage extends StatelessWidget {
                       await value.signInWithGoogle(context);
                       value.changeIsLoadingGIn();
                     },
+                    style: ButtonStyle(
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            side:
+                                BorderSide(width: 0.50, color: Colors.black26),
+                            borderRadius: BorderRadius.circular(1))),
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.white)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: value.isLoadingGIn
                           ? [
-                              SizedBox(
+                              const SizedBox(
                                   width: 25,
                                   height: 25,
                                   child: CircularProgressIndicator(
@@ -71,20 +80,17 @@ class LoginPage extends StatelessWidget {
                               ),
                             ],
                     ),
-                    style: ButtonStyle(
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            side:
-                                BorderSide(width: 0.50, color: Colors.black26),
-                            borderRadius: BorderRadius.circular(1))),
-                        backgroundColor:
-                            MaterialStatePropertyAll(Colors.white)),
                   ),
                 ),
                 Text("or"),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: TextFormField(
+                    focusNode:_name ,
                     controller: emailTextController,
+                     onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_password);
+                                },
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
@@ -101,8 +107,12 @@ class LoginPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 24.0),
                   child: TextFormField(
+                    focusNode: _password,
                     obscureText: !value.showPassword,
                     controller: passwordTextController,
+                     onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_login);
+                                },
                     decoration: InputDecoration(
                         suffixIcon: IconButton(
                             padding: EdgeInsets.only(right: 16),
@@ -134,7 +144,9 @@ class LoginPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 1.1,
                     height: 56,
                     child: TextButton(
+                      focusNode: _login,
                       onPressed: () async {
+                        
                         if (emailTextController.text.isEmpty ||
                             passwordTextController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -148,6 +160,7 @@ class LoginPage extends StatelessWidget {
                           value.changeIsLoading();
                         }
                         Navigator.pushNamed(context, '/');
+                        
                       },
                       child: value.isLoading
                           ? SizedBox(

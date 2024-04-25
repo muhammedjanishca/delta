@@ -2,6 +2,7 @@ import 'package:firebase_hex/main.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
 import 'package:firebase_hex/search_api.dart';
 import 'package:firebase_hex/widgets/style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,11 +29,16 @@ Widget searchBox(BuildContext context) {
                   color: const Color.fromARGB(255, 136, 136, 136),
                   fontSize: 14,
                 ),
+                 prefixIcon: Icon(
+                      CupertinoIcons.search,
+                      color: Theme.of(context).dividerColor,
+                      size: 20
+                    ),
                 border: InputBorder.none,
                 contentPadding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                suffixIcon: const Icon(Icons.search,
-                    color: Color.fromARGB(255, 170, 169, 169)),
+                     EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                // suffixIcon:  Icon(Icons.search,
+                //     color: Theme.of(context).dividerColor,),
               ),
             ),
             suggestionsCallback: (query) async {

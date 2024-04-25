@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:js';
-import 'package:firebase_hex/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +6,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../../widgets/style.dart';

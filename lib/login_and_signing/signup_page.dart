@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/pages/another_pages/IRSH.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
@@ -7,11 +6,9 @@ import 'package:firebase_hex/responsive/signup.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import '../provider/Text_color.dart';
 import 'email_otp.dart';
 import 'mail_verification.dart';
 
@@ -27,15 +24,21 @@ class SignUpPage extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
-class DeskSignUp extends StatelessWidget {
-  DeskSignUp({super.key});
 
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final nameTextController = TextEditingController();
   final mobileNumTextController = TextEditingController(text: "+966");
   final otpTextController = TextEditingController();
+  final FocusNode _name = FocusNode();
+  final FocusNode _email = FocusNode();
+  final FocusNode _password = FocusNode();
+  final FocusNode _enter = FocusNode();
+  final FocusNode _checkBox = FocusNode();
+// ignore: must_be_immutable
+class DeskSignUp extends StatelessWidget {
+  DeskSignUp({super.key});
+
 
   String? verificationId;
   EmailOTP emailOtpAuth = EmailOTP();
@@ -110,7 +113,11 @@ class DeskSignUp extends StatelessWidget {
                                       MediaQuery.of(context).size.height / 45,
                                 ),
                                 TextFormField(
+                                  focusNode: _name,
                                   controller: nameTextController,
+                                   onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_email);
+                                },
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -134,7 +141,11 @@ class DeskSignUp extends StatelessWidget {
                                       MediaQuery.of(context).size.height / 45,
                                 ),
                                 TextFormField(
+                                  focusNode: _email,
                                   controller: emailTextController,
+                                   onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_password);
+                                },
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -158,8 +169,12 @@ class DeskSignUp extends StatelessWidget {
                                       MediaQuery.of(context).size.height / 45,
                                 ),
                                 TextFormField(
+                                  focusNode: _password,
                                   obscureText: !value.showPassword,
                                   controller: passwordTextController,
+                                   onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_checkBox);
+                                },
                                   decoration: InputDecoration(
                                       suffixIcon: IconButton(
                                           padding: EdgeInsets.only(right: 16),
@@ -198,6 +213,7 @@ class DeskSignUp extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Checkbox(
+                                      focusNode: _checkBox,
                                         focusColor:
                                             Color.fromARGB(255, 76, 138, 131),
                                         overlayColor: MaterialStatePropertyAll(
@@ -206,6 +222,7 @@ class DeskSignUp extends StatelessWidget {
                                         value: value.isChecked,
                                         onChanged: (value1) {
                                           value.changeIsChecked();
+                                           FocusScope.of(context).requestFocus(_enter);
                                         }),
                                     Text(
                                       "By signing up, you agree to the Terms of Service and Privacy Policy",
@@ -227,6 +244,7 @@ class DeskSignUp extends StatelessWidget {
                                       MediaQuery.of(context).size.width / 1.1,
                                   height: 50,
                                   child: TextButton(
+                                    focusNode: _enter,
                                     onPressed: () async {
                                       if (nameTextController.text.isEmpty ||
                                           emailTextController.text.isEmpty ||
@@ -745,12 +763,6 @@ class DeskSignUp extends StatelessWidget {
 class MobileSignup extends StatelessWidget {
   MobileSignup({super.key});
 
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
-  final nameTextController = TextEditingController();
-  final mobileNumTextController = TextEditingController(text: "+966");
-  final otpTextController = TextEditingController();
-
   String? verificationId;
   EmailOTP emailOtpAuth = EmailOTP();
 
@@ -769,9 +781,7 @@ class MobileSignup extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.height / 32,
-                    // ),
+                   
                     Text(
                         "Sign Up",
                         style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),

@@ -579,70 +579,76 @@ class AddressShowMob extends StatelessWidget {
                         width: MediaQuery.of(context).size.width / 10,
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 1.2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            // Divider(),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height / 20,
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          // Divider(),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 20,
+                          ),
+                          Text(
+                            'Summary\n',
+                            style: GoogleFonts.roboto(
+                                fontSize: 23, fontWeight: FontWeight.w500),
+                          ),
+                          // SizedBox(height: 47),
+                          ListTile(
+                            title: Text(
+                              'Subtotal',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15, fontWeight: FontWeight.w400),
                             ),
-                            const Text(
-                              'Summary\n',
-                              style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.w500),
+                            trailing: Text(
+                              '\SAR ${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
                             ),
-                            // SizedBox(height: 47),
-                            ListTile(
-                              title: const Text(
-                                'Subtotal',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w400),
-                              ),
-                              trailing: Text(
-                                '\SAR${cartProvider.getTotalPrice().toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              'VAT (${vatRate}%)',
+                              style: GoogleFonts.poppins(fontSize: 14),
                             ),
-                            ListTile(
-                              title: Text('VAT (${vatRate}%)'),
-                              trailing: Text('\SAR${vat.toStringAsFixed(2)}'),
+                            trailing: Text(
+                              '\SAR ${vat.toStringAsFixed(2)}',
+                              style: GoogleFonts.poppins(fontSize: 14),
                             ),
-                            const Divider(
-                              height:
-                                  1, // Adjust the height of the divider as needed
-                              color: Color.fromARGB(255, 147, 146,
-                                  146), // Choose the color of the divider
-                              thickness:
-                                  1, // Specify the thickness of the divider line
+                          ),
+                          const Divider(
+                            height:
+                                1, // Adjust the height of the divider as needed
+                            color: Color.fromARGB(255, 147, 146,
+                                146), // Choose the color of the divider
+                            thickness:
+                                1, // Specify the thickness of the divider line
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ListTile(
+                            title: Text(
+                              'Total Price (with VAT)',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
                             ),
-                            const SizedBox(
-                              height: 10,
+                            trailing: Text(
+                              '\SAR ${totalPriceWithVAT.toStringAsFixed(2)}',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            ListTile(
-                              title: const Text(
-                                'Total Price (with VAT)',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                              trailing: Text(
-                                '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            const Divider(
-                              height:
-                                  1, // Adjust the height of the divider as needed
-                              color: Color.fromARGB(255, 147, 146,
-                                  146), // Choose the color of the divider
-                              thickness:
-                                  1, // Specify the thickness of the divider line
-                            ),
-                          ],
-                        ),
+                          ),
+                          const Divider(
+                            height:
+                                1, // Adjust the height of the divider as needed
+                            color: Color.fromARGB(255, 147, 146,
+                                146), // Choose the color of the divider
+                            thickness:
+                                1, // Specify the thickness of the divider line
+                          ),
+                        ],
                       ),
+                    ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 22,
                       ),

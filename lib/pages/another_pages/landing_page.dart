@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -34,32 +33,32 @@ class _DesktopLandingState extends State<DesktopLanding> {
   double offset = 0;
 
   List<String> imageUrls = [
-    // 'assets/image/lugs 4.jpg',
-    // 'assets/image/landing.jpg',
-    'assets/image/glands 4.png',
-    'assets/image/Al.-Compression-Cable-Lugs-As-Per-Din-46329-New-1-300x262.jpg',
-    'assets/image/crimping tools 5.jpg',
-    'assets/image/accessories 3.jpg',
-    'assets/image/x-mm-wheel-connector-dc-gear-motor-hex-coupling-for-robot-robotics-with-screws-1_2048x2048.webp',
-    // 'assets/image/glands 4.png',
-
-    // 'assets/image/crimping tools 3.jpg',
-    // 'assets/image/accessories 3.jpg',
-    // 'assets/image/connectors 2.jpg'
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(1).png',
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(5).png',
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(7).png',
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(2).png',
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(6).png',
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(4).png',
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(8).png',
+    
   ];
   List<String> textindex = [
-    'Glands',
-    'Lugs',
-    'Crimping Tool',
-    'Accessories',
-    'Connecters',
+    'PVC Coated Galvanised Flexible Conduit',
+    'hose clamps',
+    'double plate "u" clamp',
+    'crimping tool',
+    'Roller ball type stainless steel cable ties',
+    'Insulated bus bar system for mcb',
+    'Copper Bonded Grounding Rods',
   ];
   List<String> descriptionCarosal = [
-    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
-    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
-    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
-    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
-    'HEX is a manufacturer of high\nquality cable terminal ends & accessories.',
+    'Cable Support Systems\n',
+    'Cable Jointing & Termination\nKit Components',
+    'earthing & lightning protection\naccessories',
+    'view more crimping tools\n',
+    'Stainless steel cable\nties & markers',
+    'Switch Board Control\nPanel Accessories',
+    'Earthing & Lightning\nProtection',
   ];
 
   @override
@@ -82,20 +81,26 @@ class _DesktopLandingState extends State<DesktopLanding> {
   void _navigateToPage(BuildContext context, int index) {
     switch (index) {
       case 0:
-        navigateToPage(context, '/Lugs');
+        navigateToPage(context, '/cable-support-systems/');
         break;
       case 1:
-        navigateToPage(context, '/Glands');
+        navigateToPage(context, '/cable-jointing-and-termination-kit-components/');
         break;
       case 2:
-        navigateToPage(context, '/CrimpingTools');
+        navigateToPage(context, '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/');
         break;
       case 3:
-        navigateToPage(context, '/Accessories');
+        navigateToPage(context, '/crimping-tools/');
         break;
       case 4:
-        navigateToPage(context, '/Connectors');
+        navigateToPage(context, '/Stainless Steel Cable Ties & Markers');
         break;
+      case 5:
+      navigateToPage(context, '/switch-board-control-panel-accessories/');
+        break;  
+        case 5:
+      navigateToPage(context, '/earthing-lightning-protection-systems/earthing-lightning-protection/');
+        break;  
     }
   }
 
@@ -796,10 +801,9 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                  onPressed: () {
                                                                   Navigator.pushNamed(
                                                                       context,
-                                                                      '/brass-cable-gland-kits-accessories/brass-cable-glands/');
+                                                                      '/cable-support-systems/');
                                                                 },
-                                            title:
-                                                "PVC Coated Galvanised Flexible Conduit",
+                                            title: "PVC Coated Galvanised Flexible Conduit",
                                                 subtitle: "Cable Support Systems",
                                             imagePath:
                                                 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(1).png',
@@ -859,7 +863,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                
                                                 },
                                             title:
-                                                'roller ball type stainless steel cable ties',
+                                                'Roller ball type stainless steel cable ties',
                                                 subtitle: "Stainless steel cable ties & markers",
                                             imagePath:
                                                 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(6).png',
@@ -874,7 +878,7 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                                                
                                                 },
                                             title:
-                                                'insulated bus bar system for mcb',
+                                                'Insulated bus bar system for mcb',
                                                 subtitle: "Switch Board Control Panel Accessories",
                                             imagePath:
                                                 'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(4).png',
@@ -1023,22 +1027,22 @@ Gap(65),
                                               children: [
                                                 Image.asset(
                                                     'assets/image/hex-logo-new.png'),
-                                                const Gap(35),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 60.0),
-                                                  child: Text(
-                                                      "Renowed manufacturers of world class electrical and brass components",
-                                                      // "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              fontSize: 30,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700)),
-                                                  //pos rupp
-                                                )
+                                              const Gap(35),
+                                                Text(
+                          'Renowed Manufactures Of',
+                          style: GoogleFonts.raleway(
+                              fontSize: 25, fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          'World Class Electrical',
+                          style: GoogleFonts.raleway(
+                              fontSize: 25, fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          'And Brass Components',
+                          style: GoogleFonts.raleway(
+                              fontSize: 25, fontWeight: FontWeight.w500),
+                        )
                                               ],
                                             ))),
                                     Expanded(
@@ -1198,7 +1202,7 @@ Gap(65),
                 Container(
                     width: width,
                     height: height / 1.1,
-                    color: colorOne,
+                    color: Colors.white,
                     child: Column(
                       children: [
                         const Gap(35),
@@ -1213,9 +1217,10 @@ Gap(65),
                         ),
                         const Gap(25),
                         Container(
-                          color: colorOne,
+                          color: Colors.white,
                           height: 450,
                           child: PageView.builder(
+                        
                             controller: pageController,
                             itemCount: imageUrls.length,
                             itemBuilder: (context, index) {
@@ -1232,7 +1237,7 @@ Gap(65),
                                         borderRadius: BorderRadius.circular(30),
                                         child: SizedBox(
                                           height: 350,
-                                          child: Image.asset(
+                                          child: Image.network(
                                             imageUrls[index],
                                             fit: BoxFit.cover,
                                             alignment: Alignment(
@@ -1287,27 +1292,20 @@ Gap(65),
                         const Gap(25),
                         Text(
                           'Renowed Manufactures Of',
-                          // "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
                           style: GoogleFonts.raleway(
                               fontSize: 25, fontWeight: FontWeight.w500),
                         ),
                         Text(
                           'World Class Electrical',
-                          // "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
                           style: GoogleFonts.raleway(
                               fontSize: 25, fontWeight: FontWeight.w500),
                         ),
                         Text(
                           'And Brass Components',
-                          // "RENOWNED MANUFACTURERS OF WORLD CLASS ELECTRICAL AND BRASS COMPONENTS",
                           style: GoogleFonts.raleway(
                               fontSize: 25, fontWeight: FontWeight.w500),
                         )
-                        // Text(
-                        //   "\nRENOWNED MANUFACTURERS OF WORLD\nCLASS ELECTRICAL AND BRASS COMPONENTS",
-                        //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
-                        // )
-                      ],
+                         ],
                     )),
                 Container(
                     width: double.infinity,

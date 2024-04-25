@@ -52,10 +52,14 @@ class AccessoriesPage extends StatelessWidget {
 
             return ListView(
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width / 4,
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  child: custCarosal(context, sliderAccessories, Index),
+                // Container(
+                //   width: MediaQuery.of(context).size.width / 4,
+                //   height: MediaQuery.of(context).size.height / 2.5,
+                //   child: custCarosal(context, sliderAccessories, Index),
+                // ),
+                SizedBox(
+                  child:Image.network(  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/janishone+canva.png',
+) ,
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 4,
