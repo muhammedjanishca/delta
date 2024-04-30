@@ -28,7 +28,6 @@ import '../../login_and_signing/loginpage.dart';
 import '../../widgets/whatsApp.dart';
 import 'package:badges/badges.dart' as badges;
 
-
 void _handlePopupSelection(String choice) {
   // Handle the selected menu item here
   switch (choice) {
@@ -99,13 +98,14 @@ class _DesktopAppBarState extends State<DesktopAppBar> {
 
   @override
   Widget build(BuildContext context) {
-     double screenWidth = MediaQuery.of(context).size.width;
-double Width = screenWidth <950?MediaQuery.of(context).size.width / 4.5 :  MediaQuery.of(context).size.width / 6;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double Width = screenWidth < 950
+        ? MediaQuery.of(context).size.width / 4.5
+        : MediaQuery.of(context).size.width / 6;
 
     // Define your mode based on screen width
-    PlutoMenuBarMode menuBarMode = screenWidth <= 1050
-        ? PlutoMenuBarMode.tap 
-        : PlutoMenuBarMode.hover;
+    PlutoMenuBarMode menuBarMode =
+        screenWidth <= 1050 ? PlutoMenuBarMode.tap : PlutoMenuBarMode.hover;
     Provider.of<AuthenticationHelper>(context).getCurrentUser();
     var user = Provider.of<AuthenticationHelper>(context).user;
     if (user != null) {
@@ -129,7 +129,6 @@ double Width = screenWidth <950?MediaQuery.of(context).size.width / 4.5 :  Media
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                     
                       InkWell(
                         onTap: () {
                           // Navigate to the named route '/your_destination_screen'
@@ -143,61 +142,63 @@ double Width = screenWidth <950?MediaQuery.of(context).size.width / 4.5 :  Media
                         ),
                       ),
                       HoverText(),
-                     
                       SizedBox(
-                        child: Row(children: [
-                      LoginAndLogOut(),
-                      Gap(15),
-
-                      Container(
-                        height: 13,
-                        width: .5,
-                        color: Colors.black,
-                      ),
-                      Gap(15),
-                      InkWell(
-                        onTap: () {
-                          user != null
-                              ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                              : showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return LoginPage(); // Your custom dialog widget
-                                  },
-                                );
-                        },
                         child: Row(
                           children: [
-                            badges.Badge(
-                                badgeContent: Text(
-                                  cartCount.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                child: Icon(
-                                  Icons.shopping_cart_outlined,
-                                  color: Colors.black26,
-                                )),
-                            Gap(10),
-                            Text("My Cart",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    // fontSize: 16,
-                                  ),
-                                )),
+                            LoginAndLogOut(),
+                            Gap(15),
+                            Container(
+                              height: 13,
+                              width: .5,
+                              color: Colors.black,
+                            ),
+                            Gap(15),
+                            InkWell(
+                              onTap: () {
+                                user != null
+                                    ? (cartCount != 0
+                                        ? Navigator.pushNamed(context, '/cart')
+                                        : Navigator.pushNamed(
+                                            context, '/cartempty'))
+                                    : showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return LoginPage(); // Your custom dialog widget
+                                        },
+                                      );
+                              },
+                              child: Row(
+                                children: [
+                                  badges.Badge(
+                                      badgeContent: Text(
+                                        cartCount.toString(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      child: Icon(
+                                        Icons.shopping_cart_outlined,
+                                        color: Colors.black26,
+                                      )),
+                                  Gap(10),
+                                  Text("My Cart",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          // fontSize: 16,
+                                        ),
+                                      )),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                        ],),
-                      ),  ],
+                    ],
                   ),
                 ),
                 Container(
                   height: 45,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: colorTwo
-                      ),
+                  decoration: BoxDecoration(color: colorTwo),
                   child: Row(
                     children: [
                       SizedBox(
@@ -206,7 +207,7 @@ double Width = screenWidth <950?MediaQuery.of(context).size.width / 4.5 :  Media
                       SizedBox(
                         width: Width,
                         child: PlutoMenuBar(
-                          mode:menuBarMode,
+                          mode: menuBarMode,
                           menus: whiteHoverMenus,
                           backgroundColor: Colors.white,
                           itemStyle: PlutoMenuItemStyle(
@@ -221,16 +222,13 @@ double Width = screenWidth <950?MediaQuery.of(context).size.width / 4.5 :  Media
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 9.4,
                       ),
-
                       SizedBox(
                         height: 37,
                         width: MediaQuery.of(context).size.width / 3,
                         child: searchBox(context),
-                       
                       )
-                     
                     ],
-                  ),  
+                  ),
                 )
               ],
             ),
@@ -292,16 +290,14 @@ double Width = screenWidth <950?MediaQuery.of(context).size.width / 4.5 :  Media
 Widget custmobileDrawer(BuildContext context) {
   return ChangeNotifierProvider(
     create: (context) => DataProvider(),
-    
     child: Theme(
       data: ThemeData(
-      
         canvasColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.red),
-          // Set the background color of the Drawer to black
-          ),
+        // Set the background color of the Drawer to black
+      ),
       child: Drawer(
-        backgroundColor: colorTwo,
+        backgroundColor: colorOne,
         child: ListView(
           // Text("Login",
           //                             style: GoogleFonts.poppins(
@@ -315,18 +311,19 @@ Widget custmobileDrawer(BuildContext context) {
             ExpansionTile(
               // collapsedBackgroundColor: Colors.amber,
 
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
                 'Cable Terminal Ends',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  
+                  tileColor: colorTwo, // Set background color for Lugs
+
                   hoverColor: colorOne,
                   title: Text(
                     'Lugs',
@@ -342,7 +339,12 @@ Widget custmobileDrawer(BuildContext context) {
                         ));
                   },
                 ),
+                Divider(
+                  color: colorTwo,
+                  height: 1,
+                ),
                 ListTile(
+                  tileColor: colorTwo, // Set background color for Lugs
                   hoverColor: colorTwo,
                   title: Text(
                     'Connectors',
@@ -360,21 +362,26 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
               ],
             ),
-            Divider(),
+            Divider(
+              color: colorTwo,
+            ),
             ExpansionTile(
               // collapsedBackgroundColor: janishcolor,
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
                 'Brass Cable Gland Kits & Accessories',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+
+                  hoverColor: colorOne,
+
                   title: Text(
                     'Glands',
                     style: TextStyle(color: Colors.white),
@@ -389,8 +396,13 @@ Widget custmobileDrawer(BuildContext context) {
                         ));
                   },
                 ),
+                Divider(
+                  color: colorTwo,
+                  height: 1,
+                ),
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+                  hoverColor: colorTwo,
                   title: Text(
                     'Accessories',
                     style: TextStyle(color: Colors.white),
@@ -408,20 +420,24 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
               ],
             ),
-            Divider(),
+            Divider(
+              color: colorTwo,
+            ),
             ExpansionTile(
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
                 'Crimping Tool',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+
+                  hoverColor: colorOne,
                   title: Text(
                     'Crimping Tool',
                     style: TextStyle(color: Colors.white),
@@ -439,23 +455,29 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
               ],
             ),
-             Divider(),
+            Divider(
+              color: colorTwo,
+              height: 1,
+            ),
             ExpansionTile(
               // collapsedBackgroundColor: janishcolor,
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
                 'Earthing & Lightning Protection Systems',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+
+                  hoverColor: colorTwo,
                   title: Text(
-                   'Earthing & Lightning Protection',
+                    'Earthing & Lightning Protection',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
@@ -468,8 +490,13 @@ Widget custmobileDrawer(BuildContext context) {
                         ));
                   },
                 ),
+                Divider(
+                  color: colorTwo,
+                  height: 1,
+                ),
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+                  hoverColor: colorTwo,
                   title: Text(
                     'ELPS - Accessories',
                     style: TextStyle(color: Colors.white),
@@ -487,22 +514,26 @@ Widget custmobileDrawer(BuildContext context) {
                 ),
               ],
             ),
-            Divider(),
+            Divider(
+              color: colorTwo,
+            ),
             ExpansionTile(
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
                 'Switch Board / Control Panel Accessories',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+
+                  hoverColor: colorOne,
                   title: Text(
-                     'Switch Board / Control Panel Accessories',
+                    'Switch Board / Control Panel Accessories',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
@@ -511,29 +542,31 @@ Widget custmobileDrawer(BuildContext context) {
                         MaterialPageRoute(
                           builder: (context) => AppBarMain(
                               body: RefreshIndicator(
-                                  onRefresh: refresh,
-                                  child: SbcpaProduct())),
+                                  onRefresh: refresh, child: SbcpaProduct())),
                         ));
                   },
                 ),
               ],
             ),
-            Divider(),
-            ExpansionTile(
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+   Divider(
+              color: colorTwo,
+            ),            ExpansionTile(
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
-               'Stainless Steel Cable Ties & Markers',
+                'Stainless Steel Cable Ties & Markers',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+
+                  hoverColor: colorOne,
                   title: Text(
-                  'Stainless Steel Cable Ties & Markers',
+                    'Stainless Steel Cable Ties & Markers',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
@@ -542,29 +575,33 @@ Widget custmobileDrawer(BuildContext context) {
                         MaterialPageRoute(
                           builder: (context) => AppBarMain(
                               body: RefreshIndicator(
-                                  onRefresh: refresh,
-                                  child: SsctmProduct())),
+                                  onRefresh: refresh, child: SsctmProduct())),
                         ));
                   },
                 ),
               ],
             ),
-            Divider(),
+            Divider(
+              color: colorTwo,
+              height: 1,
+            ),
             ExpansionTile(
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
-            'Cable Support Systems',
+                'Cable Support Systems',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+
+                  hoverColor: colorOne,
                   title: Text(
-                     'Cable Support Systems',
+                    'Cable Support Systems',
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
@@ -573,27 +610,30 @@ Widget custmobileDrawer(BuildContext context) {
                         MaterialPageRoute(
                           builder: (context) => AppBarMain(
                               body: RefreshIndicator(
-                                  onRefresh: refresh,
-                                  child: ConduitesPage())),
+                                  onRefresh: refresh, child: ConduitesPage())),
                         ));
                   },
                 ),
               ],
             ),
-            Divider(),
+            Divider(
+              color: colorTwo,
+            ),
             ExpansionTile(
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
+              iconColor: Colors.black,
+              collapsedIconColor: Colors.black,
               title: Text(
                 'Cable Jointing & Termination Kit Components',
                 style: GoogleFonts.poppins(
                     // fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15), // Set the text color to white
               ),
               children: [
                 ListTile(
-                  hoverColor: Color.fromRGBO(249, 156, 6, 1.0),
+                  tileColor: colorTwo, // Set background color for Lugs
+
+                  hoverColor: colorOne,
                   title: Text(
                     'Cable Jointing & Termination Kit Components',
                     style: TextStyle(color: Colors.white),
@@ -604,14 +644,12 @@ Widget custmobileDrawer(BuildContext context) {
                         MaterialPageRoute(
                           builder: (context) => AppBarMain(
                               body: RefreshIndicator(
-                                  onRefresh: refresh,
-                                  child: CjtkcPage())),
+                                  onRefresh: refresh, child: CjtkcPage())),
                         ));
                   },
                 ),
               ],
             ),
-
           ],
         ),
       ),
@@ -640,7 +678,7 @@ class MobileAppBar extends StatelessWidget {
       children: [
         SafeArea(
           child: AppBar(
-             elevation: 0,
+            elevation: 0,
             backgroundColor: colorTwo,
             title: Container(
               // color: Colors.yellow,
@@ -677,57 +715,59 @@ class MobileAppBar extends StatelessWidget {
                             foregroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromARGB(255, 194, 192, 192)),
                           ),
-                          child:  Text("Login",
-                                      style: GoogleFonts.poppins(
-                                        textStyle: const TextStyle(
-                                          color: Colors.white,
-                                          // fontSize: 16,
-                                        ),
-                                      )),
-                        )
-                      :TextButton(
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: Text("Are you sure to logout?"),
-                                      // content: Text("This is my message."),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text('Cancel')),
-                                        TextButton(
-                                            onPressed: () {
-                                              FirebaseAuth.instance.signOut();
-                                              // Navigator.pop(context);
-
-                                              Navigator.pushNamed(context, '/');
-                                            },
-                                            child: Text('Yes'))
-                                      ],
-                                    );
-                                  },
-                                );
-                                // FirebaseAuth.instance.signOut();
-                              },
-                              child: Text(
-                                'Logout',
-                                style: GoogleFonts.poppins(color: Colors.white),
+                          child: Text("Login",
+                              style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  // fontSize: 16,
+                                ),
                               )),
-                              Gap(2),
-                               Container(
-                        height: 13,
-                        width: .5,
-                        color: Colors.white,
-                      ),
-                       Gap(12),
+                        )
+                      : TextButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Are you sure to logout?"),
+                                  // content: Text("This is my message."),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Cancel')),
+                                    TextButton(
+                                        onPressed: () {
+                                          FirebaseAuth.instance.signOut();
+                                          // Navigator.pop(context);
+
+                                          Navigator.pushNamed(context, '/');
+                                        },
+                                        child: Text('Yes'))
+                                  ],
+                                );
+                              },
+                            );
+                            // FirebaseAuth.instance.signOut();
+                          },
+                          child: Text(
+                            'Logout',
+                            style: GoogleFonts.poppins(color: Colors.white),
+                          )),
+                  Gap(2),
+                  Container(
+                    height: 13,
+                    width: .5,
+                    color: Colors.white,
+                  ),
+                  Gap(12),
                   GestureDetector(
                     onTap: () {
                       user != null
-                          ?(cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
+                          ? (cartCount != 0
+                              ? Navigator.pushNamed(context, '/cart')
+                              : Navigator.pushNamed(context, '/cartempty'))
                           : showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -761,8 +801,8 @@ class MobileAppBar extends StatelessWidget {
               Container(
                 height: 50,
                 child: searchBox(context),
-                ),
-                // Gap(25)
+              ),
+              // Gap(25)
             ],
           ),
         ),
