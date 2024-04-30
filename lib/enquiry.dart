@@ -37,6 +37,14 @@ class _EnquireBoxState extends State<EnquireBox> {
   final phoneController = TextEditingController();
   final companyNameContoller = TextEditingController();
   final messageController = TextEditingController();
+
+  final FocusNode _name = FocusNode();
+  final FocusNode _email = FocusNode();
+  final FocusNode _phone = FocusNode();
+  final FocusNode _msg = FocusNode();
+  final FocusNode _attach = FocusNode();
+  final FocusNode _enter = FocusNode();
+
   // bool isLoading = false;
   html.File? pickedFile;
   @override
@@ -44,11 +52,11 @@ class _EnquireBoxState extends State<EnquireBox> {
     return Consumer<AuthenticationHelper>(builder: (context, value, child) {
       return AlertDialog(
         title: Center(
-          child: Image.asset(
-            'assets/image/Yellow and Brown Modern Apparel Logo (9).png',
+          child: Image.network(
+            'https://deltabuckets.s3.ap-south-1.amazonaws.com/tdt+logos/TDT+-01.png',
             width: 170,
-            height: 60,
-            fit: BoxFit.cover,
+            height: 100,
+            // fit: BoxFit.cover,
           ),
         ),
         content: Container(
@@ -61,6 +69,10 @@ class _EnquireBoxState extends State<EnquireBox> {
                   padding: const EdgeInsets.only(top: 24.0),
                   child: TextFormField(
                     controller: companyNameContoller,
+                    focusNode: _name,
+                    onFieldSubmitted: (value) {
+                      FocusScope.of(context).requestFocus(_email);
+                    },
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
@@ -71,12 +83,16 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Company Name"),
+                        hintText: "Company Name",hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 24.0),
                   child: TextFormField(
+                    focusNode: _email,
+                    onFieldSubmitted: (value) {
+                      FocusScope.of(context).requestFocus(_phone);
+                    },
                     controller: emailTextController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -88,12 +104,16 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Email"),
+                        hintText: "Email",hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 24.0),
                   child: TextFormField(
+                    focusNode: _phone,
+                    onFieldSubmitted: (value) {
+                      FocusScope.of(context).requestFocus(_msg);
+                    },
                     controller: phoneController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -105,12 +125,16 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Phone (Optional)"),
+                        hintText: "Phone (Optional)",hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 24.0),
                   child: TextFormField(
+                    focusNode: _msg,
+                    onFieldSubmitted: (value) {
+                      FocusScope.of(context).requestFocus(_attach);
+                    },
                     controller: messageController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -122,7 +146,7 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Message (Optional)"),
+                        hintText: "Message (Optional)",hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Row(
@@ -131,8 +155,9 @@ class _EnquireBoxState extends State<EnquireBox> {
                       width: MediaQuery.of(context).size.width / 30,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 19.0),
+                      padding: const EdgeInsets.only(top: 0.0),
                       child: InkWell(
+                        focusNode: _attach,
                         onTap: () async {
                           if (kIsWeb) {
                             // Web platform
@@ -140,40 +165,26 @@ class _EnquireBoxState extends State<EnquireBox> {
                           } else {
                             // Other platforms
                             await pickFile(callback: updateSelectedFileName);
+                            (value) {
+                            };
                           }
                         },
-                        child: Row(
-                          children: [
-                            //   Icon(
-                            //     Icons.attach_file,
-                            //     color: Colors.black,
-                            //     size: 24,
-                            //   ),
-                            //  Gap(10),
-                            //   Text(
-                            //     "Attach Quotation",
-                            //     style: GoogleFonts.poppins(
-                            //       color: Colors.black,
-                            //       fontSize: 18,
-                            //       fontWeight: FontWeight.w600,
-                            //     ),
-                            //   ),
-                          ],
-                        ),
+                        child: Text(""),
+                       
                       ),
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 25,
-                    ),
+                    // SizedBox(
+                    //   width: MediaQuery.of(context).size.width / 25,
+                    // ),
                     if (selectedFileName != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Chip(
                           label: Text(
                             selectedFileName!,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
+                            style: GoogleFonts.poppins(
+                              color: Colors.black54,
+                              // fontSize: 16,
                             ),
                           ),
                           backgroundColor:
@@ -184,254 +195,197 @@ class _EnquireBoxState extends State<EnquireBox> {
                               // Reset any other related data or UI elements
                             });
                           },
-                          deleteIcon: Icon(Icons.close),
+                          deleteIcon: Icon(Icons.close, color: Theme.of(context).dividerColor,),
                         ),
                       ),
                   ],
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 80,
-                ),
-                // Container(
-                //   width: MediaQuery.of(context).size.width / 1,
-                //   height: 80,
-                //   child: Row(
-                //     children: [
-                //        Icon(
-                //           Icons.attach_file,
-                //           color: Colors.black,
-                //           size: 24,
-                //         ),
-                //         const Gap(10),
-                //         Text(
-                //           "Attach Quotation",
-                //           style: GoogleFonts.poppins(
-                //             color: Colors.black,
-                //             fontSize: 18,
-                //             fontWeight: FontWeight.w600,
-                //           ),
-                //         ),
-                //          ElevatedButton(
-                //           onPressed: () async {
-                //             if (emailTextController.text.isEmpty ||
-                //                 companyNameContoller.text.isEmpty) {
-                //               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //                   content: Text(
-                //                       "Company Name and Email is Required ")));
-                //             } else {
-                //               value.changeIsLoading();
-                //               // await pickFileWeb(
-                //               //     callback: updateSelectedFileName);
-                //               // Make sure selectedFileName is updated before uploading
-                //               await uploadData();
-                //               value.changeIsLoading();
-                //             }
-                //           },
-                //           child: Text(
-                //             'SUBMIT',
-                //             style: TextStyle(color: Colors.white),
-                //           ),
-                //           style: ButtonStyle(
-                //             backgroundColor:
-                //                 MaterialStateProperty.all(Colors.black),
-                //             minimumSize:
-                //                 MaterialStateProperty.all(const Size(300, 50)),
-                //           ),
-                //         ),
-                //          FloatingActionButton(
-                //             onPressed: () {
-                //               whatsapp.launchWhatsApp();
-                //             },
-                //             tooltip: 'Open WhatsApp',
-                //             child: FaIcon(FontAwesomeIcons.whatsapp),
-                //             backgroundColor: Color.fromARGB(255, 16, 229, 23)),
-                //                     ],),
-                // ),
-                SizedBox(
-                  height: 55,
-                  width: double.infinity,
-                  // color: Colors.amber,
-                  child: FittedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 30,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 19.0),
-                          child: InkWell(
-                            onTap: () async {
-                              if (kIsWeb) {
-                                // Web platform
-                                await pickFileWeb(
-                                    callback: updateSelectedFileName);
-                              } else {
-                                // Other platforms
-                                await pickFile(
-                                    callback: updateSelectedFileName);
-                              }
-                            },
-                            child: const Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.attach_file,
-                                  color: Colors.black,
-                                  size: 24,
-                                ),
-                                Gap(10),
-                                Text(
-                                  "Attach Quotation",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 25,
-                        ),
-                        if (selectedFileName != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Chip(
-                              label: Text(
-                                selectedFileName!,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                ),
+                
+                
+                Column(
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        if (kIsWeb) {
+                          // Web platform
+                          await pickFileWeb(
+                              callback: updateSelectedFileName);
+                        } else {
+                          // Other platforms
+                          await pickFile(
+                              callback: updateSelectedFileName);
+                        }
+                      },
+                      child:  Row(
+                        // crossAxisAlignment: CrossAxisAlignment.,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.attach_file,
+                                // color: Colors.black26,
+                                 color: Theme.of(context).dividerColor,
+                               
                               ),
-                              backgroundColor:
-                                  Colors.white, // Customize the color as needed
-                              onDeleted: () {
-                                setState(() {
-                                  selectedFileName = null;
-                                  // Reset any other related data or UI elements
-                                });
-                              },
-                              deleteIcon: Icon(Icons.close),
+                               Gap(5),
+                           Text(
+                            "Attach Quotation",
+                            style: GoogleFonts.poppins(
+                              color: Colors.black54,
+                             
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 5.5,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (emailTextController.text.isEmpty ||
-                                companyNameContoller.text.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  content: Text(
-                                      "Company Name and Email is Required ")));
-                            } else {
-                              value.changeIsLoading();
-                              // await pickFileWeb(
-                              //     callback: updateSelectedFileName);
-                              // Make sure selectedFileName is updated before uploading
-                              await uploadData();
-                              value.changeIsLoading();
-                            }
-                          },
-                          child: Text(
-                            'SUBMIT',
-                            style: TextStyle(color: Colors.white),
+                            ],
                           ),
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.black),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(300, 50)),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 7.5,
-                        ),
-                        // TextButton(
-                        //     onPressed: () async {
-                        //       if (emailTextController.text.isEmpty ||
-                        //           companyNameContoller.text.isEmpty) {
-                        //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //             content: Text(
-                        //                 "Company Name and Email is Required ")));
-                        //       } else {
-                        //         value.changeIsLoading();
-                        //         // await pickFileWeb(
-                        //         //     callback: updateSelectedFileName);
-                        //         // Make sure selectedFileName is updated before uploading
-                        //         await uploadData();y
-                        //         value.changeIsLoading();
-                        //       }
-                        //     },
-                        //     child: value.isLoading
-                        //         ? SizedBox(
-                        //             width: 25,
-                        //             height: 25,
-                        //             child: CircularProgressIndicator(
-                        //               color: Colors.black,
-                        //               strokeWidth: 2,
-                        //             ))
-                        //         : Text(
-                        //             "Submit",
-                        //             style: GoogleFonts.inter(
-                        //               color: Colors.black,
-                        //               fontSize: 18,
-                        //               fontWeight: FontWeight.w500,
-                        //             ),
-                        //           ),
-                        //     style: ButtonStyle(
-                        //       shape: MaterialStateProperty.all<
-                        //               RoundedRectangleBorder>(
-                        //           RoundedRectangleBorder(
-                        //               borderRadius: BorderRadius.circular(18.0),
-                        //               side: BorderSide(color: Colors.black))),
-                        //       minimumSize: MaterialStateProperty.all<Size>(
-                        //         Size(MediaQuery.of(context).size.width / 2.5,
-                        //             MediaQuery.of(context).size.width / 8),
-                        //       ),
-                        //     )),
-
-                        FloatingActionButton(
-                            onPressed: () {
-                              whatsapp.launchWhatsApp();
-                            },
-                            tooltip: 'Open WhatsApp',
-                            child: FaIcon(FontAwesomeIcons.whatsapp),
-                            backgroundColor: Color.fromARGB(255, 16, 229, 23)),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 7.5,
-                        ),
-                        // ElevatedButton(
-                        //     style: ButtonStyle(
-                        //       backgroundColor: MaterialStateProperty.all<Color>(
-                        //           Colors.green),
-                        //       shape: MaterialStateProperty.all<
-                        //               RoundedRectangleBorder>(
-                        //           RoundedRectangleBorder(
-                        //               borderRadius: BorderRadius.circular(18.0),
-                        //               side: BorderSide(color: Colors.black))),
-                        //       minimumSize: MaterialStateProperty.all<Size>(
-                        //         Size(MediaQuery.of(context).size.width / 9,
-                        //             MediaQuery.of(context).size.width / 8),
-                        //       ),
-                        //     ),
-                        //     onPressed: () {
-                        //       whatsapp.launchWhatsApp();
-                        //     },
-                        //     child: Text(
-                        //       'WhatsApp Us',
-                        //       style: TextStyle(color: Colors.black),
-                        //     ))
-                      ],
+                          FloatingActionButton(
+                        onPressed: () {
+                          whatsapp.launchWhatsApp();
+                        },
+                        tooltip: 'Open WhatsApp',
+                        child: FaIcon(FontAwesomeIcons.whatsapp),
+                        backgroundColor: Color.fromARGB(255, 16, 229, 23)),
+                         
+                        ],
+                      ),
                     ),
-                  ),
+                    // SizedBox(
+                    //   width: MediaQuery.of(context).size.width / 25,
+                    // ),
+                    // if (selectedFileName != null)
+                    //   Padding(
+                    //     padding: const EdgeInsets.only(top: 8.0),
+                    //     child: Chip(
+                    //       label: Text(
+                    //         selectedFileName!,
+                    //         style: TextStyle(
+                    //           color: Colors.black,
+                    //           fontSize: 16,
+                    //         ),
+                    //       ),
+                    //       backgroundColor:
+                    //           Colors.white, // Customize the color as needed
+                    //       onDeleted: () {
+                    //         setState(() {
+                    //           selectedFileName = null;
+                    //           // Reset any other related data or UI elements
+                    //         });
+                    //       },
+                    //       deleteIcon: Icon(Icons.close),
+                    //     ),
+                    //   ),
+
+                    // SizedBox(
+                    //   width: MediaQuery.of(context).size.width / 5.5,
+                    // ),
+                    ElevatedButton(
+                      focusNode: _enter,
+                      onPressed: () async {
+                        if (emailTextController.text.isEmpty ||
+                            companyNameContoller.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  "Company Name and Email is Required ")));
+                        } else {
+                          value.changeIsLoading();
+                          // await pickFileWeb(
+                          //     callback: updateSelectedFileName);
+                          // Make sure selectedFileName is updated before uploading
+                          await uploadData();
+                          value.changeIsLoading();
+                        }
+                      },
+                      child: Text(
+                        'SUBMIT',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.black),
+                        minimumSize:
+                            MaterialStateProperty.all(const Size(300, 50)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 7.5,
+                    ),
+                    // TextButton(
+                    //     onPressed: () async {
+                    //       if (emailTextController.text.isEmpty ||
+                    //           companyNameContoller.text.isEmpty) {
+                    //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //             content: Text(
+                    //                 "Company Name and Email is Required ")));
+                    //       } else {
+                    //         value.changeIsLoading();
+                    //         // await pickFileWeb(
+                    //         //     callback: updateSelectedFileName);
+                    //         // Make sure selectedFileName is updated before uploading
+                    //         await uploadData();y
+                    //         value.changeIsLoading();
+                    //       }
+                    //     },
+                    //     child: value.isLoading
+                    //         ? SizedBox(
+                    //             width: 25,
+                    //             height: 25,
+                    //             child: CircularProgressIndicator(
+                    //               color: Colors.black,
+                    //               strokeWidth: 2,
+                    //             ))
+                    //         : Text(
+                    //             "Submit",
+                    //             style: GoogleFonts.inter(
+                    //               color: Colors.black,
+                    //               fontSize: 18,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //     style: ButtonStyle(
+                    //       shape: MaterialStateProperty.all<
+                    //               RoundedRectangleBorder>(
+                    //           RoundedRectangleBorder(
+                    //               borderRadius: BorderRadius.circular(18.0),
+                    //               side: BorderSide(color: Colors.black))),
+                    //       minimumSize: MaterialStateProperty.all<Size>(
+                    //         Size(MediaQuery.of(context).size.width / 2.5,
+                    //             MediaQuery.of(context).size.width / 8),
+                    //       ),
+                    //     )),
+
+                    // FloatingActionButton(
+                    //     onPressed: () {
+                    //       whatsapp.launchWhatsApp();
+                    //     },
+                    //     tooltip: 'Open WhatsApp',
+                    //     child: FaIcon(FontAwesomeIcons.whatsapp),
+                    //     backgroundColor: Color.fromARGB(255, 16, 229, 23)),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 7.5,
+                    ),
+                    // ElevatedButton(
+                    //     style: ButtonStyle(
+                    //       backgroundColor: MaterialStateProperty.all<Color>(
+                    //           Colors.green),
+                    //       shape: MaterialStateProperty.all<
+                    //               RoundedRectangleBorder>(
+                    //           RoundedRectangleBorder(
+                    //               borderRadius: BorderRadius.circular(18.0),
+                    //               side: BorderSide(color: Colors.black))),
+                    //       minimumSize: MaterialStateProperty.all<Size>(
+                    //         Size(MediaQuery.of(context).size.width / 9,
+                    //             MediaQuery.of(context).size.width / 8),
+                    //       ),
+                    //     ),
+                    //     onPressed: () {
+                    //       whatsapp.launchWhatsApp();
+                    //     },
+                    //     child: Text(
+                    //       'WhatsApp Us',
+                    //       style: TextStyle(color: Colors.black),
+                    //     ))
+                  ],
                 ),
               ],
             ),
@@ -498,7 +452,7 @@ class _EnquireBoxState extends State<EnquireBox> {
 
       // Read file content as Uint8List
       final List<int> fileBytes = await _readFileAsBytes(file);
-      print('File Bytes Length: ${fileBytes.length}');
+      // print('File Bytes Length: ${fileBytes.length}');
       callback(file.name);
     }
   }
@@ -515,7 +469,7 @@ class _EnquireBoxState extends State<EnquireBox> {
 
       // Read file content as Uint8List
       final List<int> fileBytes = await _readFileAsBytes(file);
-      print('File Bytes Length in API: ${fileBytes.length}');
+      // print('File Bytes Length in API: ${fileBytes.length}');
       FormData formData = FormData.fromMap({
         'email': emailTextController.text,
         'phone': phoneController.text,
@@ -534,12 +488,12 @@ class _EnquireBoxState extends State<EnquireBox> {
       );
 
       if (response.statusCode == 200) {
-        print('Upload successful');
+        // print('Upload successful');
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Icon(
+              title: const Icon(
                 Icons.check_circle_outline,
                 color: Colors.green,
                 size: 50.0,

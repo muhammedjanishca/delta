@@ -433,12 +433,12 @@ class _MobilecartState extends State<Mobilecart> {
         cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+      body: Container(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                height: 650,
+                height: 600,
                 padding:
                     const EdgeInsets.only(left: 16), // Add left padding here
                 child: Column(
@@ -477,7 +477,7 @@ class _MobilecartState extends State<Mobilecart> {
                         itemBuilder: (context, index) {
                           final item =
                               jsonDecode(cartItems["cartItems"][index]);
-
+        
                           // final item = cartProvider.cartItems[index];
                           return GestureDetector(
                             onTap: () {
@@ -526,8 +526,7 @@ class _MobilecartState extends State<Mobilecart> {
                                               : Text(
                                                 '${item['productCode']} ${item['price'].toStringAsFixed(2)}',
                                                 style: GoogleFonts.poppins(
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                                  ),
                                               ),
                                           // Text(
                                           //   // toStringAsFixed(2)
@@ -627,24 +626,19 @@ class _MobilecartState extends State<Mobilecart> {
                   ],
                 ),
               ),
-
+        
               // flex: 2,
               SizedBox(
                 height: MediaQuery.of(context).size.height / 2,
                 child: Row(
                   children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 10,
-                    ),
+                   Gap(30),
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 1.2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          // Divider(),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 20,
-                          ),
+                          Gap(10),
                           Text(
                             'Summary\n',
                             style: GoogleFonts.roboto(
@@ -713,7 +707,7 @@ class _MobilecartState extends State<Mobilecart> {
                   ],
                 ),
               ),
-
+        
               Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   // height: MediaQuery.of(context).size.height / 1,
@@ -731,6 +725,322 @@ class _MobilecartState extends State<Mobilecart> {
     );
   }
 }
+// class Mobilecart extends StatefulWidget {
+//   const Mobilecart({super.key});
+
+//   @override
+//   State<Mobilecart> createState() => _MobilecartState();
+// }
+
+// class _MobilecartState extends State<Mobilecart> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final userInputProvider = Provider.of<UserInputProvider>(context);
+//     final FirebaseAuth auth = FirebaseAuth.instance;
+//     final cartProvider = Provider.of<CartProvider>(context);
+//     cartProvider.getCartData();
+//     var cartItems = cartProvider.fetchedItems;
+//     double subtotal = cartProvider.getTotalPrice();
+//     double vatRate = 15.0;
+//     double vat = cartProvider.calculateVAT(subtotal, vatRate);
+//     double totalPriceWithVAT =
+//         cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
+//     return Scaffold(
+//       body: SingleChildScrollView(
+//         child: Container(
+//           child: Column(
+//             children: [
+//               Container(
+//                 height: 650,
+//                 padding:
+//                     const EdgeInsets.only(left: 16), // Add left padding here
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     SizedBox(
+//                       height: 50,
+//                       child: Row(
+//                         children: [
+//                           TextButton(
+//                               onPressed: () {},
+//                               child: const Text(
+//                                 "HOME>>",
+//                                 style: TextStyle(
+//                                     color: Color.fromARGB(255, 54, 98, 98),
+//                                     fontSize: 17,
+//                                     fontWeight: FontWeight.w300),
+//                               )),
+//                           Text(
+//                             "CART",
+//                             style: TextStyle(
+//                               fontSize: 20,
+//                               fontWeight: FontWeight.w700,
+//                               color: Color.fromRGBO(249, 156, 6, 1.0),
+//                             ),
+//                           )
+//                         ],
+//                       ),
+//                     ),
+//                     Expanded(
+//                       child: ListView.separated(
+//                         physics: const ScrollPhysics(),
+//                         itemCount: cartItems["cartItems"].length,
+//                         separatorBuilder: (context, index) =>
+//                             const Divider(color: Colors.grey),
+//                         itemBuilder: (context, index) {
+//                           final item =
+//                               jsonDecode(cartItems["cartItems"][index]);
+//                           // final item = cartProvider.cartItems[index];
+//                           return GestureDetector(
+//                             onTap: () {
+//                               // if(index)
+//                               // Navigator.of(context).push(mater)
+//                             },
+//                             child: ListTile(
+//                               title: FittedBox(
+//                                 child: Row(
+//                                   children: [
+//                                     Container(
+//                                       height:
+//                                           MediaQuery.of(context).size.height /
+//                                               8,
+//                                       width:
+//                                           MediaQuery.of(context).size.width / 5,
+//                                       color: Colors.white,
+//                                       child: Image.network(
+//                                         item['imageUrl'],
+//                                         fit: BoxFit.scaleDown,
+//                                       ),
+//                                     ),
+//                                     SizedBox(
+//                                       width: MediaQuery.of(context).size.width /
+//                                           30,
+//                                     ),
+//                                     SizedBox(
+//                                       height:
+//                                           MediaQuery.of(context).size.height /
+//                                               5.5,
+//                                       width: MediaQuery.of(context).size.width /
+//                                           1.5,
+//                                       child: Column(
+//                                         crossAxisAlignment:
+//                                             CrossAxisAlignment.start,
+//                                         mainAxisAlignment:
+//                                             MainAxisAlignment.center,
+//                                         children: [
+//                                           Text(
+//                                             '${item["productName"]}',
+//                                             style: GoogleFonts.poppins(),
+//                                           ),
+//                                           item["productName"] ==
+//                                                   item['productCode']
+//                                               ? const SizedBox()
+//                                               : Text(
+//                                                 '${item['productCode']} ${item['price'].toStringAsFixed(2)}',
+//                                                 style: GoogleFonts.poppins(
+//                                                     fontWeight:
+//                                                         FontWeight.w600),
+//                                               ),
+//                                           // Text(
+//                                           //   // toStringAsFixed(2)
+//                                           //   'Price: \SAR ${item['price'].toStringAsFixed(2)}',
+//                                           //   style: GoogleFonts.poppins(),
+//                                           // ),
+//                                           Row(
+//                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                             children: [
+//                                               Container(
+//                                                 child: Row(
+//                                                   children: [
+//                                                      Text(
+//                                                 'Quantity : ${item['quantity']}',
+//                                                 style: GoogleFonts.poppins(),
+//                                               ),
+//                                               TextButton(
+//                                                   child: Text("Edit",style:GoogleFonts.poppins(color: Colors.black87),), 
+//                                                   onPressed: () {
+//                                                     int newQuantity =
+//                                                         item['quantity'];
+//                                                     showDialog(
+//                                                         context: context,
+//                                                         builder: (context) {
+//                                                           return AlertDialog(
+//                                                             title: const Text(
+//                                                                 'Edit Quantity'),
+//                                                             content: TextField(
+//                                                               keyboardType:
+//                                                                   TextInputType
+//                                                                       .number,
+//                                                               decoration:
+//                                                                   const InputDecoration(
+//                                                                       labelText:
+//                                                                           'Quantity'),
+//                                                               onChanged:
+//                                                                   (value) {
+//                                                                 newQuantity = int
+//                                                                         .tryParse(
+//                                                                             value) ??
+//                                                                     newQuantity;
+//                                                               },
+//                                                             ),
+//                                                             actions: [
+//                                                               TextButton(
+//                                                                 onPressed: () {
+//                                                                   Navigator.pop(
+//                                                                       context);
+//                                                                 },
+//                                                                 child: const Text(
+//                                                                     'Cancel'),
+//                                                               ),
+//                                                               TextButton(
+//                                                                 onPressed: () {
+//                                                                   cartProvider
+//                                                                       .updateQuantity(
+//                                                                           index,
+//                                                                           newQuantity);
+//                                                                   Navigator.pop(
+//                                                                       context);
+//                                                                 },
+//                                                                 child:
+//                                                                     const Text(
+//                                                                         'Save'),
+//                                                               ),
+//                                                             ],
+//                                                           );
+//                                                         });
+//                                                   }),
+//                                                   ],
+//                                                 ),
+//                                               ),
+//                                               IconButton(
+//                                                 icon: const Icon(
+//                                                   Icons.delete_outline_outlined,
+//                                                   color: Colors.black54,
+//                                                 ),
+//                                                 onPressed: () {
+//                                                   cartProvider.removeFromCart(
+//                                                       index,
+//                                                       cartItems['cartItems']);
+//                                                 },
+//                                               ),
+//                                             ],
+//                                           )
+//                                         ],
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ),
+//                             ),
+//                           );
+//                         },
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               // flex: 2,
+//               SizedBox(
+//                 height: MediaQuery.of(context).size.height / 2,
+//                 child: Row(
+//                   children: [
+//                     SizedBox(
+//                       width: MediaQuery.of(context).size.width / 10,
+//                     ),
+//                     SizedBox(
+//                       width: MediaQuery.of(context).size.width / 1.2,
+//                       child: Column(
+//                         crossAxisAlignment: CrossAxisAlignment.stretch,
+//                         children: <Widget>[
+//                           // Divider(),
+//                           SizedBox(
+//                             height: MediaQuery.of(context).size.height / 20,
+//                           ),
+//                           Text(
+//                             'Summary\n',
+//                             style: GoogleFonts.roboto(
+//                                 fontSize: 23, fontWeight: FontWeight.w500),
+//                           ),
+//                           // SizedBox(height: 47),
+//                           ListTile(
+//                             title: Text(
+//                               'Subtotal',
+//                               style: GoogleFonts.poppins(
+//                                   fontSize: 15, fontWeight: FontWeight.w400),
+//                             ),
+//                             trailing: Text(
+//                               '\SAR ${cartProvider.getTotalPrice().toStringAsFixed(2)}',
+//                               style: GoogleFonts.poppins(
+//                                   fontSize: 15, fontWeight: FontWeight.w500),
+//                             ),
+//                           ),
+//                           ListTile(
+//                             title: Text(
+//                               'VAT (${vatRate}%)',
+//                               style: GoogleFonts.poppins(fontSize: 14),
+//                             ),
+//                             trailing: Text(
+//                               '\SAR ${vat.toStringAsFixed(2)}',
+//                               style: GoogleFonts.poppins(fontSize: 14),
+//                             ),
+//                           ),
+//                           const Divider(
+//                             height:
+//                                 1, // Adjust the height of the divider as needed
+//                             color: Color.fromARGB(255, 147, 146,
+//                                 146), // Choose the color of the divider
+//                             thickness:
+//                                 1, // Specify the thickness of the divider line
+//                           ),
+//                           const SizedBox(
+//                             height: 10,
+//                           ),
+//                           ListTile(
+//                             title: Text(
+//                               'Total Price (with VAT)',
+//                               style: GoogleFonts.poppins(
+//                                   fontSize: 15, fontWeight: FontWeight.w500),
+//                             ),
+//                             trailing: Text(
+//                               '\SAR ${totalPriceWithVAT.toStringAsFixed(2)}',
+//                               style: GoogleFonts.poppins(
+//                                   fontSize: 18, fontWeight: FontWeight.bold),
+//                             ),
+//                           ),
+//                           const Divider(
+//                             height:
+//                                 1, // Adjust the height of the divider as needed
+//                             color: Color.fromARGB(255, 147, 146,
+//                                 146), // Choose the color of the divider
+//                             thickness:
+//                                 1, // Specify the thickness of the divider line
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     SizedBox(
+//                       width: MediaQuery.of(context).size.width / 22,
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               Container(
+//                   color: const Color.fromARGB(255, 255, 255, 255),
+//                   // height: MediaQuery.of(context).size.height / 1,
+//                   height: 980,
+//                   child: MediaQuery.of(context).size.width >= 700
+//                       ? const deskBottomSheett()
+//                       : const mobiledeskBottomSheett()),
+//               //  Footer(child: Container(height: 50,
+//               //                color: Colors.pink,)),
+//             ],
+//           ),
+//         ),
+//       ),
+//       bottomNavigationBar: CustomBottomNavigationBar(),
+//     );
+//   }
+// }
 
 class CustomBottomNavigationBar extends StatelessWidget {
   @override
@@ -765,9 +1075,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 onPressed: () async {
                   context.read<AddressProvider>().isUserDataAvailable(context);
                 },
-                child: const Text(
+                child:  Text(
                   'GENERATE QUOTATION',
-                  style: TextStyle(color: Colors.white),
+                  style: GoogleFonts.poppins(color: Colors.white),
                 ),
               ),
             )
@@ -827,9 +1137,9 @@ class MobileBottomNavigationBaru extends StatelessWidget {
                                 selectedAddress: selectedAddress,
                               )));
                 },
-                child: const Text(
+                child:  Text(
                   'GENERATE QUOTATION',
-                  style: TextStyle(color: Colors.white),
+                  style: GoogleFonts.poppins(color: Colors.white),
                 ),
               ),
             )

@@ -172,7 +172,7 @@ class QuotationDeskPage extends StatelessWidget {
       ),
      
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 76, 138, 131),
+        backgroundColor: Color.fromARGB(255, 20, 208, 60),
         onPressed: () async {
           context
               .read<AddressProvider>()
@@ -333,50 +333,16 @@ class QuotationDeskPage extends StatelessWidget {
               //GANERATE QUATATION TOTAL AMOUNT CONTAINER___*******
               Row(
                 children: [
-                  Container(
+                  const SizedBox(
                     // color: Colors.amber,
                     width: 20,
                     height: 10,
                   ),
                   const SizedBox(
-                    //   // color: const Color.fromARGB(255, 128, 118, 91),
                     width: 500,
                     height: 200,
                   ),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       // _buildTableCell("janish"),
-                  //       Text(
-                  //         "TERM AND CONDITIONS",
-                  //         style: TextStyle(
-                  //             fontWeight: FontWeight.w500, fontSize: 15),
-                  //       ),
-                  //       Gap(5),
-                  //       Text(
-                  //         "Payment	      : 30 Dyas",
-                  //         style: TextStyle(
-                  //             fontWeight: FontWeight.w300, fontSize: 14),
-                  //       ),
-                  //       Text(
-                  //         "Delivery	       : 03 Days",
-                  //         style: TextStyle(
-                  //             fontWeight: FontWeight.w300, fontSize: 14),
-                  //       ),
-                  //       Text(
-                  //         "Validity		        : 07 Days",
-                  //         style: TextStyle(
-                  //             fontWeight: FontWeight.w300, fontSize: 14),
-                  //       ),
-                  //       Text(
-                  //         "We hope our offer will meet your entire satisfaction and look forward\nto receive your valued order soon.Should you require any further\ninformation on our products, please feel free to contact us. We assure\nour prompt and professional service at all the time we remain.",
-                  //         style: TextStyle(
-                  //             fontWeight: FontWeight.w300, fontSize: 14),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
+                 
                   SizedBox(
                     width: 264,
                     height: 200,
@@ -537,15 +503,7 @@ class QuotationMobilePage extends StatelessWidget {
                             )
                           ],
                         ),
-                      ),
-
-                      // Text(
-                      //   '$city',
-                      //   style: GoogleFonts.poppins(),
-                      // ),
-                      // Continue displaying other address details as needed
-                      // Your existing code to display the rest of the quotation page
-                    ],
+                      ),],
                   ),
                 )
                 // MyClipPath(),
@@ -558,11 +516,69 @@ class QuotationMobilePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 76, 138, 131),
-        onPressed: () {
+        backgroundColor: Color.fromARGB(255, 20, 208, 60),
+        onPressed: () async {
           context
               .read<AddressProvider>()
               .get_current_address(cartItems, context);
+          // Call your backend API to increment the invoice number
+          final response = await http.post(
+            Uri.parse('https://ready.deltabackend.com/invoice_number'),
+          );
+
+          if (response.statusCode == 200) {
+            // If the increment was successful, show an alert dialog with Yes and No options
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Success'),
+                  content: const Text(
+                      'Some Product Might not have prices it is better to enquire the details about products more...'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        // Add your actions when 'Yes' is pressed
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('No'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const EnquireBox();
+                          },
+                        );
+                      },
+                      child: const Text('Enquire Now'),
+                    ),
+                  ],
+                );
+              },
+            );
+          } else {
+            // Handle errors and show an error alert dialog with OK button
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Failed to increment invoice number.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the alert dialog
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         },
         child: const Icon(Icons.print),
       ),
@@ -600,7 +616,7 @@ class QuotationMobilePage extends StatelessWidget {
                         'DESCRIPTION',
                         style: GoogleFonts.poppins(
                           fontSize: 11,
-                          color: Colors.black,
+                          color: const Color.fromARGB(255, 0, 0, 0),
                         ),
                       ),
                     ),
@@ -677,7 +693,7 @@ class QuotationMobilePage extends StatelessWidget {
                                   TextSpan(
                                     text:
                                         jsonDecode(cartItems[i])['productName'],
-                                    style: GoogleFonts.poppins(fontSize: 11),
+                                    style: GoogleFonts.poppins(fontSize: 11,color: Colors.black),
                                   ), // Adjust font size as needed )),
                                   // Add more TextSpans for additional content or line breaks
                                 ],
@@ -691,7 +707,7 @@ class QuotationMobilePage extends StatelessWidget {
                                   TextSpan(
                                     text:
                                         jsonDecode(cartItems[i])['productCode'],
-                                    style: GoogleFonts.poppins(fontSize: 12),
+                                    style: GoogleFonts.poppins(fontSize: 12,color: Colors.black),
                                   ),
                                 ],
                               ),
@@ -700,8 +716,7 @@ class QuotationMobilePage extends StatelessWidget {
                           DataCell(_buildTableCell(
                             '${jsonDecode(cartItems[i])['quantity']}',
                             style: GoogleFonts.poppins(
-                                fontSize:
-                                    10.0), // Example: Smaller text for quantity
+                                fontSize:10.0), // Example: Smaller text for quantity
                           )),
                           DataCell(_buildTableCell('unit',
                               style: const TextStyle(fontSize: 10.0))),
@@ -746,23 +761,22 @@ class QuotationMobilePage extends StatelessWidget {
                     children: [
                       Container(
                         // color: Colors.amber,
-                        padding: const EdgeInsets.all(
-                            8), // Add padding inside the container
+                        padding:  EdgeInsets.only(left: 8,right: 8), // Add padding inside the container
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment
                               .spaceBetween, // Adjust to spaceBetween for equal spacing
                           children: [
                             _buildTableCell(
-                              'Net before VAT',
-                              fontWeight: FontWeight.bold,
+                              'Net Before(VAT)',
+                              fontWeight: FontWeight.w400,
                               style: GoogleFonts.poppins(
-                                  fontSize: 14), // Specify a font size
+                                  ), // Specify a font size
                             ),
                             _buildTableCell(
                               '\SAR ${totalPrice.toStringAsFixed(2)}',
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w400,
                               style: GoogleFonts.poppins(
-                                  fontSize: 14), // Keep font size consistent
+                                 ), // Keep font size consistent
                             ),
                           ],
                         ),
@@ -772,21 +786,24 @@ class QuotationMobilePage extends StatelessWidget {
                         endIndent: 10,
                         color: Color.fromARGB(255, 123, 87, 87),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .spaceBetween, // Adjust to spaceBetween
-                        children: [
-                          _buildTableCell(
-                            'VAT',
-                            fontWeight: FontWeight.bold,
-                            style: GoogleFonts.poppins(fontSize: 14),
-                          ),
-                          _buildTableCell(
-                            '\SAR${vat.toStringAsFixed(2)}',
-                            fontWeight: FontWeight.bold,
-                            style: GoogleFonts.poppins(fontSize: 14),
-                          ),
-                        ],
+                      Padding(
+                         padding:  EdgeInsets.only(left: 8,right: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .spaceBetween, // Adjust to spaceBetween
+                          children: [
+                            _buildTableCell(
+                              'VAT',
+                              fontWeight: FontWeight.w400,
+                              style: GoogleFonts.poppins(),
+                            ),
+                            _buildTableCell(
+                              '\SAR ${vat.toStringAsFixed(2)}',
+                              fontWeight: FontWeight.w400,
+                              style: GoogleFonts.poppins(fontSize: 14),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         color: Colors.amber,
@@ -799,14 +816,15 @@ class QuotationMobilePage extends StatelessWidget {
                             _buildTableCell(
                               'Total Amount',
                               fontWeight: FontWeight.bold,
+                              fontSize: 14,
                               style: GoogleFonts.poppins(
                                   fontSize: 14), // Consistent style
                             ),
                             _buildTableCell(
-                              '\SAR${totalPriceWithVAT.toStringAsFixed(2)}',
+                              '\SAR ${totalPriceWithVAT.toStringAsFixed(2)}',
                               fontWeight: FontWeight.bold,
                               style: GoogleFonts.poppins(
-                                  fontSize: 14), // Consistent style
+                                  ), // Consistent style
                             ),
                           ],
                         ),

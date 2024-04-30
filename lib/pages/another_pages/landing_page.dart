@@ -1698,7 +1698,7 @@ class ProductContainer extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             child: Text(
-              'Qute'.toUpperCase(),
+              'Quote'.toUpperCase(),
               style: GoogleFonts.roboto(color: Colors.black, fontSize: 15),
             ),
             style: ButtonStyle(
