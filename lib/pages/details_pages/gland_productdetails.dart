@@ -792,7 +792,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                         child: const Text('ADD TO CART'),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                            Color.fromRGBO(249, 156, 6, 1.0),
+                             const Color.fromARGB(255, 54, 98, 98)
                           ),
                           minimumSize: MaterialStateProperty.all(Size(150, 50)),
                         ),
@@ -1064,7 +1064,7 @@ class ProductDetailsOfGlands extends StatelessWidget {
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
-                                              Color.fromRGBO(249, 156, 6, 1.0),
+                             const Color.fromARGB(255, 54, 98, 98)
                                             ),
                                             minimumSize:
                                                 MaterialStateProperty.all(
