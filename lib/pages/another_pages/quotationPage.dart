@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../../constants.dart';
 import '../../enquiry.dart';
 
 class QuotationPage extends StatelessWidget {
@@ -179,7 +180,7 @@ class QuotationDeskPage extends StatelessWidget {
               .get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
-            Uri.parse('https://ready.deltabackend.com/invoice_number'),
+            Uri.parse('$appBaseUrl/invoice_number'),
           );
 
           if (response.statusCode == 200) {
@@ -523,7 +524,7 @@ class QuotationMobilePage extends StatelessWidget {
               .get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
-            Uri.parse('https://ready.deltabackend.com/invoice_number'),
+            Uri.parse('$appBaseUrl/invoice_number'),
           );
 
           if (response.statusCode == 200) {

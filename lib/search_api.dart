@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'constants.dart';
+
 class ProductProvider extends ChangeNotifier {
   final TextEditingController easySearchController = TextEditingController();
   List<Map<String, dynamic>> products = [];
@@ -9,7 +11,7 @@ class ProductProvider extends ChangeNotifier {
   Future<List<Map<String, dynamic>>> fetchData(String query) async {
     try {
       final response = await http.get(
-        Uri.parse('https://ready.deltabackend.com/searching?query=$query'),
+        Uri.parse('$appBaseUrl/searching?query=$query'),
       );
 
       if (response.statusCode == 200) {

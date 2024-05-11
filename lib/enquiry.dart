@@ -14,6 +14,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:provider/provider.dart';
 
+import 'constants.dart';
+
 class EnquireBox extends StatefulWidget {
   const EnquireBox({super.key});
 
@@ -483,7 +485,7 @@ class _EnquireBoxState extends State<EnquireBox> {
       });
 
       var response = await dio.post(
-        'https://ready.deltabackend.com/enquiry/sendmail',
+        '$appBaseUrl/enquiry/sendmail',
         data: formData,
       );
 

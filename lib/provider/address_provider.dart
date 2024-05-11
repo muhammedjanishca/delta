@@ -7,6 +7,8 @@ import 'package:firebase_hex/widgets/pdfservies.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../constants.dart';
+
 class AddressProvider with ChangeNotifier {
   int selectIndex = 0;
 
@@ -76,7 +78,7 @@ class AddressProvider with ChangeNotifier {
     if (current_address.isNotEmpty) {
       print('22222222222222222222222222');
       http.post(
-        Uri.parse('https://ready.deltabackend.com/store_invoice'),
+        Uri.parse('$appBaseUrl/store_invoice'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({"u_id": '${FirebaseAuth.instance.currentUser!.uid}'}),
       );

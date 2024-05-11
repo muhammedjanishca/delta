@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../api.dart';
+import '../constants.dart';
 import '../model.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,7 +34,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchsbcpaData() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/sb_cpa'));
+        await http.get(Uri.parse('$appBaseUrl/sb_cpa'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -46,7 +47,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchElpsData() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/elps'));
+        await http.get(Uri.parse('$appBaseUrl/elps'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -59,7 +60,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchCjtkcData() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/cj_tkc'));
+        await http.get(Uri.parse('$appBaseUrl/cj_tkc'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -71,7 +72,7 @@ class DataProvider extends ChangeNotifier {
   }
   // Future<ProduceNewModal> fetchsbcpaData() async {
   //   final response = await http
-  //       .get(Uri.parse('https://ready.deltabackend.com/sb_cpa'));
+  //       .get(Uri.parse('$appBaseUrl/sb_cpa'));
 
   //   if (response.statusCode == 200) {
   //     ProduceNewModal pro =
@@ -84,7 +85,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchSsctmData() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/ssctm'));
+        await http.get(Uri.parse('$appBaseUrl/ssctm'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -97,7 +98,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchLugsData() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/lugs'));
+        await http.get(Uri.parse('$appBaseUrl/lugs'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -110,7 +111,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchElpsAssessoriesData() async {
     final response = await http
-        .get(Uri.parse('https://ready.deltabackend.com/elps-accessories'));
+        .get(Uri.parse('$appBaseUrl/elps-accessories'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -123,7 +124,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchglandsApiUrl() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/glands'));
+        await http.get(Uri.parse('$appBaseUrl/glands'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -136,7 +137,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchconnectersApiUrl() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/connectors'));
+        await http.get(Uri.parse('$appBaseUrl/connectors'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -149,7 +150,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchaccessoriesApiUrl() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/accessories'));
+        await http.get(Uri.parse('$appBaseUrl/accessories'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -162,7 +163,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchcrimpingtoolApiUrl() async {
     final response = await http
-        .get(Uri.parse('https://ready.deltabackend.com/crimpingtools'));
+        .get(Uri.parse('$appBaseUrl/crimpingtools'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -175,7 +176,7 @@ class DataProvider extends ChangeNotifier {
 
   Future<ProduceNewModal> fetchconduitsApiUrl() async {
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/conduits'));
+        await http.get(Uri.parse('$appBaseUrl/conduits'));
 
     if (response.statusCode == 200) {
       ProduceNewModal pro =
@@ -191,7 +192,7 @@ class DataProvider extends ChangeNotifier {
     // print("fdghjk");
     // print(type);
     final response =
-        await http.get(Uri.parse('https://ready.deltabackend.com/$type'));
+        await http.get(Uri.parse('$appBaseUrl/$type'));
 
     if (response.statusCode == 200) {
       // print(response.body);
