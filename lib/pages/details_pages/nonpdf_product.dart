@@ -688,7 +688,6 @@ class Nopdf extends StatelessWidget {
                                             // final selectedPrice =
                                             //     selectedPriceNotifier
                                             //         .value;
-
                                             final price =
                                                 double.parse(priceofproduct!);
 
@@ -725,7 +724,6 @@ class Nopdf extends StatelessWidget {
                                                   content:
                                                       Text("Added to cart")),
                                             );
-                                            // print(priceofproduct);
                                           } else {
                                             // signed out
                                             showDialog(
@@ -740,9 +738,7 @@ class Nopdf extends StatelessWidget {
                                       child: Text('ADD TO CART', style: GoogleFonts.poppins(color: Colors.white),),
                                       style: ButtonStyle(
                                         backgroundColor:
-                                            MaterialStateProperty.all(
-                             const Color.fromARGB(255, 54, 98, 98)
-                                        ),
+                                            MaterialStateProperty.all(addtoCart),
                                         minimumSize: MaterialStateProperty.all(
                                             Size(180, 60)),
                                       ),
@@ -752,15 +748,11 @@ class Nopdf extends StatelessWidget {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        user != null
-                                            ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                                            : showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return LoginPage(); // Your custom dialog widget
-                                                },
-                                              );
+                                        user != null;
+                                            cartCount != 0
+                                                ? Navigator.pushNamed( context, '/cart')
+                                                : Navigator.pushNamed(
+                                                    context, '/cartempty');
                                       },
                                       child:  Text(
                                         'GO TO CART',

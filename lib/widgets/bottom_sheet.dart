@@ -93,7 +93,7 @@ class deskBottomSheett extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<AuthenticationHelper>(context).getCurrentUser();
-    var user = Provider.of<AuthenticationHelper>(context).user;
+    // var user = Provider.of<AuthenticationHelper>(context).user;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
     // bool _validate = false;
@@ -236,7 +236,7 @@ class deskBottomSheett extends StatelessWidget {
                               );
                             },
                             child: Text("Contact Us",
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.merriweather(
                                   color: Colors.white,
                                   fontSize: 16,
                                 ))),
@@ -250,7 +250,7 @@ class deskBottomSheett extends StatelessWidget {
                               );
                             },
                             child: Text("About Us",
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.merriweather(
                                   color: Colors.white,
                                   fontSize: 16,
                                 ))),
@@ -265,7 +265,7 @@ class deskBottomSheett extends StatelessWidget {
                               );
                             },
                             child: Text("Terms & Conditions",
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.merriweather(
                                   color: Colors.white,
                                   fontSize: 16,
                                 ))),
@@ -279,7 +279,7 @@ class deskBottomSheett extends StatelessWidget {
                               );
                             },
                             child: Text("sales@transdeltatrading.com",
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.merriweather(
                                   color: Colors.white,
                                   fontSize: 16,
                                 ))),
@@ -552,7 +552,7 @@ class deskBottomSheett extends StatelessWidget {
                           },
                           child: Text(
                             'SUBMIT',
-                            style: GoogleFonts.poppins(color: Colors.black),
+                            style: GoogleFonts.merriweather(color: Colors.black),
                           ),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -600,8 +600,8 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     
 
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
+    // double _height = MediaQuery.of(context).size.height;
+    // double _width = MediaQuery.of(context).size.width;
     Future<void> sendEmail(String name, String email, String company,
         String phone, String message) async {
       final apiUrl = 'https://api.emailjs.com/api/v1.0/email/send';
@@ -710,7 +710,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         );
                       },
                       child: Text("Contact Us",
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.merriweather(
                             color: Colors.white,
                             fontSize: 16,
                           ))),
@@ -724,7 +724,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         );
                       },
                       child: Text("About Us",
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.merriweather(
                             color: Colors.white,
                             fontSize: 16,
                           ))),
@@ -738,7 +738,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         );
                       },
                       child: Text("Terms & Conditions",
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.merriweather(
                             color: Colors.white,
                             fontSize: 16,
                           ))),
@@ -765,7 +765,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         );
                       },
                       child: Text("sales@transdeltatrading.com",
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.merriweather(
                             color: Colors.white,
                             fontSize: 16,
                           )))
@@ -1040,7 +1040,7 @@ class _mobiledeskBottomSheettState extends State<mobiledeskBottomSheett> {
                         },
                         child: Text(
                           'SUBMIT',
-                          style: TextStyle(color: Colors.black),
+                          style: GoogleFonts.merriweather(color: Colors.black),
                         ),
                         style: ButtonStyle(
                           backgroundColor:

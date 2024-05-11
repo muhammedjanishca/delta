@@ -1,18 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
-import 'package:firebase_hex/widgets/carousal_slider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
 import '../../provider/data_provider.dart';
 import '../../provider/thumbnail.dart';
 
+// ignore: must_be_immutable
 class AccessoriesPage extends StatelessWidget {
   AccessoriesPage({super.key});
 
@@ -20,13 +19,13 @@ class AccessoriesPage extends StatelessWidget {
   // Initialize with an invalid index
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
+    // double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
         var screenSize = MediaQuery.of(context).size;
  double thumbnailSize = screenSize.width * 0.11; 
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
-    final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
+    // final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
     final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
 

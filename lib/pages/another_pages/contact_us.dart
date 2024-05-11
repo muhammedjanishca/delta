@@ -30,6 +30,12 @@ class ContactUsPage extends StatelessWidget {
     final email = TextEditingController();
     final phone = TextEditingController();
     final message = TextEditingController();
+    final FocusNode _comName = FocusNode();
+    final FocusNode _name = FocusNode();
+    final FocusNode _email = FocusNode();
+    final FocusNode _msg = FocusNode();
+    final FocusNode _phone = FocusNode();
+    final FocusNode _enter = FocusNode();
     Future<void> sendEmail(String name, String email, String company,
         String phone, String message) async {
       final apiUrl = 'https://api.emailjs.com/api/v1.0/email/send';
@@ -184,8 +190,12 @@ class ContactUsPage extends StatelessWidget {
                               Expanded(
                                 child: ListTile(
                                   title: Text('Name',
-                                      style: TextStyle(fontSize: 15)),
+                                      style: GoogleFonts.poppins()),
                                   subtitle: TextFormField(
+                                    focusNode: _name,
+                                     onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_comName);
+                                },
                                     controller: firstname,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -193,12 +203,12 @@ class ContactUsPage extends StatelessWidget {
                                       }
                                       return null; // Return null if the input is valid
                                     },
-                                    decoration: const InputDecoration(
+                                    decoration:  InputDecoration(
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(8)),
                                       ),
-                                      hintText: '  Name',
+                                      hintText: '  Name',hintStyle: GoogleFonts.poppins()
                                     ),
                                   ),
                                 ),
@@ -210,9 +220,13 @@ class ContactUsPage extends StatelessWidget {
                                 child: ListTile(
                                   title: Text(
                                     'Company Name',
-                                    style: TextStyle(fontSize: 15),
+                                    style: GoogleFonts.poppins(),
                                   ),
                                   subtitle: TextFormField(
+                                    focusNode: _comName,
+                                     onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_email);
+                                },
                                     controller: companyname,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -220,11 +234,11 @@ class ContactUsPage extends StatelessWidget {
                                       }
                                       return null; // Return null if the input is valid
                                     },
-                                    decoration: const InputDecoration(
+                                    decoration:  InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(8))),
-                                      hintText: '  Company Name',
+                                      hintText: '  Company Name',hintStyle: GoogleFonts.poppins()
                                     ),
                                   ),
                                 ),
@@ -234,9 +248,13 @@ class ContactUsPage extends StatelessWidget {
                           ListTile(
                             title: Text(
                               'Email',
-                              style: TextStyle(fontSize: 15),
+                              style: GoogleFonts.poppins(),
                             ),
                             subtitle: TextFormField(
+                              focusNode: _email,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_phone);
+                                },
                               controller: email,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -247,11 +265,11 @@ class ContactUsPage extends StatelessWidget {
                                 }
                                 return null;
                               },
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8))),
-                                hintText: '  Email',
+                                hintText: '  Email',hintStyle: GoogleFonts.poppins()
                               ),
                             ),
                           ),
@@ -261,9 +279,13 @@ class ContactUsPage extends StatelessWidget {
                           ListTile(
                             title: Text(
                               'Phone Number',
-                              style: TextStyle(fontSize: 15),
+                              style: GoogleFonts.poppins(),
                             ),
                             subtitle: TextFormField(
+                              focusNode: _phone,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_msg);
+                                },
                               keyboardType: TextInputType.phone,
                               controller: phone,
                               validator: (value) {
@@ -275,11 +297,11 @@ class ContactUsPage extends StatelessWidget {
                                 }
                                 return null;
                               },
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8))),
-                                hintText: '  +966501234567',
+                                hintText: '  +966501234567',hintStyle: GoogleFonts.poppins(),
                                 prefixIcon: Icon(Icons.phone),
                               ),
                             ),
@@ -290,17 +312,21 @@ class ContactUsPage extends StatelessWidget {
                           ListTile(
                             title: Text(
                               'Message',
-                              style: TextStyle(fontSize: 15),
+                              style: GoogleFonts.poppins(),
                             ),
                             subtitle: TextFormField(
+                              focusNode: _msg,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_enter);
+                                },
                               controller: message,
                               keyboardType: TextInputType.multiline,
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   color: const Color.fromARGB(255, 80, 80, 80)),
                               maxLines: 5,
                               decoration: InputDecoration(
                                   hintText: "Message",
-                                  hintStyle: TextStyle(
+                                  hintStyle: GoogleFonts.poppins(
                                       color: const Color.fromARGB(
                                           255, 151, 151, 151)),
                                   border: OutlineInputBorder(
@@ -327,6 +353,7 @@ class ContactUsPage extends StatelessWidget {
                             height: MediaQuery.of(context).size.height / 25,
                           ),
                           ElevatedButton(
+                            focusNode: _enter,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 // All text fields are valid, you can perform your action here
@@ -366,7 +393,7 @@ class ContactUsPage extends StatelessWidget {
                             },
                             child: Text(
                               'SUBMIT',
-                              style: TextStyle(color: Colors.white),
+                              style: GoogleFonts.merriweather(color: Colors.white),
                             ),
                             style: ButtonStyle(
                               backgroundColor:
@@ -395,7 +422,7 @@ class ContactUsPage extends StatelessWidget {
                                   fontSize: 25, fontWeight: FontWeight.w900),
                             ),
                             Text(
-                              "We'll get back to you within 24 hours",
+                              "We'll get back to you within 24 hours",style: GoogleFonts.poppins(),
                             ),
                             Gap(25),
                             Row(
@@ -403,8 +430,12 @@ class ContactUsPage extends StatelessWidget {
                                 Expanded(
                                   child: ListTile(
                                     title: Text('Name',
-                                        style: TextStyle(fontSize: 15)),
+                                        style: GoogleFonts.poppins(fontSize: 15)),
                                     subtitle: TextFormField(
+                                       focusNode: _name,
+                                     onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_comName);
+                                },
                                       controller: firstname,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
@@ -412,12 +443,12 @@ class ContactUsPage extends StatelessWidget {
                                         }
                                         return null; // Return null if the input is valid
                                       },
-                                      decoration: const InputDecoration(
+                                      decoration:  InputDecoration(
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(8)),
                                         ),
-                                        hintText: '  Name',
+                                        hintText: 'Name',hintStyle: GoogleFonts.poppins()
                                       ),
                                     ),
                                   ),
@@ -429,9 +460,13 @@ class ContactUsPage extends StatelessWidget {
                                   child: ListTile(
                                     title: Text(
                                       'Company Name',
-                                      style: TextStyle(fontSize: 15),
+                                      style: GoogleFonts.poppins(fontSize: 13),
                                     ),
                                     subtitle: TextFormField(
+                                       focusNode: _comName,
+                                     onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_email);
+                                },
                                       controller: companyname,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
@@ -439,11 +474,11 @@ class ContactUsPage extends StatelessWidget {
                                         }
                                         return null; // Return null if the input is valid
                                       },
-                                      decoration: const InputDecoration(
+                                      decoration:  InputDecoration(
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8))),
-                                        hintText: '  Company Name',
+                                        hintText: 'Company Name',hintStyle: GoogleFonts.poppins(fontSize: 13)
                                       ),
                                     ),
                                   ),
@@ -453,9 +488,13 @@ class ContactUsPage extends StatelessWidget {
                             ListTile(
                               title: Text(
                                 'Email',
-                                style: TextStyle(fontSize: 15),
+                                style: GoogleFonts.poppins(fontSize: 15),
                               ),
                               subtitle: TextFormField(
+                                 focusNode: _email,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_phone);
+                                },
                                 controller: email,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -466,11 +505,11 @@ class ContactUsPage extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                decoration: const InputDecoration(
+                                decoration:  InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(8))),
-                                  hintText: '  Email',
+                                  hintText: '  Email',hintStyle: GoogleFonts.poppins()
                                 ),
                               ),
                             ),
@@ -480,9 +519,13 @@ class ContactUsPage extends StatelessWidget {
                             ListTile(
                               title: Text(
                                 'Phone Number',
-                                style: TextStyle(fontSize: 15),
+                                style: GoogleFonts.poppins(fontSize: 15),
                               ),
                               subtitle: TextFormField(
+                                 focusNode: _phone,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_msg);
+                                },
                                 keyboardType: TextInputType.phone,
                                 controller: phone,
                                 validator: (value) {
@@ -498,11 +541,11 @@ class ContactUsPage extends StatelessWidget {
                                 // FilteringTextInputFormatter.allow(RegExp(r'^\+?966|05[0-9]?$')),
 
                                 // ],
-                                decoration: const InputDecoration(
+                                decoration:  InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(8))),
-                                  hintText: '  +966501234567',
+                                  hintText: '  +966501234567',hintStyle: GoogleFonts.poppins(),
                                   prefixIcon: Icon(Icons.phone),
                                 ),
                               ),
@@ -513,9 +556,13 @@ class ContactUsPage extends StatelessWidget {
                             ListTile(
                               title: Text(
                                 'Message',
-                                style: TextStyle(fontSize: 15),
+                                style: GoogleFonts.poppins(fontSize: 15),
                               ),
                               subtitle: TextFormField(
+                                 focusNode: _msg,
+                               onFieldSubmitted: (value) {
+                                  FocusScope.of(context).requestFocus(_enter);
+                                },
                                 controller: message,
                                 keyboardType: TextInputType.multiline,
                                 style: TextStyle(
@@ -524,7 +571,7 @@ class ContactUsPage extends StatelessWidget {
                                 maxLines: 5,
                                 decoration: InputDecoration(
                                     hintText: "Message",
-                                    hintStyle: TextStyle(
+                                    hintStyle: GoogleFonts.poppins(
                                         color: const Color.fromARGB(
                                             255, 151, 151, 151)),
                                     border: OutlineInputBorder(
@@ -554,6 +601,7 @@ class ContactUsPage extends StatelessWidget {
                               height: MediaQuery.of(context).size.height / 25,
                             ),
                             ElevatedButton(
+                            focusNode: _enter,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 // All text fields are valid, you can perform your action here
@@ -593,7 +641,7 @@ class ContactUsPage extends StatelessWidget {
                             },
                             child: Text(
                               'SUBMIT',
-                              style: TextStyle(color: Colors.white),
+                              style: GoogleFonts.merriweather(color: Colors.white),
                             ),
                             style: ButtonStyle(
                               backgroundColor:
@@ -661,7 +709,7 @@ class ContactContaineru extends StatelessWidget {
           Gap(50),
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: GoogleFonts.oswald(fontWeight: FontWeight.bold),
           ),
           Gap(10),
           Text(content),
@@ -669,7 +717,7 @@ class ContactContaineru extends StatelessWidget {
           TextButton(
             child: Text(
               buttonText.toUpperCase(), // Use the provided buttonText
-              style: TextStyle(fontSize: 10),
+              style: GoogleFonts.merriweather(fontSize: 10),
             ),
             style: ButtonStyle(
               padding:

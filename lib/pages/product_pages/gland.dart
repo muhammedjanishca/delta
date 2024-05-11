@@ -1,13 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
-import 'package:firebase_hex/widgets/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
-import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
@@ -22,15 +17,15 @@ class GlandPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double _height = MediaQuery.of(context).size.height;
+    // double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     double thumbnailSize = screenSize.width * 0.11;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
-    final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
+    // final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
     final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
-    final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
+    // final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
 
     return Consumer(builder: (context, provider, child) {
       return FutureBuilder<ProduceNewModal>(
@@ -42,9 +37,9 @@ class GlandPage extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            final products = snapshot.data!.data;
-            final nonNullProducts =
-                products.where((product) => product != null).toList();
+            // final products = snapshot.data!.data;
+            // final nonNullProducts =
+            //     products.where((product) => product != null).toList();
 
             return ListView(
               children: [
@@ -53,7 +48,7 @@ class GlandPage extends StatelessWidget {
                 //   height: MediaQuery.of(context).size.height / 2.5,
                 //   child: custCarosal(context, sliderAccessories, Index),
                 // ),
-                Container(
+                SizedBox(
                   child:Image.network('https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/Yellow+White+Modern+Digital+Marketing+LinkedIn+Article+Cover+Image+.png') ,
                 ),
                 SizedBox(

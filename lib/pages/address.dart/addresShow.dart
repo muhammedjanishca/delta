@@ -342,7 +342,7 @@ class _AddressShowState extends State<AddressShow> {
                                     },
                                     child: Text(
                                       'GENERATE QUATATION',
-                                      style: GoogleFonts.roboto(
+                                      style: GoogleFonts.merriweather(
                                           color: Colors.white),
                                     ),
                                     style: ButtonStyle(
@@ -442,8 +442,8 @@ class AddressShowMob extends StatelessWidget {
     double totalPriceWithVAT =
         cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
     // var removAdd = cartProvider.removeAddress();
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    // double _width = MediaQuery.of(context).size.width;
+    // double _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Colors.white,

@@ -8,7 +8,7 @@ class VerificationState with ChangeNotifier {
   bool verificationSuccess = false;
 
   void startTimer() {
-    final Timer timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    final Timer timer = Timer.periodic( Duration(seconds: 1), (Timer timer) {
       if (remainingTime > 0) {
         remainingTime--;
       } else {

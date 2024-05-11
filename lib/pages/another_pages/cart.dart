@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/provider/Refresh.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/provider/address_provider.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
 import 'package:firebase_hex/responsive/res_cartpage.dart';
@@ -11,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../login_and_signing/authentication.dart';
 import '../../provider/cart_provider.dart';
-import '../../provider/user_input_provider.dart';
+// import '../../provider/user_input_provider.dart';
 import 'quotationPage.dart';
 
 class CartPage extends StatelessWidget {
@@ -74,8 +73,8 @@ class _DeskCartState extends State<DeskCart> {
 //       addresscount =
 //           Provider.of<AddressProvider>(context).selectIndex;
 //     }
-    final userInputProvider = Provider.of<UserInputProvider>(context);
-    final FirebaseAuth auth = FirebaseAuth.instance;
+    // final userInputProvider = Provider.of<UserInputProvider>(context);
+    // final FirebaseAuth auth = FirebaseAuth.instance;
     final cartProvider = Provider.of<CartProvider>(context);
     cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
@@ -367,7 +366,7 @@ class _DeskCartState extends State<DeskCart> {
                                 child: Text(
                                   'GENERATE QUATATION',
                                   style:
-                                      GoogleFonts.roboto(color: Colors.white),
+                                      GoogleFonts.merriweather(color: Colors.white),
                                 ),
                                 style: ButtonStyle(
                                   shape: MaterialStatePropertyAll(
@@ -421,8 +420,8 @@ class Mobilecart extends StatefulWidget {
 class _MobilecartState extends State<Mobilecart> {
   @override
   Widget build(BuildContext context) {
-    final userInputProvider = Provider.of<UserInputProvider>(context);
-    final FirebaseAuth auth = FirebaseAuth.instance;
+    // final userInputProvider = Provider.of<UserInputProvider>(context);
+    // final FirebaseAuth auth = FirebaseAuth.instance;
     final cartProvider = Provider.of<CartProvider>(context);
     cartProvider.getCartData();
     var cartItems = cartProvider.fetchedItems;
@@ -1047,11 +1046,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     // cartProvider.getCartData();
-    var cartItems = cartProvider.fetchedItems;
+    // var cartItems = cartProvider.fetchedItems;
     double subtotal = cartProvider.getTotalPrice();
     double vatRate = 15.0;
-    double vat = cartProvider.calculateVAT(subtotal, vatRate);
-    double totalPriceWithVAT =
+    // double vat = cartProvider.calculateVAT(subtotal, vatRate);
+    // double totalPriceWithVAT =
         cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
     return BottomAppBar(
       child: Container(
@@ -1077,7 +1076,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 },
                 child:  Text(
                   'GENERATE QUOTATION',
-                  style: GoogleFonts.poppins(color: Colors.white),
+                  style: GoogleFonts.merriweather(color: Colors.white),
                 ),
               ),
             )
@@ -1096,8 +1095,8 @@ class MobileBottomNavigationBaru extends StatelessWidget {
     var cartItems = cartProvider.fetchedItems;
     double subtotal = cartProvider.getTotalPrice();
     double vatRate = 15.0;
-    double vat = cartProvider.calculateVAT(subtotal, vatRate);
-    double totalPriceWithVAT =
+    // double vat = cartProvider.calculateVAT(subtotal, vatRate);
+    // double totalPriceWithVAT =
         cartProvider.getTotalPriceWithVAT(subtotal, vatRate);
     return BottomAppBar(
       child: Container(

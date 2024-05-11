@@ -1,13 +1,10 @@
 import 'dart:convert';
-import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/pages/address.dart/addresShow.dart';
-import 'package:firebase_hex/provider/Refresh.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -80,7 +77,7 @@ class _TextAddressState extends State<TextAddress> {
                           height: 40,
                           child: Padding(
                             padding: const EdgeInsets.only(top: 15),
-                            child: Text("ADD ADDRESS"),
+                            child: Text("ADD ADDRESS",style: GoogleFonts.poppins(),),
                           )),
                       Divider(),
                       Gap(10),
@@ -224,7 +221,7 @@ class _TextAddressState extends State<TextAddress> {
                           },
                           child: Text(
                             'ADD ADDRESS',
-                            style: TextStyle(color: Colors.white),
+                            style: GoogleFonts.merriweather(color: Colors.white),
                           ),
                           style: ButtonStyle(
                             backgroundColor:
@@ -253,7 +250,7 @@ class _TextAddressState extends State<TextAddress> {
                             height: 40,
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15),
-                              child: Text("ADD ADDRESS"),
+                              child: Text("ADD ADDRESS",style: GoogleFonts.merriweather(),),
                             )),
                         Divider(),
                         Gap(10),
@@ -396,7 +393,7 @@ class _TextAddressState extends State<TextAddress> {
                           },
                           child: Text(
                             'ADD ADDRESS',
-                            style: TextStyle(color: Colors.white),
+                            style: GoogleFonts.merriweather(color: Colors.white),
                           ),
                           style: ButtonStyle(
                             backgroundColor:

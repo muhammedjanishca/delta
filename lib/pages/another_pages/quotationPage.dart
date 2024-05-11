@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../../constants.dart';
 import '../../enquiry.dart';
 
 class QuotationPage extends StatelessWidget {
@@ -67,10 +68,10 @@ class QuotationDeskPage extends StatelessWidget {
     // Use selectedAddress to display address details
     final companyName = selectedAddress['Company Name'];
     final contactNumber = selectedAddress['Contact Number'];
-    final streetAddress = selectedAddress['Street Address'];
-    final streetAddressline2 = selectedAddress['Street Address line 2'];
+    // final streetAddress = selectedAddress['Street Address'];
+    // final streetAddressline2 = selectedAddress['Street Address line 2'];
     final location = selectedAddress['Location'];
-    final city = selectedAddress['City'];
+    // final city = selectedAddress['City'];
     final email = selectedAddress['Email'];
     // Continue with other address fields as needed
     return Scaffold(
@@ -170,7 +171,6 @@ class QuotationDeskPage extends StatelessWidget {
           ),
         ),
       ),
-     
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 20, 208, 60),
         onPressed: () async {
@@ -179,7 +179,7 @@ class QuotationDeskPage extends StatelessWidget {
               .get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
-            Uri.parse('https://ready.deltabackend.com/invoice_number'),
+            Uri.parse('$appBaseurl/invoice_number'),
           );
 
           if (response.statusCode == 200) {
@@ -342,7 +342,6 @@ class QuotationDeskPage extends StatelessWidget {
                     width: 500,
                     height: 200,
                   ),
-                 
                   SizedBox(
                     width: 264,
                     height: 200,
@@ -438,10 +437,10 @@ class QuotationMobilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final companyName = selectedAddress['Company Name'];
     final contactNumber = selectedAddress['Contact Number'];
-    final streetAddress = selectedAddress['Street Address'];
-    final streetAddressline2 = selectedAddress['Street Address line 2'];
+    // final streetAddress = selectedAddress['Street Address'];
+    // final streetAddressline2 = selectedAddress['Street Address line 2'];
     final location = selectedAddress['Location'];
-    final city = selectedAddress['City'];
+    // final city = selectedAddress['City'];
     final email = selectedAddress['Email'];
     // Continue with other address fields as needed
     return Scaffold(
@@ -503,7 +502,8 @@ class QuotationMobilePage extends StatelessWidget {
                             )
                           ],
                         ),
-                      ),],
+                      ),
+                    ],
                   ),
                 )
                 // MyClipPath(),
@@ -523,7 +523,7 @@ class QuotationMobilePage extends StatelessWidget {
               .get_current_address(cartItems, context);
           // Call your backend API to increment the invoice number
           final response = await http.post(
-            Uri.parse('https://ready.deltabackend.com/invoice_number'),
+            Uri.parse('$appBaseurl/invoice_number'),
           );
 
           if (response.statusCode == 200) {
@@ -693,7 +693,8 @@ class QuotationMobilePage extends StatelessWidget {
                                   TextSpan(
                                     text:
                                         jsonDecode(cartItems[i])['productName'],
-                                    style: GoogleFonts.poppins(fontSize: 11,color: Colors.black),
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 11, color: Colors.black),
                                   ), // Adjust font size as needed )),
                                   // Add more TextSpans for additional content or line breaks
                                 ],
@@ -707,7 +708,8 @@ class QuotationMobilePage extends StatelessWidget {
                                   TextSpan(
                                     text:
                                         jsonDecode(cartItems[i])['productCode'],
-                                    style: GoogleFonts.poppins(fontSize: 12,color: Colors.black),
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 12, color: Colors.black),
                                   ),
                                 ],
                               ),
@@ -716,7 +718,8 @@ class QuotationMobilePage extends StatelessWidget {
                           DataCell(_buildTableCell(
                             '${jsonDecode(cartItems[i])['quantity']}',
                             style: GoogleFonts.poppins(
-                                fontSize:10.0), // Example: Smaller text for quantity
+                                fontSize:
+                                    10.0), // Example: Smaller text for quantity
                           )),
                           DataCell(_buildTableCell('unit',
                               style: const TextStyle(fontSize: 10.0))),
@@ -761,7 +764,9 @@ class QuotationMobilePage extends StatelessWidget {
                     children: [
                       Container(
                         // color: Colors.amber,
-                        padding:  EdgeInsets.only(left: 8,right: 8), // Add padding inside the container
+                        padding: EdgeInsets.only(
+                            left: 8,
+                            right: 8), // Add padding inside the container
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment
                               .spaceBetween, // Adjust to spaceBetween for equal spacing
@@ -769,14 +774,14 @@ class QuotationMobilePage extends StatelessWidget {
                             _buildTableCell(
                               'Net Before(VAT)',
                               fontWeight: FontWeight.w400,
-                              style: GoogleFonts.poppins(
-                                  ), // Specify a font size
+                              style:
+                                  GoogleFonts.poppins(), // Specify a font size
                             ),
                             _buildTableCell(
                               '\SAR ${totalPrice.toStringAsFixed(2)}',
                               fontWeight: FontWeight.w400,
-                              style: GoogleFonts.poppins(
-                                 ), // Keep font size consistent
+                              style: GoogleFonts
+                                  .poppins(), // Keep font size consistent
                             ),
                           ],
                         ),
@@ -787,7 +792,7 @@ class QuotationMobilePage extends StatelessWidget {
                         color: Color.fromARGB(255, 123, 87, 87),
                       ),
                       Padding(
-                         padding:  EdgeInsets.only(left: 8,right: 8),
+                        padding: EdgeInsets.only(left: 8, right: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment
                               .spaceBetween, // Adjust to spaceBetween
@@ -823,8 +828,7 @@ class QuotationMobilePage extends StatelessWidget {
                             _buildTableCell(
                               '\SAR ${totalPriceWithVAT.toStringAsFixed(2)}',
                               fontWeight: FontWeight.bold,
-                              style: GoogleFonts.poppins(
-                                  ), // Consistent style
+                              style: GoogleFonts.poppins(), // Consistent style
                             ),
                           ],
                         ),

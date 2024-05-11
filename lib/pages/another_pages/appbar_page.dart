@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_hex/pages/another_pages/cart.dart';
 import 'package:firebase_hex/pages/product_pages/AccessoriesPage.dart';
 import 'package:firebase_hex/pages/product_pages/Cjtkc.dart';
 import 'package:firebase_hex/pages/product_pages/Sbcpa.dart';

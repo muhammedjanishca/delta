@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
@@ -12,7 +9,6 @@ import '../../provider/hover_image_provider.dart';
 import '../../provider/thumbnail.dart';
 import '../../widgets/style.dart';
 import '../../widgets/bottom_sheet.dart';
-import '../../widgets/carousal_slider.dart';
 
 class LugsPage extends StatelessWidget {
   LugsPage({super.key});
@@ -23,11 +19,11 @@ class LugsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     double thumbnailSize = screenSize.width * 0.11; // Adjust the factor as needed
-    double _height = MediaQuery.of(context).size.height;
+    // double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
-    final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
+    // final ImageHoverProvider = Provider.of<ImageHoveroProvider>(context);
     final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
 

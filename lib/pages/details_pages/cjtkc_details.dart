@@ -788,8 +788,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
                       },
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 54, 98, 98)),
+                        backgroundColor: MaterialStateProperty.all(addtoCart),
                         minimumSize: MaterialStateProperty.all(Size(150, 50)),
                       ),
                     ),
@@ -803,15 +802,11 @@ class ProductDetailsCjtkc extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                                            user != null
-                                                ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
+                                            user != null;
+                                            cartCount != 0
+                                                ? Navigator.pushNamed( context, '/cart')
+                                                : Navigator.pushNamed(
+                                                    context, '/cartempty');
                                           },
                       child: Text(
                         'GO TO CART',
@@ -1070,9 +1065,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
-                                                MaterialStateProperty.all(
-                                                 const Color.fromARGB(255, 54, 98, 98),
-                                            ),
+                                                MaterialStateProperty.all(addtoCart),
                                             minimumSize:
                                                 MaterialStateProperty.all(
                                                     Size(180, 60)),
@@ -1083,15 +1076,11 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                         ),
                                         ElevatedButton(
                                           onPressed: () {
-                                            user != null
-                                                ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
+                                            user != null;
+                                            cartCount != 0
+                                                ? Navigator.pushNamed( context, '/cart')
+                                                : Navigator.pushNamed(
+                                                    context, '/cartempty');
                                           },
                                           child: Text(
                                             'GO TO CART',

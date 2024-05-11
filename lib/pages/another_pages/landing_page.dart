@@ -7,12 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
-
 import '../../main.dart';
-import '../../provider/thumbnail.dart';
-import '../../search_api.dart';
 import '../../widgets/bottom_sheet.dart';
 
 class DesktopLanding extends StatefulWidget {
@@ -44,9 +40,9 @@ class _DesktopLandingState extends State<DesktopLanding> {
   ];
   List<String> textindex = [
     'PVC Coated Galvanised Flexible Conduit',
-    'hose clamps',
-    'double plate "u" clamp',
-    'crimping tool',
+    'Hose clamps',
+    'Double plate "u" clamp',
+    'Crimping tool',
     'Roller ball type stainless steel cable ties',
     'Insulated bus bar system for mcb',
     'Copper Bonded Grounding Rods',
@@ -54,8 +50,8 @@ class _DesktopLandingState extends State<DesktopLanding> {
   List<String> descriptionCarosal = [
     'Cable Support Systems\n',
     'Cable Jointing & Termination\nKit Components',
-    'earthing & lightning protection\naccessories',
-    'view more crimping tools\n',
+    'Earthing & lightning protection\naccessories',
+    'View more crimping tools\n',
     'Stainless steel cable\nties & markers',
     'Switch Board Control\nPanel Accessories',
     'Earthing & Lightning\nProtection',
@@ -108,18 +104,18 @@ class _DesktopLandingState extends State<DesktopLanding> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final productProvider =
-        Provider.of<ProductProvider>(context, listen: false);
-    final selectedThumbnailProvider =
-        Provider.of<SelectedThumbnailProvider>(context);
+    // final productProvider =
+    //     Provider.of<ProductProvider>(context, listen: false);
+    // final selectedThumbnailProvider =
+    //     Provider.of<SelectedThumbnailProvider>(context);
 
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
 
     // final descriptionStyle = Theme.of(context).textTheme.headlineMedium;
     return LayoutBuilder(builder: (context, Constraints) {
       if (Constraints.maxWidth > 850) {
         return Material(
-          color: Colors.black,
+          color: Colors.transparent,
           child: NotificationListener<ScrollNotification>(
             onNotification: updateOffsetAccordingToScroll,
             child: ScrollConfiguration(
@@ -128,12 +124,16 @@ class _DesktopLandingState extends State<DesktopLanding> {
                 children: <Widget>[
                   Positioned(
                     top: -.25 * offset,
-                    child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: kHeroImage,
-                      height: height,
-                      width: width,
-                      fit: BoxFit.cover,
+                    child: FittedBox(
+                      child: Container(
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: kHeroImage,
+                          // height: height,
+                          width: width,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   // Positioned(
@@ -243,104 +243,104 @@ class _DesktopLandingState extends State<DesktopLanding> {
                                 height:
                                     MediaQuery.of(context).size.height / 9.7,
                               ),
-                              Row(
-                                // crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Experience ",
-                                    // "EXPERIENCE THE NEW",
-                                    style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 45,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "The New",
-                                    // "EXPERIENCE THE NEW",
-                                    style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 45,
-                                        // fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    // "DELTA PREMIUM PRODUCTS",
-                                    "Delta ",
-                                    style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 45,
-                                        // fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    // "DELTA PREMIUM PRODUCTS",
-                                    "Premium Products.",
-                                    style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 45,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                // color: Colors.blue,
-                                height: height / 2,
-                                width: width / 1,
-                                // color: Colors.white,
-                                child: Center(
-                                  child: AnimatedTextKit(
-                                    totalRepeatCount: 40,
-                                    animatedTexts: [
-                                      RotateAnimatedText(
-                                          '   tested\nproducts'.toUpperCase(),
-                                          // .toUpperCase(),
-                                          textStyle: GoogleFonts.poppins(
-                                            letterSpacing: 3,
-                                            fontSize: 80,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color.fromARGB(
-                                                255, 217, 220, 60),
-                                          )),
-                                      RotateAnimatedText(
-                                        'efficient\n service'.toUpperCase(),
-                                        textStyle: GoogleFonts.poppins(
-                                          fontSize: 80.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color.fromARGB(
-                                              255, 217, 220, 60),
-                                        ),
-                                      ),
-                                      RotateAnimatedText(
-                                        'trusted\n  brand'.toUpperCase(),
-                                        duration:
-                                            const Duration(milliseconds: 4000),
-                                        textStyle: GoogleFonts.poppins(
-                                          fontSize: 80.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color.fromARGB(
-                                              255, 217, 220, 60),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              // Row(
+                              //   // crossAxisAlignment: CrossAxisAlignment.center,
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       "Experience ",
+                              //       // "EXPERIENCE THE NEW",
+                              //       style: GoogleFonts.poppins(
+                              //         textStyle: const TextStyle(
+                              //           color: Colors.white,
+                              //           fontSize: 45,
+                              //           fontWeight: FontWeight.bold,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       "The New",
+                              //       // "EXPERIENCE THE NEW",
+                              //       style: GoogleFonts.poppins(
+                              //         textStyle: const TextStyle(
+                              //           color: Colors.white,
+                              //           fontSize: 45,
+                              //           // fontWeight: FontWeight.bold,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       // "DELTA PREMIUM PRODUCTS",
+                              //       "Delta ",
+                              //       style: GoogleFonts.poppins(
+                              //         textStyle: const TextStyle(
+                              //           color: Colors.white,
+                              //           fontSize: 45,
+                              //           // fontWeight: FontWeight.bold,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       // "DELTA PREMIUM PRODUCTS",
+                              //       "Premium Products.",
+                              //       style: GoogleFonts.poppins(
+                              //         textStyle: const TextStyle(
+                              //           color: Colors.white,
+                              //           fontSize: 45,
+                              //           fontWeight: FontWeight.bold,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // SizedBox(
+                              //   // color: Colors.blue,
+                              //   height: height / 2,
+                              //   width: width / 1,
+                              //   // color: Colors.white,
+                              //   child: Center(
+                              //     child: AnimatedTextKit(
+                              //       totalRepeatCount: 40,
+                              //       animatedTexts: [
+                              //         RotateAnimatedText(
+                              //             '   tested\nproducts'.toUpperCase(),
+                              //             // .toUpperCase(),
+                              //             textStyle: GoogleFonts.poppins(
+                              //               letterSpacing: 3,
+                              //               fontSize: 80,
+                              //               fontWeight: FontWeight.bold,
+                              //               color: const Color.fromARGB(
+                              //                   255, 217, 220, 60),
+                              //             )),
+                              //         RotateAnimatedText(
+                              //           'efficient\n service'.toUpperCase(),
+                              //           textStyle: GoogleFonts.poppins(
+                              //             fontSize: 80.0,
+                              //             fontWeight: FontWeight.bold,
+                              //             color: const Color.fromARGB(
+                              //                 255, 217, 220, 60),
+                              //           ),
+                              //         ),
+                              //         RotateAnimatedText(
+                              //           'trusted\n  brand'.toUpperCase(),
+                              //           duration:
+                              //               const Duration(milliseconds: 4000),
+                              //           textStyle: GoogleFonts.poppins(
+                              //             fontSize: 80.0,
+                              //             fontWeight: FontWeight.bold,
+                              //             color: const Color.fromARGB(
+                              //                 255, 217, 220, 60),
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
                               const Gap(10),
                               // SizedBox(
                               //     width: MediaQuery.of(context).size.width / 3,
@@ -1084,119 +1084,119 @@ Gap(65),
                 Stack(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 2,
+                      // height: MediaQuery.of(context).size.height / 2,
                       child: Image.network(
-                        'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/image+(2).png',
+                        'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/White+Minimal+Furniture+Website+Desktop+Prototype+(1).png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Positioned(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 17,
-                          ),
-                          Row(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Experience ",
-                                // "EXPERIENCE THE NEW",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                "The New",
-                                // "EXPERIENCE THE NEW",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 21,
-                                    // fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                // "DELTA PREMIUM PRODUCTS",
-                                "Delta ",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 21,
-                                    // fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                // "DELTA PREMIUM PRODUCTS",
-                                "Premium Products.",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            // color: Colors.blue,
-                            height: height / 3,
-                            width: width / 1,
-                            // color: Colors.white,
-                            child: Center(
-                              child: AnimatedTextKit(
-                                totalRepeatCount: 50,
-                                animatedTexts: [
-                                  RotateAnimatedText(
-                                      '   tested\nproducts'.toUpperCase(),
-                                      // .toUpperCase(),
-                                      textStyle: GoogleFonts.poppins(
-                                        letterSpacing: 3,
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                        color: const Color.fromARGB(
-                                            255, 217, 220, 60),
-                                      )),
-                                  RotateAnimatedText(
-                                    'efficient\n service'.toUpperCase(),
-                                    textStyle: GoogleFonts.poppins(
-                                      fontSize: 40.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color.fromARGB(
-                                          255, 217, 220, 60),
-                                    ),
-                                  ),
-                                  RotateAnimatedText(
-                                    'trusted\n  brand'.toUpperCase(),
-                                    duration:
-                                        const Duration(milliseconds: 4000),
-                                    textStyle: GoogleFonts.poppins(
-                                      fontSize: 40.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color.fromARGB(
-                                          255, 217, 220, 60),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Positioned(
+                    //   child: Column(
+                    //     children: [
+                    //       SizedBox(
+                    //         height: MediaQuery.of(context).size.height / 17,
+                    //       ),
+                    //       Row(
+                    //         // crossAxisAlignment: CrossAxisAlignment.center,
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           Text(
+                    //             "Experience ",
+                    //             // "EXPERIENCE THE NEW",
+                    //             style: GoogleFonts.poppins(
+                    //               textStyle: const TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontSize: 21,
+                    //                 fontWeight: FontWeight.bold,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           Text(
+                    //             "The New",
+                    //             // "EXPERIENCE THE NEW",
+                    //             style: GoogleFonts.poppins(
+                    //               textStyle: const TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontSize: 21,
+                    //                 // fontWeight: FontWeight.bold,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           Text(
+                    //             // "DELTA PREMIUM PRODUCTS",
+                    //             "Delta ",
+                    //             style: GoogleFonts.poppins(
+                    //               textStyle: const TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontSize: 21,
+                    //                 // fontWeight: FontWeight.bold,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           Text(
+                    //             // "DELTA PREMIUM PRODUCTS",
+                    //             "Premium Products.",
+                    //             style: GoogleFonts.poppins(
+                    //               textStyle: const TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontSize: 21,
+                    //                 fontWeight: FontWeight.bold,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       SizedBox(
+                    //         // color: Colors.blue,
+                    //         height: height / 3,
+                    //         width: width / 1,
+                    //         // color: Colors.white,
+                    //         child: Center(
+                    //           child: AnimatedTextKit(
+                    //             totalRepeatCount: 50,
+                    //             animatedTexts: [
+                    //               RotateAnimatedText(
+                    //                   '   tested\nproducts'.toUpperCase(),
+                    //                   // .toUpperCase(),
+                    //                   textStyle: GoogleFonts.poppins(
+                    //                     letterSpacing: 3,
+                    //                     fontSize: 40,
+                    //                     fontWeight: FontWeight.bold,
+                    //                     color: const Color.fromARGB(
+                    //                         255, 217, 220, 60),
+                    //                   )),
+                    //               RotateAnimatedText(
+                    //                 'efficient\n service'.toUpperCase(),
+                    //                 textStyle: GoogleFonts.poppins(
+                    //                   fontSize: 40.0,
+                    //                   fontWeight: FontWeight.bold,
+                    //                   color: const Color.fromARGB(
+                    //                       255, 217, 220, 60),
+                    //                 ),
+                    //               ),
+                    //               RotateAnimatedText(
+                    //                 'trusted\n  brand'.toUpperCase(),
+                    //                 duration:
+                    //                     const Duration(milliseconds: 4000),
+                    //                 textStyle: GoogleFonts.poppins(
+                    //                   fontSize: 40.0,
+                    //                   fontWeight: FontWeight.bold,
+                    //                   color: const Color.fromARGB(
+                    //                       255, 217, 220, 60),
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
                 Container(
@@ -1251,9 +1251,9 @@ Gap(65),
                                           padding: const EdgeInsets.all(15),
                                           child: Text(
                                             textindex[index],
-                                            style: GoogleFonts.poppins(
+                                            style: GoogleFonts.oswald(
                                               color: Colors.black,
-                                              fontSize: 17,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -1265,7 +1265,7 @@ Gap(65),
                                             padding: const EdgeInsets.all(15),
                                             child: Text(
                                               descriptionCarosal[index],
-                                              style: GoogleFonts.poppins(),
+                                              style: GoogleFonts.roboto(),
                                             )),
                                       ),
                                     ],
@@ -1616,7 +1616,6 @@ Future<bool> checkIfDataExists() async {
 }
 
 class NoScrollGlow extends ScrollBehavior {
-  @override
   Widget buildViewportChrome(
     BuildContext context,
     Widget child,
@@ -1627,7 +1626,7 @@ class NoScrollGlow extends ScrollBehavior {
 }
 
 const kHeroImage =
-    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/image+(2).png';
+    'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing_page+images/White+Minimal+Furniture+Website+Desktop+Prototype+(1).png';
 
 // Product container code of landing Page
 

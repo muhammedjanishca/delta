@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
-import 'package:firebase_hex/widgets/style.dart';
+// import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../login_and_signing/loginpage.dart';
 import '../pages/another_pages/contact_us.dart';
 import '../provider/cart_provider.dart';
-import 'package:badges/badges.dart' as badges;
+// import 'package:badges/badges.dart' as badges;
 
 Color textColor = Colors.black;
 Color textColorr = Colors.black;
@@ -172,12 +172,12 @@ class LoginAndLogOut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int cartCount = 0;
+    // int cartCount = 0;
       var user = Provider.of<AuthenticationHelper>(context).user;
     if (user != null) {
       Provider.of<CartProvider>(context).getCartData();
-      cartCount =
-          Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
+      // cartCount =
+      //     Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
     }
     return  user == null
                         ? InkWell(
@@ -250,9 +250,7 @@ class HoverText extends StatefulWidget {
 
 class _HoverTextState extends State<HoverText> {
   
-  @override
-  
-//home
+  //home
   void incrementEnter(PointerEvent details) {
     setState(() {
       enterCounter++;

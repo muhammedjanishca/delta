@@ -34,17 +34,26 @@ class ProductDetailsoflugs extends StatelessWidget {
         TextEditingController(text: '1'); // start with initial value as 1
 
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final selectedContainerColorNotifier =
-        Provider.of<SelectedContainerColorNotifier>(context);
+    // final selectedContainerColorNotifier =
+    //     Provider.of<SelectedContainerColorNotifier>(context);
     final selectedCodeProvider = Provider.of<SelectedCodeProvider>(context);
-    final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
+
+    // final selectedKiduProvider = Provider.of<SelectedKiduProvider>(context);
+    Provider.of<AuthenticationHelper>(context).getCurrentUser();
     final selectedThumbnailProvider =
         Provider.of<SelectedThumbnailProvider>(context);
     final selectedPriceNotifieru =
         Provider.of<SelectedPriceNotifier>(context, listen: false);
     var user = Provider.of<AuthenticationHelper>(context).user;
+    // if (user != null) {
+    //   Provider.of<CartProvider>(context).getCartData();
+    //   cartCount =
+    //       Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
 
-    final imageSelection = Provider.of<ImageSelection>(context);
+    //       print("conutttt: $cartCount");
+    // }
+
+    // final imageSelection = Provider.of<ImageSelection>(context);
     String selectedProductIndex =
         ModalRoute.of(context)!.settings.name as String;
     var settingList = selectedProductIndex.split('/');
@@ -129,7 +138,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                
                                 SizedBox(
                                   // height: do
                                   // height: MediaQuery.of(context).size.height /0.1,
@@ -157,7 +165,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       .selectedThumbnail!)
                                               : thumbnail != null
                                                   ? Image.network(thumbnail!)
-                                                  : SizedBox(),
+                                                  : const SizedBox(),
                                         ),
                                       ),
                                       Center(
@@ -216,7 +224,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                       ),
                                       //--------Product Price-----------
 
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       Center(
@@ -236,11 +244,13 @@ class ProductDetailsoflugs extends StatelessWidget {
                                         ),
                                       ),
 
-                                      Divider(),
+                                      const Divider(),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 25),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Flexible(
                                               child: FittedBox(
@@ -256,7 +266,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           style: GoogleFonts
                                                               .poppins(
                                                             // fontSize: 12.0,
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0xFF212121),
                                                           ),
                                                         ),
@@ -264,7 +274,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       Container(
                                                         height: 60,
                                                         padding:
-                                                            EdgeInsets.all(8.0),
+                                                            const EdgeInsets.all(8.0),
                                                         child: Consumer<
                                                             SelectedPriceNotifier>(
                                                           builder: (context,
@@ -276,7 +286,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             String prefix = ":";
                                                             TextStyle
                                                                 prefixStyle =
-                                                                TextStyle(
+                                                                const TextStyle(
                                                               color:
                                                                   Colors.black,
                                                               fontWeight:
@@ -286,14 +296,14 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             );
                                                             TextStyle
                                                                 suffixStyle =
-                                                                TextStyle(
+                                                                const TextStyle(
                                                               color: Colors.red,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
                                                               fontSize: 14,
                                                             );
-                                      
+
                                                             int prefixIndex =
                                                                 priceText
                                                                     .indexOf(
@@ -352,12 +362,11 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                     
+
                                       SizedBox(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            20,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                20,
                                       ),
                                       SizedBox(
                                         child: Row(
@@ -390,17 +399,15 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                       quantityController
                                                                           .text) ??
                                                                   0;
-                                                          if (currentQty >
-                                                              0) {
+                                                          if (currentQty > 0) {
                                                             quantityController
                                                                     .text =
-                                                                (currentQty -
-                                                                        1)
+                                                                (currentQty - 1)
                                                                     .toString();
                                                           }
                                                         },
-                                                        icon: Icon(
-                                                            Icons.remove),
+                                                        icon:
+                                                            const Icon(Icons.remove),
                                                       ),
                                                     ),
                                                     // Gap(5), // Provide some horizontal space between the button and the text field
@@ -421,7 +428,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           decoration:
                                                               InputDecoration(
                                                             contentPadding:
-                                                                EdgeInsets.symmetric(
+                                                                const EdgeInsets.symmetric(
                                                                     vertical:
                                                                         8.0), // Center the placeholder vertically
                                                             border:
@@ -449,7 +456,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             (currentQty + 1)
                                                                 .toString();
                                                       },
-                                                      icon: Icon(Icons.add),
+                                                      icon: const Icon(Icons.add),
                                                     )),
                                                   ],
                                                 ),
@@ -461,8 +468,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     showModalBottomSheet(
                                                       useSafeArea: true,
                                                       context: context,
-                                                      isScrollControlled:
-                                                          true,
+                                                      isScrollControlled: true,
                                                       builder: (BuildContext
                                                           context) {
                                                         return SingleChildScrollView(
@@ -476,7 +482,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                 child:
                                                                     Container(
                                                                   // width: MediaQuery.of(context).size.width/1.5,
-                                                                  height: MediaQuery.of(context)
+                                                                  height: MediaQuery.of(
+                                                                              context)
                                                                           .size
                                                                           .height /
                                                                       1,
@@ -484,8 +491,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                       .white,
                                                                   child: pdf !=
                                                                           null
-                                                                      ? SfPdfViewer.network(
-                                                                          pdf!)
+                                                                      ? SfPdfViewer
+                                                                          .network(
+                                                                              pdf!)
                                                                       : Nopdf(),
                                                                 ),
                                                               ),
@@ -496,7 +504,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                     16, // Adjust the left position as needed
                                                                 child:
                                                                     IconButton(
-                                                                  icon: Icon(Icons
+                                                                  icon: const Icon(Icons
                                                                       .close), // You can use any icon you like
                                                                   onPressed:
                                                                       () {
@@ -511,10 +519,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       },
                                                     );
                                                   },
-                                                  child: Row(
+                                                  child: const Row(
                                                     children: [
-                                                      Icon(Icons
-                                                          .edit_document),
+                                                      Icon(Icons.edit_document),
                                                       Text("size chart")
                                                     ],
                                                   )
@@ -524,7 +531,6 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                       
 
                                       Center(
                                         child: Column(
@@ -582,7 +588,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           color: dataProvider
                                                                           .colors[
                                                                       index] ==
-                                                                  Color(
+                                                                  const Color(
                                                                       0xffffffff)
                                                               ? Colors.white
                                                               : pickedColor,
@@ -613,7 +619,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                               color: dataProvider
                                                                               .colors[
                                                                           index] ==
-                                                                      Color(
+                                                                      const Color(
                                                                           0xffffffff)
                                                                   ? Colors.black
                                                                   : Colors
@@ -629,24 +635,23 @@ class ProductDetailsoflugs extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
                                           '    description'.toUpperCase(),
                                           style: GoogleFonts.quicksand(
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 156, 155, 155),
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                      Gap(10),
+                                      const Gap(10),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 13),
@@ -670,26 +675,21 @@ class ProductDetailsoflugs extends StatelessWidget {
                                             }).join(' ');
 
                                             return Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start, // Align items at the start of each row
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .start, // Align items at the start of each row
                                               children: [
-                                                Icon(Icons.star,
+                                                const Icon(Icons.star,
                                                     size: 20,
-                                                    color:
-                                                        const Color.fromARGB(
-                                                            255,
-                                                            103,
-                                                            103,
-                                                            103)),
-                                                SizedBox(
+                                                    color: Color.fromARGB(
+                                                        255, 103, 103, 103)),
+                                                const SizedBox(
                                                     width:
                                                         10), // Add space between icon and text
                                                 Flexible(
                                                   child: Text(
                                                     capitalizedLine
                                                         .trim(), // Trim any leading/trailing whitespace
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 16,
                                                     ),
                                                     overflow:
@@ -702,10 +702,9 @@ class ProductDetailsoflugs extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                     ],
                                   ),
@@ -723,7 +722,6 @@ class ProductDetailsoflugs extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          
           child: Container(
             color: Colors.black,
             child: Row(
@@ -731,7 +729,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                 Expanded(
                   child: Container(
                     height: 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.amber,
                     ),
                     child: ElevatedButton(
@@ -763,17 +761,17 @@ class ProductDetailsoflugs extends StatelessWidget {
                                   productName: productName ?? '');
 
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Added to cart')));
+                                  const SnackBar(content: Text('Added to cart')));
                               selectedPriceNotifieru
                                   .setProductCodeSelected(false);
                             } else {
                               ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
+                                  .showSnackBar(const SnackBar(
                                 content: Text('Select the product code'),
                               ));
                             }
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text('Select the product code'),
                             ));
                             // Handle the case where the user is not signed in
@@ -788,10 +786,8 @@ class ProductDetailsoflugs extends StatelessWidget {
                       },
                       child: const Text('ADD TO CART'),
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                             const Color.fromARGB(255, 54, 98, 98)
-                            ),
-                        minimumSize: MaterialStateProperty.all(Size(150, 50)),
+                        backgroundColor: MaterialStateProperty.all(addtoCart),
+                        minimumSize: MaterialStateProperty.all(const Size(150, 50)),
                       ),
                     ),
                   ),
@@ -799,22 +795,17 @@ class ProductDetailsoflugs extends StatelessWidget {
                 Expanded(
                   child: Container(
                     height: 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.black,
                     ),
                     child: TextButton(
                       onPressed: () {
-                                            user != null
-                                                ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
-                                          },
-                      child: Text(
+                        user != null;
+                        cartCount != 0
+                            ? Navigator.pushNamed(context, '/cart')
+                            : Navigator.pushNamed(context, '/cartempty');
+                      },
+                      child: const Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -897,7 +888,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                   // color: const Color.fromARGB(255, 138, 129, 101),
                                   width: MediaQuery.of(context).size.width / 1,
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 20),
                                     child: Column(
                                       children: [
                                         Row(
@@ -922,7 +913,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     },
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsets.all(8.0),
+                                                          const EdgeInsets.all(8.0),
                                                       child: Container(
                                                         decoration:
                                                             BoxDecoration(
@@ -976,7 +967,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                   : thumbnail != null
                                                       ? Image.network(
                                                           thumbnail!)
-                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                                      : const SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
                                             ),
                                           ],
                                         ),
@@ -1034,7 +1025,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           productName ?? '');
 
                                                   ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
+                                                      .showSnackBar(const SnackBar(
                                                           content: Text(
                                                               'Added to cart')));
                                                   selectedPriceNotifieru
@@ -1042,14 +1033,14 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           false);
                                                 } else {
                                                   ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
+                                                      .showSnackBar(const SnackBar(
                                                     content: Text(
                                                         'Select the product code'),
                                                   ));
                                                 }
                                               } else {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   content: Text(
                                                       'Select the product code'),
                                                 ));
@@ -1072,27 +1063,38 @@ class ProductDetailsoflugs extends StatelessWidget {
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
-                             const Color.fromARGB(255, 54, 98, 98)
-                                            ),
+                                                    addtoCart),
                                             minimumSize:
                                                 MaterialStateProperty.all(
-                                                    Size(180, 60)),
+                                                    const Size(180, 60)),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 20,
                                         ),
                                         ElevatedButton(
                                           onPressed: () {
-                                            user != null
-                                                ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
+                                            // print("cartCount: ${cartCount}");                                            user != null;
+                                            cartCount != 0
+                                            ? Navigator.pushNamed(context, '/cart')
+                                            : Navigator.pushNamed(context, '/cartempty');
+                                            //  user != null;
+                                            // cartCount == 0
+                                            //     ? Navigator.pushNamed(
+                                            //         context, '/cartempty')
+                                            //     : Navigator.pushNamed(
+                                            //         context, '/cart');
+                                            // user != null
+                                            //     ? (cartCount !=0
+                                            //     ? Navigator.pushNamed(context, '/cart')
+                                            //     : Navigator.pushNamed(context, '/cartempty'))
+                                            //     : showDialog(
+                                            //         context: context,
+                                            //         builder:
+                                            //             (BuildContext context) {
+                                            //           return LoginPage(); // Your custom dialog widget
+                                            //         },
+                                            //       );
                                           },
                                           child: Text(
                                             'GO TO CART',
@@ -1107,7 +1109,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                     ),
                                             minimumSize:
                                                 MaterialStateProperty.all(
-                                                    Size(180, 60)),
+                                                    const Size(180, 60)),
                                           ),
                                         ),
                                       ],
@@ -1121,7 +1123,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                             flex: 3,
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding: EdgeInsets.only(right: 35),
+                                padding: const EdgeInsets.only(right: 35),
                                 child: Column(
                                   children: [
                                     Container(
@@ -1130,14 +1132,14 @@ class ProductDetailsoflugs extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Gap(30),
+                                          const Gap(30),
                                           Text(
                                             textpass ?? "",
                                             style: GoogleFonts.poppins(
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 26),
                                           ),
-                                          Gap(25),
+                                          const Gap(25),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -1157,7 +1159,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             style: GoogleFonts
                                                                 .poppins(
                                                               fontSize: 16.0,
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xFF212121),
                                                             ),
                                                           ),
@@ -1165,7 +1167,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                         Container(
                                                           height: 60,
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   8.0),
                                                           child: Consumer<
                                                               SelectedPriceNotifier>(
@@ -1199,7 +1201,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                 child: RichText(
                                                                   text:
                                                                       TextSpan(
-                                                                    style: TextStyle(
+                                                                    style: const TextStyle(
                                                                         fontSize:
                                                                             14,
                                                                         color: Color.fromARGB(
@@ -1214,7 +1216,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                       TextSpan(
                                                                         text:
                                                                             sarText,
-                                                                        style: TextStyle(
+                                                                        style: const TextStyle(
                                                                             color:
                                                                                 Colors.red,
                                                                             fontWeight: FontWeight.bold), // SAR text style
@@ -1265,7 +1267,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                                   .toString();
                                                         }
                                                       },
-                                                      icon: Icon(Icons.remove),
+                                                      icon: const Icon(Icons.remove),
                                                     ),
                                                   ),
                                                   // Gap(5), // Provide some horizontal space between the button and the text field
@@ -1286,7 +1288,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:
-                                                              EdgeInsets.symmetric(
+                                                              const EdgeInsets.symmetric(
                                                                   vertical:
                                                                       8.0), // Center the placeholder vertically
                                                           border:
@@ -1312,13 +1314,13 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                           (currentQty + 1)
                                                               .toString();
                                                     },
-                                                    icon: Icon(Icons.add),
+                                                    icon: const Icon(Icons.add),
                                                   )),
                                                 ],
                                               ),
                                             ),
                                           ),
-                                          Gap(25),
+                                          const Gap(25),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -1419,7 +1421,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             color: dataProvider
                                                                             .colors[
                                                                         index] ==
-                                                                    Color(
+                                                                    const Color(
                                                                         0xffffffff)
                                                                 ? Colors.white
                                                                 : pickedColor,
@@ -1450,7 +1452,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                             style: TextStyle(
                                                                 color: dataProvider.colors[
                                                                             index] ==
-                                                                        Color(
+                                                                        const Color(
                                                                             0xffffffff)
                                                                     ? Colors
                                                                         .black
@@ -1500,17 +1502,17 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          Gap(25),
+                                          const Gap(25),
                                           Text(
                                             'description'.toUpperCase(),
                                             style: GoogleFonts.quicksand(
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   255, 156, 155, 155),
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          Gap(15),
+                                          const Gap(15),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -1539,14 +1541,14 @@ class ProductDetailsoflugs extends StatelessWidget {
                                                       size: 20,
                                                       color: Color.fromARGB(
                                                           255, 103, 103, 103)),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                       width:
                                                           10), // Add space between icon and text
                                                   Flexible(
                                                     child: Text(
                                                       capitalizedLine
                                                           .trim(), // Trim any leading/trailing whitespace
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontSize: 16,
                                                       ),
                                                       overflow:
@@ -1557,7 +1559,7 @@ class ProductDetailsoflugs extends StatelessWidget {
                                               );
                                             }).toList(),
                                           ),
-                                          Gap(30)
+                                          const Gap(30)
                                         ],
                                       ),
                                     ),

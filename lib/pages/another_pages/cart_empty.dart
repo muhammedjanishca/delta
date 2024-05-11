@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../login_and_signing/authentication.dart';
+import '../../provider/cart_provider.dart';
 
 class CartEmptyPage extends StatelessWidget {
   const CartEmptyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    int cartCount = 0;
+    var user = Provider.of<AuthenticationHelper>(context).user;
+    if (user != null) {
+      Provider.of<CartProvider>(context).getCartData();
+      cartCount =
+          Provider.of<CartProvider>(context).fetchedItems['cartItems'].length;
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -49,7 +60,9 @@ class CartEmptyPage extends StatelessWidget {
                   Gap(10),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/');
+                        cartCount != 0
+                            ? Navigator.pushNamed(context, '/cart')
+                            : Navigator.pushNamed(context, '/cable-terminal-ends/lugs/');
                       },
                       style: ElevatedButton.styleFrom(
                           elevation: 10,
@@ -59,7 +72,7 @@ class CartEmptyPage extends StatelessWidget {
                             side: BorderSide(color: Colors.red),
                           )),
                       child: Text(
-                        'Return To Shpe',
+                        'TAP HERE',
                         style: GoogleFonts.poppins(),
                       )),
                 ],

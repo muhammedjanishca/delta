@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'constants.dart';
 
 class ProductProvider extends ChangeNotifier {
   final TextEditingController easySearchController = TextEditingController();
@@ -9,7 +10,7 @@ class ProductProvider extends ChangeNotifier {
   Future<List<Map<String, dynamic>>> fetchData(String query) async {
     try {
       final response = await http.get(
-        Uri.parse('https://ready.deltabackend.com/searching?query=$query'),
+        Uri.parse('$appBaseurl/searching?query=$query'),
       );
 
       if (response.statusCode == 200) {
@@ -19,7 +20,7 @@ class ProductProvider extends ChangeNotifier {
         throw Exception('Failed to load search data');
       }
     } catch (error) {
-      print(error.toString());
+      // print(error.toString());
       throw error;
     }
   }
@@ -30,7 +31,7 @@ class ProductProvider extends ChangeNotifier {
       products = data;
       notifyListeners();
     } catch (error) {
-      print(error.toString());
+      // print(error.toString());
     }
   }
 }

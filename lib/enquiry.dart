@@ -14,6 +14,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:provider/provider.dart';
 
+import 'constants.dart';
+
 class EnquireBox extends StatefulWidget {
   const EnquireBox({super.key});
 
@@ -83,7 +85,8 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Company Name",hintStyle: GoogleFonts.poppins()),
+                        hintText: "Company Name",
+                        hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Padding(
@@ -104,7 +107,8 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Email",hintStyle: GoogleFonts.poppins()),
+                        hintText: "Email",
+                        hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Padding(
@@ -125,7 +129,8 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Phone (Optional)",hintStyle: GoogleFonts.poppins()),
+                        hintText: "Phone (Optional)",
+                        hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Padding(
@@ -146,7 +151,8 @@ class _EnquireBoxState extends State<EnquireBox> {
                         disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(1),
                             borderSide: BorderSide(color: Colors.black12)),
-                        hintText: "Message (Optional)",hintStyle: GoogleFonts.poppins()),
+                        hintText: "Message (Optional)",
+                        hintStyle: GoogleFonts.poppins()),
                   ),
                 ),
                 Row(
@@ -165,12 +171,10 @@ class _EnquireBoxState extends State<EnquireBox> {
                           } else {
                             // Other platforms
                             await pickFile(callback: updateSelectedFileName);
-                            (value) {
-                            };
+                            (value) {};
                           }
                         },
                         child: Text(""),
-                       
                       ),
                     ),
                     // SizedBox(
@@ -195,28 +199,27 @@ class _EnquireBoxState extends State<EnquireBox> {
                               // Reset any other related data or UI elements
                             });
                           },
-                          deleteIcon: Icon(Icons.close, color: Theme.of(context).dividerColor,),
+                          deleteIcon: Icon(
+                            Icons.close,
+                            color: Theme.of(context).dividerColor,
+                          ),
                         ),
                       ),
                   ],
                 ),
-                
-                
                 Column(
                   children: [
                     InkWell(
                       onTap: () async {
                         if (kIsWeb) {
                           // Web platform
-                          await pickFileWeb(
-                              callback: updateSelectedFileName);
+                          await pickFileWeb(callback: updateSelectedFileName);
                         } else {
                           // Other platforms
-                          await pickFile(
-                              callback: updateSelectedFileName);
+                          await pickFile(callback: updateSelectedFileName);
                         }
                       },
-                      child:  Row(
+                      child: Row(
                         // crossAxisAlignment: CrossAxisAlignment.,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -225,28 +228,26 @@ class _EnquireBoxState extends State<EnquireBox> {
                               Icon(
                                 Icons.attach_file,
                                 // color: Colors.black26,
-                                 color: Theme.of(context).dividerColor,
-                               
+                                color: Theme.of(context).dividerColor,
                               ),
-                               Gap(5),
-                           Text(
-                            "Attach Quotation",
-                            style: GoogleFonts.poppins(
-                              color: Colors.black54,
-                             
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
+                              Gap(5),
+                              Text(
+                                "Attach Quotation",
+                                style: GoogleFonts.poppins(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
                             ],
                           ),
                           FloatingActionButton(
-                        onPressed: () {
-                          whatsapp.launchWhatsApp();
-                        },
-                        tooltip: 'Open WhatsApp',
-                        child: FaIcon(FontAwesomeIcons.whatsapp),
-                        backgroundColor: Color.fromARGB(255, 16, 229, 23)),
-                         
+                              onPressed: () {
+                                whatsapp.launchWhatsApp();
+                              },
+                              tooltip: 'Open WhatsApp',
+                              child: FaIcon(FontAwesomeIcons.whatsapp),
+                              backgroundColor:
+                                  Color.fromARGB(255, 16, 229, 23)),
                         ],
                       ),
                     ),
@@ -285,8 +286,8 @@ class _EnquireBoxState extends State<EnquireBox> {
                         if (emailTextController.text.isEmpty ||
                             companyNameContoller.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  "Company Name and Email is Required ")));
+                              content:
+                                  Text("Company Name and Email is Required ")));
                         } else {
                           value.changeIsLoading();
                           // await pickFileWeb(
@@ -451,7 +452,7 @@ class _EnquireBoxState extends State<EnquireBox> {
       });
 
       // Read file content as Uint8List
-      final List<int> fileBytes = await _readFileAsBytes(file);
+      // final List<int> fileBytes = await _readFileAsBytes(file);
       // print('File Bytes Length: ${fileBytes.length}');
       callback(file.name);
     }
@@ -483,7 +484,7 @@ class _EnquireBoxState extends State<EnquireBox> {
       });
 
       var response = await dio.post(
-        'https://ready.deltabackend.com/enquiry/sendmail',
+        '$appBaseurl/enquiry/sendmail',
         data: formData,
       );
 

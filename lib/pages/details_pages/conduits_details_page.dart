@@ -1,18 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_hex/login_and_signing/authentication.dart';
 import 'package:firebase_hex/login_and_signing/loginpage.dart';
-import 'package:firebase_hex/login_and_signing/signup_page.dart';
 import 'package:firebase_hex/provider/cart_provider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/thumbnail.dart';
-import 'package:firebase_hex/provider/user_input_provider.dart';
-import 'package:firebase_hex/pages/another_pages/quotationPage.dart';
 import 'package:firebase_hex/responsive/product_page.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -782,9 +778,7 @@ class ProductDetailsOfConduits extends StatelessWidget {
                         },
                         child: const Text('ADD TO CART'),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                             const Color.fromARGB(255, 54, 98, 98)
-                          ),
+                          backgroundColor: MaterialStateProperty.all(addtoCart ),
                           minimumSize: MaterialStateProperty.all(Size(150, 50)),
                         ),
                       )),
@@ -797,14 +791,19 @@ class ProductDetailsOfConduits extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        user != null
-                            ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LoginPage(); // Your custom dialog widget
-                                },
-                              );
+                         user != null;
+                                            cartCount != 0
+                                                ? Navigator.pushNamed( context, '/cart')
+                                                : Navigator.pushNamed(
+                                                    context, '/cartempty');
+                      //   user != null
+                      //       ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
+                      //       : showDialog(
+                      //           context: context,
+                      //           builder: (BuildContext context) {
+                      //             return LoginPage(); // Your custom dialog widget
+                      //           },
+                      //         );
                       },
                       child: Text(
                         'GO TO CART',
@@ -1066,9 +1065,7 @@ class ProductDetailsOfConduits extends StatelessWidget {
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
-                                                MaterialStateProperty.all(
-                             const Color.fromARGB(255, 54, 98, 98)
-                                            ),
+                                                MaterialStateProperty.all(addtoCart ),
                                             minimumSize:
                                                 MaterialStateProperty.all(
                                                     Size(180, 60)),
@@ -1079,15 +1076,11 @@ class ProductDetailsOfConduits extends StatelessWidget {
                                         ),
                                         ElevatedButton(
                                           onPressed: () {
-                                            user != null
-                                                ? (cartCount !=0? Navigator.pushNamed(context, '/cart') : Navigator.pushNamed(context, '/cartempty'))
-                                                : showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return LoginPage(); // Your custom dialog widget
-                                                    },
-                                                  );
+                                            user != null;
+                                            cartCount != 0
+                                                ? Navigator.pushNamed( context, '/cart')
+                                                : Navigator.pushNamed(
+                                                    context, '/cartempty');
                                           },
                                           child: Text(
                                             'GO TO CART',
