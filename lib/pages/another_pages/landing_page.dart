@@ -104,835 +104,821 @@ class _DesktopLandingState extends State<DesktopLanding> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    // final productProvider =
-    //     Provider.of<ProductProvider>(context, listen: false);
-    // final selectedThumbnailProvider =
-    //     Provider.of<SelectedThumbnailProvider>(context);
-
-    // double screenWidth = MediaQuery.of(context).size.width;
-
-    // final descriptionStyle = Theme.of(context).textTheme.headlineMedium;
+    
     return LayoutBuilder(builder: (context, Constraints) {
       if (Constraints.maxWidth > 850) {
-        return Material(
-          color: Colors.transparent,
-          child: NotificationListener<ScrollNotification>(
-            onNotification: updateOffsetAccordingToScroll,
-            child: ScrollConfiguration(
-              behavior: NoScrollGlow(),
-              child: Stack(
-                children: <Widget>[
-                  Positioned(
-                    top: -.25 * offset,
-                    child: FittedBox(
-                      child: Container(
-                        child: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          image: kHeroImage,
-                          // height: height,
-                          width: width,
-                          fit: BoxFit.cover,
+        return Container(
+           decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [colorOne,colorTwo], // Define your gradient colors here
+      ),
+    ),
+          child: Material(
+            color: Colors.transparent,
+            child: NotificationListener<ScrollNotification>(
+              onNotification: updateOffsetAccordingToScroll,
+              child: ScrollConfiguration(
+                behavior: NoScrollGlow(),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      top: -.25 * offset,
+                      child: FittedBox(
+                        child: Container(
+                          child: FadeInImage.memoryNetwork(
+                            placeholder: kTransparentImage,
+                            image: kHeroImage,
+                            // height: height,
+                            width: width,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  // Positioned(
-                  //   top: -.25 * offset,
-                  //   child: SizedBox(
-                  //     // color: Colors.yellow,
-                  //     height: 600,
-                  //     width: width,
-                  //     child: Align(
-                  //       alignment: const Alignment(0, 0),
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 40),
-                  //         child: Column(
-                  //           mainAxisAlignment: MainAxisAlignment.start,
-                  //           crossAxisAlignment: CrossAxisAlignment.center,
-                  //           children: [
-                  //             const SizedBox(
-                  //               height: 130,
-                  //             ),
-                  //             // Gap(45),
-                  //             Text(
-                  //               "Experience the new",
-                  //               // "EXPERIENCE THE NEW",
-                  //               style: GoogleFonts.poppins(
-                  //                 textStyle: const TextStyle(
-                  //                   color: Colors.white,
-                  //                   fontSize: 35,
-                  //                    fontWeight: FontWeight.bold,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //             Text(
-                  //               // "DELTA PREMIUM PRODUCTS",
-                  //               "Delta premium products",
-                  //               style: GoogleFonts.poppins(
-                  //                 textStyle: const TextStyle(
-                  //                   color: Colors.white,
-                  //                   fontSize: 35,
-                  //                   fontWeight: FontWeight.bold,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //              Text(
-                  //               "\nTested Products | Efficient Service | Trusted Brand",
-                  //               style: GoogleFonts.poppins(
-                  //                 fontSize: 20,
-                  //                 fontWeight: FontWeight.w400,
-                  //                 color: Colors.white,
-                  //               ),
-                  //             ),
-                  //             // Container(
-                  //             //   color: Colors.amber,
-                  //             //   height: height / 3.5,
-                  //             //   width: width / 2,
-                  //             //   // color: Colors.white,
-                  //             //   child:
-                  //             //       Center(
-                  //             //     child: AnimatedTextKit(
-                  //             //       totalRepeatCount: 40,
-                  //             //       animatedTexts: [
-                  //             //         RotateAnimatedText(
-                  //             //             'Trans Delta Trading'.toUpperCase(),
-                  //             //             textStyle: const TextStyle(
-                  //             //                 letterSpacing: 3,
-                  //             //                 fontSize: 30,
-                  //             //                 fontWeight: FontWeight.bold,
-                  //             //                 color: Colors.orange)),
-                  //             //         FadeAnimatedText(
-                  //             //           'Powering Progress: Your Source for Premium Electrical Solutions',
-                  //             //           textStyle: const TextStyle(
-                  //             //               // backgroundColor: Colors.green,
-                  //             //               color: Color.fromARGB(
-                  //             //                   255, 243, 149, 35),
-                  //             //               fontSize: 25.0,
-                  //             //               fontWeight: FontWeight.bold),
-                  //             //         ),
-                  //             //         ScaleAnimatedText(
-                  //             //           'We are introducing our products',
-                  //             //           duration:
-                  //             //               const Duration(milliseconds: 4000),
-                  //             //           textStyle: const TextStyle(
-                  //             //               color: Colors.white,
-                  //             //               fontSize: 50.0),
-                  //             //         ),
-                  //             //       ],
-                  //             //     ),
-                  //             //   ),
-                  //             // ),
-                  //             const SizedBox(height: 20),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          color: Colors.transparent,
-                          height: height,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                // color: Colors.amber,
-                                height:
-                                    MediaQuery.of(context).size.height / 9.7,
-                              ),
-                              // Row(
-                              //   // crossAxisAlignment: CrossAxisAlignment.center,
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     Text(
-                              //       "Experience ",
-                              //       // "EXPERIENCE THE NEW",
-                              //       style: GoogleFonts.poppins(
-                              //         textStyle: const TextStyle(
-                              //           color: Colors.white,
-                              //           fontSize: 45,
-                              //           fontWeight: FontWeight.bold,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //     Text(
-                              //       "The New",
-                              //       // "EXPERIENCE THE NEW",
-                              //       style: GoogleFonts.poppins(
-                              //         textStyle: const TextStyle(
-                              //           color: Colors.white,
-                              //           fontSize: 45,
-                              //           // fontWeight: FontWeight.bold,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     Text(
-                              //       // "DELTA PREMIUM PRODUCTS",
-                              //       "Delta ",
-                              //       style: GoogleFonts.poppins(
-                              //         textStyle: const TextStyle(
-                              //           color: Colors.white,
-                              //           fontSize: 45,
-                              //           // fontWeight: FontWeight.bold,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //     Text(
-                              //       // "DELTA PREMIUM PRODUCTS",
-                              //       "Premium Products.",
-                              //       style: GoogleFonts.poppins(
-                              //         textStyle: const TextStyle(
-                              //           color: Colors.white,
-                              //           fontSize: 45,
-                              //           fontWeight: FontWeight.bold,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              // SizedBox(
-                              //   // color: Colors.blue,
-                              //   height: height / 2,
-                              //   width: width / 1,
-                              //   // color: Colors.white,
-                              //   child: Center(
-                              //     child: AnimatedTextKit(
-                              //       totalRepeatCount: 40,
-                              //       animatedTexts: [
-                              //         RotateAnimatedText(
-                              //             '   tested\nproducts'.toUpperCase(),
-                              //             // .toUpperCase(),
-                              //             textStyle: GoogleFonts.poppins(
-                              //               letterSpacing: 3,
-                              //               fontSize: 80,
-                              //               fontWeight: FontWeight.bold,
-                              //               color: const Color.fromARGB(
-                              //                   255, 217, 220, 60),
-                              //             )),
-                              //         RotateAnimatedText(
-                              //           'efficient\n service'.toUpperCase(),
-                              //           textStyle: GoogleFonts.poppins(
-                              //             fontSize: 80.0,
-                              //             fontWeight: FontWeight.bold,
-                              //             color: const Color.fromARGB(
-                              //                 255, 217, 220, 60),
-                              //           ),
-                              //         ),
-                              //         RotateAnimatedText(
-                              //           'trusted\n  brand'.toUpperCase(),
-                              //           duration:
-                              //               const Duration(milliseconds: 4000),
-                              //           textStyle: GoogleFonts.poppins(
-                              //             fontSize: 80.0,
-                              //             fontWeight: FontWeight.bold,
-                              //             color: const Color.fromARGB(
-                              //                 255, 217, 220, 60),
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   ),
-                              // ),
-                              const Gap(10),
-                              // SizedBox(
-                              //     width: MediaQuery.of(context).size.width / 3,
-                              //     child:
-                              //         TypeAheadFormField<Map<String, dynamic>>(
-                              //       textFieldConfiguration:
-                              //           TextFieldConfiguration(
-                              //         decoration: InputDecoration(
-                              //             hintText: 'Search here...',
-                              //             hintStyle: TextStyle(
-                              //               color:
-                              //                   Colors.black.withOpacity(0.5),
-                              //               fontSize: 16,
-                              //             ),
-                              //             fillColor: Color.fromARGB(
-                              //                 255, 249, 250, 210),
-                              //             filled: true,
-                              //             prefixIcon: Icon(
-                              //               Icons.search,
-                              //               color: Color.fromARGB(
-                              //                   221, 101, 101, 101),
-                              //             ),
-                              //             suffixIcon: ElevatedButton(
-                              //                 onPressed: () {},
-                              //                 child: Text("Search"))),
-                              //       ),
-                              //       suggestionsCallback: (query) async {
-                              //         // Only call the fetchData() method if the search query is not empty.
-                              //         if (query.isNotEmpty) {
-                              //           return await productProvider
-                              //               .fetchData(query);
-                              //         } else {
-                              //           return [];
-                              //         }
-                              //       },
-                              //       itemBuilder: (context, suggestion) {
-                              //         return SizedBox(
-                              //           child: ListTile(
-                              //             leading: CircleAvatar(
-                              //               backgroundImage: NetworkImage(
-                              //                   suggestion['thumbnail'])
-                              //             ),
-                              //             title: Text(suggestion['product_name']),
-                              //           ),
-                              //         );
-                              //       },
-                              //       onSuggestionSelected: (suggestion) {
-                              //         final productName =
-                              //             suggestion['product_name'];
-                              //         final type = suggestion['type'];
-                              //         final productNameWithUnderscores =
-                              //             productName.replaceAll(" ", "_");
-                              //         // final thumbnail = suggestion["thumbnail"];
-                              //         selectedThumbnailProvider
-                              //             .setSelectedThumbnail("",
-                              //                 index: null);
-                              //         navigateToProductDetailsFromSearch(
-                              //             context,
-                              //             productNameWithUnderscores,
-                              //             type);
-                              //       },
-                              //     ))
-                            ],
+                    // Positioned(
+                    //   top: -.25 * offset,
+                    //   child: SizedBox(
+                    //     // color: Colors.yellow,
+                    //     height: 600,
+                    //     width: width,
+                    //     child: Align(
+                    //       alignment: const Alignment(0, 0),
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.symmetric(horizontal: 40),
+                    //         child: Column(
+                    //           mainAxisAlignment: MainAxisAlignment.start,
+                    //           crossAxisAlignment: CrossAxisAlignment.center,
+                    //           children: [
+                    //             const SizedBox(
+                    //               height: 130,
+                    //             ),
+                    //             // Gap(45),
+                    //             Text(
+                    //               "Experience the new",
+                    //               // "EXPERIENCE THE NEW",
+                    //               style: GoogleFonts.poppins(
+                    //                 textStyle: const TextStyle(
+                    //                   color: Colors.white,
+                    //                   fontSize: 35,
+                    //                    fontWeight: FontWeight.bold,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             Text(
+                    //               // "DELTA PREMIUM PRODUCTS",
+                    //               "Delta premium products",
+                    //               style: GoogleFonts.poppins(
+                    //                 textStyle: const TextStyle(
+                    //                   color: Colors.white,
+                    //                   fontSize: 35,
+                    //                   fontWeight: FontWeight.bold,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //              Text(
+                    //               "\nTested Products | Efficient Service | Trusted Brand",
+                    //               style: GoogleFonts.poppins(
+                    //                 fontSize: 20,
+                    //                 fontWeight: FontWeight.w400,
+                    //                 color: Colors.white,
+                    //               ),
+                    //             ),
+                    //             // Container(
+                    //             //   color: Colors.amber,
+                    //             //   height: height / 3.5,
+                    //             //   width: width / 2,
+                    //             //   // color: Colors.white,
+                    //             //   child:
+                    //             //       Center(
+                    //             //     child: AnimatedTextKit(
+                    //             //       totalRepeatCount: 40,
+                    //             //       animatedTexts: [
+                    //             //         RotateAnimatedText(
+                    //             //             'Trans Delta Trading'.toUpperCase(),
+                    //             //             textStyle: const TextStyle(
+                    //             //                 letterSpacing: 3,
+                    //             //                 fontSize: 30,
+                    //             //                 fontWeight: FontWeight.bold,
+                    //             //                 color: Colors.orange)),
+                    //             //         FadeAnimatedText(
+                    //             //           'Powering Progress: Your Source for Premium Electrical Solutions',
+                    //             //           textStyle: const TextStyle(
+                    //             //               // backgroundColor: Colors.green,
+                    //             //               color: Color.fromARGB(
+                    //             //                   255, 243, 149, 35),
+                    //             //               fontSize: 25.0,
+                    //             //               fontWeight: FontWeight.bold),
+                    //             //         ),
+                    //             //         ScaleAnimatedText(
+                    //             //           'We are introducing our products',
+                    //             //           duration:
+                    //             //               const Duration(milliseconds: 4000),
+                    //             //           textStyle: const TextStyle(
+                    //             //               color: Colors.white,
+                    //             //               fontSize: 50.0),
+                    //             //         ),
+                    //             //       ],
+                    //             //     ),
+                    //             //   ),
+                    //             // ),
+                    //             const SizedBox(height: 20),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+        
+                    SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            color: Colors.transparent,
+                            height: height,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  // color: Colors.amber,
+                                  height:
+                                      MediaQuery.of(context).size.height / 9.7,
+                                ),
+                                // Row(
+                                //   // crossAxisAlignment: CrossAxisAlignment.center,
+                                //   mainAxisAlignment: MainAxisAlignment.center,
+                                //   children: [
+                                //     Text(
+                                //       "Experience ",
+                                //       // "EXPERIENCE THE NEW",
+                                //       style: GoogleFonts.poppins(
+                                //         textStyle: const TextStyle(
+                                //           color: Colors.white,
+                                //           fontSize: 45,
+                                //           fontWeight: FontWeight.bold,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     Text(
+                                //       "The New",
+                                //       // "EXPERIENCE THE NEW",
+                                //       style: GoogleFonts.poppins(
+                                //         textStyle: const TextStyle(
+                                //           color: Colors.white,
+                                //           fontSize: 45,
+                                //           // fontWeight: FontWeight.bold,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.center,
+                                //   children: [
+                                //     Text(
+                                //       // "DELTA PREMIUM PRODUCTS",
+                                //       "Delta ",
+                                //       style: GoogleFonts.poppins(
+                                //         textStyle: const TextStyle(
+                                //           color: Colors.white,
+                                //           fontSize: 45,
+                                //           // fontWeight: FontWeight.bold,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     Text(
+                                //       // "DELTA PREMIUM PRODUCTS",
+                                //       "Premium Products.",
+                                //       style: GoogleFonts.poppins(
+                                //         textStyle: const TextStyle(
+                                //           color: Colors.white,
+                                //           fontSize: 45,
+                                //           fontWeight: FontWeight.bold,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                // SizedBox(
+                                //   // color: Colors.blue,
+                                //   height: height / 2,
+                                //   width: width / 1,
+                                //   // color: Colors.white,
+                                //   child: Center(
+                                //     child: AnimatedTextKit(
+                                //       totalRepeatCount: 40,
+                                //       animatedTexts: [
+                                //         RotateAnimatedText(
+                                //             '   tested\nproducts'.toUpperCase(),
+                                //             // .toUpperCase(),
+                                //             textStyle: GoogleFonts.poppins(
+                                //               letterSpacing: 3,
+                                //               fontSize: 80,
+                                //               fontWeight: FontWeight.bold,
+                                //               color: const Color.fromARGB(
+                                //                   255, 217, 220, 60),
+                                //             )),
+                                //         RotateAnimatedText(
+                                //           'efficient\n service'.toUpperCase(),
+                                //           textStyle: GoogleFonts.poppins(
+                                //             fontSize: 80.0,
+                                //             fontWeight: FontWeight.bold,
+                                //             color: const Color.fromARGB(
+                                //                 255, 217, 220, 60),
+                                //           ),
+                                //         ),
+                                //         RotateAnimatedText(
+                                //           'trusted\n  brand'.toUpperCase(),
+                                //           duration:
+                                //               const Duration(milliseconds: 4000),
+                                //           textStyle: GoogleFonts.poppins(
+                                //             fontSize: 80.0,
+                                //             fontWeight: FontWeight.bold,
+                                //             color: const Color.fromARGB(
+                                //                 255, 217, 220, 60),
+                                //           ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
+                                const Gap(10),
+                                // SizedBox(
+                                //     width: MediaQuery.of(context).size.width / 3,
+                                //     child:
+                                //         TypeAheadFormField<Map<String, dynamic>>(
+                                //       textFieldConfiguration:
+                                //           TextFieldConfiguration(
+                                //         decoration: InputDecoration(
+                                //             hintText: 'Search here...',
+                                //             hintStyle: TextStyle(
+                                //               color:
+                                //                   Colors.black.withOpacity(0.5),
+                                //               fontSize: 16,
+                                //             ),
+                                //             fillColor: Color.fromARGB(
+                                //                 255, 249, 250, 210),
+                                //             filled: true,
+                                //             prefixIcon: Icon(
+                                //               Icons.search,
+                                //               color: Color.fromARGB(
+                                //                   221, 101, 101, 101),
+                                //             ),
+                                //             suffixIcon: ElevatedButton(
+                                //                 onPressed: () {},
+                                //                 child: Text("Search"))),
+                                //       ),
+                                //       suggestionsCallback: (query) async {
+                                //         // Only call the fetchData() method if the search query is not empty.
+                                //         if (query.isNotEmpty) {
+                                //           return await productProvider
+                                //               .fetchData(query);
+                                //         } else {
+                                //           return [];
+                                //         }
+                                //       },
+                                //       itemBuilder: (context, suggestion) {
+                                //         return SizedBox(
+                                //           child: ListTile(
+                                //             leading: CircleAvatar(
+                                //               backgroundImage: NetworkImage(
+                                //                   suggestion['thumbnail'])
+                                //             ),
+                                //             title: Text(suggestion['product_name']),
+                                //           ),
+                                //         );
+                                //       },
+                                //       onSuggestionSelected: (suggestion) {
+                                //         final productName =
+                                //             suggestion['product_name'];
+                                //         final type = suggestion['type'];
+                                //         final productNameWithUnderscores =
+                                //             productName.replaceAll(" ", "_");
+                                //         // final thumbnail = suggestion["thumbnail"];
+                                //         selectedThumbnailProvider
+                                //             .setSelectedThumbnail("",
+                                //                 index: null);
+                                //         navigateToProductDetailsFromSearch(
+                                //             context,
+                                //             productNameWithUnderscores,
+                                //             type);
+                                //       },
+                                //     ))
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          // height: ,
-                          width: width,
-                          color: Colors.white,
-                          child: Column(
-                            children: [
-                              const Gap(45),
-                              Text(
-                                'What are we offering'.toUpperCase(),
-                                style: GoogleFonts.quicksand(
-                                  color: colorTwo,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
+                          Container(
+                            // height: ,
+                            width: width,
+                            color: Colors.white,
+                            child: Column(
+                              children: [
+                                const Gap(45),
+                                Text(
+                                  'What are we offering'.toUpperCase(),
+                                  style: GoogleFonts.quicksand(
+                                    color: colorTwo,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
                                 ),
-                              ),
-                              // Text(
-                              //   'What are we offering'.toUpperCase(),
-                              //   style: GoogleFonts.quicksand(
-                              //     color:
-                              //         const Color.fromARGB(255, 156, 155, 155),
-                              //     fontSize: 18,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
-                              // Text(
-                              //   'Our Products'.toUpperCase(),
-                              //   style: GoogleFonts.poppins(
-                              //     color: Color.fromARGB(255, 4, 4, 4),
-                              //     fontSize: 22,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
-                              // sdfg
-                              const Gap(35),
-                              SizedBox(
-                                // color: colorTwo,
-                                width: MediaQuery.of(context).size.width / 1.2,
-                                height: MediaQuery.of(context).size.height / 2,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    MouseRegion(
-                                      onEnter: (_) =>
-                                          setState(() => isHovered = true),
-                                      onExit: (_) =>
-                                          setState(() => isHovered = false),
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          gradient: LinearGradient(
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                            colors: [
-                                              Color.fromARGB(
-                                                  255, 192, 191, 191),
-                                              Color.fromARGB(
-                                                  255, 215, 215, 214),
-                                              Color.fromARGB(
-                                                  255, 240, 239, 239),
-                                            ],
+                                // Text(
+                                //   'What are we offering'.toUpperCase(),
+                                //   style: GoogleFonts.quicksand(
+                                //     color:
+                                //         const Color.fromARGB(255, 156, 155, 155),
+                                //     fontSize: 18,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),
+                                // ),
+                                // Text(
+                                //   'Our Products'.toUpperCase(),
+                                //   style: GoogleFonts.poppins(
+                                //     color: Color.fromARGB(255, 4, 4, 4),
+                                //     fontSize: 22,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),
+                                // ),
+                                // sdfg
+                                const Gap(35),
+                                SizedBox(
+                                  // color: colorTwo,
+                                  width: MediaQuery.of(context).size.width / 1.2,
+                                  height: MediaQuery.of(context).size.height / 2,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      MouseRegion(
+                                        onEnter: (_) =>
+                                            setState(() => isHovered = true),
+                                        onExit: (_) =>
+                                            setState(() => isHovered = false),
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            gradient: LinearGradient(
+                                              begin: Alignment.bottomCenter,
+                                              end: Alignment.topCenter,
+                                              colors: [
+                                                Color.fromARGB(
+                                                    255, 192, 191, 191),
+                                                Color.fromARGB(
+                                                    255, 215, 215, 214),
+                                                Color.fromARGB(
+                                                    255, 240, 239, 239),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                2,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.6,
-                                        child: Row(
-                                          children: [
-                                            Stack(children: [
-                                              SizedBox(
-                                                // color: Colors.amber,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    2,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4.5,
-                                                child: FittedBox(
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        left: 15, right: 10),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Cable Terminal Ends'
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: colorTwo,
-                                                            fontSize: 20,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "\nHEX is renowned for its superior quality\nof brass cable gland kits in the global market.",
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  fontSize: 16),
-                                                        ),
-                                                        const Gap(15),
-                                                        if (isHovered)
-                                                          Row(
-                                                            children: [
-                                                              ElevatedButton(
-                                                                onPressed: () {
-                                                                  Navigator.pushNamed(
-                                                                      context,
-                                                                      '/cable-terminal-ends/connectors/');
-                                                                },
-                                                                style:
-                                                                    ButtonStyle(
-                                                                  backgroundColor:
-                                                                      MaterialStateProperty.all(
-                                                                          Colors
-                                                                              .white),
-                                                                  minimumSize: MaterialStateProperty.all(
-                                                                      const Size(
-                                                                          120,
-                                                                          50)),
-                                                                ),
-                                                                child: Text(
-                                                                  'CONNECTORS',
-                                                                  style: TextStyle(
-                                                                      color:
-                                                                          colorTwo,
-                                                                      fontSize:
-                                                                          14),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                  width: 10),
-                                                              ElevatedButton(
-                                                                onPressed: () {
-                                                                  Navigator.pushNamed(
-                                                                      context,
-                                                                      '/cable-terminal-ends/lugs/');
-                                                                },
-                                                                child: const Text(
-                                                                  'LUGS',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          15),
-                                                                ),
-                                                                style:
-                                                                    ButtonStyle(
-                                                                  backgroundColor:
-                                                                      MaterialStateProperty
-                                                                          .all(
-                                                                              colorTwo),
-                                                                  minimumSize: MaterialStateProperty.all(
-                                                                      const Size(
-                                                                          120,
-                                                                          50)),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 10,
-                                                left: 10,
-                                                child: Image.asset(
-                                                  'assets/image/hex_logo.png',
-                                                  width: 25,
-                                                  height: 25,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ]),
-                                            SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
+                                          height:
+                                              MediaQuery.of(context).size.height /
                                                   2,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  6.2,
-                                              child: FittedBox(
-                                                child: Image.asset(
-                                                  'assets/image/w-removebg-preview (1).png',
-                                                  width: 200,
-                                                  height: 200,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const Gap(15),
-                                    MouseRegion(
-                                      onEnter: (_) =>
-                                          setState(() => iHovered = true),
-                                      onExit: (_) =>
-                                          setState(() => iHovered = false),
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          gradient: LinearGradient(
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                            colors: [
-                                              Color.fromARGB(
-                                                  255, 192, 191, 191),
-                                              Color.fromARGB(
-                                                  255, 215, 215, 214),
-                                              Color.fromARGB(
-                                                  255, 240, 239, 239),
-                                            ],
-                                          ),
-                                        ),
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                2,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.6,
-                                        child: Row(
-                                          children: [
-                                            Stack(children: [
-                                              SizedBox(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    2,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4.5,
-                                                child: FittedBox(
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        left: 15, right: 10),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Brass Cable Gland Kits'
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: colorTwo,
-                                                            fontSize: 20,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  2.6,
+                                          child: Row(
+                                            children: [
+                                              Stack(children: [
+                                                SizedBox(
+                                                  // color: Colors.amber,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      2,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4.5,
+                                                  child: FittedBox(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          left: 15, right: 10),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            'Cable Terminal Ends'
+                                                                .toUpperCase(),
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              color: colorTwo,
+                                                              fontSize: 20,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        Text(
-                                                          "\nHEX is renowned for its superior quality\nof brass cable gland kits in the global market.",
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  fontSize: 16),
-                                                        ),
-                                                        const Gap(15),
-                                                        if (iHovered)
-                                                          Row(
-                                                            children: [
-                                                              ElevatedButton(
-                                                                onPressed: () {
-                                                                  Navigator.pushNamed(
-                                                                      context,
-                                                                      '/switch-board-control-panel-accessories/');
-                                                                },
-                                                                style:
-                                                                    ButtonStyle(
-                                                                  backgroundColor:
-                                                                      MaterialStateProperty.all(
-                                                                          const Color(
-                                                                              0xFFFFFFFF)),
-                                                                  minimumSize: MaterialStateProperty.all(
-                                                                      const Size(
-                                                                          120,
-                                                                          50)),
-                                                                ),
-                                                                child: Text(
-                                                                  'ACCESSORIES',
-                                                                  style: TextStyle(
-                                                                      color:
-                                                                          colorTwo,
-                                                                      fontSize:
-                                                                          14),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                  width: 10),
-                                                              ElevatedButton(
-                                                                onPressed: () {
-                                                                  Navigator.pushNamed(
-                                                                      context,
-                                                                      '/brass-cable-gland-kits-accessories/brass-cable-glands/');
-                                                                },
-                                                                child:
-                                                                    const Text(
-                                                                  'GLANDS',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          15),
-                                                                ),
-                                                                style:
-                                                                    ButtonStyle(
-                                                                  backgroundColor:
-                                                                      MaterialStateProperty
-                                                                          .all(
-                                                                              colorTwo),
-                                                                  minimumSize: MaterialStateProperty.all(
-                                                                      const Size(
-                                                                          120,
-                                                                          50)),
-                                                                ),
-                                                              ),
-                                                            ],
+                                                          Text(
+                                                            "\nHEX is renowned for its superior quality\nof brass cable gland kits in the global market.",
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    fontSize: 16),
                                                           ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 10,
-                                                left: 10,
-                                                child: Image.asset(
-                                                  'assets/image/hex_logo.png',
-                                                  width: 25,
-                                                  height: 25,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ]),
-                                            SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  2,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  6.2,
-                                              child: FittedBox(
-                                                child: Image.asset(
-                                                  'assets/image/w1-removebg-preview (1).png',
-                                                  width: 200,
-                                                  height: 200,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              // gap
-                              Padding(
-                                padding: const EdgeInsets.only(left: 50),
-                                child: Container(
-                                  color: Colors.white,
-                                  height: height / 1.2,
-                                  width: width,
-                                  child:  Center(
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      clipBehavior: Clip.antiAlias,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          FittedBox(
-                                              child: ProductContainer(
-                                                 onPressed: () {
-                                                                  Navigator.pushNamed(
-                                                                      context,
-                                                                      '/cable-support-systems/');
-                                                                },
-                                            title: "PVC Coated Galvanised Flexible Conduit",
-                                                subtitle: "Cable Support Systems",
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(1).png',
-                                               
-                                          )
-                                          ),
-                                          const Gap(10),
-                                           FittedBox(
-                                              child: ProductContainer(
-                                                onPressed: (){
- Navigator.pushNamed(
-                                                                      context,
-                                                                      '/cable-jointing-and-termination-kit-components/');
+                                                          const Gap(15),
+                                                          if (isHovered)
+                                                            Row(
+                                                              children: [
+                                                                ElevatedButton(
+                                                                  onPressed: () {
+                                                                    Navigator.pushNamed(
+                                                                        context,
+                                                                        '/cable-terminal-ends/connectors/');
                                                                   },
-                                            title:
-                                                'hose clamps',
-                                                subtitle: "Cable Jointing & Termination Kit Components",
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(5).png',
-                                          )),
-                                          const Gap(10),
-                                           FittedBox(
-                                              child: ProductContainer(
-                                                 onPressed: (){
-                                                   Navigator.pushNamed(
-                                                                      context,
-                                                                      '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/');
-                                                               
-                                                },
-                                            title: 'double plate "u" clamp',
-                                            subtitle: "earthing & lightning protection accessories",
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(7).png',
-                                          )),
-                                          const Gap(10),
-                                           FittedBox(
-                                              child: ProductContainer(
-                                                 onPressed: (){
-                                                   Navigator.pushNamed(
-                                                                      context,
-                                                                      '/crimping-tools/');
-                                                               
-                                                },
-                                            title:
-                                                'crimping tool',
-                                                subtitle: "view more crimping tools",
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(2).png',
-                                          )),
-                                          const Gap(10),
-                                           FittedBox(
-                                              child: ProductContainer(
-                                                onPressed: (){
-                                                   Navigator.pushNamed(
-                                                                      context,
-                                                                      '/Stainless Steel Cable Ties & Markers');
-                                                               
-                                                },
-                                            title:
-                                                'Roller ball type stainless steel cable ties',
-                                                subtitle: "Stainless steel cable ties & markers",
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(6).png',
-                                          )),
-                                          const Gap(10),
-                                           FittedBox(
-                                              child: ProductContainer(
-                                                 onPressed: (){
-                                                   Navigator.pushNamed(
-                                                                      context,
-                                                                      '/switch-board-control-panel-accessories/');
-                                                               
-                                                },
-                                            title:
-                                                'Insulated bus bar system for mcb',
-                                                subtitle: "Switch Board Control Panel Accessories",
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(4).png',
-                                          )),
-                                          Gap(10),
-                                          FittedBox(
-                                              child: ProductContainer(
-                                                 onPressed: (){
-                                                   Navigator.pushNamed(
-                                                                      context,
-                                                                      '/earthing-lightning-protection-systems/earthing-lightning-protection/');
-                                                               
-                                                },
-                                            title: 'Copper Bonded Grounding Rods',
-                                            subtitle: "Earthing & Lightning Protection",
-                                            imagePath:
-                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(8).png',
-                                          )),
-                                        ],
+                                                                  style:
+                                                                      ButtonStyle(
+                                                                    backgroundColor:
+                                                                        MaterialStateProperty.all(
+                                                                            Colors
+                                                                                .white),
+                                                                    minimumSize: MaterialStateProperty.all(
+                                                                        const Size(
+                                                                            120,
+                                                                            50)),
+                                                                  ),
+                                                                  child: Text(
+                                                                    'CONNECTORS',
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            colorTwo,
+                                                                        fontSize:
+                                                                            14),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 10),
+                                                                ElevatedButton(
+                                                                  onPressed: () {
+                                                                    Navigator.pushNamed(
+                                                                        context,
+                                                                        '/cable-terminal-ends/lugs/');
+                                                                  },
+                                                                  child: const Text(
+                                                                    'LUGS',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            15),
+                                                                  ),
+                                                                  style:
+                                                                      ButtonStyle(
+                                                                    backgroundColor:
+                                                                        MaterialStateProperty
+                                                                            .all(
+                                                                                colorTwo),
+                                                                    minimumSize: MaterialStateProperty.all(
+                                                                        const Size(
+                                                                            120,
+                                                                            50)),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 10,
+                                                  left: 10,
+                                                  child: Image.asset(
+                                                    'assets/image/hex_logo.png',
+                                                    width: 25,
+                                                    height: 25,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ]),
+                                              SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    2,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    6.2,
+                                                child: FittedBox(
+                                                  child: Image.asset(
+                                                    'assets/image/w-removebg-preview (1).png',
+                                                    width: 200,
+                                                    height: 200,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      const Gap(15),
+                                      MouseRegion(
+                                        onEnter: (_) =>
+                                            setState(() => iHovered = true),
+                                        onExit: (_) =>
+                                            setState(() => iHovered = false),
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            gradient: LinearGradient(
+                                              begin: Alignment.bottomCenter,
+                                              end: Alignment.topCenter,
+                                              colors: [
+                                                Color.fromARGB(
+                                                    255, 192, 191, 191),
+                                                Color.fromARGB(
+                                                    255, 215, 215, 214),
+                                                Color.fromARGB(
+                                                    255, 240, 239, 239),
+                                              ],
+                                            ),
+                                          ),
+                                          height:
+                                              MediaQuery.of(context).size.height /
+                                                  2,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  2.6,
+                                          child: Row(
+                                            children: [
+                                              Stack(children: [
+                                                SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      2,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4.5,
+                                                  child: FittedBox(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          left: 15, right: 10),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            'Brass Cable Gland Kits'
+                                                                .toUpperCase(),
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              color: colorTwo,
+                                                              fontSize: 20,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            "\nHEX is renowned for its superior quality\nof brass cable gland kits in the global market.",
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    fontSize: 16),
+                                                          ),
+                                                          const Gap(15),
+                                                          if (iHovered)
+                                                            Row(
+                                                              children: [
+                                                                ElevatedButton(
+                                                                  onPressed: () {
+                                                                    Navigator.pushNamed(
+                                                                        context,
+                                                                        '/switch-board-control-panel-accessories/');
+                                                                  },
+                                                                  style:
+                                                                      ButtonStyle(
+                                                                    backgroundColor:
+                                                                        MaterialStateProperty.all(
+                                                                            const Color(
+                                                                                0xFFFFFFFF)),
+                                                                    minimumSize: MaterialStateProperty.all(
+                                                                        const Size(
+                                                                            120,
+                                                                            50)),
+                                                                  ),
+                                                                  child: Text(
+                                                                    'ACCESSORIES',
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            colorTwo,
+                                                                        fontSize:
+                                                                            14),
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 10),
+                                                                ElevatedButton(
+                                                                  onPressed: () {
+                                                                    Navigator.pushNamed(
+                                                                        context,
+                                                                        '/brass-cable-gland-kits-accessories/brass-cable-glands/');
+                                                                  },
+                                                                  child:
+                                                                      const Text(
+                                                                    'GLANDS',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            15),
+                                                                  ),
+                                                                  style:
+                                                                      ButtonStyle(
+                                                                    backgroundColor:
+                                                                        MaterialStateProperty
+                                                                            .all(
+                                                                                colorTwo),
+                                                                    minimumSize: MaterialStateProperty.all(
+                                                                        const Size(
+                                                                            120,
+                                                                            50)),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 10,
+                                                  left: 10,
+                                                  child: Image.asset(
+                                                    'assets/image/hex_logo.png',
+                                                    width: 25,
+                                                    height: 25,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ]),
+                                              SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    2,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    6.2,
+                                                child: FittedBox(
+                                                  child: Image.asset(
+                                                    'assets/image/w1-removebg-preview (1).png',
+                                                    width: 200,
+                                                    height: 200,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // gap
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 50),
+                                  child: Container(
+                                    color: Colors.white,
+                                    height: height / 1.2,
+                                    width: width,
+                                    child:  Center(
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        clipBehavior: Clip.antiAlias,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            FittedBox(
+                                                child: ProductContainer(
+                                                   onPressed: () {
+                                                                    Navigator.pushNamed(
+                                                                        context,
+                                                                        '/cable-support-systems/');
+                                                                  },
+                                              title: "PVC Coated Galvanised Flexible Conduit",
+                                                  subtitle: "Cable Support Systems",
+                                              imagePath:
+                                                  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(1).png',
+                                                 
+                                            )
+                                            ),
+                                            const Gap(10),
+                                             FittedBox(
+                                                child: ProductContainer(
+                                                  onPressed: (){
+         Navigator.pushNamed(
+                                                                        context,
+                                                                        '/cable-jointing-and-termination-kit-components/');
+                                                                    },
+                                              title:
+                                                  'hose clamps',
+                                                  subtitle: "Cable Jointing & Termination Kit Components",
+                                              imagePath:
+                                                  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(5).png',
+                                            )),
+                                            const Gap(10),
+                                             FittedBox(
+                                                child: ProductContainer(
+                                                   onPressed: (){
+                                                     Navigator.pushNamed(
+                                                                        context,
+                                                                        '/earthing-lightning-protection-systems/earthing-lightning-protection-accessories/');
+                                                                 
+                                                  },
+                                              title: 'double plate "u" clamp',
+                                              subtitle: "earthing & lightning protection accessories",
+                                              imagePath:
+                                                  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(7).png',
+                                            )),
+                                            const Gap(10),
+                                             FittedBox(
+                                                child: ProductContainer(
+                                                   onPressed: (){
+                                                     Navigator.pushNamed(
+                                                                        context,
+                                                                        '/crimping-tools/');
+                                                                 
+                                                  },
+                                              title:
+                                                  'crimping tool',
+                                                  subtitle: "view more crimping tools",
+                                              imagePath:
+                                                  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(2).png',
+                                            )),
+                                            const Gap(10),
+                                             FittedBox(
+                                                child: ProductContainer(
+                                                  onPressed: (){
+                                                     Navigator.pushNamed(
+                                                                        context,
+                                                                        '/Stainless Steel Cable Ties & Markers');
+                                                                 
+                                                  },
+                                              title:
+                                                  'Roller ball type stainless steel cable ties',
+                                                  subtitle: "Stainless steel cable ties & markers",
+                                              imagePath:
+                                                  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(6).png',
+                                            )),
+                                            const Gap(10),
+                                             FittedBox(
+                                                child: ProductContainer(
+                                                   onPressed: (){
+                                                     Navigator.pushNamed(
+                                                                        context,
+                                                                        '/switch-board-control-panel-accessories/');
+                                                                 
+                                                  },
+                                              title:
+                                                  'Insulated bus bar system for mcb',
+                                                  subtitle: "Switch Board Control Panel Accessories",
+                                              imagePath:
+                                                  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(4).png',
+                                            )),
+                                            Gap(10),
+                                            FittedBox(
+                                                child: ProductContainer(
+                                                   onPressed: (){
+                                                     Navigator.pushNamed(
+                                                                        context,
+                                                                        '/earthing-lightning-protection-systems/earthing-lightning-protection/');
+                                                                 
+                                                  },
+                                              title: 'Copper Bonded Grounding Rods',
+                                              subtitle: "Earthing & Lightning Protection",
+                                              imagePath:
+                                                  'https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/landing+page+scroll+images/landing+page+scroll+pictures/canva+1+(8).png',
+                                            )),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-Gap(65),
-                              Container(
-                                color: const Color.fromARGB(255, 236, 242, 242),
-                                height:
-                                    MediaQuery.of(context).size.height / 1.1,
-                                width: MediaQuery.of(context).size.width,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    MouseRegion(
-                                      onEnter: (_) =>
-                                          setState(() => issHovered = true),
-                                      onExit: (_) =>
-                                          setState(() => issHovered = false),
-                                      child: Stack(children: [
-                                        FittedBox(
-                                          child: SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.1,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2,
-                                              child: Image.asset(
-                                                  'assets/image/glands 4.png',
-                                                  fit: BoxFit.fill)),
-                                        ),
-                                        if (issHovered)
+        Gap(65),
+                                Container(
+                                  color: const Color.fromARGB(255, 236, 242, 242),
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.1,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      MouseRegion(
+                                        onEnter: (_) =>
+                                            setState(() => issHovered = true),
+                                        onExit: (_) =>
+                                            setState(() => issHovered = false),
+                                        child: Stack(children: [
                                           FittedBox(
                                             child: SizedBox(
                                                 height: MediaQuery.of(context)
@@ -944,133 +930,149 @@ Gap(65),
                                                         .width /
                                                     2,
                                                 child: Image.asset(
-                                                    'assets/image/glands 2.png',
+                                                    'assets/image/glands 4.png',
                                                     fit: BoxFit.fill)),
                                           ),
-                                      ]),
-                                    ),
-                                    SizedBox(
-                                      child: Row(
-                                        children: [
-                                          const Gap(75),
-                                          Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                3,
-                                            width: 10,
-                                            color: Colors.yellow,
-                                          ),
-                                          const Gap(15),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Where the',
-                                                style: GoogleFonts.workSans(
-                                                    fontSize: 45,
-                                                    color: const Color.fromARGB(
-                                                        255, 30, 30, 30),
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              Text(
-                                                'world of',
-                                                style: GoogleFonts.workSans(
-                                                    fontSize: 45,
-                                                    color: const Color.fromARGB(
-                                                        255, 51, 51, 51),
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              Text(
-                                                'construction',
-                                                style: GoogleFonts.workSans(
-                                                    fontSize: 45,
-                                                    color: const Color.fromARGB(
-                                                        255, 129, 129, 129),
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              Text(
-                                                'gets together',
-                                                style: GoogleFonts.workSans(
-                                                    fontSize: 45,
-                                                    color: const Color.fromARGB(
-                                                        255, 184, 183, 183),
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                          if (issHovered)
+                                            FittedBox(
+                                              child: SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      1.1,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2,
+                                                  child: Image.asset(
+                                                      'assets/image/glands 2.png',
+                                                      fit: BoxFit.fill)),
+                                            ),
+                                        ]),
                                       ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 550,
-                                width: double.infinity,
-                                // color: Colors.amber,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Container(
-                                            color: Colors.white,
-                                            child: Column(
+                                      SizedBox(
+                                        child: Row(
+                                          children: [
+                                            const Gap(75),
+                                            Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  3,
+                                              width: 10,
+                                              color: Colors.yellow,
+                                            ),
+                                            const Gap(15),
+                                            Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Image.asset(
-                                                    'assets/image/hex-logo-new.png'),
-                                              const Gap(35),
                                                 Text(
-                          'Renowed Manufactures Of',
-                          style: GoogleFonts.raleway(
-                              fontSize: 25, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          'World Class Electrical',
-                          style: GoogleFonts.raleway(
-                              fontSize: 25, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          'And Brass Components',
-                          style: GoogleFonts.raleway(
-                              fontSize: 25, fontWeight: FontWeight.w500),
-                        )
+                                                  'Where the',
+                                                  style: GoogleFonts.workSans(
+                                                      fontSize: 45,
+                                                      color: const Color.fromARGB(
+                                                          255, 30, 30, 30),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  'world of',
+                                                  style: GoogleFonts.workSans(
+                                                      fontSize: 45,
+                                                      color: const Color.fromARGB(
+                                                          255, 51, 51, 51),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  'construction',
+                                                  style: GoogleFonts.workSans(
+                                                      fontSize: 45,
+                                                      color: const Color.fromARGB(
+                                                          255, 129, 129, 129),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  'gets together',
+                                                  style: GoogleFonts.workSans(
+                                                      fontSize: 45,
+                                                      color: const Color.fromARGB(
+                                                          255, 184, 183, 183),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                               ],
-                                            ))),
-                                    Expanded(
-                                        child: Container(
-                                      color: Colors.white,
-                                      child: Image.network(
-                                        "https://www.lkea.in/assets/images/about/2.jpg",
-                                        // width: 170,
-                                        // height: 60,
-                                        // fit: BoxFit.cover,
-                                      ),
-                                    ))
-                                  ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
+                                SizedBox(
+                                  height: 550,
                                   width: double.infinity,
-                                  child:
-                                      MediaQuery.of(context).size.width >= 700
-                                          ? const deskBottomSheett()
-                                          : const mobiledeskBottomSheett())
-                            ],
+                                  // color: Colors.amber,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: Container(
+                                              color: Colors.white,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                      'assets/image/hex-logo-new.png'),
+                                                const Gap(35),
+                                                  Text(
+                            'Renowed Manufactures Of',
+                            style: GoogleFonts.raleway(
+                                fontSize: 25, fontWeight: FontWeight.w500),
                           ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                          Text(
+                            'World Class Electrical',
+                            style: GoogleFonts.raleway(
+                                fontSize: 25, fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            'And Brass Components',
+                            style: GoogleFonts.raleway(
+                                fontSize: 25, fontWeight: FontWeight.w500),
+                          )
+                                                ],
+                                              ))),
+                                      Expanded(
+                                          child: Container(
+                                        color: Colors.white,
+                                        child: Image.network(
+                                          "https://www.lkea.in/assets/images/about/2.jpg",
+                                          // width: 170,
+                                          // height: 60,
+                                          // fit: BoxFit.cover,
+                                        ),
+                                      ))
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                    width: double.infinity,
+                                    child:
+                                        MediaQuery.of(context).size.width >= 700
+                                            ? const deskBottomSheett()
+                                            : const mobiledeskBottomSheett())
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

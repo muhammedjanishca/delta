@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'constants.dart';
 
+import 'constants.dart';
+
 class ProductProvider extends ChangeNotifier {
   final TextEditingController easySearchController = TextEditingController();
   List<Map<String, dynamic>> products = [];
