@@ -1,13 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_hex/provider/Text_color.dart';
 import 'package:firebase_hex/widgets/bottom_sheet.dart';
-import 'package:firebase_hex/widgets/carousal_slider.dart';
 import 'package:firebase_hex/provider/data_provider.dart';
 import 'package:firebase_hex/provider/hover_image_provider.dart';
 import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../model.dart';
@@ -37,9 +34,6 @@ class CrimpingToolPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: lottieSuccess()
- 
-            // SpinKitCubeGrid(size: 140, 
-            // color: Color.fromRGBO(249, 156, 6, 1.0),)
             );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -51,38 +45,7 @@ class CrimpingToolPage extends StatelessWidget {
 
             return ListView(
               children: [
-                 SizedBox(
-                  child:Image.network('https://deltabuckets.s3.ap-south-1.amazonaws.com/carousel+images/product+page+images/images/lugs+Canva.png') ,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 4,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 26),
-                    child: Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "HOME>>",
-                            style: GoogleFonts.roboto(
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Crimping Tools",
-                          style: GoogleFonts.roboto(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: colorProductName
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+               
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: MediaQuery.of(context).size.width >= 600 ? 30 : 10,
@@ -148,26 +111,6 @@ class CrimpingToolPage extends StatelessWidget {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // MouseRegion(
-                                  //   onEnter: (_) {
-                                  //       ImageHoverProvider  .setSelectedImageIndex(index);
-                                  //   },
-                                  //   onExit: (_) {
-                                  //      ImageHoverProvider   .setSelectedImageIndex(-1);
-                                  //   },
-                                  //   child: AnimatedContainer(
-                                  //     duration: Duration(milliseconds: 200),
-                                  //     height:ImageHoverProvider.selectedImageIndex == index? 210: 160,
-                                  //     width:ImageHoverProvider.selectedImageIndex == index
-                                  //         ? MediaQuery.of(context).size.width / 4
-                                  //         : MediaQuery.of(context).size.width / 5,
-                                  //     child: Image.network(
-                                  //       productData.thumbnail ?? "",
-                                  //       height: 150,
-                                  //       width:MediaQuery.of(context).size.width /5,
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   Image.network(
                                     productData.thumbnail ?? "",
                                     width: thumbnailSize,
@@ -185,6 +128,22 @@ class CrimpingToolPage extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
+                              ),
+                              //ul listed product
+                              if (productData.ultype !=null)
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                               
+                                  // color: colorOne,
+                                  child: Image.network(
+                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                    width: 100,
+                                    height: 45,
+                                    fit: BoxFit.fill,
+                                  ),
+                                
                               ),
                               // Asset image as foreground decoration
                               Positioned(

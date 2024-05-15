@@ -30,7 +30,8 @@ class ProductDetailsOfTools extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController quantityController = TextEditingController(text: '1'); // start with initial value as 1
+    TextEditingController quantityController =
+        TextEditingController(text: '1'); // start with initial value as 1
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     String selectedProductIndex =
@@ -588,8 +589,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                         },
                         child: const Text('ADD TO CART'),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(addtoCart
-                          ),
+                          backgroundColor: MaterialStateProperty.all(addtoCart),
                           minimumSize: MaterialStateProperty.all(Size(150, 50)),
                         ),
                       )),
@@ -603,10 +603,9 @@ class ProductDetailsOfTools extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         user != null;
-                                            cartCount != 0
-                                                ? Navigator.pushNamed( context, '/cart')
-                                                : Navigator.pushNamed(
-                                                    context, '/cartempty');
+                        cartCount != 0
+                            ? Navigator.pushNamed(context, '/cart')
+                            : Navigator.pushNamed(context, '/cartempty');
                       },
                       child: Text(
                         'GO TO CART',
@@ -636,6 +635,7 @@ class ProductDetailsOfTools extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
+            String? ultype;
             String? textpass;
             String? thumbnail;
             String? description;
@@ -644,6 +644,7 @@ class ProductDetailsOfTools extends StatelessWidget {
             String? pdf;
 
             if (selectedThumbnailProvider.selectedIndex != null) {
+              ultype = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!].ultype;
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
               thumbnail = snapshot.data!
@@ -689,7 +690,7 @@ class ProductDetailsOfTools extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                SizedBox(
                                   // height: do
                                   // color: const Color.fromARGB(255, 138, 129, 101),
                                   width: MediaQuery.of(context).size.width / 1,
@@ -754,27 +755,44 @@ class ProductDetailsOfTools extends StatelessWidget {
                                                 }).toList(),
                                               ),
                                             ),
-                                            Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: selectedThumbnailProvider
-                                                          .selectedThumbnail !=
-                                                      null
-                                                  ? Image.network(
-                                                      selectedThumbnailProvider
-                                                          .selectedThumbnail!)
-                                                  : thumbnail != null
-                                                      ? Image.network(
-                                                          thumbnail!)
-                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-                                            ),
+                                            Stack(children: [
+                                              Container(
+                                                color: Colors.white,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    1.8,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                child: selectedThumbnailProvider
+                                                            .selectedThumbnail !=
+                                                        null
+                                                    ? Image.network(
+                                                        selectedThumbnailProvider
+                                                            .selectedThumbnail!)
+                                                    : thumbnail != null
+                                                        ? Image.network(
+                                                            thumbnail!)
+                                                        : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                              ),
+                                              if(ultype!=null)
+                                              // if (selectedThumbnailProvider. != null)
+                                                Positioned(
+                                                  top: 0,
+                                                  left: 0,
+
+                                                  // color: colorOne,
+                                                  child: Image.network(
+                                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                                    width: 100,
+                                                    height: 45,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                            ]),
                                           ],
                                         ),
                                       ],
@@ -866,7 +884,8 @@ class ProductDetailsOfTools extends StatelessWidget {
                                         ),
                                         style: ButtonStyle(
                                           backgroundColor:
-                                              MaterialStateProperty.all(addtoCart ),
+                                              MaterialStateProperty.all(
+                                                  addtoCart),
                                           minimumSize:
                                               MaterialStateProperty.all(
                                                   Size(180, 60)),
@@ -878,10 +897,11 @@ class ProductDetailsOfTools extends StatelessWidget {
                                       ElevatedButton(
                                         onPressed: () {
                                           user != null;
-                                            cartCount != 0
-                                                ? Navigator.pushNamed( context, '/cart')
-                                                : Navigator.pushNamed(
-                                                    context, '/cartempty');
+                                          cartCount != 0
+                                              ? Navigator.pushNamed(
+                                                  context, '/cart')
+                                              : Navigator.pushNamed(
+                                                  context, '/cartempty');
                                         },
                                         child: Text(
                                           'GO TO CART',
@@ -1005,65 +1025,91 @@ class ProductDetailsOfTools extends StatelessWidget {
                                               Gap(20)
                                             ],
                                           ),
-                                           Container(
-                                          width:180, // Fixed width for the text field
-                                           height: 40,
-                                          decoration: BoxDecoration(
-                                                 border: Border.all(
-                                                 color: Colors.grey, // Border color
-                                            width: 1, // Border width
-                                          ),
-                                        ),
-                                        child: FittedBox(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center, // Center row contents horizontally
-                                            // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
-                                            children: <Widget>[
-                                             SizedBox(
-                                          
-                                           
-                                          child: IconButton(
-                                            onPressed: () {
-                                              int currentQty = int.tryParse(quantityController.text) ?? 0;
-                                              if (currentQty > 0) {
-                                                quantityController.text = (currentQty - 1).toString();
-                                              }
-                                            },
-                                            icon: Icon(Icons.remove),
-                                          ),
-                                          ),
-                                              // Gap(5), // Provide some horizontal space between the button and the text field
-                                              Form(
-                                                key: _formKey,
-                                                child: SizedBox(
-                                                  width: 60, // Fixed width for the text field
-                                                  height: 40,
-                                                  child: TextFormField(
-                                                    textAlign: TextAlign.center, // Center the text inside the text field
-                                                    controller: quantityController,
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      contentPadding: EdgeInsets.symmetric(vertical: 8.0), // Center the placeholder vertically
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(0), // Add rounded corners to the text field
+                                          Container(
+                                            width:
+                                                180, // Fixed width for the text field
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color:
+                                                    Colors.grey, // Border color
+                                                width: 1, // Border width
+                                              ),
+                                            ),
+                                            child: FittedBox(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center, // Center row contents horizontally
+                                                // crossAxisAlignment: CrossAxisAlignment., // Center row contents vertically
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        int currentQty =
+                                                            int.tryParse(
+                                                                    quantityController
+                                                                        .text) ??
+                                                                0;
+                                                        if (currentQty > 0) {
+                                                          quantityController
+                                                                  .text =
+                                                              (currentQty - 1)
+                                                                  .toString();
+                                                        }
+                                                      },
+                                                      icon: Icon(Icons.remove),
+                                                    ),
+                                                  ),
+                                                  // Gap(5), // Provide some horizontal space between the button and the text field
+                                                  Form(
+                                                    key: _formKey,
+                                                    child: SizedBox(
+                                                      width:
+                                                          60, // Fixed width for the text field
+                                                      height: 40,
+                                                      child: TextFormField(
+                                                        textAlign: TextAlign
+                                                            .center, // Center the text inside the text field
+                                                        controller:
+                                                            quantityController,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets.symmetric(
+                                                                  vertical:
+                                                                      8.0), // Center the placeholder vertically
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        0), // Add rounded corners to the text field
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
+                                                  // Gap(5),
+                                                  SizedBox(
+                                                      child: IconButton(
+                                                    onPressed: () {
+                                                      int currentQty = int.tryParse(
+                                                              quantityController
+                                                                  .text) ??
+                                                          0;
+                                                      quantityController.text =
+                                                          (currentQty + 1)
+                                                              .toString();
+                                                    },
+                                                    icon: Icon(Icons.add),
+                                                  )),
+                                                ],
                                               ),
-                                              // Gap(5),
-                                              SizedBox(
-                                           child: IconButton(
-                                                  onPressed: (){
-                                                      int currentQty = int.tryParse(quantityController.text) ?? 0;
-                                                  quantityController.text = (currentQty + 1).toString();
-                                                  }, 
-                                                  icon:Icon(Icons.add),
-                                              )),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                        ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,

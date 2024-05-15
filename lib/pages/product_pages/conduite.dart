@@ -186,6 +186,18 @@ class ConduitesPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              if (productData.ultype !=null)
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                  child: Image.network(
+                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                    width: 100,
+                                    height: 45,
+                                    fit: BoxFit.fill,
+                                  ),
+                              ),
                               // Asset image as foreground decoration
                               Positioned(
                                 top: 0,

@@ -73,6 +73,7 @@ class SsctmProductDetails extends StatelessWidget {
             } else {
               String? description = "";
               List<CodesAndPrice>? price = [];
+              String? Ultype;
               String? priceofproduct = "";
               List<String>? image = [];
               String? pdf = "";
@@ -89,6 +90,10 @@ class SsctmProductDetails extends StatelessWidget {
                     .data!
                     .data[selectedThumbnailProvider.selectedIndex!]
                     .codesAndPrice!;
+                     Ultype = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .ultype;
                 priceofproduct = snapshot
                     .data!
                     .data[selectedThumbnailProvider.selectedIndex!]
@@ -106,6 +111,7 @@ class SsctmProductDetails extends StatelessWidget {
                     price?.addAll(element.codesAndPrice!.map((e) => e));
                     image?.addAll(element.images!.map((e) => e));
                     pdf = element.pdf ?? "";
+                    Ultype  = element.ultype;
                     return true;
                   } else {
                     return false;
@@ -131,25 +137,40 @@ class SsctmProductDetails extends StatelessWidget {
                                     children: [
                                       backButton(context),
                                       Center(
-                                        child: Container(
-                                          color: Colors.white,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              3.3,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.9,
-                                          child: selectedThumbnailProvider
-                                                      .selectedThumbnail !=
-                                                  null
-                                              ? Image.network(
-                                                  selectedThumbnailProvider
-                                                      .selectedThumbnail!)
-                                              : thumbnail != null
-                                                  ? Image.network(thumbnail!)
-                                                  : SizedBox(),
+                                        child: Stack(
+                                          children:[ Container(
+                                            color: Colors.white,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                3.3,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.9,
+                                            child: selectedThumbnailProvider
+                                                        .selectedThumbnail !=
+                                                    null
+                                                ? Image.network(
+                                                    selectedThumbnailProvider
+                                                        .selectedThumbnail!)
+                                                : thumbnail != null
+                                                    ? Image.network(thumbnail!)
+                                                    : SizedBox(),
+                                          ),
+                                          if (Ultype!=null)
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                  child: Image.network(
+                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                    width: 100,
+                                    height: 45,
+                                    fit: BoxFit.fill,
+                                  ),
+                              ),
+                                          ]
                                         ),
                                       ),
                                       Center(
@@ -828,6 +849,7 @@ class SsctmProductDetails extends StatelessWidget {
           } else {
             String? textpass;
             String? thumbnail;
+            String? Ultype;
             String? description;
             List<CodesAndPrice>? price = [];
             List<String>? image = [];
@@ -844,6 +866,10 @@ class SsctmProductDetails extends StatelessWidget {
             if (selectedThumbnailProvider.selectedIndex != null) {
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
+                   Ultype = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .ultype;
               thumbnail = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
               description = snapshot.data!
@@ -868,7 +894,7 @@ class SsctmProductDetails extends StatelessWidget {
               //   );
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
-                  print("2121");
+                  Ultype  = element.ultype;
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
@@ -896,7 +922,7 @@ class SsctmProductDetails extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                SizedBox(
                                   // height: do
                                   // color: const Color.fromARGB(255, 138, 129, 101),
                                   width: MediaQuery.of(context).size.width / 1,
@@ -961,26 +987,41 @@ class SsctmProductDetails extends StatelessWidget {
                                                 }).toList(),
                                               ),
                                             ),
-                                            Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: selectedThumbnailProvider
-                                                          .selectedThumbnail !=
-                                                      null
-                                                  ? Image.network(
-                                                      selectedThumbnailProvider
-                                                          .selectedThumbnail!)
-                                                  : thumbnail != null
-                                                      ? Image.network(
-                                                          thumbnail!)
-                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                            Stack(
+                                              children:[ Container(
+                                                color: Colors.white,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    1.8,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                child: selectedThumbnailProvider
+                                                            .selectedThumbnail !=
+                                                        null
+                                                    ? Image.network(
+                                                        selectedThumbnailProvider
+                                                            .selectedThumbnail!)
+                                                    : thumbnail != null
+                                                        ? Image.network(
+                                                            thumbnail!)
+                                                        : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                              ),
+                                              if (Ultype!=null)
+                              Positioned(
+                                top: 20,
+                                left: 0,
+                                  child: Image.network(
+                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                    width: 100,
+                                    height: 45,
+                                    fit: BoxFit.fill,
+                                  ),
+                              ),
+                                              ]
                                             ),
                                           ],
                                         ),

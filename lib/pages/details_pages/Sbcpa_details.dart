@@ -70,12 +70,17 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
               return Text('Error: ${snapshot.error}');
             } else {
               String? description = "";
+              String? Ultype;
               List<CodesAndPrice>? price = [];
               String? priceofproduct = "";
               List<String>? image = [];
               String? pdf = "";
 
               if (selectedThumbnailProvider.selectedIndex != null) {
+                 Ultype = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .ultype;
                 // print("kjh");
                 textpass = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].productName;
@@ -98,6 +103,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
               } else {
                 snapshot.data!.data.firstWhere((element) {
                   if (element.productName == product_name) {
+                    Ultype  = element.ultype;
                     textpass = element.productName;
                     thumbnail = element.thumbnail;
                     description = element.description;
@@ -129,25 +135,40 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                     children: [
                                       backButton(context),
                                       Center(
-                                        child: Container(
-                                          color: Colors.white,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              3.3,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.9,
-                                          child: selectedThumbnailProvider
-                                                      .selectedThumbnail !=
-                                                  null
-                                              ? Image.network(
-                                                  selectedThumbnailProvider
-                                                      .selectedThumbnail!)
-                                              : thumbnail != null
-                                                  ? Image.network(thumbnail!)
-                                                  : SizedBox(),
+                                        child: Stack(
+                                          children:[ Container(
+                                            color: Colors.white,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                3.3,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.9,
+                                            child: selectedThumbnailProvider
+                                                        .selectedThumbnail !=
+                                                    null
+                                                ? Image.network(
+                                                    selectedThumbnailProvider
+                                                        .selectedThumbnail!)
+                                                : thumbnail != null
+                                                    ? Image.network(thumbnail!)
+                                                    : SizedBox(),
+                                          ),
+                                          if (Ultype!=null)
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                  child: Image.network(
+                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                    width: 100,
+                                    height: 45,
+                                    fit: BoxFit.fill,
+                                  ),
+                              ),
+                                          ]
                                         ),
                                       ),
                                       Center(
@@ -825,6 +846,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
           } else {
             String? textpass;
             String? thumbnail;
+            String? Ultype;
             String? description;
             List<CodesAndPrice>? price = [];
             List<String>? image = [];
@@ -839,6 +861,10 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
             //     index: snapshot.data!.data.indexWhere((element) => element.productName==product_name)
             //     );
             if (selectedThumbnailProvider.selectedIndex != null) {
+               Ultype = snapshot
+                      .data!
+                      .data[selectedThumbnailProvider.selectedIndex!]
+                      .ultype;
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
               thumbnail = snapshot.data!
@@ -865,7 +891,7 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
               //   );
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == product_name) {
-                  // print("2121");
+                  Ultype  = element.ultype;
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
@@ -958,26 +984,41 @@ class ProductDetailsOfSbcpa extends StatelessWidget {
                                                 }).toList(),
                                               ),
                                             ),
-                                            Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: selectedThumbnailProvider
-                                                          .selectedThumbnail !=
-                                                      null
-                                                  ? Image.network(
-                                                      selectedThumbnailProvider
-                                                          .selectedThumbnail!)
-                                                  : thumbnail != null
-                                                      ? Image.network(
-                                                          thumbnail!)
-                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                            Stack(
+                                              children:[ Container(
+                                                color: Colors.white,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    1.8,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                child: selectedThumbnailProvider
+                                                            .selectedThumbnail !=
+                                                        null
+                                                    ? Image.network(
+                                                        selectedThumbnailProvider
+                                                            .selectedThumbnail!)
+                                                    : thumbnail != null
+                                                        ? Image.network(
+                                                            thumbnail!)
+                                                        : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                              ),
+                                              if (Ultype!=null)
+                              Positioned(
+                                top: 20,
+                                left: 0,
+                                  child: Image.network(
+                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                    width: 100,
+                                    height: 45,
+                                    fit: BoxFit.fill,
+                                  ),
+                              ),
+                                              ]
                                             ),
                                           ],
                                         ),

@@ -79,12 +79,15 @@ class ProductDetailsCjtkc extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
+                String? Ultype;
                 String? description;
                 List<CodesAndPrice>? price = [];
                 List<String>? image = [];
                 String? pdf;
                 ;
                 if (selectedThumbnailProvider.selectedIndex != null) {
+                  Ultype = snapshot.data!
+                      .data[selectedThumbnailProvider.selectedIndex!].ultype;
                   textpass = snapshot
                       .data!
                       .data[selectedThumbnailProvider.selectedIndex!]
@@ -106,7 +109,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
                 } else {
                   snapshot.data!.data.firstWhere((element) {
                     if (element.productName == productName) {
-                      print("2121");
+                      Ultype = element.ultype;
                       textpass = element.productName;
                       thumbnail = element.thumbnail;
                       description = element.description;
@@ -129,7 +132,6 @@ class ProductDetailsCjtkc extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                
                                 SizedBox(
                                   // height: do
                                   // height: MediaQuery.of(context).size.height /0.1,
@@ -139,26 +141,40 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                     children: [
                                       backButton(context),
                                       Center(
-                                        child: Container(
-                                          color: Colors.white,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              3.3,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.9,
-                                          child: selectedThumbnailProvider
-                                                      .selectedThumbnail !=
-                                                  null
-                                              ? Image.network(
-                                                  selectedThumbnailProvider
-                                                      .selectedThumbnail!)
-                                              : thumbnail != null
-                                                  ? Image.network(thumbnail!)
-                                                  : SizedBox(),
-                                        ),
+                                        child: Stack(children: [
+                                          Container(
+                                            color: Colors.white,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                3.3,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.9,
+                                            child: selectedThumbnailProvider
+                                                        .selectedThumbnail !=
+                                                    null
+                                                ? Image.network(
+                                                    selectedThumbnailProvider
+                                                        .selectedThumbnail!)
+                                                : thumbnail != null
+                                                    ? Image.network(thumbnail!)
+                                                    : SizedBox(),
+                                          ),
+                                          if (Ultype != null)
+                                            Positioned(
+                                              top: 0,
+                                              left: 0,
+                                              child: Image.network(
+                                                'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                                // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                                width: 100,
+                                                height: 45,
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                        ]),
                                       ),
                                       Center(
                                         child: SingleChildScrollView(
@@ -238,9 +254,11 @@ class ProductDetailsCjtkc extends StatelessWidget {
 
                                       Divider(),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 25),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Flexible(
                                               child: FittedBox(
@@ -293,7 +311,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                                                       .bold,
                                                               fontSize: 14,
                                                             );
-                                      
+
                                                             int prefixIndex =
                                                                 priceText
                                                                     .indexOf(
@@ -352,12 +370,11 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                     
+
                                       SizedBox(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            20,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                20,
                                       ),
                                       SizedBox(
                                         child: Row(
@@ -390,17 +407,15 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                                                       quantityController
                                                                           .text) ??
                                                                   0;
-                                                          if (currentQty >
-                                                              0) {
+                                                          if (currentQty > 0) {
                                                             quantityController
                                                                     .text =
-                                                                (currentQty -
-                                                                        1)
+                                                                (currentQty - 1)
                                                                     .toString();
                                                           }
                                                         },
-                                                        icon: Icon(
-                                                            Icons.remove),
+                                                        icon:
+                                                            Icon(Icons.remove),
                                                       ),
                                                     ),
                                                     // Gap(5), // Provide some horizontal space between the button and the text field
@@ -461,8 +476,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                                     showModalBottomSheet(
                                                       useSafeArea: true,
                                                       context: context,
-                                                      isScrollControlled:
-                                                          true,
+                                                      isScrollControlled: true,
                                                       builder: (BuildContext
                                                           context) {
                                                         return SingleChildScrollView(
@@ -476,7 +490,8 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                                                 child:
                                                                     Container(
                                                                   // width: MediaQuery.of(context).size.width/1.5,
-                                                                  height: MediaQuery.of(context)
+                                                                  height: MediaQuery.of(
+                                                                              context)
                                                                           .size
                                                                           .height /
                                                                       1,
@@ -484,8 +499,9 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                                                       .white,
                                                                   child: pdf !=
                                                                           null
-                                                                      ? SfPdfViewer.network(
-                                                                          pdf!)
+                                                                      ? SfPdfViewer
+                                                                          .network(
+                                                                              pdf!)
                                                                       : Nopdf(),
                                                                 ),
                                                               ),
@@ -513,8 +529,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                                   },
                                                   child: Row(
                                                     children: [
-                                                      Icon(Icons
-                                                          .edit_document),
+                                                      Icon(Icons.edit_document),
                                                       Text("size chart")
                                                     ],
                                                   )
@@ -524,7 +539,6 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                       
 
                                       Center(
                                         child: Column(
@@ -629,10 +643,9 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                       Container(
                                         alignment: Alignment.bottomLeft,
@@ -670,18 +683,13 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                             }).join(' ');
 
                                             return Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start, // Align items at the start of each row
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .start, // Align items at the start of each row
                                               children: [
                                                 Icon(Icons.star,
                                                     size: 20,
-                                                    color:
-                                                        const Color.fromARGB(
-                                                            255,
-                                                            103,
-                                                            103,
-                                                            103)),
+                                                    color: const Color.fromARGB(
+                                                        255, 103, 103, 103)),
                                                 SizedBox(
                                                     width:
                                                         10), // Add space between icon and text
@@ -702,10 +710,9 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .height /
-                                            20,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20,
                                       ),
                                     ],
                                   ),
@@ -723,7 +730,6 @@ class ProductDetailsCjtkc extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          
           child: Container(
             color: Colors.black,
             child: Row(
@@ -802,12 +808,11 @@ class ProductDetailsCjtkc extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                                            user != null;
-                                            cartCount != 0
-                                                ? Navigator.pushNamed( context, '/cart')
-                                                : Navigator.pushNamed(
-                                                    context, '/cartempty');
-                                          },
+                        user != null;
+                        cartCount != 0
+                            ? Navigator.pushNamed(context, '/cart')
+                            : Navigator.pushNamed(context, '/cartempty');
+                      },
                       child: Text(
                         'GO TO CART',
                         style: TextStyle(color: Colors.white),
@@ -834,6 +839,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
+            String? Ultype;
             String? textpass;
             String? thumbnail;
             String? description;
@@ -842,6 +848,8 @@ class ProductDetailsCjtkc extends StatelessWidget {
             String? pdf;
 
             if (selectedThumbnailProvider.selectedIndex != null) {
+              Ultype = snapshot
+                  .data!.data[selectedThumbnailProvider.selectedIndex!].ultype;
               textpass = snapshot.data!
                   .data[selectedThumbnailProvider.selectedIndex!].productName;
               thumbnail = snapshot.data!
@@ -859,6 +867,7 @@ class ProductDetailsCjtkc extends StatelessWidget {
             } else {
               snapshot.data!.data.firstWhere((element) {
                 if (element.productName == productName) {
+                  Ultype = element.ultype;
                   textpass = element.productName;
                   thumbnail = element.thumbnail;
                   description = element.description;
@@ -951,27 +960,41 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                                 }).toList(),
                                               ),
                                             ),
-                                            Container(
-                                              color: Colors.white,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  1.8,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              child: selectedThumbnailProvider
-                                                          .selectedThumbnail !=
-                                                      null
-                                                  ? Image.network(
-                                                      selectedThumbnailProvider
-                                                          .selectedThumbnail!)
-                                                  : thumbnail != null
-                                                      ? Image.network(
-                                                          thumbnail!)
-                                                      : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
-                                            ),
+                                            Stack(children: [
+                                              Container(
+                                                color: Colors.white,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    1.8,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                child: selectedThumbnailProvider
+                                                            .selectedThumbnail !=
+                                                        null
+                                                    ? Image.network(
+                                                        selectedThumbnailProvider
+                                                            .selectedThumbnail!)
+                                                    : thumbnail != null
+                                                        ? Image.network(
+                                                            thumbnail!)
+                                                        : SizedBox(), // Empty SizedBox() as a placeholder if both thumbnail and selectedThumbnail are null
+                                              ),
+                                              if (Ultype != null)
+                                                Positioned(
+                                                  top: 20,
+                                                  left: 0,
+                                                  child: Image.network(
+                                                    'https://deltabuckets.s3.ap-south-1.amazonaws.com/images/ul+list+logo+from+hex+site.png',
+                                                    // 'https://deltabuckets.s3.ap-south-1.amazonaws.com/Light+Brown+Taupe+Beige+Modern+Elegance+Recruitment+LinkedIn+Profile+Picture+(100+x+100+px)+(100+x+70+px).png',
+                                                    width: 100,
+                                                    height: 45,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                            ]),
                                           ],
                                         ),
                                       ],
@@ -1065,7 +1088,8 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                           ),
                                           style: ButtonStyle(
                                             backgroundColor:
-                                                MaterialStateProperty.all(addtoCart),
+                                                MaterialStateProperty.all(
+                                                    addtoCart),
                                             minimumSize:
                                                 MaterialStateProperty.all(
                                                     Size(180, 60)),
@@ -1078,7 +1102,8 @@ class ProductDetailsCjtkc extends StatelessWidget {
                                           onPressed: () {
                                             user != null;
                                             cartCount != 0
-                                                ? Navigator.pushNamed( context, '/cart')
+                                                ? Navigator.pushNamed(
+                                                    context, '/cart')
                                                 : Navigator.pushNamed(
                                                     context, '/cartempty');
                                           },

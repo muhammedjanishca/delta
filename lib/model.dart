@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 ProduceNewModal produceNewModalFromJson(String str) =>
@@ -33,6 +32,7 @@ class Datum {
   String? priceofproduct;
   List<CodesAndPrice>? codesAndPrice;
   String? pdf;
+  String? ultype;
   Datum({
     this.id,
     this.productName,
@@ -42,6 +42,7 @@ class Datum {
     this.codesAndPrice,
     this.priceofproduct,
     this.pdf,
+    this.ultype,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -52,8 +53,9 @@ class Datum {
         description: json["description"],
         codesAndPrice: List<CodesAndPrice>.from(
             json["codes_and_price"].map((x) => CodesAndPrice.fromJson(x))),
-            priceofproduct: json["priceofproduct"],
+        priceofproduct: json["priceofproduct"],
         pdf: json["pdf"],
+        ultype: json["ul_type"]
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,8 +66,10 @@ class Datum {
         "description": description,
         "codes_and_price":
             List<dynamic>.from(codesAndPrice!.map((x) => x.toJson())),
-            "priceofproduct":priceofproduct,
+        "priceofproduct": priceofproduct,
         "pdf": pdf,
+        "ul_type": ultype,
+
       };
 }
 
@@ -93,47 +97,51 @@ class CodesAndPrice {
 //
 //     final services = servicesFromJson(jsonString);
 
-
 Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
 
 String servicesToJson(Services data) => json.encode(data.toJson());
 
 class Services {
-    List<ProductSearch>? data;
+  List<ProductSearch>? data;
 
-    Services({
-        this.data,
-    });
+  Services({
+    this.data,
+  });
 
-    factory Services.fromJson(Map<String, dynamic> json) => Services(
-        data: json["data"] == null ? [] : List<ProductSearch>.from(json["data"]!.map((x) => ProductSearch.fromJson(x))),
-    );
+  factory Services.fromJson(Map<String, dynamic> json) => Services(
+        data: json["data"] == null
+            ? []
+            : List<ProductSearch>.from(
+                json["data"]!.map((x) => ProductSearch.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
-        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-    };
+  Map<String, dynamic> toJson() => {
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+      };
 }
 
 class ProductSearch {
-    int? idNum;
-    String? productName;
-    String? thumbnail;
+  int? idNum;
+  String? productName;
+  String? thumbnail;
 
-    ProductSearch({
-        this.idNum,
-        this.productName,
-        this.thumbnail,
-    });
+  ProductSearch({
+    this.idNum,
+    this.productName,
+    this.thumbnail,
+  });
 
-    factory ProductSearch.fromJson(Map<String, dynamic> json) => ProductSearch(
+  factory ProductSearch.fromJson(Map<String, dynamic> json) => ProductSearch(
         idNum: json["id_num"],
         productName: json["product_name"],
         thumbnail: json["thumbnail"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id_num": idNum,
         "product_name": productName,
         "thumbnail": thumbnail,
-    };
+      };
 }

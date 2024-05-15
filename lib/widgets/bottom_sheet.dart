@@ -75,6 +75,19 @@ launchInstagram() async {
     throw 'Could not launch $url';
   }
 }
+//sales mail
+launchsalesmail() async {
+  final url =
+      'https://outlook.office.com/mail/'; // Replace with your WhatsApp URL
+
+  // ignore: deprecated_member_use
+  if (await canLaunch(url)) {
+    // ignore: deprecated_member_use
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
  final FocusNode _name = FocusNode();
     final FocusNode _comName = FocusNode();
     final FocusNode _email = FocusNode();
@@ -271,13 +284,7 @@ class deskBottomSheett extends StatelessWidget {
                                 ))),
                         Gap(20),
                         TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ContactUsPage()),
-                              );
-                            },
+                            onPressed:launchsalesmail,
                             child: Text("sales@transdeltatrading.com",
                                 style: GoogleFonts.merriweather(
                                   color: Colors.white,
