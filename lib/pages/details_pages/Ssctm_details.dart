@@ -79,24 +79,17 @@ class SsctmProductDetails extends StatelessWidget {
               String? pdf = "";
 
               if (selectedThumbnailProvider.selectedIndex != null) {
-                // print("kjh");
                 textpass = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].productName;
                 thumbnail = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].thumbnail;
                 description = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].description;
-                price = snapshot
-                    .data!
-                    .data[selectedThumbnailProvider.selectedIndex!]
-                    .codesAndPrice!;
-                     Ultype = snapshot
-                      .data!
-                      .data[selectedThumbnailProvider.selectedIndex!]
+                price = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!]
+                .codesAndPrice!;
+                     Ultype = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!]
                       .ultype;
-                priceofproduct = snapshot
-                    .data!
-                    .data[selectedThumbnailProvider.selectedIndex!]
+                priceofproduct = snapshot.data!.data[selectedThumbnailProvider.selectedIndex!]
                     .priceofproduct;
                 image = snapshot.data!
                     .data[selectedThumbnailProvider.selectedIndex!].images;

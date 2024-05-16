@@ -1,20 +1,42 @@
+import 'package:firebase_hex/widgets/style.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'IRSH.dart';
 
 class TermsAndConditionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Terms and Conditions'),
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+    backgroundColor: Colors.white,
+     appBar: custSmallAppBar(context,Colors.white),
+      body:  SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('1. General', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text(
+            Container(
+              color: colorTwo,
+              height: MediaQuery.of(context).size.height/4,
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Terms & Conditions",style:GoogleFonts.poppins(fontSize: 25,color: Colors.white,fontWeight: FontWeight.w600)),
+               Row(
+                children: [
+                  Text("To learn more about privacy at LinkedIn please visit our",style: GoogleFonts.poppins(color: Colors.white),),
+                  TextButton(onPressed: (){},
+                   child: Text("Privacy Hub",
+                   style:GoogleFonts.poppins(fontWeight: FontWeight.w500,color: Colors.white,decoration: TextDecoration.underline),
+                   
+                   ))
+                ],
+               )
+                ],
+              ),
+            ),
+            const Text('1. General', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const Text(
               'These Terms govern the use of this website and any other contract or agreement that integrates them by reference. Visitors and users are required to accept these Terms to access articles and products provided through our site.',
               style: TextStyle(fontSize: 16),
             ),
